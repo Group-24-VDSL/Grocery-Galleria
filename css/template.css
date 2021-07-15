@@ -172,6 +172,42 @@ body {
   box-shadow: 0 0 10px var(--spanish-viridian);
 }
 
+.input-pw-grp {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-bottom: 0px;
+  width: max-content;
+}
+
+.input-pw {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.toggle_pwd {
+  right: 0;
+  top: 0.6rem;
+  cursor: pointer;
+  position: absolute;
+  margin-right: 0;
+  margin-left: 0.5rem;
+  padding-right: 1rem;
+  color: #51ac37;
+  font-size: 1rem;
+}
+
+.toggle_pwd::after {
+  box-sizing: border-box;
+}
+.toggle_pwd::before {
+  box-sizing: border-box;
+}
+
 .table {
   width: 100%;
   max-width: 100%;
@@ -201,4 +237,20 @@ table td {
 
 .table-hover tr:hover {
   background-color: var(--classic-grey-2);
+}
+
+.row {
+  display: flex;
+}
+
+.card {
+}
+
+.product-card {
+}
+
+.shop-card {
+}
+
+.product-card-img {
 }
