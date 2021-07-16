@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Template</title>
+    <!--Stylesheets-->
+    <link rel="stylesheet" href="../../css/template.css">
+    <link rel="stylesheet" href="../../css/all.css">
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!--Javascript-->
+    <script src="../../js/template.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <meta charset="UTF-8">
+</head>
+<nav>
+
+</nav>
+
+<body>
+    <div>
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-secondary btn-lg">Large Button</button>
+        <button type="button" class="btn btn-secondary btn-sm">Small Button</button>
+        <button type="button" class="btn btn-secondary btn-disabled">Small Button</button>
+        <button type="button" class="btn btn-primary btn-w-icon"><i class="fas fa-home"></i>With Icon Button</button>
+        <button type="button" class="btn btn-primary btn-icon-only"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-red btn-icon-only"><i class="far fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-yellow btn-icon-only"><i class="far fa-eye"></i></button>
+
+    </div>
+
+    <div class="alert alert-red">
+        <a href="#" class="alert-close" onclick="this.parentElement.style.display='none';"><i
+                class="fa fa-times-circle"></i></a>
+        <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+    </div>
+
+    <div class="alert alert-green">
+        <a href="#" class="alert-close" onclick="this.parentElement.style.display='none';"><i
+                class="fa fa-times-circle"></i></a>
+        <strong>Success!</strong> This alert box could indicate a Positive action.
+    </div>
+
+    <div>
+        <form class="frm select">
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" placeholder="John"><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" placeholder="Smith"> <br>
+            
+            <div class="input-pw-grp">
+              <input class="input-pw" type="password" id="txtPassword" />
+              <i class="toggle_pwd fa fa-fw fa-eye field_icon" id="showpw" onclick="togglePassword()"></i>
+            </div>
+
+            <select id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <br>
+            <input type="radio" id="html" name="fav_language" value="HTML">
+            <label for="html">HTML</label><br>
+            <input type="radio" id="css" name="fav_language" value="CSS">
+            <label for="css">CSS</label><br>
+        </form>
+    </div>
+    <div>
+        <table class="table thead-green table-hover">
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th> 
+              <th>Age</th>
+            </tr>
+            <tr>
+              <td>Jill</td>
+              <td>Smith</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Eve</td>
+              <td>Jackson</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>80</td>
+            </tr>
+          </table>
+          
+    </div>
+    <div class="row">
+      <div>
+        <div class="card">
+          <img src="img/placeholder.jpg" alt="Avatar" style="width:100%">
+          <div class="container">
+            <h4><b>Shop Name</b></h4> 
+            <p>Architect & Engineer</p> 
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <img src="img/placeholder.jpg" alt="Avatar" style="width:100%">
+          <div class="container">
+            <h4><b>Item Name</b></h4> 
+            <p>Architect & Engineer</p> 
+          </div>
+        </div>
+      </div>
+      <div class="card product-card">
+        <div class="row">
+          <div class="product-card-img">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
