@@ -1,6 +1,6 @@
 function togglePassword() {
-            $("#toggle_pwd").click(function () {
-                $(this).toggleClass("fa-eye fa-eye-slash");
-               var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
-                $("#txtPassword").attr("type", type);
+    var element = document.getElementById("showpw"); 
+    element.classList.toggle("fa-eye fa-eye-slash");
+    var type = element.hasClass("fa-eye-slash") ? "text" : "password";
+    element.attr("type", type);
 }
