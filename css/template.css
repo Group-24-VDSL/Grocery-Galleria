@@ -245,15 +245,72 @@ table td {
 
 .card {
   text-align: center;
-  
+  box-shadow: #00000029 0px 1px 4px;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover{
+  box-shadow: #0000003d 0px 3px 8px;
 
 }
 
 .product-card {
-}
 
-.shop-card {
 }
 
 .product-card-img {
+  
+}
+
+.product-card-img {
+
+}
+
+.product-card-body {
+  
+}
+
+.shop-card {
+
+
+}
+
+
+.shop-card:hover {
+  box-shadow: ;
+}
+
+.shop-card-img {
+  display: block;
+  height: 180px;
+  width: fit-content;
+}
+
+.shop-card-body {
+  display: flex;
+  flex-direction:column;
+  text-align: left;
+  
+}
+.shop-name{
+  font-weight: bold;
+  font-size: 1.5rem;
+  color:var(--spanish-green)
+}
+.shop-name-des{
+  background-color: var(--classic-black);
+}
+.stars {
+  color: var(--classic-grey-1);
+  display: flex;
+}
+
+.checked{
+  color:var(--spanish-green);
+}
+
+.container{
+  box-sizing: border-box;
 }
