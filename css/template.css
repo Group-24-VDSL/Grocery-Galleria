@@ -249,6 +249,7 @@ table td {
   transition: 0.3s;
   display: flex;
   flex-direction: column;
+  padding:0.5rem;
 }
 
 .card:hover{
@@ -279,7 +280,6 @@ table td {
 
 
 .shop-card:hover {
-  box-shadow: ;
 }
 
 .shop-card-img {
