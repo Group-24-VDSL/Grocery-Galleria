@@ -20,7 +20,7 @@
   --device-sm: 576px;
   --device-md: 768px;
   --device-lg: 992px;
-  --device-xl: 1200px; 
+  --device-xl: 1200px;
 }
 
 /* 
@@ -260,16 +260,14 @@ table td {
   transition: 0.3s;
   display: flex;
   flex-direction: column;
-  padding:0.5rem;
+  padding: 0.5rem;
 }
 
-.card:hover{
+.card:hover {
   box-shadow: #0000003d 0px 3px 8px;
-
 }
 
 .product-card {
-
 }
 
 .product-card-img {
@@ -277,18 +275,13 @@ table td {
 }
 
 .product-card-img {
-
 }
 
 .product-card-body {
-  
 }
 
 .shop-card {
-
-
 }
-
 
 .shop-card:hover {
 }
@@ -304,70 +297,92 @@ table td {
   flex-direction: row;
   justify-content: space-between;
   text-align: left;
-  
 }
 .shop-card-text {
   display: flex;
   flex-direction: column;
 }
 
-.shop-name{
+.shop-name {
   font-weight: bold;
   font-size: 1.5rem;
-  color:var(--spanish-green)
+  color: var(--spanish-green);
 }
-.shop-name-des{
+.shop-name-des {
   background-color: var(--classic-black);
 }
 
-.shop-card-button{
+.shop-card-button {
   align-self: center;
 }
-
-
 
 .stars {
   color: var(--classic-grey-1);
   display: flex;
 }
 
-.checked{
-  color:var(--spanish-green);
+.checked {
+  color: var(--spanish-green);
 }
 
-.container{
+.container {
   box-sizing: border-box;
 }
 
-.header-container{
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
   box-sizing: border-box;
   width: 100%;
   position: fixed;
-  
 }
 
-.header-container-inside{
+.header-container-inside {
+  width: inherit;
   box-sizing: border-box;
   display: flex;
-  color:var(--classic-white);
+  color: var(--classic-white);
   background-color: var(--spanish-green);
+  justify-content: space-between;
   /* height:7.3125rem; */
 }
 
-.header-logo{
+.header-logo {
   height: auto;
   max-width: 100%;
 }
-.header-img{
-  width:50vh;
+.header-img {
+  width: 25vh;
 }
-@media screen and (min-width:var(--device-md)){
-  .header-img{
-    width:100%;
+@media (min-width: var(--device-md)) {
+  .header-img {
+    width: 100%;
   }
 }
 
-.header-top{
-
+.header-top {
 }
 
+.header-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: x-large;
+}
+.header-buttons i {
+  padding: 10px;
+}
+
+.search-container {
+  display: none;
+  
+}
+
+@media (min-width: var(--device-md)) {
+  .search-container {
+    display: flex;
+    max-width:600px;
+    
+  }
+}
