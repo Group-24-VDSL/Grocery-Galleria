@@ -4,7 +4,7 @@ function togglePassword() {
     $('#txtPassword').attr("type", type);
 }
 
-$('.ps-toggle--sidebar').on('click', function(e) {
+$('.navigation-toggle').on('click', function(e) {
     e.preventDefault();
     var url = $(this).attr('href');
     $(this).toggleClass('active');
@@ -13,8 +13,18 @@ $('.ps-toggle--sidebar').on('click', function(e) {
         .removeClass('active');
     $(url).toggleClass('active');
     $(url)
-        .siblings('.ps-panel--sidebar')
+        .siblings('.navigation-toggle')
         .removeClass('active');
-    $('.ps-site-overlay').toggleClass('active');
-    console.log("activated");
+    $('.navigation-back-overlay').toggleClass('active');
+});
+
+$('.navigation-back-overlay').on('click', function(e) {
+    e.preventDefault();
+    $('navigation-back-overlay').toggleClass('active');
+    $('.navigation-toggle')
+        .siblings('a')
+        .removeClass('active');
+    $('.navigation-back-overlay').toggleClass('active');
+    $('#menu-mobile').toggleClass('active');
+
 });
