@@ -1,0 +1,75 @@
+:root {
+  --spanish-viridian: #007f5fff;
+  --spanish-green: #2b9348ff;
+  --green-ryb: #55a630ff;
+  --apple-green: #80b918ff;
+  --android-green: #aacc00ff;
+  --bitter-lemon: #bfd200ff;
+  --pear: #d4d700ff;
+  --pear-dark: #dbc500;
+  --titanium-yellow: #dddf00ff;
+  --xanthic: #eeef20ff;
+  --maximum-yellow: #ffff3fff;
+  --classic-grey-1: #cfcfcf;
+  --classic-grey-2: #c7c7c7;
+  --classic-grey-3: #585858;
+  --classic-white: #ffffffff;
+  --classic-black: #00000000;
+  --alert-red: #a94442;
+  --alert-red-dark: #750200;
+  --alert-red-bright: #ff0400;
+  --device-sm: 576px;
+  --device-md: 768px;
+  --device-lg: 992px;
+  --device-xl: 1200px;
+}
+.sidebar {
+  background-color: var(--classic-grey-3);
+  min-height: 100%;
+  padding:  10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color:var(--classic-white);
+}
+
+.menu-item{
+    display: flex;
+}
+
+.menu-icon{
+    font-size: 1.5rem;
+    margin-right:0.5rem;
+}
+
+.collapsed {
+  width: 3%;
+}
+
+@media screen and (max-width: 992px) {
+  .collapsed {
+    width: 5%;
+  }
+  @media screen and (max-width: 768px) {
+    .collapsed {
+      width: 8%;
+    }
+    @media screen and (max-width: 576px) {
+      .collapsed {
+        width: 9%;
+      }
+    }
+    @media screen and (max-width:360px) {
+        .collapsed{
+            width:13%;
+        }
+    }
+  }
+}
+
+.expand {
+  width: 25%;
+}
+.display-none {
+  display: none !important;
+}
