@@ -26,20 +26,51 @@
 .sidebar {
   background-color: var(--classic-grey-3);
   min-height: 100%;
-  padding:  10px;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   left: 0;
+  color: var(--classic-white);
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  padding:10px;
+  font-size: 1.5rem;
+  cursor:pointer;
+  color:var(--classic-white);
+}
+.menu-item a a:active a:hover{
+  text-decoration: none;
+}
+.menu-item:hover{
+  background-color:var(--classic-grey-2);
+  color:var(--spanish-green);
+}
+.menu-item-menu{
+  background-color: var(--spanish-green);
+  
+}
+
+.menu-item-menu:hover{
+  background-color: var(--spanish-viridian);
   color:var(--classic-white);
 }
 
-.menu-item{
-    display: flex;
+.menu-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+.menu-text{
+  font-size: 1.2rem;
+  
+
 }
 
-.menu-icon{
-    font-size: 1.5rem;
-    margin-right:0.5rem;
+.menu-item-logout{
+  margin-top: auto;
 }
 
 .collapsed {
@@ -59,17 +90,69 @@
         width: 9%;
       }
     }
-    @media screen and (max-width:360px) {
-        .collapsed{
-            width:13%;
-        }
+    @media screen and (max-width: 360px) {
+      .collapsed {
+        width: 13%;
+      }
     }
   }
 }
 
 .expand {
-  width: 25%;
+  width: 9%;
 }
+
+@media screen and (max-width: 992px) {
+  .expand {
+    width: 12%;
+  }
+  @media screen and (max-width: 768px) {
+    .expand {
+      width: 16%;
+    }
+    @media screen and (max-width: 576px) {
+      .expand {
+        width: 21%;
+      }
+    }
+    @media screen and (max-width: 360px) {
+      .expand {
+        width: 32%;
+      }
+    }
+  }
+}
+
+.main-content{
+  margin-left:3%;
+}
+
+@media screen and (max-width: 992px) {
+  .main-content {
+    margin-left: 5%;
+  }
+  @media screen and (max-width: 768px) {
+    .main-content {
+      margin-left: 8%;
+    }
+    @media screen and (max-width: 576px) {
+      .main-content {
+        margin-left: 9%;
+      }
+    }
+    @media screen and (max-width: 360px) {
+      .main-content {
+        margin-left: 13%;
+      }
+    }
+  }
+}
+
+.main-header{
+  font-size: 2rem;
+  color: var(--classic-grey-3)
+}
+
 .display-none {
   display: none !important;
 }
