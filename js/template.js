@@ -30,6 +30,8 @@ $( function(){
     
     });
     
-
+    $('.cart-mobile-content-item').on('click','.cart-mobile-item-remove',function(){
+        $(this).closest('.cart-mobile-content-item').remove();
+    });
 
 }); //document ready

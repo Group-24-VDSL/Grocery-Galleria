@@ -32,7 +32,7 @@ col-xl-* - 1200px
 */
 
 body {
-  font-family: Lato;
+  font-family: Open Sans;
 }
 
 .btn {
@@ -585,4 +585,50 @@ table td {
   display: flex;
   flex-shrink: 1;
 
+}
+
+.cart-mobile-content{
+  padding:20px 10px 0;
+
+}
+.cart-mobile-content-item{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.cart-mobile-item-image{
+  max-width: 56px;
+}
+
+.cart-mobile-item-image a{
+  outline:none !important;
+}
+
+.cart-mobile-item-image img{
+  max-width: 100%;
+} 
+
+.cart-mobile-item-description{
+  position: relative;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.cart-mobile-item-description p{
+  margin:0;
+}
+
+.cart-mobile-item-remove{
+  position: absolute;
+  top:0;
+  right: 0;
+  text-decoration:none;
+  color: var(--classic-black);
+}
+
+.cart-mobile-item-price{
+  display: flex;
+  position: absolute;
+  right:0;
+  bottom:0;
 }
