@@ -363,6 +363,7 @@ table td {
 }
 
 .header-top {
+
 }
 
 .header-buttons {
@@ -390,21 +391,24 @@ table td {
 
 .search-container {
   display: none;
+  width: 100%;
+  justify-content: center;
 }
 
 @media screen and (min-width: 992px){
-  .search-container  {
+  .search-container{
     display: flex !important;
     align-items: center;
-   margin-top: 10px;
+
   }
 }
 
 .search-container form{
   display: flex;
   flex-direction: row; 
-  max-width: 600px;
+  max-width: 900px;
   align-items:center;
+  width: 100%;
 
 }
 
@@ -413,6 +417,7 @@ table td {
   padding: 0.375rem 0.75rem;
   border-radius: 0px;
   border:1px transparent;
+  width: 100%;
 }
 
 .search-container-form input:focus {
