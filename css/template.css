@@ -450,6 +450,8 @@ table td {
   z-index: 999;
   position: relative;
   padding-bottom:10px;
+  border-top: 1px solid var(--classic-grey-2);
+  padding-top:10px;
 }
 
 .navigation-item{
@@ -623,7 +625,7 @@ table td {
   top:0;
   right: 0;
   text-decoration:none;
-  color: var(--classic-black);
+  color:black;
 }
 
 .cart-mobile-item-price{
@@ -631,4 +633,43 @@ table td {
   position: absolute;
   right:0;
   bottom:0;
+}
+
+.cart-mobile-footer{
+  position:fixed;
+  background-color: white;
+  width:100%;
+  bottom:70px;
+  border-top: 1px solid var(--classic-grey-2);
+  padding-top:10px;
+}
+.cart-mobile-footer h3{
+  margin:0;
+  padding-left: 10px;
+}
+.cart-mobile-footer h4{
+  margin:0;
+  padding-left: 10px;
+}
+.cart-mobile-footer  strong{
+  float:right;
+  margin-right: 10px;
+}
+.cart-mobile-footer button{
+  float: right;
+  border:none;
+  background-color: var(--spanish-green);
+  color:white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top:10px;
+  margin-right: 10px;
+  padding:10px 20px;
+}
+.cart-mobile-footer button:hover{
+  background-color: var(--spanish-viridian);
+}
+
+.cart-mobile-footer h3{
+
 }
