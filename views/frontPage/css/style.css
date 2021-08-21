@@ -150,7 +150,7 @@ img{
    margin-bottom: var(--mb-2);
  }
 
- .nav__link, .nav__logo, .nav__toggle{
+ .nav__link, .nav__logo, .nav__toggle, .nav__close{
    color: var(--text-color);
    font-weight: var(--font-medium);
  }
@@ -167,7 +167,7 @@ img{
  .nav__link:hover{
    color: var(--first-color);
  }
- .nav__toggle{
+ .nav__toggle, .nav__close{
    font-size: 1.3rem;
    cursor: pointer;
  }
@@ -237,7 +237,6 @@ img{
   background-color: var(--first-color);
   color: #FFFF;
   padding: .75rem 1rem;
-  margin: .5rem;
   border-radius: .5rem;
   transition: .3s;
 }
@@ -345,7 +344,7 @@ img{
   font-size: var(--small-font-size);
   margin: .25rem 0 var(--mb-3);
 }
-.footer__social{
+.footer__icons{
   font-size: 1.5rem;
   color: var(--title-color);
   margin-right: var(--mb-2);
@@ -417,9 +416,10 @@ img{
     margin-left: var(--mb-5);
     margin-bottom: 0;
   }
-  .nav__toggle{
+  .nav__toggle, .nav__close{
     display: none;
   }
+  
 
   .home__container{
     height: 100vh;
@@ -436,7 +436,7 @@ img{
     column-gap: 4rem;
   }
   .shop__content{
-    padding: 1.5rem;
+    padding: 1.0rem;
   }
   .shop__img{
     width: 400px;
