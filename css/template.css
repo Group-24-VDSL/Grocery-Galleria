@@ -22,6 +22,37 @@
   --device-md: 768px;
   --device-lg: 992px;
   --device-xl: 1200px;
+
+  --header-height: 3rem;
+  --first-color:#2b9348;
+  --first-color-alt: #55a630;
+  --title-color: #393939;
+  --text-color:#707070;
+  --text-color-light:#A6A6A6;
+  --body-color:#FBFEFD;
+  --container-color: #FFFFFF;
+
+  --body-font: "Open Sans", sans-serif;
+  --biggest-font-size: 2.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size:1rem;
+  --normal-font-size:.938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  --mb-1: .5rem;
+  --mb-2: 1rem;
+  --mb-3: 1.5rem;
+  --mb-4: 2rem;
+  --mb-5: 2.5rem;
+  --mb-6: 3rem;
+
+  --z-tooltip: 10;
+  --z-fixed: 100;
 }
 
 /* 
@@ -34,7 +65,28 @@ col-xl-* - 1200px
 body {
   font-family: Open Sans;
 }
+ul{
+  padding: 0;
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+.section{
+  padding: 2rem 0 2rem;
+}
+.bd-container{
+  max-width: 960px;
+  width: calc(100% - 2rem);
+  margin-left: var(--mb-2);
+  margin-right: var(--mb-2);
 
+}
+
+.bd-grid{
+  display: grid;
+  gap: 1.5rem;
+}
 .btn {
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
@@ -360,6 +412,7 @@ table td {
   .header-img {
     width: 100%;
   }
+  
 }
 
 .header-top {
@@ -677,4 +730,67 @@ table td {
 
 .cart-mobile-footer h3{
 
+}
+
+ /*----------------footer-------------- */
+
+.footer__container{
+  grid-template-columns: repeat(auto-fit, minmax(220px, 2fr));
+  row-gap: 2rem;
+}
+.footer__logo{
+  font-size: var(--h3-font-size);
+  color: var(--first-color);
+  font-weight: var(--font-semi-bold);
+}
+.footer__description{
+  display: block;
+  font-size: var(--small-font-size);
+  margin: .25rem 0 var(--mb-3);
+}
+.footer__icons{
+  font-size: 1.5rem;
+  color: var(--title-color);
+  margin-right: var(--mb-2);
+}
+.footer__title{
+  font-size: var(--h2-font-size);
+  color: var(--title-color);
+  margin-bottom: var(--mb-2);
+}
+.footer__link{
+  display: inline-block;
+  color: var(--text-color);
+  margin-bottom: var(--mb-1);
+  font-style: normal;
+}
+.footer__link:hover{
+  color: var(--first-color);
+}
+.features__logo{
+  width: 64px;
+  height: 64px;
+}
+.footer__copy{
+  text-align: center;
+  font-size: var(--small-font-size);
+  color: var(--text-color);
+  margin-top: 3.5rem;
+}
+
+@media screen and (min-width: 768px){
+  body{
+    margin: 0;
+  }
+  .section{
+    padding-top: 0.5rem;
+  }
+  
+}
+
+@media screen and (min-width: 960px){
+  .bd-container{
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
