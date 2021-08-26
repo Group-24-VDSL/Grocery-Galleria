@@ -23,22 +23,24 @@
   --device-lg: 992px;
   --device-xl: 1200px;
 
-  --header-height: 3rem;
+  --header-height: 2.5rem;
+  --searchbar-height: 5rem;
   --first-color:#2b9348;
   --first-color-alt: #55a630;
   --title-color: #393939;
   --text-color:#707070;
   --text-color-light:#A6A6A6;
-  --body-color:#FBFEFD;
+  --body-color:#ffffff;
   --container-color: #FFFFFF;
+  --header-color: #f1faee;
 
   --body-font: "Open Sans", sans-serif;
   --biggest-font-size: 2.5rem;
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;
   --h3-font-size:1rem;
-  --normal-font-size:.938rem;
-  --small-font-size: .813rem;
+  --normal-font-size:1rem;
+  --small-font-size: .8rem;
   --smaller-font-size: .75rem;
 
   --font-medium: 500;
@@ -50,9 +52,6 @@
   --mb-4: 2rem;
   --mb-5: 2.5rem;
   --mb-6: 3rem;
-
-  --z-tooltip: 10;
-  --z-fixed: 100;
 }
 
 /* 
@@ -729,68 +728,121 @@ table td {
 }
 
 .cart-mobile-footer h3{
-
-}
-
- /*----------------footer-------------- */
-
-.footer__container{
-  grid-template-columns: repeat(auto-fit, minmax(220px, 2fr));
-  row-gap: 2rem;
-}
-.footer__logo{
-  font-size: var(--h3-font-size);
-  color: var(--first-color);
-  font-weight: var(--font-semi-bold);
-}
-.footer__description{
-  display: block;
-  font-size: var(--small-font-size);
-  margin: .25rem 0 var(--mb-3);
-}
-.footer__icons{
-  font-size: 1.5rem;
-  color: var(--title-color);
-  margin-right: var(--mb-2);
-}
-.footer__title{
-  font-size: var(--h2-font-size);
-  color: var(--title-color);
-  margin-bottom: var(--mb-2);
-}
-.footer__link{
-  display: inline-block;
-  color: var(--text-color);
-  margin-bottom: var(--mb-1);
-  font-style: normal;
-}
-.footer__link:hover{
-  color: var(--first-color);
-}
-.features__logo{
-  width: 64px;
-  height: 64px;
-}
-.footer__copy{
-  text-align: center;
-  font-size: var(--small-font-size);
-  color: var(--text-color);
-  margin-top: 3.5rem;
-}
-
-@media screen and (min-width: 768px){
-  body{
-    margin: 0;
-  }
-  .section{
-    padding-top: 0.5rem;
-  }
   
 }
 
-@media screen and (min-width: 960px){
-  .bd-container{
-    margin-left: auto;
-    margin-right: auto;
-  }
+/* footer start */
+
+/*
+/* Uncomment below section before using the footer */
+/*
+*{
+  font-family: var(--body-font);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none; 
+  border:none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all .2s linear;
 }
+*::selection{
+  background:var(--first-color);
+  color:var(--body-color);
+}
+
+ html{
+   font-size: 62%;
+   overflow-x: hidden;
+   scroll-padding-top: 6.5rem;
+   scroll-behavior: smooth;
+ }
+ ul{
+  padding: 0;
+  list-style: none;
+}
+ section{
+   padding: 2rem 9%;
+ }
+.btn{
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: var(--first-color);
+  color:var(--body-color);
+  padding: .8rem 3rem;
+  font-size: var(--h1-font-size);
+  border-radius: .5rem;
+  transition: .3s;
+}
+.btn:hover{
+  background-color: var(--first-color-alt);
+}
+.logo-img{
+  padding-right: .5rem;
+  max-width: 220px;
+  height: auto;
+
+ }
+ */
+ /* Footer design */
+.footer .box-container{
+  display: flex;
+  gap:1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer .box-container .box{
+  padding:1rem 0;
+  flex:1 1 25rem;
+}
+
+.footer .box-container .box .communication a{
+  padding:0;
+  height:4rem;
+  width:4rem;
+  line-height: 4rem;
+  text-align: center;
+}
+.footer .box-container .box h3{
+  font-size: 2.5rem;
+  color:var(--title-color);
+}
+
+.footer .box-container .box p{
+  font-size: var(--h2-font-size);
+  color:var(--text-color);
+  padding:.7rem 0;
+}
+
+.footer .box-container .box .links{
+  padding:1rem 0;
+}
+.footer .box-container .box ul .element{
+  display: block;
+  padding:.5rem 0;
+  font-size: var(--h1-font-size);
+  color:var(--title-color);
+}
+.footer .box-container .box .links a{
+  display: block;
+  padding:.5rem 0;
+  font-size: var(--h1-font-size);
+  color:var(--title-color);
+}
+
+.footer .box-container .box .links a:hover{
+  text-decoration: underline;
+  color:var(--first-color-alt);
+}
+.features-logo{
+  width: 64px;
+  height: 64px;
+}
+.footer-copyright{
+  text-align: center;
+  font-size: var(--h1-font-size);
+  color: var(--text-color);
+  margin-top: 2.5rem;
+}
+/* footer end */
