@@ -310,7 +310,9 @@
 .product .box-container .box .btn{
   display: block;
 }
-
+.footer{
+  background-color: var(--header-color);
+}
 .footer .box-container{
   display: flex;
   gap:1.5rem;
@@ -319,7 +321,7 @@
 
 .footer .box-container .box{
   padding:1rem 0;
-  flex:1 1 25rem;
+  flex:1 1 20rem;
 }
 
 .footer .box-container .box .communication a{
@@ -341,9 +343,9 @@
   padding:.7rem 0;
 }
 
-.footer .box-container .box .links{
+/* .footer .box-container .box .links{
   padding:1rem 0;
-}
+} */
 .footer .box-container .box ul .element{
   display: block;
   padding:.5rem 0;
