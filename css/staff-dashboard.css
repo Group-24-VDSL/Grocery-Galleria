@@ -1,0 +1,31 @@
+.insights{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+}
+
+.sub-insights{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    flex: 1 1 auto!important; /* The flex-basis CSS property sets the initial main size of a flex item */
+    margin:10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.sub-insights:hover{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 4px 8px;
+}
+
+.sub-insights strong{
+    font-size: 5rem;
+    color: var(--spanish-viridian);
+}
+.
+
+.insights-left{
+
+}
+
+.insights-right{
+    
+}
