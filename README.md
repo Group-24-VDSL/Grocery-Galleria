@@ -1,2 +1,2 @@
-# frameworks
-Frameworks for the group project.
+# framework-core
+Framework Core of the group project
