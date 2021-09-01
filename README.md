@@ -29,7 +29,7 @@ push:
 
 
 Also make sure you change your document root to the,
-     DocumentRoot "C:/xampp/htdocs/php_mvc/public"
+    DocumentRoot "C:/xampp/htdocs/php_mvc/public"
 
  
 
