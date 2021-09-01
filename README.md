@@ -31,7 +31,7 @@ push:
 Also make sure you change your document root to the, <br>
     DocumentRoot "<XAMMP_HOME>/htdocs/Grocery-Galleria/public"
 
- ###Folder Structure
+ ##Folder Structure
 
 ```text
 ├── controllers - 
