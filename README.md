@@ -31,7 +31,28 @@ push:
 Also make sure you change your document root to the,
     DocumentRoot "C:/xampp/htdocs/php_mvc/public"
 
- 
+ ###Folder Structure
+
+```text
+├── controllers - 
+│   ├── css
+│   │   ├── **/*.css
+│   ├── favicon.ico
+│   ├── images
+│   ├── index.html
+│   ├── js
+│   │   ├── **/*.js
+│   └── partials/template
+├── core  
+├── models
+├── public
+├── runtime
+├── views
+│   ├── layouts
+├── README.md
+├── composer.json
+└── .gitignore
+```
 
 
 
