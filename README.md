@@ -29,7 +29,7 @@ push:
 
 
 Also make sure you change your document root to the, <br>
-    DocumentRoot "C:/xampp/htdocs/Grocery-Galleria/public"
+    DocumentRoot "<XAMMP_HOME>/htdocs/Grocery-Galleria/public"
 
  ###Folder Structure
 
