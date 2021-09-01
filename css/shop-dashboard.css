@@ -1,18 +1,69 @@
 div {
     column-gap: 40px;
+	display:block;
   }
 
-.flex-container{
+ .flex-container{
 	width: 80%;
 	min-height: 300px;
 	margin: 0 auto;
 	display: -webkit-flex; /* Safari */		
-	display: flex; /* Standard syntax */
-}
-.flex-container .column{
+	/* display: flex; Standard syntax */
+    /* flex-wrap: wrap;*/
+ } 
+.column-1  {
 	padding: 10px;
-	background: #dbdfe5;
-	-webkit-flex: 1; /* Safari */
-	-ms-flex: 1; /* IE 10 */
-	flex: 1; /* Standard syntax */
+	 background: #dbdfe5; 
+	-webkit-flex: 1; /* Safari*/
+	 -ms-flex: 1; /*IE 10   */
+	 /* flex: 1 1 10rem; Standard syntax */
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+}
+ .column-2 {
+	padding: 10px;
+	 background: #dbdfe5; 
+	-webkit-flex: 1; /* Safari*/
+	 -ms-flex: 1; /*IE 10   */
+	 /* flex: 1 1 10rem; Standard syntax */
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+}
+
+#navigation {
+    text-transform: uppercase;
+    padding: 15px 15px 15px 15px;
+    color: #FFFFFF;
+  background: #19222E;
+    display: block;
+}
+
+#shopName {
+	font-size: 13px;
+}
+
+.main-content:after{
+	clear:both;
+}
+
+.main-content:before , .main-content:after , .row:before ,  .row:after{
+	content:" " ;
+	display : table ;
+}
+
+*:before, *:after {
+    /* -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; */
+    box-sizing: border-box;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.tile-heading {
+    padding: 5px 8px;
+    text-transform: uppercase;
+    color: #FFF;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 40%);
+    background-color: #c7c7c7
 }
