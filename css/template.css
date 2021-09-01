@@ -35,6 +35,10 @@ body {
   font-family: Open Sans;
 }
 
+.box-shadow{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .btn {
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
