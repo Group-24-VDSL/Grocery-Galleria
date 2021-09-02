@@ -1,7 +1,6 @@
 
 @import url('/css/fonts.css');
 
-
 :root{
   --header-height: 2.5rem;
   --searchbar-height: 5rem;
@@ -95,12 +94,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding:2rem 9%;
+  padding:1.8rem 9%;
  }
 
  .logo-img{
   padding-right: .5rem;
-  max-width: 220px;
+  max-width: 240px;
   height: auto;
   
  }
@@ -121,7 +120,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding:2rem 7%;
+    padding:1.5rem 7%;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
     position: relative;
   }
@@ -129,7 +128,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding:0 2%;
+    padding:1rem 2%;
     position: relative;
   }
   .header-2.active{
@@ -208,7 +207,7 @@
 }
 .home .image{
   flex: 1 1 40rem;
-  padding-top: 5rem;
+  padding-top: 2rem;
 }
 .home .image img{
   width: 100%;
@@ -328,21 +327,21 @@
 }
 
 .shop .box-container .box img{
-  width: 20rem;
+  width: 25rem;
   border-radius: .5rem;
   align-self: center;
-  margin-top: var(--mb-6);
+  margin-top: var(--mb-4);
   margin-bottom: var(--mb-2);
 }
 
-.shop .box-container .box .rating{
+/* .shop .box-container .box .rating{
   position: absolute;
   top:1rem; left: 1rem;
   background:rgba(0,255,0,.1);
   color:var(--green);
   padding:.7rem 1rem;
   font-size: 2rem;
-}
+} */
 
 .shop .box-container .box h3{
   color:var(--title-color);
