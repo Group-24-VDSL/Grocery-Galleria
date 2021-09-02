@@ -252,7 +252,9 @@ table {
 
 table td {
   border-bottom: 1px solid var(--classic-grey-2);
+  padding:10px;
 }
+
 .thead-green th {
   color: #fff;
   background-color: var(--green-ryb);
