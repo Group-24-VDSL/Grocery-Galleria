@@ -63,7 +63,7 @@
   list-style: none;
 }
  section{
-   padding: 2rem 9%;
+   padding: 2rem 8%;
  }
  .btn{
   display: inline-block;
@@ -254,7 +254,7 @@
   
   .footer .box-container .box{
     padding:1rem 0;
-    flex:1 1 25rem;
+    flex:1 1 20rem;
   }
   
   .footer .box-container .box .communication a{
@@ -297,6 +297,7 @@
     color:var(--first-color-alt);
   }
   .features-logo{
+    padding: .5rem;
     width: 64px;
     height: 64px;
   }
