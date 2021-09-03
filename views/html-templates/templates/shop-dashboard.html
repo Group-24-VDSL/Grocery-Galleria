@@ -36,23 +36,129 @@
       <span id="" class="menu-text menu-expand display-none">Logout</span>
     </a>
   </div>
+
   <div class="main-content">
-    <div>
-      <h1 class="main-header">Dashboard</h1>
-      <h2 id = "shopName" class="shop-name">Vishwa Grocery</h2></div>
+    <div class="page-header">
+      <span class="main-header">Dashboard</span>
+      <!-- <span id = "shopName" class="shop-name">Vishwa Grocery</span> -->
+      <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Dashboard</a></li>
+        </ul>
+    </div>
+    
     <div>
       <div class="container-fluid">
-        <div class = "row"></div>
-        <div class="column">
-          <div class="tile tile-primary">
-            <div class="tile-heading">
-              Total Orders
+        <div class = "row">
+              
+                <div class="column">
+                  <div class="tile tile-primary">
+                    <div class="tile-heading">
+                      Total Orders 
+                    </div>
+                    <div>
+                    <div class="tile-body"> 
+                      <span>
+                        <i class="fas fa-shopping-cart"></i>
+                      </span>
+                      <span class="tile-right">230</span>
+                    </div>
+                    </div>
+                    <div class="tile-footer">
+                      <a href="#">view more...</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="column">
+                  <div class="tile tile-primary">
+                    <div class="tile-heading">
+                      Total Sales
+                    </div>
+                    <div>
+                    <div class="tile-body"> 
+                      <span>
+                        <i class="fas fa-credit-card"></i>
+                      </span>
+                      <span class="tile-right">5050K</span>
+                    </div>
+                  </div>
+                    <div class="tile-footer">
+                      <a href="#">view more...</a>
+                    </div>
+                  </div>
+                </div>
+              
+          </div>
+      </div> 
+      <div class= "row">
+        <div class="panel-row">
+          <div class="default-panel">
+            <div class="panel-heading">
+              <span class="panel-title"> <i class="fas fa-shopping-cart"></i>
+                &nbsp Latest Orders
+              </span>
+            </div>
+            <div class="panel-table">
+              <table class="table">
+                <b><thead>
+                  <tr>
+                  <td class="text-right">Order ID</td>
+                  <td>Customer</td>
+                  <td>Status</td>
+                  <td>Date</td>
+                  <td class="text-right">Total</td>
+                  <td class="text-right">View</td>
+                  </tr>
+                  </thead></b>
+                  <tbody>
+                    <tr>
+                    <td class="text-right">13438</td>
+                    <td>Yohan De Silva</td>
+                    <td>New</td>
+                    <td>02/09/2021</td>
+                    <td class="text-right">Rs.7500</td>
+                    <td class="text-right"><a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="far fa-eye"></i></a></td>
+                    </tr>
+                    <tr>
+                    <td class="text-right">13437</td>
+                    <td>SSD Sanduni sandeepa</td>
+                    <td>Delivered</td>
+                    <td>02/09/2021</td>
+                    <td class="text-right">Rs.1075</td>
+                    <td class="text-right"><a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="far fa-eye"></i></a></td>
+                    </tr>
+                    <tr>
+                    <td class="text-right">13436</td>
+                    <td>TM Wathsala Vishwajith</td>
+                    <td>Delivered</td>
+                    <td>02/09/2021</td>
+                    <td class="text-right">Rs.3443</td>
+                    <td class="text-right"><a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="far fa-eye"></i></a></td>
+                    </tr>
+                    <tr>
+                    <td class="text-right">13435</td>
+                    <td>DT Sirimanna</td>
+                    <td>New</td>
+                    <td>02/09/2021</td>
+                    <td class="text-right">Rs.845</td>
+                    <td class="text-right"><a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="far fa-eye"></i></a></td>
+                    </tr>
+                    <tr>
+                    <td class="text-right">13434</td>
+                    <td>W Lahiru Sampath</td>
+                    <td>New</td>
+                    <td>02/09/2021</td>
+                    <td class="text-right">Rs.2460</td>
+                    <td class="text-right"><a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="far fa-eye"></i></a></td>
+                    </tr>
+                    </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="column-2">Column 2</div>
-    </div>
-
+      </div>
+    </div>   
   </div>
 </body>
 
