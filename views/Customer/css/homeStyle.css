@@ -61,7 +61,7 @@
   list-style: none;
 }
  section{
-   padding: 2rem 9%;
+   padding: 3rem 8%;
  }
  .btn{
   display: inline-block;
@@ -228,6 +228,7 @@
 }
 
 .banner-container{
+  /* align-items: center; */
   background-color: var(--header-color);
   display: flex;
   flex-wrap: wrap;
@@ -236,7 +237,8 @@
 
 .banner-container .banner{
   flex:1 1 40rem;
-  height: 25rem;
+  height: 35rem;
+  border-radius: 1rem;
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
   overflow: hidden;
   position: relative;
@@ -290,8 +292,12 @@
 }
 
 .category .box-container .box img{
-  width: 20rem;
-  margin:.5rem 0;
+  width: 25rem;
+  border-radius: .5rem;
+  align-self: center;
+  margin-top: var(--mb-4);
+  margin-bottom: var(--mb-2);
+  
 }
 
 .category .box-container .box h3{
@@ -368,11 +374,31 @@
 .shop .box-container .box .btn{
   display: block;
 }
+.see-more{
+  font-size: var(--h1-font-size);
+  float: right;
+  border: .2rem solid var(--first-color-alt);
+  margin-top: 1.5rem;
+  padding: .8rem 2rem;
+  background: transparent;
+  color:var(--title-color);
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+.see-more span, i{
+  display: inline-block;
+  vertical-align: middle;
+}
+.see-more i{
+  padding-left: 1rem;
+  font-size: var(--biggest-font-size);
+}
 .footer{
   background-color: var(--header-color);
+  margin-top: 3rem;
 }
 .footer .box-container{
-  
   display: flex;
   gap:1.5rem;
   flex-wrap: wrap;
@@ -423,6 +449,7 @@
   color:var(--first-color-alt);
 }
 .features-logo{
+  padding: .5rem;
   width: 64px;
   height: 64px;
 }
