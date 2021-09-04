@@ -49,6 +49,11 @@
   background-color:var(--classic-grey-2);
   color:var(--spanish-green);
 }
+
+.menu-item-child{
+  background-color: var(--apple-green);
+}
+
 .menu-item-menu{
   background-color: var(--spanish-green);
   
@@ -65,8 +70,11 @@
 }
 .menu-text{
   font-size: 1.2rem;
-  
+}
 
+.menu-expand-icon{
+  margin-left: auto;
+  padding-right:5px;
 }
 
 .menu-item-logout{
