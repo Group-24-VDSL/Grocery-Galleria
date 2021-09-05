@@ -410,5 +410,32 @@ a {
     color:var(--classic-white);
 }
 
+ .container-payment .details{
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: .2rem solid rgba(0,0,0,.2);
+  
+  }
 
+ .container-payment .details span{
+    float: right;
+    font-weight: bold;
+  }
+
+.container-payment .checkout{
+    float: right;
+}
+
+.container-payment{
+    /* flex: 1 20rem; */
+    text-align: left;
+    font-size: var(--h1-font-size);
+    padding: 2rem;
+    border:.2rem solid var(--spanish-viridian);
+    background-color: #f1faee;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
 
