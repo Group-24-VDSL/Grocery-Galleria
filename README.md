@@ -28,10 +28,30 @@ push:
     git subtree push --prefix core https://github.com/Group-24-VDSL/framework-core.git main
 
 
-Also make sure you change your document root to the,
-    DocumentRoot "C:/xampp/htdocs/php_mvc/public"
+Also make sure you change your document root to the, <br>
+    DocumentRoot "<XAMMP_HOME>/htdocs/Grocery-Galleria/public"
 
- 
+ ## Folder Structure
+
+```text
+├── controllers - 
+├── core  
+├── models
+├── public
+│   ├── css
+│   │   ├── **/*.css
+│   ├── favicon.ico
+│   ├── images
+│   ├── index.php
+│   ├── js
+│   └── └── **/*.js
+├── runtime
+├── views
+│   ├── layouts
+├── README.md
+├── composer.json
+└── .gitignore
+```
 
 
 
