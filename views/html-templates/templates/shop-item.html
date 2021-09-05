@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--Stylesheets-->
+  <link rel="stylesheet" href="../../../css/template.css" />
+  <link rel="stylesheet" href="../../../css/dashboard.css" />
+  <link rel="stylesheet" href="../../../css/all.css" />
+  <link rel="stylesheet" href="../../../css/fonts.css" />
+  <link rel="stylesheet" href="../../../css/shop-dashboard.css" />
+
+  <!--Javascript-->
+  <script src="../../../js/jquery.min.js"></script>
+  <script src="../../../js/template.js"></script>
+  <script src="../../../js/dashboard.js"></script>
+
+</head>
+
+<body>
+  <div class="sidebar collapsed">
+    <a id="menu" class="menu-item menu-item-menu">
+      <span id="menu-icon" class="menu-icon"><i class="fas fa-bars"></i></span>
+      <span id="" class="menu-text menu-expand display-none">Menu</span>
+    </a>
+    <a id="" class="menu-item" href="#">
+      <span id="" class="menu-icon"><i class="fas fa-shopping-basket"></i></span>
+      <span id="" class="menu-text menu-expand display-none">Items</span>
+    </a>
+    <a id="" class="menu-item" href="#">
+      <span id="" class="menu-icon"><i class="fas fa-cash-register"></i></span>
+      <span id="" class="menu-text menu-expand display-none">Orders</span>
+    </a>
+    <a id="menu" class="menu-item menu-item-logout">
+      <span id="" class="menu-icon"><i class="fas fa-power-off"></i></span>
+      <span id="" class="menu-text menu-expand display-none">Logout</span>
+    </a>
+  </div>
+
+  <div class="main-content">
+    <div class="page-header">
+      <span class="main-header">Shop Item</span>
+      <!-- <span id = "shopName" class="shop-name">Vishwa Grocery</span> -->
+      <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Shop Item</a></li>
+        </ul>
+    </div>
+    &nbsp;
+    <div class="container-fluid">
+      
+      <div class= "row">
+        <div class="panel-row">
+          <div class="default-panel">
+            <div class="panel-heading">
+              <span class="panel-title"> <i class="fas fa-list"></i></i>
+                &nbsp Shop Items
+              </span>
+            </div>
+            <div class="item-table">
+              <form action="#" method="post" enctype="multipart/form-data" id="form-product">
+                <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"></td>
+                <td class="text-left"> Item ID </td>
+                <td class="text-center">Image</td>
+                <td class="text-left"> Product Name </td>
+                <td class="text-left"> Category</td>
+                <td class="text-right">Unit Price</td>
+                <td class="text-left">Unit Weight </td>
+                <td class="text-right">Available Quantity </td>
+                <td class="text-left"> >Status </td>
+                
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td class="text-center"> <input type="checkbox" name="selected[]" value="44">
+                </td>
+                <td class="text-left">Veg044</td>
+                <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914006.jpg" alt="carrot" class="img-thumbnail"> </td>
+                <td class="text-left">Big Onion</td>
+                <td class="text-left">Onion</td>
+                <td class="text-right"> <span>RS.50.00</span>
+                </td>
+                <td class="text-left">100 g</td>
+                <td class="text-right"> <span class="label label-success">50 Kg</span> </td>
+                <td class="text-left">Enabled</td>
+                </tr>
+                <tr>
+                  <td class="text-center"> <input type="checkbox" name="selected[]" value="110">
+                  </td>
+                  <td class="text-left">Veg110</td>
+                  <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914039.jpg" alt="carrot" class="img-thumbnail"> </td>
+                  <td class="text-left">Pumpkin</td>
+                  <td class="text-left">Low-Contry</td>
+                  <td class="text-right"> <span>RS.50.00</span>
+                  </td>
+                  <td class="text-left">100 g</td>
+                  <td class="text-right"> <span class="label label-success">0</span> </td>                  
+                  <td class="text-left">Not Enable</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center"> <input type="checkbox" name="selected[]" value="2">
+                    </td>
+                    <td class="text-left">Veg002</td>
+                    <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915013.jpg" alt="carrot" class="img-thumbnail"> </td>
+                    <td class="text-left">Potato</td>
+                    <td class="text-left">Up-Country</td>
+                    <td class="text-right"> <span>RS.100.00</span>
+                    </td>
+                    <td class="text-left">100 g</td>
+                    <td class="text-right"> <span class="label label-success">100 Kg</span> </td>
+                    <td class="text-left">Enabled</td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center"> <input type="checkbox" name="selected[]" value="10">
+                      </td>
+                      <td class="text-left">Veg010</td>
+                      <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915005.jpg" alt="carrot" class="img-thumbnail"> </td>
+                      <td class="text-left">Cabbage</td>
+                      <td class="text-left">Up-Country</td>
+                      <td class="text-right"> <span>RS.60.00</span>
+                      </td>
+                      <td class="text-left">100 g</td>
+                      <td class="text-right"> <span class="label label-success">50 Kg</span> </td>
+                      <td class="text-left">Enabled</td>
+                      </tr>
+                      <tr>
+                        <td class="text-center"> <input type="checkbox" name="selected[]" value="1">
+                        </td>
+                        <td class="text-left">Veg001</td>
+                        <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915007.jpg" alt="carrot" class="img-thumbnail"> </td>
+                        <td class="text-left">Carrot</td>
+                        <td class="text-left">Up-Country</td>
+                        <td class="text-right"> <span>RS.30.00</span>
+                        </td>
+                        <td class="text-left">100 g</td>
+                        <td class="text-right"> <span class="label label-success">10 Kg</span> </td>
+                        <td class="text-left">Enabled</td>
+                        </tr>
+                </tbody>
+                </table>
+                </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+  </div>
+</body>
+
+</html>
