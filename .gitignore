@@ -6,6 +6,7 @@ composer.phar
 # composer.lock
 
 composer.lock
+.vscode
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,composer,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,composer,intellij+all
