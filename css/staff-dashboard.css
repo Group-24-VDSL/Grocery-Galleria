@@ -1,0 +1,5 @@
+.table-border{
+    border: 0.2rem solid var(--spanish-viridian);
+    border-radius: 1rem;
+    padding: 2rem;
+}
