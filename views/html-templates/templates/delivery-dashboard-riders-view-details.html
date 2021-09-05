@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--Stylesheets-->
   <link rel="stylesheet" href="../../../css/template.css" />
   <link rel="stylesheet" href="../../../css/dashboard.css" />
@@ -57,31 +57,29 @@
       <span id="" class="menu-text menu-expand display-none">Logout</span>
     </a>
   </div>
+
   <div class="main-content">
     <nav>
-      <h1 class="main-header">Dashboard</h1>
+      <h1 class="main-header">Delivery Dashboard</h1>
     </nav>
     <div class="">
-      <h3>Add Rider</h3>
-      <div class="frm">
-        <form action="" method="POST">
-          <div class="row">
-            <div class="column">
-              <div><label>RiderID:</label><input type=text name="" value="12" style="" class=""></div>
-              <div><label>Name:</label><input type=text name="" value="Nimal" style="" class=""></div>
-              <div><label>NIC:</label><input type=text name="" value="980654875V" style="" class=""></div>
-              <div><label>Email:</label><input type=text name="" value="nimal@gmail.com" style="" class=""></div>
-              <div><label>Contact Number:</label><input type=text name="" value="0715487558" style="" class=""></div>
-            </div>
-            <div><label>Profile Picture:</label><img src='.././../../img/placeholder-150.png'><input type=text name="" value="image.png" style="" class=""></div>
-          </div>
-          <div><button type="button" type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-secondary">Cancel</button>
-          </div>
+      <h3>View Rider Information</h3>
+      <div class="frm ">
+        <div class="row">
+        <div class="column">
+          <div><label>RiderID:</label><input type=text name="" value="12" style="" class="" disabled></div>
+          <div><label>Name:</label><input type=text name="" value="Nimal" style="" class="" disabled></div>
+          <div><label>NIC:</label><input type=text name="" value="980654875V" style="" class="" disabled></div>
+          <div><label>Email:</label><input type=text name="" value="nimal@gmail.com" style="" class="" disabled></div>
+          <div><label>Contact Number:</label><input type=text name="" value="0715487558" style="" class="" disabled></div>
+        </div>
+        <div><label>Profile Picture:</label><img src='.././../../img/placeholder-150.png'></div>
       </div>
-      </form>
 
+      </div>
     </div>
+
+  </div>
 </body>
 
 </html>
