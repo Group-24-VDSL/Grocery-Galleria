@@ -283,10 +283,8 @@ table td {
 .display-flex{
   display: flex;
 }
-.order-shop-display{
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap:1em;
-}
+
+
 
 .card {
   text-align: center;
