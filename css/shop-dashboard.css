@@ -5,7 +5,7 @@
 .page-header{
     display: grid;
     grid:auto auto;
-    grid-template-columns: ;
+    /* grid-template-columns: ; */
     
 }
 
@@ -186,6 +186,10 @@ ul {
     -moz-box-sizing: border-box; */
     /* box-sizing: border-box; */
 /* } */ 
+
+.order-details{
+    justify-content: space-evenly;
+}
 
 .row-shop-dashboard {
     margin-left: -15px;
