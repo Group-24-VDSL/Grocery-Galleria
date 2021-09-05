@@ -276,6 +276,18 @@ table td {
   flex-direction: column;
 }
 
+.display-grid{
+  display: grid;
+}
+
+.display-flex{
+  display: flex;
+}
+.order-shop-display{
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap:1em;
+}
+
 .card {
   text-align: center;
   box-shadow: #00000029 0px 1px 4px;

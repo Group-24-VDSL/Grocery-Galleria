@@ -33,6 +33,8 @@
   left: 0;
   color: var(--classic-white);
   overflow: hidden;
+  position: fixed;
+  z-index: 1;
 }
 
 .menu-item {
