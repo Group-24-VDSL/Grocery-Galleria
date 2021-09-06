@@ -1,7 +1,22 @@
-<h1>Auth</h1>
-<a href="/">Home</a>
-<a href="/contact">Contact</a>
-<a href="/register">Register</a>
-<a href="/login">login</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/Auth.css">
+    <title>Login</title>
+</head>
+<body>
+<header>
+    <div class="header-1">
+        <a href="#" class="logo"><img class="logo-img" src="./img/logo2.png" alt="" srcset=""></a>
+        <a href="" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+</header>
 {{content}}
+<p class="footer-copyright">&#169; 2021 Grocery Galleria. All right reserved.</p>
+<script type="text/javascript" src="./js/Auth.js"></script>
+</body>
+</html>
 

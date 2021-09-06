@@ -1,22 +1,40 @@
 <?php
 /** @var $model \app\models\User **/
+/** @var $form \core\form\Form */
 ?>
 
-<h1>Login</h1>
 
-<?php $form = \app\core\form\Form::begin("","post");?>
-<?php echo $form->field($model,'email')->emailField(); ?>
-<?php echo $form->field($model,'password')->passwordField(); ?>
-<button type="submit">Submit</button>
-<?php \app\core\form\Form::end(); ?>
-<!--<form action="" method="post">-->
-<!--    <div >-->
-<!--        <label >Email address</label>-->
-<!--        <input type="email" name="username">-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label>Password</label>-->
-<!--        <input type="password" name="password">-->
-<!--    </div>-->
-<!--    <button type="submit">Submit</button>-->
-<!--</form>-->
+<div class="container">
+    <div class="subcontainer">
+        <img class="main-img" src="./img/login-background.png" alt="">
+    </div>
+    <div class="subcontainer">
+        <?php $form = \app\core\form\Form::begin("","post");?>
+            <img class="user" src="./img/user.svg" alt="">
+            <h2>Welcome</h2>
+            <div class="input-div one">
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h5>Username</h5>
+                    <?php echo $form->fieldonly($model,'email',["input"])->emailField(); ?>
+                </div>
+            </div>
+            <div class="input-div two">
+                <div class="icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div>
+                    <h5>Password</h5>
+                    <?php echo $form->fieldonly($model,'password',["input"])->passwordField(); ?>
+                </div>
+            </div>
+            <a href="#">Forgot Password</a>
+            <input class="btn" type="submit" name="" id="" value="Login">
+        <?php \app\core\form\Form::end(); ?>
+    </div>
+</div>
+
+
+

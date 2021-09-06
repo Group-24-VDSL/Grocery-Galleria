@@ -20,14 +20,13 @@ class User extends UserModel
 
     public function save()
     {
-
         $this->password = password_hash($this->password,PASSWORD_BCRYPT);
         return parent::save(); //call the parent DBModel::save
     }
 
     public static function tableName(): string
     {
-        return 'users'; //table name
+        return 'login'; //table name
     }
 
     public function rules(): array
