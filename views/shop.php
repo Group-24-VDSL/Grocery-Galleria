@@ -5,7 +5,7 @@
         <h1 class="subheading"><i class="fas fa-leaf"></i> Up <span>country</span></h1>
         <div class="box-container">
             <div class="box">
-                <img src="./img/product-imgs/Pic914006.jpg" alt="">
+                <img src="/img/product-imgs/Pic914006.jpg" alt="">
                 <h3>Big Onion</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -22,7 +22,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic914007.jpg" alt="">
+                <img src="/img/product-imgs/Pic914007.jpg" alt="">
                 <h3>bitter gourd</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -39,7 +39,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic915007.jpg" alt="">
+                <img src="/img/product-imgs/Pic915007.jpg" alt="">
                 <h3>Carrot</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -56,7 +56,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic915013.jpg" alt="">
+                <img src="/img/product-imgs/Pic915013.jpg" alt="">
                 <h3>Potato</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -79,7 +79,7 @@
         <h1 class="subheading"><i class="fas fa-leaf"></i> Low <span>country</span></h1>
         <div class="box-container">
             <div class="box">
-                <img src="./img/product-imgs/Pic915016.jpg" alt="">
+                <img src="/img/product-imgs/Pic915016.jpg" alt="">
                 <h3>Tomato</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -96,7 +96,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic914029.jpg" alt="">
+                <img src="/img/product-imgs/Pic914029.jpg" alt="">
                 <h3>Lime</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -113,7 +113,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic914016.jpg" alt="">
+                <img src="/img/product-imgs/Pic914016.jpg" alt="">
                 <h3>Ginger</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -130,7 +130,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic914039.jpg" alt="">
+                <img src="/img/product-imgs/Pic914039.jpg" alt="">
                 <h3>Pumpkin</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -147,7 +147,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic915011.jpg" alt="">
+                <img src="/img/product-imgs/Pic915011.jpg" alt="">
                 <h3>Leeks</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -164,7 +164,7 @@
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             </div>
             <div class="box">
-                <img src="./img/product-imgs/Pic915008.jpg" alt="">
+                <img src="/img/product-imgs/Pic915008.jpg" alt="">
                 <h3>Green Chillies</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>

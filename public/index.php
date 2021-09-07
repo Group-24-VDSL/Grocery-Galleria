@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
+
+use app\controllers\ShopController;
 use app\core\Application;
 use app\controllers\SiteControllers;
 use app\controllers\AuthController;
@@ -30,6 +32,8 @@ $app->router->post('/register',[AuthController::class,'register']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 
 $app->router->get('/profile',[AuthController::class,'profile']);
+
+$app->router->get('/gallery/shop',[ShopController::class,'showShop']);
 
 
 $app->run();

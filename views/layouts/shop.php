@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/all.css">
-    <link rel="stylesheet" href="./css/Shop.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/Shop.css">
 
     <!-- JavaScript -->
-    <script src="./js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <title>Vishwa Grocery</title>
 </head>
 <body>
 <!-- Header start -->
 <header>
     <div class="header-1">
-        <a href="#" class="logo"><img class="logo-img" src="./img/logo2.png" alt="" srcset=""></a>
+        <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
         <a href="" class="logout"><i class="fas fa-sign-out-alt"></i></a>
     </div>
     <!-- Shop banner start -->
@@ -53,7 +53,7 @@
         </div>
         <div class="part">
             <div class="icons">
-                <a href="#"class="fas fa-shopping-cart"></a>
+                <a href="#" class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-clipboard-list"></a>
                 <a href="#" class="fas fa-user"></a>
             </div>
@@ -71,7 +71,7 @@
     <div class="box-container">
 
         <div class="box">
-            <a href="#" class="logo"><img class="logo-img" src="./img/logo2.png" alt="" srcset=""></a>
+            <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam culpa sit enim nesciunt rerum laborum illum quam error ut alias!</p>
             <div class="communication">
                 <a href="#" class="btn fas fa-phone-alt"></a>
@@ -115,12 +115,12 @@
             <h3>Services</h3>
             <div class="links">
               <span>
-                <img class="features-logo" src="./img/gurantee.png" alt="">
+                <img class="features-logo" src="/img/gurantee.png" alt="">
               </span>
-                <img class="features-logo" src="./img/cash.png" alt="">
+                <img class="features-logo" src="/img/cash.png" alt="">
                 </span>
                 <span>
-                <img class="features-logo" src="./img/delivery.png" alt="">
+                <img class="features-logo" src="/img/delivery.png" alt="">
               </span>
             </div>
         </div>
@@ -131,6 +131,6 @@
 </section>
 <!-- Footer ends -->
 
-<script src="./js/Shop.js"></script>
+<script src="/js/Shop.js"></script>
 </body>
 </html>
