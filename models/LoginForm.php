@@ -9,35 +9,30 @@ use app\core\Model;
 
 class LoginForm extends Model
 {
-    public string $email = '';
-    public string $password = '';
+    public string $Email = '';
+    public string $Password = '';
+
     public function rules(): array
     {
         return [
-            'email' => [self::RULE_REQUIRED,self::RULE_EMAIL],
-            'password' => [self::RULE_REQUIRED]
+            'Email' => [self::RULE_REQUIRED,self::RULE_EMAIL],
+            'Password' => [self::RULE_REQUIRED]
         ];
     }
 
     public function login()
     {
-        $user = User::findOne(['email'=> $this->email]);
+        $user = User::findOne(['Email'=> $this->Email]);
         if(!$user) {
-            $this->addError('email', 'Username or Password invalid');
+            $this->addError('Email', 'Username or Password invalid');
             return false;
         }
-        if(!password_verify($this->password,$user->password)){
-            $this->addError('password', 'Username or Password invalid');
+        if(!password_verify($this->Password,$user->PasswordHash)){
+            $this->addError('Password', 'Username or Password invalid');
             return false;
         }
 
         return Application::$app->login($user);
     }
 
-    public function labels(){
-        return [
-            'email' => 'Your Email',
-            'password' => 'Password'
-        ];
-    }
 }

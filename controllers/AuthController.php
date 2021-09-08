@@ -7,6 +7,7 @@ use app\core\Controller;
 use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
+use app\models\Customer;
 use app\models\LoginForm;
 use app\models\User;
 
@@ -19,12 +20,13 @@ class AuthController extends Controller
     
     public function login(Request $request,Response $response){
         $loginForm = new LoginForm();
+
         if($request->isPost()){
             $loginForm->loadData($request->getBody());
             if($loginForm->validate() && $loginForm->login()){
                 Application::$app->response->redirect('/');
 //                $response->redirect('/contact');
-                echo "success";
+//                echo "success";
                 return;
             }
 
@@ -35,16 +37,17 @@ class AuthController extends Controller
         ]);
     }
     public function register(Request $request){
-        $this->setLayout('auth');
-
-        $user = new User();
+        $this->setLayout('register');
+        $user = new Customer();
         if($request->isPost()){
 
             $user->loadData($request->getBody());
 
             if($user->validate() && $user->save()){
+                print_r(here2);
                 Application::$app->session->setFlash('success', 'Register Success');
-                Application::$app->response->redirect('/');
+                $this->setLayout('auth');
+                Application::$app->response->redirect('/login');
                 exit;
             }
 //            var_dump($registerModel->errors);
