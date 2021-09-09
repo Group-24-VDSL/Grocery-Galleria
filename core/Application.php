@@ -74,12 +74,13 @@ class Application
         $this->controller = $controller;
     }
 
-    public function login(UserModel $user)
+    public function login(User $user)
     {
         $this->user = $user;
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey};
         $this->session->set('user',$primaryValue);
+        $this->session->set('role',$user->Role);
         return true;
     }
 
