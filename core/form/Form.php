@@ -27,4 +27,9 @@ class Form
     public function textArea(Model $model,$attribute){
         return new TextArea($model,$attribute);
     }
+
+    public function selectfield(Model $model,$attribute,$options=[],$classes=[])
+    {
+        return new SelectField($model,$attribute,$options,$classes);
+    }
 }
