@@ -33,6 +33,8 @@
   left: 0;
   color: var(--classic-white);
   overflow: hidden;
+  position: fixed;
+  z-index: 1;
 }
 
 .menu-item {
@@ -49,6 +51,11 @@
   background-color:var(--classic-grey-2);
   color:var(--spanish-green);
 }
+
+.menu-item-child{
+  background-color: var(--apple-green);
+}
+
 .menu-item-menu{
   background-color: var(--spanish-green);
   
@@ -65,8 +72,11 @@
 }
 .menu-text{
   font-size: 1.2rem;
-  
+}
 
+.menu-expand-icon{
+  margin-left: auto;
+  padding-right:5px;
 }
 
 .menu-item-logout{
@@ -156,3 +166,39 @@
 .display-none {
   display: none !important;
 }
+
+
+.insights-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+ }
+ 
+ .sub-insights{
+
+     flex: 1 1 auto!important; /* The flex-basis CSS property sets the initial main size of a flex item */
+     margin:10px;
+     align-items: center;
+     display: flex;
+     flex-direction: column;
+ }
+ .sub-insights:hover{
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 4px 8px;
+ }
+ 
+ .sub-insights strong{
+     font-size: 5rem;
+     color: var(--spanish-viridian);
+ }
+ 
+ .insights-left{
+ 
+ }
+ 
+ .insights-right{
+     
+ }
+
+ .insights-wide{
+   padding:10px;
+ }

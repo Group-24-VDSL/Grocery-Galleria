@@ -1,0 +1,29 @@
+.table-border{
+    border: 0.2rem solid var(--spanish-viridian);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.delivery-view{
+    grid-template-columns: 2fr 1fr;
+}
+
+.delivery-view-details input{
+    width: 100%;
+}
+.order-shop-display{
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:1em;
+  }
+
+.delivey-view-profile-pic{
+    justify-self: center;
+}
+
+.delivey-view-profile-pic > div{
+    display: grid;
+}
+
+.submit-cancel{
+    margin-top:10px;
+}
