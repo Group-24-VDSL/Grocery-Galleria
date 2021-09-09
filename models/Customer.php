@@ -2,8 +2,7 @@
 
 namespace app\models;
 
-use app\core\db\DBModel;
-use app\models\User;
+
 use app\core\UserModel;
 
 class Customer extends UserModel
@@ -21,7 +20,6 @@ class Customer extends UserModel
 
     public string $Email = '';
     public string $Password = '';
-//    public int $status= self::STATUS_INACTIVE; //email is not validated
     public string $ConfirmPassword = '';
 
     public function save()
@@ -39,15 +37,15 @@ class Customer extends UserModel
     public function rules(): array
     {
         return [
-//            'Email' => [self::RULE_EMAIL,self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]], //check if the user class has the same email or not.
-//            'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
-//            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],
-//            'Name' => [self::RULE_REQUIRED],
-//            'Address'=>[self::RULE_REQUIRED],
-//            'ContactNo'=>[self::RULE_REQUIRED],
-//            'City'=>[self::RULE_REQUIRED],
-//            'Suburb' =>[self::RULE_REQUIRED],
-//            'Location'=>[self::RULE_REQUIRED],
+            'Email' => [self::RULE_EMAIL,self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]], //check if the user class has the same email or not.
+            'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
+            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],
+            'Name' => [self::RULE_REQUIRED],
+            'Address'=>[self::RULE_REQUIRED],
+            'ContactNo'=>[self::RULE_REQUIRED],
+            'City'=>[self::RULE_REQUIRED],
+            'Suburb' =>[self::RULE_REQUIRED],
+            'Location'=>[self::RULE_REQUIRED]
         ];
     }
 
