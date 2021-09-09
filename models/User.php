@@ -11,16 +11,24 @@ class User extends UserModel
 
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
-    const STATUS_DELETED = 2;
+    const STATUS_DELETED = 1;
+    const STATUS_NOTDELETED = 0;
 
-    public string $email = '';
-    public string $password = '';
-    public int $status= self::STATUS_INACTIVE; //email is not validated
-    public string $confirmPassword = '';
+    public string $Email = '';
+    public string $Password = ''; //always have to use capitalized names
+    public string $PasswordHash = '';
+    public string $Name = '';
+    public int $Verify_Flag = self::STATUS_INACTIVE; //email is not validated
+    public int $Delete_Flag = self::STATUS_NOTDELETED;
+    public int $UserID = 0;
+    public string $Role = '';
+    public string $ConfirmPassword = '';
+
+
 
     public function save()
     {
-        $this->password = password_hash($this->password,PASSWORD_BCRYPT);
+        $this->PasswordHash = password_hash($this->Password,PASSWORD_BCRYPT);
         return parent::save(); //call the parent DBModel::save
     }
 
@@ -32,32 +40,34 @@ class User extends UserModel
     public function rules(): array
     {
         return [
-            'email' => [self::RULE_EMAIL,self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]], //check if the user class has the same email or not.
-            'password' => [[self::RULE_MIN,'min' => 8],[self::RULE_MAX,'max' => 32],self::RULE_REQUIRED],
-            'confirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'password']]
+            'Email' => [self::RULE_EMAIL,self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]], //check if the user class has the same email or not.
+            'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
+            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']]
         ];
     }
 
     public function attributes(): array
     {
-        return ['email','password','status'];
+        return ['Email','PasswordHash','Verify_Flag','Delete_Flag','Role'];
     }
 
     public function labels(): array{
         return [
-            'email' => 'Email',
-            'password' => 'Password',
+            'Email' => 'Email',
+            'Password' => 'Password',
             'confirmPassword' => 'Confirm Password'
         ];
     }
 
     public static function primaryKey():string
     {
-        return 'id';
+        return 'UserID';
     }
+
+
 
     public function getDisplayName(): string
     {
-        return $this->email;
+        return $this->Name;
     }
 }
