@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
+use app\controllers\DeliveryController;
 use app\controllers\ShopController;
 use app\controllers\TestController;
 use app\core\Application;
@@ -22,6 +23,9 @@ $config = [
 $app = new Application(dirname(__DIR__), $config);
 
 $app->router->get('/',[SiteControllers::class,'home']);
+
+$app->router->get('/welcome',[SiteControllers::class,'welcome']);
+
 $app->router->get('/contact',[SiteControllers::class,'contact']);
 $app->router->post('/contact',[SiteControllers::class,'handleContact']);
 
@@ -36,6 +40,7 @@ $app->router->get('/profile',[AuthController::class,'profile']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showShop']);
 
+$app->router->get('/dashboard/staff/addrider',[DeliveryController::class,'addrider']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 
