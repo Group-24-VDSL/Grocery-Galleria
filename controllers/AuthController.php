@@ -14,53 +14,67 @@ use app\models\User;
 class AuthController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->registerMiddleware(new AuthMiddleware(['profile']));
     }
-    
-    public function login(Request $request,Response $response){
+
+    public function login(Request $request, Response $response)
+    {
         $loginForm = new LoginForm();
 
-        if($request->isPost()){
+        if ($request->isPost()) {
             $loginForm->loadData($request->getBody());
-            if($loginForm->validate() && $loginForm->login()){
+            if ($loginForm->validate() && $loginForm->login()) {
                 Application::$app->response->redirect('/');
-//                $response->redirect('/contact');
-//                echo "success";
                 return;
             }
 
         }
         $this->setLayout('auth');
-        return $this->render('login',[
+        return $this->render('login', [
             'model' => $loginForm
         ]);
     }
-    public function register(Request $request){
+
+    public function register(Request $request)
+    {
         $this->setLayout('register');
         $user = new Customer();
-        if($request->isPost()){
+        $user->loadData($request->getBody());
+        if ($request->isPost()) {
+            if ($request->getPath() === '/register') { //that means its a customer
 
-            $user->loadData($request->getBody());
+                $tempuser = new User(); //register the user 1st
+                $tempuser->loadData($request->getBody());
+                $tempuser->Role ='Customer'; //it is a customer
+                if ($tempuser->validate() && $tempuser->save()) {
+                    //then we have to register the customer
 
-            if($user->validate() && $user->save()){
-                print_r(here2);
-                Application::$app->session->setFlash('success', 'Register Success');
-                $this->setLayout('auth');
-                Application::$app->response->redirect('/login');
-                exit;
-            }
+                    //find the user-id to save as the customer-id
+                    $temp = User::findOne(['Email' => $request->getBody()['Email']]);
+                    $user->CustomerID = $temp->UserID;
+
+                    if($user->validate() && $user->save()){
+                        Application::$app->session->setFlash('success', 'Register Success');
+                        $this->setLayout('auth');
+                        Application::$app->response->redirect('/login');
+                        exit;
+                    }
+                }
 //            var_dump($registerModel->errors);
-            return $this->render('register',[
-                'model' => $user
-            ]);
+                return $this->render('register', [
+                    'model' => $user
+                ]);
+            }
         }
-        return $this->render('register',[
+        return $this->render('register', [
             'model' => $user
         ]);
     }
 
-    public function logout(Request $request, Response $response){
+    public function logout(Request $request, Response $response)
+    {
         Application::$app->logout();
         $response->redirect('/');
     }
