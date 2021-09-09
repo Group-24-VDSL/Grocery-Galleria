@@ -2,6 +2,7 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use app\controllers\ShopController;
+use app\controllers\TestController;
 use app\core\Application;
 use app\controllers\SiteControllers;
 use app\controllers\AuthController;
@@ -35,6 +36,8 @@ $app->router->get('/profile',[AuthController::class,'profile']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showShop']);
 
+//for debugging purposes
+$app->router->get('/test',[TestController::class,'test']);
 
 $app->run();
 
