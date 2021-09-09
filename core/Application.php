@@ -19,7 +19,7 @@ class Application
     public ?UserModel $user;
 
     public View $view;
-    public static Application  $app;
+    public static Application $app;
     public function __construct($rootPath ,$config)
     {
         self::$app = $this;
