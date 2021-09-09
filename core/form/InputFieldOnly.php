@@ -37,7 +37,7 @@ class InputFieldOnly
 
     public function __toString()
     {
-        return sprintf('<input type="%s" name="%s" style="%s" value="%s" class="%s">',
+        return sprintf('<input type="%s" name="%s" style="%s" value="%s" class="%s" >',
             $this->type,
             $this->attribute,
             $this->model->hasError($this->attribute) ? "border: 1px solid red;" : '',
