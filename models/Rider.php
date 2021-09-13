@@ -24,6 +24,17 @@ class Rider extends \app\core\UserModel
         return ['Name','Address','Email','ContactNo','NIC','ProfilePic'];
     }
 
+    public function labels(): array{
+        return [
+            'Name'=>'Name',
+            'Address'=>'Address',
+            'Email'=>'Email',
+            'ContactNo'=>'Contact Number',
+            'NIC'=>'National ID',
+            'ProfilePic' => 'Profile Picture'
+        ];
+    }
+
     public static function primaryKey(): string
     {
         return 'RiderID';
