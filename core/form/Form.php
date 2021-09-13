@@ -24,7 +24,7 @@ class Form
         return new InputFieldOnly( $model,$attribute,$classes);
     }
 
-    public function textArea(Model $model,$attribute){
+    public function textarea(Model $model,$attribute){
         return new TextArea($model,$attribute);
     }
 
@@ -32,4 +32,9 @@ class Form
     {
         return new SelectField($model,$attribute,$options,$classes);
     }
+
+    public function imagefield(Model $model,$attribute){
+        return new ImageField($model,$attribute);
+    }
+
 }
