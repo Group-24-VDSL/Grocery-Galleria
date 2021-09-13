@@ -36,10 +36,5 @@ class SelectField
         );
     }
 
-//<select id="suburb" name="suburb">
-//<option value="Colombo">Colombo</option>
-//<option value="Maharagama">Maharagama</option>
-//<option value="Gampaha">Gampaha</option>
-//<option value="Nawala">Nawala</option>
-//</select>
+
 }
