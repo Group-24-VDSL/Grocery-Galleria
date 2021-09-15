@@ -16,8 +16,8 @@ class Form
         echo '</form>';
     }
 
-    public function field(Model $model,$attribute){
-        return new InputField($model,$attribute);
+    public function field(Model $model,$attribute,$disabled = null){
+        return new InputField($model,$attribute,$disabled);
     }
 
     public function fieldonly(Model $model,$attribute,$classes=[]){
