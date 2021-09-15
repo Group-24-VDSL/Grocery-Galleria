@@ -5,7 +5,6 @@
 .page-header {
   display: grid;
   grid: auto auto;
-  /* grid-template-columns: ; */
 }
 
 .container-fluid::before {
@@ -15,7 +14,7 @@
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
-  padding: 0em;
+  padding: 0;
 }
 
 .page-header {
@@ -46,7 +45,6 @@
   font-weight: 300;
   flex: 1 1 50rem;
   font-size: 15px;
-  display: inline-block;
 }
 
 .breadcrumb {
@@ -55,7 +53,7 @@
 
   background: none;
   margin: 8px 0 19px 0;
-  padding: 0 0px;
+  padding: 0 0;
   border-radius: 0;
   flex: 1 1 80rem;
 }
@@ -78,16 +76,16 @@
 .breadcrumb li a {
   color: #999999;
   font-size: 14px;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 ul {
   display: block;
   list-style-type: disc;
   margin-block-start: 1em;
   margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   padding-inline-start: 40px;
 }
 /* 
@@ -114,7 +112,6 @@ ul {
 /* -ms-flex: 1; IE 10   */
 /* flex: 1 1 10rem; Standard syntax */
 /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  */
-*/
 /* } */ 
 
 /* #navigation {
@@ -127,12 +124,12 @@ ul {
 
 
 #header {
-  min-height: 0px;
+  min-height: 0;
   background: #ffffff;
   border-bottom: 1px solid #d8d8d8;
   margin: 0;
   padding: 0;
-  box-shadow: 0px 0px 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
   display: block;
 }
 #header .navbar-header {
@@ -142,8 +139,6 @@ ul {
   transition-timing-function: ease;
   transition-delay: 0s;
   border-right: 1px solid #eee;
-  border-right-width: 1px;
-  border-right-style: solid;
   border-right-color: rgb(238, 238, 238);
   width: 235px;
   display: none;

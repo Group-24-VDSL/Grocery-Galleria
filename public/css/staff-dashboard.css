@@ -16,11 +16,11 @@
     grid-gap:1em;
   }
 
-.delivey-view-profile-pic{
+.delivery-view-profile-pic{
     justify-self: center;
 }
 
-.delivey-view-profile-pic > div{
+.delivery-view-profile-pic > div{
     display: grid;
 }
 
