@@ -7,7 +7,7 @@
         <h1 class="main-header">Dashboard</h1>
     </nav>
     <div class="">
-        <h3>Add Rider</h3>`
+        <h3>Add Rider</h3>
         <div class="frm">
             <?php $form = \app\core\form\Form::begin("","post");?>
                 <div class="display-grid delivery-view">
