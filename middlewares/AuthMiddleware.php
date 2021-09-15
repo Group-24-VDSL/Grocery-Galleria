@@ -18,7 +18,9 @@ class AuthMiddleware extends BaseMiddleware
     }
 
 
-
+    /**
+     * @throws ForbiddenException
+     */
     public function execute()
     {
         if(Application::isGuest()){
