@@ -18,10 +18,10 @@ abstract class DBModel extends Model
 
     public function save(){ //save in the table
         $tableName = $this->tableName();
+        $this->attributes();
         $attributes = $this->attributes();  //can also take from the table schema
         $prepareparams = array_map(fn($attr) => ":$attr", $attributes);  //attributes make :attributes
         $stmt  = self::prepare("INSERT INTO $tableName (".implode(',',$attributes).") VALUES(".implode(',',$prepareparams).")");
-
         foreach ($attributes as $attribute) {
             $stmt->bindValue(":$attribute", $this->{$attribute}); //iterate through attributes
         }
