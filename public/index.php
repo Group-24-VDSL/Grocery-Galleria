@@ -41,6 +41,7 @@ $app->router->get('/profile',[AuthController::class,'profile']);
 $app->router->get('/gallery/shop',[ShopController::class,'showShop']);
 
 $app->router->get('/dashboard/staff/addrider',[DeliveryController::class,'addrider']);
+$app->router->get('/dashboard/staff/viewrider',[DeliveryController::class,'viewrider']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 
