@@ -25,7 +25,6 @@ class User extends UserModel
     public string $ConfirmPassword = '';
 
 
-
     public function save()
     {
         $this->PasswordHash = password_hash($this->Password,PASSWORD_BCRYPT);

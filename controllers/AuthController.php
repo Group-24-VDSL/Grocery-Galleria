@@ -13,7 +13,6 @@ use app\models\User;
 
 class AuthController extends Controller
 {
-
     public function __construct()
     {
         $this->registerMiddleware(new AuthMiddleware(['profile']));
@@ -83,6 +82,5 @@ class AuthController extends Controller
     {
         return $this->render('profile');
     }
-
 
 }
