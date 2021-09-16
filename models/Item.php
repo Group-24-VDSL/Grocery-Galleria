@@ -26,7 +26,7 @@ class Item extends DBModel
 
     public function attributes(): array
     {
-        return ['ItemID','Name','ItemImage','Brand','UWeight','MRP'];
+        return ['Name','ItemImage','Brand','UWeight','MRP'];
     }
 
     public function labels(): array{
