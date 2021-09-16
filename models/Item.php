@@ -7,12 +7,13 @@ use app\core\db\DBModel;
 class Item extends DBModel
 {
 
-    public int $ItemID;
+    public int $ItemID = 0;
     public string $Name = '';
     public string $ItemImage = '';
     public string $Brand = '';
     public float $UWeight = 0;
     public float $MRP = 0;
+    public float $MaxCount = 0;
 
     public function save()
     {
@@ -26,17 +27,18 @@ class Item extends DBModel
 
     public function attributes(): array
     {
-        return ['Name','ItemImage','Brand','UWeight','MRP'];
+        return ['Name','ItemImage','Brand','UWeight','MRP','MaxCount'];
     }
 
     public function labels(): array{
         return [
-            'Name'=>'Name',
-            'Address'=>'Address',
-            'Email'=>'Email',
-            'ContactNo'=>'Contact Number',
-            'NIC'=>'National ID',
-            'ProfilePic' => 'Profile Picture'
+            'Name'=>'Item Name',
+            'ItemImage'=>'Item Image',
+            'Brand'=>'Brand (if any)',
+            'UWeight'=>'Unit Weight',
+            'MRP'=>'Maximum Retail Price(MRP)',
+            'ProfilePic' => 'Profile Picture',
+            'MaxCount' => 'Maximum Count'
         ];
     }
 
@@ -47,6 +49,8 @@ class Item extends DBModel
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [
+            'Name' => [self::RULE_REQUIRED]
+        ];
     }
 }

@@ -2,26 +2,35 @@
 
 namespace app\models;
 
-class Delivery extends \app\core\db\DBModel
+use app\core\db\DBModel;
+
+class Delivery extends DBModel
 {
+    public int $DeliveryID = 0;
+    public int $RiderID = 0;
+    public string $Date = '';
+    public string $Status = '';
+    public string $CompDate = '';
+    public string $CompTime = '';
+    public int $OrderID = 0;
 
     public static function tableName(): string
     {
-        // TODO: Implement tableName() method.
+        return 'delivery';
     }
 
     public function attributes(): array
     {
-        // TODO: Implement attributes() method.
+        return ['RiderID','Date','Status','CompDate','CompTime','OrderID' ];
     }
 
     public static function primaryKey(): string
     {
-        // TODO: Implement primaryKey() method.
+        return 'DeliveryID';
     }
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [];
     }
 }

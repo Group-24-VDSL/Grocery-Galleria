@@ -2,26 +2,38 @@
 
 namespace app\models;
 
-class ShopOrder extends \app\core\db\DBModel
+use app\core\db\DBModel;
+
+class ShopOrder extends DBModel
 {
+    public int $ShopID = 0;
+    public int $CartID = 0;
+    public string $Date = '';
+    public float $ShopTotal = 0;
 
     public static function tableName(): string
     {
-        // TODO: Implement tableName() method.
+        return 'shoporder';
     }
 
     public function attributes(): array
     {
-        // TODO: Implement attributes() method.
+        return ['ShopID','CartID','Date','ShopTotal'];
     }
 
     public static function primaryKey(): string
     {
-        // TODO: Implement primaryKey() method.
+//        return '['ShopID','CardID']';
+        return '';
     }
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+       return [
+           'ShopID'=>[self::RULE_REQUIRED],
+           'CartID'=>[self::RULE_REQUIRED],
+           'Date'=>[self::RULE_REQUIRED],
+           'ShopTotal' => [self::RULE_REQUIRED]
+       ];
     }
 }

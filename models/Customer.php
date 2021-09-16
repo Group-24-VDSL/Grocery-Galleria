@@ -54,13 +54,6 @@ class Customer extends UserModel
         return ['CustomerID','Name','Address','Email','ContactNo','City','Suburb','Location'];
     }
 
-//    public function labels(): array{
-//        return [
-//            'email' => 'Email',
-//            'password' => 'Password',
-//            'confirmPassword' => 'Confirm Password'
-//        ];
-//    }
 
     public static function primaryKey():string
     {

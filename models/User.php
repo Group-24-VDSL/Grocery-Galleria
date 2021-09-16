@@ -47,7 +47,7 @@ class User extends UserModel
 
     public function attributes(): array
     {
-        return ['Email','PasswordHash','Verify_Flag','Delete_Flag','Role'];
+        return ['Email','Name','PasswordHash','Verify_Flag','Delete_Flag','Role'];
     }
 
     public function labels(): array{

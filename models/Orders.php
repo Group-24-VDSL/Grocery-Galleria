@@ -2,26 +2,38 @@
 
 namespace app\models;
 
-class Orders extends \app\core\db\DBModel
+use app\core\db\DBModel;
+
+class Orders extends DBModel
 {
+    public int $OrderID = 0;
+    public int $CartID = 0;
+    public float $DeliveryCost = 0;
+    public float $TotalCost = 0;
+
 
     public static function tableName(): string
     {
-        // TODO: Implement tableName() method.
+        return 'orders';
     }
 
     public function attributes(): array
     {
-        // TODO: Implement attributes() method.
+        return ['CartID','DeliveryCost','TotalCost'];
     }
 
     public static function primaryKey(): string
     {
-        // TODO: Implement primaryKey() method.
+        return 'OrderID';
     }
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [
+            'OrderID'=> [self::RULE_REQUIRED,self::RULE_INT],
+            'CartID'=> [self::RULE_REQUIRED,self::RULE_INT],
+            'DeliveryCost' => [self::RULE_REQUIRED,self::RULE_FLOAT] ,
+            'TotalCost' => [self::RULE_REQUIRED,self::RULE_FLOAT]
+        ];
     }
 }

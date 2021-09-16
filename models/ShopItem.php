@@ -2,26 +2,36 @@
 
 namespace app\models;
 
-class ShopItem extends \app\core\db\DBModel
-{
+use app\core\db\DBModel;
 
+class ShopItem extends DBModel
+{
+    public int $ItemID = 0;
+    public int $ShopID = 0;
+    public float $UnitPrice = 0;
+    public float $Stock = 0;
+    public int $Enabled = 0;
     public static function tableName(): string
     {
-        // TODO: Implement tableName() method.
+        return 'shopitem';
     }
 
     public function attributes(): array
     {
-        // TODO: Implement attributes() method.
+        return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
     }
 
     public static function primaryKey(): string
     {
-        // TODO: Implement primaryKey() method.
+        //return ['ItemID','ShopID'];
+        return '';
     }
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [
+            'UnitPrice' => [self::RULE_INT],
+            'Stock' => [self::RULE_MIN]
+        ];
     }
 }

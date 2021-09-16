@@ -2,10 +2,12 @@
 
 namespace app\models;
 
-class Rider extends \app\core\UserModel
+use app\core\UserModel;
+
+class Rider extends UserModel
 {
     //
-    public int $RiderID;
+    public int $RiderID = 0;
     public string $Name = '';
     public string $Address = '';
     public string $Email = '';
@@ -42,7 +44,15 @@ class Rider extends \app\core\UserModel
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [
+            'Email' => [self::RULE_EMAIL,self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]], //check if the user class has the same email or not.
+            'Name' => [self::RULE_REQUIRED],
+            'Address'=>[self::RULE_REQUIRED],
+            'ContactNo'=>[self::RULE_REQUIRED, self::RULE_PHONE],
+            'City'=>[self::RULE_REQUIRED],
+            'Suburb' =>[self::RULE_REQUIRED],
+            'Location'=>[self::RULE_REQUIRED]
+        ];
     }
 
     public function getDisplayName(): string

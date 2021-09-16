@@ -2,26 +2,36 @@
 
 namespace app\models;
 
-class Complaint extends \app\core\db\DBModel
+use app\core\db\DBModel;
+
+class Complaint extends DBModel
 {
+    public int $ComplaintID = 0;
+    public int $CustomerID = 0;
+    public int $StaffID = 0;
+    public int $OrderID = 0;
+    public string $Description = '';
+    public string $Date = '';
 
     public static function tableName(): string
     {
-        // TODO: Implement tableName() method.
+        return 'complaint';
     }
 
     public function attributes(): array
     {
-        // TODO: Implement attributes() method.
+        return ['CustomerID','StaffID','OrderID','Description','Date'];
     }
 
     public static function primaryKey(): string
     {
-        // TODO: Implement primaryKey() method.
+        return 'ComplaintID';
     }
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [
+            'Description' => [self::RULE_REQUIRED]
+        ];
     }
 }
