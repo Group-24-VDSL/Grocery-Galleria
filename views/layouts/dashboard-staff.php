@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/css/dashboard.css" />
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/staff-dashboard.css">
+    <link rel="stylesheet" href="/css/staff-dashboard.css"/>
+    <link rel="stylesheet" href="/css/shop-dashboard.css"/>
     <!--Javascript-->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/template.js"></script>

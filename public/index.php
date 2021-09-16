@@ -22,7 +22,7 @@ $config = [
 
 $app = new Application(dirname(__DIR__), $config);
 
-$app->router->get('/',[SiteControllers::class,'home']);
+$app->router->get('/',[SiteControllers::class,'welcome']);
 
 $app->router->get('/welcome',[SiteControllers::class,'welcome']);
 
