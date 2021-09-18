@@ -8,6 +8,6 @@ use app\models\User;
 class TestController extends \app\core\Controller
 {
     public function test(Request $request){
-        var_dump($request->getBody());
+        var_dump(User::findAll());
     }
 }
