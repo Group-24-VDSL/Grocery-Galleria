@@ -25,4 +25,14 @@ $(document).ready(function () {
         $(this).children("i").toggleClass("fa-caret-right fa-caret-down");
    });
 
+    $(".image-input").on('change',function (){
+        const preview = document.querySelector(".image-preview");
+        const input = document.querySelector(".image-input");
+        const [file] = input.files;
+        if(file){
+            preview.src = URL.createObjectURL(file);
+        }
+
+    })
+
 });
