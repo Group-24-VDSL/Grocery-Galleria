@@ -17,7 +17,8 @@ class ImageField
 
     public function __toString(): string
     {
-        return sprintf('<img src="%s">',
-        $this->attribute ?? '/img/placeholder-150.png');
+        return sprintf('<img id="%s" src="%s">',
+        $this->attribute,
+        $this->model->{$this->attribute} ?? '/img/placeholder-150.png');
     }
 }

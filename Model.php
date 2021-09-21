@@ -10,6 +10,12 @@ abstract class Model
     public const RULE_MAX = 'max';
     public const RULE_MATCH = 'match';
     public const RULE_UNIQUE = 'unique';
+    public const RULE_INT = 'int';
+    public const RULE_PHONE = 'phone';
+    public const RULE_FLOAT = 'float';
+
+    public const REGEXP_PHONE_NL="/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
+
 
     public function loadData($data){
         foreach ($data as $key => $value){
@@ -44,7 +50,10 @@ abstract class Model
             self::RULE_MIN => 'Min length of this field must be {min}',
             self::RULE_MAX => 'Max length of this field must be {max}',
             self::RULE_MATCH => 'This field must be the same as {match}',
-            self::RULE_UNIQUE=> 'You have already used this {field}'
+            self::RULE_UNIQUE=> 'You have already used this {field}',
+            self::RULE_INT => 'This {field} should only contain numbers',
+            self::RULE_FLOAT => 'This {field} should be a float',
+            self::RULE_PHONE => 'This {field} should be a valid phone number'
         ];
     }
 
@@ -67,6 +76,15 @@ abstract class Model
                 }
                 if($ruleName === self::RULE_MAX && strlen($value) > $rule['max']){ //remove this in production
                     $this->addErrorForRule($attribute, self::RULE_MAX,$rule);
+                }
+                if($ruleName === self::RULE_INT && !filter_var($value,FILTER_VALIDATE_INT)){
+                    $this->addErrorForRule($attribute, self::RULE_INT,$rule);
+                }
+                if($ruleName === self::RULE_INT && !filter_var($value,FILTER_VALIDATE_FLOAT)){
+                    $this->addErrorForRule($attribute, self::RULE_FLOAT,$rule);
+                }
+                if($ruleName === self::RULE_INT && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
+                    $this->addErrorForRule($attribute, self::RULE_PHONE,$rule);
                 }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, ['match' => $rule['match']]);
