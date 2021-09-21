@@ -28,6 +28,9 @@ class DeliveryController extends Controller
                     $this->setLayout('auth');
                     exit;
                 }
+                return $this->render('delivery/add-rider', [
+                    'model' => $rider
+                ]);
             }
 
         }
