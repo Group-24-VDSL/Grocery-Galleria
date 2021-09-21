@@ -41,6 +41,7 @@ $app->router->get('/dashboard/staff/addrider',[DeliveryController::class,'addrid
 $app->router->get('/dashboard/staff/viewrider',[DeliveryController::class,'viewrider']);
 
 $app->router->get('/dashboard/staff/additem',[StaffController::class,'additem']);
+$app->router->post('/dashboard/staff/additem',[StaffController::class,'additem']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 
