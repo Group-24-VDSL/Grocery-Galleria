@@ -48,7 +48,7 @@ class Request
           $file = getimagesize($_FILES[$attribute]["tmp_name"]);
           if($file){
               if($filename !== ''){
-                  $target = $path.$filename.strtolower(pathinfo(basename(filter_var($_FILES[$attribute]["name"], FILTER_SANITIZE_SPECIAL_CHARS)), PATHINFO_EXTENSION));
+                  $target = $path.$filename.".".strtolower(pathinfo(basename(filter_var($_FILES[$attribute]["name"], FILTER_SANITIZE_SPECIAL_CHARS)), PATHINFO_EXTENSION));
                   if (!file_exists($target)) {
                       if ($_FILES[$attribute]["size"] < 500000) { //0.5MB
                           if (in_array(strtolower(pathinfo(basename(filter_var($_FILES[$attribute]["name"], FILTER_SANITIZE_SPECIAL_CHARS)), PATHINFO_EXTENSION)), ["png", "jpg"])) {
