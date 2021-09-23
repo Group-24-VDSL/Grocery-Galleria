@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/fonts.css">
     <title>Login</title>
 </head>
+<?php include_once("utils/sessions.php"); ?>
 <body>
 <header>
     <div class="header-1">

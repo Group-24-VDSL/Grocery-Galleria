@@ -16,7 +16,7 @@
 
     <title>Dashboard-Delivery</title>
 </head>
-
+<?php include_once("utils/sessions.php"); ?>
 <body>
 <div class="sidebar collapsed">
     <a id="menu" class="menu-item menu-item-menu">

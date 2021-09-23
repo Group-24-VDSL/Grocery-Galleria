@@ -15,7 +15,7 @@
     <script src="/js/template.js"></script>
     <script src="/js/dashboard.js"></script>
 </head>
-
+<?php include_once("utils/sessions.php"); ?>
 <body>
 <div class="sidebar collapsed">
     <a id="menu" class="menu-item menu-item-menu">

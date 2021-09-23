@@ -12,6 +12,7 @@
     <title>Vishwa Grocery</title>
 </head>
 <body>
+<?php include_once("utils/sessions.php"); ?>
 <!-- Header start -->
 <header>
     <div class="header-1">
