@@ -16,7 +16,7 @@
                     <div><?php echo $form->field($model,"Name");?></div>
                     <div><?php echo $form->field($model,"Brand");?></div>
                     <div><?php echo $form->field($model,"UWeight");?></div>
-                    <div><?php echo $form->selectfield($model,"Unit",['kg'=>'Kg','g'=>'g','l'=>'liter']);?></div>
+                    <div><?php echo $form->selectfield($model,"Unit",['0'=>'Kg','1'=>'g','2'=>'liter']);?></div>
                     <div><?php echo $form->field($model,"MRP");?></div>
                     <div><?php echo $form->field($model,"MaxCount");?></div>
                 </div>
