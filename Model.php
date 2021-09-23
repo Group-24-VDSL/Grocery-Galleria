@@ -144,4 +144,9 @@ abstract class Model
         return $errors[0] ?? '';
     }
 
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
 }
