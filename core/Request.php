@@ -41,4 +41,25 @@ class Request
 
         return $body;
     }
+
+    public function loadFile($path,$attribute)
+    {
+      if($this->method() === 'post'){
+          $file = getimagesize($_FILES[$attribute]["tmp_name"]);
+          if($file){
+              $target = $path.basename(filter_var($_FILES[$attribute]["name"],FILTER_SANITIZE_SPECIAL_CHARS));
+              echo $target;
+              if(!file_exists($target)){
+                 if($_FILES[$attribute]["size"] < 500000 ){ //0.5MB
+                     if(in_array(strtolower(pathinfo($target,PATHINFO_EXTENSION)),["png","jpg"])) {
+                         if(move_uploaded_file($_FILES[$attribute]["tmp_name"], $target)) {
+                            return $target;
+                         }
+                     }
+                 }
+              }
+          }
+      }
+      return null;
+    }
 }
