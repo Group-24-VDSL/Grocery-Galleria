@@ -4,6 +4,9 @@ namespace app\core; //autoload
 
 use app\core\db\Database;
 use app\models\User;
+use \RandomLib\Factory;
+use RandomLib\Generator;
+use SecurityLib\Strength;
 
 class Application
 {
@@ -17,7 +20,8 @@ class Application
     public ?Controller $controller = null;
     public Database $db;
     public ?UserModel $user;
-
+    public Factory $factory;
+    public Generator $generator;
     public View $view;
     public static Application $app;
     public function __construct($rootPath ,$config)
@@ -33,6 +37,9 @@ class Application
         $this->view = new View();
 
         $this->session=new Session();
+
+        $this->factory = new Factory();
+        $this->generator = $this->factory->getGenerator(new Strength(Strength::LOW));
 
         $userId = Application::$app->session->get('user');
         if ($userId) {

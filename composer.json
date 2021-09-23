@@ -13,6 +13,7 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.3",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "paragonie/random-lib": "^2.0"
     }
 }
