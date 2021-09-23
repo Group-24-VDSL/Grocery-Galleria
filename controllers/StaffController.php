@@ -14,8 +14,6 @@ class StaffController extends Controller
         $item = new Item();
         $this->setLayout("dashboard-staff");
         if($request->isPost()){
-            var_dump($request->getBody());
-            var_dump($_FILES);
             $item->loadData($request->getBody());
             $itemimg = $request->loadFile("img/product-imgs/","ItemImage");
             if($itemimg){
