@@ -38,6 +38,7 @@ $app->router->get('/profile',[AuthController::class,'profile']);
 $app->router->get('/gallery/shop',[ShopController::class,'showShop']);
 
 $app->router->get('/dashboard/staff/addrider',[DeliveryController::class,'addrider']);
+$app->router->post('/dashboard/staff/addrider',[DeliveryController::class,'addrider']);
 $app->router->get('/dashboard/staff/viewrider',[DeliveryController::class,'viewrider']);
 
 $app->router->get('/dashboard/staff/additem',[StaffController::class,'additem']);
