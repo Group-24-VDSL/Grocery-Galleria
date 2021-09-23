@@ -49,9 +49,7 @@ class Rider extends UserModel
             'Name' => [self::RULE_REQUIRED],
             'Address'=>[self::RULE_REQUIRED],
             'ContactNo'=>[self::RULE_REQUIRED, self::RULE_PHONE],
-            'City'=>[self::RULE_REQUIRED],
-            'Suburb' =>[self::RULE_REQUIRED],
-            'Location'=>[self::RULE_REQUIRED]
+            'NIC' =>[self::RULE_REQUIRED,self::RULE_NIC]
         ];
     }
 

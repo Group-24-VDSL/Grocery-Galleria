@@ -14,9 +14,10 @@ abstract class Model
     public const RULE_PHONE = 'phone';
     public const RULE_FLOAT = 'float';
     public const RULE_ONEOF = 'oneof'; //input should be one of the items in the given array.
+    public const RULE_NIC = 'nic';
 
     public const REGEXP_PHONE_NL="/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
-
+    public const REGEXP_NIC = "/([0-9]){9}V$|(^(19[0-9][0-9]|20[0-9][0-9])([0-9]){8}$)/";
 
     public function loadData($data){
         foreach ($data as $key => $value){
@@ -64,7 +65,8 @@ abstract class Model
             self::RULE_INT => 'This {field} should only contain numbers',
             self::RULE_FLOAT => 'This {field} should be a float',
             self::RULE_PHONE => 'This {field} should be a valid phone number',
-            self::RULE_ONEOF => 'Invalid Value Given'
+            self::RULE_ONEOF => 'Invalid Value Given',
+            self::RULE_NIC => 'Invalid NIC'
         ];
     }
 
@@ -96,6 +98,9 @@ abstract class Model
                 }
                 if($ruleName === self::RULE_INT && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
                     $this->addErrorForRule($attribute, self::RULE_PHONE,$rule);
+                }
+                if($ruleName === self::RULE_INT && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_NIC)))){
+                    $this->addErrorForRule($attribute, self::RULE_NIC,$rule);
                 }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, ['match' => $rule['match']]);
