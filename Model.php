@@ -13,14 +13,25 @@ abstract class Model
     public const RULE_INT = 'int';
     public const RULE_PHONE = 'phone';
     public const RULE_FLOAT = 'float';
+    public const RULE_ONEOF = 'oneof'; //input should be one of the items in the given array.
+    public const RULE_NIC = 'nic';
 
     public const REGEXP_PHONE_NL="/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
-
+    public const REGEXP_NIC = "/([0-9]){9}V$|(^(19[0-9][0-9]|20[0-9][0-9])([0-9]){8}$)/";
 
     public function loadData($data){
         foreach ($data as $key => $value){
             if(property_exists($this,$key)){
-                $this->{$key} = $value; //assign key = value in the model class
+                if(is_numeric($value)){ //ints or floats
+                    if(filter_var($value,FILTER_VALIDATE_FLOAT)){
+                        $this->{$key} = (float)$value; //value is float.
+                    }elseif(filter_var($value,FILTER_VALIDATE_INT)){
+                        $this->{$key} = (int)$value; //value is int.
+                    }
+                }else{
+                    $this->{$key} = $value; //assign key = value in the model class
+                }
+
             }
         }
     }
@@ -53,7 +64,9 @@ abstract class Model
             self::RULE_UNIQUE=> 'You have already used this {field}',
             self::RULE_INT => 'This {field} should only contain numbers',
             self::RULE_FLOAT => 'This {field} should be a float',
-            self::RULE_PHONE => 'This {field} should be a valid phone number'
+            self::RULE_PHONE => 'This {field} should be a valid phone number',
+            self::RULE_ONEOF => 'Invalid Value Given',
+            self::RULE_NIC => 'Invalid NIC'
         ];
     }
 
@@ -86,8 +99,14 @@ abstract class Model
                 if($ruleName === self::RULE_INT && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
                     $this->addErrorForRule($attribute, self::RULE_PHONE,$rule);
                 }
+                if($ruleName === self::RULE_INT && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_NIC)))){
+                    $this->addErrorForRule($attribute, self::RULE_NIC,$rule);
+                }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, ['match' => $rule['match']]);
+                }
+                if($ruleName === self::RULE_ONEOF && !in_array($value,$rule['oneof'])){
+                    $this->addErrorForRule($attribute, self::RULE_ONEOF, ['match' => $rule['match']]);
                 }
                 if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
@@ -123,6 +142,11 @@ abstract class Model
     {
         $errors = $this->errors[$attribute] ?? [];
         return $errors[0] ?? '';
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
     }
 
 }

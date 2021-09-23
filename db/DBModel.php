@@ -63,4 +63,12 @@ abstract class DBModel extends Model
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_CLASS,static::class);
     }
+
+    public static function getLastID(){
+        $tableName = static::tableName();
+        $primary = static::primaryKey();
+        $statement = self::prepare("SELECT MAX($primary) FROM $tableName");
+        $statement->execute();
+        return (int)$statement->fetchColumn();
+    }
 }
