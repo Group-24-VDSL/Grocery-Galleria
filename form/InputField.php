@@ -8,21 +8,16 @@ class InputField extends BaseField
 {
     const TYPE_EMAIL = 'email';
     const TYPE_TEXT = 'text';
-    const TYPE_PASSWORD = 'password';
-    const TYPE_NUMBER = 'number';
-    //add more types lists, checkboxes etc
+    const TYPE_PASSWORD = 'password'; //add more types lists, checkboxes etc
 
 
     public string $type;
-    public string $value;
-    public $disabled;
 
-    public function __construct(Model $model, string $attribute,$disabled = null){
+    public function __construct(Model $model, string $attribute){
         $this->type = self::TYPE_TEXT;
-        $this->disabled = $disabled;
         parent::__construct($model, $attribute);
-        $this->value = $this->model->{$this->attribute};
     }
+
 
 
     public function passwordField()
@@ -37,25 +32,13 @@ class InputField extends BaseField
         return $this;
     }
 
-    public function numberField(){
-        $this->type = self::TYPE_NUMBER;
-        return $this;
-    }
-
-    public function setValue(string $value){
-        $this->value = $value;
-        return $this;
-    }
-
     public function renderInput(): string
     {
-       return sprintf('<input type="%s" name="%s" style="%s" value="%s" %s >',
+       return sprintf('<input type="%s" name="%s" value="%s" style="%s">',  
            $this->type,
            $this->attribute,
            $this->model->hasError($this->attribute) ? "border: 1px solid red;" : '',
-       $this->value,
-       !is_null($this->disabled) ? "disabled" : ''
+       $this->model->{$this->attribute}
        );
     }
-
 }
