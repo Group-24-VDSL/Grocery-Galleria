@@ -35,14 +35,26 @@ $app->router->post('/register',[AuthController::class,'register']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 $app->router->get('/profile',[AuthController::class,'profile']);
 
-$app->router->get('/gallery/shop',[ShopController::class,'showShop']);
+$app->router->get('/gallery/shop',[ShopController::class,'showshop']);
+$app->router->get('/gallery',[ShopController::class,'showgallery']);
 
-$app->router->get('/dashboard/staff/addrider',[DeliveryController::class,'addrider']);
-$app->router->post('/dashboard/staff/addrider',[DeliveryController::class,'addrider']);
-$app->router->get('/dashboard/staff/viewrider',[DeliveryController::class,'viewrider']);
+$app->router->get('/dashboard/delivery/addrider',[DeliveryController::class,'addrider']);
+$app->router->post('/dashboard/delivery/addrider',[DeliveryController::class,'addrider']);
+$app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'viewriders']);
+$app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'viewrider']);
+$app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
+$app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
 
 $app->router->get('/dashboard/staff/additem',[StaffController::class,'additem']);
 $app->router->post('/dashboard/staff/additem',[StaffController::class,'additem']);
+$app->router->post('/dashboard/staff/user',[StaffController::class,'user']);
+$app->router->post('/dashboard/staff/viewcustomers',[StaffController::class,'viewcustomers']);
+$app->router->post('/dashboard/staff/viewshops',[StaffController::class,'viewshops']);
+$app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewusers']);
+
+$app->router->get('/dashboard/shop/viewitem',[ShopController::class,'viewitem']);
+$app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
+$app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 
