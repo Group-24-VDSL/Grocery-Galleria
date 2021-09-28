@@ -38,6 +38,7 @@
   </div>
 
   <div class="main-content">
+    
     <div class="page-header">
       <span class="main-header">Shop Item</span>
       <!-- <span class="filter-icon"><i class="fas fa-filter"></i></span> -->
@@ -74,78 +75,85 @@
                 <td class="table-heading"> Unit Weight </td>
                 <td class="table-heading"> Available Quantity </td>
                 <td class="table-heading"> Status </td>
-                
+                <td class="table-heading">  </td>
+                <td class="table-heading">  </td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr class="item-row">
                 <td class="text-center"> <input type="checkbox" name="selected[]" value="44">
                 </td>
                 <td class="text-left">Veg044</td>
                 <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914006.jpg" alt="carrot" class="img-thumbnail"> </td>
                 <td class="text-left">Big Onion</td>
                 <td class="text-left">Onion</td>
-                <td class="text-right"> <span>RS.50.00</span>
-                </td>
+                <td class="text-right"> <span>RS.50.00</span></td>
                 <td class="text-left">100 g</td>
-                <td class="text-right"> <span class="label label-success">50 Kg</span> </td>
+                <td class="text-right"> <span class="label lable-available">50 Kg</span> </td>
                 <td class="text-left">Enabled</td>
                 <td class="action-button"><a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="far fa-edit"></i></a></td>
-                <td><input type="button" value="DELETE" onclick="deleteRow(this)"></td>
+                <td><input class="delete-button" type="button" value="DELETE" onclick="deleteRow(this)"></td>
                 </tr>
-                <tr>
+                <tr class="item-row">
                   <td class="text-center"> <input type="checkbox" name="selected[]" value="110" checked="checked">
                   </td>
                   <td class="text-left">Veg110</td>
                   <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914039.jpg" alt="carrot" class="img-thumbnail"> </td>
                   <td class="text-left">Pumpkin</td>
                   <td class="text-left">Low-Contry</td>
-                  <td class="text-right"> <span>RS.50.00</span>
-                  </td>
+                  <td class="text-right"> <span>RS.50.00</span> </td>
                   <td class="text-left">100 g</td>
-                  <td class="text-right"> <span class="label label-success">0</span> </td>                  
+                  <td class="text-right"> <span class="label lable-unavailable">0</span> </td>                  
                   <td class="text-left">Not Enable</td>
+                  <td class="action-button"><a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="far fa-edit"></i></a></td>
+                  <td><input class="delete-button" type="button" value="DELETE" onclick="deleteRow(this)"></td>
                   </tr>
-                  <tr>
+                  <tr class="item-row">
                     <td class="text-center"> <input type="checkbox" name="selected[]" value="2">
                     </td>
                     <td class="text-left">Veg002</td>
                     <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915013.jpg" alt="carrot" class="img-thumbnail"> </td>
                     <td class="text-left">Potato</td>
                     <td class="text-left">Up-Country</td>
-                    <td class="text-right"> <span>RS.100.00</span>
-                    </td>
+                    <td class="text-right"> <span>RS.100.00</span></td>
                     <td class="text-left">100 g</td>
-                    <td class="text-right"> <span class="label label-success">100 Kg</span> </td>
+                    <td class="text-right"> <span class="label lable-available">100 Kg</span> </td>
                     <td class="text-left">Enabled</td>
+                    <td class="action-button"><a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="far fa-edit"></i></a></td>
+                     <td><input class="delete-button" type="button" value="DELETE" onclick="deleteRow(this)"></td>
                     </tr>
 
-                    <tr>
+                    <tr class="item-row">
                       <td class="text-center"> <input type="checkbox" name="selected[]" value="10">
                       </td>
                       <td class="text-left">Veg010</td>
                       <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915005.jpg" alt="carrot" class="img-thumbnail"> </td>
                       <td class="text-left">Cabbage</td>
                       <td class="text-left">Up-Country</td>
-                      <td class="text-right"> <span>RS.60.00</span>
-                      </td>
+                      <td class="text-right"> <span>RS.60.00</span></td>
                       <td class="text-left">100 g</td>
-                      <td class="text-right"> <span class="label label-success">50 Kg</span> </td>
+                      <td class="text-right"> <span class="label lable-available">50 Kg</span> </td>
                       <td class="text-left">Enabled</td>
+                      <td class="action-button"><a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="far fa-edit"></i></a></td>
+                      <td><input class="delete-button" type="button" value="DELETE" onclick="deleteRow(this)"></td>
                       </tr>
-                      <tr>
-                        <td class="text-center"> <input type="checkbox" name="selected[]" value="1">
-                        </td>
-                        <td class="text-left">Veg001</td>
-                        <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915007.jpg" alt="carrot" class="img-thumbnail"> </td>
-                        <td class="text-left">Carrot</td>
-                        <td class="text-left">Up-Country</td>
-                        <td class="text-right"> <span>RS.30.00</span>
-                        </td>
-                        <td class="text-left">100 g</td>
-                        <td class="text-right"> <span class="label label-success">10 Kg</span> </td>
-                        <td class="text-left">Enabled</td>
+                      <div class="item-row">
+                        <tr>
+                          <td class="text-center"> <input type="checkbox" name="selected[]" value="1">
+                          </td>
+                          <td class="text-left">Veg001</td>
+                          <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915007.jpg" alt="carrot" class="img-thumbnail"> </td>
+                          <td class="text-left">Carrot</td>
+                          <td class="text-left">Up-Country</td>
+                          <td class="text-right"> <span>RS.30.00</span>
+                          </td>
+                          <td class="text-left">100 g</td>
+                          <td class="text-right"> <span class="label lable-available">10 Kg</span> </td>
+                          <td class="text-left">Enabled</td>
+                          <td class="action-button"><a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="far fa-edit"></i></a></td>
+                          <td><input class="delete-button" type="button" value="DELETE" onclick="deleteRow(this)"></td>
                         </tr>
+                      </div> 
                 </tbody>
                 </table>
                 </div>
