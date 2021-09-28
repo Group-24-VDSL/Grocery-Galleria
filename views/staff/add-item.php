@@ -19,6 +19,7 @@
                     <div><?php echo $form->selectfield($model,"Unit",['0'=>'Kg','1'=>'g','2'=>'liter']);?></div>
                     <div><?php echo $form->field($model,"MRP");?></div>
                     <div><?php echo $form->field($model,"MaxCount");?></div>
+                    <div><?php echo $form->selectfield($model,"Category",['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']);?></div>
                 </div>
                 <div class="delivey-view-profile-pic">
                     <div><label>Profile Picture:</label><img class="image-preview" src='/img/placeholder-150.png'><?php echo $form->inputfile($model,"ItemImage",['image-input'],"image/jpeg,image/png");?></div>
