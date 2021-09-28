@@ -28,6 +28,11 @@ class Form
         return new TextArea($model,$attribute);
     }
 
+    public function selectfieldonly(Model $model,$attribute,$options=[],$classes=[])
+    {
+        return new SelectFieldOnly($model,$attribute,$options,$classes);
+    }
+
     public function selectfield(Model $model,$attribute,$options=[],$classes=[])
     {
         return new SelectField($model,$attribute,$options,$classes);

@@ -4,7 +4,7 @@ namespace app\core\form;
 
 use app\core\Model;
 
-class SelectField extends BaseField
+class SelectFieldOnly
 {
 
     public Model $model;
@@ -14,14 +14,13 @@ class SelectField extends BaseField
 
     public function __construct(Model $model, string $attribute,$options = [], $classes = [])
     {
+        $this->model = $model;
+        $this->attribute = $attribute;
         $this->classes = $classes;
         $this->options = $options;
-        parent::__construct($model, $attribute);
     }
 
-
-
-    public function renderInput(): string
+    public function __toString()
     {
         $optionline = '';
 
@@ -36,4 +35,6 @@ class SelectField extends BaseField
             $optionline
         );
     }
+
+
 }
