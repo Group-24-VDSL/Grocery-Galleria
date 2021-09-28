@@ -8,14 +8,14 @@
         <div class="panel-row">
             <div class="default-panel">
                 <div class="panel-heading">
-              <span class="panel-title"> <i class="fas fa-list"></i></i>
+              <span class="panel-title"> <i class="fas fa-list">
                   &nbsp Shop Items
               </span>
                 </div>
                 <div class="item-table">
                     <form action="#" method="post" enctype="multipart/form-data" id="form-product">
                         <div class="table-responsive">
-                            <table id="item"class="table table-bordered table-hover">
+                            <table id="item" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" checked="checked"></td>
@@ -57,7 +57,7 @@
                                     <td class="text-left">Veg110</td>
                                     <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914039.jpg" alt="carrot" class="img-thumbnail"> </td>
                                     <td class="text-left">Pumpkin</td>
-                                    <td class="text-left">Low-Contry</td>
+                                    <td class="text-left">Low-Country</td>
                                     <td class="text-right"> <span>RS.50.00</span>
                                     </td>
                                     <td class="text-left">100 g</td>

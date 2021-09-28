@@ -23,6 +23,10 @@
   --device-lg: 992px;
   --device-xl: 1200px;
 }
+body{
+  margin-left: 4%;
+}
+
 .sidebar {
   background-color: var(--classic-grey-3);
   min-height: 100%;

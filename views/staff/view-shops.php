@@ -2,7 +2,6 @@
 /** @var $model \app\models\User **/
 ?>
 <div class="container-fluid">
-
     <div class= "row row-shop-dashboard">
         <div class="panel-row">
             <div class="default-panel">

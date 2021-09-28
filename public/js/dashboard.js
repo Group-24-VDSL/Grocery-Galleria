@@ -4,7 +4,6 @@ $(document).ready(function () {
         $(".fa-bars").toggleClass("fa-rotate-90");
         $(".menu-expand").toggleClass("display-none");
         $(".menu-expand-icon").toggleClass("display-none");
-        
     }
 
     $("#menu").click(function () {
