@@ -21,7 +21,7 @@ $(document).ready(function () {
     //     // content.toggleClass("display-none");
     // }
     $(".menu-expand-icon").on('click',function(){
-        $(this).parent().nextAll(".menu-dropdown-container").toggleClass("display-none")
+        $(this).parent().nextAll(".menu-dropdown-container").eq(0).toggleClass("display-none")
         $(this).children("i").toggleClass("fa-caret-right fa-caret-down");
    });
 

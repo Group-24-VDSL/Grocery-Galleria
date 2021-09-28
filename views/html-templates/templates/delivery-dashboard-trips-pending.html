@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../../../css/all.css" />
   <link rel="stylesheet" href="../../../css/fonts.css" />
   <link rel="stylesheet" href="../../../css/staff-dashboard.css">
+  <link rel="stylesheet" href="../../../css/shop-dashboard.css" />
   <!--Javascript-->
   <script src="../../../js/jquery.min.js"></script>
   <script src="../../../js/template.js"></script>
@@ -57,63 +58,145 @@
       <span id="" class="menu-text menu-expand display-none">Logout</span>
     </a>
   </div>
-  <div class="main-content">
-    <nav>
-      <h1 class="main-header">Delivery Dashboard</h1>
-    </nav>
 
-    <div class="">
-      <h3>Pending Orders</h3>
-      <table class="table thead-green table-hover">
-        <tr>
-          <th>OrderID</th>
-          <th>CustomerID</th>
-          <th>Address</th>
-          <th>Rider Name</th>
-          <th>Status</th>
-          <th>Shops</th>
-          <th>Total Price</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>12</td>
-          <td>132/4,Galahitiyawa Road,Naththandiya,Kandy</td>
-          <td>Nimal</td>
-          <td>Pending</td>
-          <td>Senevirathne Stores, Super Store, Nuwinda Vegetables</td>
-          <td>Rs.1300</td>
-          <td><button type="button" class="btn btn-primary btn-icon-only"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-red btn-icon-only"><i class="far fa-trash-alt"></i></button>
-            <button type="button" class="btn btn-yellow btn-icon-only"><i class="far fa-eye"></i></button></td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>13</td>
-          <td>132/4,Galahitiyawa Road,Naththandiya,Kandy</td>
-          <td>Kamal</td>
-          <td>Pending</td>
-          <td>Senevirathne Stores, Super Store, Nuwinda Vegetables</td>
-          <td>Rs.1300</td>
-          <td><button type="button" class="btn btn-primary btn-icon-only"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-red btn-icon-only"><i class="far fa-trash-alt"></i></button>
-            <button type="button" class="btn btn-yellow btn-icon-only"><i class="far fa-eye"></i></button></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>12</td>
-          <td>132/4,Galahitiyawa Road,Naththandiya,Kandy</td>
-          <td>Nimal</td>
-          <td>Pending</td>
-          <td>Senevirathne Stores, Super Store, Nuwinda Vegetables</td>
-          <td>Rs.1300</td>
-          <td><button type="button" class="btn btn-primary btn-icon-only"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-red btn-icon-only"><i class="far fa-trash-alt"></i></button>
-            <button type="button" class="btn btn-yellow btn-icon-only"><i class="far fa-eye"></i></button></td>
-        </tr>
-      </table>
+  <div class="main-content">
+    <div class="page-header">
+      <span class="main-header">Dashboard</span>
+      <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Dashboard</a></li>
+      </ul>
     </div>
 
+    <div class="row order-details">
+      <div>
+        <h3>Order ID:{ID}</h3>
+      </div>
+      <div>
+        <h3>Rider Details:</h3>
+        <p>RiderID:10</p>
+        <p>Nimal Thirimanna</p>
+      </div>
+    </div>
+    <div class="display-grid order-shop-display">
+      <div class="container-payment ">
+        <h3>Perera Stores</h3>
+        <div class="details">Address: 133/4, Pamunu Watta, Gangodawila</div>
+        <div class="details">Item count: <span>12</span></div>
+        <div class="details total">SubTotal: <span>Rs 1600</span></div>
+      </div>
+      <div class="container-payment ">
+        <h3>Perera Stores</h3>
+        <div class="details">Address: 133/4, Pamunu Watta, Gangodawila</div>
+        <div class="details">Item count: <span>12</span></div>
+        <div class="details total">SubTotal: <span>Rs 1600</span></div>
+      </div>
+      <div class="container-payment ">
+        <h3>Perera Stores</h3>
+        <div class="details">Address: 133/4, Pamunu Watta, Gangodawila</div>
+        <div class="details">Item count: <span>12</span></div>
+        <div class="details total">SubTotal: <span>Rs 1600</span></div>
+      </div>
+    </div>
+    <div class="table-responsive table-border">
+      <div>
+        <h3>Shop Name1</h3>
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <td class="text-left"> Item ID </td>
+            <td class="text-center">Image</td>
+            <td class="text-left"> Product Name </td>
+            <td class="text-left"> Category</td>
+            <td class="text-right">Unit Price</td>
+            <td class="text-left">Unit Weight </td>
+            <td class="text-right">Quantity </td>
+            <td class="text-left"> Price </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            </td>
+            <td class="text-left">Veg044</td>
+            <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914006.jpg"
+                alt="carrot" class="img-thumbnail"> </td>
+            <td class="text-left">Big Onion</td>
+            <td class="text-left">Onion</td>
+            <td class="text-right"> <span>RS.50.00</span>
+            </td>
+            <td class="text-left">100 g</td>
+            <td class="text-right"> <span class="label label-success">1Kg</span> </td>
+            <td class="text-left">Rs:502.00</td>
+          </tr>
+          <tr>
+
+            </td>
+            <td class="text-left">Veg110</td>
+            <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914039.jpg"
+                alt="carrot" class="img-thumbnail"> </td>
+            <td class="text-left">Pumpkin</td>
+            <td class="text-left">Low-Contry</td>
+            <td class="text-right"> <span>RS.50.00</span>
+            </td>
+            <td class="text-left">100 g</td>
+            <td class="text-right"> <span class="label label-success">500g</span> </td>
+            <td class="text-left">Rs:200.00</td>
+          </tr>
+          <tr>
+            </td>
+            <td class="text-left">Veg002</td>
+            <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915013.jpg"
+                alt="carrot" class="img-thumbnail"> </td>
+            <td class="text-left">Potato</td>
+            <td class="text-left">Up-Country</td>
+            <td class="text-right"> <span>RS.100.00</span>
+            </td>
+            <td class="text-left">100 g</td>
+            <td class="text-right"> <span class="label label-success">1Kg</span> </td>
+            <td class="text-left">Rs:342.00</td>
+          </tr>
+
+          <tr>
+            </td>
+            <td class="text-left">Veg010</td>
+            <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915005.jpg"
+                alt="carrot" class="img-thumbnail"> </td>
+            <td class="text-left">Cabbage</td>
+            <td class="text-left">Up-Country</td>
+            <td class="text-right"> <span>RS.60.00</span>
+            </td>
+            <td class="text-left">100 g</td>
+            <td class="text-right"> <span class="label label-success">1Kg</span> </td>
+            <td class="text-left">Rs:512.00</td>
+          </tr>
+          <tr>
+            </td>
+            <td class="text-left">Veg001</td>
+            <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic915007.jpg"
+                alt="carrot" class="img-thumbnail"> </td>
+            <td class="text-left">Carrot</td>
+            <td class="text-left">Up-Country</td>
+            <td class="text-right"> <span>RS.30.00</span>
+            </td>
+            <td class="text-left">100 g</td>
+            <td class="text-right"> <span class="label label-success">600g</span> </td>
+            <td class="text-left">Rs:322.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="container-payment">
+        <div class="details">Item count: <span>12</span></div>
+        <div class="details total">Sub: <span>Rs 1600</span></div>
+      </div>
+    </div>
+    <div class="container-payment">
+      <div class="details">Item count: <span>12</span></div>
+      <div class="details">No of Shops: <span>4</span></div>
+      <div class="details total">Total: <span>Rs 1600</span></div>
+
+      <button class="btn checkout btn-primary">Mark As Completed</button>
+    </div>
   </div>
 </body>
 

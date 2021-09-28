@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--Stylesheets-->
   <link rel="stylesheet" href="../../../css/template.css" />
   <link rel="stylesheet" href="../../../css/dashboard.css" />
@@ -13,7 +13,6 @@
   <script src="../../../js/jquery.min.js"></script>
   <script src="../../../js/template.js"></script>
   <script src="../../../js/dashboard.js"></script>
-
 </head>
 
 <body>
@@ -59,32 +58,60 @@
   </div>
   <div class="main-content">
     <nav>
-      <h1 class="main-header">Dashboard</h1>
+      <h1 class="main-header">Delivery Dashboard</h1>
     </nav>
+
     <div class="">
-      <h3>Add Rider</h3>
-      <div class="frm">
-        <form action="" method="POST">
-          <div class="display-grid delivery-view">
-            <div class="delivery-view-details">
-              <div><label>RiderID:</label><input type=text name="" value="12" style="" class=""></div>
-              <div><label>Name:</label><input type=text name="" value="Nimal" style="" class=""></div>
-              <div><label>NIC:</label><input type=text name="" value="980654875V" style="" class=""></div>
-              <div><label>Email:</label><input type=text name="" value="nimal@gmail.com" style="" class=""></div>
-              <div><label>Contact Number:</label><input type=text name="" value="0715487558" style="" class=""></div>
-            </div >
-            <div class="delivey-view-profile-pic">
-            <div><label>Profile Picture:</label><img src='.././../../img/placeholder-150.png'><input type=text name="" value="image.png" style="" class=""></div>
-          </div>
-          <div><button type="button" type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-secondary">Cancel</button>
-          </div>
-      </div>
-      </form>
-
+      <h3>Pending Orders</h3>
+      <table class="table thead-green table-hover">
+        <tr>
+          <th>OrderID</th>
+          <th>CustomerID</th>
+          <th>Address</th>
+          <th>Rider Name</th>
+          <th>Status</th>
+          <th>Shops</th>
+          <th>Total Price</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>12</td>
+          <td>132/4,Galahitiyawa Road,Naththandiya,Kandy</td>
+          <td>Nimal</td>
+          <td>Pending</td>
+          <td>Senevirathne Stores, Super Store, Nuwinda Vegetables</td>
+          <td>Rs.1300</td>
+          <td><button type="button" class="btn btn-primary btn-icon-only"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-red btn-icon-only"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-yellow btn-icon-only"><i class="far fa-eye"></i></button></td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>13</td>
+          <td>132/4,Galahitiyawa Road,Naththandiya,Kandy</td>
+          <td>Kamal</td>
+          <td>Pending</td>
+          <td>Senevirathne Stores, Super Store, Nuwinda Vegetables</td>
+          <td>Rs.1300</td>
+          <td><button type="button" class="btn btn-primary btn-icon-only"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-red btn-icon-only"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-yellow btn-icon-only"><i class="far fa-eye"></i></button></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>12</td>
+          <td>132/4,Galahitiyawa Road,Naththandiya,Kandy</td>
+          <td>Nimal</td>
+          <td>Pending</td>
+          <td>Senevirathne Stores, Super Store, Nuwinda Vegetables</td>
+          <td>Rs.1300</td>
+          <td><button type="button" class="btn btn-primary btn-icon-only"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-red btn-icon-only"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-yellow btn-icon-only"><i class="far fa-eye"></i></button></td>
+        </tr>
+      </table>
     </div>
-    </div>
-    </div>
+  </div>
 </body>
-
 </html>
