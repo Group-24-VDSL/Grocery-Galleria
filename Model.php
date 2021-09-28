@@ -22,16 +22,15 @@ abstract class Model
     public function loadData($data){
         foreach ($data as $key => $value){
             if(property_exists($this,$key)){
-                if(is_numeric($value)){ //ints or floats
-                    if(filter_var($value,FILTER_VALIDATE_FLOAT)){
+                if( is_numeric($value) || gettype($this->{$key})==="double" || gettype($this->{$key})==="integer" ){ //ints or floats
+                    if(filter_var($value,FILTER_VALIDATE_FLOAT) && gettype($this->{$key})==="double"){
                         $this->{$key} = (float)$value; //value is float.
-                    }elseif(filter_var($value,FILTER_VALIDATE_INT)){
+                    }elseif(filter_var($value,FILTER_VALIDATE_INT) && gettype($this->{$key})==="integer"){
                         $this->{$key} = (int)$value; //value is int.
                     }
                 }else{
                     $this->{$key} = $value; //assign key = value in the model class
                 }
-
             }
         }
     }
@@ -42,7 +41,6 @@ abstract class Model
 
     private function addErrorForRule(string $attribute, string $rule,$params =[]){
         $message = $this->errorMessages()[$rule]?? ''; //get the error message for the rule
-//        var_dump($params);
         foreach ($params as $key => $value){
             $message = str_replace("{{$key}}",$value,$message);
         }
@@ -78,7 +76,7 @@ abstract class Model
                 if(!is_string($ruleName)){
                     $ruleName = $rule[0];
                 }
-                if($ruleName === self::RULE_REQUIRED && !$value){
+                if($ruleName === self::RULE_REQUIRED && !$value && $value!== 0 && $value!== '0' ){
                     $this->addErrorForRule($attribute, self::RULE_REQUIRED);
                 }
                 if($ruleName === self::RULE_EMAIL && !filter_var($value,FILTER_VALIDATE_EMAIL)){
@@ -93,20 +91,20 @@ abstract class Model
                 if($ruleName === self::RULE_INT && !filter_var($value,FILTER_VALIDATE_INT)){
                     $this->addErrorForRule($attribute, self::RULE_INT,$rule);
                 }
-                if($ruleName === self::RULE_INT && !filter_var($value,FILTER_VALIDATE_FLOAT)){
+                if($ruleName === self::RULE_FLOAT && !filter_var($value,FILTER_VALIDATE_FLOAT)){
                     $this->addErrorForRule($attribute, self::RULE_FLOAT,$rule);
                 }
-                if($ruleName === self::RULE_INT && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
+                if($ruleName === self::RULE_PHONE && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
                     $this->addErrorForRule($attribute, self::RULE_PHONE,$rule);
                 }
-                if($ruleName === self::RULE_INT && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_NIC)))){
+                if($ruleName === self::RULE_NIC && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_NIC)))){
                     $this->addErrorForRule($attribute, self::RULE_NIC,$rule);
                 }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, ['match' => $rule['match']]);
                 }
-                if($ruleName === self::RULE_ONEOF && !in_array($value,$rule['oneof'])){
-                    $this->addErrorForRule($attribute, self::RULE_ONEOF, ['match' => $rule['match']]);
+                if($ruleName === self::RULE_ONEOF && !in_array($value,$rule['oneof'],true)){
+                    $this->addErrorForRule($attribute, self::RULE_ONEOF, $rule);
                 }
                 if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
@@ -144,7 +142,7 @@ abstract class Model
         return $errors[0] ?? '';
     }
 
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
