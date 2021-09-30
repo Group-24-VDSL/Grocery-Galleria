@@ -1,6 +1,13 @@
 @import url("/css/fonts.css");
 
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+@import url('/css/fonts.css');
+
+
+:root{
+=======
 :root {
+>>>>>>> Stashed changes:public/css/main.css
   --header-height: 2.5rem;
   --searchbar-height: 5rem;
   --first-color: #2b9348;
@@ -43,9 +50,15 @@
   transition: all 0.2s linear;
 }
 
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+*::selection{
+  background:var(--first-color);
+  color:var(--body-color);
+=======
 *::selection {
   background: var(--first-color);
   color: var(--body-color);
+>>>>>>> Stashed changes:public/css/main.css
 }
 
 html {
@@ -58,10 +71,17 @@ ul {
   padding: 0;
   list-style: none;
 }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+ section{
+   padding: 2rem 9%;
+ }
+ .btn{
+=======
 section {
   padding: 3rem 8%;
 }
 .btn {
+>>>>>>> Stashed changes:public/css/main.css
   display: inline-block;
   margin-top: 1rem;
   background-color: var(--first-color);
@@ -83,42 +103,232 @@ section {
   font-size: 3.5rem;
   padding-bottom: 2rem;
 }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+.subheading{
+  text-align: left;
+  color:var(--title-color);
+  text-transform: uppercase;
+  padding: 1rem;
+  font-size: 2rem;
+  padding-bottom: 2rem;
+  text-decoration: underline;
+}
+.heading span{
+  color:var(--first-color);
+=======
 .heading span {
   color: var(--first-color);
+>>>>>>> Stashed changes:public/css/main.css
   text-transform: uppercase;
 }
 .header-1 {
   background: var(--header-color);
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.2rem 9%;
+  padding: 1.8rem 9%;
 }
 
 .logo-img {
   padding-right: 0.5rem;
   max-width: 240px;
   height: auto;
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+  
+ }
+ .header-1 .logout{
+   font-size: 3rem;
+   color:var(--title-color);
+   padding: 0 1rem;
+   border:.1rem solid rgba(0,0,0,.1);
+   box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+   border-radius: .5rem;
+  }
+ 
+  .logout:hover{
+    background-color: #e63946;
+    transition: .3s;
+  }
+  .header-2{
+    background:var(--header-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:1rem 7%;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.1);
+    position: relative;
+  }
+  .part{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:1rem 2%;
+    position: relative;
+  }
+  .header-2.active{
+    position: fixed;
+    top:0; left: 0; right:0;
+    z-index: 10000;
+  }
+  
+  .header-2 .navbar a{
+    padding:.5rem 1.5rem;
+    font-size: 2rem;
+    border-radius: .5rem;
+    color:var(--title-color);
+  }
+  .header-2 .navbar a:hover{
+    background: var(--first-color-alt);
+    color: var(--body-color);
+    transition: .3s;
+  }
+  .header-2 .search-box-container{
+    display: flex;
+    height: var(--searchbar-height);
+  }
+  .header-2 .search-box-container #search-box{
+   height: 100%;
+   width:200%;
+   padding:1rem;
+   font-size: 2rem;
+   color:var(--title-color);
+   border:.1rem solid rgba(0,0,0,.3);
+   border-radius:  0 0 0 1rem;
+   text-transform: none;
+ }
+ .header-2 .search-box-container .search{
+   height: 100%;
+   width:15rem;
+   border-radius: 0 1rem 0 0;
+   font-size: 2rem;
+   line-height: 5rem;
+   color:#fff;
+   background:var(--first-color);
+   text-align: center;
+   cursor: pointer;
+ }
+ .header-2 .search-box-container .search:hover{
+   background: var(--first-color-alt);
+ }
+  .header-2 .icons a{
+    font-size: var(--biggest-font-size);
+    color:var(--title-color);
+    padding-left: 1rem;
+}
+.header-2 .icons a:hover{
+  color:var(--first-color-alt);
+}
+
+#menu-bar{
+=======
 }
 .header-1 .logout {
-  font-size: var(--biggest-font-size);
+  font-size: 3rem;
   color: var(--title-color);
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
 }
-/* .header-1 .logout i {
-  padding: 0;
-  margin: 0;
-} */
 .logout:hover {
-  color: #e63946;
+  background-color: #e63946;
+  transition: 0.3s;
 }
 .header-2 {
   background: var(--body-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 7%;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 7%;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2%;
+  position: relative;
+}
+.header-2.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+}
+
+.header-2 .navbar a {
+  padding: 0.5rem 1.5rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  color: var(--title-color);
+}
+.header-2 .navbar a:hover {
+  background: var(--first-color-alt);
+  color: var(--body-color);
+  transition: 0.3s;
+}
+.header-2 .search-box-container {
+  display: flex;
+  height: var(--searchbar-height);
+}
+.header-2 .search-box-container #search-box {
+  height: 100%;
+  width: 200%;
+  padding: 1rem;
+  font-size: 2rem;
+  color: var(--title-color);
+  border: 0.1rem solid rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 0 1rem;
+  text-transform: none;
+}
+.header-2 .search-box-container .search {
+  height: 100%;
+  width: 15rem;
+  border-radius: 0 1rem 0 0;
+  font-size: 2rem;
+  line-height: 5rem;
+  color: #fff;
+  background: var(--first-color);
+  text-align: center;
+  cursor: pointer;
+}
+.header-2 .search-box-container .search:hover {
+  background: var(--first-color-alt);
+}
+.header-2 .icons a {
+  font-size: var(--biggest-font-size);
+  color: var(--title-color);
+  padding-left: 1rem;
+}
+.header-2 .icons a:hover {
+  color: var(--first-color-alt);
+}
+
+#menu-bar {
+>>>>>>> Stashed changes:public/css/main.css
+  font-size: 3rem;
+  color: var(--title-color);
+  padding: 0 1rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+}
+
+.logout:hover {
+  background-color: #e63946;
+  transition: 0.3s;
+}
+.header-2 {
+  background: var(--header-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 7%;
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
   position: relative;
 }
 .part {
@@ -197,13 +407,47 @@ section {
 #search-bar {
   margin-left: 5%;
 }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+.vege-banner{
+  background:url(/views/shop/img/vege_banner.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 15rem;
+  padding-bottom: 10rem;
+  box-shadow: 0 .5rem 1rem var(--first-color);
+  
+  
+}
+.vege-banner .content{
+  /* max-width: 50rem; */
+  text-align: center;
+  
+}
+
+.vege-banner .content .title{
+  font-size: 6rem;
+  color:var(--first-color);
+}
+.vege-banner .content .subtitle{
+  font-size: 3rem;
+  color:var(--text-color);
+}
+
+.vege-banner .content p{
+  font-size: 2rem;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding:1rem 0;
+  color:var(--text-color);
+}
+.shop .box-container{
+=======
 .home {
   background-color: var(--header-color);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  padding-bottom: 2rem;
 }
 .home .image {
   flex: 1 1 40rem;
@@ -211,7 +455,6 @@ section {
 }
 .home .image img {
   width: 100%;
-  height: 100%;
 }
 
 .home .content {
@@ -281,17 +524,15 @@ section {
 }
 
 .category .box-container .box {
-  border: 0.2rem solid rgba(85, 166, 48, 0.3);
+  border: 0.1rem solid rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
-  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 2rem;
   flex: 1 1 25rem;
   box-sizing: border-box;
 }
-.category .box-container .box:hover {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-}
+
 .category .box-container .box img {
   width: 25rem;
   border-radius: 0.5rem;
@@ -316,6 +557,7 @@ section {
 }
 /* shop */
 .shop .box-container {
+>>>>>>> Stashed changes:public/css/main.css
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -325,15 +567,12 @@ section {
   flex: 1 1 30rem;
   text-align: center;
   padding: 2rem;
-  border: 0.2rem solid rgba(85, 166, 48, 0.3);
-  /* box-shadow: 0 0.5rem 1rem var(--first-color); */
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   overflow: hidden;
   position: relative;
 }
-.shop .box-container .box:hover {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-}
+
 .shop .box-container .box img {
   width: 25rem;
   border-radius: 0.5rem;
@@ -376,6 +615,9 @@ section {
 .shop .box-container .box .btn {
   display: block;
 }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+.footer{
+=======
 .see-more {
   font-size: var(--h1-font-size);
   float: right;
@@ -398,8 +640,8 @@ i {
   font-size: var(--biggest-font-size);
 }
 .footer {
+>>>>>>> Stashed changes:public/css/main.css
   background-color: var(--header-color);
-  margin-top: 3rem;
 }
 .footer .box-container {
   display: flex;
@@ -407,9 +649,15 @@ i {
   flex-wrap: wrap;
 }
 
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+.footer .box-container .box{
+  padding:1rem 0;
+  flex:1 1 20rem;
+=======
 .footer .box-container .box {
   padding: 1rem 0;
   flex: 1 1 25rem;
+>>>>>>> Stashed changes:public/css/main.css
 }
 
 .footer .box-container .box .communication a {
@@ -431,10 +679,17 @@ i {
   padding: 0.7rem 0;
 }
 
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+/* .footer .box-container .box .links{
+  padding:1rem 0;
+} */
+.footer .box-container .box ul .element{
+=======
 .footer .box-container .box .links {
   padding: 1rem 0;
 }
 .footer .box-container .box ul .element {
+>>>>>>> Stashed changes:public/css/main.css
   display: block;
   padding: 0.5rem 0;
   font-size: var(--h1-font-size);
@@ -451,9 +706,15 @@ i {
   text-decoration: underline;
   color: var(--first-color-alt);
 }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+.features-logo{
+  padding: .5rem;
+  width: 64px;
+=======
 .features-logo {
   padding: 0.5rem;
-  width: 64px;
+  width: auto;
+>>>>>>> Stashed changes:public/css/main.css
   height: 64px;
 }
 .footer-copyright {
@@ -463,10 +724,16 @@ i {
   margin-top: 2.5rem;
 }
 
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+@media(max-width:1390px){
+
+  html{
+=======
 /* media queries */
 
 @media (max-width: 1380px) {
   html {
+>>>>>>> Stashed changes:public/css/main.css
     font-size: 55%;
   }
 }
@@ -482,13 +749,20 @@ i {
     left: 0;
     right: 0;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
     background: var(--first-color);
     border-radius: 0.8rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     display: none;
   }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+  .header-2 .navbar{
+    color: var(--first-color);
+    
+=======
   .header-2 .navbar {
     background: #2b9348;
+>>>>>>> Stashed changes:public/css/main.css
   }
   .header-2 .navbar.active {
     display: initial;
@@ -504,6 +778,8 @@ i {
     margin: 1.5rem 0;
     border-radius: 1rem;
   }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+=======
 
   .home .content {
     text-align: center;
@@ -512,20 +788,26 @@ i {
   .home .content h3 {
     font-size: 4rem;
   }
+>>>>>>> Stashed changes:public/css/main.css
 }
 @media (max-width: 960px) {
   .header-1,
   .header-2 {
-    padding: 1rem 2rem;
+    padding: 2rem;
   }
 
   .section {
     padding: 2rem;
   }
 }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+@media(max-width:580px){
+  html{
+=======
 
 @media (max-width: 580px) {
   html {
+>>>>>>> Stashed changes:public/css/main.css
     font-size: 50%;
   }
   .heading {
@@ -534,7 +816,10 @@ i {
   .header-2 {
     flex-flow: column;
   }
+<<<<<<< Updated upstream:views/Categories/css/cateStyle.css
+=======
   /* .header-2 .part .search-bar{
     margin-left: 5%;
 } */
+>>>>>>> Stashed changes:public/css/main.css
 }

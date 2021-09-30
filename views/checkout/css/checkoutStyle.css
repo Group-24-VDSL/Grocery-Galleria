@@ -10,7 +10,7 @@
   --text-color-light: #a6a6a6;
   --body-color: #ffffff;
   --container-color: #ffffff;
-  --header-color: #f1faee;
+  --header-color: #fff;
   --input-background-color: #f7f7f7;
 
   --body-font: "Open Sans", sans-serif;
@@ -103,7 +103,7 @@ section {
   align-items: center;
   justify-content: space-between;
   padding: 2rem 9%;
-  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
 .logo-img {
@@ -152,7 +152,7 @@ section {
   font-size: var(--h1-font-size);
   padding: 2.5rem;
   /* border:.2rem solid var(--first-color-alt); */
-  box-shadow: 0 0.5rem 1rem rgba(85, 166, 48, 0.8);
+  box-shadow: 0 0.5rem 1rem rgba(85, 166, 48, 0.2);
   background-color: var(--header-color);
   border-radius: 1rem;
   overflow: hidden;

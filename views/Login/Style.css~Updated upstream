@@ -203,7 +203,12 @@ html {
   background: none;
   padding: 0.5rem 0.7rem;
   font-size: var(--h2-font-size);
+<<<<<<< Updated upstream:views/Login/Style.css
+  color:var(--text-color);
+=======
   color: var(--text-color);
+  text-transform: none;
+>>>>>>> Stashed changes:public/css/Auth.css
 }
 
 .subcontainer a {
