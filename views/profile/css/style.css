@@ -206,6 +206,9 @@ section {
 .profile .content {
   display: grid;
 }
+/* .profile > .content > .info-div {
+  padding-top: 5%;
+} */
 .profile .content .tabs {
   text-align: center;
   align-items: center;
@@ -217,6 +220,9 @@ section {
 }
 .profile .content .tab-btn {
   background-color: white;
+}
+.profile .content .tab-btn i {
+  font-size: 2rem;
 }
 
 .profile .content .tabs:hover {
@@ -290,23 +296,23 @@ section {
 .inputBox select:hover {
   border: 0.2rem solid rgba(86, 156, 106, 0.8);
 }
-/* .info-div {
+.info-div {
   display: none;
 }
-.show-text .info-div {
+.show-text {
   display: block;
 }
-*/
+
 .down-icon {
   display: none;
 }
-/*
+
 .show-text .down-icon {
   display: inline;
 }
 .show-text .right-icon {
   display: none;
-} */
+}
 .footer {
   background-color: var(--header-color);
   margin-top: 3rem;
@@ -393,7 +399,6 @@ section {
     right: 0;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     background: var(--first-color);
-    border-radius: 0.8rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     display: none;
   }
@@ -412,7 +417,7 @@ section {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
     padding: 1rem;
     margin: 1.5rem 0;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
 }
 @media (max-width: 960px) {
