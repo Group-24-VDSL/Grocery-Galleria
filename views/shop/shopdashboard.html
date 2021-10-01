@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/all.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/dashoboardStyle.css" />
+
+    <title>Shop dashboard</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../../img/logo_white-min.png" alt="" />
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="">
+            <i class="bx bx-grid-alt"></i>
+            <span class="link-name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-box"></i>
+            <span class="link-name">Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-list-ul"></i>
+            <span class="link-name">Order list</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bxs-pie-chart-alt"></i>
+            <span class="link-name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-data"></i>
+            <span class="link-name">Stock</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-cog"></i>
+            <span class="link-name">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-log-out"></i>
+            <span class="link-name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Home section start -->
+
+    <section class="home-section">
+      <nav>
+        <div class="sidebar-toggle">
+          <i class="bx bx-menu"></i>
+          <span class="dashboard">Dashboard</span>
+        </div>
+        <div class="search-box">
+          <input type="search" id="" placeholder="Search.... " />
+          <button class="bx bx-search search"></button>
+        </div>
+        <div class="profile-details">
+          <i class="bx bx-user"></i>
+          <span class="user-name">Dilshan98</span>
+        </div>
+      </nav>
+
+      <div class="home-content">
+        <div class="overview-boxes">
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Total Orders</div>
+              <div class="number">1276</div>
+              <div class="indicator">
+                <i class='bx bx-up-arrow-alt'></i>
+                <span class="text">Up so far</span>
+              </div>
+            </div>
+            <!-- <i class='bx bx-cart-alt cart'></i> -->
+            <img src="https://img.icons8.com/color/48/000000/total-sales-1.png"/>
+          </div>
+          <div class="box">
+             <div class="right-side">
+                <div class="box-topic">Total Revenue</div>
+                <div class="number">1276</div>
+                <div class="indicator">
+                  <i class='bx bx-up-arrow-alt'></i>
+                  <span class="text">Up so far</span>
+                </div>
+              </div>
+          </div>
+            <!-- <i class='bx bx-cart-alt cart'></i> -->
+            <img src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-revenue-money-and-economy-itim2101-lineal-color-itim2101.png"/>
+          </div>
+    </section>
+    <!-- Home section ends -->
+    <script src="./js/dashboardScript.js"></script>
+  </body>
+</html>
