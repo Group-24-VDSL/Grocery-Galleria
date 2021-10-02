@@ -47,6 +47,10 @@ body {
   min-height: 100vh;
   width: 100%;
 }
+ul {
+  list-style: none;
+}
+
 /* .btn {
   display: inline-block;
   margin-top: 1rem;
@@ -285,16 +289,95 @@ body {
   font-size: var(--h2-font-size);
   margin-right: 0.5rem;
 }
-.box .indicator i .down {
+.home-content .box .indicator .down {
   color: red;
 }
 .home-content .box .indicator .text {
   font-size: var(--small-font-size);
 }
-/* .home-content .core {
+.home-content .core {
   background-color: white;
   justify-content: space-around;
   padding: 0 1rem;
   margin: 0 1rem;
   border-radius: 0.5rem;
-} */
+  height: 480px;
+}
+.home-content .core .container-items {
+  width: 100%;
+  /* justify-items: left; */
+}
+.home-content .core .container-items .table-header {
+  /* text-align: center; */
+  padding: 1rem 2.5rem;
+  border: 0.1rem solid var(--home-color);
+  background-color: var(--header-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+.home-content .core .container-items .table-header ul {
+  font-size: var(--normal-font-size);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.home-content .core .container-items .table-header li {
+  min-width: 64px;
+  align-items: center;
+}
+.home-content .core .container-items .ongoing-items {
+  padding: 0.2rem 2.5rem;
+  border: 0.1rem solid var(--home-color);
+  border-radius: 0.5rem;
+  background-color: var(--header-color);
+  overflow: hidden;
+  position: relative;
+}
+.home-content .core .container-items .ongoing-items ul {
+  display: flex;
+  font-size: var(--small-font-size);
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.home-content .core .container-items .ongoing-items li {
+  width: 64px;
+  align-items: center;
+}
+.home-content .core .container-items .ongoing-items .item-img img {
+  width: 40px;
+  height: 40px;
+  /* border-radius: 50rem; */
+}
+.home-content .core .container-items .ongoing-items .item-uStock input {
+  width: 100%;
+}
+.home-content .core .container-items .ongoing-items .item-ubutton .btn-item {
+  display: inline-block;
+  /* margin-top: 1rem; */
+  background-color: var(--first-color);
+  color: var(--body-color);
+  padding: 0.5rem 0.8rem;
+  font-size: var(--smaller-font-size);
+  border-radius: 0.5rem;
+  transition: 0.3s;
+}
+.home-content
+  .core
+  .container-items
+  .ongoing-items
+  .item-ubutton
+  .btn-item:hover {
+  background: var(--hover-color);
+}
+.home-content .core .container-items .scroller {
+  height: 300px;
+  overflow-y: scroll;
+  scrollbar-color: var(--first-color);
+  scrollbar-width: thin;
+}
