@@ -142,9 +142,10 @@ ul {
 }
 .home-section {
   background: var(--home-color);
-  position: relative;
+  position: fixed;
   min-height: 100vh;
-  width: calc(100%-240px);
+  min-width: 180vh;
+  /* width: calc(100%-240px); */
   left: 240px;
   transition: all 0.4s ease-in-out;
 }
