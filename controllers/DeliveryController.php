@@ -7,9 +7,18 @@ use app\core\Controller;
 use app\core\Request;
 use app\models\Rider;
 use app\models\User;
+use Exception;
+use Kreait\Firebase\Exception\Database\UnsupportedQuery;
+use Kreait\Firebase\Exception\FirebaseException;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\To;
+use SendGrid\Mail\TypeException;
 
 class DeliveryController extends Controller
 {
+    /**
+     * @throws TypeException
+     */
     public function addrider(Request $request)
     {
         $this->setLayout('dashboard-deli');
@@ -24,15 +33,60 @@ class DeliveryController extends Controller
                 //then we have to register the rider
                 //find the user-id to save as the rider-id
                 $rider->loadData($request->getBody());
-                $temp = User::findOne(['Email' => $request->getBody()['Email']]);
-                $rider->RiderID = $temp->UserID;
-                $riderpic = $request->loadFile("img/rider-imgs/", "ProfilePic", '95' . str_pad((string)$rider->RiderID, 5, '0', STR_PAD_LEFT));
-                if (!is_null($riderpic)){
+                $temp = User::findOne(['Email' => $user->Email]);
+                $rider->RiderID = (int)$temp->UserID;
+                Application::$app->session->setFlash('danger', var_dump($temp) . var_dump($rider));
+                $riderpic = $request->loadFile("/img/rider-imgs/", "ProfilePic", '95' . str_pad((string)$rider->RiderID, 5, '0', STR_PAD_LEFT));
+                if (!is_null($riderpic) && !empty($riderpic)){
                     $rider->ProfilePic = $riderpic;
                     if ($rider->validate() && $rider->save()) {
                         Application::$app->session->setFlash('success', 'Rider Register Success');
+
+                        //save on firebase
+                        try{
+                            Application::$app->firedb->getReference('users/'.(string)$rider->RiderID)->set([
+                            'Email' => $rider->Email,
+                            'Name' => $rider->Name,
+                            'Password' => $user->PasswordHash,
+                            'RiderType' => $rider->RiderType,
+                            'RiderLocationLag' => '0',
+                            'RiderLocationLat' => '0',
+                            'ContactNo' => $rider->ContactNo,
+                            'ProfilePic' => $rider->ProfilePic
+                        ]);
+                        }catch (FirebaseException $e){
+                            Application::$app->session->setFlash('warning', 'Firebase Sync Failed.'.var_dump($e));
+                            return $this->render('delivery/add-rider', [
+                                'model' => $rider
+                            ]);
+                        }
+                        //send the register success email
+                        //id = d-4c34f31db7674b7d98f93f0eed9f23f5
+
+                        $to = new To($rider->Email,
+                            $rider->Name,
+                            [
+                                'password' => $user->Password,
+                                'name' => $rider->Name
+                            ]
+                        );
+                        $email =  new Mail(
+                            Application::$app->emailfrom,$to
+                        );
+                        $email->setTemplateId('d-4c34f31db7674b7d98f93f0eed9f23f5');
+
+                        try {
+                            $response = Application::$app->sendgrid->send($email);
+                        } catch (Exception $e) {
+                            echo 'Caught exception: '.  $e->getMessage(). "\n";
+                            Application::$app->session->setFlash('warning', 'Error sending Email');
+                            return $this->render('delivery/add-rider', [
+                                'model' => $rider
+                            ]);
+                        }
+
                         $this->setLayout('dashboard-deli');
-                        Application::$app->response->redirect("/dashboard/staff/addrider");
+                        Application::$app->response->redirect("/dashboard/delivery/addrider");
                         exit;
                     }
                 }
@@ -41,7 +95,7 @@ class DeliveryController extends Controller
                     'model' => $rider
                 ]);
             }
-            Application::$app->session->setFlash('warning', 'Please Recheck Information entered');
+            Application::$app->session->setFlash('warning', 'Please Recheck Information entered, Rider might have already registered.');
             return $this->render('delivery/add-rider', [
                 'model' => $rider
             ]);

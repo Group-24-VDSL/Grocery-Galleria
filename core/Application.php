@@ -7,6 +7,8 @@ use app\models\User;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
+use SendGrid;
+use SendGrid\Mail\From;
 
 class Application
 {
@@ -20,8 +22,12 @@ class Application
     public ?Controller $controller = null;
     public Database $db;
     public ?UserModel $user;
-    public Factory $factory;
+    public Factory $secfactory;
     public Generator $generator;
+    public \Kreait\Firebase\Factory $firefactory;
+    public $firedb;
+    public SendGrid  $sendgrid;
+    public From $emailfrom;
     public View $view;
     public static Application $app;
     public function __construct($rootPath ,$config)
@@ -38,8 +44,14 @@ class Application
 
         $this->session=new Session();
 
-        $this->factory = new Factory();
-        $this->generator = $this->factory->getGenerator(new Strength(Strength::LOW));
+        $this->sendgrid = new SendGrid($_ENV['SENDGRID_API_KEY']);
+        $this->emailfrom = new From('grocerygalleria@gmail.com','Grocery Galleria');
+
+        $this->secfactory = new Factory();
+        $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
+
+        $this->firefactory = (new \Kreait\Firebase\Factory())->withServiceAccount(dirname(__DIR__).'/runtime/'.$_ENV['FIREBASE_KEY']);
+        $this->firedb = $this->firefactory->createDatabase();
 
         $userId = Application::$app->session->get('user');
         if ($userId) {
