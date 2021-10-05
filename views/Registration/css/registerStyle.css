@@ -12,6 +12,7 @@
   --container-color: #ffffff;
   --header-color: #ffffff;
   --input-background-color: #f7f7f7;
+  --input-background-color-2: #d8d5d5;
 
   --body-font: "Open Sans", sans-serif;
   --biggest-font-size: 3rem;
@@ -191,6 +192,22 @@ section {
 .register .inputBox input:hover,
 .inputBox select:hover {
   border: 0.2rem solid rgba(86, 156, 106, 0.8);
+}
+.register .btn-align {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.register button {
+  width: 100%;
+}
+.register .deny {
+  color: var(--title-color);
+  background-color: var(--input-background-color-2);
+}
+.register .deny:hover {
+  color: white;
+  background-color: rgb(255, 0, 0);
 }
 .footer {
   background-color: var(--header-color);
