@@ -9,6 +9,7 @@ class InputField extends BaseField
     const TYPE_EMAIL = 'email';
     const TYPE_TEXT = 'text';
     const TYPE_PASSWORD = 'password'; //add more types lists, checkboxes etc
+    const TYPE_NUMBER = 'number';
 
 
     public string $type;
@@ -32,13 +33,19 @@ class InputField extends BaseField
         return $this;
     }
 
+    public function numberField(){
+        $this->type = self::TYPE_NUMBER;
+        return $this;
+    }
+
     public function renderInput(): string
     {
        return sprintf('<input type="%s" name="%s" value="%s" style="%s">',  
            $this->type,
            $this->attribute,
-           $this->model->hasError($this->attribute) ? "border: 1px solid red;" : '',
-       $this->model->{$this->attribute}
+           $this->model->{$this->attribute},
+           $this->model->hasError($this->attribute) ? "border: 1px solid red;" : ''
+
        );
     }
 }
