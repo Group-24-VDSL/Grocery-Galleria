@@ -14,6 +14,7 @@ class Rider extends UserModel
     public string $ContactNo = '';
     public string $NIC = '';
     public string $ProfilePic = '';
+    public int $RiderType = 0; //0 = bike , 1 = threewheel
 
 
     public static function tableName(): string
@@ -23,7 +24,7 @@ class Rider extends UserModel
 
     public function attributes(): array
     {
-        return ['Name','Address','Email','ContactNo','NIC','ProfilePic'];
+        return ['RiderID','Name','Address','Email','ContactNo','NIC','ProfilePic','RiderType'];
     }
 
     public function labels(): array{
