@@ -2,6 +2,9 @@
 
 namespace app\core;
 
+define('basedir',dirname(__DIR__));
+define('publicdir',basedir.'/public');
+
 class Request
 {
     public function getPath(){
@@ -50,21 +53,23 @@ class Request
               if($filename !== ''){
                   $target = $path.$filename.".".strtolower(pathinfo(basename(filter_var($_FILES[$attribute]["name"], FILTER_SANITIZE_SPECIAL_CHARS)), PATHINFO_EXTENSION));
                   if (!file_exists($target)) {
-                      if ($_FILES[$attribute]["size"] < 500000) { //0.5MB
+                      if ($_FILES[$attribute]["size"] < 1000000) { //1MB
                           if (in_array(strtolower(pathinfo(basename(filter_var($_FILES[$attribute]["name"], FILTER_SANITIZE_SPECIAL_CHARS)), PATHINFO_EXTENSION)), ["png", "jpg"])) {
-                              if (move_uploaded_file($_FILES[$attribute]["tmp_name"], $target)) {
+                              if (move_uploaded_file($_FILES[$attribute]["tmp_name"], publicdir.$target)) {
                                   return $target;
                               }
                           }
                       }
                   }
               }else {
-                  $target = $path . basename(filter_var($_FILES[$attribute]["name"], FILTER_SANITIZE_SPECIAL_CHARS));
+                  $target = basedir.$path . basename(filter_var($_FILES[$attribute]["name"], FILTER_SANITIZE_SPECIAL_CHARS));
                   if (!file_exists($target)) {
                       if ($_FILES[$attribute]["size"] < 500000) { //0.5MB
                           if (in_array(strtolower(pathinfo($target, PATHINFO_EXTENSION)), ["png", "jpg"])) {
                               if (move_uploaded_file($_FILES[$attribute]["tmp_name"], $target)) {
                                   return $target;
+                              }else{
+                                  return null;
                               }
                           }
                       }
