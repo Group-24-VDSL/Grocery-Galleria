@@ -35,4 +35,8 @@ class LoginForm extends Model
         return Application::$app->login($user);
     }
 
+    public function jsonarray(): array
+    {
+        return [];
+    }
 }

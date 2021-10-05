@@ -69,4 +69,9 @@ class User extends UserModel
     {
         return $this->Name;
     }
+
+    public function jsonarray(): array
+    {
+        return ['Email','Name','Delete_Flag','Role'];
+    }
 }

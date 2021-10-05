@@ -2,7 +2,9 @@
 
 namespace app\models;
 
-class Shop extends \app\core\UserModel
+use app\core\UserModel;
+
+class Shop extends UserModel
 {
 
     public int $ShopID = 0;
@@ -26,7 +28,7 @@ class Shop extends \app\core\UserModel
 
     public function attributes(): array
     {
-        return ['Name', 'Address', 'Email', 'ContactNo', 'Location', 'City', 'Suburb', 'Location','ShopName', 'ShopDesc', 'ShopBanner'];
+        return ['ShopID','Name', 'Address', 'Email', 'ContactNo', 'Location', 'City', 'Suburb', 'Location','ShopName', 'ShopDesc', 'ShopBanner'];
     }
 
     public function rules(): array
@@ -48,5 +50,10 @@ class Shop extends \app\core\UserModel
     public function getDisplayName(): string
     {
         return $this->Name;
+    }
+
+    public function jsonarray(): array
+    {
+        return $this->attributes();
     }
 }

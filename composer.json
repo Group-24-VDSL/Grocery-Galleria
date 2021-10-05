@@ -16,6 +16,7 @@
         "ext-pdo": "*",
         "paragonie/random-lib": "^2.0",
         "phpmailer/phpmailer": "^6.5",
-        "sendgrid/sendgrid": "~7"
+        "sendgrid/sendgrid": "~7",
+        "ext-json": "*"
     }
 }

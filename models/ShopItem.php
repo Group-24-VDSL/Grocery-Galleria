@@ -11,6 +11,7 @@ class ShopItem extends DBModel
     public float $UnitPrice = 0;
     public float $Stock = 0;
     public int $Enabled = 0;
+
     public static function tableName(): string
     {
         return 'shopitem';
@@ -33,5 +34,10 @@ class ShopItem extends DBModel
             'UnitPrice' => [self::RULE_INT],
             'Stock' => [self::RULE_MIN]
         ];
+    }
+
+    public function jsonarray(): array
+    {
+        return $this->attributes();
     }
 }
