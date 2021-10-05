@@ -22,7 +22,7 @@ abstract class Model
     public function loadData($data){
         foreach ($data as $key => $value){
             if(property_exists($this,$key)){
-                if( is_numeric($value) || gettype($this->{$key})==="double" || gettype($this->{$key})==="integer" ){ //ints or floats
+                if( gettype($this->{$key})==="double" || gettype($this->{$key})==="integer" ){ //ints or floats
                     if(filter_var($value,FILTER_VALIDATE_FLOAT) && gettype($this->{$key})==="double"){
                         $this->{$key} = (float)$value; //value is float.
                     }elseif(filter_var($value,FILTER_VALIDATE_INT) && gettype($this->{$key})==="integer"){
@@ -60,9 +60,9 @@ abstract class Model
             self::RULE_MAX => 'Max length of this field must be {max}',
             self::RULE_MATCH => 'This field must be the same as {match}',
             self::RULE_UNIQUE=> 'You have already used this {field}',
-            self::RULE_INT => 'This {field} should only contain numbers',
-            self::RULE_FLOAT => 'This {field} should be a float',
-            self::RULE_PHONE => 'This {field} should be a valid phone number',
+            self::RULE_INT => 'This field should only contain numbers',
+            self::RULE_FLOAT => 'This field should be a float',
+            self::RULE_PHONE => 'This field should be a valid phone number',
             self::RULE_ONEOF => 'Invalid Value Given',
             self::RULE_NIC => 'Invalid NIC'
         ];
@@ -89,22 +89,22 @@ abstract class Model
                     $this->addErrorForRule($attribute, self::RULE_MAX,$rule);
                 }
                 if($ruleName === self::RULE_INT && !filter_var($value,FILTER_VALIDATE_INT)){
-                    $this->addErrorForRule($attribute, self::RULE_INT,$rule);
+                    $this->addErrorForRule($attribute, self::RULE_INT);
                 }
                 if($ruleName === self::RULE_FLOAT && !filter_var($value,FILTER_VALIDATE_FLOAT)){
-                    $this->addErrorForRule($attribute, self::RULE_FLOAT,$rule);
+                    $this->addErrorForRule($attribute, self::RULE_FLOAT);
                 }
                 if($ruleName === self::RULE_PHONE && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
-                    $this->addErrorForRule($attribute, self::RULE_PHONE,$rule);
+                    $this->addErrorForRule($attribute, self::RULE_PHONE);
                 }
                 if($ruleName === self::RULE_NIC && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_NIC)))){
-                    $this->addErrorForRule($attribute, self::RULE_NIC,$rule);
+                    $this->addErrorForRule($attribute, self::RULE_NIC);
                 }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, ['match' => $rule['match']]);
                 }
                 if($ruleName === self::RULE_ONEOF && !in_array($value,$rule['oneof'],true)){
-                    $this->addErrorForRule($attribute, self::RULE_ONEOF, $rule);
+                    $this->addErrorForRule($attribute, self::RULE_ONEOF);
                 }
                 if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
