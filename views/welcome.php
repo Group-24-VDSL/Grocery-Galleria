@@ -1,15 +1,15 @@
 <!-- Home section start -->
 <section class="home" id="home">
 
-    <div class="image">
-        <img src="/img/welcome/Home.png" alt="">
-    </div>
-
+    
     <div class="content">
         <span>Grocery to doorStep</span>
         <h3>your daily need products</h3>
         <a href="#category" class="btn">Explore Now</a>
         <a href="/register" class="btn">Regsiter Now</a>
+    </div>
+    <div class="image">
+        <img src="/img/welcome/Home-2.png" alt="">
     </div>
 
 </section>

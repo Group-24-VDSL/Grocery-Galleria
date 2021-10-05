@@ -36,4 +36,9 @@ class ShopOrder extends DBModel
            'ShopTotal' => [self::RULE_REQUIRED]
        ];
     }
+
+    public function jsonarray(): array
+    {
+        return $this->attributes();
+    }
 }

@@ -34,4 +34,9 @@ class Complaint extends DBModel
             'Description' => [self::RULE_REQUIRED]
         ];
     }
+
+    public function jsonarray(): array
+    {
+        return $this->attributes();
+    }
 }

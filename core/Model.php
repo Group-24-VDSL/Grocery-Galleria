@@ -2,7 +2,9 @@
 
 namespace app\core;
 
-abstract class Model
+use JsonSerializable;
+
+abstract class Model implements JsonSerializable
 {
     public const RULE_REQUIRED = 'required';
     public const RULE_EMAIL = 'email';
@@ -38,6 +40,8 @@ abstract class Model
     abstract public function rules():array;
 
     public array $errors = [];
+
+    abstract public function jsonarray():array;
 
     private function addErrorForRule(string $attribute, string $rule,$params =[]){
         $message = $this->errorMessages()[$rule]?? ''; //get the error message for the rule
@@ -145,6 +149,14 @@ abstract class Model
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function jsonSerialize(){
+        $attributes = $this->jsonarray();
+        $dataobj = [];
+        foreach($attributes as $attribute){
+            $dataobj+=[ $attribute => $this->{$attribute} ];
+        }
     }
 
 }

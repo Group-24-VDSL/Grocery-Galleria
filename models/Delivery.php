@@ -33,4 +33,9 @@ class Delivery extends DBModel
     {
         return [];
     }
+
+    public function jsonarray(): array
+    {
+        return $this->attributes();
+    }
 }

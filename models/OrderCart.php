@@ -37,4 +37,9 @@ class OrderCart extends DBModel
             'ShopTotal' => [self::RULE_REQUIRED,self::RULE_FLOAT]
         ];
     }
+
+    public function jsonarray(): array
+    {
+        return ['CartID','ShopID','ItemIDList','CustomerID','QuantityList','ShopTotal'];
+    }
 }

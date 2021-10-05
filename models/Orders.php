@@ -36,4 +36,9 @@ class Orders extends DBModel
             'TotalCost' => [self::RULE_REQUIRED,self::RULE_FLOAT]
         ];
     }
+
+    public function jsonarray(): array
+    {
+        return ['OrderID','CartID','DeliveryCost','TotalCost'];
+    }
 }

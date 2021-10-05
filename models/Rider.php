@@ -58,4 +58,9 @@ class Rider extends UserModel
     {
         return $this->Name;
     }
+
+    public function jsonarray(): array
+    {
+        return $this->attributes();
+    }
 }

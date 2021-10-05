@@ -34,4 +34,9 @@ class Cart extends DBModel
             'CustomerID' => [self::RULE_REQUIRED]
         ];
     }
+
+    public function jsonarray(): array
+    {
+        return ['CartID','Date','Time','CustomerID'];
+    }
 }

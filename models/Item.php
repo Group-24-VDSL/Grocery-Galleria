@@ -60,4 +60,9 @@ class Item extends DBModel
             'Category' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3]]]
         ];
     }
+
+    public function jsonarray(): array
+    {
+        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
+    }
 }
