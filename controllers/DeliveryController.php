@@ -7,6 +7,9 @@ use app\core\Controller;
 use app\core\Request;
 use app\models\Rider;
 use app\models\User;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\To;
+use SendGrid\Mail\TypeException;
 
 class DeliveryController extends Controller
 {
@@ -24,15 +27,40 @@ class DeliveryController extends Controller
                 //then we have to register the rider
                 //find the user-id to save as the rider-id
                 $rider->loadData($request->getBody());
-                $temp = User::findOne(['Email' => $request->getBody()['Email']]);
-                $rider->RiderID = $temp->UserID;
-                $riderpic = $request->loadFile("img/rider-imgs/", "ProfilePic", '95' . str_pad((string)$rider->RiderID, 5, '0', STR_PAD_LEFT));
-                if (!is_null($riderpic)){
+                $temp = User::findOne(['Email' => $user->Email]);
+                $rider->RiderID = (int)$temp->UserID;
+                $riderpic = $request->loadFile("/img/rider-imgs/", "ProfilePic", '95' . str_pad((string)$rider->RiderID, 5, '0', STR_PAD_LEFT));
+                if (!is_null($riderpic) && !empty($riderpic)){
                     $rider->ProfilePic = $riderpic;
                     if ($rider->validate() && $rider->save()) {
                         Application::$app->session->setFlash('success', 'Rider Register Success');
+                        //send the register success email
+                        //id = d-4c34f31db7674b7d98f93f0eed9f23f5
+
+                        $to = new To($rider->Email,
+                            $rider->Name,
+                            [
+                                'password' => $user->Password,
+                                'name' => $rider->Name
+                            ]
+                        );
+                        $email =  new Mail(
+                            Application::$app->emailfrom,$to
+                        );
+                        $email->setTemplateId('d-4c34f31db7674b7d98f93f0eed9f23f5');
+
+                        try {
+                            $response = Application::$app->sendgrid->send($email);
+                        } catch (Exception $e) {
+                            echo 'Caught exception: '.  $e->getMessage(). "\n";
+                            Application::$app->session->setFlash('warning', 'Error sending Email');
+                            return $this->render('delivery/add-rider', [
+                                'model' => $rider
+                            ]);
+                        }
+
                         $this->setLayout('dashboard-deli');
-                        Application::$app->response->redirect("/dashboard/staff/addrider");
+                        Application::$app->response->redirect("/dashboard/delivery/addrider");
                         exit;
                     }
                 }
@@ -41,7 +69,7 @@ class DeliveryController extends Controller
                     'model' => $rider
                 ]);
             }
-            Application::$app->session->setFlash('warning', 'Please Recheck Information entered');
+            Application::$app->session->setFlash('warning', 'Please Recheck Information entered, Rider might have already registered.');
             return $this->render('delivery/add-rider', [
                 'model' => $rider
             ]);
