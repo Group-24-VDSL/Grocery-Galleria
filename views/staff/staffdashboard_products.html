@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/all.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/dashoboardStyle.css" />
+
+    <title>Staff dashboard</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../../img/logo_only_color.png" alt="" />
+        <img class="text" src="../../img/text_white-min.png" alt="" />
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="">
+            <i class="bx bx-grid-alt"></i>
+            <span class="link-name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-box"></i>
+            <span class="link-name">Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bxs-group"></i>
+            <span class="link-name">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bxs-pie-chart-alt"></i>
+            <span class="link-name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-message-error"></i>
+            <span class="link-name">Complaints</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-cog"></i>
+            <span class="link-name">Settings</span>
+          </a>
+        </li>
+        <li class="logout">
+          <a href="">
+            <i class="bx bx-log-out"></i>
+            <span class="link-name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Home section start -->
+
+    <section class="home-section">
+      <nav>
+        <div class="sidebar-toggle">
+          <i class="bx bx-menu sidebarBtn"></i>
+          <span class="dashboard">Staff Dashboard</span>
+        </div>
+        <div class="search-box">
+          <input type="search" id="" placeholder="Search.... " />
+          <button class="bx bx-search search"></button>
+        </div>
+        <div class="profile-details">
+          <i class="bx bx-user"></i>
+          <span class="user-name">Dilshan98</span>
+        </div>
+      </nav>
+
+      <div class="home-content">
+        <div class="overview-boxes">
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Orders</div>
+              <div class="number">1276</div>
+              <div class="indicator">
+                <i class="bx bxs-up-arrow-square"></i>
+                <span class="text">Up so far</span>
+              </div>
+            </div>
+            <!-- <i class='bx bx-cart-alt cart'></i> -->
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-delivery-box-shopping-and-ecommerce-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Revenue</div>
+              <div class="number">1276</div>
+              <div class="indicator">
+                <i class="bx bxs-up-arrow-square"></i>
+                <span class="text">Up so far</span>
+              </div>
+            </div>
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-revenue-money-and-economy-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+          <!-- <i class='bx bx-cart-alt cart'></i> -->
+
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Shops</div>
+              <div class="number">12,876</div>
+              <div class="indicator">
+                <i class="bx bxs-up-arrow-square"></i>
+                <span class="text">Up so far</span>
+              </div>
+            </div>
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-financial-mobile-payment-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Riders</div>
+              <div class="number">11,086</div>
+              <div class="indicator">
+                <i class="bx bxs-up-arrow-square"></i>
+                <span class="text">Up so far</span>
+              </div>
+            </div>
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-order-online-shopping-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+        </div>
+
+        <div class="core">
+          <h1 class="heading">System <span>Products</span></h1>
+          <div class="container-core">
+            <ul class="tabs">
+              <li><button class="btn-tab">Vegetables</button></li>
+              <li><button class="btn-tab">Fruits</button></li>
+              <li><button class="btn-tab">Grocery</button></li>
+              <li><button class="btn-tab">Fish</button></li>
+              <li><button class="btn-tab">Meat</button></li>
+            </ul>
+            <div class="table-header">
+              <ul>
+                <li>Photo</li>
+                <li>Name</li>
+                <li>Brand</li>
+                <li>Unit</li>
+                <li>MRP</li>
+                <li>Min(kg)</li>
+                <li>Increment</li>
+                <li>Max(kg)</li>
+                <li>Update</li>
+              </ul>
+            </div>
+            <div class="table-details scroller">
+              <ul class="column">
+                <li class="column-img">
+                  <img src="/views/shop/img/Pic915013.jpg" alt="" />
+                </li>
+                <li class="column-name">Potato</li>
+                <li class="column-brand">Null</li>
+                <li class="column-unit">Kg</li>
+                <li class="column-mrp"><input type="text" /></li>
+                <li class="column-minWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </li>
+                <li class="column-IncStep">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </li>
+                <li class="column-maxWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </li>
+                <li class="column-ubutton">
+                  <button class="btn-column" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="column">
+                <li class="column-img">
+                  <img src="/views/shop/img/Pic914005.jpg" alt="" />
+                </li>
+                <li class="column-name">Big Onion</li>
+                <li class="column-brand">Null</li>
+                <li class="column-unit">Kg</li>
+                <li class="column-mrp"><input type="text" /></li>
+                <li class="column-minWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </li>
+                <li class="column-IncStep">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </li>
+                <li class="column-maxWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </li>
+                <li class="column-ubutton">
+                  <button class="btn-column" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="column">
+                <li class="column-img">
+                  <img src="/views/shop/img/Pic914015.jpg" alt="" />
+                </li>
+                <li class="column-name">Garlic</li>
+                <li class="column-brand">Null</li>
+                <li class="column-unit">Kg</li>
+                <li class="column-mrp"><input type="text" /></li>
+                <li class="column-minWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </li>
+                <li class="column-IncStep">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </li>
+                <li class="column-maxWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </li>
+                <li class="column-ubutton">
+                  <button class="btn-column" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="column">
+                <li class="column-img">
+                  <img src="/views/shop/img/Pic915016.jpg" alt="" />
+                </li>
+                <li class="column-name">Tomatoe</li>
+                <li class="column-brand">Null</li>
+                <li class="column-unit">Kg</li>
+                <li class="column-mrp"><input type="text" /></li>
+                <li class="column-minWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </li>
+                <li class="column-IncStep">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </li>
+                <li class="column-maxWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </li>
+                <li class="column-ubutton">
+                  <button class="btn-column" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="column">
+                <li class="column-img">
+                  <img src="/views/shop/img/Pic915008.jpg" alt="" />
+                </li>
+                <li class="column-name">Tomatoe</li>
+                <li class="column-brand">Null</li>
+                <li class="column-unit">Kg</li>
+                <li class="column-mrp">
+                  <input type="text" />
+                </li>
+                <li class="column-minWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </li>
+                <li class="column-IncStep">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </li>
+                <li class="column-maxWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </li>
+                <li class="column-ubutton">
+                  <button class="btn-column" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="column">
+                <li class="column-img">
+                  <img src="/views/shop/img/Pic914039.jpg" alt="" />
+                </li>
+                <li class="column-name">Pumpkin</li>
+                <li class="column-brand">Null</li>
+                <li class="column-unit">Kg</li>
+                <li class="column-mrp"><input type="text" /></li>
+                <li class="column-minWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </li>
+                <li class="column-IncStep">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </li>
+                <li class="column-maxWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </li>
+                <li class="column-ubutton">
+                  <button class="btn-column" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="column">
+                <li class="column-img">
+                  <img src="/views/shop/img/Pic914012.jpg" alt="" />
+                </li>
+                <li class="column-name">Tomatoe</li>
+                <li class="column-brand">Null</li>
+                <li class="column-unit">Kg</li>
+                <li class="column-mrp"><input type="text" /></li>
+                <li class="column-minWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </li>
+                <li class="column-IncStep">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </li>
+                <li class="column-maxWeight">
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </li>
+                <li class="column-ubutton">
+                  <button class="btn-column" type="submit">Update</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="core">
+          <h1 class="heading">Add <span>Products</span></h1>
+          <div class="container-core">
+            <!-- <ul class="tabs">
+              <li><button class="btn-tab">Vegetables</button></li>
+              <li><button class="btn-tab">Fruits</button></li>
+              <li><button class="btn-tab">Grocery</button></li>
+              <li><button class="btn-tab">Fish</button></li>
+              <li><button class="btn-tab">Meat</button></li>
+            </ul> -->
+
+            <div class="form-details register">
+              <form action="" id="itemReg">
+                <div class="inputBox">
+                  <label for="category"
+                    ><i class="fas fa-list"></i>Select category</label
+                  >
+                  <select id="category" name="category">
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Grocery">Grocery</option>
+                    <option value="Fish">Fish</option>
+                    <option value="Meat">Meat</option>
+                  </select>
+                </div>
+                <div class="inputBox">
+                  <label for="Name"
+                    ><i class="fas fa-edit"></i>Product Name</label
+                  >
+                  <input type="text" placeholder="" id="name" />
+                </div>
+                <div class="inputBox">
+                  <label for="ItemImage"
+                    ><i class="far fa-images"></i>Item Image</label
+                  >
+                  <input type="file" placeholder="" id="ItemImage" />
+                </div>
+                <div class="inputBox">
+                  <label for="Brand"><i class="fas fa-edit"></i>Brand</label>
+                  <input type="text" placeholder="Eg: Munchee" id="Brand" />
+                </div>
+
+                <div class="inputBox">
+                  <label for="Unit"
+                    ><i class="fas fa-balance-scale"></i>Unit</label
+                  >
+                  <select id="Unit" name="Unit">
+                    <option value="Kg">Kg</option>
+                    <option value="g">gram</option>
+                    <option value="L">Litre</option>
+                    <option value="ml">Mili Litre</option>
+                    <option value="unit">Unit</option>
+                  </select>
+                </div>
+                <div class="inputBox">
+                  <label for="UWeight"
+                    ><i class="fas fa-weight-hanging"></i>Unit Weight</label
+                  >
+                  <input
+                    type="number"
+                    min="1"
+                    value="1"
+                    step="0.1"
+                    id="UWeight"
+                    name="UWeight"
+                  />
+                </div>
+                <div class="inputBox">
+                  <label for="MRP"><i class="fas fa-coins"></i>MRP</label>
+                  <input type="text" />
+                </div>
+
+                <div class="inputBox">
+                  <label for="maxWeight"
+                    ><i class="fas fa-weight-hanging"></i>Max Selling
+                    weight</label
+                  >
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="maxWeight"
+                    name="maxWeight"
+                  />
+                </div>
+                <div class="inputBox">
+                  <label for="IncStep"
+                    ><i class="fas fa-sort-numeric-up-alt"></i>Increment
+                    Step</label
+                  >
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="IncStep"
+                    name="IncStep"
+                  />
+                </div>
+                <div class="inputBox">
+                  <label for="minWeight"
+                    ><i class="fas fa-weight-hanging"></i>Min selling
+                    weight</label
+                  >
+                  <input
+                    type="number"
+                    min="0.1"
+                    max="5"
+                    value="0.1"
+                    step="0.1"
+                    id="minWeight"
+                    name="minWeight"
+                  />
+                </div>
+                <div class="inputBox"></div>
+                <div class="inputBox div-button">
+                  <button class="btn btn-add">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Home section ends -->
+    <script src="./js/dashboardScript.js"></script>
+  </body>
+</html>

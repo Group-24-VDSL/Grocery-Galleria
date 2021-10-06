@@ -73,10 +73,10 @@ ul {
   color: var(--title-color);
   padding: 0.5rem 0.8rem;
   font-size: var(--small-font-size);
-  border: 0.1rem solid var(--home-color);
+  border: 0.2rem solid var(--home-color);
   border-radius: 0.5rem 0.5rem 0 0;
   min-width: 128px;
-  border-bottom: none;
+  /* border-bottom: none; */
 }
 .tabs .btn-tab:hover {
   background-color: white;
@@ -173,10 +173,9 @@ ul {
 }
 .home-section {
   background: var(--home-color);
-  position: fixed;
+  position: relative;
   min-height: 100vh;
-  min-width: 180vh;
-  /* width: calc(100%-240px); */
+  max-width: 180vh;
   left: 240px;
   transition: all 0.4s ease-in-out;
 }
@@ -314,9 +313,9 @@ ul {
   background-color: white;
   justify-content: space-around;
   padding: 0 1rem;
-  margin: 0 1rem;
+  margin: 1rem 1rem;
   border-radius: 0.5rem;
-  height: 480px;
+  height: 500px;
 }
 .home-content .core .container-core {
   width: 100%;
@@ -332,7 +331,6 @@ ul {
   position: relative;
 }
 .home-content .core .container-core .table-header ul {
-  font-size: var(--normal-font-size);
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -341,11 +339,15 @@ ul {
   flex-wrap: wrap;
 }
 .home-content .core .container-core .table-header ul li {
-  min-width: 64px;
+  font-size: var(--normal-font-size);
+  min-width: 72px;
+  /* max-width: 72px; */
   align-items: center;
+  text-align: left;
 }
-.home-content .core .container-core .table-details {
-  padding: 0.2rem 2.5rem;
+.home-content .core .container-core .table-details,
+.form-details {
+  padding: 0.5rem 2.5rem;
   border: 0.1rem solid var(--home-color);
   border-radius: 0 0 0.5rem 0.5rem;
   background-color: var(--header-color);
@@ -354,27 +356,23 @@ ul {
 }
 .home-content .core .container-core .table-details .column {
   display: flex;
-  font-size: var(--small-font-size);
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
 }
 .home-content .core .container-core .table-details .column li {
+  font-size: var(--small-font-size);
   min-width: 64px;
+  max-width: 72px;
   align-items: center;
+  text-align: center;
 }
 .home-content .core .container-core .table-details .column .column-img img {
   width: 40px;
   height: 40px;
 }
-.home-content
-  .core
-  .container-core
-  .table-details
-  .column
-  .column-uStock
-  input {
+.home-content .core .container-core .table-details .column input {
   width: 100%;
 }
 .home-content
@@ -408,4 +406,42 @@ ul {
   overflow-y: scroll;
   scrollbar-color: var(--first-color);
   scrollbar-width: thin;
+}
+
+.register form {
+  text-align: center;
+  padding: 2rem;
+  border: 0.1rem solid rgba(43, 147, 72, 0.8);
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+.register form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.register form .inputBox {
+  text-align: left;
+  font-size: var(--normal-font-size);
+  width: 80%;
+}
+.register form .inputBox i {
+  padding: 0.5rem;
+}
+
+.register form .inputBox input,
+.register form .inputBox select {
+  color: var(--title-color);
+  padding: 0.5rem;
+  font-size: var(--small-font-size);
+  background: var(--input-background-color);
+  text-transform: none;
+  border: 0.2rem solid var(--home-color);
+  border-radius: 0.5rem;
+  width: 100%;
+}
+.register form .div-button {
+ 
+.register form .register form .div-button .btn-add {
 }
