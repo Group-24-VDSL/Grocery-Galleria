@@ -51,19 +51,20 @@ ul {
   list-style: none;
 }
 
-/* .btn {
+.btn {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: 2rem;
   background-color: var(--first-color);
   color: var(--body-color);
-  padding: 0.8rem 3rem;
-  font-size: var(--h1-font-size);
+  padding: 0.8rem 1rem;
+  font-size: var(--small-font-size);
   border-radius: 0.5rem;
   transition: 0.3s;
+  width: 30%;
 }
 .btn:hover {
   background-color: var(--first-color-alt);
-} */
+}
 
 .heading {
   text-align: left;
@@ -142,7 +143,7 @@ ul {
 }
 .home-section {
   background: var(--home-color);
-  position: fixed;
+  position: relative;
   min-height: 100vh;
   min-width: 180vh;
   /* width: calc(100%-240px); */
@@ -221,42 +222,7 @@ ul {
 .home-section nav .profile-details i {
   font-size: var(--h1-font-size);
 }
-/* .home-content .overview-boxes {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
 
-.home-content .overview-boxes .box {
-  border: 0.1rem solid black;
-  width: 40%;
-  text-align: left;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.home-content .overview-boxes .box .content {
-  padding: 0.5rem;
-}
-.home-content .overview-boxes .box .content .box-topic {
-  font-size: var(--h2-font-size);
-}
-.home-content .overview-boxes .box .content .number {
-  font-size: var(--biggest-font-size);
-  font-weight: 400;
-}
-.home-content .overview-boxes .box .content .indicator {
-}
-.home-content .overview-boxes .box .content .indicator i {
-  font-size: var(--h2-font-size);
-  background-color: var(--first-color-alt);
-  border-radius: 5rem;
-  margin-right: 2%;
-}
-.home-content .overview-boxes .box img {
-  height: 4rem;
-} */
 .home-section .home-content {
   position: relative;
   padding-top: 1rem;
@@ -316,7 +282,7 @@ ul {
   background-color: white;
   justify-content: space-around;
   padding: 0 1rem;
-  margin: 0 1rem;
+  margin: 1rem 1rem;
   border-radius: 0.5rem;
   height: 480px;
 }
@@ -397,4 +363,34 @@ ul {
   overflow-y: scroll;
   scrollbar-color: var(--first-color);
   scrollbar-width: thin;
+}
+.home-content .core .container-items .add-item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  align-items: center;
+  border: 0.2rem solid var(--home-color);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+.home-content .core .container-items .add-item .inputBox {
+  text-align: left;
+  font-size: var(--h3-font-size);
+  width: 100%;
+}
+.home-content .core .container-items .add-item .inputBox label {
+  width: 100%;
+  display: inline-block;
+}
+.home-content .core .container-items .add-item .inputBox input,
+.home-content .core .container-items .add-item .inputBox select {
+  margin-top: 0.5rem;
+  color: var(--title-color);
+  width: 80%;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+  border: 0.2rem solid var(--home-color);
+  font-size: var(--normal-font-size);
 }
