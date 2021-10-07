@@ -1,16 +1,8 @@
-@import url("/css/fonts.css");
-
+@import "all.css";
+@import "variables.css";
 :root {
   --header-height: 2.5rem;
-  --searchbar-height: 5rem;
-  --first-color: #2b9348;
-  --first-color-alt: #55a630;
-  --title-color: #393939;
-  --text-color: #707070;
-  --text-color-light: #a6a6a6;
-  --body-color: #ffffff;
-  --container-color: #ffffff;
-  --header-color: #fff;
+  --header-color: #f1faee;
   --input-background-color: #f7f7f7;
 
   --body-font: "Open Sans", sans-serif;
@@ -18,19 +10,6 @@
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;
   --h3-font-size: 1rem;
-  --normal-font-size: 1rem;
-  --small-font-size: 0.8rem;
-  --smaller-font-size: 0.75rem;
-
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  --mb-1: 0.5rem;
-  --mb-2: 1rem;
-  --mb-3: 1.5rem;
-  --mb-4: 2rem;
-  --mb-5: 2.5rem;
-  --mb-6: 3rem;
 }
 * {
   font-family: var(--body-font);
@@ -79,17 +58,15 @@ section {
   text-align: center;
   color: var(--title-color);
   text-transform: uppercase;
-  padding: 1rem;
   font-size: var(--biggest-font-size);
-  padding-bottom: 2rem;
+  padding: 1rem 1rem 2rem;
 }
 .subheading {
   text-align: left;
   color: var(--title-color);
   text-transform: uppercase;
-  padding: 1rem;
   font-size: var(--biggest-font-size);
-  padding-bottom: 2rem;
+  padding: 1rem 1rem 2rem;
   text-decoration: underline;
 }
 .heading span {
