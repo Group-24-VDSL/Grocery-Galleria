@@ -53,9 +53,10 @@ $app->router->post('/dashboard/staff/viewcustomers',[StaffController::class,'vie
 $app->router->post('/dashboard/staff/viewshops',[StaffController::class,'viewshops']);
 $app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewusers']);
 
-$app->router->get('/dashboard/shop/viewitem',[ShopController::class,'viewitem']);
-$app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
-$app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
+$app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
+$app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
+$app->router->get('/dashboard/shop/viewOrder',[ShopController::class,'vieworder']);
+$app->router->get('/dashboard/shop/viewOrders',[ShopController::class,'vieworders']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 
