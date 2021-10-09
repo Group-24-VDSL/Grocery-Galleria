@@ -44,7 +44,8 @@ class Router
              * @var Controller $controller
              **/
             $controller = new $callback[0]; //create a instance of the callback class
-            Application::$app->controller = $controller;
+//            Application::$app->controller = $controller;
+            Application::$app->setController($controller);
             $controller->action = $callback[1]; //the method of the class
             $callback[0] = $controller; //put the instance back in the array
 
