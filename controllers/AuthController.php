@@ -10,6 +10,7 @@ use app\core\Response;
 use app\models\Customer;
 use app\models\LoginForm;
 use app\models\User;
+use app\models\Shop;
 
 class AuthController extends Controller
 {
@@ -39,20 +40,20 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $this->setLayout('register');
-        $user = new Customer();
+        $requestPath = $request->getPath();
+        $position = stripos($requestPath,'/',1);
+        $userRole = ucfirst(substr($requestPath,1,$position-1)); // User Role
+        $userName = "\\app\\models\\$userRole";
+        $user = new $userName(); // Create user obj based on user type using user models
         $user->loadData($request->getBody());
         if ($request->isPost()) {
-            if ($request->getPath() === '/register') { //that means its a customer
-
-                $tempuser = new User(); //register the user 1st
-                $tempuser->loadData($request->getBody());
-                $tempuser->Role ='Customer'; //it is a customer
-                if ($tempuser->validate() && $tempuser->save()) {
-                    //then we have to register the customer
-
-                    //find the user-id to save as the customer-id
+                $UserLogin = new User(); //register the user 1st
+                $UserLogin->loadData($request->getBody()); // load the input values into model attributes
+                $UserLogin->Role = $userRole;
+                if ($UserLogin->validate() && $UserLogin->save()) {
                     $temp = User::findOne(['Email' => $request->getBody()['Email']]);
-                    $user->CustomerID = $temp->UserID;
+                    $userID = $userRole."ID";
+                    $user->$userID = $temp->UserID;
 
                     if($user->validate() && $user->save()){
                         Application::$app->session->setFlash('success', 'Register Success');
@@ -65,9 +66,9 @@ class AuthController extends Controller
                 return $this->render('register', [
                     'model' => $user
                 ]);
-            }
+
         }
-        return $this->render('register', [
+        return $this->render("$userRole\\register", [
             'model' => $user
         ]);
     }
