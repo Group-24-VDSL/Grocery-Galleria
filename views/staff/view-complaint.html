@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/all.css">
+  <link rel="stylesheet" href="../../views/Registration/css/registerStyle.css">
+  <link rel="stylesheet" href="../staff/css/complaint.css">
+  <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../staff/js/complaint.js"></script>
+  <title>Complaints</title>
+</head>
+<body>
+  <header>
+    <div class="header-1">
+      <a href="#" class="logo"><img class="logo-img" src="../../img/logo2.png" alt="dd" srcset=""></a>
+      <a href="" class="back"><i class="fas fa-step-backward"></i></a>
+      </div>
+  </header>
+
+  <div class = "main-content complaint-view" id="#complaint-section">
+      <div class = "complaint-content">
+            <ul class = "form-section page-section">
+                <li id="cid_1" class="form-input-wide" data-type="control_head">
+                    <div class="form-header-group  header-large">
+                      <div class="header-text httal htvam">
+                        <h1 id="header_1" class="form-header" data-component="header">
+                          Complaints
+                        </h1>
+                      </div>
+                    </div>
+                </li> 
+            </ul>
+      </div>
+
+      <div class = "complaint-content main">
+        <div class="complaint-content-header">
+            <div class = "complaint-header-element" >
+                <form class = "complaint-sort" action="">
+                        <li class="header-line" id="id-11">
+                            <label class="header-label header-label-top " id="label_11" > Show: </label>
+                            <div id="cid_11" class="form-input-wide" >
+                              <select class="header-dropDown" name="complaint-regarding" id="input_11">
+                                <option value="">All</option>
+                                <option value="">New </option>
+                                <option value="">Attended</option>
+                              </select>
+                            </div>
+                        </li>
+                        <li class="header-line" id="id-12">
+                            <label class="header-label header-label-top " id="label_12" >Priority Select By: &nbsp; &nbsp; &nbsp; &nbsp;</label>
+                            <div id="cid_12" class="form-input-wide" >
+                              <select class="header-dropDown" name="" id="input_12">
+                                <option value="" ></option>
+                                <option value="1">High priority</option>
+                                <option value="2">Low priority</option>
+                              </select>
+                            </div>
+                        </li>
+                </form>
+                <div class="view">   
+                    <span class="header-label header-label-top view-button-left">previous </span><a href=""> <i class='bx bxs-left-arrow'></i></a>
+                     <a href=""><i class='bx bxs-right-arrow'></i></a> <span class="header-label header-label-top view-button-right">next</span>
+                </div>
+            </div>
+            <table class = "complaint-table">
+                <thead class="complaint-table-header">
+                    <tr>
+                        <td class="check"></td>
+                        <td>Complaint ID</td>
+                        <td>Complaint Date</td>
+                        <td>Order ID</td>
+                        <td>Order Date</td>
+                        <td>Complaint Regarding</td>
+                        <td>Priority</td>
+                        <td>Status</td>
+                        <td>View Description</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td >   
+                            <input type="checkbox"  class ="complaint-check">
+                            <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit" id="desc-button"><span class="" ><i class="bx bx-show-alt"></i></span></button> 
+                          <div id="" class="description">
+                            <div class="description-content">
+                            <div class="close-bar">
+                                <span class="complaint-id">Complaint ID: 3456</span>
+                                <span class="close"> &times; </span>
+                            </div>
+                            <div class="description-header">
+                              <h5>Nature of the Complaint</h5>
+                            </div>
+                            <div class="description-body">
+                              <span class="desc-text">Some text in the Modal Body</span>
+                            </div>
+                              <div class="description-header">
+                                <h5>Specific details of the complaint</h5>
+                              </div>
+                              <div class="description-body">
+                                <span>Some text in the Modal Body</span>
+                              </div>
+                            </div>
+                        </div>                
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit" id="desc-button"><span class="" id=""><i class="bx bx-show-alt"></i></span></button>
+                          <div id="" class="description">
+                            <div class="description-content">
+                            <div class="close-bar">
+                                <span class="complaint-id">Complaint ID: 1102</span>
+                                <span class="close"> &times; </span>
+                            </div>
+                            <div class="description-header">
+                              <h5>Nature of the Complaint</h5>
+                            </div>
+                            <div class="description-body">
+                              <span class="desc-text">Some text in the Modal Body</span>
+                            </div>
+                              <div class="description-header">
+                                <h5>Specific details of the complaint</h5>
+                              </div>
+                              <div class="description-body">
+                                <span>Some text in the Modal Body</span>
+                              </div>
+                            </div>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit" id="desc-button"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                          <div id="" class="description">
+                            <div class="description-content">
+                            <div class="close-bar">
+                                <span class="complaint-id">Complaint ID: 0987</span>
+                                <span class="close"> &times; </span>
+                            </div>
+                            <div class="description-header">
+                              <h5>Nature of the Complaint</h5>
+                            </div>
+                            <div class="description-body">
+                              <span class="desc-text">Some text in the Modal Body</span>
+                            </div>
+                              <div class="description-header">
+                                <h5>Specific details of the complaint</h5>
+                              </div>
+                              <div class="description-body">
+                                <span>Some text in the Modal Body</span>
+                              </div>
+                            </div>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                         <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type="checkbox"  class ="complaint-check">
+                          <span class="checkmark"></span>
+                        </td>
+                        <td>1102</td>
+                        <td>18-09-2021</td>
+                        <td>110314</td>
+                        <td>15-09-2021</td>
+                        <td>Delivery</td>
+                        <td>Low</td>
+                        <td>New</td>
+                        <td>
+                          <button class="btn-description" type="submit"><span class="" id="desc-button"><i class="bx bx-show-alt"></i></span></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </tbody>
+            </table>
+        </div>
+      </div>   
+
+    </div>
+
+
+    
+<script>
+  // Get the description
+  // var description = document.getElementById("complaint-description");
+  
+  // Get the button that opens the description
+  // var btn = document.getElementById("desc-button");
+  
+  // Get the <span> element that closes the description
+  // var span = document.getElementsByClassName("close")[0];
+
+
+  
+  // When the user clicks the button, open the description 
+  // btn.onclick = function() {
+  //   description.style.display = "block";
+  // }
+  
+  // When the user clicks on <span> (x), close the description
+  // span.onclick = function() {
+  //   description.style.display = "none";
+  // }
+  
+  // When the user clicks anywhere outside of the description, close it
+  // window.onclick = function(event) {
+  //   if (event.target == description) {
+  //     description.style.display = "none";
+  //   }
+  // }
+
+  $(".btn-description").on("click",function(){
+    // $(this).closest("div.description").show();
+    $(this).siblings('.description').show();
+  });
+
+  $(".close").on("click",function(){
+    // $(this).closest("div.description").show();
+    $(this).closest('.description').hide();
+  });
+  </script>
+  </body>
+  </html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/all.css">
+  <link rel="stylesheet" href="../../views/Registration/css/registerStyle.css">
+  <link rel="stylesheet" href="./complaint.css">
+  <title>Complaint-form</title>
+</head>
+<body>
+  <header>
+    <div class="header-1">
+      <a href="#" class="logo"><img class="logo-img" src="../../img/logo2.png" alt="dd" srcset=""></a>
+      <a href="" class="back"><i class="fas fa-step-backward"></i></a>
+      </div>
+  </header>
+
+  <div class = "main-content" id="#complaint-section">
+      <div class = "form-content">
+            <ul class = "form-section page-section">
+                <li id="cid_1" class="form-input-wide" data-type="control_head">
+                    <div class="form-header-group  header-large">
+                      <div class="header-text httal htvam">
+                        <h1 id="header_1" class="form-header" data-component="header">
+                          Complaints
+                        </h1>
+                        <div id="subHeader_1" class="form-subHeader">
+                          Submit the Form To Add User Complaints 
+                        </div>
+                      </div>
+                    </div>
+                </li> 
+            </ul>
+      </div>
+      <form action="" method="" id="complaint-form">
+      <div class = "form-content">
+        <ul class = "form-section page-section">
+              <li class="form-line" id="id_1">
+                <label class="form-label form-label-top" id="label_1" > Complaint Date: </label>
+                <div id="cid_3" class="form-input-wide">
+                    <div data-wrapper-react="true">
+                        <input class="form-textbox"  type="date" id="input_1" name="complaint-date">
+                    </div>
+                  </div>
+              </li>           
+              <li class="form-line" data-type="control_textbox" id="id_2">
+                <label class="form-label form-label-top " id="label_2"> Order ID: </label>
+                <div id="cid_9" class="form-input-wide">
+                  <input type="text" id="input_2" name="order-id"  class="form-textbox" data-defaultvalue="" >
+                </div>
+              </li>
+              <li class="form-line" data-type="control_datetime" id="id_3">
+                <label class="form-label form-label-top form-label-auto" id="label_3"> Order Date: </label>
+                <div id="cid_3" class="form-input-wide" >
+                    <div data-wrapper-react="true">
+                        <input class="form-textbox" type="date" id="order-date" name="order-date">
+                    </div>
+                  </div>
+              </li>
+              <li class="form-line" id="id-4">
+                <label class="form-label form-label-top " id="label_4" > The complaint is regarding: </label>
+                <div id="cid_4" class="form-input-wide" >
+                  <select class="form-dropDown" name="complaint-regarding" id="input_4">
+                    <option value="">Shop</option>
+                    <option value="">Delivery</option>
+                  </select>
+                </div>
+              </li>
+              <li class="form-line" id="id-5">
+                <label class="form-label form-label-top " id="label_5"> Priority: </label>
+                <div id="cid_4" class="form-input-wide" >
+                <select class="form-dropDown" name="priority" id="input_5">
+                    <option value="">High</option>
+                    <option value="">Low</option>
+                  </select>
+                </div>
+              </li>
+              <li class="form-line" id="id_6">
+                <label class="form-label form-label-top" id="label_6">The nature of complaint: </label>
+                <div id="cid_7" class="form-input-wide" >
+                  <textarea id="input_6" class="form-textarea" name="complaint-nature" ></textarea>
+                </div>
+              </li>
+              <li class="form-line" id="id_7">
+                <label class="form-label form-label-top" id="label_7"> The specific details of the complaint: </label>
+                <div id="cid_7" class="form-input-wide" >
+                  <textarea id="input_7" class="form-textarea" name="complaint-specific" ></textarea>
+                </div>
+              </li>
+        </ul>
+        <div class="form-buttons-wrapper">
+            <button id="complaint-submit" type="submit" class="submit-button" data-component="button" data-content="">
+              Save
+            </button>
+        </div>
+      </div>   
+    </form>  
+  </sdiv>
+  </body>
+  </html>
