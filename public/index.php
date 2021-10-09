@@ -30,8 +30,10 @@ $app->router->post('/contact',[SiteControllers::class,'handleContact']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
-$app->router->get('/register',[AuthController::class,'register']);
-$app->router->post('/register',[AuthController::class,'register']);
+$app->router->get('/customer/register',[AuthController::class,'register']);
+$app->router->post('/customer/register',[AuthController::class,'register']);
+$app->router->get('/shop/register',[AuthController::class,'register']);
+$app->router->post('/shop/register',[AuthController::class,'register']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 $app->router->get('/profile',[AuthController::class,'profile']);
 
@@ -52,6 +54,7 @@ $app->router->post('/dashboard/staff/user',[StaffController::class,'user']);
 $app->router->post('/dashboard/staff/viewcustomers',[StaffController::class,'viewcustomers']);
 $app->router->post('/dashboard/staff/viewshops',[StaffController::class,'viewshops']);
 $app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewusers']);
+
 
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
