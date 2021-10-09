@@ -6,9 +6,9 @@ use app\core\Model;
 
 class Form
 {
-    public static function begin($action, $method,$classes=[],$enctype = '')
+    public static function begin($action, $method,$id,$classes=[],$enctype = '')
     {
-        echo sprintf('<form action="%s" method="%s" class="%s" enctype="%s">', $action, $method,implode(" ",$classes),$enctype);
+        echo sprintf('<form action="%s" method="%s" id="%s" class="%s"  enctype="%s">', $action, $method,$id,implode(" ",$classes),$enctype);
         return new Form();
     }
 
@@ -42,7 +42,7 @@ class Form
         return new ImageField($model,$attribute);
     }
 
-    public function inputfile($model,$attribute,$class=[],$accept='')
+    public function inputfile(Model $model,$attribute,$class=[],$accept='')
     {
         return new InputFile($model,$attribute,$class,$accept);
     }
