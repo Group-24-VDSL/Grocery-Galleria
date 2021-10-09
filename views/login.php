@@ -9,7 +9,8 @@
         <img class="main-img" src="./img/login-background.png" alt="">
     </div>
     <div class="subcontainer">
-        <?php $form = \app\core\form\Form::begin("","post"); ?>
+        <img class="user" src="../../img/user.svg" alt="" />
+        <?php $form = \app\core\form\Form::begin("","post","Login"); ?>
             <img class="user" src="./img/user.svg" alt="">
             <h2>Welcome</h2>
             <div class="input-div one">
@@ -17,7 +18,7 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div>
-                    <h5>Username</h5>
+                    <h5>Email</h5>
                     <?php echo $form->fieldonly($model,'Email',["input"])->emailField(); ?>
                 </div>
             </div>

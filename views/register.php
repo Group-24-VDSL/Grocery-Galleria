@@ -6,7 +6,7 @@
 
 <section class="register" id="register">
     <h1 class="heading">Registration <span>Form</span> Customer</h1>
-    <?php $form = \app\core\form\Form::begin("","post");?>
+    <?php $form = \app\core\form\Form::begin("","post","CustReg");?>
         <div class="inputBox">
             <label for="Name"><i class="fas fa-edit"></i>Name</label>
             <?php echo $form->fieldonly($model,'Name');?>
