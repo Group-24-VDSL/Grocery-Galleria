@@ -29,30 +29,34 @@ class InputFieldOnly
 
     public function passwordField()
     {
-        $this->type = self::TYPE_PASSWORD;
+        $this->type = empty($this->model->hasError($this->attribute))? self::TYPE_PASSWORD:self::TYPE_TEXT ;
         return $this;
     }
 
     public function emailField()
     {
-        $this->type = self::TYPE_EMAIL;
+        $this->type =empty($this->model->hasError($this->attribute))? self::TYPE_EMAIL: self::TYPE_TEXT;
         return $this;
     }
 
     public function numberField(){
-        $this->type = self::TYPE_NUMBER;
+        $this->type = empty($this->model->hasError($this->attribute))? self::TYPE_NUMBER:self::TYPE_TEXT ;
         return $this;
     }
 
     public function hiddenField()
     {
-        $this->type = self::TYPE_HIDDEN;
+        $this->type = empty($this->model->hasError($this->attribute))? self::TYPE_HIDDEN:self::TYPE_TEXT;
         return $this;
     }
 
     public function setValue(string $value){
-        $this->value = $value;
-        return $this;
+        return $this->value =  empty($this->model->hasError($this->attribute))?$this->model->{$this->attribute}: $this->model->getFirstError($this->attribute);
+//        return $this;
+    }
+    public function setStyle(): string
+    {
+        return empty($this->model->hasError($this->attribute))? "" : "border: .1rem solid red;";
     }
 
     public function __toString()
@@ -60,8 +64,8 @@ class InputFieldOnly
         return sprintf('<input type="%s" name="%s" style="%s" value="%s" class="%s" >',
             $this->type,
             $this->attribute,
-            $this->model->hasError($this->attribute) ? "border: 1px solid red;" : '',
-            $this->value,
+            $this->setStyle(),
+            $this->setValue($this->value),
             $this->classes ? implode(" ",$this->classes): ""
         );
     }
