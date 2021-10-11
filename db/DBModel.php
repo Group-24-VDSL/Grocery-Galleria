@@ -46,19 +46,33 @@ abstract class DBModel extends Model
         return $statement->fetchObject(static::class);
     }
 
-    public static function findAll($where =[])
+    public static function findAll($where =[],$limit = null)
     {
         $tableName = static::tableName();
-        if(empty($where)){
-            $statement = self::prepare("SELECT * FROM $tableName");
-            $statement->execute();
-            return $statement->fetchAll(\PDO::FETCH_CLASS,static::class);
-        }
-        $attributes = array_keys($where);
-        $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
-        $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
-        foreach ($where as $key => $item) {
-            $statement->bindValue(":$key", $item);
+        if(is_null($limit)){
+            if(empty($where)){
+                $statement = self::prepare("SELECT * FROM $tableName");
+                $statement->execute();
+                return $statement->fetchAll(\PDO::FETCH_CLASS,static::class);
+            }
+            $attributes = array_keys($where);
+            $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
+            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
+        }else{
+            if(empty($where)){
+                $statement = self::prepare("SELECT * FROM $tableName LIMIT $limit");
+                $statement->execute();
+                return $statement->fetchAll(\PDO::FETCH_CLASS,static::class);
+            }
+            $attributes = array_keys($where);
+            $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
+            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql LIMIT $limit");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
         }
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_CLASS,static::class);
