@@ -11,14 +11,16 @@ class Request
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         $position = strpos($path,'?'); //check the position of GET attributes
         if($position === false){
-            return $path;
+            return filter_var($path,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
         }
-        return substr($path,0,$position);
+        return substr(filter_var($path,FILTER_SANITIZE_FULL_SPECIAL_CHARS),0,$position);
 
     }
     public function method(): string
     {
-        return strtolower($_SERVER['REQUEST_METHOD']);
+        return strtolower(filter_var($_SERVER['REQUEST_METHOD'],FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
     }
 
     public function isGet(){
