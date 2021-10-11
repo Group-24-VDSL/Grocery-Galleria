@@ -71,5 +71,5 @@
         </div>
         <div class="inputBox"></div>
         <button type="submit" class="btn submit">Submit Registration</button>
-    </form>
+    <?php \app\core\form\Form::end(); ?>
 </section>

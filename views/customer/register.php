@@ -47,6 +47,6 @@
         </div>
         <div class="inputBox"><div id="map"></div></div>
         <div class="inputBox"><button type="submit" class="btn submit" >Submit Registration</button></div>
-        <div class="inputBox"><button type="reset" class="btn " >Cancel</button></div>
+        <div class="inputBox"><button type="reset" class="btn" >Cancel</button></div>
     <?php echo $form::end() ?>
 </section>
