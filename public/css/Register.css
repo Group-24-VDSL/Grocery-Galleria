@@ -288,3 +288,7 @@ section {
     font-size: 4rem;
   }
 }
+
+#map {
+  height: 100%;
+}

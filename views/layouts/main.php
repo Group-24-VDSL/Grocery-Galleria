@@ -108,11 +108,11 @@
         </div>
     </div>
 
-
     <p class="footer-copyright">&#169; 2021 Grocery Galleria. All right reserved.</p>
 </section>
 
 <!-- footer section ends -->
 <script src="/js/main.js"></script>
+<script src="/js/rivets-cart.min.js"></script>
 </body>
 </html>
