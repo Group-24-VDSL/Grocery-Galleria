@@ -21,11 +21,11 @@ class InputFile
 
     public function __toString(): string
     {
-        return sprintf('<input type="file" name="%s" id="%s" class="%s" src="%s" accept="%s">',
+        return sprintf('<input type="file" name="%s" id="%s" class="%s" accept="%s">',
             $this->attribute,
             $this->attribute,
             $this->class ? implode(" ",$this->class): "",
-            $this->model->{$this->attribute} ?? '/img/placeholder-150.png',
+//            $this->model->{$this->attribute} ?? '/img/placeholder-150.png',
             $this->accept);
     }
 }
