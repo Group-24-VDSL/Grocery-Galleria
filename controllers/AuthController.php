@@ -52,20 +52,16 @@ class AuthController extends Controller
                 $UserLogin->Role = $userRole;
                 if ($UserLogin->validate() && $UserLogin->save()) {
                     $temp = User::findOne(['Email' => $request->getBody()['Email']]);
-                    $userID = $userRole."ID";
+                    $userID = $userRole . "ID";
                     $user->$userID = $temp->UserID;
-
-                    if($user->validate() && $user->save()){
-                        Application::$app->session->setFlash('success', 'Register Success');
-                        $this->setLayout('auth');
-                        Application::$app->response->redirect('/login');
-                        exit;
-                    }
                 }
-//            var_dump($registerModel->errors);
-                return $this->render('register', [
-                    'model' => $user
-                ]);
+                if ($user->validate() && $user->save()) {
+                    Application::$app->session->setFlash('success', 'Register Success');
+                    $this->setLayout('auth');
+                    Application::$app->response->redirect('/login');
+                    exit;
+                }
+                return $this->render("$userRole\\register", ['model' => $user]);
 
         }
         return $this->render("$userRole\\register", [
