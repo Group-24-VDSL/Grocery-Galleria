@@ -10,9 +10,9 @@
     <div class="">
         <h3>Add Item</h3>
         <div class="frm">
-            <?php $form = \app\core\form\Form::begin("","post",[],"multipart/form-data");?>
+            <?php $form = \app\core\form\Form::begin("","post","",[],"multipart/form-data",);?>
             <div class="display-grid delivery-view">
-                <div class="delivery-view-details">
+                <div class="left-side-form">
                     <div><?php echo $form->field($model,"Name");?></div>
                     <div><?php echo $form->field($model,"Brand");?></div>
                     <div><?php echo $form->field($model,"UWeight");?></div>
@@ -21,7 +21,7 @@
                     <div><?php echo $form->field($model,"MaxCount");?></div>
                     <div><?php echo $form->selectfield($model,"Category",['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']);?></div>
                 </div>
-                <div class="delivey-view-profile-pic">
+                <div class="right-side-form">
                     <div><label>Profile Picture:</label><img class="image-preview" src='/img/placeholder-150.png'><?php echo $form->inputfile($model,"ItemImage",['image-input'],"image/jpeg,image/png");?></div>
                 </div>
                 <div class="submit-cancel"><button type="submit" class="btn btn-primary">Submit</button>

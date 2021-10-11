@@ -8,7 +8,7 @@
     grid-template-columns: 2fr 1fr;
 }
 
-.delivery-view-details input{
+.left-side-form input{
     width: 100%;
 }
 .order-shop-display{
@@ -16,11 +16,11 @@
     grid-gap:1em;
   }
 
-.delivery-view-profile-pic{
+.right-side-form{
     justify-self: center;
 }
 
-.delivery-view-profile-pic > div{
+.left-side-form > div{
     display: grid;
 }
 
