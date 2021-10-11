@@ -1,5 +1,5 @@
 
-@import url('/css/fonts.css');
+@import url('fonts.css');
 
 
 :root{
@@ -242,7 +242,8 @@
 }
 
 .product .box-container{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   /* flex-basis: 40%; */
   /* flex-direction:; */
   flex-wrap: wrap;

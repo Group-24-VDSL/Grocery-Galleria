@@ -42,7 +42,7 @@ class AuthController extends Controller
         $this->setLayout('register');
         $requestPath = $request->getPath();
         $position = stripos($requestPath,'/',1);
-        $userRole = ucfirst(substr($requestPath,1,$position-1)); // User Role
+        $userRole = ucfirst(filter_var(substr($requestPath,1,$position-1),FILTER_SANITIZE_SPECIAL_CHARS)); // User Role
         $userName = "\\app\\models\\$userRole";
         $user = new $userName(); // Create user obj based on user type using user models
         $user->loadData($request->getBody());

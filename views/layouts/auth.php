@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/Auth.css">
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/fonts.css">
-    <link rel="stylesheet" href="/css/template.css">
     <title>Login</title>
 </head>
 <?php include_once("utils/sessions.php"); ?>

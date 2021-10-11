@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/Register.css">
 
+    <script src="/js/jquery.min.js"></script>
     <title>Registration customer</title>
 </head>
 <body>
@@ -77,6 +78,7 @@
 
     <p class="footer-copyright">&#169; 2021 Grocery Galleria. All right reserved.</p>
 </section>
-<script src="/js/script.js"></script>
+<script src="/js/register.js"></script>
+
 </body>
 </html>
