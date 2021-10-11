@@ -1,33 +1,11 @@
+@import "variables.css";
 :root {
-  --header-height: 2.5rem;
-  --searchbar-height: 5rem;
-  --first-color: #2b9348;
-  --first-color-alt: #55a630;
-  --title-color: #393939;
-  --text-color: #707070;
-  --text-color-light: #a6a6a6;
-  --body-color: #ffffff;
-  --container-color: #ffffff;
-  --header-color: #fff;
 
-  --body-font: "Open Sans", sans-serif;
   --biggest-font-size: 2.5rem;
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;
   --h3-font-size: 1rem;
-  --normal-font-size: 1rem;
-  --small-font-size: 0.8rem;
-  --smaller-font-size: 0.75rem;
 
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  --mb-1: 0.5rem;
-  --mb-2: 1rem;
-  --mb-3: 1.5rem;
-  --mb-4: 2rem;
-  --mb-5: 2.5rem;
-  --mb-6: 3rem;
 }
 * {
   font-family: var(--body-font);
@@ -67,7 +45,7 @@ html {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 9%;
-  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
 }
 
 .logo-img {
@@ -80,7 +58,7 @@ html {
   color: var(--title-color);
   padding: 0 1rem;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); */
   border-radius: 0.5rem;
 }
 .logout:hover {
@@ -91,7 +69,7 @@ html {
 .container {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   gap: 2rem;
   align-content: center;
   justify-content: space-between;
@@ -203,7 +181,6 @@ html {
   padding: 0.5rem 0.7rem;
   font-size: var(--h2-font-size);
   color: var(--text-color);
-  text-transform: none;
 }
 
 .subcontainer a {

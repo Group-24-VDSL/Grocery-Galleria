@@ -1,37 +1,15 @@
-@import url("/css/fonts.css");
-
+@import "variables.css";
 :root {
   --header-height: 2.5rem;
-  --searchbar-height: 5rem;
-  --first-color: #2b9348;
-  --first-color-alt: #55a630;
-  --title-color: #393939;
-  --text-color: #707070;
-  --text-color-light: #a6a6a6;
-  --body-color: #ffffff;
-  --container-color: #ffffff;
   --header-color: #fff;
   --input-background-color: #f7f7f7;
+  --input-background-color-2: #d8d5d5;
 
   --body-font: "Open Sans", sans-serif;
   --biggest-font-size: 3rem;
-  --h1-font-size: 1.5rem;
-  --h2-font-size: 1.25rem;
-  --h3-font-size: 1rem;
-  --normal-font-size: 1rem;
-  --small-font-size: 0.8rem;
-  --smaller-font-size: 0.75rem;
 
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  --mb-1: 0.5rem;
-  --mb-2: 1rem;
-  --mb-3: 1.5rem;
-  --mb-4: 2rem;
-  --mb-5: 2.5rem;
-  --mb-6: 3rem;
 }
+
 * {
   font-family: var(--body-font);
   margin: 0;
@@ -79,17 +57,15 @@ section {
   text-align: center;
   color: var(--title-color);
   text-transform: uppercase;
-  padding: 1rem;
   font-size: var(--biggest-font-size);
-  padding-bottom: 2rem;
+  padding: 1rem 1rem 2rem;
 }
 .subheading {
   text-align: left;
   color: var(--title-color);
   text-transform: uppercase;
-  padding: 1rem;
   font-size: var(--biggest-font-size);
-  padding-bottom: 2rem;
+  padding: 1rem 1rem 2rem;
   text-decoration: underline;
 }
 .heading span {
@@ -102,7 +78,7 @@ section {
   align-items: center;
   justify-content: space-between;
   padding: 2rem 9%;
-  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
 }
 
 .logo-img {
@@ -191,6 +167,22 @@ section {
 .register .inputBox input:hover,
 .inputBox select:hover {
   border: 0.2rem solid rgba(86, 156, 106, 0.8);
+}
+.register .btn-align {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.register button {
+  width: 100%;
+}
+.register .deny {
+  color: var(--title-color);
+  background-color: var(--input-background-color-2);
+}
+.register .deny:hover {
+  color: white;
+  background-color: rgb(255, 0, 0);
 }
 .footer {
   background-color: var(--header-color);

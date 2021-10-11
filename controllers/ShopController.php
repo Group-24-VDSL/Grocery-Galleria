@@ -13,5 +13,11 @@ class ShopController extends Controller
         return $this->render('shop');
     }
 
+    public function productOverview(){
+        $this->setLayout('dashboardL-shop');
+        return $this->render('shop/core-products');
+    }
+    
+
 
 }

@@ -60,7 +60,7 @@
         <div class="content">
             <h3>Sell with Us</h3>
             <p>Get Register Now</p>
-            <a href="#register" class="btn">Click here</a>
+            <a href="/shop/register" class="btn">Click here</a>
         </div>
     </div>
 
