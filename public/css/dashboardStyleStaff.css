@@ -1,0 +1,252 @@
+@import "variables.css";
+@import "dashboardStyle.css";
+
+
+.btn {
+   margin-top: 0;
+  background-color: var(--first-color);
+  padding: 0.5rem 0.8rem;
+  font-size: var(--smaller-font-size);
+}
+
+.tabs {
+  font-size: 0;
+}
+.tabs li {
+  display: inline;
+}
+.tabs .btn-tab {
+  display: inline-block;
+  background-color: var(--home-color);
+  color: var(--title-color);
+  padding: 0.5rem 0.8rem;
+  font-size: var(--small-font-size);
+  border: 0.2rem solid var(--home-color);
+  border-radius: 0.5rem 0.5rem 0 0;
+  min-width: 128px;
+  /* border-bottom: none; */
+}
+.tabs .btn-tab:hover {
+  background-color: white;
+  border-bottom: 0.2rem solid var(--first-color-alt);
+}
+
+.home-content .core {
+  height: 500px;
+}
+
+.home-content .core .container-core .table-header {
+  padding: 1rem 2.5rem;
+  border: 0.1rem solid var(--home-color);
+  border-top: none;
+  background-color: var(--header-color);
+  border-radius: 0 0.5rem 0 0;
+  overflow: hidden;
+  position: relative;
+}
+.home-content .core .container-core .table-header ul {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.home-content .core .container-core .table-header ul li {
+  font-size: var(--normal-font-size);
+  width: 72px;
+  /* max-width: 72px; */
+  align-items: center;
+  text-align: center;
+}
+.home-content .core .container-core .table-details,
+.form-details {
+  padding: 0.5rem 2.5rem;
+  border: 0.1rem solid var(--home-color);
+  border-radius: 0 0 0.5rem 0.5rem;
+  background-color: var(--header-color);
+  overflow: hidden;
+  position: relative;
+}
+.home-content .core .container-core .table-details .column {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.home-content .core .container-core .table-details .column li {
+  font-size: var(--small-font-size);
+  width: 72px;
+  /* max-width: 72px; */
+  align-items: center;
+  text-align: center;
+}
+.home-content .core .container-core .table-details .column .column-img img {
+  width: 40px;
+  height: 40px;
+}
+.home-content .core .container-core .table-details .column input {
+  width: 100%;
+}
+.home-content
+.core
+.container-core
+.table-details
+.column
+.column-ubutton
+.btn-column {
+  display: inline-block;
+  /* margin-top: 1rem; */
+  background-color: var(--first-color);
+  color: var(--body-color);
+  padding: 0.5rem 0.8rem;
+  font-size: var(--smaller-font-size);
+  border-radius: 0.5rem;
+  transition: 0.3s;
+}
+.home-content
+.core
+.container-core
+.table-details
+.column
+.column-ubutton
+.btn-column:hover {
+  background: var(--hover-color);
+}
+
+.home-content .core .container-core .scroller {
+  height: 300px;
+  overflow-y: scroll;
+  scrollbar-color: var(--first-color);
+  scrollbar-width: thin;
+}
+
+.register form {
+  text-align: center;
+  padding: 1rem;
+  /* border: 0.1rem solid rgba(43, 147, 72, 0.8); */
+  /* box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1); */
+}
+.register form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.register form .inputBox {
+  text-align: left;
+  font-size: var(--normal-font-size);
+  width: 80%;
+}
+.register form .inputBox i {
+  padding: 0.5rem;
+}
+
+.register form .inputBox input,
+.register form .inputBox select {
+  color: var(--title-color);
+  padding: 0.5rem;
+  font-size: var(--small-font-size);
+  background: var(--input-background-color);
+  text-transform: none;
+  border: 0.2rem solid var(--home-color);
+  border-radius: 0.5rem;
+  width: 100%;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--home-color);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+  /* bottom: 4px; */
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--first-color-alt);
+}
+
+/* input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+} */
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(1.5rem);
+  -ms-transform: translateX(1.5rem);
+  transform: translateX(1.5rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 1rem;
+  height: 1.5rem;
+}
+
+.slider.round:before {
+  border-radius: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
