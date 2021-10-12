@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/Register.css">
+    <link rel="stylesheet" href="/css/template.css">
+
 
     <script src="/js/jquery.min.js"></script>
     <title>Registration customer</title>
