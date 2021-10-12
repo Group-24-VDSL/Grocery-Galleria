@@ -6,6 +6,7 @@ use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\models\Item;
+use app\models\Complaint;
 
 class StaffController extends Controller
 {
@@ -53,6 +54,31 @@ class StaffController extends Controller
         [
             'itemslist'=>$items
             ]);
+    }
+
+    public function viewcomplaints()
+    {
+        $complaints = Complaint::findAll();
+        $this->setLayout("dashboardL-staff");
+        return $this->render("staff/view-complaint",
+        [
+                'comlist'=>$complaints 
+            ]);
+    }
+
+    public function addcomplaint(Request $request) 
+    {
+        $complaint = new Complaint() ;
+        $this->setLayout("headeronly-staff");
+        if($request->isPost()){
+            $complaint->loadData($request->getbody());
+        }
+
+        return $this->render("staff/add-complaint"
+        ,[
+            'model' => $complaint
+        ]);
+
     }
 
 }
