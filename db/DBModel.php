@@ -29,7 +29,35 @@ abstract class DBModel extends Model
         return true;
     }
 
-    public static function  prepare($sql){ // hmm... why static
+    public function update($attributes = [],$where=[])
+    {
+        $tableName = $this->tableName();
+        $stmt  = self::prepare("UPDATE $tableName SET".implode(", ", array_map(function($v){ return "$v=:$v"; }, array_keys($attributes)))." WHERE ".implode("AND", array_map(fn($attr) => "$attr = :$attr", $where))."");
+        foreach ($attributes as $key => $value) {
+            $stmt->bindValue(":$key", $value); //iterate through attributes
+            // bind the User model attribute values with each :attribute into the sql statement
+        }
+        foreach ($where as $key => $value) {
+            $stmt->bindValue(":$key", $value); //iterate through attributes
+            // bind the User model attribute values with each :attribute into the sql statement
+        }
+        $stmt->execute();
+        return true;
+    }
+
+    public function delete($where=[])
+    {
+        $tableName = $this->tableName();
+        $stmt  = self::prepare("DELETE FROM  $tableName WHERE ".implode("AND", array_map(fn($attr) => "$attr = :$attr", $where)));
+        foreach ($where as $key => $value) {
+            $stmt->bindValue(":$key", $value); //iterate through attributes
+            // bind the User model attribute values with each :attribute into the sql statement
+        }
+        $stmt->execute();
+        return true;
+    }
+
+    public static function prepare($sql){ // hmm... why static
         return Application::$app->db->pdo->prepare($sql);
     }
 
