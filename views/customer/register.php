@@ -1,6 +1,6 @@
 <?php
     /** @var $model \app\models\Customer **/
-    /** @var $form \core\form\Form */
+    /** @var $form app\core\form\Form */
 ?>
 <!-- registration section start -->
 
@@ -10,44 +10,26 @@
         <div class="inputBox">
             <label for="Name"><i class="fas fa-edit"></i>Name</label>
             <?php echo $form->fieldonly($model,'Name');?>
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
         </div>
         <div class="inputBox">
             <label for="Address"><i class="fas fa-home"></i>Address</label>
             <?php echo $form->fieldonly($model,'Address');?>
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
         </div>
         <div class="inputBox">
             <label for="Email"><i class="fas fa-envelope"></i>Email</label>
             <?php echo $form->fieldonly($model,'Email')->emailField();?>
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
         </div>
         <div class="inputBox">
             <label for="contact"><i class="fas fa-phone"></i>Contact</label>
             <?php echo $form->fieldonly($model,'ContactNo');?>
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
         </div>
-        <div class="inputBox" style="grid-column-start: 1">
+        <div class="inputBox" >
             <label for="Password"><i class="fas fa-key"></i>Password</label>
             <?php echo $form->fieldonly($model,'Password')->passwordField();?>
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
         </div>
         <div class="inputBox">
             <label for="PasswordR"><i class="fas fa-key"></i>Re-enter password</label>
             <?php echo $form->fieldonly($model,'ConfirmPassword')->passwordField();?>
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
         </div>
         <div class="inputBox">
             <label for="city"><i class="fas fa-map-marked-alt"></i>Select city</label>
@@ -58,15 +40,13 @@
             <?php echo $form->selectfieldonly($model,'Suburb',['Colombo'=>'Colombo','Maharagama'=>'Maharagama','Gampaha'=>'Gampaha','Nawala'=>'Nawala']);?>
         </div>
 
-        <div class="inputBox">
+        <div class="inputBox" >
             <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>
             <?php echo $form->fieldonly($model,'Location');?>
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
-            <div id="map"></div>
+
         </div>
-        <div class="inputBox"></div>
-        <button type="submit" class="btn submit"  >Submit Registration</button>
-    </form>
+        <div class="inputBox"><div id="map"></div></div>
+        <div class="inputBox"><button type="submit" class="btn submit" >Submit Registration</button></div>
+        <div class="inputBox"><button type="reset" class="btn" >Cancel</button></div>
+    <?php echo $form::end() ?>
 </section>
