@@ -42,7 +42,7 @@ class AuthController extends Controller
         $this->setLayout('register');
         $requestPath = $request->getPath();
         $position = stripos($requestPath,'/',1);
-        $userRole = ucfirst(substr($requestPath,1,$position-1)); // User Role
+        $userRole = ucfirst(filter_var(substr($requestPath,1,$position-1),FILTER_SANITIZE_SPECIAL_CHARS)); // User Role
         $userName = "\\app\\models\\$userRole";
         $user = new $userName(); // Create user obj based on user type using user models
         $user->loadData($request->getBody());
@@ -52,20 +52,16 @@ class AuthController extends Controller
                 $UserLogin->Role = $userRole;
                 if ($UserLogin->validate() && $UserLogin->save()) {
                     $temp = User::findOne(['Email' => $request->getBody()['Email']]);
-                    $userID = $userRole."ID";
+                    $userID = $userRole . "ID";
                     $user->$userID = $temp->UserID;
-
-                    if($user->validate() && $user->save()){
-                        Application::$app->session->setFlash('success', 'Register Success');
-                        $this->setLayout('auth');
-                        Application::$app->response->redirect('/login');
-                        exit;
-                    }
                 }
-//            var_dump($registerModel->errors);
-                return $this->render('register', [
-                    'model' => $user
-                ]);
+                if ($user->validate() && $user->save()) {
+                    Application::$app->session->setFlash('success', 'Register Success');
+                    $this->setLayout('auth');
+                    Application::$app->response->redirect('/login');
+                    exit;
+                }
+                return $this->render("$userRole\\register", ['model' => $user]);
 
         }
         return $this->render("$userRole\\register", [

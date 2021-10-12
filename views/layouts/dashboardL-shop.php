@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/dashboardStyle.css">
     <link
-      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      href="/css/boxicons.min.css"
       rel="stylesheet"
     />
     <!--Javascript-->

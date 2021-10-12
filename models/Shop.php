@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\Model;
 use app\core\UserModel;
 
 class Shop extends UserModel
@@ -77,5 +78,8 @@ class Shop extends UserModel
     public function jsonarray(): array
     {
         return $this->attributes();
+    }
+    public function setErrors():Model{
+
     }
 }
