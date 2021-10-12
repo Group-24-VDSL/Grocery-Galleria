@@ -7,13 +7,13 @@ use app\core\Controller;
 use app\core\Request;
 use app\models\Rider;
 use app\models\User;
+use Exception;
 use SendGrid\Mail\Mail;
 use SendGrid\Mail\To;
-use SendGrid\Mail\TypeException;
 
 class DeliveryController extends Controller
 {
-    public function addrider(Request $request)
+    public function riderRegister(Request $request)
     {
         $this->setLayout('dashboard-deli');
         $user = new User();
