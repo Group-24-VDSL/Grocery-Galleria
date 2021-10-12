@@ -65,7 +65,10 @@ class AuthController extends Controller
         $verifystring = Application::$app->generator->generateString(24);
         $url = 'http://localhost/verify?id='.$uniqueid.'&verifycode='.$verifystring;
 
-        $verify = new Verification($userid,$uniqueid,$verifystring);
+        $verify = new Verification();
+        $verify->UserID = $userid;
+        $verify->VerificationCode = $verifystring;
+        $verify->UniqueID= $uniqueid;
 
         if($verify->validate() && $verify->save()){
             $to = new To($email,$name,
@@ -94,19 +97,20 @@ class AuthController extends Controller
 
     public function verify(Request $request)
     {
-        if($request->isSet('id') && $request->isSet('verifycode')){
-            $verify = Verification::findOne(['UniqueID' => $request->getBody()['id']]);
-            if($verify && ($verify->VerificationCode === $request->getBody()['verifycode'])){
-                $user = User::findOne(['UserID'=>$verify->UserID]);
-                if($user){
-                    //update the user
-                    if($user->update(['Verify_Flag'=>1],['UserID'=>$user->UserID])){
-                        return true; //render the true view
+        $this->setLayout('auth');
+            if ($request->isSet('id') && $request->isSet('verifycode')) {
+                $verify = Verification::findOne(['UniqueID' => $request->getBody()['id']]);
+                if ($verify && ($verify->VerificationCode === $request->getBody()['verifycode'])) {
+                    $user = User::findOne(['UserID' => $verify->UserID]);
+                    if ($user) {
+                        //update the user
+                        if ($user->update(['Verify_Flag' => 1], ['UserID' => $user->UserID])) {
+                            Application::$app->response->redirect('/login');
+                        }
                     }
                 }
             }
-        }
-        return false;
+        return $this->render('email-verified');
 
     }
 
