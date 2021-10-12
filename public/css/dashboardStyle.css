@@ -34,9 +34,8 @@ ul {
   text-align: left;
   color: var(--title-color);
   text-transform: uppercase;
-  padding: 1rem;
   font-size: var(--h2-font-size);
-  padding-bottom: 2rem;
+  padding: 1rem 1rem 2rem;
 }
 .heading span {
   color: var(--first-color);
@@ -118,7 +117,7 @@ ul {
 .home-section nav {
   height: 80px;
   background: var(--container-color);
-  padding: 0 20px;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,12 +125,14 @@ ul {
 .home-section nav .sidebar-toggle {
   display: flex;
   align-items: center;
-  font-size: var(--h1-font-size);
   font-weight: 500;
 }
 .home-section nav .sidebar-toggle i {
   font-size: var(--biggest-font-size);
   margin-right: 4%;
+}
+.home-section nav .sidebar-toggle span {
+  font-size: var(--h1-font-size);
 }
 .home-section nav .search-box {
   display: flex;
@@ -169,7 +170,7 @@ ul {
   display: flex;
   align-items: center;
   height: 3rem;
-  min-width: 220px;
+  min-width: 200px;
   border: 0.1rem solid rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
   justify-content: center;
@@ -180,11 +181,10 @@ ul {
   font-weight: 500;
   color: var(--title-color);
   margin: 0 0.5rem;
-  font-weight: 500;
   /* white-space: nowrap; */
 }
 .home-section nav .profile-details i {
-  font-size: var(--h1-font-size);
+  font-size: var(--h2-font-size);
 }
 
 .home-section .home-content {
@@ -233,7 +233,6 @@ ul {
   line-height: 1rem;
   text-align: center;
   color: var(--first-color-alt);
-  font-size: var(--h2-font-size);
   margin-right: 0.5rem;
 }
 .home-content .box .indicator .down {
