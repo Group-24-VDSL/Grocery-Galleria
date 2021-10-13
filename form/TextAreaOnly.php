@@ -30,3 +30,4 @@ class TextAreaOnly
             $this->model->getFirstError($this->attribute)
         );
     }
+}
