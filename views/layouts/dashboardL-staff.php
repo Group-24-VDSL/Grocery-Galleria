@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
+    <link rel="stylesheet" href="/css/template.css">
 <!--    <link rel="stylesheet" href="/css/boxicons.min.css" />-->
     <link
             href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
