@@ -47,8 +47,11 @@ $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'vi
 $app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
 
+
 $app->router->get('/dashboard/staff/additem',[StaffController::class,'additem']);
 $app->router->post('/dashboard/staff/additem',[StaffController::class,'additem']);
+$app->router->get('/dashboard/staff/products',[staffController::class,'products']);
+$app->router->post('/dashboard/staff/products',[staffController::class,'products']);
 $app->router->get('/dashboard/staff/viewitems',[StaffController::class,'viewitems']);
 $app->router->post('/dashboard/staff/user',[StaffController::class,'user']);
 $app->router->post('/dashboard/staff/viewcustomers',[StaffController::class,'viewcustomers']);
