@@ -12,7 +12,7 @@ class StaffController extends Controller
     public function additem(Request $request)
     {
         $item = new Item();
-        $this->setLayout("dashboard-staff");
+        $this->setLayout("dashboardL-staff");
         if($request->isPost()){
             $item->loadData($request->getBody());
             $itemimg = $request->loadFile("/img/product-imgs/","ItemImage",'95' . str_pad((string)Item::getLastID(), 5, '0', STR_PAD_LEFT));
@@ -44,7 +44,14 @@ class StaffController extends Controller
                 'model' => $item
             ]);
     }
-
+    public function products(){
+        $item = new Item();
+        $this->setLayout("dashboardL-staff");
+        return $this->render("staff/core-products"
+            ,[
+                'model' => $item
+            ]);
+    }
     public function viewitems()
     {
         $items = Item::findAll();
