@@ -4,7 +4,7 @@ namespace app\core\form;
 
 class TextArea extends BaseField
 {
-    public array $classes;
+    public array $classes=[];
     public function setClass($classes = [])
     {
         $this->classes=$classes;
