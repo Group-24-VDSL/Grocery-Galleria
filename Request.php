@@ -30,6 +30,15 @@ class Request
         return $this->method()==='post';
     }
 
+    public function isSet($key)
+    {
+        if ($this->method() === 'get'){
+            return isset($_GET[$key]);
+        }else{
+            return isset($_POST[$key]);
+        }
+    }
+
     public function getBody(){
         $body = [];
 
