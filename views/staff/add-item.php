@@ -3,32 +3,77 @@
 /** @var $model \app\models\Item **/
 /** @var $form app\core\form\Form */
 ?>
-<div class="main-content">
-    <nav>
-        <h1 class="main-header">Dashboard</h1>
-    </nav>
-    <div class="">
-        <h3>Add Item</h3>
-        <div class="frm">
-            <?php $form = \app\core\form\Form::begin("","post","",[],"multipart/form-data",);?>
-            <div class="display-grid delivery-view">
-                <div class="left-side-form">
-                    <div><?php echo $form->field($model,"Name");?></div>
-                    <div><?php echo $form->field($model,"Brand");?></div>
-                    <div><?php echo $form->field($model,"UWeight");?></div>
-                    <div><?php echo $form->selectfield($model,"Unit",['0'=>'Kg','1'=>'g','2'=>'liter']);?></div>
-                    <div><?php echo $form->field($model,"MRP");?></div>
-                    <div><?php echo $form->field($model,"MaxCount");?></div>
-                    <div><?php echo $form->selectfield($model,"Category",['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']);?></div>
-                </div>
-                <div class="right-side-form">
-                    <div><label>Profile Picture:</label><img class="image-preview" src='/img/placeholder-150.png'><?php echo $form->inputfile($model,"ItemImage",['image-input'],"image/jpeg,image/png");?></div>
-                </div>
-                <div class="submit-cancel"><button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-secondary">Cancel</button>
-                </div>
+<div class="core">
+    <h1 class="heading">Add <span>Products</span></h1>
+    <div class="container-core">
+        <div class="form-details register">
+            <?php $form = \app\core\form\Form::begin("","post","itemReg",[],"multipart/form-data",);?>
+            <div class="inputBox">
+                <label for="category">
+                    <i class="fas fa-list"></i>
+                    <?php echo $model->labels()['Category']?>
+                </label>
+                <?php echo $form->selectfieldonly($model,"Category",['0'=>'Vegetables','1'=>'Fruits','2'=>'Grocery','3'=>'Fish','4'=>'Meat']);?>
+            </div>
+            <div class="inputBox">
+                <label for="Name">
+                    <i class="fas fa-edit"></i>
+                    <?php echo $model->labels()['Name']?>
+                </label>
+                <?php echo $form->fieldonly($model,"Name");?>
+            </div>
+            <div class="inputBox">
+                <label for="ItemImage">
+                    <i class="far fa-images"></i>
+                    <?php echo $model->labels()['ItemImage']?>
+                </label>
+                <?php echo $form->inputfile($model,"ItemImage")?>
+            </div>
+            <div class="inputBox">
+                <label for="Brand">
+                    <i class="fas fa-edit"></i>
+                    <?php echo $model->labels()['Brand']?>
+                </label>
+                <?php echo $form->fieldonly($model,"Brand");?>
+            </div>
+
+            <div class="inputBox">
+                <label for="Unit">
+                    <i class="fas fa-balance-scale"></i>
+                    <?php echo $model->labels()['Unit']?>
+                </label
+                >
+                <?php echo $form->selectfieldonly($model,"Unit",['0'=>'Kg','1'=>'Gram','2'=>'Litre','3'=>'ml','4'=>'Unit']);?>
+            </div>
+            <div class="inputBox">
+                <label for="UWeight">
+                    <i class="fas fa-weight-hanging"></i>
+                    <?php echo $model->labels()['UWeight']?>
+                </label>
+                <?php echo $form->numberfieldonly($model,"UWeight",10,10000,10);?>
+            </div>
+
+            <div class="inputBox">
+                <label for="MaxWeight">
+                    <i class="fas fa-weight-hanging"></i>
+                    <?php echo $model->labels()['MaxWeight']?>
+                </label
+                >
+                <?php echo $form->numberfieldonly($model,"MaxWeight",10,10000,10);?>
+            </div>
+            <div class="inputBox">
+                <label for="MRP">
+                    <i class="fas fa-coins"></i>
+                    <?php echo $model->labels()['MRP']?>
+                </label>
+                <?php echo $form->numberfieldonly($model,"MRP",1,10000,1);?>
+            </div>
+            <!--                <div class="inputBox"></div>-->
+            <div class="inputBox div-button">
+                <button class="btn btn-add">Submit</button>
             </div>
             <?php \app\core\form\Form::end()?>
         </div>
     </div>
 </div>
+
