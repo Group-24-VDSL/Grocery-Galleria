@@ -40,11 +40,13 @@ class InputField extends BaseField
 
     public function renderInput(): string
     {
-       return sprintf('<input type="%s" name="%s" value="%s" style="%s">',  
+       return sprintf('<input type="%s" name="%s" value="%s" style="%s">
+<div><small style="color: red">%s</small></div>',
            $this->type,
            $this->attribute,
            $this->model->{$this->attribute},
-           $this->model->hasError($this->attribute) ? "border: 1px solid red;" : ''
+           $this->model->hasError($this->attribute) ? "border: 1px solid red;" : '',
+           $this->model->getFirstError($this->attribute)
 
        );
     }

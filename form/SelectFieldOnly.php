@@ -28,11 +28,14 @@ class SelectFieldOnly
             $optionline .= '<option value="'.$key.'">'.$value.'</option>';
         }
 
-        return sprintf('<select id="%s" name="%s"  class="%s">%s</select>',
+        return sprintf('
+<select id="%s" name="%s"  class="%s">%s</select>
+<div><small style="color: red">%s</small></div>',
             $this->attribute,
             $this->attribute,
             $this->classes ? implode(" ",$this->classes): "",
-            $optionline
+            $optionline,
+            $this->model->getFirstError($this->attribute)
         );
     }
 
