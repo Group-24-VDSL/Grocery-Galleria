@@ -17,6 +17,8 @@ abstract class Model implements JsonSerializable
     public const RULE_FLOAT = 'float';
     public const RULE_ONEOF = 'oneof'; //input should be one of the items in the given array.
     public const RULE_NIC = 'nic';
+    public const RULE_MIN_VAL = 'minValue';
+    public const RULE_MAX_VAL = 'maxValue';
 
     public const REGEXP_PHONE_NL="/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
     public const REGEXP_NIC = "/([0-9]){9}V$|(^(19[0-9][0-9]|20[0-9][0-9])([0-9]){8}$)/";
@@ -46,7 +48,7 @@ abstract class Model implements JsonSerializable
     private function addErrorForRule(string $attribute, string $rule,$params =[]){
         $message = $this->errorMessages()[$rule]?? ''; //get the error message for the rule
         foreach ($params as $key => $value){
-            $message = str_replace("{{$key}}",$value,$message);
+           $message = str_replace("{{$key}}",$value,$message);
         }
         $this->errors[$attribute][] = $message;
 
@@ -68,7 +70,9 @@ abstract class Model implements JsonSerializable
             self::RULE_FLOAT => 'This field should be a float',
             self::RULE_PHONE => 'This field should be a valid phone number',
             self::RULE_ONEOF => 'Invalid Value Given',
-            self::RULE_NIC => 'Invalid NIC'
+            self::RULE_NIC => 'Invalid NIC',
+            self::RULE_MIN_VAL =>'Min value of this field must greater than {minValue}',
+            self::RULE_MAX_VAL =>'Max value of this field must be {maxValue}'
         ];
     }
 
@@ -109,6 +113,12 @@ abstract class Model implements JsonSerializable
                 }
                 if($ruleName === self::RULE_ONEOF && !in_array($value,$rule['oneof'],true)){
                     $this->addErrorForRule($attribute, self::RULE_ONEOF);
+                }
+                if($ruleName === self::RULE_MIN_VAL && $value < $this->{$rule['minValue']}){
+                    $this->addErrorForRule($attribute,self::RULE_MIN_VAL,['minValue' => $this->{$rule['minValue']}]);//$this->>Uweight;
+                }
+                if($ruleName === self::RULE_MAX_VAL && $value > $rule['maxValue']){
+                    $this->addErrorForRule($attribute,self::RULE_MAX_VAL,['maxValue'=>$rule['maxValue']]);
                 }
                 if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
