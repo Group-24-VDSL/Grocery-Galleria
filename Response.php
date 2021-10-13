@@ -14,4 +14,7 @@ class Response
     {
         header('Location: '.$string);
     }
+    public function setContentTypeJSON(){
+        header('Content-Type: application/json');
+    }
 }
