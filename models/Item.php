@@ -11,11 +11,11 @@ class Item extends DBModel
     public string $Name = '';
     public string $ItemImage = '';
     public string $Brand = '';
-    public float $UWeight = 0;
+    public float $UWeight = 0.0;
     public int $Unit = 0; //[kg = 0, g = 1, l = 2]
-    public float $MRP = 0;
+    public float $MRP = 0.0;
     public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']
-    public float $MaxCount = 0;
+    public float $MaxWeight = 0.0;
 
     public function save()
     {
@@ -29,18 +29,20 @@ class Item extends DBModel
 
     public function attributes(): array
     {
-        return ['Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
+        return ['Name','ItemImage','Brand','UWeight','Unit','MRP','MaxWeight','Category'];
     }
 
     public function labels(): array{
         return [
-            'Name'=>'Item Name',
+            'Name'=>'Product Name',
             'ItemImage'=>'Item Image',
             'Brand'=>'Brand (if any)',
-            'UWeight'=>'Unit Weight',
+            'UWeight'=>'Unit Weight in gram',
             'Unit'=>'Unit',
+            'Category'=>'Category',
             'MRP'=>'Maximum Retail Price(MRP)',
-            'MaxCount' => 'Maximum Count'
+            'MaxWeight' => 'Max Selling
+                        Weight in gram'
         ];
     }
 
@@ -53,16 +55,16 @@ class Item extends DBModel
     {
         return [
             'Name' => [self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]],
-            'UWeight' => [self::RULE_REQUIRED,[self::RULE_MIN,'min'=>0]],
+            'UWeight' => [self::RULE_REQUIRED,[self::RULE_MIN_VAL,'min'=>0]],
             'MRP' => [[self::RULE_MIN,'min'=>0]],
-            'MaxCount' => [[self::RULE_MIN,'min'=> 0]],
-            'Unit' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2]]],
-            'Category' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3]]]
+            'MaxWeight' => [[self::RULE_MIN_VAL,'minValue'=>'UWeight'],[self::RULE_MAX_VAL,'maxValue'=>10000]],
+            'Unit' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]],
+            'Category' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]]
         ];
     }
 
     public function jsonarray(): array
     {
-        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
+        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxWeight','Category'];
     }
 }
