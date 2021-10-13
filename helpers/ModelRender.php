@@ -3,6 +3,7 @@
 namespace app\helpers;
 
 use app\models\Item;
+use app\models\Complaint;
 
 class ModelRender
 {
@@ -32,6 +33,55 @@ class ModelRender
         $item->MRP,
             sprintf('%.2f%s',$item->UWeight,($item->Unit===0)?'Kg':(($item->Unit === 1)?'g':'liter'))
         );
+    }
+
+    public static function staffviewcomplaints(Complaint $com)
+    {
+        return sprintf('
+                            <tr>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>
+                                  <button class="btn-description" type="submit" id="desc-button"><span class="" ><i class="bx bx-show-alt"></i></span></button> 
+                                  <div id="" class="description">
+                                    <div class="description-content">
+                                    <div class="close-bar">
+                                        <span class="complaint-id">Complaint ID: %s</span>
+                                        <span class="close"> &times; </span>
+                                    </div>
+                                    <div class="description-header">
+                                      <h5>Nature of the Complaint</h5>
+                                    </div>
+                                    <div class="description-body">
+                                      <span class="desc-text">%s</span>
+                                    </div>
+                                      <div class="description-header">
+                                        <h5>Specific details of the complaint</h5>
+                                      </div>
+                                      <div class="description-body">
+                                        <span>%s</span>
+                                      </div>
+                                    </div>
+                                </div>                
+                                </td>
+                            </tr>',
+
+        $com->ComplaintID  ,
+        $com->ComplaintDate , 
+        $com->OrderID ,
+        $com->OrderDate ,
+            ($com->Regarding === 0)?'Shop': 'Delivery',
+            ($com->Priority === 0)?'High': 'Low',
+            ($com->Status === 0)?'New': 'Attended',
+        $com->ComplaintID  ,
+        $com->Nature  ,
+        $com->SpecialDetails  ,
+          );
     }
 
 }

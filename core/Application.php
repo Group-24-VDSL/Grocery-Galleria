@@ -4,6 +4,7 @@ namespace app\core; //autoload
 
 use app\core\db\Database;
 use app\models\User;
+use Exception;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
@@ -68,8 +69,8 @@ class Application
     {
         try{ //try catch for the exception handling
             echo $this->router->resolve();
-        }catch (\Exception $e){
-            $this->response->statusCode($e->getCode());
+        }catch (Exception $e){
+            $this->response->statusCode((int)$e->getCode());
             echo $this->view->renderView('_error',[
                 'exception' => $e
             ]);

@@ -11,6 +11,11 @@ use app\models\Customer;
 use app\models\LoginForm;
 use app\models\User;
 use app\models\Shop;
+use app\models\Verification;
+use Exception;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\To;
+use SendGrid\Mail\TypeException;
 
 class AuthController extends Controller
 {
@@ -37,36 +42,76 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public static function register(Request $request, string $type)
     {
-        $this->setLayout('register');
-        $requestPath = $request->getPath();
-        $position = stripos($requestPath,'/',1);
-        $userRole = ucfirst(filter_var(substr($requestPath,1,$position-1),FILTER_SANITIZE_SPECIAL_CHARS)); // User Role
-        $userName = "\\app\\models\\$userRole";
-        $user = new $userName(); // Create user obj based on user type using user models
+        $user = new User();
         $user->loadData($request->getBody());
-        if ($request->isPost()) {
-                $UserLogin = new User(); //register the user 1st
-                $UserLogin->loadData($request->getBody()); // load the input values into model attributes
-                $UserLogin->Role = $userRole;
-                if ($UserLogin->validate() && $UserLogin->save()) {
-                    $temp = User::findOne(['Email' => $request->getBody()['Email']]);
-                    $userID = $userRole . "ID";
-                    $user->$userID = $temp->UserID;
-                }
-                if ($user->validate() && $user->save()) {
-                    Application::$app->session->setFlash('success', 'Register Success');
-                    $this->setLayout('auth');
-                    Application::$app->response->redirect('/login');
-                    exit;
-                }
-                return $this->render("$userRole\\register", ['model' => $user]);
-
+        $user->Role = $type;
+        if($user->validate() && $user->save()){
+            $temp = User::findOne(['Email' => $user->Email]);
+            return $temp->UserID;
+        }else{
+            return null;
         }
-        return $this->render("$userRole\\register", [
-            'model' => $user
-        ]);
+    }
+
+    /**
+     * @throws TypeException
+     */
+    public static function verificationSend(int $userid,string $name,string $email)
+    {
+        // d-b81e118d214a416884c8ef46298b2b8e
+        $uniqueid = Application::$app->generator->generateString(24);
+        $verifystring = Application::$app->generator->generateString(24);
+        $url = 'http://localhost/verify?id='.$uniqueid.'&verifycode='.$verifystring;
+
+        $verify = new Verification();
+        $verify->UserID = $userid;
+        $verify->VerificationCode = $verifystring;
+        $verify->UniqueID= $uniqueid;
+
+        if($verify->validate() && $verify->save()){
+            $to = new To($email,$name,
+                [
+                    'link' => $url,
+                ]
+            );
+            $email =  new Mail(
+                Application::$app->emailfrom,$to
+            );
+            $email->setTemplateId('d-b81e118d214a416884c8ef46298b2b8e');
+
+            try {
+                $response = Application::$app->sendgrid->send($email);
+                return true;
+            } catch (Exception $e){
+                echo 'Caught exception: '.  $e->getMessage(). "\n";
+                Application::$app->session->setFlash('warning', 'Error sending Email');
+            }
+        }else{ //validation or save failed.
+            return null;
+        }
+
+
+    }
+
+    public function verify(Request $request)
+    {
+        $this->setLayout('auth');
+            if ($request->isSet('id') && $request->isSet('verifycode')) {
+                $verify = Verification::findOne(['UniqueID' => $request->getBody()['id']]);
+                if ($verify && ($verify->VerificationCode === $request->getBody()['verifycode'])) {
+                    $user = User::findOne(['UserID' => $verify->UserID]);
+                    if ($user) {
+                        //update the user
+                        if ($user->update(['Verify_Flag' => 1], ['UserID' => $user->UserID])) {
+                            Application::$app->response->redirect('/login');
+                        }
+                    }
+                }
+            }
+        return $this->render('email-verified');
+
     }
 
     public function logout(Request $request, Response $response)
