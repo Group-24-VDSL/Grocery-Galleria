@@ -17,6 +17,7 @@ class Customer extends UserModel
     public string $City = '';
     public string $Suburb = '';
     public string $Location = '';
+    public string $PlaceID = '';
 
     public string $Email = '';
     public string $Password = '';
@@ -26,8 +27,6 @@ class Customer extends UserModel
     {
         return parent::save();
     }
-
-
 
     public static function tableName(): string
     {
@@ -51,7 +50,7 @@ class Customer extends UserModel
 
     public function attributes(): array
     {
-        return ['CustomerID','Name','Address','Email','ContactNo','City','Suburb','Location'];
+        return ['CustomerID','Name','Address','Email','ContactNo','City','Suburb','Location','PlaceID'];
     }
 
 

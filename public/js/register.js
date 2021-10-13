@@ -5,9 +5,12 @@ $(function (listener){
     script.async = true;
 
     let map, infoWindow;
-    let inputfield = document.getElementsByName('Location')[0];
+    let locationfield = document.getElementsByName('Location')[0];
+    let placefield = document.getElementsByName('PlaceID')[0];
 
     window.initMap = function () {
+
+        const geocoder = new google.maps.Geocoder();
 
         map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: 6.9271, lng: 79.8612 },
@@ -26,7 +29,9 @@ $(function (listener){
         locationButton.setAttribute('type','button');
         locationButton.textContent = "Find your Location";
         locationButton.classList.add("custom-map-control-button");
+
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+
         locationButton.addEventListener("click", () => {
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
@@ -38,7 +43,8 @@ $(function (listener){
                         };
                         myMarker.setPosition(pos);
                         map.setCenter(pos);
-                        inputfield.setAttribute('value',JSON.stringify(pos));
+                        locationfield.setAttribute('value',JSON.stringify(pos));
+                        geocodeLatLng(geocoder,map,pos);
                     },
                     () => {
                         handleLocationError(true, infoWindow, map.getCenter());
@@ -52,7 +58,8 @@ $(function (listener){
 
         google.maps.event.addListener(myMarker, 'dragend', function () {
             const pos = this.getPosition();
-            inputfield.setAttribute('value',JSON.stringify(pos));
+            geocodeLatLng(geocoder,map,pos);
+            locationfield.setAttribute('value',JSON.stringify(pos));
         });
 
 
@@ -64,6 +71,21 @@ $(function (listener){
                     : "Error: Your browser doesn't support geolocation."
             );
             infoWindow.open(map);
+        }
+
+        window.geocodeLatLng = function (geocoder, map,pos) {
+            console.log(pos);
+            console.log("here");
+            geocoder
+                .geocode({ location: pos })
+                .then((response) => {
+                    if (response.results[0]) {
+                        placefield.setAttribute('value',response.results[0].place_id);
+                    } else {
+                        placefield.setAttribute('value',"");
+                    }
+                })
+                .catch((e) => window.alert("Geocoder failed due to: " + e));
         }
     }
 
