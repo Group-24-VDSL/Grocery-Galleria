@@ -167,6 +167,7 @@ abstract class Model implements JsonSerializable
         foreach($attributes as $attribute){
             $dataobj+=[ $attribute => $this->{$attribute} ];
         }
+        return $dataobj;
     }
 
 }
