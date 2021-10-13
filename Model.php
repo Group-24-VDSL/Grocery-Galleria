@@ -115,7 +115,7 @@ abstract class Model implements JsonSerializable
                     $this->addErrorForRule($attribute, self::RULE_ONEOF);
                 }
                 if($ruleName === self::RULE_MIN_VAL && $value < $this->{$rule['minValue']}){
-                    $this->addErrorForRule($attribute,self::RULE_MIN_VAL,['minValue' => $this->{$rule['minValue']}]);//$this->>Uweight;
+                    $this->addErrorForRule($attribute,self::RULE_MIN_VAL,['minValue' => $rule['minValue']]);//$this->>Uweight;
                 }
                 if($ruleName === self::RULE_MAX_VAL && $value > $rule['maxValue']){
                     $this->addErrorForRule($attribute,self::RULE_MAX_VAL,['maxValue'=>$rule['maxValue']]);
