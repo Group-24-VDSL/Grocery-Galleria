@@ -129,5 +129,5 @@
             <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
             <button id="accept" type="submit" class="btn submit">Accept Registration</button>
         </div>
-    </form>
+    <?php echo $form->end();?>
 </section>
