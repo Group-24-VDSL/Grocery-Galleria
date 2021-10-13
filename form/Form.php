@@ -31,6 +31,10 @@ class Form
         return new TextArea($model,$attribute);
     }
 
+    public function textAreaOnly(Model $model,$attribute,$classes=[]){
+        return new TextAreaOnly($model,$attribute,$classes);
+    }
+
     public function selectfieldonly(Model $model,$attribute,$options=[],$classes=[])
     {
         return new SelectFieldOnly($model,$attribute,$options,$classes);
