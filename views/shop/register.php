@@ -115,15 +115,15 @@
             <?php echo $form->fieldonly($model,'ShopDesc');?>
 <!--            <input type="text" placeholder="eg: Farm Fresh" id="description">-->
         </div>
-        <div class="inputBox banner">
-            <label for="ShopBanner"><i class="fas fa-images"></i>
-                <?php echo $model->labels()['ShopBanner']?></label>
-            <?php echo $form->inputfile($model,'ShopBanner');?>
-<!--            <input type="file" id="ShopBanner" name="ShopBanner">-->
-            <i class="iconSE fas fa-check-circle"></i>
-            <i class="iconSE fas fa-exclamation-circle"></i>
-            <small></small>
-        </div>
+<!--        <div class="inputBox banner">-->
+<!--            <label for="ShopBanner"><i class="fas fa-images"></i>-->
+<!--                --><?php //echo $model->labels()['ShopBanner']?><!--</label>-->
+<!--            --><?php //echo $form->inputfile($model,'ShopBanner');?>
+<!--           <input type="file" id="ShopBanner" name="ShopBanner">-->
+<!--            <i class="iconSE fas fa-check-circle"></i>-->
+<!--            <i class="iconSE fas fa-exclamation-circle"></i>-->
+<!--            <small></small>-->
+<!--        </div>-->
         <div class="inputBox"></div>
         <div class="btn-align">
             <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>

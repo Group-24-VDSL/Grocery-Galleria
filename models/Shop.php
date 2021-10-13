@@ -17,7 +17,9 @@ class Shop extends UserModel
     public string $City = '';
     public string $Suburb = '';
     public string $ShopName = '';
-    public string $ShopBanner= '';
+//    public string $ShopBanner= ''; we don't do this anymore
+    public string $placeid = '';
+    public string $waypointid = '';
     public string $ShopDesc = '';
 
     public string $Password = '';
@@ -41,7 +43,6 @@ class Shop extends UserModel
             'City' =>'City',
             'Suburb' =>'Suburb',
             'ShopName' =>'Shop Name',
-            'ShopBanner' =>'Shop Banner',
             'ShopDesc' =>'Shop Label',
             'Password' => 'Password',
             'ConfirmPassword' => 'Confirm-Password'
@@ -49,7 +50,7 @@ class Shop extends UserModel
     }
     public function attributes(): array
     {
-        return ['ShopID','Name', 'Address', 'Email', 'ContactNo', 'Location', 'City', 'Suburb','ShopName','ShopBanner', 'ShopDesc'];
+        return ['ShopID','Name', 'Address', 'Email', 'ContactNo', 'Location', 'City', 'Suburb','ShopName', 'ShopDesc'];
     }
 
     public function rules(): array
@@ -65,7 +66,6 @@ class Shop extends UserModel
             'Suburb' => [self::RULE_REQUIRED],
             'Location' => [self::RULE_REQUIRED],
             'ShopName' => [self::RULE_REQUIRED],
-            'ShopBanner' =>[self::RULE_REQUIRED],
             'ShopDesc' => [self::RULE_REQUIRED,[self::RULE_MAX,'max'=>30]]
         ];
     }
@@ -79,7 +79,6 @@ class Shop extends UserModel
     {
         return $this->attributes();
     }
-    public function setErrors():Model{
 
-    }
+
 }
