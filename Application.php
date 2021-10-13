@@ -4,9 +4,12 @@ namespace app\core; //autoload
 
 use app\core\db\Database;
 use app\models\User;
+use Exception;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
+use SendGrid;
+use SendGrid\Mail\From;
 
 class Application
 {
@@ -20,8 +23,10 @@ class Application
     public ?Controller $controller = null;
     public Database $db;
     public ?UserModel $user;
-    public Factory $factory;
+    public Factory $secfactory;
     public Generator $generator;
+    public SendGrid  $sendgrid;
+    public From $emailfrom;
     public View $view;
     public static Application $app;
     public function __construct($rootPath ,$config)
@@ -38,8 +43,12 @@ class Application
 
         $this->session=new Session();
 
-        $this->factory = new Factory();
-        $this->generator = $this->factory->getGenerator(new Strength(Strength::LOW));
+        $this->sendgrid = new SendGrid($_ENV['SENDGRID_API_KEY']);
+        $this->emailfrom = new From('grocerygalleria@gmail.com','Grocery Galleria');
+
+        $this->secfactory = new Factory();
+        $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
+
 
         $userId = Application::$app->session->get('user');
         if ($userId) {
@@ -60,8 +69,8 @@ class Application
     {
         try{ //try catch for the exception handling
             echo $this->router->resolve();
-        }catch (\Exception $e){
-            $this->response->statusCode($e->getCode());
+        }catch (Exception $e){
+            $this->response->statusCode((int)$e->getCode());
             echo $this->view->renderView('_error',[
                 'exception' => $e
             ]);

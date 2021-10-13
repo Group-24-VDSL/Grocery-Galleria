@@ -13,7 +13,6 @@ class InputFieldOnly
     const TYPE_HIDDEN = 'hidden'; //add more types lists, checkboxes etc
 
     public string $type;
-
     public Model $model;
     public string $attribute;
     public string $value;
@@ -26,7 +25,9 @@ class InputFieldOnly
         $this->classes=$classes;
         $this->value = $this->model->{$this->attribute};
     }
-
+    public function hasNoError(){
+        return empty($this->model->hasError($this->attribute));
+    }
     public function passwordField()
     {
         $this->type = self::TYPE_PASSWORD;
@@ -35,7 +36,7 @@ class InputFieldOnly
 
     public function emailField()
     {
-        $this->type = self::TYPE_EMAIL;
+        $this->type =self::TYPE_EMAIL;
         return $this;
     }
 
@@ -46,23 +47,27 @@ class InputFieldOnly
 
     public function hiddenField()
     {
-        $this->type = self::TYPE_HIDDEN;
+        $this->type =self::TYPE_HIDDEN;
         return $this;
     }
 
-    public function setValue(string $value){
-        $this->value = $value;
-        return $this;
+    public function setStyle(): string
+    {
+        return $this->hasNoError()? "" : "border: .1rem solid red;";
     }
 
     public function __toString()
     {
-        return sprintf('<input type="%s" name="%s" style="%s" value="%s" class="%s" >',
+        return sprintf('
+    <input type="%s" name="%s" style="%s" value="%s" class="%s" >
+    <div><small style="color: red">%s</small></div>
+    ',
             $this->type,
             $this->attribute,
-            $this->model->hasError($this->attribute) ? "border: 1px solid red;" : '',
+            $this->setStyle(),
             $this->value,
-            $this->classes ? implode(" ",$this->classes): ""
+            $this->classes ? implode(" ",$this->classes): "",
+            $this->model->getFirstError($this->attribute)
         );
     }
 }

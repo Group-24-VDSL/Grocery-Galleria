@@ -2,7 +2,9 @@
 
 namespace app\core;
 
-abstract class Model
+use JsonSerializable;
+
+abstract class Model implements JsonSerializable
 {
     public const RULE_REQUIRED = 'required';
     public const RULE_EMAIL = 'email';
@@ -15,6 +17,8 @@ abstract class Model
     public const RULE_FLOAT = 'float';
     public const RULE_ONEOF = 'oneof'; //input should be one of the items in the given array.
     public const RULE_NIC = 'nic';
+    public const RULE_MIN_VAL = 'minValue';
+    public const RULE_MAX_VAL = 'maxValue';
 
     public const REGEXP_PHONE_NL="/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
     public const REGEXP_NIC = "/([0-9]){9}V$|(^(19[0-9][0-9]|20[0-9][0-9])([0-9]){8}$)/";
@@ -22,16 +26,15 @@ abstract class Model
     public function loadData($data){
         foreach ($data as $key => $value){
             if(property_exists($this,$key)){
-                if(is_numeric($value)){ //ints or floats
-                    if(filter_var($value,FILTER_VALIDATE_FLOAT)){
+                if( gettype($this->{$key})==="double" || gettype($this->{$key})==="integer" ){ //ints or floats
+                    if(filter_var($value,FILTER_VALIDATE_FLOAT) && gettype($this->{$key})==="double"){
                         $this->{$key} = (float)$value; //value is float.
-                    }elseif(filter_var($value,FILTER_VALIDATE_INT)){
+                    }elseif(filter_var($value,FILTER_VALIDATE_INT) && gettype($this->{$key})==="integer"){
                         $this->{$key} = (int)$value; //value is int.
                     }
                 }else{
                     $this->{$key} = $value; //assign key = value in the model class
                 }
-
             }
         }
     }
@@ -40,11 +43,12 @@ abstract class Model
 
     public array $errors = [];
 
+    abstract public function jsonarray():array;
+
     private function addErrorForRule(string $attribute, string $rule,$params =[]){
         $message = $this->errorMessages()[$rule]?? ''; //get the error message for the rule
-//        var_dump($params);
         foreach ($params as $key => $value){
-            $message = str_replace("{{$key}}",$value,$message);
+           $message = str_replace("{{$key}}",$value,$message);
         }
         $this->errors[$attribute][] = $message;
 
@@ -62,11 +66,13 @@ abstract class Model
             self::RULE_MAX => 'Max length of this field must be {max}',
             self::RULE_MATCH => 'This field must be the same as {match}',
             self::RULE_UNIQUE=> 'You have already used this {field}',
-            self::RULE_INT => 'This {field} should only contain numbers',
-            self::RULE_FLOAT => 'This {field} should be a float',
-            self::RULE_PHONE => 'This {field} should be a valid phone number',
+            self::RULE_INT => 'This field should only contain numbers',
+            self::RULE_FLOAT => 'This field should be a float',
+            self::RULE_PHONE => 'This field should be a valid phone number',
             self::RULE_ONEOF => 'Invalid Value Given',
-            self::RULE_NIC => 'Invalid NIC'
+            self::RULE_NIC => 'Invalid NIC',
+            self::RULE_MIN_VAL =>'Min value of this field must greater than {minValue}',
+            self::RULE_MAX_VAL =>'Max value of this field must be {maxValue}'
         ];
     }
 
@@ -78,7 +84,7 @@ abstract class Model
                 if(!is_string($ruleName)){
                     $ruleName = $rule[0];
                 }
-                if($ruleName === self::RULE_REQUIRED && !$value){
+                if($ruleName === self::RULE_REQUIRED && !$value && $value!== 0 && $value!== '0' ){
                     $this->addErrorForRule($attribute, self::RULE_REQUIRED);
                 }
                 if($ruleName === self::RULE_EMAIL && !filter_var($value,FILTER_VALIDATE_EMAIL)){
@@ -91,22 +97,28 @@ abstract class Model
                     $this->addErrorForRule($attribute, self::RULE_MAX,$rule);
                 }
                 if($ruleName === self::RULE_INT && !filter_var($value,FILTER_VALIDATE_INT)){
-                    $this->addErrorForRule($attribute, self::RULE_INT,$rule);
+                    $this->addErrorForRule($attribute, self::RULE_INT);
                 }
-                if($ruleName === self::RULE_INT && !filter_var($value,FILTER_VALIDATE_FLOAT)){
-                    $this->addErrorForRule($attribute, self::RULE_FLOAT,$rule);
+                if($ruleName === self::RULE_FLOAT && !filter_var($value,FILTER_VALIDATE_FLOAT)){
+                    $this->addErrorForRule($attribute, self::RULE_FLOAT);
                 }
-                if($ruleName === self::RULE_INT && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
-                    $this->addErrorForRule($attribute, self::RULE_PHONE,$rule);
+                if($ruleName === self::RULE_PHONE && !filter_var($value, FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_PHONE_NL)))){
+                    $this->addErrorForRule($attribute, self::RULE_PHONE);
                 }
-                if($ruleName === self::RULE_INT && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_NIC)))){
-                    $this->addErrorForRule($attribute, self::RULE_NIC,$rule);
+                if($ruleName === self::RULE_NIC && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP,array("options"=>array("regexp"=>self::REGEXP_NIC)))){
+                    $this->addErrorForRule($attribute, self::RULE_NIC);
                 }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, ['match' => $rule['match']]);
                 }
-                if($ruleName === self::RULE_ONEOF && !in_array($value,$rule['oneof'])){
-                    $this->addErrorForRule($attribute, self::RULE_ONEOF, ['match' => $rule['match']]);
+                if($ruleName === self::RULE_ONEOF && !in_array($value,$rule['oneof'],true)){
+                    $this->addErrorForRule($attribute, self::RULE_ONEOF);
+                }
+                if($ruleName === self::RULE_MIN_VAL && $value < $this->{$rule['minValue']}){
+                    $this->addErrorForRule($attribute,self::RULE_MIN_VAL,['minValue' => $rule['minValue']]);//$this->>Uweight;
+                }
+                if($ruleName === self::RULE_MAX_VAL && $value > $rule['maxValue']){
+                    $this->addErrorForRule($attribute,self::RULE_MAX_VAL,['maxValue'=>$rule['maxValue']]);
                 }
                 if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
@@ -144,9 +156,18 @@ abstract class Model
         return $errors[0] ?? '';
     }
 
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function jsonSerialize(){
+        $attributes = $this->jsonarray();
+        $dataobj = [];
+        foreach($attributes as $attribute){
+            $dataobj+=[ $attribute => $this->{$attribute} ];
+        }
+        return $dataobj;
     }
 
 }
