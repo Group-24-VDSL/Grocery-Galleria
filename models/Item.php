@@ -55,7 +55,7 @@ class Item extends DBModel
     {
         return [
             'Name' => [self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]],
-            'UWeight' => [self::RULE_REQUIRED,[self::RULE_MIN_VAL,'min'=>0]],
+            'UWeight' => [self::RULE_REQUIRED,[self::RULE_MIN_VAL,'minValue'=>0]],
             'MRP' => [[self::RULE_MIN,'min'=>0]],
             'MaxWeight' => [[self::RULE_MIN_VAL,'minValue'=>'UWeight'],[self::RULE_MAX_VAL,'maxValue'=>10000]],
             'Unit' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]],
@@ -67,4 +67,5 @@ class Item extends DBModel
     {
         return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxWeight','Category'];
     }
+
 }
