@@ -4,8 +4,11 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\controllers\APIController;
 use app\core\Request;
+use app\models\Item;
 use app\models\Shop;
+use app\models\ShopItem;
 
 class ShopController extends Controller
 {
@@ -19,6 +22,29 @@ class ShopController extends Controller
     public function productOverview(){
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/core-products');
+    }
+    public function additem(Request $request){
+
+        $shopItem =new ShopItem();
+        $this->setLayout('dashboardL-shop');
+        if($request->isPost()){
+            $shopItem->loadData($request->getBody());
+                if($shopItem->validate() && $shopItem->save()){
+                    Application::$app->session->setFlash("success", "Item Saved.");
+                    Application::$app->response->redirect("/dashboard/shop/additem");
+                }else{
+                    Application::$app->session->setFlash("warning", "Validation Failed.");
+                    return $this->render("shop/add-item"
+                        ,[
+                            'model' => $shopItem
+                        ]);
+                }
+            }
+        return $this->render('shop/add-item',[
+            'model' => $shopItem
+        ]);
+
+
     }
 
     public function shopRegister(Request $request)
