@@ -17,6 +17,7 @@ class InputFieldOnly
     public string $attribute;
     public string $value;
     public $classes = [];
+    public string $interaction ='';
 
     public function __construct(Model $model, string $attribute,$classes=[]){
         $this->type = self::TYPE_TEXT;
@@ -24,6 +25,7 @@ class InputFieldOnly
         $this->attribute = $attribute;
         $this->classes=$classes;
         $this->value = $this->model->{$this->attribute};
+
     }
     public function hasNoError(){
         return empty($this->model->hasError($this->attribute));
@@ -56,10 +58,20 @@ class InputFieldOnly
         return $this->hasNoError()? "" : "border: .1rem solid red;";
     }
 
+    public function setValue(string $value){
+        $this->value =$value;
+        return $this;
+    }
+
+    public function setInteraction(string $interaction)
+    {
+        $this->interaction = $interaction;
+        return $this;
+    }
     public function __toString()
     {
         return sprintf('
-    <input type="%s" name="%s" style="%s" value="%s" class="%s" >
+    <input type="%s" name="%s" style="%s" value="%s" class="%s" %s >
     <div><small style="color: red">%s</small></div>
     ',
             $this->type,
@@ -67,6 +79,7 @@ class InputFieldOnly
             $this->setStyle(),
             $this->value,
             $this->classes ? implode(" ",$this->classes): "",
+            $this->interaction,
             $this->model->getFirstError($this->attribute)
         );
     }
