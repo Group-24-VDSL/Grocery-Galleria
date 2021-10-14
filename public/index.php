@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
+use app\controllers\APIController;
 use app\controllers\DeliveryController;
 use app\controllers\ShopController;
 use app\controllers\StaffController;
@@ -64,13 +65,19 @@ $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addc
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);
 
 
+
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
 $app->router->get('/dashboard/shop/viewOrder',[ShopController::class,'vieworder']);
 $app->router->get('/dashboard/shop/viewOrders',[ShopController::class,'vieworders']);
+$app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
+$app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 
+$app->router->get('/api/item',[APIController::class,'getItem']);
+$app->router->get('/api/items',[APIController::class,'getItemAll']);
+$app->router->get('/api/shopItems',[APIController::class,'getShopItems']);
 $app->run();
 
 
