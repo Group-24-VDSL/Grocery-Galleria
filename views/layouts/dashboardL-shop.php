@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/dashboardStyle.css">
+    <link rel="stylesheet" href="/css/template.css">
     <link
-      href="/css/boxicons.min.css"
-      rel="stylesheet"
+            href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+            rel="stylesheet"
     />
-    <!--Javascript-->
-<!--    <script src="/js/jquery.min.js"></script>-->
-<!--    <script src="/js/template.js"></script>-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/template.js"></script>
 
 
     <title>Dashboard-Shop</title>
