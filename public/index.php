@@ -2,6 +2,7 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use app\controllers\APIController;
+use app\controllers\CustomerController;
 use app\controllers\DeliveryController;
 use app\controllers\ShopController;
 use app\controllers\StaffController;
@@ -33,10 +34,10 @@ $app->router->get('/verify',[AuthController::class,'verify']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
-$app->router->get('/customer/register',[\app\controllers\CustomerController::class,'customerRegister']);
-$app->router->post('/customer/register',[\app\controllers\CustomerController::class,'customerRegister']);
-$app->router->get('/shop/register',[AuthController::class,'register']);
-$app->router->post('/shop/register',[AuthController::class,'register']);
+$app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
+$app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
+$app->router->get('/shop/register',[ShopController::class,'shopRegister']);
+$app->router->post('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 $app->router->get('/profile',[AuthController::class,'profile']);
 

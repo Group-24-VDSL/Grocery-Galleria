@@ -15,7 +15,7 @@ class Item extends DBModel
     public int $Unit = 0; //[kg = 0, g = 1, l = 2]
     public float $MRP = 0.0;
     public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']
-    public float $MaxWeight = 0.0;
+    public int $MaxCount = 0; // cabbage: (250g/Unit)*8 = 2000g(max selling weigh) // MaxCount=8
 
     public function save()
     {
@@ -29,7 +29,7 @@ class Item extends DBModel
 
     public function attributes(): array
     {
-        return ['Name','ItemImage','Brand','UWeight','Unit','MRP','MaxWeight','Category'];
+        return ['Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
     }
 
     public function labels(): array{
@@ -41,7 +41,7 @@ class Item extends DBModel
             'Unit'=>'Unit',
             'Category'=>'Category',
             'MRP'=>'Maximum Retail Price(MRP)',
-            'MaxWeight' => 'Max Selling
+            'MaxCount' => 'Max Selling
                         Weight in gram'
         ];
     }
@@ -57,7 +57,7 @@ class Item extends DBModel
             'Name' => [self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]],
             'UWeight' => [self::RULE_REQUIRED,[self::RULE_MIN_VAL,'minValue'=>0]],
             'MRP' => [[self::RULE_MIN,'min'=>0]],
-            'MaxWeight' => [[self::RULE_MIN_VAL,'minValue'=>'UWeight'],[self::RULE_MAX_VAL,'maxValue'=>10000]],
+            'MaxCount' => [[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_MAX_VAL,'maxValue'=>10]],
             'Unit' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]],
             'Category' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]]
         ];
@@ -65,7 +65,7 @@ class Item extends DBModel
 
     public function jsonarray(): array
     {
-        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxWeight','Category'];
+        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
     }
 
 }
