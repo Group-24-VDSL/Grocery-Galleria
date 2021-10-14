@@ -45,7 +45,7 @@
             <?php echo $form->fieldonly($model,'PlaceID')->hiddenField();?>
         </div>
         <div class="inputBox map-inputBox"><label for="location"><i class="fas fa-map-marker-alt"></i>Location</label><div id="map"></div></div>
-        <div class="inputBox"><button type="submit" class="btn submit" >Submit Registration</button></div>
-        <div class="inputBox"><button type="reset" class="btn" >Cancel</button></div>
+        <div class="inputBox"><button type="submit" class="btn button submit" >Submit Registration</button></div>
+<!--        <div class="inputBox"><button type="reset" class="btn" >Cancel</button></div>-->
     <?php echo $form::end() ?>
 </section>
