@@ -8,7 +8,7 @@ class ShopItem extends DBModel
 {
     public int $ItemID = 0;
     public int $ShopID = 0;
-    public float $UnitPrice = 0;
+    public float $UnitPrice = 0.0;
     public float $Stock = 0;
     public int $Enabled = 0;
 
@@ -24,20 +24,20 @@ class ShopItem extends DBModel
 
     public static function primaryKey(): string
     {
-        //return ['ItemID','ShopID'];
+//        return ['ItemID','ShopID'];
         return '';
     }
 
     public function rules(): array
     {
         return [
-            'UnitPrice' => [self::RULE_INT],
-            'Stock' => [self::RULE_MIN]
+            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0]],
+            'Stock' => [[self::RULE_MIN_VAL,'minValue'=>5]]
         ];
     }
 
     public function jsonarray(): array
     {
-        return $this->attributes();
+        return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
     }
 }
