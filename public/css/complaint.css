@@ -18,6 +18,15 @@
     width: o.1px;
 }
 
+
+.home-content .core {
+    margin-bottom: 0%;
+    padding-bottom: 1rem;
+}
+.core-complaint {
+    margin-bottom: 0rem;
+    padding-bottom: 0;
+}
 .complaint-heading {
     display: flex;
     justify-content: space-between;
@@ -303,7 +312,7 @@ textarea:hover, select:hover, input:hover{
     box-shadow: 0 4px 4px rgb(87 100 126 / 21%);
     background-color: #fff;
     max-width: 100%;
-    max-height: 480px;
+    max-height: 400px;
     /* padding : 0px */
 }
 
@@ -335,6 +344,7 @@ textarea:hover, select:hover, input:hover{
     font-size: 14px;
     text-align: center;
     padding: 1rem;
+    padding-top: 0;
     margin-bottom: 1rem;
     /* margin-left: 1rem; */
     /* margin: 1rem ; */
@@ -342,6 +352,7 @@ textarea:hover, select:hover, input:hover{
     /* margin-right: 1rem; */
     /* margin-left: 1rem; */
     height: auto;
+    max-height:300px ;
     /* min-height: 495px; */
 }
 
@@ -361,8 +372,9 @@ textarea:hover, select:hover, input:hover{
     /* padding-right: 1rem; */
     /* max-width: ; */
     margin-bottom: 1rem;
-    max-height:565px;
-
+    height: 400px;
+    max-height:400px;
+    max-width: 100%;
 
 }
 
@@ -376,7 +388,7 @@ textarea:hover, select:hover, input:hover{
 
 .complaint-header-element{
     display: flex;
-    gap: 28rem;
+    gap: 26rem;
     flex-wrap: nowrap;
     justify-content: space-around;
     font-size: 13px;
@@ -428,12 +440,32 @@ td {
     width: 100px;
     height: fit-content;
     padding: 0.3rem;
-    border-bottom: 1px solid #b8bdc9;
+    /* border-bottom: 1px solid #b8bdc9; */
+
+
 }
-table tbody tr {
-    border-bottom: 1px solid #b8bdc9;
-    border-radius: 5px;
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
 }
+
+thead {
+    /* width: 400px; */
+}
+
+tbody {
+    overflow-y: scroll;
+    display: block;
+    /* max-height: 460px; */
+
+}
+
+ .complaint-table-body{
+    margin-right: -1rem;
+    height: 260px;
+}
+
 .complaint-table table tbody tr:hover {
     background-color: var(--input-background-color);
 }

@@ -7,6 +7,7 @@ use app\core\db\DBModel;
 class Orders extends DBModel
 {
     public int $OrderID = 0;
+    public string $OrderDate = 'DATE(CURRENT_TIMESTAMP)';
     public int $CartID = 0;
     public float $DeliveryCost = 0;
     public float $TotalCost = 0;
@@ -19,7 +20,7 @@ class Orders extends DBModel
 
     public function attributes(): array
     {
-        return ['CartID','DeliveryCost','TotalCost'];
+        return ['OrderDate','CartID','DeliveryCost','TotalCost'];
     }
 
     public static function primaryKey(): string

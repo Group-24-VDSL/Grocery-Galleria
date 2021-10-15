@@ -8,7 +8,7 @@ class Complaint extends DBModel
 {
     public int $ComplaintID = 0;
     public int $CustomerID = 0;
-    public string $ComplaintDate = '';
+    public string $ComplaintDate = 'DATE(CURRENT_TIMESTAMP)';
     public int $OrderID = 0;
     public string $OrderDate = '';
     public int $Regarding = 0 ; /**[0-shop , 1-delivery] */

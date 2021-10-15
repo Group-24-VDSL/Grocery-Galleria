@@ -257,6 +257,93 @@ ul {
 .home-content .overview-boxes .box img {
   height: 4rem;
 } */
+
+.home-content .core-order {
+    background-color: white;
+    justify-content: space-around;
+    padding: 0 1rem;
+    margin: 0 1rem;
+    border-radius: 0.5rem;
+    height: 430px;
+}
+.home-content .core-order .container-items {
+    width: 100%;
+    /* justify-items: left; */
+}
+.home-content .core-order .container-items .table-header {
+    /* text-align: center; */
+    padding: 1rem 2.5rem;
+    border: 0.1rem solid var(--home-color);
+    background-color: var(--header-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
+}
+.home-content .core-order .container-items .table-header ul {
+    font-size: var(--normal-font-size);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.home-content .core-order .container-items .table-header li {
+    min-width: 64px;
+    align-items: center;
+}
+.home-content .core-order .container-items .ongoing-items {
+    padding: 0.2rem 2.5rem;
+    border: 0.1rem solid var(--home-color);
+    border-radius: 0.5rem;
+    background-color: var(--header-color);
+    overflow: hidden;
+    position: relative;
+}
+.home-content .core-order .container-items .ongoing-items ul {
+    display: flex;
+    font-size: var(--small-font-size);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.home-content .core-order .container-items .ongoing-items li {
+    width: 64px;
+    align-items: center;
+}
+.home-content .core-order .container-items .ongoing-items .item-img img {
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50rem; */
+}
+.home-content .core-order .container-items .ongoing-items .item-uStock input {
+    width: 100%;
+}
+.home-content .core-order .container-items .ongoing-items .item-ubutton .btn-item {
+    display: inline-block;
+    /* margin-top: 1rem; */
+    background-color: var(--first-color);
+    color: var(--body-color);
+    padding: 0.5rem 0.8rem;
+    font-size: var(--smaller-font-size);
+    border-radius: 0.5rem;
+    transition: 0.3s;
+}
+.home-content
+.core-order-order
+.container-items
+.ongoing-items
+.item-ubutton
+.btn-item:hover {
+    background: var(--hover-color);
+}
+.home-content .core-order-order .container-items .scroller {
+    height: 300px;
+    overflow-y: scroll;
+    scrollbar-color: var(--first-color);
+    scrollbar-width: thin;
+}
 .home-section .home-content {
     position: relative;
     padding-top: 1rem;
@@ -312,7 +399,7 @@ ul {
 .home-content .box .indicator .text {
     font-size: var(--small-font-size);
 }
-.home-content .core {
+.home-content .core-order-order {
     background-color: white;
     justify-content: space-around;
     padding: 0 1rem;
@@ -320,11 +407,11 @@ ul {
     border-radius: 0.5rem;
     height: 470px;
 }
-.home-content .core .container-items {
+.home-content .core-order .container-items {
     width: 100%;
     /* justify-items: left; */
 }
-.home-content .core .container-items .table-header {
+.home-content .core-order .container-items .table-header {
     text-align: center;
     padding: 0.7rem 2rem;
     border: 0.1rem solid var(--home-color);
@@ -335,7 +422,7 @@ ul {
     overflow: hidden;
     position: relative;
 }
-.home-content .core .container-items .table-header ul {
+.home-content .core-order .container-items .table-header ul {
     font-size: var(--normal-font-size);
     font-weight: 500;
     display: flex;
@@ -344,21 +431,24 @@ ul {
     gap: 3rem;
     flex-wrap: wrap;
 }
-.home-content .core .container-items .table-header li {
+.home-content .core-order .container-items .table-header li {
     min-width: 64px;
     align-items: center;
 }
 
-/* .home-content .core .container-items .ongoing-items  */
-.home-content .core .container-items .ongoing-items {
+/* .home-content .core-order .container-items .ongoing-items  */
+.home-content .core-order .container-items .ongoing-items {
     padding: 2rem 2.5rem;
+    padding-top: 0;
     border: 0.1rem solid var(--home-color);
     border-radius: 0.5rem;
     background-color: var(--header-color);
     overflow: hidden;
     position: relative;
+    height: 190px;
+    overflow-y: scroll;
 }
-.home-content .core .container-items .ongoing-items ul {
+.home-content .core-order .container-items .ongoing-items ul {
     display: flex;
     font-size: var(--small-font-size);
     align-items:left;
@@ -367,20 +457,20 @@ ul {
     flex-wrap: wrap;
     padding-top: 10px;
 }
-.home-content .core .container-items .ongoing-items li {
+.home-content .core-order .container-items .ongoing-items li {
     width: 64px;
     align-items: center;
 }
 
-.home-content .core .container-items .ongoing-items .item-img img {
+.home-content .core-order .container-items .ongoing-items .item-img img {
     width: 40px;
     height: 40px;
     /* border-radius: 50rem; */
 }
-.home-content .core .container-items .ongoing-items .item-uStock input {
+.home-content .core-order .container-items .ongoing-items .item-uStock input {
     width: 100%;
 }
-.home-content .core .container-items .ongoing-items .item-ubutton .btn-item {
+.home-content .core-order .container-items .ongoing-items .item-ubutton .btn-item {
     display: inline-block;
     /* margin-top: 1rem; */
     align-content: center;
@@ -393,14 +483,14 @@ ul {
     align-items: center;
 }
 .home-content
-.core
+.core-order
 .container-items
 .ongoing-items
 .item-ubutton
 .btn-item:hover {
     background: var(--hover-color);
 }
-.home-content .core .container-items .order-scroller{
+.home-content .core-order .container-items .order-scroller{
     height: 245px;
     overflow-y: scroll;
     scrollbar-color: var(--first-color);
@@ -441,7 +531,7 @@ ul {
 
 .tabs {
     /* margin-bottom: 100rem; */
-    padding-bottom: 1000px;
+    padding-bottom: 1px;
 }
 
 .tab.active {
@@ -479,7 +569,7 @@ ul {
     color:#FFF;
 }
 
-.home-content .core .container-items .ongoing-items .ubutton .btn-item {
+.home-content .core-order .container-items .ongoing-items .ubutton .btn-item {
     display: inline-block;
     /* margin-top: 1rem; */
     align-content: center;
@@ -497,7 +587,7 @@ ul {
 }
 
 
-.home-content .core .container-items .ongoing-items .ubutton .btn-item:hover{
+.home-content .core-order .container-items .ongoing-items .ubutton .btn-item:hover{
     background-color: darkgreen;
 }
 
@@ -505,7 +595,7 @@ ul {
     margin-right:30px ;
 }
 
-.home-content .core .container-items .table-header .completed {
+.home-content .core-order .container-items .table-header .completed {
     margin-right: 2000px;
     padding-right: 0px;
 }

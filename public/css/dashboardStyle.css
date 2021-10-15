@@ -133,6 +133,7 @@ ul {
 }
 .home-section nav .sidebar-toggle span {
   font-size: var(--h1-font-size);
+  width: fit-content;
 }
 .home-section nav .search-box {
   display: flex;
@@ -190,6 +191,7 @@ ul {
 .home-section .home-content {
   position: relative;
   padding-top: 1rem;
+  width: auto;
 }
 .home-content .overview-boxes {
   display: flex;

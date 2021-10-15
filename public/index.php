@@ -64,13 +64,15 @@ $app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewuse
 $app->router->get('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);
+$app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
 
 
 
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
-$app->router->get('/dashboard/shop/viewOrder',[ShopController::class,'vieworder']);
-$app->router->get('/dashboard/shop/viewOrders',[ShopController::class,'vieworders']);
+$app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
+$app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
+$app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 //for debugging purposes

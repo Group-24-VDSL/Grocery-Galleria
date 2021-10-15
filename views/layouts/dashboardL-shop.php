@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/dashboardStyle.css">
     <link rel="stylesheet" href="/css/template.css">
-    <link
-            href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
-            rel="stylesheet"
-    />
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/template.js"></script>
 
