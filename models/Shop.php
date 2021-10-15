@@ -18,9 +18,9 @@ class Shop extends UserModel
     public string $Suburb = '';
     public string $ShopName = '';
 //    public string $ShopBanner= ''; we don't do this anymore
-    public string $placeid = '';
-    public string $waypointid = '';
+    public string $PlaceID = '';
     public string $ShopDesc = '';
+    public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']
 
     public string $Password = '';
     public string $ConfirmPassword = '';
@@ -43,14 +43,15 @@ class Shop extends UserModel
             'City' =>'City',
             'Suburb' =>'Suburb',
             'ShopName' =>'Shop Name',
-            'ShopDesc' =>'Shop Label',
+            'ShopDesc' =>'Shop Description',
             'Password' => 'Password',
-            'ConfirmPassword' => 'Confirm-Password'
+            'ConfirmPassword' => 'Confirm Password',
+            'Category' => 'Select category'
         ];
     }
     public function attributes(): array
     {
-        return ['ShopID','Name', 'Address', 'Email', 'ContactNo', 'Location', 'City', 'Suburb','ShopName', 'ShopDesc'];
+        return ['ShopID','Name', 'Address', 'Email', 'ContactNo', 'Location', 'City', 'Suburb','ShopName', 'ShopDesc','Category','PlaceID'];
     }
 
     public function rules(): array
@@ -66,7 +67,8 @@ class Shop extends UserModel
             'Suburb' => [self::RULE_REQUIRED],
             'Location' => [self::RULE_REQUIRED],
             'ShopName' => [self::RULE_REQUIRED],
-            'ShopDesc' => [self::RULE_REQUIRED,[self::RULE_MAX,'max'=>30]]
+            'ShopDesc' => [self::RULE_REQUIRED,[self::RULE_MAX,'max'=>30]],
+            'Category' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]]
         ];
     }
 
@@ -77,7 +79,7 @@ class Shop extends UserModel
 
     public function jsonarray(): array
     {
-        return $this->attributes();
+        return ['ShopID','Name', 'Address', 'ContactNo', 'Location', 'City', 'Suburb','ShopName', 'ShopDesc','Category','PlaceID'];
     }
 
 

@@ -54,12 +54,12 @@
             </div>
 
             <div class="inputBox">
-                <label for="MaxWeight">
+                <label for="MaxCount">
                     <i class="fas fa-weight-hanging"></i>
-                    <?php echo $model->labels()['MaxWeight']?>
+                    <?php echo $model->labels()['MaxCount']?>
                 </label
                 >
-                <?php echo $form->numberfieldonly($model,"MaxWeight",10,10000,10);?>
+                <?php echo $form->numberfieldonly($model,"MaxCount",10,10000,10);?>
             </div>
             <div class="inputBox">
                 <label for="MRP">

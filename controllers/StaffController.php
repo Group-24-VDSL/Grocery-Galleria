@@ -53,6 +53,12 @@ class StaffController extends Controller
                 'model' => $item
             ]);
     }
+
+    public function vieworderdetails(){
+        $this->setLayout('headeronly-staff');
+        return $this->render('staff/view-orders-details');
+    }
+
     public function viewitems()
     {
         $items = Item::findAll();
@@ -79,13 +85,22 @@ class StaffController extends Controller
         $this->setLayout("headeronly-staff");
         if($request->isPost()){
             $complaint->loadData($request->getbody());
-        }
 
+            if($complaint->validate() && $complaint->save()){
+                Application::$app->session->setFlash("success", "Complaint Saved.");
+                Application::$app->response->redirect("/dashboard/staff/addcomplaint");
+            }
+            else {
+                Application::$app->session->setFlash("warning", "Validation Failed.");
+                    return $this->render("staff/add-complaint"
+                        ,[
+                            'model' => $complaint
+                        ]);
+            }
+        }
         return $this->render("staff/add-complaint"
         ,[
             'model' => $complaint
         ]);
-
     }
-
 }

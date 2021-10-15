@@ -2,6 +2,7 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use app\controllers\APIController;
+use app\controllers\CustomerController;
 use app\controllers\DeliveryController;
 use app\controllers\ShopController;
 use app\controllers\StaffController;
@@ -33,10 +34,10 @@ $app->router->get('/verify',[AuthController::class,'verify']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
-$app->router->get('/customer/register',[\app\controllers\CustomerController::class,'customerRegister']);
-$app->router->post('/customer/register',[\app\controllers\CustomerController::class,'customerRegister']);
-$app->router->get('/shop/register',[AuthController::class,'register']);
-$app->router->post('/shop/register',[AuthController::class,'register']);
+$app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
+$app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
+$app->router->get('/shop/register',[ShopController::class,'shopRegister']);
+$app->router->post('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 $app->router->get('/profile',[AuthController::class,'profile']);
 
@@ -63,13 +64,15 @@ $app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewuse
 $app->router->get('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);
+$app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
 
 
 
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
-$app->router->get('/dashboard/shop/viewOrder',[ShopController::class,'vieworder']);
-$app->router->get('/dashboard/shop/viewOrders',[ShopController::class,'vieworders']);
+$app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
+$app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
+$app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 //for debugging purposes

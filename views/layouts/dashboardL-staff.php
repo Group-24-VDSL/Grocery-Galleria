@@ -60,6 +60,12 @@
         </li>
         <li>
             <a href="">
+            <i class='bx bx-cycling'></i>
+                <span class="link-name">Riders</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>
@@ -78,7 +84,7 @@
     <nav>
         <div class="sidebar-toggle">
             <i class="bx bx-menu sidebarBtn"></i>
-            <span class="dashboard">Staff Dashboard</span>
+            <span style="width:300px" class="dashboard">Staff Dashboard</span>
         </div>
         <div class="search-box">
             <input type="search" id="" placeholder="Search.... " />
