@@ -2,19 +2,29 @@
 <link rel="stylesheet" href="/css/complaint.css">
 <link rel="stylesheet" href="/css/Register.css">
 
-
-<<?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
-      <div class = "form-content">
+<div class = "main-content" id="#complaint-section">
+    <div class = "form-content">
         <ul class = "form-section page-section">
-              <!-- <li class="form-line" id=""> -->
-                <!-- <label class="form-label form-label-top" id="" > Complaint Date: </label>
-                <div id="" class="form-input-wide">
-                    <div data-wrapper-react="true"> -->
-                        <!-- <input class="form-textbox"  type="date" id="input_1" name="complaint-date"> -->
-                         <!-- <?php //echo $form->fieldonly($model,'ComplaintDate',["input","form-textbox"]); ?> -->
-                    <!-- </div>
-                  </div>
-              </li>            --> 
+            <li id="cid_1" class="form-input-wide" data-type="control_head">
+                <div class="form-header-group  header-large">
+                    <div class="header-text httal htvam">
+                        <h1 id="header_1" class="form-header" data-component="header">
+                            Complaints
+                        </h1>
+                        <div id="subHeader_1" class="form-subHeader">
+                            Submit the Form To Add User Complaints
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+      <div class = "form-content">
+
+        <ul class = "form-section page-section">
+            <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
               <li class="form-line" data-type="control_textbox" id="">
                 <label class="form-label form-label-top " id=""> Order ID: </label>
                 <div id="" class="form-input-wide">
