@@ -44,8 +44,16 @@ class ShopController extends Controller
         return $this->render('shop/add-item',[
             'model' => $shopItem
         ]);
+    }
 
+    public function vieworders(){
+        $this->setLayout('dashboardL-shop');
+        return $this->render('shop/view-orders');
+    }
 
+    public function vieworderdetails(){
+        $this->setLayout('headeronly-staff');
+        return $this->render('shop/view-order-details');
     }
 
 
