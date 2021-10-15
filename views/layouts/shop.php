@@ -13,6 +13,7 @@
 </head>
 <body>
 <?php include_once("utils/sessions.php"); ?>
+<?php include_once("utils/pwa.php"); ?>
 <!-- Header start -->
 <header>
     <div class="header-1">

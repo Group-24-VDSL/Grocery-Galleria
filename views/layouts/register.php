@@ -15,6 +15,7 @@
 </head>
 <body>
 <?php include_once("utils/sessions.php"); ?>
+<?php include_once("utils/pwa.php"); ?>
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
