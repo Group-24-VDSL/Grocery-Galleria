@@ -53,7 +53,6 @@ class Customer extends UserModel
         return ['CustomerID','Name','Address','Email','ContactNo','City','Suburb','Location','PlaceID'];
     }
 
-
     public static function primaryKey():string
     {
         return 'CustomerID';
