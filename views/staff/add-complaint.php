@@ -20,7 +20,7 @@
         </ul>
     </div>
 </div>
-
+    <div class = "main-content" id="#complaint-section">
       <div class = "form-content">
 
         <ul class = "form-section page-section">
@@ -71,3 +71,4 @@
         </div>
       </div>   
       <?php \app\core\form\Form::end(); ?>
+    </div>

@@ -10,6 +10,15 @@ use app\models\Complaint;
 
 class StaffController extends Controller
 {
+
+    public function staffRegister(Request $request)
+    {
+        $this->setLayout('register');
+        $user = new Staff(); // Create customer
+        $user->loadData($request->getBody());
+
+    }
+
     public function additem(Request $request)
     {
         $item = new Item();
@@ -52,6 +61,11 @@ class StaffController extends Controller
             ,[
                 'model' => $item
             ]);
+    }
+
+    public function vieworders(){
+        $this->setLayout('dashboardL-shop');
+        return $this->render('staff/view-orders');
     }
 
     public function vieworderdetails(){
