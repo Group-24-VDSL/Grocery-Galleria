@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
+    <link rel="stylesheet" href="/css/staff-register-form.css">
     <link rel="stylesheet" href="/css/template.css">
     <!--    <link rel="stylesheet" href="/css/boxicons.min.css" />-->
     <link
