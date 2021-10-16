@@ -51,7 +51,8 @@ $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'vi
 $app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
 
-
+$app->router->get('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
+$app->router->post('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
 $app->router->get('/dashboard/staff/additem',[StaffController::class,'additem']);
 $app->router->post('/dashboard/staff/additem',[StaffController::class,'additem']);
 $app->router->get('/dashboard/staff/products',[staffController::class,'products']);
@@ -64,6 +65,7 @@ $app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewuse
 $app->router->get('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);
+$app->router->get('/dashboard/staff/vieworders',[StaffController::class,'vieworders']);
 $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
 
 

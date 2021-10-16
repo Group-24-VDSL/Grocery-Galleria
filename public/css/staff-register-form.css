@@ -1,0 +1,80 @@
+* {
+    font-family: var(--body-font);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    /* transition: all 0.2s linear; */
+}
+
+.register form {
+    text-align: center;
+    padding: 1rem 2rem;
+    border: 0.5rem solid rgba(43, 147, 72, 0.8);
+    box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,0.1);
+    height: 480px
+}
+.register form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* gap: 1rem; */
+    /* column-gap: 0; */
+    row-gap: 0;
+    width: 88rem;
+}
+
+.register form .inputBox {
+    text-align: left;
+    font-size:15px;
+    width: 80%;
+}
+
+.register .inputBox input:hover, .inputBox select:hover {
+    border: 0.2rem solid rgba(86, 156, 106, 0.8);
+}
+.register form .inputBox input, .inputBox select {
+    padding: 1rem;
+    /*font-size: var(--h1-font-size);*/
+    background: var(--input-background-color);
+    text-transform: none;
+    margin-top: 1rem;
+    border: 0.2rem solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    width: 100%;
+}
+.register .inputBox .iconSE {
+    visibility: hidden;
+    position: relative;
+    top: -40%;
+    right: -85%;
+}
+.register form .inputBox i, .register form .location i {
+    padding: 0.5rem;
+}
+.register .button {
+    height: 4rem;
+    font-size: var(--h1-font-size);
+    width: 100%;
+}
+.register .deny {
+    color: var(--title-color);
+    background-color: var(--home-color);
+}
+.register .deny:hover {
+    color: white;
+    background-color: rgb(255, 0, 0);
+}
+.btn:hover {
+    background-color: var(--first-color-alt);
+}
+
+
+@media (max-width: 768px) {
+    .register form .inputBox {
+        /*grid-template-columns: repeat(1, 1fr);*/
+        grid-column: 1/3;
+    }
+}
