@@ -217,16 +217,15 @@ a{
 
 .frm input {
   border-radius: 0.25rem;
-  border: 1px solid var(--spanish-green);
+  border: 1px solid #a6a6a6;
   font-size: 1rem;
   padding: 0.375rem 0.75rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: 1.5rem;
 }
 
 .frm input:focus {
-  border: 1px solid var(--spanish-viridian);
+  border: 1px solid #393939;
   outline: none !important;
-  box-shadow: 0 0 10px var(--spanish-viridian);
 }
 
 .frm label {
@@ -239,13 +238,12 @@ a{
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  border: 1px solid var(--spanish-green);
+  border: 1px solid #a6a6a6;
 }
 
 .frm select:focus {
-  border: 1px solid var(--spanish-viridian);
+  border: 1px solid #393939;
   outline: none !important;
-  box-shadow: 0 0 10px var(--spanish-viridian);
 }
 
 .input-pw-grp {
