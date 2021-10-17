@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../../css/all.css">
   <link rel="stylesheet" href="../../views/Registration/css/registerStyle.css">
 
-  <title>Registration customer</title>
+  <title>Registration Delivery</title>
 </head>
 <body>
   <header>
@@ -19,7 +19,7 @@
   </header>
   <!-- registration section start -->
   <section class="register" id="register">
-    <h1 class="heading">Registration <span>Form</span> Customer</h1>
+    <h1 class="heading">Registration <span>Form</span> Riders</h1>
     <form action="" id="Regform">
       <div class="inputBox">
         <label for="Name"><i class="fas fa-edit"></i>Name</label>
@@ -50,6 +50,20 @@
           <small></small>
       </div>
       <div class="inputBox">
+        <label for="contact"><i class="fas fa-phone"></i>Contact</label>
+        <input type="text" placeholder="Contact No" id="contact">
+        <i class="iconSE fas fa-check-circle"></i>
+        <i class="iconSE fas fa-exclamation-circle"></i>
+        <small></small>
+      </div>
+      <div class="inputBox">
+        <label for="contact"><i class="far fa-id-card"></i>NIC</label>
+        <input type="text" placeholder="eg: 923456123V" id="nic">
+        <i class="iconSE fas fa-check-circle"></i>
+        <i class="iconSE fas fa-exclamation-circle"></i>
+        <small></small>
+      </div>
+      <div class="inputBox">
           <label for="Password"><i class="fas fa-key"></i>Password</label>
           <input type="password" placeholder="password" id="password">
           <i class="iconSE fas fa-check-circle"></i>
@@ -63,40 +77,11 @@
          <i class="iconSE fas fa-exclamation-circle"></i>
          <small></small>    
       </div>
-      <div class="inputBox">
-        <label for="city"><i class="fas fa-map-marked-alt"></i>Select city</label>
-        <select id="city" name="city">
-          <option value="Colombo">Colombo</option>
-          <option value="Maharagama">Maharagama</option>
-          <option value="Gampaha">Gampaha</option>
-          <option value="Nawala">Nawala</option>
-        </select>
-      </div>
-      <div class="inputBox">
-        <label for="suburb"><i class="fas fa-street-view"></i>Select suburb</label>
-        <select id="suburb" name="suburb">
-          <option value="Colombo">Colombo</option>
-          <option value="Maharagama">Maharagama</option>
-          <option value="Gampaha">Gampaha</option>
-          <option value="Nawala">Nawala</option>
-        </select>
-      </div>
-      <div class="inputBox">
-        <label for="contact"><i class="fas fa-phone"></i>Contact</label>
-        <input type="text" placeholder="Contact No" id="contact">
-        <i class="iconSE fas fa-check-circle"></i>
-        <i class="iconSE fas fa-exclamation-circle"></i>
-        <small></small>
-      </div>
-      <div class="inputBox">
-        <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>
-        <input type="url" placeholder="Location" id="location">
-        <i class="iconSE fas fa-check-circle"></i>
-        <i class="iconSE fas fa-exclamation-circle"></i>
-        <small></small>
-      </div>
       <div class="inputBox"></div>
-        <button type="submit" class="btn submit">Submit Registration</button>
+      <div class="btn-align">
+        <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
+        <button id="accept" type="submit" class="btn submit">Accept Registration</button>
+      </div>
   </form>
   </section>
 <!-- footer section starts  -->

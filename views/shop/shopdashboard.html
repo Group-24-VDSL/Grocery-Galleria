@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/all.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/dashoboardStyle.css" />
+
+    <title>Shop dashboard</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../../img/logo_only_color.png" alt="" />
+        <img class="text" src="../../img/text_white-min.png" alt="" />
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="">
+            <i class="bx bx-grid-alt"></i>
+            <span class="link-name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-box"></i>
+            <span class="link-name">Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-list-ul"></i>
+            <span class="link-name">Order list</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bxs-pie-chart-alt"></i>
+            <span class="link-name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-data"></i>
+            <span class="link-name">Stock</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bx bx-cog"></i>
+            <span class="link-name">Settings</span>
+          </a>
+        </li>
+        <li class="logout">
+          <a href="">
+            <i class="bx bx-log-out"></i>
+            <span class="link-name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Home section start -->
+
+    <section class="home-section">
+      <nav>
+        <div class="sidebar-toggle">
+          <i class="bx bx-menu sidebarBtn"></i>
+          <span class="dashboard">Dashboard</span>
+        </div>
+        <div class="search-box">
+          <input type="search" id="" placeholder="Search.... " />
+          <button class="bx bx-search search"></button>
+        </div>
+        <div class="profile-details">
+          <i class="bx bx-user"></i>
+          <span class="user-name">Dilshan98</span>
+        </div>
+      </nav>
+
+      <div class="home-content">
+        <div class="overview-boxes">
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Orders</div>
+              <div class="number">1276</div>
+              <div class="indicator">
+                <i class="bx bxs-up-arrow-square"></i>
+                <span class="text">Up so far</span>
+              </div>
+            </div>
+            <!-- <i class='bx bx-cart-alt cart'></i> -->
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-delivery-box-shopping-and-ecommerce-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Revenue</div>
+              <div class="number">1276</div>
+              <div class="indicator">
+                <i class="bx bxs-up-arrow-square"></i>
+                <span class="text">Up so far</span>
+              </div>
+            </div>
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-revenue-money-and-economy-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+          <!-- <i class='bx bx-cart-alt cart'></i> -->
+
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Income</div>
+              <div class="number">12,876</div>
+              <div class="indicator">
+                <i class="down bx bxs-down-arrow-square"></i>
+                <span class="text">Down from today</span>
+              </div>
+            </div>
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-financial-mobile-payment-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="box-topic">Total Orders</div>
+              <div class="number">11,086</div>
+              <div class="indicator">
+                <i class="down bx bxs-down-arrow-square"></i>
+                <span class="text">Down From Today</span>
+              </div>
+            </div>
+            <img
+              src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-order-online-shopping-itim2101-lineal-color-itim2101.png"
+            />
+          </div>
+        </div>
+
+        <div class="core">
+          <h1 class="heading">Ongoing <span>Products</span></h1>
+          <div class="container-items">
+            <div class="table-header">
+              <ul>
+                <li>Photo</li>
+                <li>Name</li>
+                <li>MRP</li>
+                <li>U/Price</li>
+                <li>Unit</li>
+                <li>Stock</li>
+                <li>Update Stock</li>
+                <li>Update</li>
+              </ul>
+            </div>
+            <div class="ongoing-items scroller">
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic915013.jpg" alt="" />
+                </li>
+                <li class="item-name">Potato</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic914005.jpg" alt="" />
+                </li>
+                <li class="item-name">Big Onion</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic914007.jpg" alt="" />
+                </li>
+                <li class="item-name">Green Chillies</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic914015.jpg" alt="" />
+                </li>
+                <li class="item-name">Garlic</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic915016.jpg" alt="" />
+                </li>
+                <li class="item-name">Tomatoe</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic915008.jpg" alt="" />
+                </li>
+                <li class="item-name">Tomatoe</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic914039.jpg" alt="" />
+                </li>
+                <li class="item-name">Pumpkin</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+              <ul class="item">
+                <li class="item-img">
+                  <img src="/views/shop/img/Pic914012.jpg" alt="" />
+                </li>
+                <li class="item-name">Tomatoe</li>
+                <li class="item-mrp">67</li>
+                <li class="item-uprice">81</li>
+                <li class="item-unit">Kg</li>
+                <li class="item-cStock">
+                  <label for="currentStock">10</label>
+                </li>
+                <li class="item-uStock">
+                  <input
+                    type="number"
+                    min="10"
+                    max="200"
+                    value="10"
+                    id="currentStock"
+                    name="currentStock"
+                  />
+                </li>
+                <li class="item-ubutton">
+                  <button class="btn-item" type="submit">Update</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="core sub-core">
+          <h1 class="heading">Add <span>Products</span></h1>
+          <div class="container-items">
+            <form action="" class="add-item">
+              <div class="inputBox">
+                <label for="Unit"
+                  ><i class="fas fa-list-ul"></i>Select product</label
+                >
+                <select id="Unit" name="Unit">
+                  <option value="Kg">Tomatoe</option>
+                  <option value="g">Pumpkin</option>
+                  <option value="L">Big Onion</option>
+                  <option value="ml">Potato</option>
+                </select>
+              </div>
+              <div class="inputBox lock">
+                <label for="MRP"
+                  ><i class="fas fa-arrow-circle-up"></i>MRP</label
+                >
+                <input type="text" readonly />
+              </div>
+              <div class="inputBox lock">
+                <label for="Unit"
+                  ><i class="fas fa-balance-scale"></i>Unit</label
+                >
+                <input type="text" readonly />
+              </div>
+              <div class="inputBox">
+                <label for="UWeight"
+                  ><i class="fas fa-weight-hanging"></i>Unit Weight</label
+                >
+                <input type="text" readonly />
+              </div>
+              <div class="inputBox">
+                <label for="UPrice"
+                  ><i class="fas fa-coins"></i>Unit Price
+                </label>
+                <input type="text" />
+              </div>
+              <button class="btn">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Home section ends -->
+    <script src="./js/dashboardScript.js"></script>
+  </body>
+</html>

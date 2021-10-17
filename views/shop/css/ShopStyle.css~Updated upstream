@@ -240,8 +240,7 @@ section {
 }
 
 .product .box-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
   /* flex-basis: 40%; */
   /* flex-direction:; */
   flex-wrap: wrap;
