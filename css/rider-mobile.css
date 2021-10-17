@@ -141,3 +141,23 @@
 .order-summary > button{
     padding: 20px;
 }
+
+.profile-form{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.profile-form > input{
+    width: 75%;
+}
+
+.profile-form > *{
+    margin-bottom:10px;
+}
+
+.profile-form-buttons{
+    display: flex;
+    
+    justify-content: space-around;
+}
