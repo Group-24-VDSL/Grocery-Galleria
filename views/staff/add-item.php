@@ -59,7 +59,7 @@
                     <?php echo $model->labels()['MaxCount']?>
                 </label
                 >
-                <?php echo $form->numberfieldonly($model,"MaxCount",10,10000,10);?>
+                <?php echo $form->numberfieldonly($model,"MaxCount",1,100,1);?>
             </div>
             <div class="inputBox">
                 <label for="MRP">
