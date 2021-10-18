@@ -92,7 +92,7 @@
                 <i class="fas fa-star-half-alt"></i>
             </div>
             <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
+            <a href="/gallery/shop?ShopID=5" class="btn">
                 <i class="fas fa-external-link-alt"></i> Visit Store</a>
         </div>
         <div class="box">
