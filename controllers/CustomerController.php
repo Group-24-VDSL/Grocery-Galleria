@@ -43,4 +43,18 @@ class CustomerController extends Controller
             'model' => $user
         ]);
     }
+    public function profile()
+    {
+        return $this->render('customer/profile');
+    }
+    public function cart()
+    {
+        $this->setLayout('cart');
+        return $this->render('customer/cart');
+    }
+    public function checkout()
+    {
+        $this->setLayout('checkoutL');
+        return $this->render('customer/checkout');
+    }
 }
