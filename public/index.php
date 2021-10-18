@@ -8,7 +8,7 @@ use app\controllers\ShopController;
 use app\controllers\StaffController;
 use app\controllers\TestController;
 use app\core\Application;
-use app\controllers\SiteControllers;
+use app\controllers\SiteController;
 use app\controllers\AuthController;
 
 
@@ -25,10 +25,10 @@ $config = [
 
 $app = new Application(dirname(__DIR__), $config);
 
-$app->router->get('/',[SiteControllers::class,'welcome']);
-$app->router->get('/welcome',[SiteControllers::class,'welcome']);
-$app->router->get('/contact',[SiteControllers::class,'contact']);
-$app->router->post('/contact',[SiteControllers::class,'handleContact']);
+$app->router->get('/',[SiteController::class,'welcome']);
+$app->router->get('/welcome',[SiteController::class,'welcome']);
+$app->router->get('/contact',[SiteController::class,'contact']);
+$app->router->post('/contact',[SiteController::class,'handleContact']);
 
 $app->router->get('/verify',[AuthController::class,'verify']);
 
@@ -42,7 +42,7 @@ $app->router->get('/logout',[AuthController::class,'logout']);
 $app->router->get('/profile',[AuthController::class,'profile']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
-$app->router->get('/gallery',[ShopController::class,'showgallery']);
+$app->router->get('/gallery',[SiteController::class,'shopGallery']);
 
 $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);

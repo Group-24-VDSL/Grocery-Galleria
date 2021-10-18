@@ -6,12 +6,17 @@ use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 
-class SiteControllers extends Controller
+class SiteController extends Controller
 {
     public function welcome()
     {
         $this->setLayout('main');
         return $this->render('welcome');
+    }
+
+    public function shopGallery(){
+        $this->setLayout('main');
+        return $this->render('gallery');
     }
 //    public function handleContact(Request $request){
 ////        $body = Application::$app->request->getBody();
