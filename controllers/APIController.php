@@ -15,7 +15,7 @@ class APIController extends Controller
     public function getItem(Request $request,Response $response) // get item details from DB
     {
         $response->setContentTypeJSON();
-        $item=Item::findOne(['Name'=>'Brinjal']);
+        $item=Item::findOne(array_slice($request->getBody(),1,null,true));
         return json_encode($item->jsonSerialize());
     }
     public function getItemAll(Request $request,Response $response) // get all items from DB
