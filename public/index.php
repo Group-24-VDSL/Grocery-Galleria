@@ -31,6 +31,7 @@ $app->router->get('/contact',[SiteController::class,'contact']);
 $app->router->post('/contact',[SiteController::class,'handleContact']);
 
 $app->router->get('/verify',[AuthController::class,'verify']);
+$app->router->get('/email-verified',[AuthController::class,'emailverified']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);

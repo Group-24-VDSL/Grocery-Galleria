@@ -5,3 +5,19 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule ^(.*)$ index.php?$1 [L,QSA]
+
+<IfModule mod_expires.c>
+  # Data interchange
+    AddType application/json          json map topojson
+  # JavaScript
+    AddType text/javascript           js mjs
+  # Media files
+    AddType image/svg+xml                 svg svgz
+  # Web fonts
+    AddType font/woff                         woff
+    AddType font/woff2                        woff2
+    AddType application/vnd.ms-fontobject                eot
+    AddType font/ttf                          ttf
+    AddType font/collection                   ttc
+    AddType font/otf                          otf
+</IfModule>
