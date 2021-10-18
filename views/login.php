@@ -9,9 +9,8 @@
         <img class="main-img" src="./img/login-background.png" alt="">
     </div>
     <div class="subcontainer">
-        <img class="user" src="../../img/user.svg" alt="" />
+            <img class="user" src="./img/user.png" alt="">
         <?php $form = \app\core\form\Form::begin("","post","Login"); ?>
-            <img class="user" src="./img/user.svg" alt="">
             <h2>Welcome</h2>
             <div class="input-div one">
                 <div class="icon">
