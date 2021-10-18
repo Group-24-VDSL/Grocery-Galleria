@@ -35,12 +35,17 @@ $app->router->get('/email-verified',[AuthController::class,'emailverified']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
-$app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
-$app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->get('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->post('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->get('/logout',[AuthController::class,'logout']);
-$app->router->get('/profile',[AuthController::class,'profile']);
+
+
+
+$app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
+$app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
+$app->router->get('/customer/profile',[CustomerController::class,'profile']);
+$app->router->get('/customer/cart',[CustomerController::class,'cart']);
+$app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
 $app->router->get('/gallery',[SiteController::class,'shopGallery']);
@@ -84,6 +89,8 @@ $app->router->get('/test',[TestController::class,'test']);
 $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopItems',[APIController::class,'getShopItems']);
+$app->router->get('/api/shop',[APIController::class,'getShop']);
+$app->router->get('/api/shops',[APIController::class,'getAllShop']);
 $app->run();
 
 

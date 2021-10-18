@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/main.css">
     <!-- JavaScript -->
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/rivets-cart.min.js"></script>
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>CustomerHome</title>
 </head>
 <body>
@@ -38,9 +39,9 @@
         </div>
         <div class="part">
             <div class="icons">
-                <a href="#"class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-clipboard-list"></a>
-                <a href="#" class="fas fa-user"></a>
+                <a href="/customer/cart" class="fas fa-shopping-cart"></a>
+<!--                <a href="#" class="fas fa-clipboard-list"></a>-->
+                <a href="/customer/profile" class="fas fa-user"></a>
             </div>
         </div>
     </div>
@@ -114,6 +115,6 @@
 
 <!-- footer section ends -->
 <script src="/js/main.js"></script>
-<script src="/js/rivets-cart.min.js"></script>
+
 </body>
 </html>

@@ -1,6 +1,3 @@
-<?php
-/** @var $shopmodel \app\models\Shop */
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,67 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/Shop.css">
-
-    <!-- JavaScript -->
-    <script src="/js/jquery.min.js"></script>
-    <title></title>
+    <link rel="stylesheet" href="/css/template.css">
+    <link rel="stylesheet" href="/css/checkout.css">
+    <title>Checkout</title>
 </head>
 <body>
-<?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
-<!-- Header start -->
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
-        <a href="" class="back"><i class="fas fa-step-backward"></i></a>
-    </div>
-    <!-- Shop banner start -->
-    <section class="shop-banner" id="banner">
-        <div class="content">
-            <h3 class="title"><i class="fas fa-store"></i>
-                <span id="ShopName"></span>
-            </h3>
-            <h3 class="subtitle">
-                <span id="City" class=""></span><span> -</span>
-                <span id="Suburb"></span>
-            </h3>
-            <p>
-                <span id="Address" ></span>
-            </p>
-        </div>
-    </section>
-    <!-- Shop banner end -->
-    <div class="header-2">
-        <nav class="navbar">
-            <a href="#">All</a>
-            <a href="#">Random</a>
-            <a href="#">Low</a>
-            <a href="#">High</a>
-            <a href="#">Special</a>
-        </nav>
-        <div class="part">
-            <div id="menu-bar" class="fas fa-bars"></div>
-            <div id="search-bar">
-                <form action="" class="search-box-container">
-                    <input type="search" id="search-box" placeholder="Search items..">
-                    <button class="fas fa-search search "></button>
-                </form>
-            </div>
-        </div>
-        <div class="part">
-            <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-clipboard-list"></a>
-                <a href="#" class="fas fa-user"></a>
-            </div>
-        </div>
+        <a href="/customer/cart" class="back"><i class="fas fa-step-backward"></i></a>
     </div>
 </header>
-<!-- Header end -->
 
+<!-- Checkout section starts -->
 {{content}}
-
+<!-- Checkout section ends -->
+<!-- footer section starts  -->
 <section class="footer" id="contact">
 
     <div class="box-container">
@@ -131,9 +83,5 @@
 
     <p class="footer-copyright">&#169; 2021 Grocery Galleria. All right reserved.</p>
 </section>
-
-<!-- Footer ends -->
-
-<script src="/js/Shop.js"></script>
 </body>
 </html>
