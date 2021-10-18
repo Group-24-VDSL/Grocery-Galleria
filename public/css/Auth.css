@@ -15,16 +15,22 @@
   outline: none;
   border: none;
   text-decoration: none;
-  text-transform: capitalize;
   transition: all 0.2s linear;
 }
 
 html {
   background-color: var(--header-color);
   overflow-x: hidden;
+  scroll-padding-top: 6.5rem;
   scroll-behavior: smooth;
 }
-
+ul {
+  padding: 0;
+  list-style: none;
+}
+section {
+  padding: 3rem 8%;
+}
 .btn {
   display: inline-block;
   margin-top: 1rem;
@@ -39,6 +45,18 @@ html {
 .btn:hover {
   background-color: var(--first-color-alt);
 }
+.heading {
+  text-align: center;
+  justify-content: center;
+  color: var(--title-color);
+  text-transform: uppercase;
+  padding: 1rem;
+  font-size: var(--biggest-font-size);
+}
+.heading span {
+  color: var(--first-color);
+  text-transform: uppercase;
+}
 .header-1 {
   background: var(--header-color);
   display: flex;
@@ -50,16 +68,13 @@ html {
 
 .logo-img {
   padding-right: 0.5rem;
-  max-width: 220px;
+  max-width: 240px;
   height: auto;
 }
 .header-1 .logout {
-  font-size: 2rem;
+  font-size: var(--biggest-font-size);
   color: var(--title-color);
-  padding: 0 1rem;
-  border: 0.1rem solid rgba(0, 0, 0, 0.1);
-  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); */
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 .logout:hover {
   background-color: #e63946;
