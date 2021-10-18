@@ -120,9 +120,6 @@ class AuthController extends Controller
         $response->redirect('/');
     }
 
-    public function profile()
-    {
-        return $this->render('profile');
-    }
+
 
 }
