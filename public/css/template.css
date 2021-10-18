@@ -266,15 +266,15 @@ table td {
   background-color: var(--classic-grey-2);
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-}
+/*.row {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*}*/
 
-.column {
-  display: flex;
-  flex-direction: column;
-}
+/*.column {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
 
 .display-grid{
   display: grid;
