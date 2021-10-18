@@ -39,16 +39,51 @@ const shopCity = document.getElementById('City');
 const shopSuburb = document.getElementById('Suburb');
 const shopAddress = document.getElementById('Address');
 
-const ShopID = getUrlParameter('ShopID');
-const URLShopAPI = "http://localhost/api/shop?ShopID=";
-const URLFindShop = URLShopAPI.concat(ShopID);
+const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
 
+const ShopID = getUrlParameter('ShopID');
+
+const URLShopAPI = "http://localhost/api/shop?ShopID=";
+const URLShopItemAPI = "http://localhost/api/shopItems?ShopID=";
+
+const URLFindShop = URLShopAPI.concat(ShopID);
+const URLFindShopItems = URLShopItemAPI.concat(ShopID);
+
+const URLFindItemAPI = "http://localhost/api/item?ItemID=";
 
 $.getJSON(URLFindShop, function (Shop) {
     shopName.innerHTML = Shop.ShopName;
     shopCity.innerHTML = Shop.City;
     shopSuburb.innerHTML = Shop.Suburb;
     shopAddress.innerHTML = Shop.Address;
+});
+
+const ItemBox = document.getElementById('ItemBox');
+
+
+$.getJSON(URLFindShopItems, function (ShopItems) {
+    ShopItems.forEach(shopItem => {
+        const Item = document.createElement('div');
+        Item.classList.add('box');
+        const URLShopItem = URLFindItemAPI.concat(shopItem.ItemID);
+        $.getJSON(URLShopItem, function (item) {
+            Item.innerHTML = `
+            <img id="ItemImage" name="ItemImage" src="${item.ItemImage}" alt="">
+                <h3 id="Name">${item.Name}</h3>
+                <div class="price">
+                    <span id="UnitPrice">${shopItem.UnitPrice}</span>
+                    <span> /</span>
+                    <span id="Unit">${UnitTag[item.Unit]}</span>
+                    </div>
+                <div class="quantity">
+                    <span>quantity :</span>
+                    <input type="number" name="quantity" min=${item.UWeight} max="3000" step=${item.UWeight} value=${item.UWeight}>
+                </div>
+                <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
+            `
+        })
+        ItemBox.appendChild(Item);
+    })
 });
 
 
