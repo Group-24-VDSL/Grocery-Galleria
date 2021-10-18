@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use app\models\Staff;
 
 use app\core\Application;
 use app\core\Controller;
@@ -10,6 +11,41 @@ use app\models\Complaint;
 
 class StaffController extends Controller
 {
+
+    public function staffRegister(Request $request)
+    {
+        $this->setLayout('dashboard-staff');
+        $user = new Staff(); // Create customer
+        $user->loadData($request->getBody());
+        if ($request->isPost()) {
+            $userid = AuthController::register($request,'Staff');
+            if($userid){
+                $user->StaffID = $userid; //save the UserID = CustomerID
+                if($user->validate() && $user->save()){
+                    Application::$app->session->setFlash('success', 'Registration Success');
+                    //send user verification
+                    $status = AuthController::verificationSend($user->StaffID,$user->Name,$user->Email);
+                    if($status){
+                        Application::$app->response->redirect('/login');
+                    }
+                }else{
+                    Application::$app->session->setFlash('danger', 'Registration Failed');
+                    $this->setLayout('register');
+                    return $this->render("staff/register", ['model' => $user]);
+                }
+            }else {
+                Application::$app->session->setFlash('danger', 'Registration Failed ');
+                $this->setLayout('register');
+                return $this->render("staff/register", ['model' => $user]);
+            }
+
+        }
+        return $this->render("staff/register", [
+            'model' => $user
+        ]);
+
+    }
+
     public function additem(Request $request)
     {
         $item = new Item();
@@ -52,6 +88,11 @@ class StaffController extends Controller
             ,[
                 'model' => $item
             ]);
+    }
+
+    public function vieworders(){
+        $this->setLayout('dashboardL-shop');
+        return $this->render('staff/view-orders');
     }
 
     public function vieworderdetails(){

@@ -31,6 +31,13 @@
                 </div>
                 <img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-cash-gambling-justicon-flat-justicon.png"/>
             </div>
+            <div class="box-item-list">
+                <div class="content">
+                    <div style=" font-size: 18.4px" class="box-topic">Delivery Cost(LKR)</div>
+                    <div class="number-details">  300.00</div>
+                </div>
+                <img src="https://img.icons8.com/external-konkapp-flat-konkapp/64/000000/external-delivery-logistic-and-delivery-konkapp-flat-konkapp.png"/>
+            </div>
 
             <div class="box-item-list">
                 <div class="content">
@@ -47,6 +54,31 @@
                 </div>
                 <img src="https://img.icons8.com/external-itim2101-flat-itim2101/64/000000/external-scale-logistics-itim2101-flat-itim2101.png"/>
             </div>
+
+        </div>
+        <div style="height: auto" class="core">
+            <divc class="customer-details">
+                <h1 class="heading"> <span>Customer Details</span><span style="color: var(--text-color-light)" class="shop-id"></span></h1>
+                <table class="cus-details">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Contact No</th>
+                    </tr>
+                    </thead>
+                    <tbody class="">
+                    <tr>
+                        <td>C00987</td>
+                        <td>Sanduni Siriwardhane</td>
+                        <td>No. 20 , Dhammadhinna Rd, Tangalle</td>
+                        <td>0715800177</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </divc>
+
         </div>
 
         <div style="height: auto" class="core">
@@ -59,11 +91,11 @@
                         <table class="shop-details">
                             <tbody>
                             <tr>
-                                <th>Shop ID</th>
+                                <th>Shop<br>ID</th>
                                 <td>: S12340</td>
                             </tr>
                             <tr>
-                                <th>Shop<br>name</th>
+                                <th>Shop<br>Name</th>
                                 <td>: Samarasekara Stores</td>
                             </tr>
                             <tr>

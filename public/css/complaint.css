@@ -15,7 +15,7 @@
     height: auto;
     margin: 0em;
     padding: 0.1px;
-    width: o.1px;
+    width: 0.1px;
 }
 
 
@@ -35,7 +35,7 @@
 
 .form-content {
     border-radius: 5px 15px;
-    box-shadow: 0 4px 4px rgb(87 100 126 / 21%);
+    box-shadow: 0 4px 4px rgba(87 ,100 ,126 ,0.2);
     background-color: #fff;
     max-width: 75%;
     padding : 100px
@@ -67,13 +67,13 @@ ul.page-section {
 
 form {
     display: block;
-    margin-top: 0em;
+    margin-top: 0;
     margin-block-end: 1em;
 }
 
 
 .form-input-wide {
-    width: 50%;
+    width: 90%;
 }
 
 
@@ -309,7 +309,7 @@ textarea:hover, select:hover, input:hover{
 
 .complaint-content {
     border-radius: 5px 5px;
-    box-shadow: 0 4px 4px rgb(87 100 126 / 21%);
+    box-shadow: 0 4px 4px rgba(87 ,100, 126 ,0.2);
     background-color: #fff;
     max-width: 100%;
     max-height: 400px;
@@ -415,7 +415,7 @@ textarea:hover, select:hover, input:hover{
 .header-label-top {
     width: 100%;
     margin-left: 15px;
-    margin-bottom: 5px px;
+    margin-bottom: 5px ;
     padding-top: 3px;
 }
 

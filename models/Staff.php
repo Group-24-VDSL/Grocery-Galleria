@@ -2,23 +2,15 @@
 
 namespace app\models;
 
-
 use app\core\UserModel;
 
-class Customer extends UserModel
+
+class Staff extends UserModel
 {
 
-
-    public int $CustomerID = 0;
-
+    public int $StaffID = 0;
     public string $Name = '';
-    public string $Address = '';
     public string $ContactNo = '';
-    public string $City = '';
-    public string $Suburb = '';
-    public string $Location = '';
-    public string $PlaceID = '';
-
     public string $Email = '';
     public string $Password = '';
     public string $ConfirmPassword = '';
@@ -30,7 +22,7 @@ class Customer extends UserModel
 
     public static function tableName(): string
     {
-        return 'customer'; //table name
+        return 'staff'; //table name
     }
 
     public function rules(): array
@@ -40,22 +32,18 @@ class Customer extends UserModel
             'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
             'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],
             'Name' => [self::RULE_REQUIRED],
-            'Address'=>[self::RULE_REQUIRED],
-            'ContactNo'=>[self::RULE_REQUIRED],
-            'City'=>[self::RULE_REQUIRED],
-            'Suburb' =>[self::RULE_REQUIRED],
-            'Location'=>[self::RULE_REQUIRED]
+            'ContactNo'=>[self::RULE_REQUIRED,[self::RULE_MAX,'max' => 10],[self::RULE_MIN,'min' => 10]],
         ];
     }
 
     public function attributes(): array
     {
-        return ['CustomerID','Name','Address','Email','ContactNo','City','Suburb','Location','PlaceID'];
+        return ['StaffID','Name','Address','Email','ContactNo'];
     }
 
     public static function primaryKey():string
     {
-        return 'CustomerID';
+        return 'StaffID';
     }
 
     public function getDisplayName(): string

@@ -311,7 +311,7 @@
 }
 .details th,
 .staff-details th,
-.shop-details th  {
+.shop-details th,.cus-details th  {
     text-align: left;
     font-weight: 500;
     font-size: 15px;
@@ -332,20 +332,47 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 18%;
+    width: 16%;
     background: #fff;
     padding: 1rem 0.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0 ,0 , 0.1);
 }
 
  .shop-details{
      border-radius: 8px;
      width: 370px;
      height: 355px;
-     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+     box-shadow: 0 0.5rem 1rem rgba(0, 0 ,0 , 0.1);
  }
 
  .location-link{
      color: var(--first-color);
  }
+
+ .cus-details {
+     padding: 2rem;
+     padding-bottom: 1rem;
+     /*border: 2px solid var(--home-color);*/
+     box-shadow: 0 0.5rem 1rem rgba(0, 0 ,0 , 0.1);
+     border-radius: 8px;
+     margin: 1rem 1rem;
+ }
+
+.cus-details tr {
+    width: 100%;
+}
+.cus-details th td {
+    border-bottom: 2px solid var(--home-color);
+}
+.cus-details td{
+    padding: 1rem;
+    font-size: 13px;
+}
+.customer-details{
+    padding: 1rem;
+}
+
+.customer-details .heading {
+    padding-bottom: 1rem;
+}

@@ -1,7 +1,8 @@
 $(function (listener){
     // Create the script tag, set the appropriate attributes
     let script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwYJrYLyEaQGRUYEnh10GS5luyYnt2a5U&callback=initMap';
+    // script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwYJrYLyEaQGRUYEnh10GS5luyYnt2a5U&callback=initMap';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap';
     script.async = true;
 
     let map, infoWindow;

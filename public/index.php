@@ -8,7 +8,7 @@ use app\controllers\ShopController;
 use app\controllers\StaffController;
 use app\controllers\TestController;
 use app\core\Application;
-use app\controllers\SiteControllers;
+use app\controllers\SiteController;
 use app\controllers\AuthController;
 
 
@@ -25,10 +25,10 @@ $config = [
 
 $app = new Application(dirname(__DIR__), $config);
 
-$app->router->get('/',[SiteControllers::class,'welcome']);
-$app->router->get('/welcome',[SiteControllers::class,'welcome']);
-$app->router->get('/contact',[SiteControllers::class,'contact']);
-$app->router->post('/contact',[SiteControllers::class,'handleContact']);
+$app->router->get('/',[SiteController::class,'welcome']);
+$app->router->get('/welcome',[SiteController::class,'welcome']);
+$app->router->get('/contact',[SiteController::class,'contact']);
+$app->router->post('/contact',[SiteController::class,'handleContact']);
 
 $app->router->get('/verify',[AuthController::class,'verify']);
 
@@ -47,7 +47,7 @@ $app->router->get('/customer/cart',[CustomerController::class,'cart']);
 $app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
-$app->router->get('/gallery',[ShopController::class,'showgallery']);
+$app->router->get('/gallery',[SiteController::class,'shopGallery']);
 
 $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
@@ -56,7 +56,8 @@ $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'vi
 $app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
 
-
+$app->router->get('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
+$app->router->post('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
 $app->router->get('/dashboard/staff/additem',[StaffController::class,'additem']);
 $app->router->post('/dashboard/staff/additem',[StaffController::class,'additem']);
 $app->router->get('/dashboard/staff/products',[staffController::class,'products']);
@@ -69,6 +70,7 @@ $app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewuse
 $app->router->get('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);
+$app->router->get('/dashboard/staff/vieworders',[StaffController::class,'vieworders']);
 $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
 
 
