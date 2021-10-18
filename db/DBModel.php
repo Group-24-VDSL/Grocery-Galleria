@@ -45,9 +45,9 @@ abstract class DBModel extends Model
         return true;
     }
 
-    public function delete($where=[])
+    public static function delete($where=[])
     {
-        $tableName = $this->tableName();
+        $tableName = static::tableName();
         $stmt  = self::prepare("DELETE FROM  $tableName WHERE ".implode("AND", array_map(fn($attr) => "$attr = :$attr", $where)));
         foreach ($where as $key => $value) {
             $stmt->bindValue(":$key", $value); //iterate through attributes
