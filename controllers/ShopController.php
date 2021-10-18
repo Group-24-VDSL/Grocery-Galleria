@@ -30,6 +30,11 @@ class ShopController extends Controller
         $this->setLayout('dashboardL-shop');
         if($request->isPost()){
             $shopItem->loadData($request->getBody());
+            if($request->getBody()['Unit'] == "Kg"){
+                $stock = $shopItem->Stock;
+                $stock = $stock*1000;
+                $shopItem->Stock = $stock;
+            }
                 if($shopItem->validate() && $shopItem->save()){
                     Application::$app->session->setFlash("success", "Item Saved.");
                     Application::$app->response->redirect("/dashboard/shop/additem");
