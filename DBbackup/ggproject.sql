@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2021 at 08:19 AM
+-- Generation Time: Oct 18, 2021 at 01:55 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -43,18 +43,28 @@ CREATE TABLE `cart` (
 --
 
 CREATE TABLE `complaint` (
-  `ComplaintID` int(11) NOT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `StaffID` int(11) NOT NULL,
-  `OrderID` int(11) NOT NULL,
-  `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
-  `OrderDate` date NOT NULL,
-  `ComplaintDate` date NOT NULL,
-  `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-  `Prority` tinyint(1) NOT NULL,
-  `Regarding` tinyint(1) NOT NULL,
-  `Status` tinyint(1) NOT NULL
+                             `ComplaintID` int(11) NOT NULL,
+                             `ComplaintDate` date NOT NULL,
+                             `OrderID` varchar(10) COLLATE utf8mb4_bin NOT NULL,
+                             `OrderDate` date NOT NULL,
+                             `Regarding` int(11) NOT NULL,
+                             `Priority` int(11) NOT NULL,
+                             `Status` tinyint(1) NOT NULL,
+                             `Nature` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+                             `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `complaint`
+--
+
+INSERT INTO `complaint` (`ComplaintID`, `ComplaintDate`, `OrderID`, `OrderDate`, `Regarding`, `Priority`, `Status`, `Nature`, `SpecialDetails`) VALUES
+                                                                                                                                                    (1102, '2021-10-12', '34500', '2021-10-10', 0, 1, 1, 'wrong weights of the items', 'by shop 101'),
+                                                                                                                                                    (1103, '2021-10-13', '4500', '2021-10-11', 1, 1, 0, 'delay of the delivery', ''),
+                                                                                                                                                    (1104, '2021-10-15', '4560', '2021-10-11', 0, 0, 0, 'item count is wrong', 'by Samarasinghe shop'),
+                                                                                                                                                    (1105, '2021-10-15', '4876', '2021-10-12', 1, 0, 1, 'delay of the delivery', ''),
+                                                                                                                                                    (1106, '2021-10-12', '4577', '2021-10-11', 0, 1, 1, 'vegetables are not good status', 'by shop ID 8907'),
+                                                                                                                                                    (1108, '2021-10-13', '1107', '2021-10-13', 0, 1, 0, 'aaaa', 'aaaa');
 
 -- --------------------------------------------------------
 
@@ -73,13 +83,6 @@ CREATE TABLE `customer` (
   `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`CustomerID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `Suburb`, `Location`, `PlaceID`) VALUES
-(2, 'Ravin Sabare', 'Address eka', 'ravinsabre@gmail.com', '0332222548', 'Colombo', 'Colombo', '{&quot;lat&quot;:6.943458914658162,&quot;lng&quot;:79.9875427734375}', '');
 
 -- --------------------------------------------------------
 
@@ -113,13 +116,6 @@ CREATE TABLE `deliveryrider` (
   `ProfilePic` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `RiderType` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
---
--- Dumping data for table `deliveryrider`
---
-
-INSERT INTO `deliveryrider` (`RiderID`, `Name`, `Address`, `Email`, `ContactNo`, `NIC`, `ProfilePic`, `RiderType`) VALUES
-(1, 'Ravin Samaranayake', 'Address Eka', 'ravinsabre@gmail.com', '0713055458', '980671242V', '/img/rider-imgs/9500001.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -182,10 +178,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`UserID`, `Email`, `PasswordHash`, `Name`, `Verify_Flag`, `Delete_Flag`, `Role`) VALUES
-(2, 'ravinsabre@gmail.com', '$2y$10$Ok7PVcJLplQFzfI39kEF4.TG.mt/RqIY/DJX.voiYdAJB5iR7SPsK', 'Ravin Sabare', 1, 0, 'Customer'),
-(3, 'samantha@mailinator.com', '$2y$10$6eBEINCKhomU394KEVwY2upe5XVlKqJhnHyQSsUSEYcLQ8KtaVPWq', 'samantha', 1, 0, 'Shop'),
-(4, 'damintha@something.com', '$2y$10$k3vVEQWSo3Czo9HMoUyyGuAwdYFLqOVoc53B97j42rsJ6cr6cgh0S', 'damintha', 1, 0, 'Shop'),
-(5, 'dilshanthenuka9@gmail.com', '$2y$10$rriBh61q3NbFzQJwGoTUh.7tfij.K0nB9EfomH1kNUiUHvqJNzNJC', 'S.A Dilshan Thenuka', 0, 0, 'Shop');
+    (2, 'sandunisandeepa1@gmail.com', '$2y$10$tC4L/GAcCFLchV3/.mVd0uu7adCT6FEi7p5S7i9wshCpVYxtlxd1C', 'Vindy', 0, 0, 'Staff');
 
 -- --------------------------------------------------------
 
@@ -209,10 +202,11 @@ CREATE TABLE `ordercart` (
 --
 
 CREATE TABLE `orders` (
-  `OrderID` int(11) NOT NULL,
-  `CartID` int(11) NOT NULL,
-  `DeliveryCost` float NOT NULL,
-  `TotalCost` float NOT NULL
+                          `OrderID` int(11) NOT NULL,
+                          `CartID` int(11) NOT NULL,
+                          `OrderDate` date NOT NULL,
+                          `DeliveryCost` float NOT NULL,
+                          `TotalCost` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -248,13 +242,6 @@ CREATE TABLE `shop` (
   `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
---
--- Dumping data for table `shop`
---
-
-INSERT INTO `shop` (`ShopID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `Suburb`, `ShopName`, `ShopDesc`, `Category`, `Location`, `PlaceID`) VALUES
-(5, 'S.A Dilshan Thenuka', '22/2 Old Kesbewa Road, Nugegoda.', 'dilshanthenuka9@gmail.com', '0778571737', 'Colombo', 'Colombo', 'Senarath Grocery', 'Farm Fresh Goods', 0, '{&quot;lat&quot;:6.8672672,&quot;lng&quot;:79.8856714}', 'ChIJr_pa_k9a4joR0Lc1vOefaMQ');
-
 -- --------------------------------------------------------
 
 --
@@ -289,11 +276,10 @@ CREATE TABLE `shoporder` (
 --
 
 CREATE TABLE `staff` (
-  `StaffID` int(11) NOT NULL,
-  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
+                         `StaffID` int(11) NOT NULL,
+                         `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                         `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+                         `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -475,7 +461,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-  MODIFY `ShopID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+    MODIFY `ShopID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

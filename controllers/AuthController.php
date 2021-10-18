@@ -105,12 +105,17 @@ class AuthController extends Controller
                     if ($user) {
                         //update the user
                         if ($user->update(['Verify_Flag' => 1], ['UserID' => $user->UserID])) {
-                            Application::$app->response->redirect('/login');
+                            Verification::delete(['UserID' => $user->UserID]) ;
+                            return $this->render('email-verified',[
+                                'invalid' => 'false'
+                            ]);
                         }
                     }
                 }
             }
-        return $this->render('email-verified');
+        return $this->render('email-verified',[
+            'invalid' => 'true'
+        ]);
 
     }
 

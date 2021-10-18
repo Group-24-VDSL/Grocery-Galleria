@@ -219,6 +219,20 @@ section {
   margin-top: 2rem;
 }
 
+.email-verified-svg{
+  height: 10rem;
+  width: auto;
+}
+.email-verified{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.email-verified > p{
+  text-transform: none;
+}
+
 /* @media screen and (max-width: 1000px) {
   .subcontainer form{
     width: 60%;
@@ -252,3 +266,5 @@ section {
 }
 @media (max-width: 580px) {
 }
+
+
