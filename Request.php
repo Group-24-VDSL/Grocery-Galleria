@@ -23,7 +23,8 @@ class Request
 
     }
 
-    public function isGet(){
+    public function isGet(): bool
+    {
         return $this->method()==='get';
     }
     public function isPost(){
@@ -39,7 +40,8 @@ class Request
         }
     }
 
-    public function getBody(){
+    public function getBody(): array
+    {
         $body = [];
 
         if($this->method() === 'get'){
@@ -56,7 +58,26 @@ class Request
         return $body;
     }
 
-    public function loadFile($path,$attribute,$filename='')
+    public function getJson(): ?array
+    {
+        if($this->method() === 'post'){
+            $raw =file_get_contents('php://input'); //access raw post request
+            $rawbody = json_decode($raw,true); //decode it as a associative array
+            if(json_last_error() === JSON_ERROR_NONE){ //valid json
+                $body = [];
+                foreach ($rawbody as $key => $value){
+                    $body[filter_var($key,FILTER_SANITIZE_FULL_SPECIAL_CHARS)] = filter_var($value,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                }
+                return $body;
+            }else{
+                return null;
+            }
+
+        }
+        return null;
+    }
+
+    public function loadFile($path,$attribute,$filename=''): ?string
     {
       if($this->method() === 'post'){
           $file = getimagesize($_FILES[$attribute]["tmp_name"]);
