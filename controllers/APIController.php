@@ -59,10 +59,20 @@ class APIController extends Controller
             if($json){
                 $tempcart = new TemporaryCart();
                 $tempcart->loadData($json);
-                if($tempcart->validate() && $tempcart->save()){
-                    return json_encode('{"success":"ok"}');
+                $checktemp = TemporaryCart::findOne(["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID]);
+                if($checktemp) { //there exists such item
+                    $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
+                    if($tempcart->update(["Quantity"=>$newQuantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])){
+                        return json_encode('{"success":"ok"}');
+                    }else{
+                        return json_encode('{"success":"fail"}');
+                    }
                 }else{
-                    return json_encode('{"success":"fail"}');
+                    if ($tempcart->validate() && $tempcart->save()) {
+                        return json_encode('{"success":"ok"}');
+                    } else {
+                        return json_encode('{"success":"fail"}');
+                    }
                 }
             }
             return json_encode('{"success":"fail"}');
