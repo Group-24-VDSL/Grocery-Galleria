@@ -38,7 +38,7 @@ class Staff extends UserModel
 
     public function attributes(): array
     {
-        return ['StaffID','Name','Address','Email','ContactNo'];
+        return ['StaffID','Name','Email','ContactNo'];
     }
 
     public static function primaryKey():string
