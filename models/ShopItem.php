@@ -31,7 +31,7 @@ class ShopItem extends DBModel
     public function rules(): array
     {
         return [
-            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0]],
+            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0],self::RULE_MRP],
             'Stock' => [[self::RULE_MIN_VAL,'minValue'=>5]]
         ];
     }
