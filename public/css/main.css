@@ -291,6 +291,35 @@ section {
 .category .box-container .box .btn {
   display: block;
 }
+.shop-banner{
+  border: 0.1rem solid rgba(0, 0, 0,0.2);
+  background: url(/img/shop-imgs/vege_banner.jpg) center no-repeat;
+  background-size: cover;
+  padding-top: 15rem;
+  padding-bottom: 10rem;
+  /* box-shadow: 0 0.5rem 1rem var(--first-color); */
+}
+.shop-banner .content {
+  /* max-width: 50rem; */
+  text-align: center;
+}
+
+.shop-banner .content .title {
+  font-size: 6rem;
+  color: var(--first-color);
+}
+.shop-banner .content .subtitle {
+  font-size: 3rem;
+  color: var(--text-color);
+}
+
+.shop-banner .content p {
+  font-size: 2rem;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 1rem 0;
+  color: var(--text-color);
+}
 /* shop */
 .shop .box-container {
   display: flex;
