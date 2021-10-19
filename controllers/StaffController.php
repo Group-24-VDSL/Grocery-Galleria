@@ -14,7 +14,7 @@ class StaffController extends Controller
 
     public function staffRegister(Request $request)
     {
-        $this->setLayout('dashboard-staff');
+        $this->setLayout('dashboardL-staff');
         $user = new Staff(); // Create customer
         $user->loadData($request->getBody());
         if ($request->isPost()) {
@@ -91,7 +91,7 @@ class StaffController extends Controller
     }
 
     public function vieworders(){
-        $this->setLayout('dashboardL-shop');
+        $this->setLayout('dashboardL-staff');
         return $this->render('staff/view-orders');
     }
 
@@ -103,7 +103,7 @@ class StaffController extends Controller
     public function viewitems()
     {
         $items = Item::findAll();
-        $this->setLayout("dashboard-staff");
+        $this->setLayout("dashboardL-staff");
         return $this->render("staff/view-items",
         [
             'itemslist'=>$items
@@ -143,5 +143,10 @@ class StaffController extends Controller
         ,[
             'model' => $complaint
         ]);
+    }
+    public function viewUsers()
+    {
+        $this->setLayout("dashboardL-staff");
+        return $this->render("staff/users");
     }
 }

@@ -9,7 +9,7 @@
 <div class="core core-complaint">
           <div class="complaint-heading">
             <h1 class="heading">User <span>Complaints</span></h1>
-            <a href="../staff/complaint.html"><button class="btn-add" type="submit" id="add-button"><span class="" ><i class='bx bx-plus'></i></span></button> </a>
+            <a href="/dashboard/staff/addcomplaint"><button class="btn-add" type="submit" id="add-button"><span class="" ><i class='bx bx-plus'></i></span></button> </a>
           </div>
           <div class="container-items">
 
