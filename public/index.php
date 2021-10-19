@@ -87,12 +87,15 @@ $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
+$app->router->post('/test',[TestController::class,'test']);
 
 $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopItems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
+$app->router->get('/api/getcart',[APIController::class,'getCart']);
+$app->router->post('/api/addtocart',[APIController::class,'addToCart']);
 $app->run();
 
 
