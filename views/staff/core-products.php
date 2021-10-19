@@ -19,9 +19,8 @@
                 <li>Brand</li>
                 <li>Unit</li>
                 <li>MRP</li>
-                <li>Min(kg)</li>
-                <li>Increment</li>
-                <li>Max(kg)</li>
+                <li>UnitWeight</li>
+                <li>MaxCount</li>
                 <li>Update</li>
             </ul>
         </div>
@@ -56,17 +55,7 @@
                         name="IncStep"
                     />
                 </li>
-                <li class="column-maxWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="maxWeight"
-                        name="maxWeight"
-                    />
-                </li>
+                 
                 <li class="column-ubutton">
                     <button class="btn-column" type="submit">Update</button>
                 </li>
@@ -101,17 +90,7 @@
                         name="IncStep"
                     />
                 </li>
-                <li class="column-maxWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="maxWeight"
-                        name="maxWeight"
-                    />
-                </li>
+                 
                 <li class="column-ubutton">
                     <button class="btn-column" type="submit">Update</button>
                 </li>
@@ -146,17 +125,7 @@
                         name="IncStep"
                     />
                 </li>
-                <li class="column-maxWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="maxWeight"
-                        name="maxWeight"
-                    />
-                </li>
+                 
                 <li class="column-ubutton">
                     <button class="btn-column" type="submit">Update</button>
                 </li>
@@ -191,17 +160,7 @@
                         name="IncStep"
                     />
                 </li>
-                <li class="column-maxWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="maxWeight"
-                        name="maxWeight"
-                    />
-                </li>
+                 
                 <li class="column-ubutton">
                     <button class="btn-column" type="submit">Update</button>
                 </li>
@@ -238,17 +197,7 @@
                         name="IncStep"
                     />
                 </li>
-                <li class="column-maxWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="maxWeight"
-                        name="maxWeight"
-                    />
-                </li>
+                 
                 <li class="column-ubutton">
                     <button class="btn-column" type="submit">Update</button>
                 </li>
@@ -283,17 +232,7 @@
                         name="IncStep"
                     />
                 </li>
-                <li class="column-maxWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="maxWeight"
-                        name="maxWeight"
-                    />
-                </li>
+                 
                 <li class="column-ubutton">
                     <button class="btn-column" type="submit">Update</button>
                 </li>
@@ -328,17 +267,7 @@
                         name="IncStep"
                     />
                 </li>
-                <li class="column-maxWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="maxWeight"
-                        name="maxWeight"
-                    />
-                </li>
+                 
                 <li class="column-ubutton">
                     <button class="btn-column" type="submit">Update</button>
                 </li>

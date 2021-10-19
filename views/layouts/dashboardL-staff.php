@@ -18,7 +18,7 @@
             rel="stylesheet"
     />
 
-    <title>Dashboard-Shop</title>
+    <title>Dashboard-Staff</title>
 </head>
 <?php include_once("utils/sessions.php"); ?>
 <?php include_once("utils/pwa.php"); ?>
@@ -30,19 +30,25 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="">
+            <a href="/dashboard/staff/vieworders">
                 <i class="bx bx-grid-alt"></i>
                 <span class="link-name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/staff/products">
                 <i class="bx bx-box"></i>
                 <span class="link-name">Products</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/staff/additem">
+                <i class='bx bx-list-plus'></i>
+                <span class="link-name">New</span>
+            </a>
+        </li>
+        <li>
+            <a href="/dashboard/staff/viewusers">
                 <i class="bx bxs-group"></i>
                 <span class="link-name">Users</span>
             </a>
@@ -54,7 +60,7 @@
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/staff/viewcomplaints">
                 <i class="bx bx-message-error"></i>
                 <span class="link-name">Complaints</span>
             </a>
@@ -72,7 +78,7 @@
             </a>
         </li>
         <li class="logout">
-            <a href="">
+            <a href="/logout">
                 <i class="bx bx-log-out"></i>
                 <span class="link-name">Log out</span>
             </a>
