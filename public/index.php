@@ -48,7 +48,7 @@ $app->router->get('/customer/cart',[CustomerController::class,'cart']);
 $app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
-$app->router->get('/gallery',[SiteController::class,'shopGallery']);
+$app->router->get('/gallery',[ShopController::class,'shopGallery']);
 
 $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);

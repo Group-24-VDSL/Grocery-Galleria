@@ -19,6 +19,11 @@ class ShopController extends Controller
         $this->setLayout('shop');
         return $this->render('shop');
     }
+    public function shopGallery()
+    {
+        $this->setLayout('gallery');
+        return $this->render('gallery');
+    }
 
     public function productOverview(){
         $this->setLayout('dashboardL-shop');

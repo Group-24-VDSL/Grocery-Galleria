@@ -14,10 +14,6 @@ class SiteController extends Controller
         return $this->render('welcome');
     }
 
-    public function shopGallery(){
-        $this->setLayout('main');
-        return $this->render('gallery');
-    }
 //    public function handleContact(Request $request){
 ////        $body = Application::$app->request->getBody();
 ////        var_dump($body);
