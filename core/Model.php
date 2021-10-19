@@ -3,7 +3,6 @@
 namespace app\core;
 
 use JsonSerializable;
-use app\models\Item;
 use PDO;
 
 abstract class Model implements JsonSerializable
