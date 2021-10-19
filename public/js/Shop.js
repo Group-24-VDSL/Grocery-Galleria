@@ -34,15 +34,12 @@ const getUrlParameter = function getUrlParameter(sParam) {
     return false;
 };
 
-const shopName = document.getElementById('ShopName');
-const shopCity = document.getElementById('City');
-const shopSuburb = document.getElementById('Suburb');
-const shopAddress = document.getElementById('Address');
 
 const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
 const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
 
-const ShopID = getUrlParameter('ShopID');
+
+
 
 //Api links
 const URLShopAPI = "http://localhost/api/shop";
@@ -50,28 +47,39 @@ const URLShopsAPI = "http://localhost/api/shops"
 const URLShopItemAPI = "http://localhost/api/shopItems";
 const URLFindItemAPI = "http://localhost/api/item";
 
-const URLFindShop = URLShopAPI.concat("?ShopID=").concat(ShopID);
-const URLFindShopItems = URLShopItemAPI.concat("?ShopID=").concat(ShopID);
 
 
-$.getJSON(URLFindShop, function (Shop) {
-    shopName.innerHTML = Shop.ShopName;
-    shopCity.innerHTML = Shop.City;
-    shopSuburb.innerHTML = Shop.Suburb;
-    shopAddress.innerHTML = Shop.Address;
-});
 
-const ItemBox = document.getElementById('ItemBox');
+if(document.location.pathname === '/gallery/shop') {
+    const shopName = document.getElementById('ShopName');
+    const shopCity = document.getElementById('City');
+    const shopSuburb = document.getElementById('Suburb');
+    const shopAddress = document.getElementById('Address');
+
+    const ShopID = getUrlParameter('ShopID');
+
+    const URLFindShop = URLShopAPI.concat("?ShopID=").concat(ShopID);
+    const URLFindShopItems = URLShopItemAPI.concat("?ShopID=").concat(ShopID);
+
+    $.getJSON(URLFindShop, function (Shop) {
+        shopName.innerHTML = Shop.ShopName;
+        shopCity.innerHTML = Shop.City;
+        shopSuburb.innerHTML = Shop.Suburb;
+        shopAddress.innerHTML = Shop.Address;
+    });
 
 
-$.getJSON(URLFindShopItems, function (ShopItems) {
-    ShopItems.forEach(shopItem => {
-        const Item = document.createElement('div');
-        Item.classList.add('box');
-        const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
-        $.getJSON(URLShopItem, function (item) {
-            Item.innerHTML = `
-            <img id="ItemImage" name="ItemImage" src="${item.ItemImage}" alt="">
+    const ItemBox = document.getElementById('ItemBox');
+
+
+    $.getJSON(URLFindShopItems, function (ShopItems) {
+        ShopItems.forEach(shopItem => {
+            const Item = document.createElement('div');
+            Item.classList.add('box');
+            const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
+            $.getJSON(URLShopItem, function (item) {
+                Item.innerHTML = `
+            <img id="ItemImage" alt="ItemImage" src="${item.ItemImage}" >
                 <h3 id="Name">${item.Name}</h3>
                 <div class="price">
                     <span id="UnitPrice">${shopItem.UnitPrice}</span>
@@ -80,30 +88,31 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                     </div>
                 <div class="quantity">
                     <span>quantity :</span>
-                    <input type="number" name="quantity" min=${item.UWeight} max="3000" step=${item.UWeight} value=${item.UWeight}>
+                    <input type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight}>
                 </div>
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             `
+            })
+            ItemBox.appendChild(Item);
         })
-        ItemBox.appendChild(Item);
-    })
-});
+    });
 
+}
 
+if(document.location.pathname === '/gallery') {
+    const ShopCategory = getUrlParameter('Category');
+    document.getElementById('CategoryType').innerHTML = `${ShopType[ShopCategory]}`;
 
-const ShopCategory =getUrlParameter('Category');
-document.getElementById('CategoryType').innerHTML =`${ShopType[ShopCategory]}`;
+    const URLFindShops = URLShopsAPI.concat("?Category=").concat(ShopCategory);
 
-const URLFindShops = URLShopsAPI.concat("?Category=").concat(ShopCategory);
+    const galleryBox = document.getElementById('gallery-box');
 
-const galleryBox = document.getElementById('gallery-box');
-
-$.getJSON(URLFindShops,function (Shops){
-    Shops.forEach(Shop=>{
-        const shopBox = document.createElement('div');
-        const shopURl = "/gallery/shop?ShopID=".concat(Shop.ShopID);
-        shopBox.classList.add('box');
-        shopBox.innerHTML = `
+    $.getJSON(URLFindShops, function (Shops) {
+        Shops.forEach(Shop => {
+            const shopBox = document.createElement('div');
+            const shopURl = "/gallery/shop?ShopID=".concat(Shop.ShopID);
+            shopBox.classList.add('box');
+            shopBox.innerHTML = `
         <img src="/img/welcome/logo.png" alt="">
             <h3>${Shop.ShopName}</h3>
             <div class="stars">
@@ -117,7 +126,8 @@ $.getJSON(URLFindShops,function (Shops){
             <a href=${shopURl} class="btn">
                 <i class="fas fa-external-link-alt"></i> Visit Store</a>
         `
-    galleryBox.appendChild(shopBox);
-    })
-})
+            galleryBox.appendChild(shopBox);
+        });
+    });
+}
 
