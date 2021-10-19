@@ -44,27 +44,17 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `complaint` (
                              `ComplaintID` int(11) NOT NULL,
-                             `ComplaintDate` date NOT NULL,
-                             `OrderID` varchar(10) COLLATE utf8mb4_bin NOT NULL,
+                             `CustomerID` int(11) NOT NULL,
+                             `StaffID` int(11) NOT NULL,
+                             `OrderID` int(11) NOT NULL,
+                             `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
                              `OrderDate` date NOT NULL,
-                             `Regarding` int(11) NOT NULL,
-                             `Priority` int(11) NOT NULL,
-                             `Status` tinyint(1) NOT NULL,
-                             `Nature` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-                             `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL
+                             `ComplaintDate` date NOT NULL,
+                             `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+                             `Prority` tinyint(1) NOT NULL,
+                             `Regarding` tinyint(1) NOT NULL,
+                             `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
---
--- Dumping data for table `complaint`
---
-
-INSERT INTO `complaint` (`ComplaintID`, `ComplaintDate`, `OrderID`, `OrderDate`, `Regarding`, `Priority`, `Status`, `Nature`, `SpecialDetails`) VALUES
-                                                                                                                                                    (1102, '2021-10-12', '34500', '2021-10-10', 0, 1, 1, 'wrong weights of the items', 'by shop 101'),
-                                                                                                                                                    (1103, '2021-10-13', '4500', '2021-10-11', 1, 1, 0, 'delay of the delivery', ''),
-                                                                                                                                                    (1104, '2021-10-15', '4560', '2021-10-11', 0, 0, 0, 'item count is wrong', 'by Samarasinghe shop'),
-                                                                                                                                                    (1105, '2021-10-15', '4876', '2021-10-12', 1, 0, 1, 'delay of the delivery', ''),
-                                                                                                                                                    (1106, '2021-10-12', '4577', '2021-10-11', 0, 1, 1, 'vegetables are not good status', 'by shop ID 8907'),
-                                                                                                                                                    (1108, '2021-10-13', '1107', '2021-10-13', 0, 1, 0, 'aaaa', 'aaaa');
 
 -- --------------------------------------------------------
 
@@ -295,14 +285,6 @@ CREATE TABLE `verification` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
--- Dumping data for table `verification`
---
-
-INSERT INTO `verification` (`UserID`, `VerificationCode`, `UniqueID`) VALUES
-(2, 'Dvouv4/4mUlz2pWw9AuD2B0P', 'hKB8nryfDjWTCBDSHi3Eienw'),
-(5, 'AvrS5AJwdqUPzLTEm6NxIFY3', '8FadKo4sf0gmfuj9LZGPK24+');
-
---
 -- Indexes for dumped tables
 --
 
@@ -437,7 +419,7 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `login`
