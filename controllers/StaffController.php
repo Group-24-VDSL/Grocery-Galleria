@@ -8,6 +8,7 @@ use app\core\Controller;
 use app\core\Request;
 use app\models\Item;
 use app\models\Complaint;
+use app\models\Verification;
 
 class StaffController extends Controller
 {
@@ -26,16 +27,16 @@ class StaffController extends Controller
                     //send user verification
                     $status = AuthController::verificationSend($user->StaffID,$user->Name,$user->Email);
                     if($status){
-                        Application::$app->response->redirect('/login');
+                        Application::$app->response->redirect('/dashboard/staff/addstaff');
                     }
                 }else{
                     Application::$app->session->setFlash('danger', 'Registration Failed');
-                    $this->setLayout('register');
+                    $this->setLayout('dashboard-staff');
                     return $this->render("staff/register", ['model' => $user]);
                 }
             }else {
                 Application::$app->session->setFlash('danger', 'Registration Failed ');
-                $this->setLayout('register');
+                $this->setLayout('dashboard-staff');
                 return $this->render("staff/register", ['model' => $user]);
             }
 
