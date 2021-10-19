@@ -26,19 +26,19 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="">
+            <a href="/dashboard/shop/products">
                 <i class="bx bx-grid-alt"></i>
                 <span class="link-name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/shop/additem">
                 <i class="bx bx-box"></i>
                 <span class="link-name">Products</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/shop/vieworders">
                 <i class="bx bx-list-ul"></i>
                 <span class="link-name">Order list</span>
             </a>
@@ -62,7 +62,7 @@
             </a>
         </li>
         <li class="logout">
-            <a href="">
+            <a href="/login">
                 <i class="bx bx-log-out"></i>
                 <span class="link-name">Log out</span>
             </a>

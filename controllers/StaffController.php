@@ -8,13 +8,14 @@ use app\core\Controller;
 use app\core\Request;
 use app\models\Item;
 use app\models\Complaint;
+use app\models\Verification;
 
 class StaffController extends Controller
 {
 
     public function staffRegister(Request $request)
     {
-        $this->setLayout('dashboard-staff');
+        $this->setLayout('dashboardL-staff');
         $user = new Staff(); // Create customer
         $user->loadData($request->getBody());
         if ($request->isPost()) {
@@ -26,16 +27,16 @@ class StaffController extends Controller
                     //send user verification
                     $status = AuthController::verificationSend($user->StaffID,$user->Name,$user->Email);
                     if($status){
-                        Application::$app->response->redirect('/login');
+                        Application::$app->response->redirect('/dashboard/staff/addstaff');
                     }
                 }else{
                     Application::$app->session->setFlash('danger', 'Registration Failed');
-                    $this->setLayout('register');
+                    $this->setLayout('dashboard-staff');
                     return $this->render("staff/register", ['model' => $user]);
                 }
             }else {
                 Application::$app->session->setFlash('danger', 'Registration Failed ');
-                $this->setLayout('register');
+                $this->setLayout('dashboard-staff');
                 return $this->render("staff/register", ['model' => $user]);
             }
 
@@ -91,7 +92,7 @@ class StaffController extends Controller
     }
 
     public function vieworders(){
-        $this->setLayout('dashboardL-shop');
+        $this->setLayout('dashboardL-staff');
         return $this->render('staff/view-orders');
     }
 
@@ -103,7 +104,7 @@ class StaffController extends Controller
     public function viewitems()
     {
         $items = Item::findAll();
-        $this->setLayout("dashboard-staff");
+        $this->setLayout("dashboardL-staff");
         return $this->render("staff/view-items",
         [
             'itemslist'=>$items
@@ -143,5 +144,10 @@ class StaffController extends Controller
         ,[
             'model' => $complaint
         ]);
+    }
+    public function viewUsers()
+    {
+        $this->setLayout("dashboardL-staff");
+        return $this->render("staff/users");
     }
 }
