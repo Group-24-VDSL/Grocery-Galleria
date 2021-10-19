@@ -32,7 +32,7 @@ abstract class DBModel extends Model
     public function update($attributes = [],$where=[])
     {
         $tableName = $this->tableName();
-        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr = :$attr", array_keys($attributes)))." WHERE ".implode("AND", array_map(fn($attr) => "$attr = :$attr", array_keys($where)))."");
+        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr = :$attr", array_keys($attributes)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr = :$attr", array_keys($where))));
         foreach ($attributes as $key => $value) {
             $stmt->bindValue(":$key", $value); //iterate through attributes
             // bind the User model attribute values with each :attribute into the sql statement
@@ -65,7 +65,7 @@ abstract class DBModel extends Model
     {
         $tableName = static::tableName();
         $attributes = array_keys($where);
-        $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
+        $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
         $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
         foreach ($where as $key => $item) {
             $statement->bindValue(":$key", $item);
@@ -84,7 +84,7 @@ abstract class DBModel extends Model
                 return $statement->fetchAll(\PDO::FETCH_CLASS,static::class);
             }
             $attributes = array_keys($where);
-            $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
+            $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
             $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
             foreach ($where as $key => $item) {
                 $statement->bindValue(":$key", $item);
@@ -96,7 +96,7 @@ abstract class DBModel extends Model
                 return $statement->fetchAll(\PDO::FETCH_CLASS,static::class);
             }
             $attributes = array_keys($where);
-            $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
+            $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
             $statement = self::prepare("SELECT * FROM $tableName WHERE $sql LIMIT $limit");
             foreach ($where as $key => $item) {
                 $statement->bindValue(":$key", $item);
