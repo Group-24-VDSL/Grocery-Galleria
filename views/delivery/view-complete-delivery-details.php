@@ -293,7 +293,7 @@
                                     <th>Number of Items</th>
                                     <td>: 15</td>
                                 </tr>
-                                <tr style="color: #2b9348">
+                                <tr style="color: var(--first-color)">
                                     <th>Completed Time</th>
                                     <td>: 15.00 PM</td>
                                 </tr>
@@ -469,7 +469,7 @@
                                     <th>Number of Items</th>
                                     <td>: 15</td>
                                 </tr>
-                                <tr style="color: #2b9348">
+                                <tr style="color: var(--first-color)">
                                     <th>Completed Time</th>
                                     <td>: 15.00 PM</td>
                                 </tr>
@@ -645,7 +645,7 @@
                                     <th>Number of Items</th>
                                     <td>15</td>
                                 </tr>
-                                <tr style="color: #2b9348">
+                                <tr style="color:var(--first-color)">
                                     <th>Completed Time</th>
                                     <td>: 15.00 PM</td>
                                 </tr>

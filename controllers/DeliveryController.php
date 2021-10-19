@@ -90,4 +90,28 @@ class DeliveryController extends Controller
         );
     }
 
+    public function assignrider(){
+        $this->setLayout('headeronly-staff');
+        return $this->render('delivery/assign-rider');
+    }
+
+    public function viewnewdelivery(){
+        $this->setLayout('headeronly-staff');
+        return $this->render('delivery/view-new-delivery-details');
+    }
+
+    public function viewongoingdelivery(){
+        $this->setLayout('headeronly-staff');
+        return $this->render('delivery/view-ongoing-delivery-details');
+    }
+
+    public function viewcompletedelivery(){
+        $this->setLayout('headeronly-staff');
+        return $this->render('delivery/view-complete-delivery-details');
+    }
+
+    public function viewdelivery(){
+        $this->setLayout('dashboard-delivery');
+        return $this->render('delivery/view-delivery');
+    }
 }

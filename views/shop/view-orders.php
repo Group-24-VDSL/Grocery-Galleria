@@ -8,7 +8,7 @@
 
 <div class="home-content">
 
-    <div class="core-order">
+    <div style="" class="core-order">
         <h1 class="heading"> <span>Orders</span></h1>
         <div class = "tabs">
             <ul class="order-tabs">
