@@ -70,8 +70,9 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
         Item.classList.add('box');
         const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
         $.getJSON(URLShopItem, function (item) {
+            console.log(item);
             Item.innerHTML = `
-            <img id="ItemImage" name="ItemImage" src="${item.ItemImage}" alt="">
+            <img id="ItemImage" alt="ItemImage" src="${item.ItemImage}" >
                 <h3 id="Name">${item.Name}</h3>
                 <div class="price">
                     <span id="UnitPrice">${shopItem.UnitPrice}</span>
@@ -80,7 +81,7 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                     </div>
                 <div class="quantity">
                     <span>quantity :</span>
-                    <input type="number" name="quantity" min=${item.UWeight} max="3000" step=${item.UWeight} value=${item.UWeight}>
+                    <input type="number" name="quantity" min=${item.UWeight} max="${item.UWeight*item.MaxCount}" step=${item.UWeight} value=${item.UWeight}>
                 </div>
                 <a href="#" class="btn"><i class="fas fa-cart-plus"></i> add to cart</a>
             `
@@ -90,20 +91,20 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
 });
 
 
+if(document.location.pathname === '/gallery') {
+    const ShopCategory = getUrlParameter('Category');
+    document.getElementById('CategoryType').innerHTML = `${ShopType[ShopCategory]}`;
 
-const ShopCategory =getUrlParameter('Category');
-document.getElementById('CategoryType').innerHTML =`${ShopType[ShopCategory]}`;
+    const URLFindShops = URLShopsAPI.concat("?Category=").concat(ShopCategory);
 
-const URLFindShops = URLShopsAPI.concat("?Category=").concat(ShopCategory);
+    const galleryBox = document.getElementById('gallery-box');
 
-const galleryBox = document.getElementById('gallery-box');
-
-$.getJSON(URLFindShops,function (Shops){
-    Shops.forEach(Shop=>{
-        const shopBox = document.createElement('div');
-        const shopURl = "/gallery/shop?ShopID=".concat(Shop.ShopID);
-        shopBox.classList.add('box');
-        shopBox.innerHTML = `
+    $.getJSON(URLFindShops, function (Shops) {
+        Shops.forEach(Shop => {
+            const shopBox = document.createElement('div');
+            const shopURl = "/gallery/shop?ShopID=".concat(Shop.ShopID);
+            shopBox.classList.add('box');
+            shopBox.innerHTML = `
         <img src="/img/welcome/logo.png" alt="">
             <h3>${Shop.ShopName}</h3>
             <div class="stars">
@@ -117,7 +118,8 @@ $.getJSON(URLFindShops,function (Shops){
             <a href=${shopURl} class="btn">
                 <i class="fas fa-external-link-alt"></i> Visit Store</a>
         `
-    galleryBox.appendChild(shopBox);
-    })
-})
+            galleryBox.appendChild(shopBox);
+        });
+    });
+}
 

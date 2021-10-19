@@ -72,7 +72,6 @@
 <section class="footer" id="contact">
 
     <div class="box-container">
-
         <div class="box">
             <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam culpa sit enim nesciunt rerum laborum illum quam error ut alias!</p>
