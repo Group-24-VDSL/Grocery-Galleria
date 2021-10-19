@@ -413,6 +413,13 @@
     border: 1px solid var(--text-color-light);
 }
 
+ .rider-type:hover, .rider-select:hover {
+     border: 1px solid var(--first-color);
+ }
+.rider-type:sele, .rider-select:focus {
+    border: 1px solid var(--first-color);
+}
+
 .rider-type{
     width: 8rem;
 }
