@@ -24,7 +24,7 @@
     padding-bottom: 1rem;
 }
 .core-complaint {
-    margin-bottom: 0rem;
+    margin-bottom: 0;
     padding-bottom: 0;
 }
 .complaint-heading {
@@ -366,8 +366,8 @@ textarea:hover, select:hover, input:hover{
     /* padding: 1rem;    */
     background-color: var(--home-color);
     /* background-color: green; */
-    margin: 0rem;
-    padding: 0rem;
+    margin: 0;
+    padding: 0;
     padding-bottom: -1.8rem;
     /* padding-right: 1rem; */
     /* max-width: ; */
