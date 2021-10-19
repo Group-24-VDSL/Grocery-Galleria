@@ -37,7 +37,7 @@
     border-radius: 5px 15px;
     box-shadow: 0 4px 4px rgba(87 ,100 ,126 ,0.2);
     background-color: #fff;
-    max-width: 75%;
+    min-width: 120rem;
     padding : 100px
 }
 
