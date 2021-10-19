@@ -7,10 +7,7 @@ use app\core\UserModel;
 
 class Customer extends UserModel
 {
-
-
     public int $CustomerID = 0;
-
     public string $Name = '';
     public string $Address = '';
     public string $ContactNo = '';

@@ -41,8 +41,7 @@ class Item extends DBModel
             'Unit'=>'Unit',
             'Category'=>'Category',
             'MRP'=>'Maximum Retail Price(MRP)',
-            'MaxCount' => 'Max Selling
-                        Weight in gram'
+            'MaxCount' => 'Max Count'
         ];
     }
 
@@ -57,7 +56,7 @@ class Item extends DBModel
             'Name' => [self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]],
             'UWeight' => [self::RULE_REQUIRED,[self::RULE_MIN_VAL,'minValue'=>0]],
             'MRP' => [[self::RULE_MIN,'min'=>0]],
-            'MaxCount' => [[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_MAX_VAL,'maxValue'=>10]],
+            'MaxCount' => [[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_MAX_VAL,'maxValue'=>50]],
             'Unit' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]],
             'Category' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]]
         ];

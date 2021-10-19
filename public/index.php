@@ -48,7 +48,7 @@ $app->router->get('/customer/cart',[CustomerController::class,'cart']);
 $app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
-$app->router->get('/gallery',[SiteController::class,'shopGallery']);
+$app->router->get('/gallery',[ShopController::class,'shopGallery']);
 
 $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
@@ -69,7 +69,7 @@ $app->router->get('/dashboard/staff/viewitems',[StaffController::class,'viewitem
 $app->router->post('/dashboard/staff/user',[StaffController::class,'user']);
 $app->router->post('/dashboard/staff/viewcustomers',[StaffController::class,'viewcustomers']);
 $app->router->post('/dashboard/staff/viewshops',[StaffController::class,'viewshops']);
-$app->router->post('/dashboard/staff/viewusers',[StaffController::class,'viewusers']);
+$app->router->get('/dashboard/staff/viewusers',[StaffController::class,'viewUsers']);
 $app->router->get('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);

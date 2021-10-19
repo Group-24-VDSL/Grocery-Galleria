@@ -3,6 +3,8 @@
 namespace app\core;
 
 use JsonSerializable;
+use app\core\db\DBModel;
+use app\models\Item;
 
 abstract class Model implements JsonSerializable
 {
@@ -19,6 +21,7 @@ abstract class Model implements JsonSerializable
     public const RULE_NIC = 'nic';
     public const RULE_MIN_VAL = 'minValue';
     public const RULE_MAX_VAL = 'maxValue';
+    public const RULE_MRP = 'MRP';
 
     public const REGEXP_PHONE_NL = "/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
     public const REGEXP_NIC = "/([0-9]){9}V$|(^(19[0-9][0-9]|20[0-9][0-9])([0-9]){8}$)/";
@@ -76,7 +79,8 @@ abstract class Model implements JsonSerializable
             self::RULE_ONEOF => 'Invalid Value Given',
             self::RULE_NIC => 'Invalid NIC',
             self::RULE_MIN_VAL => 'Min value of this field must greater than {minValue}',
-            self::RULE_MAX_VAL => 'Max value of this field must be {maxValue}'
+            self::RULE_MAX_VAL => 'Max value of this field must be {maxValue}',
+            self::RULE_MRP => 'Unit Price Should be less than or equal to MRP'
         ];
     }
 
@@ -138,6 +142,16 @@ abstract class Model implements JsonSerializable
                         $this->addErrorForRule($attribute, self::RULE_UNIQUE, ['field' => $this->getLabel($attribute)]);
                     }
                 }
+                if($ruleName===self::RULE_MRP){
+                    $item = new Item();
+                    $item = $item->findOne(['ItemID' =>$this->{ItemID}]);
+                    $item = $item->jsonSerialize();
+                    if($value > $item['MRP']){
+                        $this->addErrorForRule($attribute, self::RULE_MRP);
+                    }
+
+                }
+
 
             }
         }

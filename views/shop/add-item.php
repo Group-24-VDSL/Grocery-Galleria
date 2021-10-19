@@ -14,16 +14,16 @@
         <div class="inputBox lock">
             <label for="MRP"
             ><i class="fas fa-arrow-circle-up"></i>MRP</label>
-            <input id="MRP" type="text" readonly/>
+            <input id="MRP" name="MRP" type="text" readonly/>
         </div>
         <div class="inputBox lock">
             <label for="Unit"><i class="fas fa-balance-scale"></i>Unit</label>
-            <input id="Unit" type="text" readonly/>
+            <input id="Unit" name="Unit" type="text" readonly/>
         </div>
-        <?php $form->fieldonly($model, "ShopID")->setValue(0) ?>
+
         <div class="inputBox">
             <label for="UWeight"><i class="fas fa-weight-hanging"></i>Unit Weight</label>
-            <input id="UWeight" type="text" readonly/>
+            <input id="UWeight" name="UWeight" type="text" readonly/>
         </div>
         <div class="inputBox">
             <label for="UPrice"><i class="fas fa-coins"></i>Unit Price</label>
@@ -33,6 +33,10 @@
             <label for="Stock"><i class="fas fa-coins"></i>Stock</label>
             <?php echo $form->fieldonly($model, "Stock", '') ?>
         </div>
+        <div class="inputBox">
+            <?php echo $form->fieldonly($model, "ShopID")->setValue(5)->hiddenField()?>
+        </div>
+        <div class="inputBox"></div>
         <button class="btn">Submit</button>
         <script src="/js/AddItem.js"></script>
         </form>
