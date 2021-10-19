@@ -569,6 +569,44 @@ ul {
     color:#FFF;
 }
 
+.btn-item {
+    display: inline-block;
+    /* margin-top: 1rem; */
+    align-content: center;
+    color: var(--body-color);
+    /* padding: 0rem 0rem; */
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    font-size: var(--smaller-font-size);
+    border-radius: 0.5rem;
+    transition: 0.3s;
+    border: 0px;
+    /*background-color: #FFF;*/
+    align-items: top;
+    /*!* height: 25px;*/
+}
+
+.btn-item:hover {
+    background-color: darkgreen;
+}
+
+.order-view {
+    background-color:transparent;
+    font-size: 20px;
+    color: green;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+/*.order-view:nth-child(2n){*/
+/*    background-color: var(--home-color);*/
+/*}*/
+
+button{
+    background-color: transparent;
+}
+
+
 .home-content .core-order .container-items .ongoing-items .ubutton .btn-item {
     display: inline-block;
     /* margin-top: 1rem; */
