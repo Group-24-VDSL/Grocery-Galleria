@@ -20,7 +20,7 @@ const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
 const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
 
 
-const host = window.location.origin;
+const host = window.location.origin; //http://domainname
 
 //Api links
 const URLShopAPI = host+"/api/shop";
