@@ -160,9 +160,10 @@ class StaffController extends Controller
             'model' => $complaint
         ]);
     }
-    public function viewUsers()
-    {
-        $this->setLayout("dashboardL-staff");
-        return $this->render("staff/users");
-    }
+        public function viewUsers()
+        {
+            $this->setLayout("dashboardL-staff");
+            return $this->render("staff/users");
+        }
+
 }
