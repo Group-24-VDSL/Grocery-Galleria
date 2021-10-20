@@ -166,23 +166,23 @@
                     </table>
                     <div style="gap: 2rem" class="complete-section">
 
-                            <table style="height: 170px" class="details">
-                                <tbody>
-                                <tr style="height: 60px">
-                                    <th>Total (LKR) :</th>
-                                    <td>2500.00</td>
-                                </tr>
-                                <tr style="height: 60px">
-                                    <th>Weight :</th>
-                                    <td>5 Kg</td>
-                                </tr>
-                                <tr style="height: 60px">
-                                    <th>Number of Items:</th>
-                                    <td>15</td>
-                                </tr >
-                                </tbody>
-                            </table>
-                        <button class="complete-btn" type="submit" value="Complete">Mark as Completed</button>
+                        <table style="height: 170px" class="details">
+                            <tbody>
+                            <tr style="height: 60px">
+                                <th>Total (LKR) :</th>
+                                <td>2500.00</td>
+                            </tr>
+                            <tr style="height: 60px">
+                                <th>Weight :</th>
+                                <td>5 Kg</td>
+                            </tr>
+                            <tr style="height: 60px">
+                                <th>Number of Items:</th>
+                                <td>15</td>
+                            </tr >
+                            </tbody>
+                        </table>
+<!--                        <button class="complete-btn" type="submit" value="Complete">Mark as Completed</button>-->
                     </div>
                 </div>
             </div>

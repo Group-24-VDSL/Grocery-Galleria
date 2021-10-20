@@ -1,4 +1,4 @@
-<<!--<link rel="stylesheet" href="/css/Register.css">-->
+<!--<link rel="stylesheet" href="/css/Register.css">-->
 <link rel="stylesheet" href="/css/dashboardStyle.css" />
 <link rel="stylesheet" href="/css/all.css" />
 <link rel="stylesheet" href="/css/shop-order-details.css" />
@@ -295,7 +295,7 @@
                                 </tr>
                                 <tr style="color: var(--first-color)">
                                     <th>Status</th>
-                                    <td>: Collected<</td>
+                                    <td>: Collected </td>
                                 </tr>
                                 </tbody>
                             </table>

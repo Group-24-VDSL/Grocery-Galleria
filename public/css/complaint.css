@@ -455,7 +455,7 @@ thead {
 }
 
 tbody {
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     display: block;
     /* max-height: 460px; */
 
@@ -704,4 +704,9 @@ tbody {
     color: var(--container-color);
     margin: 20px;
     margin-right: 65px;
+}
+
+button .back {
+    height: 50px;
+    background-color: #fff;
 }

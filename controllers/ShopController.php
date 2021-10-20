@@ -66,6 +66,11 @@ class ShopController extends Controller
         return $this->render('shop/view-order-details');
     }
 
+    public function viewcompleteorder(){
+        $this->setLayout('headeronly-staff');
+        return $this->render('shop/view-completed-order');
+    }
+
 
     /**
      * @throws TypeException

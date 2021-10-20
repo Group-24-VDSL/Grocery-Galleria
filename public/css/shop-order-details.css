@@ -181,7 +181,7 @@
     margin: 1rem;
 }
 .table-scroll{
-    width:90%;
+    width:52.6%;
     display: block;
     empty-cells: show;
     /* Decoration */
@@ -300,6 +300,13 @@
     height: 355px;
     box-shadow: 0 0.5rem 1rem rgba(0 ,0 ,0 , 0.1);
 }
+.staff-details th {
+    height: 5.3rem;
+}
+.cus-details .details td, .cus-details .details th {
+    text-align: left;
+}
+
 .details td,
 .staff-details td ,
 .shop-details td{
@@ -311,16 +318,31 @@
 }
 .details th,
 .staff-details th,
-.shop-details th,.cus-details th  {
-    text-align:center;
+.shop-details th {
+    text-align: center;
     font-weight: 500;
     font-size: 15px;
     border-bottom: 1px solid var(--home-color);
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+.cus-details{
+    width: 60%;
+}
+
+.cus-details th{
+    text-align:left;
+    font-weight: 500;
+    font-size: 15px;
+    border-bottom: 1px solid var(--home-color);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
 .shop-details th{
     width: 90px;
+    height: 4.2rem;
 }
 
 .shop-id {
