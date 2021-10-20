@@ -82,9 +82,24 @@ class StaffController extends Controller
                 'model' => $item
             ]);
     }
-    public function products(){
+    public function products(Request $request){
         $item = new Item();
         $this->setLayout("dashboardL-staff");
+
+        if($request->isPost()){
+            $item->loadData($request->getBody());
+
+            if($item->validate() && $item->update()){
+                Application::$app->session->setFlash("success", "Item Updated Successfully.");
+                Application::$app->response->redirect("/dashboard/staff/products");
+            }else{
+                Application::$app->session->setFlash("warning", "Validation Failed.");
+                return $this->render("staff/core-products"
+                    ,[
+                        'model' => $item
+                    ]);
+            }
+        }
         return $this->render("staff/core-products"
             ,[
                 'model' => $item
