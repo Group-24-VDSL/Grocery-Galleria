@@ -40,7 +40,7 @@ $app->router->post('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 
 
-
+//customer
 $app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->get('/customer/profile',[CustomerController::class,'profile']);
@@ -50,6 +50,7 @@ $app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
 $app->router->get('/gallery',[ShopController::class,'shopGallery']);
 
+//delivery staff
 $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'viewriders']);
@@ -62,6 +63,7 @@ $app->router->get('/dashboard/delivery/viewnewdelivery',[DeliveryController::cla
 $app->router->get('/dashboard/delivery/viewongoingdelivery',[DeliveryController::class,'viewongoingdelivery']);
 $app->router->get('/dashboard/delivery/viewcompletedelivery',[DeliveryController::class,'viewcompletedelivery']);
 
+//system staff
 $app->router->get('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
 $app->router->post('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
 $app->router->get('/dashboard/staff/additem',[StaffController::class,'additem']);
@@ -79,8 +81,7 @@ $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'vie
 $app->router->get('/dashboard/staff/vieworders',[StaffController::class,'vieworders']);
 $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
 
-
-
+//shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
 $app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
@@ -92,6 +93,7 @@ $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->get('/test',[TestController::class,'test']);
 $app->router->post('/test',[TestController::class,'test']);
 
+//api
 $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopItems',[APIController::class,'getShopItems']);
@@ -99,7 +101,8 @@ $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
 $app->router->get('/api/getcart',[APIController::class,'getCart']);
 $app->router->post('/api/addtocart',[APIController::class,'addToCart']);
-$app->run();
+$app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
 
+$app->run();
 
 ?>

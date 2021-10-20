@@ -26,6 +26,13 @@ class Router
         $this->routes['post'][$path]=$callback;
     }
 
+    public function patch($path,$callback){
+        $this->routes['patch'][$path]=$callback;
+    }
+
+    /**
+     * @throws NotFoundException
+     */
     public function resolve()
     {
         $path = $this->request->getPath();
