@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/cart.css">
+    <script src="/js/jquery.min.js"></script>
 </head>
 <body>
 <header>
@@ -71,5 +72,6 @@
 
     <p class="footer-copyright">&#169; 2021 Grocery Galleria. All right reserved.</p>
 </section>
+<script src="/js/cart.js" defer></script>
 </body>
 </html>
