@@ -455,7 +455,7 @@ thead {
 }
 
 tbody {
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     display: block;
     /* max-height: 460px; */
 
