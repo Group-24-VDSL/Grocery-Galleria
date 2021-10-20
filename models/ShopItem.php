@@ -24,14 +24,13 @@ class ShopItem extends DBModel
 
     public static function primaryKey(): string
     {
-//        return ['ItemID','ShopID'];
         return '';
     }
 
     public function rules(): array
     {
         return [
-            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0],self::RULE_MRP],
+            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_MAX_VAL_CLASS,'class'=> Item::class,'checkattribute'=>'MRP','where'=>'ItemID']],
             'Stock' => [[self::RULE_MIN_VAL,'minValue'=>5]]
         ];
     }

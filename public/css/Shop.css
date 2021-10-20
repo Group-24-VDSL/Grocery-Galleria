@@ -279,6 +279,11 @@ section {
   padding: 0.5rem;
   background: var(--body-color);
 }
+
+.product .box-container .add-to-cart {
+  cursor: pointer;
+}
+
 .product .box-container .box .btn {
   display: block;
 }

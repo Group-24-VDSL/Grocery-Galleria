@@ -1,6 +1,11 @@
 # Remove the question mark from the request but maintain the query string
 RewriteEngine On
 RewriteBase /
+
+RewriteRule ^manifest$ manifest.json
+RewriteRule ^pwabuilder-sw$ pwabuilder-sw.js
+RewriteRule ^pwabuilder-sw-register$ pwabuilder-sw-register.js
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
