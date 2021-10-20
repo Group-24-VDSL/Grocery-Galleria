@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2021 at 11:32 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.6
+-- Generation Time: Oct 20, 2021 at 09:02 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,7 +51,7 @@ CREATE TABLE `complaint` (
   `OrderDate` date NOT NULL,
   `ComplaintDate` date NOT NULL,
   `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-  `Prority` tinyint(1) NOT NULL,
+  `Priority` tinyint(1) NOT NULL,
   `Regarding` tinyint(1) NOT NULL,
   `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -175,10 +175,11 @@ CREATE TABLE `ordercart` (
 --
 
 CREATE TABLE `orders` (
-  `OrderID` int(11) NOT NULL,
-  `CartID` int(11) NOT NULL,
-  `DeliveryCost` float NOT NULL,
-  `TotalCost` float NOT NULL
+                          `OrderID` int(11) NOT NULL,
+                          `CartID` int(11) NOT NULL,
+                          `OrderDate` date NOT NULL,
+                          `DeliveryCost` float NOT NULL,
+                          `TotalCost` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -279,6 +280,19 @@ CREATE TABLE `verification` (
   `UserID` int(11) NOT NULL,
   `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
   `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Table structure for table `deliverystaff`
+--
+
+CREATE TABLE `deliverystaff` (
+                                 `StaffID` int(11) NOT NULL,
+                                 `Name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+                                 `ContactNo` varchar(20) COLLATE utf8mb4_bin NOT NULL,
+                                 `Email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+                                 `City` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+                                 `Suburb` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
