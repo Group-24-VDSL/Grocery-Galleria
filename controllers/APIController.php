@@ -62,7 +62,8 @@ class APIController extends Controller
                 $checktemp = TemporaryCart::findOne(["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID]);
                 if($checktemp) { //there exists such item
                     $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
-                    if($tempcart->update(["Quantity"=>$newQuantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])){
+                    $tempcart->Quantity = $newQuantity;
+                    if ($tempcart->validate() && $tempcart->update(["Quantity"=>$newQuantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])) {
                         return json_encode('{"success":"ok"}');
                     }else{
                         return json_encode('{"success":"fail"}');
@@ -76,8 +77,26 @@ class APIController extends Controller
                 }
             }
             return json_encode('{"success":"fail"}');
+        }elseif($request->isUpdate()){
+            $json = $request->getJson();
+            if($json){
+                $tempcart = new TemporaryCart();
+                $tempcart->loadData($json);
+                $checktemp = TemporaryCart::findOne(["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID]);
+                if($checktemp) { //there exists such item
+                    if($tempcart->update(["Quantity"=>$tempcart->Quantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])){
+                        return json_encode('{"success":"ok"}');
+                    }else{
+                        return json_encode('{"success":"fail"}');
+                    }
+                }else{
+                    return json_encode('{"success":"fail"}');
+                }
+            }
+        }else{
+            return json_encode('{"success":"fail"}');
         }
-        return json_encode('{"success":"fail"}');
+
     }
 
 
