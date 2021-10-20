@@ -40,7 +40,7 @@
                         </form>
                         <div class="view">   
                             <span class="header-label header-label-top view-button-left">Previous </span><a href=""> <i class='bx bxs-left-arrow'></i></a>
-                             <a href=""><i class='bx bxs-right-arrow'></i></a> <span class="header-label header-label-top view-button-right">Next</span>
+                             <a href="./add-complaint.php"><i class='bx bxs-right-arrow'></i></a> <span class="header-label header-label-top view-button-right">Next</span>
                         </div>
                     </div>
                     
