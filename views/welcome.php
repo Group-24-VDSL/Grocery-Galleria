@@ -9,7 +9,7 @@
         <a href="/register" class="btn">Regsiter Now</a>
     </div>
     <div class="image">
-        <img src="/img/welcome/Home-2.png" alt="">
+        <img src="/img/login-background.png" alt="">
     </div>
 
 </section>
