@@ -28,16 +28,16 @@
         <li>
             <a href="">
                 <i class="bx bx-grid-alt"></i>
-                <span class="link-name">Delivery Dashboard</span>
+                <span class="link-name">Dashboard</span>
             </a>
         </li>
+<!--        <li>-->
+<!--            <a href="">-->
+<!--                <i class="bx bx-list-ul"></i>-->
+<!--                <span class="link-name">Delivery list</span>-->
+<!--            </a>-->
+<!--        </li>-->
 
-        <li>
-            <a href="">
-                <i class="bx bx-list-ul"></i>
-                <span class="link-name">Delivery list</span>
-            </a>
-        </li>
         <li>
             <a href="">
                 <i class='bx bx-cycling'></i>
@@ -60,12 +60,11 @@
     </ul>
 </div>
 <!-- Home section start -->
-
 <section class="home-section">
     <nav>
         <div class="sidebar-toggle">
             <i class="bx bx-menu sidebarBtn"></i>
-            <span class="dashboard">Dashboard</span>
+            <span style="width: 350px" class="dashboard">Delivery Dashboard</span>
         </div>
         <div class="search-box">
             <input type="search" id="" placeholder="Search.... " />
@@ -73,12 +72,11 @@
         </div>
         <div class="profile-details">
             <i class="bx bx-user"></i>
-            <span class="user-name"></span>
+            <span class="user-name">S.K.D</span>
         </div>
     </nav>
 
     <div class="home-content">
-
         {{content}}
     </div>
 </section>
