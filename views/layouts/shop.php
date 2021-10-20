@@ -58,9 +58,8 @@
         </div>
         <div class="part">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-clipboard-list"></a>
-                <a href="#" class="fas fa-user"></a>
+                <a href="/customer/cart" class="fas fa-shopping-cart"></a>
+                <a href="/customer/profile" class="fas fa-user"></a>
             </div>
         </div>
     </div>
