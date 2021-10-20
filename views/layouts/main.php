@@ -40,7 +40,6 @@
         <div class="part">
             <div class="icons">
                 <a href="/customer/cart" class="fas fa-shopping-cart"></a>
-<!--                <a href="#" class="fas fa-clipboard-list"></a>-->
                 <a href="/customer/profile" class="fas fa-user"></a>
             </div>
         </div>
@@ -115,6 +114,7 @@
 
 <!-- footer section ends -->
 <script src="/js/main.js"></script>
+
 
 </body>
 </html>

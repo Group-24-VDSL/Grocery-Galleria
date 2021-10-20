@@ -16,7 +16,7 @@
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
-        <a href="" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        <a href="" class="back"><i class="fas fa-step-backward"></i></a>
     </div>
     <!-- Vege banner start -->
     <section class="shop-banner" id="banner">
@@ -45,9 +45,8 @@
         </div>
         <div class="part">
             <div class="icons">
-                <a href="#"class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-clipboard-list"></a>
-                <a href="#" class="fas fa-user"></a>
+                <a href="/customer/cart"class="fas fa-shopping-cart"></a>
+                <a href="/customer/profile" class="fas fa-user"></a>
             </div>
         </div>
     </div>
@@ -122,5 +121,6 @@
 <!-- Footer ends -->
 
 <script src="/js/Shop.js"></script>
+
 </body>
 </html>
