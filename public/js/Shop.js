@@ -136,7 +136,7 @@ $(document).ready(function (){
         }
 
     }
-    console.log("loads fine");
+
     $(".add-to-cart").click( function (){
         let itemidvalue = $(this).data("itemid");
         let shopidvalue = $(this).data("shopid");

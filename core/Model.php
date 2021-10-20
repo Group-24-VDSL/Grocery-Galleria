@@ -3,7 +3,6 @@
 namespace app\core;
 
 use JsonSerializable;
-use app\models\Item;
 use PDO;
 
 abstract class Model implements JsonSerializable
@@ -21,7 +20,6 @@ abstract class Model implements JsonSerializable
     public const RULE_NIC = 'nic';
     public const RULE_MIN_VAL = 'minValue';
     public const RULE_MAX_VAL = 'maxValue';
-    public const RULE_MRP = 'MRP';
     public const RULE_MAX_VAL_CLASS = 'maxValueClass';
 
     public const REGEXP_PHONE_NL = "/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
@@ -81,7 +79,6 @@ abstract class Model implements JsonSerializable
             self::RULE_NIC => 'Invalid NIC',
             self::RULE_MIN_VAL => 'Min value of this field must greater than {minValue}',
             self::RULE_MAX_VAL => 'Max value of this field must be {maxValue}',
-            self::RULE_MRP => 'Unit Price Should be less than or equal to MRP',
             self::RULE_MAX_VAL_CLASS => 'Value should be less than {maxValue}'
         ];
     }
@@ -163,10 +160,6 @@ abstract class Model implements JsonSerializable
                     }
 
                 }
-
-
-
-
             }
         }
         return empty($this->errors);

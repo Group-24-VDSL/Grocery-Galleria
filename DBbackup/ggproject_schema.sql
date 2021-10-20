@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2021 at 01:55 PM
+-- Generation Time: Oct 20, 2021 at 09:02 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -43,17 +43,17 @@ CREATE TABLE `cart` (
 --
 
 CREATE TABLE `complaint` (
-                             `ComplaintID` int(11) NOT NULL,
-                             `CustomerID` int(11) NOT NULL,
-                             `StaffID` int(11) NOT NULL,
-                             `OrderID` int(11) NOT NULL,
-                             `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
-                             `OrderDate` date NOT NULL,
-                             `ComplaintDate` date NOT NULL,
-                             `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-                             `Prority` tinyint(1) NOT NULL,
-                             `Regarding` tinyint(1) NOT NULL,
-                             `Status` tinyint(1) NOT NULL
+  `ComplaintID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `StaffID` int(11) NOT NULL,
+  `OrderID` int(11) NOT NULL,
+  `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
+  `OrderDate` date NOT NULL,
+  `ComplaintDate` date NOT NULL,
+  `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+  `Priority` tinyint(1) NOT NULL,
+  `Regarding` tinyint(1) NOT NULL,
+  `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -137,16 +137,6 @@ CREATE TABLE `item` (
   `Category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
---
--- Dumping data for table `item`
---
-
-INSERT INTO `item` (`ItemID`, `Name`, `ItemImage`, `Brand`, `UWeight`, `Unit`, `MRP`, `MaxCount`, `Category`) VALUES
-(1, 'Potato', '/img/product-imgs/9500000.jpg', '', 1, 0, 160, 5, 0),
-(2, 'Big Onion', '/img/product-imgs/9500001.jpg', '', 1, 0, 120, 5, 1),
-(3, 'Tomato', '/img/product-imgs/9500002.jpg', '', 1, 0, 200, 5, 1),
-(4, 'Carrot', '/img/product-imgs/9500003.jpg', '', 1, 0, 120, 5, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -162,13 +152,6 @@ CREATE TABLE `login` (
   `Delete_Flag` tinyint(1) NOT NULL DEFAULT 0,
   `Role` varchar(10) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
---
--- Dumping data for table `login`
---
-
-INSERT INTO `login` (`UserID`, `Email`, `PasswordHash`, `Name`, `Verify_Flag`, `Delete_Flag`, `Role`) VALUES
-    (2, 'sandunisandeepa1@gmail.com', '$2y$10$tC4L/GAcCFLchV3/.mVd0uu7adCT6FEi7p5S7i9wshCpVYxtlxd1C', 'Vindy', 0, 0, 'Staff');
 
 -- --------------------------------------------------------
 
@@ -266,10 +249,25 @@ CREATE TABLE `shoporder` (
 --
 
 CREATE TABLE `staff` (
-                         `StaffID` int(11) NOT NULL,
-                         `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                         `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-                         `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
+  `StaffID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temporarycart`
+--
+
+CREATE TABLE `temporarycart` (
+  `ItemID` int(11) NOT NULL,
+  `ShopID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Purchased` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -282,6 +280,19 @@ CREATE TABLE `verification` (
   `UserID` int(11) NOT NULL,
   `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
   `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Table structure for table `deliverystaff`
+--
+
+CREATE TABLE `deliverystaff` (
+                                 `StaffID` int(11) NOT NULL,
+                                 `Name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+                                 `ContactNo` varchar(20) COLLATE utf8mb4_bin NOT NULL,
+                                 `Email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+                                 `City` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+                                 `Suburb` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -387,6 +398,12 @@ ALTER TABLE `staff`
   ADD PRIMARY KEY (`StaffID`);
 
 --
+-- Indexes for table `temporarycart`
+--
+ALTER TABLE `temporarycart`
+  ADD PRIMARY KEY (`ItemID`,`ShopID`,`CustomerID`);
+
+--
 -- Indexes for table `verification`
 --
 ALTER TABLE `verification`
@@ -425,7 +442,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -443,7 +460,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-    MODIFY `ShopID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ShopID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
