@@ -39,7 +39,8 @@
                                 <li class="order-time">08:00 AM</li>
                                 <li class="order-total">2500.00</li>
                                 <li class="ubutton">
-                                    <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
+                                    <a href=""><a href="/dashboard/shop/vieworderdetails"> <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a></a>
+<!--                                    <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>-->
                                 </li>
                             </ul>
                             <ul class="item">
@@ -247,7 +248,8 @@
                                 <li class="order-time">08:00 AM</li>
                                 <li class="order-total">2500.00</li>
                                 <li class="ubutton">
-                                    <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
+                                    <a href="/dashboard/shop/viewcompleteorder"><button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a>
+
                                 </li>
                             </ul>
                             <ul class="item">

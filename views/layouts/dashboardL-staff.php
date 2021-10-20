@@ -65,12 +65,12 @@
                 <span class="link-name">Complaints</span>
             </a>
         </li>
-        <li>
-            <a href="">
-            <i class='bx bx-cycling'></i>
-                <span class="link-name">Riders</span>
-            </a>
-        </li>
+<!--        <li>-->
+<!--            <a href="">-->
+<!--            <i class='bx bx-cycling'></i>-->
+<!--                <span class="link-name">Riders</span>-->
+<!--            </a>-->
+<!--        </li>-->
         <li>
             <a href="">
                 <i class="bx bx-cog"></i>

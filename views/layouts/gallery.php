@@ -120,7 +120,7 @@
 </section>
 <!-- Footer ends -->
 
-<script src="/js/Shop.js"></script>
+<script src="/js/gallery.js"></script>
 
 </body>
 </html>
