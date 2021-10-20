@@ -21,7 +21,7 @@ const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
 const host = window.location.origin; //http://domainname
 
 const URLShopAPI = host+"/api/shop";
-const URLShopItemAPI = host+"/api/shopItems";
+const URLShopItemAPI = host+"/api/shopitems";
 const URLFindItemAPI = host+"/api/item";
 
 const URLAddtoCartAPI = host+"/api/addtocart";
