@@ -10,6 +10,7 @@ use app\controllers\TestController;
 use app\core\Application;
 use app\controllers\SiteController;
 use app\controllers\AuthController;
+use app\controllers\RiderController;
 
 
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -102,6 +103,10 @@ $app->router->get('/api/shops',[APIController::class,'getAllShop']);
 $app->router->get('/api/getcart',[APIController::class,'getCart']);
 $app->router->post('/api/addtocart',[APIController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
+
+//rider
+$app->router->get('/rider/vieworder',[StaffController::class,'vieworder']);
+$app->router->post('/rider/vieworder',[StaffController::class,'vieworder']);
 
 $app->run();
 
