@@ -27,13 +27,20 @@ class Request
     {
         return $this->method()==='get';
     }
-    public function isPost(){
+
+    public function isPost(): bool
+    {
         return $this->method()==='post';
     }
 
-    public function isSet($key)
+    public function isPatch(): bool
     {
-        if ($this->method() === 'get'){
+        return $this->method()==='patch';
+    }
+
+    public function isSet($key): bool
+    {
+        if ($this->isGet()){
             return isset($_GET[$key]);
         }else{
             return isset($_POST[$key]);
@@ -44,12 +51,12 @@ class Request
     {
         $body = [];
 
-        if($this->method() === 'get'){
+        if($this->isGet()){
             foreach ($_GET as $key => $value){
                $body[filter_var($key,FILTER_SANITIZE_FULL_SPECIAL_CHARS)] = filter_input(INPUT_GET,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             }
         }
-        if($this->method() === 'post'){
+        if($this->isPost()){
             foreach ($_POST as $key => $value){
                 $body[filter_var($key,FILTER_SANITIZE_FULL_SPECIAL_CHARS)] = filter_input(INPUT_POST,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             }
@@ -60,7 +67,7 @@ class Request
 
     public function getJson(): ?array
     {
-        if($this->method() === 'post'){
+        if($this->isPost() || $this->isPatch()){
             $raw =file_get_contents('php://input'); //access raw post request
             $rawbody = json_decode($raw,true); //decode it as a associative array
             if(json_last_error() === JSON_ERROR_NONE){ //valid json
@@ -79,7 +86,7 @@ class Request
 
     public function loadFile($path,$attribute,$filename=''): ?string
     {
-      if($this->method() === 'post'){
+      if($this->isPost()){
           $file = getimagesize($_FILES[$attribute]["tmp_name"]);
           if($file){
               if($filename !== ''){
