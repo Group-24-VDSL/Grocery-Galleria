@@ -29,6 +29,8 @@
                                     <li>Customer ID</li>
                                     <li>No. of Shops</li>
                                     <li>Total (LKR)</li>
+                                    <li>City</li>
+                                    <li>Suburb</li>
                                     <li>View</li>
                                 </ul>
                             </div>
@@ -42,6 +44,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -55,6 +59,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -68,6 +74,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -81,6 +89,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">1</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -94,6 +104,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -107,6 +119,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -120,6 +134,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -133,6 +149,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -146,6 +164,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">1</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -159,6 +179,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -172,6 +194,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -185,6 +209,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -203,6 +229,8 @@
                                     <li>Customer ID</li>
                                     <li>No. of Shops</li>
                                     <li>Total (LKR)</li>
+                                    <li>City</li>
+                                    <li>Suburb</li>
                                     <li>View</li>
                                 </ul>
                             </div>
@@ -216,6 +244,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no"4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -229,6 +259,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -242,6 +274,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">1</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -255,6 +289,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -268,6 +304,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -281,6 +319,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -294,6 +334,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -307,6 +349,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -320,6 +364,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -333,6 +379,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -346,6 +394,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -359,6 +409,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -377,6 +429,8 @@
                                     <li>Customer ID</li>
                                     <li>No. of Shops</li>
                                     <li>Total (LKR)</li>
+                                    <li>City</li>
+                                    <li>Suburb</li>
                                     <li>View</li>
                                 </ul>
                             </div>
@@ -390,6 +444,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">1</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -403,6 +459,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -416,6 +474,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -429,6 +489,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -442,6 +504,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -455,6 +519,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">2</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -468,6 +534,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -481,6 +549,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -494,6 +564,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -507,6 +579,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">3</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -520,6 +594,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
@@ -533,6 +609,8 @@
                                     <li class="customer-id">1102922</li>
                                     <li class="shop-no">4</li>
                                     <li class="order-total">2500.00</li>
+                                    <li>Colombo</li>
+                                    <li>Nugegoda</li>
                                     <li class="ubutton">
                                         <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button>
                                     </li>
