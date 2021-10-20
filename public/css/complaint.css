@@ -705,3 +705,8 @@ tbody {
     margin: 20px;
     margin-right: 65px;
 }
+
+button .back {
+    height: 50px;
+    background-color: #fff;
+}
