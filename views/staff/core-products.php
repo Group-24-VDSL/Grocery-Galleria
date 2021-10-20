@@ -5,12 +5,12 @@
 <div class="core">
     <h1 class="heading">System <span>Products</span></h1>
     <div class="container-core">
-        <ul class="tabs">
-            <li><button class="btn-tab">Vegetables</button></li>
-            <li><button class="btn-tab">Fruits</button></li>
-            <li><button class="btn-tab">Grocery</button></li>
-            <li><button class="btn-tab">Fish</button></li>
-            <li><button class="btn-tab">Meat</button></li>
+        <ul id="tab=btns" class="tabs">
+            <li><button data-href="?Category=0" id="btn-vege" class="btn-tab">Vegetables</button></li>
+            <li><button data-href="?Category=1" class="btn-tab">Fruits</button></li>
+            <li><button data-href="?Category=2" class="btn-tab">Grocery</button></li>
+            <li><button data-href="?Category=3" class="btn-tab">Fish</button></li>
+            <li><button data-href="?Category=4" class="btn-tab">Meat</button></li>
         </ul>
         <div class="table-header">
             <ul>
@@ -24,254 +24,21 @@
                 <li>Update</li>
             </ul>
         </div>
-        <div class="table-details scroller">
-            <ul class="column">
-                <li class="column-img">
-                    <img src="/views/shop/img/Pic915013.jpg" alt="" />
-                </li>
-                <li class="column-name">Potato</li>
-                <li class="column-brand">Null</li>
-                <li class="column-unit">Kg</li>
-                <li class="column-mrp"><input type="text" /></li>
-                <li class="column-minWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="minWeight"
-                        name="minWeight"
-                    />
-                </li>
-                <li class="column-IncStep">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="IncStep"
-                        name="IncStep"
-                    />
-                </li>
-                 
-                <li class="column-ubutton">
-                    <button class="btn-column" type="submit">Update</button>
-                </li>
-            </ul>
-            <ul class="column">
-                <li class="column-img">
-                    <img src="/views/shop/img/Pic914005.jpg" alt="" />
-                </li>
-                <li class="column-name">Big Onion</li>
-                <li class="column-brand">Null</li>
-                <li class="column-unit">Kg</li>
-                <li class="column-mrp"><input type="text" /></li>
-                <li class="column-minWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="minWeight"
-                        name="minWeight"
-                    />
-                </li>
-                <li class="column-IncStep">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="IncStep"
-                        name="IncStep"
-                    />
-                </li>
-                 
-                <li class="column-ubutton">
-                    <button class="btn-column" type="submit">Update</button>
-                </li>
-            </ul>
-            <ul class="column">
-                <li class="column-img">
-                    <img src="/views/shop/img/Pic914015.jpg" alt="" />
-                </li>
-                <li class="column-name">Garlic</li>
-                <li class="column-brand">Null</li>
-                <li class="column-unit">Kg</li>
-                <li class="column-mrp"><input type="text" /></li>
-                <li class="column-minWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="minWeight"
-                        name="minWeight"
-                    />
-                </li>
-                <li class="column-IncStep">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="IncStep"
-                        name="IncStep"
-                    />
-                </li>
-                 
-                <li class="column-ubutton">
-                    <button class="btn-column" type="submit">Update</button>
-                </li>
-            </ul>
-            <ul class="column">
-                <li class="column-img">
-                    <img src="/views/shop/img/Pic915016.jpg" alt="" />
-                </li>
-                <li class="column-name">Tomatoe</li>
-                <li class="column-brand">Null</li>
-                <li class="column-unit">Kg</li>
-                <li class="column-mrp"><input type="text" /></li>
-                <li class="column-minWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="minWeight"
-                        name="minWeight"
-                    />
-                </li>
-                <li class="column-IncStep">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="IncStep"
-                        name="IncStep"
-                    />
-                </li>
-                 
-                <li class="column-ubutton">
-                    <button class="btn-column" type="submit">Update</button>
-                </li>
-            </ul>
-            <ul class="column">
-                <li class="column-img">
-                    <img src="/views/shop/img/Pic915008.jpg" alt="" />
-                </li>
-                <li class="column-name">Tomatoe</li>
-                <li class="column-brand">Null</li>
-                <li class="column-unit">Kg</li>
-                <li class="column-mrp">
-                    <input type="text" />
-                </li>
-                <li class="column-minWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="minWeight"
-                        name="minWeight"
-                    />
-                </li>
-                <li class="column-IncStep">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="IncStep"
-                        name="IncStep"
-                    />
-                </li>
-                 
-                <li class="column-ubutton">
-                    <button class="btn-column" type="submit">Update</button>
-                </li>
-            </ul>
-            <ul class="column">
-                <li class="column-img">
-                    <img src="/views/shop/img/Pic914039.jpg" alt="" />
-                </li>
-                <li class="column-name">Pumpkin</li>
-                <li class="column-brand">Null</li>
-                <li class="column-unit">Kg</li>
-                <li class="column-mrp"><input type="text" /></li>
-                <li class="column-minWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="minWeight"
-                        name="minWeight"
-                    />
-                </li>
-                <li class="column-IncStep">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="IncStep"
-                        name="IncStep"
-                    />
-                </li>
-                 
-                <li class="column-ubutton">
-                    <button class="btn-column" type="submit">Update</button>
-                </li>
-            </ul>
-            <ul class="column">
-                <li class="column-img">
-                    <img src="/views/shop/img/Pic914012.jpg" alt="" />
-                </li>
-                <li class="column-name">Tomatoe</li>
-                <li class="column-brand">Null</li>
-                <li class="column-unit">Kg</li>
-                <li class="column-mrp"><input type="text" /></li>
-                <li class="column-minWeight">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="minWeight"
-                        name="minWeight"
-                    />
-                </li>
-                <li class="column-IncStep">
-                    <input
-                        type="number"
-                        min="0.1"
-                        max="5"
-                        value="0.1"
-                        step="0.1"
-                        id="IncStep"
-                        name="IncStep"
-                    />
-                </li>
-                 
-                <li class="column-ubutton">
-                    <button class="btn-column" type="submit">Update</button>
-                </li>
-            </ul>
+        <div id="item-table" class="table-details scroller">
+<!--            <ul class="row">-->
+<!--                <li id="ItemImage" class="row-img">-->
+<!--                    <img src="/views/shop/img/Pic915013.jpg" alt="" />-->
+<!--                </li>-->
+<!--                <li id="Name" class="row-name">Potato</li>-->
+<!--                <li id="Brand" class="row-brand">Null</li>-->
+<!--                <li id="Unit" class="row-unit">Kg</li>-->
+<!--                <li id="UWeight" class="row-minWeight">300</li>-->
+<!--                <li id="MRP" class="row-mrp">67</li>-->
+<!--                <li id="MaxCount" class="row-IncStep">7</li>-->
+<!--                <li class="row-ubutton">-->
+<!--                    <a  class="btn-row" type="submit">Update</a>-->
+<!--                </li>-->
+<!--            </ul>-->
         </div>
     </div>
 </div>

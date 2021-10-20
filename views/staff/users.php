@@ -18,13 +18,13 @@
             </ul>
         </div>
         <div class="table-details scroller">
-            <ul class="column">
-                <li class="column-no">#1</li>
-                <li class="column-name">Senarath</li>
-                <li class="column-email">senarath@mail.com</li>
-                <li class="column-contact">0777685432</li>
-                <li class="column-nic">976754341V</li>
-                <li class="column-checkbox">
+            <ul class="row">
+                <li class="row-no">#1</li>
+                <li class="row-name">Senarath</li>
+                <li class="row-email">senarath@mail.com</li>
+                <li class="row-contact">0777685432</li>
+                <li class="row-nic">976754341V</li>
+                <li class="row-checkbox">
                         <input type="checkbox" />
                 </li>
             </ul>

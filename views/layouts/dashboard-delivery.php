@@ -14,7 +14,7 @@
     <script src="/js/template.js"></script>
 
 
-    <title>Dashboard-Shop</title>
+    <title>Dashboard Delivery</title>
 </head>
 <?php include_once("utils/sessions.php"); ?>
 <?php include_once("utils/pwa.php"); ?>

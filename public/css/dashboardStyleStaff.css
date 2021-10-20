@@ -24,6 +24,7 @@
   border: 0.2rem solid var(--home-color);
   border-radius: 0.5rem 0.5rem 0 0;
   min-width: 128px;
+  cursor: pointer;
   /* border-bottom: none; */
 }
 .tabs .btn-tab:hover {
@@ -68,50 +69,39 @@
   overflow: hidden;
   position: relative;
 }
-.home-content .core .container-core .table-details .column {
+.home-content .core .container-core .table-details .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: .5rem;
   flex-wrap: wrap;
 }
-.home-content .core .container-core .table-details .column li {
+.home-content .core .container-core .table-details .row li {
   font-size: var(--small-font-size);
   width: 72px;
   /* max-width: 72px; */
   align-items: center;
   text-align: center;
 }
-.home-content .core .container-core .table-details .column .column-img img {
+.home-content .core .container-core .table-details .row .row-img img {
   width: 40px;
   height: 40px;
 }
-.home-content .core .container-core .table-details .column input {
+.home-content .core .container-core .table-details .row input {
   width: 100%;
+  height: 1.5rem;
 }
-.home-content
-.core
-.container-core
-.table-details
-.column
-.column-ubutton
-.btn-column {
+.home-content .core .container-core .table-details .row .row-ubutton .btn-row {
   display: inline-block;
-  /* margin-top: 1rem; */
   background-color: var(--first-color);
   color: var(--body-color);
   padding: 0.5rem 0.8rem;
   font-size: var(--smaller-font-size);
   border-radius: 0.5rem;
   transition: 0.3s;
+  cursor: pointer;
 }
-.home-content
-.core
-.container-core
-.table-details
-.column
-.column-ubutton
-.btn-column:hover {
+.home-content .core .container-core .table-details .row .row-ubutton .btn-row:hover {
   background: var(--hover-color);
 }
 
@@ -159,7 +149,7 @@
 .home-section nav .sidebar-toggle span,.dashboard {
     width: 300px;
 }
-.column-checkbox input[type=checkbox]{
+.row-checkbox input[type=checkbox]{
   transform: scale(1.5);
 }
 

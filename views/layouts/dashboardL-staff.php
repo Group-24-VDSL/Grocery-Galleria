@@ -165,6 +165,7 @@
     </div>
 </section>
 <!-- Home section ends -->
+<script src="/js/staff.js"></script>
 <script src="/js/dashboardScript.js"></script>
 </body>
 

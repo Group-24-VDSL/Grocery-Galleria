@@ -12,7 +12,8 @@
                     <li>Price(Rs)</li>
                     <li>Qty</li>
                     <li>Total(Rs)</li>
-                    <li>Action</li>
+                    <li>Update</li>
+                    <li>Remove</li>
                 </ul>
             </div>
             <div class="shop-items">
@@ -27,31 +28,10 @@
                         </div>
                         <div class="total">98</div>
                         <div>
-                            <a href="#" class=""><i class="fas fa-times"></i></a>
+                            <a href="#" class=""><i class="fas fa-sync"></i>Update</a>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-img"><img src="/views/shop/img/Pic914006.jpg" alt=""></div>
-                        <div class="productname">Big onion</div>
-                        <div class="price">67.00</div>
-                        <div class="quantity">
-                            <input type="number" id="quantity" name="quantity" min="0.5" max="10" step="0.5" value="0.5">
-                        </div>
-                        <div class="total">98</div>
                         <div>
-                            <a href="#" class=""><i class="fas fa-times"></i></a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-img"><img src="/views/shop/img/Pic914008.jpg" alt=""></div>
-                        <div class="productname">Brinjol</div>
-                        <div class="price">67.00</div>
-                        <div class="quantity">
-                            <input type="number" id="quantity" name="quantity" min="0.5" max="10" step="0.5" value="0.5">
-                        </div>
-                        <div class="total">98</div>
-                        <div class="icon">
-                            <a href="#" class=""><i class="fas fa-times"></i></a>
+                            <a href="#" class="remove"><i class="fas fa-times"></i>Remove</a>
                         </div>
                     </div>
                 </div>
@@ -60,39 +40,48 @@
                 <div class="shop-name"><i class="fas fa-store"></i>Store 2</div>
                 <div class="cart-items">
                     <div class="item">
-                        <div class="item-img"><img src="/views/shop/img/Pic915016.jpg" alt=""></div>
-                        <div class="productname">Tomatoe</div>
+                        <div class="item-img"><img src="/img/product-imgs/9500000.jpg" alt=""></div>
+                        <div class="productname">Potato</div>
                         <div class="price">67.00</div>
                         <div class="quantity">
                             <input type="number" id="quantity" name="quantity" min="0.5" max="10" step="0.5" value="0.5">
                         </div>
                         <div class="total">98</div>
                         <div>
-                            <a href="#" class=""><i class="fas fa-times"></i></a>
+                            <a href="#" class=""><i class="fas fa-sync"></i>Update</a>
+                        </div>
+                        <div>
+                            <a href="#" class="remove"><i class="fas fa-times"></i>Remove</a>
                         </div>
                     </div>
                     <div class="item">
-                        <div class="item-img"><img src="/views/shop/img/Pic914029.jpg" alt=""></div>
-                        <div class="productname">Lime</div>
+                        <div class="item-img"><img src="/img/product-imgs/9500000.jpg" alt=""></div>
+                        <div class="productname">Potato</div>
                         <div class="price">67.00</div>
                         <div class="quantity">
                             <input type="number" id="quantity" name="quantity" min="0.5" max="10" step="0.5" value="0.5">
                         </div>
                         <div class="total">98</div>
                         <div>
-                            <a href="#" class=""><i class="fas fa-times"></i></a>
+                            <a href="#" class=""><i class="fas fa-sync"></i>Update</a>
+                        </div>
+                        <div>
+                            <a href="#" class="remove"><i class="fas fa-times"></i>Remove</a>
                         </div>
                     </div>
                     <div class="item">
-                        <div class="item-img"><img src="/views/shop/img/Pic914016.jpg" alt=""></div>
-                        <div class="productname">Ginger</div>
+                        <div class="item-img"><img src="/img/product-imgs/9500000.jpg" alt=""></div>
+                        <div class="productname">Potato</div>
                         <div class="price">67.00</div>
                         <div class="quantity">
                             <input type="number" id="quantity" name="quantity" min="0.5" max="10" step="0.5" value="0.5">
                         </div>
                         <div class="total">98</div>
-                        <div class="icon">
-                            <a href="#" class=""><i class="fas fa-times"></i></a>
+                        <div>
+                            <a href="#" class=""><i class="fas fa-sync"></i>Update</a>
+                        </div>
+                        <div>
+                            <a href="#" class="remove"><i class="fas fa-times"></i>Remove</a>
                         </div>
                     </div>
                 </div>
