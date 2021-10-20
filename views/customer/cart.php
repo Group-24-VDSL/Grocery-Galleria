@@ -4,7 +4,7 @@
 <section class="cart" id="cart">
     <!-- <h1 class="subheading"><i class="fas fa-leaf"></i>Shop name</h1> -->
     <div class="container">
-        <div class="container-item">
+        <div class="container-item" id="container-item">
             <div class="cart-header">
                 <ul>
                     <li>Product</li>

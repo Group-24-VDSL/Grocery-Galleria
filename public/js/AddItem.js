@@ -6,7 +6,7 @@ $(function () {
 
     const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
     const URLItems = "http://localhost/api/items?Category=0";
-    const URLShopItems = "http://localhost/api/shopItems?ShopID=5";
+    const URLShopItems = "http://localhost/api/shopitems?ShopID=5";
 
 
     $.getJSON(URLItems, function (items) {
