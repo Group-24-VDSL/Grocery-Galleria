@@ -96,7 +96,8 @@ $app->router->post('/test',[TestController::class,'test']);
 //api
 $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
-$app->router->get('/api/shopItems',[APIController::class,'getShopItems']);
+$app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
+$app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
 $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
 $app->router->get('/api/getcart',[APIController::class,'getCart']);
