@@ -90,6 +90,8 @@ $app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworder
 $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
+$app->router->get('/dashboard/shop/viewcompleteorder',[ShopController::class,'viewcompleteorder']);
+$app->router->post('/dashboard/shop/viewcompleteorder',[ShopController::class,'viewcompleteorder']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 $app->router->post('/test',[TestController::class,'test']);
@@ -105,8 +107,10 @@ $app->router->post('/api/addtocart',[APIController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
 
 //rider
-$app->router->get('/rider/vieworder',[StaffController::class,'vieworder']);
-$app->router->post('/rider/vieworder',[StaffController::class,'vieworder']);
+$app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
+$app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
+$app->router->get('/rider/order',[RiderController::class,'order']);
+$app->router->post('/rider/order',[RiderController::class,'order']);
 
 $app->run();
 
