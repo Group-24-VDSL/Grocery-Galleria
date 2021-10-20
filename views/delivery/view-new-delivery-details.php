@@ -277,7 +277,7 @@
                         </table>
                         <div class="complete-section">
 
-                            <table class="staff-details">
+                            <table  class="staff-details">
                                 <tbody>
                                 <tr>
                                     <th>Shop Total (LKR) :</th>

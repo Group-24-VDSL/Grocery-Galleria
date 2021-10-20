@@ -97,7 +97,7 @@
                         <td>C009894</td>
                         <td>300.00</td>
                         <td>2</td>
-                        <td><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></td>
+                        <td> <a href="/dashboard/delivery/viewnewdelivery"><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></a></td>
                     </tr>
                     <tr>
                         <td>2.</td>
@@ -107,7 +107,7 @@
                         <td>C009894</td>
                         <td>300.00</td>
                         <td>2</td>
-                        <td><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></td>
+                        <td><a href="/dashboard/delivery/viewnewdelivery"><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></a></td>
                     </tr>
                     <tr>
                         <td>3.</td>
@@ -117,7 +117,7 @@
                         <td>C009894</td>
                         <td>300.00</td>
                         <td>2</td>
-                        <td><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></td>
+                        <td><a href="/dashboard/delivery/viewnewdelivery"><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></a></td>
                     </tr>
                     <tr>
                         <td>4.</td>
@@ -219,7 +219,7 @@
                         <td>R90466</td>
                         <td>300.00</td>
                         <td>2</td>
-                        <td><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></td>
+                        <td><a href="/dashboard/delivery/viewongoingdelivery"><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></a></td>
                     </tr>
                     <tr>
                         <td>2.</td>
@@ -230,7 +230,7 @@
                         <td>R90466</td>
                         <td>300.00</td>
                         <td>2</td>
-                        <td><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></td>
+                        <td><a href="/dashboard/delivery/viewongoingdelivery"><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></a></td>
                     </tr>
                     <tr>
                         <td>3.</td>
@@ -241,7 +241,7 @@
                         <td>R90466</td>
                         <td>300.00</td>
                         <td>2</td>
-                        <td><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></td>
+                        <td><a href="/dashboard/delivery/viewongoingdelivery"><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></a></td>
                     </tr>
                     <tr>
                         <td>4.</td>
@@ -351,7 +351,7 @@
                         <td>300.00</td>
                         <td>2</td>
                         <td>4.16 PM</td>
-                        <td><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></td>
+                        <td><a href="/dashboard/delivery/viewcompletedelivery"><button class="btn-item" type="submit"><span class="order-view"><i class="bx bx-show-alt"></i></span></button></a></td>
                     </tr>
                     <tr>
                         <td>2.</td>

@@ -124,7 +124,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
 
         <div style="height: auto" class="core">
