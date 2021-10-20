@@ -132,6 +132,6 @@
 
 <!-- Footer ends -->
 
-<script src="/js/Shop.js"></script>
+<script type="text/javascript" src="/js/Shop.js"></script>
 </body>
 </html>
