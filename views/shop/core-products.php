@@ -8,7 +8,6 @@
                 <li>MRP</li>
                 <li>U/Price</li>
                 <li>Unit</li>
-                <li>Stock</li>
                 <li>Update Stock</li>
                 <li>Update</li>
             </ul>
@@ -20,10 +19,18 @@
                 </li>
                 <li class="item-name">Potato</li>
                 <li class="item-mrp">67</li>
-                <li class="item-uprice">81</li>
+
                 <li class="item-unit">Kg</li>
-                <li class="item-cStock">
-                    <label for="currentStock">10</label>
+
+                <li class="item-uprice">
+                    <input
+                            type="number"
+                            min="10"
+                            max="200"
+                            value="10"
+                            id="unitprice"
+                            name="unitprice"
+                    />
                 </li>
                 <li class="item-uStock">
                     <input
