@@ -28,7 +28,7 @@
         <li>
             <a href="">
                 <i class="bx bx-grid-alt"></i>
-                <span class="link-name">Dashboard</span>
+                <span class="link-name">Delivery Dashboard</span>
             </a>
         </li>
 
