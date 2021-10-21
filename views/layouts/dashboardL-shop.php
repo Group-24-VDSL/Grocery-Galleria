@@ -75,7 +75,7 @@
     <nav>
         <div class="sidebar-toggle">
             <i class="bx bx-menu sidebarBtn"></i>
-            <span class="dashboard">Dashboard</span>
+            <span class="dashboard">Shop Dashboard</span>
         </div>
         <div class="search-box">
             <input type="search" id="" placeholder="Search.... " />

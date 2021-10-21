@@ -24,9 +24,9 @@
         <nav class="navbar">
             <a href="#home">home</a>
             <a href="#category">Category</a>
-            <a href="#shops">Shops</a>
-            <a href="#about">About us</a>
-            <a href="#contact">Contact</a>
+<!--            <a href="#shops">Shops</a>-->
+            <a href="#aboutUs">About us</a>
+            <a href="#contactUs">Contact</a>
         </nav>
         <div class="part">
             <div id="menu-bar" class="fas fa-bars"></div>
@@ -55,7 +55,8 @@
 
         <div class="box">
             <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam culpa sit enim nesciunt rerum laborum illum quam error ut alias!</p>
+            <p>Grocery Galleria is a web-based centralized online shop galleria platform for small-scale food entrepreneurs where the people can order and get their day-to-day essential needs to their doorstep.
+            </p>
             <div class="communication">
                 <a href="#" class="btn fas fa-phone-alt"></a>
                 <a href="#" class="btn far fa-envelope"></a>

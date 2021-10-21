@@ -6,10 +6,10 @@
         <span>Grocery to doorStep</span>
         <h3>your daily need products</h3>
         <a href="#category" class="btn">Explore Now</a>
-        <a href="/register" class="btn">Regsiter Now</a>
+        <a href="/customer/register" class="btn">Regsiter Now</a>
     </div>
     <div class="image">
-        <img src="/img/welcome/Home-2.png" alt="">
+        <img src="/img/login-background.png" alt="">
     </div>
 
 </section>
@@ -41,7 +41,7 @@
             <a href="/gallery?Category=2" class="btn">shop now</a>
         </div>
         <div class="box">
-            <h3>meat</h3>
+            <h3>Fish</h3>
             <p>Farm Fresh</p>
             <img src="/img/welcome/meatShop.jpg" alt="">
             <a href="/gallery?Category=3" class="btn">shop now</a>
@@ -74,272 +74,55 @@
         <div class="content">
             <h3>Deliver with Us</h3>
             <p>Get Register Now</p>
-            <a href="#register" class="btn">Click here</a>
+            <a href="#contactUs" class="btn">Click here</a>
         </div>
     </div>
 
 </section>
 
-<!-- Home card section end -->
-<!-- Shop section Start -->
-<!-- Vegetable -->
-<section class="shop" id="shops">
-    <h1 class="heading">vegetables <span>category</span></h1>
-    <div class="box-container">
-        <div class="box">
-            <img src="/img/welcome/vegeShop.jpg" alt="">
-            <h3>Vishwa Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="/gallery/shop?ShopID=5" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
+<section class="aboutUs" id="aboutUs">
+    <h1 class="heading">About <span>Us</span></h1>
+    <div class="content">
 
-            <img src="/img/welcome/vegeShop.jpg" alt="">
-            <h3>Rathna Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-            <img src="/img/welcome/vegeShop.jpg" alt="">
-            <h3>Senarath Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-            <img src="/img/welcome/vegeShop.jpg" alt="">
-            <h3>Siripala Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
+        <h3 class="title">Grocery Galleria</h3>
+        <p>Grocery Galleria is a web-based centralized online shop galleria platform for small-scale food entrepreneurs where the people can order and get their day-to-day essential needs to their doorstep.
+        </p>
+
+        <a href="#" class="btn">Contact Us</a>
+
     </div>
-    <a href="/gallery?Category=0" class="btn see-more"><span>See more</span><i class="fas fa-chevron-right"></i></a>
+
 </section>
-<!-- Fruit -->
-<section class="shop" id="fruit">
+<!-- contactUs section starts  -->
+<section class="contactUs" id="contactUs">
+    <h1 class="heading"><span>Contact</span> us</h1>
 
-    <h1 class="heading">Fruit <span>category</span></h1>
+    <form action="">
+        <div class="inputBox">
+            <input type="text" placeholder="Name" />
+            <input type="email" placeholder="Email" />
+        </div>
 
-    <div class="box-container">
-        <div class="box">
-            <img src="/img/welcome/Shop.jpg" alt="">
-            <h3>Vishwa Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
+        <div class="inputBox">
+            <input type="number" placeholder="Contact No" />
+            <select name="Category" id="Category">
+                <option value="Customer">Customer</option>
+                <option value="Shop">Shop</option>
+                <option value="Delivery">Delivery</option>
+                <option value="Staff">Staff</option>
+            </select>
         </div>
-        <div class="box">
 
-            <img src="/img/welcome/Shop.jpg" alt="">
-            <h3>Rathna Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
+        <textarea
+                placeholder="message"
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+        ></textarea>
 
-            <img src="/img/welcome/Shop.jpg" alt="">
-            <h3>Senarath Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-
-            <img src="/img/welcome/Shop.jpg" alt="">
-            <h3>Siripala Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-    </div>
-    <a href="/gallery?Category=1" class="btn see-more"><span>See more</span><i class="fas fa-chevron-right"></i></a>
-</section>
-<!-- Grocery -->
-<section class="shop" id="grocery">
-    <h1 class="heading">Grocery <span>category</span></h1>
-    <div class="box-container">
-        <div class="box">
-            <img src="/img/welcome/groceryShop.jpg" alt="">
-            <h3>Vishwa Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-
-            <img src="/img/welcome/groceryShop.jpg" alt="">
-            <h3>Rathna Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-
-            <img src="/img/welcome/groceryShop.jpg" alt="">
-            <h3>Senarath Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-            <img src="/img/welcome/groceryShop.jpg" alt="">
-            <h3>Siripala Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-    </div>
-    <a href="/gallery?Category=1" class="btn see-more"><span>See more</span><i class="fas fa-chevron-right"></i></a>
+        <input type="submit" value="send message" class="btn" />
+    </form>
 </section>
 
-<section class="shop" id="meat">
-    <h1 class="heading">Meat <span>category</span></h1>
-    <div class="box-container">
-        <div class="box">
-            <img src="/img/welcome/meatShop.jpg" alt="">
-            <h3>Siripala Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-            <img src="/img/welcome/meatShop.jpg" alt="">
-            <h3>Siripala Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-            <img src="/img/welcome/meatShop.jpg" alt="">
-            <h3>Siripala Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-        <div class="box">
-            <img src="/img/welcome/meatShop.jpg" alt="">
-            <h3>Siripala Grocery</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <div class="price">Lowest <span>Rs.56.00/=</span> </div>
-            <a href="../../views/shop/shop.html" class="btn">
-                <i class="fas fa-external-link-alt"></i> Visit Store</a>
-        </div>
-    </div>
-    <a href="/gallery?Category=2" class="btn see-more"><span>See more</span><i class="fas fa-chevron-right"></i></a>
-</section>
-<!-- Shop section end -->
+<!-- contactUs section ends -->

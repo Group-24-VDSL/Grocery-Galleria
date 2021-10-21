@@ -34,6 +34,13 @@ class APIController extends Controller
         return json_encode($shopItems);
     }
 
+    public function getShopItem(Request $request, Response $response) // get all shop items from DB
+    {
+        $response->setContentTypeJSON();
+        $shopItem=ShopItem::findOne(array_slice($request->getBody(),1,null,true));
+        return json_encode($shopItem);
+    }
+
     // Shop section
     public function getShop(Request $request, Response $response) // get shop details from DB
     {
@@ -50,7 +57,16 @@ class APIController extends Controller
 
     }
 
-    //orders
+    //cart
+
+    public function getCart(Request $request,Response $response) // get all items from DB
+    {
+        $response->setContentTypeJSON();
+        $items =TemporaryCart::findAll(array_slice($request->getBody(),1,null,true));
+        return json_encode($items);
+
+    }
+
     public function addToCart(Request $request,Response $response)
     {
         $response->setContentTypeJSON();
@@ -77,14 +93,14 @@ class APIController extends Controller
                 }
             }
             return json_encode('{"success":"fail"}');
-        }elseif($request->isUpdate()){
+        }elseif($request->isPatch()){
             $json = $request->getJson();
             if($json){
                 $tempcart = new TemporaryCart();
                 $tempcart->loadData($json);
                 $checktemp = TemporaryCart::findOne(["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID]);
                 if($checktemp) { //there exists such item
-                    if($tempcart->update(["Quantity"=>$tempcart->Quantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])){
+                    if($tempcart->validate() && $tempcart->update(["Quantity"=>$tempcart->Quantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])){
                         return json_encode('{"success":"ok"}');
                     }else{
                         return json_encode('{"success":"fail"}');
