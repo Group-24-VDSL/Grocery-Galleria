@@ -31,6 +31,9 @@ $app->router->get('/welcome',[SiteController::class,'welcome']);
 $app->router->get('/contact',[SiteController::class,'contact']);
 $app->router->post('/contact',[SiteController::class,'handleContact']);
 
+$app->router->get('/dashboardlinks',[SiteController::class,'dashboard']);
+$app->router->post('/dashboardlinks',[SiteController::class,'dashboard']);
+
 $app->router->get('/verify',[AuthController::class,'verify']);
 $app->router->get('/email-verified',[AuthController::class,'emailverified']);
 
@@ -63,6 +66,7 @@ $app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class,
 $app->router->get('/dashboard/delivery/viewnewdelivery',[DeliveryController::class,'viewnewdelivery']);
 $app->router->get('/dashboard/delivery/viewongoingdelivery',[DeliveryController::class,'viewongoingdelivery']);
 $app->router->get('/dashboard/delivery/viewcompletedelivery',[DeliveryController::class,'viewcompletedelivery']);
+$app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 
 //system staff
 $app->router->get('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
