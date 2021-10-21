@@ -61,8 +61,8 @@ class AuthController extends Controller
     public static function verificationSend(int $userid,string $name,string $email)
     {
         // d-b81e118d214a416884c8ef46298b2b8e
-        $uniqueid = Application::$app->generator->generateString(24);
-        $verifystring = Application::$app->generator->generateString(24);
+        $uniqueid = Application::$app->generator->generateString(24,"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        $verifystring = Application::$app->generator->generateString(24,"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
         $url = 'http://localhost/verify?id='.$uniqueid.'&verifycode='.$verifystring;
 
         $verify = new Verification();
@@ -92,7 +92,6 @@ class AuthController extends Controller
             return null;
         }
 
-
     }
 
     public function verify(Request $request)
@@ -104,7 +103,8 @@ class AuthController extends Controller
                     $user = User::findOne(['UserID' => $verify->UserID]);
                     if ($user) {
                         //update the user
-                        if ($user->update(['Verify_Flag' => 1], ['UserID' => $user->UserID])) {
+                        $userTemp = new User();
+                        if ($userTemp->update(['Verify_Flag' => 1], ['UserID' => $user->UserID])) {
                             Verification::delete(['UserID' => $user->UserID]) ;
                             return $this->render('email-verified',[
                                 'invalid' => 'false'

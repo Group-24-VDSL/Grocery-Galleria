@@ -20,7 +20,7 @@ const host = window.location.origin; //http://domainname
 //Api links
 const URLShopAPI = host+"/api/shop";
 const URLShopsAPI = host+"/api/shops";
-const URLShopItemAPI = host+"/api/shopItems";
+const URLShopItemAPI = host+"/api/shopitems";
 const URLFindItemAPI = host+"/api/item";
 
 const URLAddtoCartAPI = host+"/api/addtocart";

@@ -34,7 +34,7 @@
             <?php echo $form->fieldonly($model, "Stock", '') ?>
         </div>
         <div class="inputBox">
-            <?php echo $form->fieldonly($model, "ShopID")->setValue(5)->hiddenField()?>
+            <?php echo $form->fieldonly($model, "ShopID")->setValue(6)->hiddenField()?>
         </div>
         <div class="inputBox"></div>
         <button class="btn">Submit</button>
