@@ -32,7 +32,7 @@ abstract class DBModel extends Model
     public function update($attributes = [],$where=[])
     {
         $tableName = $this->tableName();
-        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr = :$attr", array_keys($attributes)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr = :$attr", array_keys($where))));
+        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($attributes)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
         foreach ($attributes as $key => $value) {
             $stmt->bindValue(":$key", $value); //iterate through attributes
             // bind the User model attribute values with each :attribute into the sql statement
@@ -48,7 +48,7 @@ abstract class DBModel extends Model
     public static function delete($where=[])
     {
         $tableName = static::tableName();
-        $stmt  = self::prepare("DELETE FROM  $tableName WHERE ".implode("AND", array_map(fn($attr) => "$attr = :$attr", $where)));
+        $stmt  = self::prepare("DELETE FROM $tableName WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
         foreach ($where as $key => $value) {
             $stmt->bindValue(":$key", $value); //iterate through attributes
             // bind the User model attribute values with each :attribute into the sql statement
