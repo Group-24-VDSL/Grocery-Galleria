@@ -14,6 +14,12 @@ class SiteController extends Controller
         return $this->render('welcome');
     }
 
+    public function dashboard()
+    {
+        $this->setLayout("headeronly-staff");
+        return $this->render('dashboard-links');
+    }
+
 //    public function handleContact(Request $request){
 ////        $body = Application::$app->request->getBody();
 ////        var_dump($body);
