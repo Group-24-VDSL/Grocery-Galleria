@@ -5,8 +5,8 @@ $(function () {
     const UWeight = document.getElementById("UWeight");
 
     const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-    const URLItems = "http://localhost/api/items?Category=0";
-    const URLShopItems = "http://localhost/api/shopitems?ShopID=5";
+    const URLItems = "http://localhost/api/items?Category=1";
+    const URLShopItems = "http://localhost/api/shopitems?ShopID=6";
 
 
     $.getJSON(URLItems, function (items) {
@@ -25,9 +25,14 @@ $(function () {
             UWeight.setAttribute("value", items[0].UWeight);
 
             select.addEventListener('change', function () {
-                MRP.setAttribute("value", items[this.value - 1].MRP);
-                Unit.setAttribute("value", UnitTag[items[this.value - 1].Unit]);
-                UWeight.setAttribute("value", items[this.value - 1].UWeight);
+                items.forEach(item=>{
+                    if(item.ItemID == this.value){
+                        MRP.setAttribute("value", item.MRP);
+                        Unit.setAttribute("value", UnitTag[item.Unit]);
+                        UWeight.setAttribute("value", item.UWeight);
+                    }
+                })
+
             });
         }
     );
