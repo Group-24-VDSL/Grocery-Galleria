@@ -114,4 +114,9 @@ class DeliveryController extends Controller
         $this->setLayout('dashboard-delivery');
         return $this->render('delivery/view-delivery');
     }
+
+    public function profile()
+    {
+        return $this->render('delivery/profile');
+    }
 }
