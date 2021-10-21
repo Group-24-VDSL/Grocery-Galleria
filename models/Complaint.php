@@ -35,6 +35,7 @@ class Complaint extends DBModel
     public function rules(): array
     {
         return [
+            'OrderID' => [self::RULE_REQUIRED],
             'Nature' => [self::RULE_REQUIRED]
         ];
     }
