@@ -40,6 +40,9 @@ ul {
 section {
   padding: 2rem 9%;
 }
+button{
+  margin: 0;
+}
 .btn {
   display: inline-block;
   margin-top: 1rem;
@@ -279,14 +282,19 @@ section {
   padding: 0.5rem;
   background: var(--body-color);
 }
-
-.product .box-container .add-to-cart {
+/*.product .box-container .box button{*/
+/*  align-self: center;*/
+/*  margin-top: 0;*/
+/*  margin-right: 0;*/
+/*}*/
+.product .box-container .addCart {
   cursor: pointer;
+  justify-content: center;
 }
 
-.product .box-container .box .btn {
-  display: block;
-}
+/*.product .box-container .box .btn {*/
+/*  display: block;*/
+/*}*/
 .footer {
   background-color: var(--header-color);
 }

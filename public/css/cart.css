@@ -118,10 +118,12 @@ section {
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+    gap: .5rem;
 }
-/* .cart .container .container-item .cart-header ul li {
-  min-width: 15%;
-} */
+.cart .container .container-item .cart-header ul li {
+    width: 64px;
+    /*padding-right: .5rem;*/
+}
 /* .cart .container .container-item .shop-items{
   justify-content: center;
 } */
@@ -148,13 +150,22 @@ section {
 .cart .container .container-item .cart-items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: .5rem;
+    justify-content: space-around;
+    /*gap: .5rem;*/
+    position: relative;
 }
-
+.cart .container .container-item .cart-items .item div{
+    align-content: center;
+    /*overflow-x: paged-x-controls;*/
+}
 .cart .container .container-item .cart-items .item .quantity input {
-    border: 0.3rem solid var(--text-color-light);
+    border: 0.2rem solid var(--title-color);
     padding: 0.2rem;
+    width: 64px;
+    /*color: black;*/
+}
+.cart .container .container-item .cart-items .item .item-img{
+    width: 64px;
 }
 .cart .container .container-item .cart-items .item img {
     /* display: flex; */
@@ -171,17 +182,15 @@ section {
     justify-content: space-between;
     border-bottom: 0.2rem solid rgba(0, 0, 0, 0.2);
 }
-.cart .container .container-item .cart-items .item div{
-    /*min-width: 64px;*/
-    /*max-width: 72px;*/
-}
+
 .cart .container .container-item .cart-items .item i{
-    padding-right: .5rem;
+    /*padding-right: 2rem;*/
+    /*font-size: var(--h1-font-size);*/
 }
 .cart .container .container-item .cart-items .item a{
     padding: .5rem;
     color: white;
-    width: 64px;
+    /*width: 64px;*/
     background: var(--first-color-alt);
     border-radius: .5rem;
 }
@@ -192,8 +201,8 @@ section {
 .cart .container .container-item .cart-items .item .remove{
     background: var(--text-color-light);
 }.cart .container .container-item .cart-items .item .remove:hover{
-    background: red;
-}
+     background: red;
+ }
 .cart .container .container-payment {
     /* flex: 1 20rem; */
     text-align: left;
