@@ -24,15 +24,8 @@ class APIController extends Controller
         $response->setContentTypeJSON();
         $items =Item::findAll(array_slice($request->getBody(),1,null,true));
         return json_encode($items);
-
     }
 
-    public function getShopItems(Request $request, Response $response) // get all shop items from DB
-    {
-        $response->setContentTypeJSON();
-        $shopItems=ShopItem::findAll(array_slice($request->getBody(),1,null,true));
-        return json_encode($shopItems);
-    }
 
     public function getShopItem(Request $request, Response $response) // get all shop items from DB
     {
@@ -40,6 +33,14 @@ class APIController extends Controller
         $shopItem=ShopItem::findOne(array_slice($request->getBody(),1,null,true));
         return json_encode($shopItem);
     }
+
+    public function getShopItems(Request $request, Response $response) // get all shop items from DB
+    {
+        $response->setContentTypeJSON();
+        $shopItem=ShopItem::findAll(array_slice($request->getBody(),1,null,true));
+        return json_encode($shopItem);
+    }
+
 
     // Shop section
     public function getShop(Request $request, Response $response) // get shop details from DB
@@ -112,8 +113,5 @@ class APIController extends Controller
         }else{
             return json_encode('{"success":"fail"}');
         }
-
     }
-
-
 }
