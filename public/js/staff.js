@@ -16,20 +16,20 @@ const getUrlParameter = function getUrlParameter(sParam) {
 }
 
 const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
-
+// const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
+const ItemType =['Vegetables','Fruits','Grocery','Fish','Meat'];
 
 const host = window.location.origin; //http://domainname
 
 //Api links
 const URLItemsAPI = host+"/api/items";
+const URLItemAPI = host+"/api/item";
 const ItemTable = document.getElementById('item-table');
 
 $(document).ready(function (){
      $(".btn-tab").click(function ()
     {   $('#item-table').empty();
         let URLFindItems = URLItemsAPI.concat($(this).data("href"));
-        console.log(URLFindItems);
         $.getJSON(URLFindItems, function (Items) {
             Items.forEach(Item => {
                     const itemRow = document.createElement('ul');
@@ -45,17 +45,49 @@ $(document).ready(function (){
                 <li id="MRP" class="row-mrp">${Item.MRP}</li>
                 <li id="MaxCount" class="row-IncStep">${Item.MaxCount}</li>
                 <li class="row-ubutton">
-                    <a  class="btn-row" type="submit">Update</a>
+                    <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </li>
                 `
                     ItemTable.appendChild(itemRow);
                 }
             )
         })
-
+        const itemBtns = document.getElementsByClassName('btn-row');
+        // console.log(itemBtns);
+        $(itemBtns).click(function (){
+            console.log(this);
+            let URLFindItem = URLItemAPI.concat($(this).data("href"));
+            // console.log(URLFindItem);
+            $.getJSON(URLFindItem,function (Item){
+                // console.log(Item);
+                $('#Category').val(ItemType[Item.Category]);
+                $('#Unit').val(UnitTag[Item.Unit]);
+                $('#Name').val(Item.Name);
+                $('#ItemImage').val(Item.ItemImage);
+                $('#Brand').val(Item.Brand);
+                $('#UWeight').val(Item.UWeight);
+                $('#MaxCount').val(Item.MaxCount);
+                $('#MRP').val(Item.MRP);
+            })
+        });
 })
     $('#btn-vege').trigger('click');
 })
+
+    // const Category = document.getElementById('Category');
+    // const Name = document.getElementById('Name');
+    // const ItemImage = document.getElementById('ItemImage');
+    // const Brand = document.getElementById('Brand');
+    // const Unit = document.getElementById('Unit');
+    // const UWeight = document.getElementById('UWeight');
+    // const MaxCount = document.getElementById('MaxCount');
+    // const MRP = document.getElementById('MRP');
+
+
+
+
+
+
 
 
 
