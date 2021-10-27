@@ -21,9 +21,10 @@ class NumberFieldOnly extends InputFieldOnly
     public function __toString()
     {
         return sprintf('
-<input type="%s" name="%s" style="%s" value="%s" class="%s" min="%s" max="%s" step="%s">
+<input type="%s" id="%s" name="%s" style="%s" value="%s" class="%s" min="%s" max="%s" step="%s">
 <div><small style="color: red">%s</small></div>',
             $this->type,
+            $this->attribute,
             $this->attribute,
             $this->setStyle(),
             $this->value,
