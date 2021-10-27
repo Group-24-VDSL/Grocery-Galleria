@@ -25,10 +25,30 @@ class ShopController extends Controller
         return $this->render('gallery');
     }
 
-    public function productOverview(){
-        $this->setLayout('dashboardL-shop');
-        return $this->render('shop/core-products');
+    public function productOverview(Request $request){
+        $item = new Item();
+        $this->setLayout("dashboardL-shop");
+
+        if($request->isPost()){
+            $item->loadData($request->getBody());
+
+            if($item->validate() && $item->update()){
+                Application::$app->session->setFlash("success", "Item Updated Successfully.");
+                Application::$app->response->redirect("/dashboard/shop/products");
+            }else{
+                Application::$app->session->setFlash("warning", "Validation Failed.");
+                return $this->render("shop/core-products"
+                    ,[
+                        'model' => $item
+                    ]);
+            }
+        }
+        return $this->render("shop/core-products"
+            ,[
+                'model' => $item
+            ]);
     }
+
     public function additem(Request $request){
 
         $shopItem =new ShopItem();
