@@ -1,6 +1,7 @@
 
 <?php
-/** @var $model \app\models\Rider **/
+/** @var $model \app\models\ShopItem **/
+/** @var $shopitemslist array */
 ?>
 <div class="container-fluid">
 
