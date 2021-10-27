@@ -1,0 +1,126 @@
+.table-item{
+    width:100%;
+    display: block;
+    empty-cells: show;
+    /* Decoration */
+    /*height: 350px;*/
+    border-spacing: 0;
+    counter-reset: rowNumber;
+    /*border: 1px solid;*/
+}
+
+.table-item thead{
+    border: 2px solid var(--home-color);
+    border-radius:8px;
+    position:relative;
+    display: block;
+    width:100%;
+    margin-bottom: 5px;
+    padding-right: 1rem;
+    /*overflow-y: scroll;*/
+}
+
+.table-item tbody{
+    /* Position */
+    display: block; position:relative;
+    width:100%; overflow-y:scroll;
+    /* Decoration */
+    border-radius: 8px;
+    border: 2px solid var(--home-color)
+}
+
+.table-item tr{
+    width: 100%;
+    display:flex;
+}
+
+.table-item td,.table-item th{
+    flex-basis:100%;
+    flex-grow:2;
+    display: block;
+    /*padding: 0.5rem;*/
+    text-align:left;
+    font-size: 14px;
+    /*font-weight: 500;*/
+    text-align: center;
+    position: center;
+}
+.table-item th {
+    font-size: 14px;
+    padding: 1rem;
+    font-weight: 500;
+}
+
+.table-item td {
+    font-size: 13px;
+    padding: 0.5rem;
+    /*padding-bottom: 0;*/
+    vertical-align:middle;
+
+}
+
+/* Other options */
+
+.table-item.small-first-col td:first-child,
+.table-item.small-first-col th:first-child{
+    flex-basis:20%;
+    flex-grow:1;
+}
+.table-item.small-first-col td:first-child{
+    counter-increment: rowrowNumber;
+    content: counter(rowNumber) ".";
+    content: counter(rowNumber);
+}
+
+
+.table-item tbody tr:nth-child(2n){
+    background-color: var(--home-color);
+}
+
+.body-half-screen{
+    max-height: 30vh;
+}
+
+.small-col{flex-basis:10%;}
+
+.btn-item {
+    display: inline-block;
+    /* margin-top: 1rem; */
+    align-content: center;
+    color: var(--body-color);
+    /* padding: 0rem 0rem; */
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    font-size: var(--smaller-font-size);
+    border-radius: 0.5rem;
+    transition: 0.3s;
+    border: 0px;
+    /*background-color: #FFF;*/
+    align-items: top;
+    /*!* height: 25px;*/
+}
+
+.btn-item:hover {
+    background-color: darkgreen;
+}
+
+.order-view {
+    background-color:transparent;
+    font-size: 20px;
+    color: green;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+/*.order-view:nth-child(2n){*/
+/*    background-color: var(--home-color);*/
+/*}*/
+
+button{
+    background-color: transparent;
+}
+
+.row-img img {
+    width: 40px;
+    height: 40px;
+}

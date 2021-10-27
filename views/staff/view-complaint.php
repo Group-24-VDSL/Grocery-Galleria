@@ -51,7 +51,7 @@
                                 <td>Complaint Date</td>
                                 <td>Order ID</td>
                                 <td>Order Date</td>
-                                <td>Complaint Regarding</td>
+                                <td>Regarding</td>
                                 <td>Priority</td>
                                 <td>Status</td>
                                 <td>View Description</td>

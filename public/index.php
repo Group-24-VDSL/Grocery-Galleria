@@ -88,6 +88,7 @@ $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'v
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
+$app->router->post('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
 $app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
 $app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
