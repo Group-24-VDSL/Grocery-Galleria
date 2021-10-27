@@ -12,7 +12,6 @@ use app\models\Verification;
 
 class StaffController extends Controller
 {
-
     public function staffRegister(Request $request)
     {
         $this->setLayout('dashboardL-staff');
