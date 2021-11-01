@@ -12,17 +12,8 @@ const URLGetCartAPI = host + "/api/getcart";
 
 const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
 
-const itemCount = document.getElementById('itemCount');
-const subTotal = document.getElementById('subTotal');
-const ShopCount = document.getElementById('ShopCount');
-const DeliveryFee = document.getElementById('DeliveryFee');
-const GTotal = document.getElementById('GTotal');
 
-let CountShops = 0;
-let CountSubTotal = 0;
-let CountGTotal = 0;
 $.getJSON(URLGetCart, function (CartItems) {
-    itemCount.innerHTML = CartItems.length;
     CartItems.sort((a, b) => parseFloat(a.ShopID) - parseFloat(b.ShopID));
     const containerItem = document.getElementById('container-item');
     // console.log(CartItems);
@@ -34,7 +25,6 @@ $.getJSON(URLGetCart, function (CartItems) {
         const URLShopItem = URLShopItemAPI.concat("?ItemID=").concat(CartItem.ItemID).concat('&ShopID=').concat(CartItem.ShopID);
         //Creating Shops if not available
         if ($('#Shop'.concat(CartItem.ShopID)).length === 0) {
-            ++CountShops;
             let Shop = document.createElement('div');
             let ShopName = document.createElement('div');
             let cartItems = document.createElement('div');
@@ -50,7 +40,6 @@ $.getJSON(URLGetCart, function (CartItems) {
             Shop.appendChild(cartItems);
             containerItem.appendChild(Shop);
         }
-        ShopCount.innerHTML = CountShops;
         //Creating items based on Shopping Cart
         let Item = document.createElement('div');
         Item.classList.add('item');
@@ -72,12 +61,9 @@ $.getJSON(URLGetCart, function (CartItems) {
                             
                         </div>
                         <div>
-                            <a class="remove" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}">Remove</a>
-                            
+                            <a class="remove" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}">Remove</a>   
                         </div>
             `
-                    CountSubTotal = CountSubTotal+ (shopitem.UnitPrice*CartItem.Quantity);
-                    // console.log(CountSubTotal);
                 });
             });
         });
