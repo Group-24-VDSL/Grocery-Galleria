@@ -2,16 +2,16 @@
 
 namespace app\models;
 
+use app\controllers\CustomerController;
 use app\core\db\DBModel;
 
 class OrderCart extends DBModel
 {
     public int $CartID = 0;
     public int $ShopID = 0;
-    public string $ItemIDList = '';
-    public int $CustomerID = 0;
-    public string $QuantityList = '';
-    public float  $ShopTotal = 0;
+    public string $ItemID = '';
+    public string $Quantity = '';
+    public float  $Total = 0;
 
     public static function tableName(): string
     {
@@ -20,7 +20,7 @@ class OrderCart extends DBModel
 
     public function attributes(): array
     {
-        return ['ShopID','ItemIDList','CustomerID','QuantityList','ShopTotal'];
+        return ['ShopID','ItemID','Quantity','Total'];
     }
 
     public static function primaryKey(): string
@@ -31,15 +31,15 @@ class OrderCart extends DBModel
     public function rules(): array
     {
         return [
-            'ItemIDList' => [self::RULE_REQUIRED],
-            'CustomerID' => [self::RULE_REQUIRED,self::RULE_INT],
-            'QuantityList' => [self::RULE_REQUIRED],
-            'ShopTotal' => [self::RULE_REQUIRED,self::RULE_FLOAT]
+            'ItemID' => [self::RULE_REQUIRED,self::RULE_INT],
+            'CustomerID' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_IFEXISTS,'class'=> Customer::class,'attribute' => 'CustomerID']],
+            'Quantity' => [self::RULE_REQUIRED,[self::RULE_MIN_VAL,'minValue'=> 0]],
+            'Total' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=> 0]]
         ];
     }
 
     public function jsonarray(): array
     {
-        return ['CartID','ShopID','ItemIDList','CustomerID','QuantityList','ShopTotal'];
+        return ['CartID','ShopID','ItemID','Quantity','Total'];
     }
 }

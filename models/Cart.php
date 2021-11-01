@@ -6,9 +6,8 @@ use app\core\db\DBModel;
 
 class Cart extends DBModel
 {
-    public int $CartID;
-    public string $Date = '';
-    public string $Time = '';
+    public int $CartID = 0;
+    public string $DateTime = '';
     public int $CustomerID = 0;
 
     public static function tableName(): string
@@ -18,7 +17,7 @@ class Cart extends DBModel
 
     public function attributes(): array
     {
-        return ['Date','Time','CustomerID'];
+        return ['DateTime','CustomerID'];
     }
 
     public static function primaryKey(): string
@@ -29,14 +28,13 @@ class Cart extends DBModel
     public function rules(): array
     {
         return [
-            'Date' => [self::RULE_REQUIRED],
-            'Time' => [self::RULE_REQUIRED],
+            'DateTime' => [self::RULE_REQUIRED,self::RULE_DATETIME],
             'CustomerID' => [self::RULE_REQUIRED]
         ];
     }
 
     public function jsonarray(): array
     {
-        return ['CartID','Date','Time','CustomerID'];
+        return ['CartID','DateTime','CustomerID'];
     }
 }

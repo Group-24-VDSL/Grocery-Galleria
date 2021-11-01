@@ -7,7 +7,7 @@ use app\core\db\DBModel;
 class Orders extends DBModel
 {
     public int $OrderID = 0;
-    public string $OrderDate = 'DATE(CURRENT_TIMESTAMP)';
+    public string $OrderDate = '';
     public int $CartID = 0;
     public float $DeliveryCost = 0;
     public float $TotalCost = 0;
