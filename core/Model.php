@@ -21,9 +21,12 @@ abstract class Model implements JsonSerializable
     public const RULE_MIN_VAL = 'minValue';
     public const RULE_MAX_VAL = 'maxValue';
     public const RULE_MAX_VAL_CLASS = 'maxValueClass';
+    public const RULE_DATETIME = 'dateTime';
+    public const RULE_IFEXISTS = 'ifexists';
 
     public const REGEXP_PHONE_NL = "/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
     public const REGEXP_NIC = "/([0-9]){9}V$|(^(19[0-9][0-9]|20[0-9][0-9])([0-9]){8}$)/";
+    public const REGEXP_DATETIME = "/20[0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]/";
 
     public function loadData($data)
     {
@@ -79,7 +82,9 @@ abstract class Model implements JsonSerializable
             self::RULE_NIC => 'Invalid NIC',
             self::RULE_MIN_VAL => 'Min value of this field must greater than {minValue}',
             self::RULE_MAX_VAL => 'Max value of this field must be {maxValue}',
-            self::RULE_MAX_VAL_CLASS => 'Value should be less than {maxValue}'
+            self::RULE_MAX_VAL_CLASS => 'Value should be less than {maxValue}',
+            self::RULE_DATETIME =>  'Invalid Date and Time',
+            self::RULE_IFEXISTS => 'There is no such record exists'
         ];
     }
 
@@ -116,6 +121,9 @@ abstract class Model implements JsonSerializable
                 if ($ruleName === self::RULE_NIC && !filter_var(strtoupper($value), FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => self::REGEXP_NIC)))) {
                     $this->addErrorForRule($attribute, self::RULE_NIC);
                 }
+                if ($ruleName === self::RULE_DATETIME && !filter_var($value, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => self::REGEXP_DATETIME)))) {
+                    $this->addErrorForRule($attribute, self::RULE_DATETIME);
+                }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, ['match' => $rule['match']]);
                 }
@@ -130,7 +138,7 @@ abstract class Model implements JsonSerializable
                 }
                 if ($ruleName === self::RULE_UNIQUE) {
                     $className = $rule['class'];
-                    $uniqAttribute = $rule['attribute'] ?? $attribute; //if the rule has a diffrent class and a attribute to match
+                    $uniqAttribute = $rule['attribute'] ?? $attribute; //if the rule has a different class and an attribute to match
                     $tableName = $className::tableName();
                     $db = Application::$app->db;
                     $statement = $db->prepare("SELECT * FROM $tableName WHERE $uniqAttribute = :$attribute");
@@ -141,10 +149,23 @@ abstract class Model implements JsonSerializable
                         $this->addErrorForRule($attribute, self::RULE_UNIQUE, ['field' => $this->getLabel($attribute)]);
                     }
                 }
+                if($ruleName === self::RULE_IFEXISTS){
+                    $className = $rule['class'];
+                    $uniqAttribute = $rule['attribute'] ?? $attribute; //if the rule has a different class and an attribute to match
+                    $tableName = $className::tableName();
+                    $db = Application::$app->db;
+                    $statement = $db->prepare("SELECT * FROM $tableName WHERE $uniqAttribute = :$attribute");
+                    $statement->bindValue(":$attribute", $value);
+                    $statement->execute();
+                    $record = $statement->fetchObject();
+                    if (!$record) {
+                        $this->addErrorForRule($attribute, self::RULE_IFEXISTS);
+                    }
+                }
 
                 if($ruleName===self::RULE_MAX_VAL_CLASS){
                     $className = $rule['class'];
-                    $checkAttribute = $rule['checkattribute']; //if the rule has a different class and a attribute to match
+                    $checkAttribute = $rule['checkattribute']; //if the rule has a different class and an attribute to match
                     $where = $rule['where'];
                     $tableName = $className::tableName();
 
