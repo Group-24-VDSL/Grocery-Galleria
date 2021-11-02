@@ -49,7 +49,6 @@ $.getJSON(URLGetCart, function (CartItems) {
 
                     Item.innerHTML = `
                         <div class="item-img"><img src="${item.ItemImage}" alt="${item.Name}">${item.Name}</div>
-<!--                        <div class="productname"></div>-->
                         <div class="UWeight">${item.UWeight}</div>
                         <div class="price">${shopitem.UnitPrice}</div>
                         <div class="quantity">

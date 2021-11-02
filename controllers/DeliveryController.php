@@ -4,7 +4,12 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\exceptions\NotFoundException;
 use app\core\Request;
+use app\core\Response;
+use app\models\Cart;
+use app\models\Customer;
+use app\models\Orders;
 use app\models\Rider;
 use app\models\User;
 use Exception;
@@ -95,8 +100,27 @@ class DeliveryController extends Controller
         return $this->render('delivery/assign-rider');
     }
 
-    public function viewnewdelivery(){
+    /**
+     * @throws NotFoundException
+     */
+    public function viewnewdelivery(Request $request, Response $response){
         $this->setLayout('headeronly-staff');
+        if($request->isSet("id")){
+            $order = Orders::findOne(['OrderID' => $request->getBody()["id"]]);
+            if($order){
+                $cart = Cart::findOne(['CartID' => $order->CartID]);
+                if($cart) {
+                    $customer = Customer::findOne(['CustomerID' => $cart->CustomerID]);
+                    if($customer){
+
+                    }
+                }
+            }else{
+                $response->statusCode(404);
+                throw new NotFoundException();
+            }
+
+        }
         return $this->render('delivery/view-new-delivery-details');
     }
 
