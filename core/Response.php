@@ -14,7 +14,14 @@ class Response
     {
         header('Location: '.$string);
     }
+
     public function setContentTypeJSON(){
         header('Content-Type: application/json');
+    }
+
+    public function json($object)
+    {
+        $this->setContentTypeJSON();
+        return json_encode($object);
     }
 }
