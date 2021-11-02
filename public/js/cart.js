@@ -16,7 +16,15 @@ const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
 $.getJSON(URLGetCart, function (CartItems) {
     CartItems.sort((a, b) => parseFloat(a.ShopID) - parseFloat(b.ShopID));
     const containerItem = document.getElementById('container-item');
-    // console.log(CartItems);
+
+    //details pane
+    let subTotal = document.getElementById('subTotal');
+    let deliveryFee = document.getElementById('DeliveryFee');
+    let Total = document.getElementById('GTotal');
+
+    $('#itemCount').text(CartItems.length);
+    $('#ShopCount').text([...new Set(CartItems.map(item=> item.ShopID))].length);
+
 
     CartItems.forEach(CartItem => {
         // console.log(CartItem);
@@ -56,7 +64,7 @@ $.getJSON(URLGetCart, function (CartItems) {
                         </div>
                         <div class="total">${shopitem.UnitPrice * CartItem.Quantity}</div>
                         <div>
-                            <a  class="" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}" >Update</a>
+                            <a  class="update" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}" >Update</a>
                             
                         </div>
                         <div>
@@ -73,7 +81,11 @@ $.getJSON(URLGetCart, function (CartItems) {
     });
 
 
+}).then(function (){
+
 });
+
+// function update
 
 
 
