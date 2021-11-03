@@ -66,10 +66,14 @@
             <div class="inputBox">
                 <label for="ItemImage">
                     <i class="far fa-images"></i>
-                    <?php echo $model->labels()['ItemImage']?>
+                    Current Image
                 </label>
-                <?php echo $form->inputfile($model,"ItemImage")?>
+                <div>
+                <img id="ImgDis" class="imageBox" src="">
+                </div>
+<!--                --><?php //echo $form->inputfile($model,"ItemImage")?>
             </div>
+
             <div class="inputBox">
                 <label for="Brand">
                     <i class="fas fa-edit"></i>
@@ -85,6 +89,13 @@
                 </label
                 >
                 <?php echo $form->selectfieldonly($model,"Unit",['0'=>'Kg','1'=>'Gram','2'=>'Litre','3'=>'ml','4'=>'Unit']);?>
+            </div>
+            <div class="inputBox">
+                <label for="ItemImage">
+                    <i class="far fa-images"></i>
+                    New <?php echo $model->labels()['ItemImage']?>
+                </label>
+                <?php echo $form->inputfile($model,"ItemImage")?>
             </div>
             <div class="inputBox">
                 <label for="UWeight">
@@ -111,7 +122,7 @@
             </div>
             <!--                <div class="inputBox"></div>-->
             <div class="inputBox div-button">
-                <button class="btn btn-add">Submit</button>
+                <button class="btn">Submit</button>
             </div>
             <?php \app\core\form\Form::end()?>
         </div>
