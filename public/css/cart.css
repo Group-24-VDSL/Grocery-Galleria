@@ -193,6 +193,7 @@ section {
     /*width: 64px;*/
     background: var(--first-color-alt);
     border-radius: .5rem;
+    cursor: pointer;
 }
 .cart .container .container-item .cart-items .item a:hover{
     background: var(--first-color-alt-2);

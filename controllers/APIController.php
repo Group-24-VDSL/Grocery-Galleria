@@ -50,6 +50,7 @@ class APIController extends Controller
         return json_encode($shop);
     }
 
+
     public function getAllShop(Request $request,Response $response)
     {
         $response->setContentTypeJSON();
@@ -64,6 +65,7 @@ class APIController extends Controller
     {
         $response->setContentTypeJSON();
         $items =TemporaryCart::findAll(array_slice($request->getBody(),1,null,true));
+
         return json_encode($items);
 
     }
