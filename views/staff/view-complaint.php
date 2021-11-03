@@ -1,10 +1,3 @@
-    <link rel="stylesheet" href="/css/all.css" />
-    <link rel="stylesheet" href="/css/dashboardStyle.css" />
-    <link rel="stylesheet" href="/css/dashboardStyleStaff.css" />
-    <link rel="stylesheet" href="/css/complaint.css">
-    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"/>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/complaint.js"></script>
 
 <div class="core core-complaint">
           <div class="complaint-heading">
