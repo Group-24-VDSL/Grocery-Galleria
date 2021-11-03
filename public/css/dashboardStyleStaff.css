@@ -3,7 +3,7 @@
 
 
 .btn {
-   margin-top: 0;
+  margin-top: 0;
   background-color: var(--first-color);
   padding: 0.5rem 0.8rem;
   font-size: var(--smaller-font-size);
@@ -153,8 +153,10 @@
   transform: scale(1.5);
 }
 
-
-
+.register form .inputBox img{
+  width: 48px;
+  height: 48px;
+}
 
 
 
