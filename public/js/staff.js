@@ -35,15 +35,15 @@ $(document).ready(function () {
                     const itemRow = document.createElement('ul');
                     itemRow.classList.add('row');
                     itemRow.innerHTML = `
-                 <li id="ItemImage" class="row-img">
+                 <li class="row-img">
                     <img src="${Item.ItemImage}" alt="" />
                 </li>
-                <li id="Name" class="row-name">${Item.Name}</li>
-                <li id="Brand" class="row-brand">${Item.Brand}</li>
-                <li id="Unit" class="row-unit">${Item.Unit}</li>
-                <li id="UWeight" class="row-minWeight">${Item.UWeight}</li>
-                <li id="MRP" class="row-mrp">${Item.MRP}</li>
-                <li id="MaxCount" class="row-IncStep">${Item.MaxCount}</li>
+                <li class="row-name">${Item.Name}</li>
+                <li class="row-brand">${Item.Brand}</li>
+                <li class="row-unit">${Item.Unit}</li>
+                <li class="row-minWeight">${Item.UWeight}</li>
+                <li class="row-mrp">${Item.MRP}</li>
+                <li class="row-IncStep">${Item.MaxCount}</li>
                 <li class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </li>
@@ -51,46 +51,34 @@ $(document).ready(function () {
                     ItemTable.appendChild(itemRow);
                 }
             )
+        }).then(function (){
+            const itemBtns = document.getElementsByClassName('btn-row');
+            $(itemBtns).click(function () {
+                const URLFindItem = URLItemAPI.concat($(this).data("href"));
+                $.getJSON(URLFindItem, function (Item) {
+                    $('#Category').val(Item.Category);
+                    // console.log(document.getElementById('Category').value);
+                    $('#Unit').val(Item.Unit);
+                    // console.log(document.getElementById('Unit').value);
+                    $('#Name').val(Item.Name);
+                    // console.log(document.getElementById('Name').value);
+                    $('#ImgDis').attr('src',Item.ItemImage);
+                    // console.log(Item.ItemImage);
+                    $('#Brand').val(Item.Brand);
+                    // console.log(document.getElementById('Brand').value);
+                    $('#UWeight').val(Item.UWeight);
+                    // console.log(document.getElementById('UWeight').value);
+                    $('#MaxCount').val(Item.MaxCount);
+                    // console.log(document.getElementById('MaxCount').value);
+                    $('#MRP').val(Item.MRP);
+                    // console.log(document.getElementById('MRP').value);
+                })
+            });
         })
     })
     $('#btn-vege').trigger('click');
 })
 
-// const Category = document.getElementById('Category');
-// const Name = document.getElementById('Name');
-// const ItemImage = document.getElementById('ItemImage');
-// const Brand = document.getElementById('Brand');
-// const Unit = document.getElementById('Unit');
-// const UWeight = document.getElementById('UWeight');
-// const MaxCount = document.getElementById('MaxCount');
-// const MRP = document.getElementById('MRP');
-
-const itemBtns = document.getElementsByClassName('btn-row');
-// console.log(itemBtns);
-$(itemBtns).click(function () {
-    console.log(this);
-    const URLFindItem = URLItemAPI.concat($(this).data("href"));
-    console.log(URLFindItem);
-    $.getJSON(URLFindItem, function (Item) {
-        console.log(Item);
-        $('#Category').val(Item.Category);
-        console.log(document.getElementById('Category').value);
-        $('#Unit').val(Item.Unit);
-        console.log(document.getElementById('Unit').value);
-        $("#Name").val(Item.Name);
-        console.log(document.getElementById('Name'));
-        $('#ItemImage').val(Item.ItemImage);
-        console.log(document.getElementById('ItemImage'));
-        $('#Brand').val(Item.Brand);
-        console.log(document.getElementById('Brand').value);
-        $('#UWeight').val(Item.UWeight);
-        console.log(document.getElementById('UWeight').value);
-        $('#MaxCount').val(Item.MaxCount);
-        console.log(document.getElementById('MaxCount').value);
-        $('#MRP').val(Item.MRP);
-        console.log(document.getElementById('MRP').value);
-    })
-});
 
 
 
