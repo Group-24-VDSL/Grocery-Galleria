@@ -56,6 +56,7 @@ $(document).ready(function () {
             $(itemBtns).click(function () {
                 const URLFindItem = URLItemAPI.concat($(this).data("href"));
                 $.getJSON(URLFindItem, function (Item) {
+                    $('#ItemID').val(Item.ItemID);
                     $('#Category').val(Item.Category);
                     // console.log(document.getElementById('Category').value);
                     $('#Unit').val(Item.Unit);

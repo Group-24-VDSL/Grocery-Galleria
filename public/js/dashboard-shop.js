@@ -27,15 +27,13 @@ const URLGetCartAPI = host + "/api/getcart";
 
 
 const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
-const URLGetShop = URLShopItemAPI.concat('?ShopId=').concat('5')
+const URLGetShop = URLShopItemAPI.concat('?ShopID=').concat('5');
 
 const ItemTable = document.getElementById('item-table');
 // ItemTable.classList.add('item-table-body body-half-screen');
 
 $(document).ready(function () {
     $.getJSON(URLGetShop, function (Shops) {
-
-
         Shops.forEach(Shop => {
             // itemRow.classList.add('row');
             const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);

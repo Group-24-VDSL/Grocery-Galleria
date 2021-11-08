@@ -72,7 +72,7 @@
 <!--            </a>-->
 <!--        </li>-->
         <li>
-            <a href="">
+            <a href="/dashboard/staff/profilesettings">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>
