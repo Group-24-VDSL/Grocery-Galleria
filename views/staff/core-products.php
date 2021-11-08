@@ -18,8 +18,8 @@
                 <li>Name</li>
                 <li>Brand</li>
                 <li>Unit</li>
-                <li>MRP</li>
                 <li>UnitWeight</li>
+                <li>MRP</li>
                 <li>MaxCount</li>
                 <li>Update</li>
             </ul>
@@ -49,6 +49,7 @@
     <div class="container-core">
         <div class="form-details register">
             <?php $form = \app\core\form\Form::begin("","post","itemUpdate",[],"multipart/form-data",);?>
+            <input id="ItemID" name="ItemID" value="" hidden>
             <div class="inputBox">
                 <label for="category">
                     <i class="fas fa-list"></i>
@@ -69,6 +70,7 @@
                     Current Image
                 </label>
                 <div>
+
                 <img id="ImgDis" class="imageBox" src="">
                 </div>
 <!--                --><?php //echo $form->inputfile($model,"ItemImage")?>
@@ -122,7 +124,7 @@
             </div>
             <!--                <div class="inputBox"></div>-->
             <div class="inputBox div-button">
-                <button class="btn">Submit</button>
+                <button type="submit" class="btn">Submit</button>
             </div>
             <?php \app\core\form\Form::end()?>
         </div>
