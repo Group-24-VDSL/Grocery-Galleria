@@ -9,9 +9,10 @@ class OrderCart extends DBModel
 {
     public int $CartID = 0;
     public int $ShopID = 0;
+    public int $CustomerID = 0 ;
     public string $ItemID = '';
     public string $Quantity = '';
-    public float  $Total = 0;
+    public float $ShopTotal = 0 ;
 
     public static function tableName(): string
     {
@@ -20,12 +21,12 @@ class OrderCart extends DBModel
 
     public function attributes(): array
     {
-        return ['ShopID','ItemID','Quantity','Total'];
+        return ['ShopID','CustomerID','ItemID','Quantity','ShopTotal'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'CartID';
+        return ['CartID'];
     }
 
     public function rules(): array
@@ -34,12 +35,12 @@ class OrderCart extends DBModel
             'ItemID' => [self::RULE_REQUIRED,self::RULE_INT],
             'CustomerID' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_IFEXISTS,'class'=> Customer::class,'attribute' => 'CustomerID']],
             'Quantity' => [self::RULE_REQUIRED,[self::RULE_MIN_VAL,'minValue'=> 0]],
-            'Total' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=> 0]]
+            'Total' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=> 0.0]]
         ];
     }
 
     public function jsonarray(): array
     {
-        return ['CartID','ShopID','ItemID','Quantity','Total'];
+        return ['CartID','ShopID','CustomerID','ItemID','Quantity','ShopTotal'];
     }
 }
