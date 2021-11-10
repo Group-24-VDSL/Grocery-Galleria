@@ -18,50 +18,43 @@ const host = window.location.origin; //http://domainname
 //Api links
 
 const URLOrderAPI = host + "/api/orders";
-const URLFindCartAPI = host + "/api/getordercart";
 
-const URLGetOrder = URLOrderAPI.concat('?OrderID=').concat('1');
+
+const URLFindCartAPI = host + "/api/getordercart";
+const URLShopOrder = host + "/api/getshoporders" ;
+const URLGetOrder = URLShopOrder.concat('?ShopID=').concat('1');
+console.log(URLGetOrder);
+
+const ItemTable = document.getElementById('item-table');
 
 $(document).ready(function () {
-    $.getJSON(URLGetOrder, function (Orders) {
-
-
-            Orders.forEach(Order => {
+    $.getJSON(URLGetOrder, function (ShopOrders) {
+            ShopOrders.forEach(ShopOrder => {
                 // itemRow.classList.add('row');
-
-                if (Order.Status == 0){
-                    const URlFindCart = URLFindCartAPI.concat("?CartID=").concat(Order.CartID);
+                    const URlFindCart = URLFindCartAPI.concat("?CartID=").concat(ShopOrder.CartID);
                     console.log(URlFindCart);
 
                     $.getJSON(URlFindCart , function (Carts) {
                             Carts.forEach(Cart => {
-
                                     const ItemRow = document.createElement('tr');
                                     // itemRow.classList.add('tr');
                                     ItemRow.innerHTML = `
                  <td></td>
-                 <td id="Name" class="row-name">${Order.OrderID}</td>
-                 <td id="ItemImage" class="row-img">
-                    <img src="${Item.ItemImage}" alt="${Item.Name}" />
-                </td>
-                <td id="Name" class="row-name">${Item.Name}</td>
-                <td id="Brand" class="row-brand">${Item.Brand}</td>
-                <td id="Unit" class="row-unit">${Item.Unit}</td>
-                <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
-                <td id="MRP" class="row-mrp">${Item.MRP}</td>
-                <td id="UPrice" class="row-uprice">${Shop.UnitPrice}</td>
-                <td id="Stock" class="row-stock">${Shop.Stock}</td>
-                <td id="Enable" class="row-enable">${Shop.Enable}</td>
-                <td class="row-ubutton">
-                    <a  class="btn-row" type="submit">Update</a>
-                </td>
+                 <td id="ID" class="order-id">${ShopOrder.CartID}</td>            
+                <td id="RiderID" class="rider-id"></td>
+                <td id="Date" class="order-date">${ShopOrder.Date}</td>
+                <td id="Time" class="order-time">${ShopOrder.Date}</td>
+                <td id="View" class="shop-total">${ShopOrder.ShopTotal}</td>
+                <td id="Total" class="ubutton"> <button class="btn-item" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></td>
+               
+                
                 `
                                     ItemTable.appendChild(ItemRow);
                                 }
                             )
                         }
                     )
-                }
+
 
 
 
