@@ -62,6 +62,14 @@ class APIController extends Controller
 
     //cart
 
+    public function getOrderCart(Request $request , Response $response)
+    {
+        $response->setContentTypeJSON();
+        $cart =TemporaryCart::findOne(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($cart);
+    }
+
     public function getCart(Request $request,Response $response) // get all items from DB
     {
         $response->setContentTypeJSON();
