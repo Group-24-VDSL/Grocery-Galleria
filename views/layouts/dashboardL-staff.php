@@ -23,7 +23,7 @@
 <?php include_once("utils/sessions.php"); ?>
 <?php include_once("utils/pwa.php"); ?>
 <body>
-<div class="sidebar">
+<div class="sidebar active">
     <div class="sidebar-logo">
         <img src="../../img/logo_only_color.png" alt="" />
         <img class="text" src="../../img/text_white-min.png" alt="" />
@@ -72,7 +72,7 @@
 <!--            </a>-->
 <!--        </li>-->
         <li>
-            <a href="">
+            <a href="/dashboard/staff/profilesettings">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>
@@ -167,5 +167,6 @@
 <!-- Home section ends -->
 <script src="/js/staff.js"></script>
 <script src="/js/dashboardScript.js"></script>
+<script src="/js/complaint.js"></script>
 </body>
 

@@ -7,6 +7,7 @@ use PDO;
 
 abstract class Model implements JsonSerializable
 {
+
     public const RULE_REQUIRED = 'required';
     public const RULE_EMAIL = 'email';
     public const RULE_MIN = 'min';
@@ -88,7 +89,7 @@ abstract class Model implements JsonSerializable
         ];
     }
 
-    public function validate()
+    public function validate($mode='')
     {
         foreach ($this->rules() as $attribute => $rules) {
             $value = $this->{$attribute};
@@ -136,7 +137,7 @@ abstract class Model implements JsonSerializable
                 if ($ruleName === self::RULE_MAX_VAL && $value > (float)(is_string($rule['maxValue']) ? $this->{$rule['maxValue']} : $rule['maxValue'])) {
                     $this->addErrorForRule($attribute, self::RULE_MAX_VAL, ['maxValue' => is_string($rule['maxValue']) ? $this->{$rule['maxValue']} : $rule['maxValue']]);
                 }
-                if ($ruleName === self::RULE_UNIQUE) {
+                if ($ruleName === self::RULE_UNIQUE && $mode !='update') {
                     $className = $rule['class'];
                     $uniqAttribute = $rule['attribute'] ?? $attribute; //if the rule has a different class and an attribute to match
                     $tableName = $className::tableName();

@@ -70,7 +70,7 @@
             </div>
             <!--                <div class="inputBox"></div>-->
             <div class="inputBox div-button">
-                <button class="btn btn-add">Submit</button>
+                <button class="btn">Submit</button>
             </div>
             <?php \app\core\form\Form::end()?>
         </div>
