@@ -22,9 +22,9 @@ class ShopItem extends DBModel
         return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'ShopID,ItemID' ;
+        return ['ShopID,ItemID'] ;
     }
 
     public function rules(): array
