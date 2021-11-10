@@ -61,6 +61,7 @@ $(document).ready(function () {
                 <td class="row-ubutton">
                     <a  class="btn-row" type="submit">Update</a>
                 </td>
+                
                 `
                             ItemTable.appendChild(ItemRow);
                         }
