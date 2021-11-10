@@ -6,9 +6,11 @@ use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\Item;
+use app\models\OrderCart;
 use app\models\Orders;
 use app\models\Shop;
 use app\models\ShopItem;
+use app\models\ShopOrder;
 use app\models\TemporaryCart;
 
 class APIController extends Controller
@@ -65,9 +67,16 @@ class APIController extends Controller
     public function getOrderCart(Request $request , Response $response)
     {
         $response->setContentTypeJSON();
-        $cart =TemporaryCart::findOne(array_slice($request->getBody(),1,null,true));
+        $carts = OrderCart::findAll(array_slice($request->getBody(),1,null,true));
+        return json_encode($carts);
+    }
 
-        return json_encode($cart);
+    public function getShopOrder(Request $request , Response $response)
+    {
+        $response->setContentTypeJSON();
+        $orders = ShopOrder::findAll(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($orders);
     }
 
     public function getCart(Request $request,Response $response) // get all items from DB
@@ -79,7 +88,7 @@ class APIController extends Controller
 
     }
 
-    public function getOrder(Request $request, Response $response) // get all orders from DB
+    public function getOrders(Request $request, Response $response) // get all orders from DB
     {
         $response->setContentTypeJSON();
         $orders = Orders::findAll(array_slice($request->getBody(),1,null,true));
