@@ -24,9 +24,9 @@ class Delivery extends DBModel
         return ['RiderID','Date','Status','CompDate','CompTime','OrderID' ];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'DeliveryID';
+        return ['DeliveryID'];
     }
 
     public function rules(): array

@@ -41,9 +41,9 @@ class Staff extends UserModel
         return ['StaffID','Name','Email','ContactNo'];
     }
 
-    public static function primaryKey():string
+    public static function primaryKey():array
     {
-        return 'StaffID';
+        return ['StaffID'];
     }
 
     public function getDisplayName(): string

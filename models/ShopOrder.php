@@ -21,10 +21,10 @@ class ShopOrder extends DBModel
         return ['ShopID','CartID','Date','ShopTotal'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-//        return '['ShopID','CardID']';
-        return '';
+        return ['ShopID','CartID'];
+
     }
 
     public function rules(): array

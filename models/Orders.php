@@ -23,9 +23,9 @@ class Orders extends DBModel
         return ['OrderDate','CartID','DeliveryCost','TotalCost'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'OrderID';
+        return ['OrderID'];
     }
 
     public function rules(): array

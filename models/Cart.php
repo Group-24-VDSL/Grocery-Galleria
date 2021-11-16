@@ -20,9 +20,9 @@ class Cart extends DBModel
         return ['DateTime','CustomerID'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'CartID';
+        return ['CartID'];
     }
 
     public function rules(): array

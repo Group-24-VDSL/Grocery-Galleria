@@ -38,9 +38,9 @@ class Rider extends UserModel
         ];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'RiderID';
+        return ['RiderID'];
     }
 
     public function rules(): array
