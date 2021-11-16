@@ -17,7 +17,6 @@ class Shop extends UserModel
     public string $City = '';
     public string $Suburb = '';
     public string $ShopName = '';
-//    public string $ShopBanner= ''; we don't do this anymore
     public string $PlaceID = '';
     public string $ShopDesc = '';
     public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']
@@ -29,9 +28,9 @@ class Shop extends UserModel
         return 'shop';
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'ShopID';
+        return ['ShopID'];
     }
     public function labels(): array{
         return [
