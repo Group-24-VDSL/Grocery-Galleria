@@ -8,7 +8,7 @@ class Complaint extends DBModel
 {
     public int $ComplaintID = 0;
     public int $CustomerID = 0;
-    public string $ComplaintDate = 'DATE(CURRENT_TIMESTAMP)';
+    public string $ComplaintDate ='';//'DATE(CURRENT_TIMESTAMP)';
     public int $OrderID = 0;
     public string $OrderDate = '';
     public int $Regarding = 0 ; /**[0-shop , 1-delivery] */
@@ -27,9 +27,9 @@ class Complaint extends DBModel
         return ['ComplaintDate','OrderID','OrderDate','Regarding','Priority','Status','Nature','SpecialDetails'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'ComplaintID';
+        return ['ComplaintID'];
     }
 
     public function rules(): array

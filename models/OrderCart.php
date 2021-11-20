@@ -23,9 +23,9 @@ class OrderCart extends DBModel
         return ['ShopID','ItemID','Quantity','Total'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'CartID';
+        return ['CartID'];
     }
 
     public function rules(): array

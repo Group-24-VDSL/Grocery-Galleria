@@ -6,6 +6,7 @@ use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\Item;
+use app\models\Orders;
 use app\models\Shop;
 use app\models\ShopItem;
 use app\models\TemporaryCart;
@@ -61,6 +62,14 @@ class APIController extends Controller
 
     //cart
 
+    public function getOrderCart(Request $request , Response $response)
+    {
+        $response->setContentTypeJSON();
+        $cart =TemporaryCart::findOne(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($cart);
+    }
+
     public function getCart(Request $request,Response $response) // get all items from DB
     {
         $response->setContentTypeJSON();
@@ -70,50 +79,14 @@ class APIController extends Controller
 
     }
 
-    public function addToCart(Request $request,Response $response)
+    public function getOrder(Request $request, Response $response) // get all orders from DB
     {
         $response->setContentTypeJSON();
-        if($request->isPost()){
-            $json = $request->getJson();
-            if($json){
-                $tempcart = new TemporaryCart();
-                $tempcart->loadData($json);
-                $checktemp = TemporaryCart::findOne(["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID]);
-                if($checktemp) { //there exists such item
-                    $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
-                    $tempcart->Quantity = $newQuantity;
-                    if ($tempcart->validate() && $tempcart->update(["Quantity"=>$newQuantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])) {
-                        return json_encode('{"success":"ok"}');
-                    }else{
-                        return json_encode('{"success":"fail"}');
-                    }
-                }else{
-                    if ($tempcart->validate() && $tempcart->save()) {
-                        return json_encode('{"success":"ok"}');
-                    } else {
-                        return json_encode('{"success":"fail"}');
-                    }
-                }
-            }
-            return json_encode('{"success":"fail"}');
-        }elseif($request->isPatch()){
-            $json = $request->getJson();
-            if($json){
-                $tempcart = new TemporaryCart();
-                $tempcart->loadData($json);
-                $checktemp = TemporaryCart::findOne(["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID]);
-                if($checktemp) { //there exists such item
-                    if($tempcart->validate() && $tempcart->update(["Quantity"=>$tempcart->Quantity],["ItemID"=>$tempcart->ItemID,"ShopID"=>$tempcart->ShopID,"CustomerID"=>$tempcart->CustomerID])){
-                        return json_encode('{"success":"ok"}');
-                    }else{
-                        return json_encode('{"success":"fail"}');
-                    }
-                }else{
-                    return json_encode('{"success":"fail"}');
-                }
-            }
-        }else{
-            return json_encode('{"success":"fail"}');
-        }
+        $orders = Orders::findAll(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($orders);
     }
+
+
+
 }

@@ -14,20 +14,26 @@ const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
 
 
 $.getJSON(URLGetCart, function (CartItems) {
-    CartItems.sort((a, b) => parseFloat(a.ShopID) - parseFloat(b.ShopID));
+    CartItems.items.sort((a, b) => parseFloat(a.ShopID) - parseFloat(b.ShopID));
     const containerItem = document.getElementById('container-item');
 
-    //details pane
-    let subTotal = document.getElementById('subTotal');
-    let deliveryFee = document.getElementById('DeliveryFee');
-    let Total = document.getElementById('GTotal');
 
-    $('#itemCount').text(CartItems.length);
-    $('#ShopCount').text([...new Set(CartItems.map(item=> item.ShopID))].length);
+    $('#itemCount').text(CartItems.items.length);
+    $('#subTotal').text(CartItems.total.toFixed(2));
 
+    let shopcount = [...new Set(CartItems.items.map(item => item.ShopID))].length;
+    $('#ShopCount').text(shopcount);
 
-    CartItems.forEach(CartItem => {
-        // console.log(CartItem);
+    let $baseDeli = 120;
+
+    for (let i = 1; i < 5 && i < shopcount; i++) {
+        $baseDeli += 30;
+    }
+
+    $('#DeliveryFee').text($baseDeli.toFixed(2));
+    $('#GTotal').text(($baseDeli + CartItems.total).toFixed(2));
+
+    CartItems.items.forEach(CartItem => {
         let URLShop = URLShopAPI.concat('?ShopID=').concat(CartItem.ShopID);
         const URLItem = URLFindItemAPI.concat("?ItemID=").concat(CartItem.ItemID);
         const URLShopItem = URLShopItemAPI.concat("?ItemID=").concat(CartItem.ItemID).concat('&ShopID=').concat(CartItem.ShopID);
@@ -51,41 +57,53 @@ $.getJSON(URLGetCart, function (CartItems) {
         //Creating items based on Shopping Cart
         let Item = document.createElement('div');
         Item.classList.add('item');
-        $.getJSON(URLShop, function (shop) {
             $.getJSON(URLItem, function (item) {
                 $.getJSON(URLShopItem, function (shopitem) {
-
                     Item.innerHTML = `
                         <div class="item-img"><img src="${item.ItemImage}" alt="${item.Name}">${item.Name}</div>
                         <div class="UWeight">${item.UWeight}</div>
-                        <div class="price">${shopitem.UnitPrice}</div>
+                        <div class="price">${shopitem.UnitPrice.toFixed(2)}</div>
                         <div class="quantity">
-                            <input type="number" id="" name="quantity"  min="${item.UWeight}" max="${item.UWeight * item.MaxCount}" step="${item.UWeight}" value="${item.UWeight * CartItem.Quantity}">
+                            <input type="number" id="quantity${shopitem.ShopID}${shopitem.ItemID}"  name="quantity" onchange="update(${shopitem.ShopID},${shopitem.ItemID},${item.UWeight},${shopitem.UnitPrice})" min="${item.UWeight}" max="${item.UWeight * item.MaxCount}" step="${item.UWeight}" value="${item.UWeight * CartItem.Quantity}">
                         </div>
-                        <div class="total">${shopitem.UnitPrice * CartItem.Quantity}</div>
-                        <div>
-                            <a  class="update" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}" >Update</a>
-                            
+                        <div class="total" id="total${shopitem.ShopID}${shopitem.ItemID}">${(shopitem.UnitPrice * CartItem.Quantity).toFixed(2)}</div>
+                        <div class="update-button">
+                            <button  class="update btn btn-primary" id="update${shopitem.ShopID}${shopitem.ItemID}" data-id="${shopitem.ShopID}${shopitem.ItemID}" type="button" onclick="updatebutton(${shopitem.ShopID},${shopitem.ItemID})">Update</button>
                         </div>
-                        <div>
-                            <a class="remove" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}">Remove</a>   
+                        <div class="remove-button">
+                            <button class="remove btn btn-red" type="button" id="remove${shopitem.ShopID}${shopitem.ItemID}" data-id="${shopitem.ShopID}${shopitem.ItemID}" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}">Remove</button>
                         </div>
             `
                 });
             });
-        });
         //Add items to the relevant targeted shop
         const shopItemDiv = document.getElementById('CartItemsOfShop'.concat(CartItem.ShopID));
         shopItemDiv.appendChild(Item);
-
-    });
-
-
-}).then(function (){
+        });
 
 });
 
-// function update
+
+function updatebutton(ShopID,ItemID) {
+    let quantity = $('#quantity'.concat(ShopID).concat(ItemID)).val();
+    let uweight = $('#quantity'.concat(ShopID).concat(ItemID)).attr('step')
+
+    let passingvalue = Math.trunc(quantity / uweight);
+    let obj = {"ItemID": ItemID, "ShopID": ShopID, "Quantity": passingvalue, "CustomerID": 2}; //keys and values should be enclosed in double quotes
+
+    $.post(URLAddtoCartAPI, JSON.stringify(obj));
+
+}
+
+function update(ShopID,ItemID,UWeight,UnitPrice) {
+    let quantity = $('#quantity'.concat(ShopID).concat(ItemID)).val()/UWeight;
+    $('#total'.concat(ShopID).concat(ItemID)).text((quantity * UnitPrice).toFixed(2))
+}
+
+
+
+
+
 
 
 

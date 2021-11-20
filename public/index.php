@@ -2,6 +2,7 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use app\controllers\APIController;
+use app\controllers\CartController;
 use app\controllers\CustomerController;
 use app\controllers\DeliveryController;
 use app\controllers\ShopController;
@@ -48,7 +49,7 @@ $app->router->get('/logout',[AuthController::class,'logout']);
 $app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->get('/customer/profile',[CustomerController::class,'profile']);
-$app->router->get('/customer/cart',[CustomerController::class,'cart']);
+$app->router->get('/customer/cart',[CartController::class,'cart']);
 $app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
@@ -110,9 +111,12 @@ $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
 $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
-$app->router->get('/api/getcart',[APIController::class,'getCart']);
+$app->router->get('/api/getcart',[CartController::class,'getCart']);
 $app->router->post('/api/addtocart',[APIController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
+$app->router->patch('/api/orders',[APIController::class,'getOrders']);
+$app->router->patch('/api/getordercart',[APIController::class,'getOrderCart']);
+
 
 //rider
 $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);

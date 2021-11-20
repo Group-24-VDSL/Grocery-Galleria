@@ -1,3 +1,4 @@
+
 .table-item{
     width:100%;
     display: block;
@@ -66,11 +67,12 @@
     flex-basis:20%;
     flex-grow:1;
 }
-.table-item.small-first-col td:first-child{
-    counter-increment: rowrowNumber;
-    content: counter(rowNumber) ".";
-    content: counter(rowNumber);
-}
+
+
+table {counter-reset: no;}
+table tr{counter-increment: no;}
+table tr td:first-child:before{ content: counter(no)".";}
+
 
 
 .table-item tbody tr:nth-child(2n){

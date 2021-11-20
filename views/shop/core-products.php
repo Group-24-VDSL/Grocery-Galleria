@@ -17,20 +17,22 @@
                 <th>Item ID</th>
                 <th>Item Image</th>
                 <th>Item Name</th>
+                <th>Brand</th>
+                <th>U/Price</th>
                 <th>U/Weight</th>
-                <th>U/Price</th>
-                <th>U/Price</th>
+                <th>Max Price</th>
                 <th>U/Price</th>
                 <th>Max Price</th>
                 <th>Stock</th>
                 <th>enable</th>
-                <th>enable</th>
             </tr>
             </thead>
+            <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
             <tbody id="item-table" class="item-table-body body-half-screen">
 
 
             </tbody>
+            <?php \app\core\form\Form::end(); ?>
         </table>
 <!--        <div class="ongoing-items scroller">-->
 <!--            <ul class="item">-->
