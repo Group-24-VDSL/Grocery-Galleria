@@ -9,7 +9,7 @@ class Item extends DBModel
 
     public int $ItemID = 0;
     public string $Name = '';
-    public ?string $ItemImage = null;
+    public string $ItemImage = '';
     public string $Brand = '';
     public float $UWeight = 0.0;
     public int $Unit = 0; //[kg = 0, g = 1, l = 2]
