@@ -110,7 +110,7 @@ class Application
     {
         $this->user = $user;
         $primaryKey = $user->primaryKey();
-        $primaryValue = $user->{$primaryKey};
+        $primaryValue = $user->{$primaryKey[0]};
         $this->session->set('user',$primaryValue);
         $this->session->set('role',$user->Role);
         return true;

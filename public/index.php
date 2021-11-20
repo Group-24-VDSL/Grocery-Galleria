@@ -44,7 +44,6 @@ $app->router->get('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->post('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 
-
 //customer
 $app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
@@ -116,7 +115,6 @@ $app->router->post('/api/addtocart',[APIController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
 $app->router->patch('/api/orders',[APIController::class,'getOrders']);
 $app->router->patch('/api/getordercart',[APIController::class,'getOrderCart']);
-
 
 //rider
 $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
