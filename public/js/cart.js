@@ -64,7 +64,9 @@ $.getJSON(URLGetCart, function (CartItems) {
                         <div class="UWeight">${item.UWeight}</div>
                         <div class="price">${shopitem.UnitPrice.toFixed(2)}</div>
                         <div class="quantity">
-                            <input type="number" id="quantity${shopitem.ShopID}${shopitem.ItemID}"  name="quantity" onchange="update(${shopitem.ShopID},${shopitem.ItemID},${item.UWeight},${shopitem.UnitPrice})" min="${item.UWeight}" max="${item.UWeight * item.MaxCount}" step="${item.UWeight}" value="${item.UWeight * CartItem.Quantity}">
+                            <button class="quantity-step" onclick="update(${shopitem.ShopID},${shopitem.ItemID},-${item.UWeight},${shopitem.UnitPrice},${item.MaxCount})"><i class="fas fa-minus-square" ></i></button>
+                            <input type="number" id="quantity${shopitem.ShopID}${shopitem.ItemID}"  name="quantity" min="${item.UWeight}" max="${item.UWeight * item.MaxCount}" step="${item.UWeight}" value="${item.UWeight * CartItem.Quantity}" readonly>
+                            <button class="quantity-step" onclick="update(${shopitem.ShopID},${shopitem.ItemID},${item.UWeight},${shopitem.UnitPrice},${item.MaxCount})"><i class="fas fa-plus-square" ></i></button>
                         </div>
                         <div class="total" id="total${shopitem.ShopID}${shopitem.ItemID}">${(shopitem.UnitPrice * CartItem.Quantity).toFixed(2)}</div>
                         <div class="update-button">
@@ -95,9 +97,13 @@ function updatebutton(ShopID,ItemID) {
 
 }
 
-function update(ShopID,ItemID,UWeight,UnitPrice) {
-    let quantity = $('#quantity'.concat(ShopID).concat(ItemID)).val()/UWeight;
-    $('#total'.concat(ShopID).concat(ItemID)).text((quantity * UnitPrice).toFixed(2))
+function update(ShopID,ItemID,UWeight,UnitPrice,MaxCount) {
+    let quantity = $('#quantity'.concat(ShopID).concat(ItemID)).val()/Math.abs(UWeight);
+    if(quantity < MaxCount + 1  && 1 < quantity ){
+        let quantitysec = $('#quantity'.concat(ShopID).concat(ItemID)).val();
+        $('#quantity'.concat(ShopID).concat(ItemID)).val(parseInt(quantitysec) + parseInt(UWeight));
+        $('#total'.concat(ShopID).concat(ItemID)).text((quantity * UnitPrice).toFixed(2));
+    }
 }
 
 
