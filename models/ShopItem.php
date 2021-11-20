@@ -24,7 +24,7 @@ class ShopItem extends DBModel
 
     public static function primaryKey(): array
     {
-        return ['ShopID,ItemID'] ;
+        return ['ShopID','ItemID'] ;
     }
 
     public function rules(): array

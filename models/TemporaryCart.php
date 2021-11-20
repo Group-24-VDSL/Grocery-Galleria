@@ -22,9 +22,9 @@ class TemporaryCart extends DBModel
         return ['ItemID','ShopID', 'CustomerID', 'Quantity','Purchased'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return '';
+        return ['ItemID','ShopID','CustomerID'];
     }
 
     public function rules(): array

@@ -23,8 +23,8 @@ class ShopOrder extends DBModel
 
     public static function primaryKey(): array
     {
-        return ['ShopID','CardID'];
-      //  return '';
+        return ['ShopID','CartID'];
+
     }
 
     public function rules(): array

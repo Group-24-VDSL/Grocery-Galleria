@@ -47,11 +47,7 @@ class CustomerController extends Controller
     {
         return $this->render('customer/profile');
     }
-    public function cart()
-    {
-        $this->setLayout('cart');
-        return $this->render('customer/cart');
-    }
+
     public function checkout()
     {
         $this->setLayout('checkoutL');

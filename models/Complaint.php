@@ -27,9 +27,9 @@ class Complaint extends DBModel
         return ['ComplaintDate','OrderID','OrderDate','Regarding','Priority','Status','Nature','SpecialDetails'];
     }
 
-    public static function primaryKey(): string
+    public static function primaryKey(): array
     {
-        return 'ComplaintID';
+        return ['ComplaintID'];
     }
 
     public function rules(): array

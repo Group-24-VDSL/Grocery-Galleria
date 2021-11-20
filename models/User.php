@@ -58,9 +58,9 @@ class User extends UserModel
         ];
     }
 
-    public static function primaryKey():string
+    public static function primaryKey():array
     {
-        return 'UserID';
+        return ['UserID'];
     }
 
 
