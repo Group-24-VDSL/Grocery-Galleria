@@ -120,20 +120,22 @@
 }
 .home-content .core .container-core form .inputBox {
   display: grid;
-  grid-gap: 0.5rem;
+
 }
 .home-content .core .container-core form .inputBox label {
   font-size: var(--h3-font-size);
   color: var(--title-color);
-  padding: 0.5rem;
+  margin-top: .5rem;
+
 }
 .home-content .core .container-core form .inputBox i {
   padding-right: 0.5rem;
 }
-.home-content .core .container-core form .inputBox input {
-  width: 80%;
+.home-content .core .container-core form .inputBox input,
+.home-content .core .container-core form .inputBox select{
+  width: 90%;
   margin-left: 0.5rem;
-  height: 32px;
+  height: 38px;
   border: 0.1rem solid var(--home-color);
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -151,12 +153,23 @@
   font-weight: bold;
   width: 150px;
 }
+.home-content .core .container-core form .submit{
+  background-color: var(--first-color-alt);
+  border-color: transparent;
+  font-size: var(--normal-font-size);
+  font-weight: bold;
+  width: 150px;
+}
 .home-content .core .container-core form .update:hover {
   background-color: tomato;
   transition: 0.3s;
 }
+.home-content .core .container-core form .submit:hover {
+  background-color: #228B22;
+  transition: 0.3s;
+}
 .home-content .core .container-core .scroller {
-  height: 300px;
+  height: 400px;
   overflow-y: scroll;
   scrollbar-color: var(--first-color);
   scrollbar-width: thin;
@@ -165,8 +178,6 @@
 .register form {
   text-align: center;
   padding: 1rem;
-  /* border: 0.1rem solid rgba(43, 147, 72, 0.8); */
-  /* box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1); */
 }
 .register form {
   display: grid;
@@ -208,7 +219,10 @@
   height: 48px;
 }
 
-
+.register form .inputBox .imageBox{
+  margin-left: 0.5rem;
+  border-radius: 0.5rem;
+}
 
 
 
