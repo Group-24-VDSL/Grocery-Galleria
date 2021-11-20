@@ -30,38 +30,26 @@ abstract class DBModel extends Model
         return true;
     }
 
-//    public function update($attributes = [],$where=[])
-//    {
-//        $tableName = $this->tableName();
-//        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($attributes)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
-//        foreach ($attributes as $key => $value) {
-//            $stmt->bindValue(":$key", $value); //iterate through attributes
-//            // bind the User model attribute values with each :attribute into the sql statement
-//        }
-//        foreach ($where as $key => $value) {
-//            $stmt->bindValue(":$key", $value); //iterate through attributes
-//            // bind the User model attribute values with each :attribute into the sql statement
-//        }
-//        $stmt->execute();
-//        return true;
-//    }
     public function update($keys =[]){
         $tableName = $this->tableName();
         $attributes= $this->attributes();
-        $newValues = array();
+//        $newValues = array();
         $where = array();
         foreach ($keys as $key) {
             $where[$key] = $this->{$key};
         }
         $dbObj = self::findOne($where);
-        if($dbObj != $this){
-        foreach ($attributes as $attribute){
-            if(isset($this->$attribute) && ($dbObj->$attribute != $this->$attribute) ){
-                $newValues[$attribute]=$this->$attribute;
-            }
-        }
-        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($newValues)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
-        foreach ($newValues as $key => $value) {
+        $dbObjarr = array($dbObj);
+        $objarr = array($this);
+        $result = array_diff($objarr,$dbObjarr);
+//        if($dbObj != $this){
+//        foreach ($attributes as $attribute){
+//            if(isset($this->$attribute) && ($dbObj->$attribute != $this->$attribute) ){
+//                $newValues[$attribute]=$this->$attribute;
+//            }
+//        }
+        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($result)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
+        foreach ($result as $key => $value) {
             $stmt->bindValue(":$key", $value); //iterate through attributes
             // bind the User model attribute values with each :attribute into the sql statement
         }
@@ -70,7 +58,7 @@ abstract class DBModel extends Model
             // bind the User model attribute values with each :attribute into the sql statement
         }
         $stmt->execute();
-        }
+
         return true;
     }
     public static function delete($where=[])
