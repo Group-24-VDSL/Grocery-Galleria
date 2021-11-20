@@ -30,7 +30,8 @@ abstract class DBModel extends Model
         return true;
     }
 
-    public function update($keys =[]){
+    public function update(){
+        $keys = $this->primaryKey();
         $tableName = $this->tableName();
         $attributes= $this->attributes();
 //        $newValues = array();
@@ -39,26 +40,21 @@ abstract class DBModel extends Model
             $where[$key] = $this->{$key};
         }
         $dbObj = self::findOne($where);
-        $dbObjarr = array($dbObj);
-        $objarr = array($this);
+        $dbObjarr = (array)$dbObj; // db object to array
+        $objarr = (array)$this; // this object to array
         $result = array_diff($objarr,$dbObjarr);
-//        if($dbObj != $this){
-//        foreach ($attributes as $attribute){
-//            if(isset($this->$attribute) && ($dbObj->$attribute != $this->$attribute) ){
-//                $newValues[$attribute]=$this->$attribute;
-//            }
-//        }
-        $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($result)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
-        foreach ($result as $key => $value) {
-            $stmt->bindValue(":$key", $value); //iterate through attributes
-            // bind the User model attribute values with each :attribute into the sql statement
+        if(!empty($result)){
+            $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($result)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
+            foreach ($result as $key => $value) {
+                $stmt->bindValue(":$key", $value); //iterate through attributes
+                // bind the User model attribute values with each :attribute into the sql statement
+            }
+            foreach ($where as $key => $value) {
+                $stmt->bindValue(":$key", $value); //iterate through attributes
+                // bind the User model attribute values with each :attribute into the sql statement
+            }
+            $stmt->execute();
         }
-        foreach ($where as $key => $value) {
-            $stmt->bindValue(":$key", $value); //iterate through attributes
-            // bind the User model attribute values with each :attribute into the sql statement
-        }
-        $stmt->execute();
-
         return true;
     }
     public static function delete($where=[])
