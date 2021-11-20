@@ -91,8 +91,13 @@ class StaffController extends Controller
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
             $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID)-1), 5, '0', STR_PAD_LEFT));
-            $itemUpdated->ItemImage = $itemimg;
-            if ($itemUpdated->validate('update') && $itemUpdated->update(Item::primaryKey())) {
+            if(isset($itemimg)){
+                $itemUpdated->ItemImage = $itemimg;
+            }else{
+                $body = $request->getBody();
+                $itemUpdated->ItemImage = (string)$body['ImgDis'];
+            }
+            if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item Updated Successfully.");
                 Application::$app->response->redirect("/dashboard/staff/products");
             } else {
