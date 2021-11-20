@@ -70,8 +70,7 @@
                     Current Image
                 </label>
                 <img id="ImgDis" class="imageBox" src="">
-
-<!--                --><?php //echo $form->inputfile($model,"ItemImage")?>
+                <input id="ImgStr" name="ImgStr" hidden>
             </div>
 
             <div class="inputBox">
