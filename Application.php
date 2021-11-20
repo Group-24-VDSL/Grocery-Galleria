@@ -65,6 +65,22 @@ class Application
         return !self::$app->user;
     }
 
+    public static function isCustomer(){
+        return (self::$app->session->get('role') === 'Customer');
+    }
+
+    public static function isShop(){
+        return (self::$app->session->get('role') === 'Shop');
+    }
+
+    public static function isStaff(){
+        return (self::$app->session->get('role') === 'Staff');
+    }
+
+    public static function isDelivery(){
+        return (self::$app->session->get('role') === 'Delivery');
+    }
+
     public function run()
     {
         try{ //try catch for the exception handling
