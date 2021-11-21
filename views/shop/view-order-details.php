@@ -7,8 +7,8 @@
 
 use app\models\Item;
 use app\models\ShopItem;
-
 ?>
+
 <!--<link rel="stylesheet" href="/css/Register.css">-->
 <link rel="stylesheet" href="/css/dashboardStyle.css" />
 <link rel="stylesheet" href="/css/all.css" />
@@ -81,7 +81,6 @@ use app\models\ShopItem;
             </div>
 
         </div>
-
         <div style="height: 450px" class="core">
             <div class="container-order-details">
                 <h1 class="heading"> <span>Item List</span></h1>
@@ -89,7 +88,6 @@ use app\models\ShopItem;
                 <div class="item-list">
                     <table class="table-scroll small-first-col">
                         <thead>
-                        <tr>
                             <th></th>
                             <th>Item ID</th>
                             <th>Item Image</th>
@@ -98,42 +96,35 @@ use app\models\ShopItem;
                             <th>U/Price(LKR)</th>
                             <th>Quantity</th>
                             <th>Price(LKR)</th>
-                        </tr>
+
                         </thead>
                         <tbody class="body-half-screen">
-                        <?php
+                            <?php
                                 foreach($cartitems as $cartitem){
                                     $itemid = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->ItemID;
-
                                     $itemimage = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->ItemImage;
-
-                                    $itemimage = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->Name;
+                                    $itemname = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->Name;
                                     $itemuweight = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->UWeight;
                                     $itemuprice = $shopitem[$cartitem->ShopID][$cartitem->ItemID][0]->UnitPrice;
                                     $quantity = $cartitem->Quantity;
                                     $price = $quantity * $itemuprice;
-                                    echo ' <tr>';
-                                
-                                   echo '<td>' .$itemid.'</td>';
-                               
-                                   echo '<td>' .$itemimage .'</td>';
-
-                                 echo  '<td>'.$itemimage.'</td>';
-                                   echo '<td>' .$itemuweight.'</td>';
-                                  echo '<td>' .$itemuprice.'</td>';
-                                  echo ' <td>' .$quantity.'</td>';
-                                echo    '<td>' .$price.'</td>';
-                                        '</tr>';
-                                }
+                                    echo '<tr>';
+                                    echo '<td></td>' ;
+                                    echo '<td>'.$itemid.'</td>';
+                                    echo '<td><img class="item-img" src='.$itemimage.'></td>';
+                                    echo '<td>'.$itemname.'</td>';
+                                    echo '<td>'.$itemuweight.'</td>';
+                                    echo '<td>'.$itemuprice.'</td>';
+                                    echo ' <td>'.$quantity.'</td>';
+                                    echo '<td>'.$price.'</td>';
+                                    echo '</tr>';
+                                 }
                                 ?>
-
-
-
                         </tbody>
                     </table>
                     <div style="gap: 2rem" class="complete-section">
 
-                            <table style="height: 170px" class="details">
+                            <table style="height: 120px" class="details">
                                 <tbody>
                                 <tr style="height: 60px">
                                     <th>Total (LKR) :</th>
@@ -144,10 +135,7 @@ use app\models\ShopItem;
                                         ?>
                                     </td>
                                 </tr>
-                                <tr style="height: 60px">
-                                    <th>Weight :</th>
-                                    <td>5 Kg</td>
-                                </tr>
+
                                 <tr style="height: 60px">
                                     <th>Number of Items:</th>
                                     <td>
@@ -159,11 +147,12 @@ use app\models\ShopItem;
                                 </tr >
                                 </tbody>
                             </table>
+
                         <?php
                         if($shoporder -> Status == 0): ?>
-
                             <button class="complete-btn" type="submit" value="Complete">Mark as Completed</button>
                         <?php endif; ?>
+
                     </div>
                 </div>
             </div>
