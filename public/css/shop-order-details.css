@@ -256,6 +256,11 @@
     max-height: 39vh;
 }
 
+table {counter-reset: no;}
+table tbody tr{counter-increment: no;}
+table tbody tr td:first-child:before{ content: counter(no)".";
+}
+
 .small-col{flex-basis:10%;}
 
 .item-img {
