@@ -33,8 +33,6 @@ abstract class DBModel extends Model
     public function update(){
         $keys = $this->primaryKey();
         $tableName = $this->tableName();
-        $attributes= $this->attributes();
-//        $newValues = array();
         $where = array();
         foreach ($keys as $key) {
             $where[$key] = $this->{$key};
@@ -57,6 +55,7 @@ abstract class DBModel extends Model
         }
         return true;
     }
+
     public static function delete($where=[])
     {
         $tableName = static::tableName();
