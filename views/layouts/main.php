@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- JavaScript -->
     <script src="/js/jquery.min.js"></script>
-    <script src="/js/rivets-cart.min.js"></script>
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/main.css">
     <title>CustomerHome</title>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
 <body>
 <?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
 <!-- Header start -->
 <header>
     <div class="header-1">

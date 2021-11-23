@@ -13,10 +13,10 @@
     <!-- JavaScript -->
     <script src="/js/jquery.min.js"></script>
     <title></title>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
 <body>
 <?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
 <!-- Header start -->
 <header>
     <div class="header-1">

@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/main.css">
-
     <!-- JavaScript -->
     <script src="/js/jquery.min.js"></script>
     <title>Shop Gallery</title>
 </head>
+    <?php include_once("utils/pwa.php"); ?>
 <body>
+<?php include_once("utils/sessions.php"); ?>
 <!-- Header start -->
 <header>
     <div class="header-1">

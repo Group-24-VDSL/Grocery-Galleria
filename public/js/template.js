@@ -34,4 +34,39 @@ $( function(){
         $(this).closest('.cart-mobile-content-item').remove();
     });
 
+
 }); //document ready
+
+function templateAlert(type,message){
+    //alert
+    let doc = document.getElementsByClassName('alert-container')[0];
+
+    let color;
+    let text;
+
+    let Item = document.createElement('div');
+    Item.classList.add('alert');
+    switch (type) {
+        case 'red':
+            color = 'red';
+            text = 'Danger';
+            break;
+        case 'yellow':
+            color = 'yellow';
+            text = 'Warning';
+            break;
+        case 'green':
+            color = 'green';
+            text = 'Success';
+            break;
+        default:
+            color = 'yellow';
+            text = 'Warning';
+    }
+    Item.classList.add('alert-'.concat(color));
+    Item.innerHTML = `
+            <a href="#" class="alert-close" onClick="this.parentElement.style.display='none';"><i class="fa fa-times-circle"></i></a>
+            <p><strong>${text}!</strong> ${message}</p></div>`;
+    doc.appendChild(Item);
+    return true;
+};

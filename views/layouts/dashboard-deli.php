@@ -15,10 +15,10 @@
     <script src="/js/dashboard.js"></script>
 
     <title>Dashboard-Delivery</title>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
-<?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
 <body>
+<?php include_once("utils/sessions.php"); ?>
 <div class="sidebar collapsed">
     <a id="menu" class="menu-item menu-item-menu">
         <span id="menu-icon" class="menu-icon"><i class="fas fa-bars"></i></span>
