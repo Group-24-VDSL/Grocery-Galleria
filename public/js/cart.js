@@ -59,6 +59,7 @@ $.getJSON(URLGetCart, function (CartItems) {
         Item.classList.add('item');
             $.getJSON(URLItem, function (item) {
                 $.getJSON(URLShopItem, function (shopitem) {
+                    Item.id = "item".concat(shopitem.ShopID).concat(shopitem.ItemID);
                     Item.innerHTML = `
                         <div class="item-img"><img src="${item.ItemImage}" alt="${item.Name}">${item.Name}</div>
                         <div class="UWeight">${item.UWeight}</div>
@@ -73,7 +74,7 @@ $.getJSON(URLGetCart, function (CartItems) {
                             <button  class="update btn btn-primary" id="update${shopitem.ShopID}${shopitem.ItemID}" data-id="${shopitem.ShopID}${shopitem.ItemID}" type="button" onclick="updatebutton(${shopitem.ShopID},${shopitem.ItemID})">Update</button>
                         </div>
                         <div class="remove-button">
-                            <button class="remove btn btn-red" type="button" id="remove${shopitem.ShopID}${shopitem.ItemID}" data-id="${shopitem.ShopID}${shopitem.ItemID}" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}">Remove</button>
+                            <button class="remove btn btn-red" type="button" id="remove${shopitem.ShopID}${shopitem.ItemID}"  onclick="remove(${shopitem.ShopID},${shopitem.ItemID})" >Remove</button>
                         </div>
             `
                 });
@@ -88,12 +89,16 @@ $.getJSON(URLGetCart, function (CartItems) {
 
 function updatebutton(ShopID,ItemID) {
     let quantity = $('#quantity'.concat(ShopID).concat(ItemID)).val();
-    let uweight = $('#quantity'.concat(ShopID).concat(ItemID)).attr('step')
+    let uweight = $('#quantity'.concat(ShopID).concat(ItemID)).attr('step');
 
     let passingvalue = Math.trunc(quantity / uweight);
     let obj = {"ItemID": ItemID, "ShopID": ShopID, "Quantity": passingvalue, "CustomerID": 2}; //keys and values should be enclosed in double quotes
 
-    $.post(URLAddtoCartAPI, JSON.stringify(obj));
+    $.post(URLAddtoCartAPI, JSON.stringify(obj)).done(function (data){
+        console.log(data);
+    }).fail(function (){
+
+    });
 
 }
 
@@ -104,6 +109,15 @@ function update(ShopID,ItemID,UWeight,UnitPrice,MaxCount) {
         $('#quantity'.concat(ShopID).concat(ItemID)).val(parseInt(quantitysec) + parseInt(UWeight));
         $('#total'.concat(ShopID).concat(ItemID)).text((quantity * UnitPrice).toFixed(2));
     }
+}
+
+function remove(ShopID,ItemID){
+    $('#item'.concat(ShopID).concat(ItemID)).remove();
+    let obj = {"ItemID":ItemID,"ShopID":ShopID,"CustomerID":2};
+    $.post(URLAddtoCartAPI,JSON.stringify(obj)).done().fail(function (){
+        templateAlert('red','Cart Failed.');
+        }
+    );
 }
 
 

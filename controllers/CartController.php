@@ -9,6 +9,7 @@ use app\models\Shop;
 use app\models\ShopItem;
 use app\models\TemporaryCart;
 
+
 class CartController extends Controller
 {
     public function cart(Request $request,Response $response)
@@ -39,7 +40,6 @@ class CartController extends Controller
 
     public function addToCart(Request $request,Response $response)
     {
-        $response->setContentTypeJSON();
         if($request->isPost()){
             $json = $request->getJson();
             if($json){
@@ -50,22 +50,38 @@ class CartController extends Controller
                     $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
                     $tempcart->Quantity = $newQuantity;
                     if ($tempcart->validate() && $tempcart->update()) {
-                        return json_encode('{"success":"ok"}');
+                        return $response->json('{"success":"ok"}');
                     }else{
-                        return json_encode('{"success":"fail"}');
+                        return $response->json('{"success":"fail"}');
                     }
                 }else{
                     if ($tempcart->validate() && $tempcart->save()) {
                         return json_encode('{"success":"ok"}');
                     } else {
-                        return json_encode('{"success":"fail"}');
+                        return $response->json('{"success":"fail"}');
                     }
                 }
             }
-            return json_encode('{"success":"fail"}');
+            return $response->json('{"success":"fail"}');
 
         }else{
-            return json_encode('{"success":"fail"}');
+            return $response->json('{"success":"fail"}');
         }
+    }
+
+    public function deleteFromCart(Request $request,Response $response)
+    {
+        if($request->isPost()){
+            $response->setContentTypeJSON();
+            $json = $request->getJson();
+            if($json) {
+                $status = TemporaryCart::delete($json);
+                if($status){
+                    return $response->json('{"success":"ok"}');
+                }
+            }
+        }
+        return $response->json('{"success":"fail"}');
+
     }
 }
