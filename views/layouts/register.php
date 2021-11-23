@@ -12,10 +12,10 @@
 
     <script src="/js/jquery.min.js"></script>
     <title>Registration customer</title>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
 <body>
 <?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>

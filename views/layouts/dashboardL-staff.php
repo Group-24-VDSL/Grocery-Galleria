@@ -12,16 +12,14 @@
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
     <link rel="stylesheet" href="/css/template.css">
-<!--    <link rel="stylesheet" href="/css/boxicons.min.css" />-->
     <link
             href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
             rel="stylesheet"
     />
-
     <title>Dashboard-Staff</title>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
-<?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
+    <?php include_once("utils/sessions.php"); ?>
 <body>
 <div class="sidebar active">
     <div class="sidebar-logo">

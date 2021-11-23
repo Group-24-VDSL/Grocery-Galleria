@@ -1,3 +1,4 @@
+<div class="alert-container">
 <?php if (\app\core\Application::$app->session->getFlash('success')):  ?>
     <div class="alert alert-green">
         <a href="#" class="alert-close" onclick="this.parentElement.style.display='none';"><i
@@ -19,5 +20,6 @@
         <strong>Danger!</strong> <?php echo \app\core\Application::$app->session->getFlash('danger'); ?>
     </div>
 <?php endif; ?>
+</div>
 
 
