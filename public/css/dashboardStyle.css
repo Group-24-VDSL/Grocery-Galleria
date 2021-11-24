@@ -315,12 +315,7 @@ ul {
   border-radius: 0.5rem;
   transition: 0.3s;
 }
-.home-content
-.core
-.container-items
-.ongoing-items
-.item-ubutton
-.btn-item:hover {
+.home-content .core .container-items .ongoing-items .item-ubutton .btn-item:hover {
   background: var(--hover-color);
 }
 .home-content .core .container-items .scroller {

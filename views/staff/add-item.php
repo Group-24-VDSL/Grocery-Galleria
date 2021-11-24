@@ -68,9 +68,9 @@
                 </label>
                 <?php echo $form->numberfieldonly($model,"MRP",1,10000,1);?>
             </div>
-            <!--                <div class="inputBox"></div>-->
-            <div class="inputBox div-button">
-                <button class="btn">Submit</button>
+            <div class="inputBox"></div>
+            <div class="inputBox btn-div">
+                <button class="btn submit">Submit</button>
             </div>
             <?php \app\core\form\Form::end()?>
         </div>

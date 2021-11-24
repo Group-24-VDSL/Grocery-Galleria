@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="/css/template.css">
     <link rel="stylesheet" href="/css/checkout.css">
     <title>Checkout</title>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
 <body>
+<?php include_once("utils/sessions.php"); ?>
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>

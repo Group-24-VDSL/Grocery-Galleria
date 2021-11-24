@@ -69,11 +69,8 @@
                     <i class="far fa-images"></i>
                     Current Image
                 </label>
-                <div>
-
                 <img id="ImgDis" class="imageBox" src="">
-                </div>
-<!--                --><?php //echo $form->inputfile($model,"ItemImage")?>
+                <input id="ImgStr" name="ImgStr" hidden>
             </div>
 
             <div class="inputBox">
@@ -123,8 +120,8 @@
                 <?php echo $form->numberfieldonly($model,"MRP",1,10000,1);?>
             </div>
             <!--                <div class="inputBox"></div>-->
-            <div class="inputBox div-button">
-                <button type="submit" class="btn">Submit</button>
+            <div class="inputBox btn-div">
+                <button type="submit" class="btn update">Update</button>
             </div>
             <?php \app\core\form\Form::end()?>
         </div>

@@ -6,10 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/template.css">
     <link rel="stylesheet" href="/css/cart.css">
+
     <script src="/js/jquery.min.js"></script>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
 <body>
+<?php include_once("utils/sessions.php"); ?>
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
@@ -73,5 +77,6 @@
     <p class="footer-copyright">&#169; 2021 Grocery Galleria. All right reserved.</p>
 </section>
 <script src="/js/cart.js" defer></script>
+<script src="/js/template.js" defer></script>
 </body>
 </html>

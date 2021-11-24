@@ -24,7 +24,6 @@
   border: 0.2rem solid var(--home-color);
   border-radius: 0.5rem 0.5rem 0 0;
   min-width: 128px;
-  cursor: pointer;
   /* border-bottom: none; */
 }
 .tabs .btn-tab:hover {
@@ -33,9 +32,16 @@
 }
 
 .home-content .core {
-  height: 500px;
+  height: 640px;
 }
-
+.home-content .core .container-core {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 1rem;
+  border: 0.1rem solid var(--home-color);
+  border-radius: 0.5rem;
+  /* justify-items: left; */
+}
 .home-content .core .container-core .table-header {
   padding: 1rem 2.5rem;
   border: 0.1rem solid var(--home-color);
@@ -50,7 +56,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: .5rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 .home-content .core .container-core .table-header ul li {
@@ -104,9 +110,66 @@
 .home-content .core .container-core .table-details .row .row-ubutton .btn-row:hover {
   background: var(--hover-color);
 }
+.home-content .core .container-core form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 50px;
+  grid-gap: 1.5rem;
+  align-items: center;
+  padding: 1rem;
+}
+.home-content .core .container-core form .inputBox {
+  display: grid;
 
+}
+.home-content .core .container-core form .inputBox label {
+  font-size: var(--h3-font-size);
+  color: var(--title-color);
+  margin-top: .5rem;
+
+}
+.home-content .core .container-core form .inputBox i {
+  padding-right: 0.5rem;
+}
+.home-content .core .container-core form .inputBox input,
+.home-content .core .container-core form .inputBox select{
+  width: 90%;
+  margin-left: 0.5rem;
+  height: 38px;
+  border: 0.1rem solid var(--home-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+.home-content .core .container-core form .inputBox input:focus {
+  outline: 0.1rem solid var(--text-color-light);
+}
+.home-content .core .container-core form .btn-div {
+  justify-content: right;
+}
+.home-content .core .container-core form .update {
+  background-color: red;
+  border-color: transparent;
+  font-size: var(--normal-font-size);
+  font-weight: bold;
+  width: 150px;
+}
+.home-content .core .container-core form .submit{
+  background-color: var(--first-color-alt);
+  border-color: transparent;
+  font-size: var(--normal-font-size);
+  font-weight: bold;
+  width: 150px;
+}
+.home-content .core .container-core form .update:hover {
+  background-color: tomato;
+  transition: 0.3s;
+}
+.home-content .core .container-core form .submit:hover {
+  background-color: #228B22;
+  transition: 0.3s;
+}
 .home-content .core .container-core .scroller {
-  height: 300px;
+  height: 400px;
   overflow-y: scroll;
   scrollbar-color: var(--first-color);
   scrollbar-width: thin;
@@ -115,8 +178,6 @@
 .register form {
   text-align: center;
   padding: 1rem;
-  /* border: 0.1rem solid rgba(43, 147, 72, 0.8); */
-  /* box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1); */
 }
 .register form {
   display: grid;
@@ -158,7 +219,10 @@
   height: 48px;
 }
 
-
+.register form .inputBox .imageBox{
+  margin-left: 0.5rem;
+  border-radius: 0.5rem;
+}
 
 
 
