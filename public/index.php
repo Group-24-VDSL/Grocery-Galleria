@@ -111,12 +111,11 @@ $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
 $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
 $app->router->get('/api/getcart',[CartController::class,'getCart']);
-$app->router->post('/api/addtocart',[APIController::class,'addToCart']);
-$app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
-$app->router->patch('/api/orders',[APIController::class,'getOrders']);
-$app->router->patch('/api/getordercart',[APIController::class,'getOrderCart']);
-$app->router->get('/api/getshoporders',[APIController::class,'getShopOrders']);
-$app->router->get('/api/getdelivery',[APIController::class,'getDelivery']);
+$app->router->post('/api/addtocart',[CartController::class,'addToCart']);
+$app->router->patch('/api/addtocart',[CartController::class,'addToCart']);
+$app->router->post('/api/deletefromcart',[CartController::class,'deleteFromCart']);
+$app->router->get('/api/orders',[APIController::class,'getOrders']);
+$app->router->get('/api/getordercart',[APIController::class,'getOrderCart']);
 
 //rider
 $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
