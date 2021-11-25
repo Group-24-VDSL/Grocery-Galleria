@@ -38,9 +38,9 @@ abstract class DBModel extends Model
             $where[$key] = $this->{$key};
         }
         $dbObj = self::findOne($where);
-        $dbObjarr = (array)$dbObj; // db object to array
-        $objarr = (array)$this; // this object to array
-        $result = array_diff($objarr,$dbObjarr);
+        $dbObjarr = array_slice((array)$dbObj, 0, -1); // db object to array
+        $objarr = array_slice((array)$this, 0, -1); // this object to array
+        $result = array_diff_assoc($objarr,$dbObjarr);
         if(!empty($result)){
             $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($result)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
             foreach ($result as $key => $value) {
