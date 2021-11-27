@@ -69,8 +69,8 @@ $app->router->get('/dashboard/delivery/viewcompletedelivery',[DeliveryController
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 
 //system staff
-$app->router->get('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
-$app->router->post('/dashboard/staff/addstaff',[StaffController::class, 'staffRegister']);
+$app->router->get('/dashboard/staff/adduser',[StaffController::class, 'Register']);
+$app->router->post('/dashboard/staff/adduser',[StaffController::class, 'Register']);
 $app->router->get('/dashboard/staff/additem',[StaffController::class, 'addItem']);
 $app->router->post('/dashboard/staff/additem',[StaffController::class, 'addItem']);
 $app->router->get('/dashboard/staff/products',[staffController::class, 'updateItem']);
