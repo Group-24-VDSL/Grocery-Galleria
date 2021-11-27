@@ -66,7 +66,6 @@ class APIController extends Controller
     {
         $response->setContentTypeJSON();
         $cart =TemporaryCart::findOne(array_slice($request->getBody(),1,null,true));
-
         return json_encode($cart);
     }
 
