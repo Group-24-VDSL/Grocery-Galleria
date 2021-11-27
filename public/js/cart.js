@@ -7,11 +7,16 @@ const URLShopItemAPI = host + "/api/shopitem";
 const URLFindItemAPI = host + "/api/item";
 
 const URLAddtoCartAPI = host + "/api/addtocart";
+const URLDeletefromCartAPI = host + "/api/deletefromcart";
 const URLGetCartAPI = host + "/api/getcart";
-
 
 const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
 
+const totallabel = $('#GTotal');
+const subtotallabel = $('#subTotal');
+const numberofshops  = $('#ShopCount');
+const itemcount = $('#itemCount');
+const delivery = $('#DeliveryFee');
 
 $.getJSON(URLGetCart, function (CartItems) {
     CartItems.items.sort((a, b) => parseFloat(a.ShopID) - parseFloat(b.ShopID));
@@ -24,14 +29,10 @@ $.getJSON(URLGetCart, function (CartItems) {
     let shopcount = [...new Set(CartItems.items.map(item => item.ShopID))].length;
     $('#ShopCount').text(shopcount);
 
-    let $baseDeli = 120;
+    let baseDeli = calculateDelivery(shopcount);
 
-    for (let i = 1; i < 5 && i < shopcount; i++) {
-        $baseDeli += 30;
-    }
-
-    $('#DeliveryFee').text($baseDeli.toFixed(2));
-    $('#GTotal').text(($baseDeli + CartItems.total).toFixed(2));
+    $('#DeliveryFee').text(baseDeli.toFixed(2));
+    $('#GTotal').text((baseDeli + CartItems.total).toFixed(2));
 
     CartItems.items.forEach(CartItem => {
         let URLShop = URLShopAPI.concat('?ShopID=').concat(CartItem.ShopID);
@@ -59,19 +60,22 @@ $.getJSON(URLGetCart, function (CartItems) {
         Item.classList.add('item');
             $.getJSON(URLItem, function (item) {
                 $.getJSON(URLShopItem, function (shopitem) {
+                    Item.id = "item".concat(shopitem.ShopID).concat(shopitem.ItemID);
                     Item.innerHTML = `
                         <div class="item-img"><img src="${item.ItemImage}" alt="${item.Name}">${item.Name}</div>
                         <div class="UWeight">${item.UWeight}</div>
                         <div class="price">${shopitem.UnitPrice.toFixed(2)}</div>
                         <div class="quantity">
-                            <input type="number" id="quantity${shopitem.ShopID}${shopitem.ItemID}"  name="quantity" onchange="update(${shopitem.ShopID},${shopitem.ItemID},${item.UWeight},${shopitem.UnitPrice})" min="${item.UWeight}" max="${item.UWeight * item.MaxCount}" step="${item.UWeight}" value="${item.UWeight * CartItem.Quantity}">
+                            <button class="quantity-step" onclick="update(${shopitem.ShopID},${shopitem.ItemID},${item.UWeight},${shopitem.UnitPrice},${item.MaxCount},'dec')"><i class="fas fa-minus-square" ></i></button>
+                            <input type="number" id="quantity${shopitem.ShopID}${shopitem.ItemID}" data-uprice="${shopitem.UnitPrice}" name="quantity" min="${item.UWeight}" max="${item.UWeight * item.MaxCount}" step="${item.UWeight}" value="${item.UWeight * CartItem.Quantity}" readonly>
+                            <button class="quantity-step" onclick="update(${shopitem.ShopID},${shopitem.ItemID},${item.UWeight},${shopitem.UnitPrice},${item.MaxCount},'inc')"><i class="fas fa-plus-square" ></i></button>
                         </div>
                         <div class="total" id="total${shopitem.ShopID}${shopitem.ItemID}">${(shopitem.UnitPrice * CartItem.Quantity).toFixed(2)}</div>
                         <div class="update-button">
                             <button  class="update btn btn-primary" id="update${shopitem.ShopID}${shopitem.ItemID}" data-id="${shopitem.ShopID}${shopitem.ItemID}" type="button" onclick="updatebutton(${shopitem.ShopID},${shopitem.ItemID})">Update</button>
                         </div>
                         <div class="remove-button">
-                            <button class="remove btn btn-red" type="button" id="remove${shopitem.ShopID}${shopitem.ItemID}" data-id="${shopitem.ShopID}${shopitem.ItemID}" data-itemid="${item.ItemID}" data-shopid="${shopitem.ShopID}">Remove</button>
+                            <button class="remove btn btn-red" type="button" id="remove${shopitem.ShopID}${shopitem.ItemID}"  onclick="remove(${shopitem.ShopID},${shopitem.ItemID},${shopitem.UnitPrice})" >Remove</button>
                         </div>
             `
                 });
@@ -80,24 +84,118 @@ $.getJSON(URLGetCart, function (CartItems) {
         const shopItemDiv = document.getElementById('CartItemsOfShop'.concat(CartItem.ShopID));
         shopItemDiv.appendChild(Item);
         });
-
 });
 
 
 function updatebutton(ShopID,ItemID) {
     let quantity = $('#quantity'.concat(ShopID).concat(ItemID)).val();
-    let uweight = $('#quantity'.concat(ShopID).concat(ItemID)).attr('step')
+    let uweight = $('#quantity'.concat(ShopID).concat(ItemID)).attr('step');
 
     let passingvalue = Math.trunc(quantity / uweight);
     let obj = {"ItemID": ItemID, "ShopID": ShopID, "Quantity": passingvalue, "CustomerID": 2}; //keys and values should be enclosed in double quotes
-
-    $.post(URLAddtoCartAPI, JSON.stringify(obj));
+    $.ajax({
+        url : URLAddtoCartAPI,
+        data : JSON.stringify(obj),
+        type : 'PATCH',
+        dataType:'json',
+        processData: false,
+        contentType : 'application/json'
+    }).done(function (data){
+        if(JSON.parse(data)['success'] === 'ok'){
+            templateAlert('green', 'Item updated.');
+        }else{
+            templateAlert('red', 'Item update failed.');
+        }
+    });
 
 }
 
-function update(ShopID,ItemID,UWeight,UnitPrice) {
-    let quantity = $('#quantity'.concat(ShopID).concat(ItemID)).val()/UWeight;
-    $('#total'.concat(ShopID).concat(ItemID)).text((quantity * UnitPrice).toFixed(2))
+function update(ShopID,ItemID,UWeight,UnitPrice,MaxCount,method) {
+    let item = $('#quantity'.concat(ShopID).concat(ItemID));
+    let quantitysec = item.val();
+    let quantity = quantitysec/UWeight;
+    if(method === 'inc'){
+        if(quantity + 1 < MaxCount){
+
+            let uprice = item.data('uprice');
+            //update subtotal
+            let subtotal = parseInt(subtotallabel.text());
+            subtotal += uprice;
+            subtotallabel.text(subtotal.toFixed(2));
+            totallabel.text((parseInt(totallabel.text())+uprice).toFixed(2));
+
+            item.val(parseInt(quantitysec) + parseInt(UWeight));
+            $('#total'.concat(ShopID).concat(ItemID)).text(((quantity+1) * UnitPrice).toFixed(2));
+        }
+    }else{
+        if( 0 < quantity-1 ){
+
+            let uprice = item.data('uprice');
+            //update subtotal
+            let subtotal = parseInt(subtotallabel.text());
+            subtotal -= uprice;
+            subtotallabel.text(subtotal.toFixed(2));
+            totallabel.text((parseInt(totallabel.text())-uprice).toFixed(2));
+
+            item.val(parseInt(quantitysec) - parseInt(UWeight));
+            $('#total'.concat(ShopID).concat(ItemID)).text(((quantity-1) * UnitPrice).toFixed(2));
+        }
+    }
+}
+
+function remove(ShopID,ItemID,UnitPrice){
+
+    let obj = {"ItemID":ItemID,"ShopID":ShopID,"CustomerID":2};
+    $.post(URLDeletefromCartAPI,JSON.stringify(obj)).done(function (data){
+        if(JSON.parse(data)['success'] === 'ok'){
+            let numofshops = parseInt(numberofshops.text());
+
+            let item = $('#quantity'.concat(ShopID).concat(ItemID));
+            let quantity = item.val()
+            let uweight = item.attr('step');
+
+            quantity = quantity/uweight;
+
+            //update number of items
+            itemcount.text(parseInt(itemcount.text())-1);
+
+            //update subtotal
+            let subtotal = parseInt(subtotallabel.text());
+            subtotal -= (quantity*UnitPrice);
+
+            subtotallabel.text(subtotal.toFixed(2));
+
+
+            //remove the item
+            $('#item'.concat(ShopID).concat(ItemID)).remove();
+            //check if its the last item on the shop.
+            if($('#CartItemsOfShop'.concat(ShopID).concat(' div')).length===0){ //last item
+                //update no of shops
+                $('#Shop'.concat(ShopID)).remove();
+                numofshops = parseInt(numberofshops.text())-1;
+                numberofshops.text(numofshops);
+            }
+
+
+            //update total
+            let deliveryfee = calculateDelivery(numofshops);
+            delivery.text(deliveryfee.toFixed(2));
+            totallabel.text((subtotal+deliveryfee).toFixed(2));
+
+            templateAlert('green', 'Item successfully removed.');
+        }else{
+            templateAlert('red', 'Item removal from cart failed.');
+        }
+    });
+}
+
+function calculateDelivery(numberofshops){
+    let baseDeli = 120;
+
+    for (let i = 1; i < 5 && i < numberofshops; i++) {
+        baseDeli += 30;
+    }
+    return baseDeli;
 }
 
 

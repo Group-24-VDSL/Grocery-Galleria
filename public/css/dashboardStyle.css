@@ -35,7 +35,7 @@ ul {
   color: var(--title-color);
   text-transform: uppercase;
   font-size: var(--h2-font-size);
-  padding: 1rem 1rem 2rem;
+  padding: 1rem;
 }
 .heading span {
   color: var(--first-color);

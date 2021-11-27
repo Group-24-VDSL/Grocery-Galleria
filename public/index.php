@@ -114,8 +114,7 @@ $app->router->get('/api/getcart',[CartController::class,'getCart']);
 $app->router->post('/api/addtocart',[APIController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
 $app->router->patch('/api/orders',[APIController::class,'getOrders']);
-$app->router->get('/api/getshoporders',[APIController::class,'getShopOrder']);
-$app->router->get('/api/getordercart',[APIController::class,'getOrderCart']);
+$app->router->patch('/api/getordercart',[APIController::class,'getOrderCart']);
 
 //rider
 $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);

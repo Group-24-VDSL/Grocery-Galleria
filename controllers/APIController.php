@@ -67,16 +67,9 @@ class APIController extends Controller
     public function getOrderCart(Request $request , Response $response)
     {
         $response->setContentTypeJSON();
-        $carts = OrderCart::findAll(array_slice($request->getBody(),1,null,true));
-        return json_encode($carts);
-    }
+        $cart =TemporaryCart::findOne(array_slice($request->getBody(),1,null,true));
 
-    public function getShopOrder(Request $request , Response $response)
-    {
-        $response->setContentTypeJSON();
-        $orders = ShopOrder::findAll(array_slice($request->getBody(),1,null,true));
-
-        return json_encode($orders);
+        return json_encode($cart);
     }
 
     public function getCart(Request $request,Response $response) // get all items from DB
@@ -88,7 +81,7 @@ class APIController extends Controller
 
     }
 
-    public function getOrders(Request $request, Response $response) // get all orders from DB
+    public function getOrder(Request $request, Response $response) // get all orders from DB
     {
         $response->setContentTypeJSON();
         $orders = Orders::findAll(array_slice($request->getBody(),1,null,true));

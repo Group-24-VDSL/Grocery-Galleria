@@ -31,6 +31,7 @@ abstract class Model implements JsonSerializable
 
     public function loadData($data)
     {
+        $data = (array) $data;
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
                 if (gettype($this->{$key}) === "double" || gettype($this->{$key}) === "integer") { //ints or floats
