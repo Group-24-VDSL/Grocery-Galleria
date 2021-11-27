@@ -37,6 +37,7 @@ ul {
 section {
     padding: 2rem 9%;
 }
+
 .btn {
     display: inline-block;
     margin-top: 1rem;
@@ -158,12 +159,27 @@ section {
     align-content: center;
     /*overflow-x: paged-x-controls;*/
 }
+
 .cart .container .container-item .cart-items .item .quantity input {
     border: 0.2rem solid var(--title-color);
     padding: 0.2rem;
     width: 64px;
     /*color: black;*/
 }
+
+.quantity{
+
+}
+
+.quantity-step{
+    color: var(--first-color);
+    font-size: 2.25rem;
+}
+
+.quantity-step:hover{
+    color: var(--first-color-alt);
+}
+
 .cart .container .container-item .cart-items .item .item-img{
     width: 64px;
 }
