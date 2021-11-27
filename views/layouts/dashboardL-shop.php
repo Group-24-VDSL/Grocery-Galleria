@@ -12,13 +12,11 @@
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/template.js"></script>
-
-
     <title>Dashboard-Shop</title>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
-<?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
 <body>
+<?php include_once("utils/sessions.php"); ?>
 <div class="sidebar active">
     <div class="sidebar-logo">
         <img src="../../img/logo_only_color.png" alt="" />

@@ -8,17 +8,13 @@
     <link rel="stylesheet" href="/css/template.css" />
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
     <!--Javascript-->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/rider-mobile.js"></script>
+    <?php include_once("utils/pwa.php"); ?>
 </head>
-<?php include_once("utils/sessions.php"); ?>
-<?php include_once("utils/pwa.php"); ?>
 <body>
-
+<?php include_once("utils/sessions.php"); ?>
 
 {{content}}
 <!--mobile navigation-->
