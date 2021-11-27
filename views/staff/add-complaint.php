@@ -1,3 +1,7 @@
+<?php
+/** @var $model \app\models\Complaint **/
+/** @var $form app\core\form\Form */
+?>
 <link rel="stylesheet" href="/css/all.css">
 <link rel="stylesheet" href="/css/complaint.css">
 <link rel="stylesheet" href="/css/Register.css">
