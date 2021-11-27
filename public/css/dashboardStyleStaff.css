@@ -165,7 +165,7 @@
   transition: 0.3s;
 }
 .home-content .core .container-core form .submit:hover {
-  background-color: #228B22;
+  background-color: var(--first-color-alt);
   transition: 0.3s;
 }
 .home-content .core .container-core .scroller {
@@ -174,22 +174,37 @@
   scrollbar-color: var(--first-color);
   scrollbar-width: thin;
 }
+.form-container{
+  height: 500px;
+  border: 0.2rem solid rgba(43, 147, 72, 0.8);
+  border-radius: .4rem;
+  box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,0.1);
+  overflow: hidden;
+  position: relative;
+  display: none;
+}
+.scroller {
+  height: 500px;
+  overflow-y: scroll;
+  scrollbar-color: var(--first-color);
+  scrollbar-width: thin;
+}
 
 .register form {
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 .register form {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   align-items: center;
 }
 
 .register form .inputBox {
   text-align: left;
-  font-size: var(--normal-font-size);
-  width: 80%;
+  font-size: var(--h3-font-size);
+  width: 100%;
 }
 .register form .inputBox i {
   padding: 0.5rem;
@@ -224,6 +239,66 @@
   border-radius: 0.5rem;
 }
 
+.select-radio{
+  padding: .5rem 0;
+  margin-bottom: 8px;
+
+}
+
+.select-radio .radio-label {
+  font-size: var(--h3-font-size);
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  border-radius: .3rem;
+  padding: .5rem;
+  margin-right:1rem;
+  cursor: pointer;
+  width: 120px;
+  box-sizing: border-box;
+
+}
+
+.register .deny {
+  color: var(--title-color);
+  background-color: var(--home-color);
+}
+.register .deny:hover {
+  color: white;
+  background-color: rgb(255, 0, 0);
+}
+.map-inputBox{
+  grid-column: 1/3 ;
+}
+
+#map {
+  height:500px;
+}
+.show-form{
+  display: block;
+}
+.custom-map-control-button {
+  background-color: #fff;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+  margin: 10px;
+  padding: 0 0.5em;
+  font: 400 18px Roboto, Arial, sans-serif;
+  overflow: hidden;
+  height: 40px;
+  cursor: pointer;
+  width: fit-content !important;
+}
+.custom-map-control-button:hover {
+  background: #ebebeb;
+}
+/*
+.scroller{
+  height: 600px;
+  overflow-y: scroll;
+  scrollbar-color: var(--first-color);
+  scrollbar-width: thin;
+}
+*/
 
 
 

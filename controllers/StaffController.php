@@ -2,21 +2,25 @@
 
 namespace app\controllers;
 
+use app\models\Customer;
+use app\models\Shop;
 use app\models\Staff;
-
 use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\models\Item;
 use app\models\Complaint;
+use app\models\User;
 use app\models\Verification;
 
 class StaffController extends Controller
 {
-    public function staffRegister(Request $request)
+    public function Register(Request $request)
     {
         $this->setLayout('dashboardL-staff');
-        $user = new Staff(); // Create customer
+        $user = new Staff(); // staff instance
+        $customer = new Customer();
+        $shop = new Shop();
         $user->loadData($request->getBody());
         if ($request->isPost()) {
             $userid = AuthController::register($request, 'Staff');
@@ -42,7 +46,9 @@ class StaffController extends Controller
 
         }
         return $this->render("staff/register", [
-            'model' => $user
+            'staff' => $user,
+            'customer' =>$customer,
+            'shop' => $shop
         ]);
 
     }
@@ -179,9 +185,11 @@ class StaffController extends Controller
     public function profilesettings()
     {
         $staff = new Staff();
+        $user = new User();
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/profile-setting",[
-            'model'=> $staff
+            'Usermodel' =>$staff ,
+            'loginmodel' =>$user
         ]);
     }
 

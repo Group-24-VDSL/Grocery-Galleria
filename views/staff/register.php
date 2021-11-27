@@ -1,62 +1,192 @@
 <link rel="stylesheet" href="/css/all.css">
-<link rel="stylesheet" href="/css/staff-register-form.css">
+<!--<link rel="stylesheet" href="/css/staff-register-form.css">-->
 <link rel="stylesheet" href="/css/template.css">
 <?php
-/** @var $model \app\models\Staff **/
+/** @var $staff \app\models\Staff * */
 /** @var $form app\core\form\Form */
+/** @var $customer app\models\Customer */
+/** @var $shop app\models\Shop */
 ?>
-<div style="height: 580px" class="core">
+<div class="core">
     <section class="register" id="register">
-        <h1 class="heading">Registration <span>Form</span> Staff</h1>
-
-        <?php $form = \app\core\form\Form::begin("","post","");?>
+        <h1 class="heading">Registration <span>Form</span> User</h1>
+        <div class="select-radio">
+            <span class="radio-label">
+                <input id="customer-radio" class="form-radio" type="radio" name="radio" data-for="customer"/>
+                <label>Customer</label>
+            </span>
+            <span class="radio-label">
+                <input class="form-radio" type="radio" name="radio" data-for="shop"/>
+                <label>Shop</label>
+            </span>
+            <span class="radio-label">
+                <input class="form-radio" type="radio" name="radio" data-for="staff"/>
+                <label>Staff</label>
+            </span>
+        </div>
+        <div class="form-container scroller" data-name="customer">
+            <?php $form = \app\core\form\Form::begin("/customer/register", "post", ""); ?>
             <div class="inputBox">
                 <label for="Name"><i class="fas fa-edit"></i>Name</label>
-                <?php echo $form->fieldonly($model,'Name');?>
-                <i class="iconSE fas fa-check-circle"></i>
-                <i class="iconSE fas fa-exclamation-circle"></i>
-                <small></small>
+                <?php echo $form->fieldonly($customer, 'Name'); ?>
             </div>
-            <!--        <div class="inputBox">-->
-            <!--            <label for="Address"><i class="fas fa-home"></i>Address</label>-->
-            <!--            <input type="text" placeholder="Eg: No:56/B Example Rd, Example" id="address">-->
-            <!--            <i class="iconSE fas fa-check-circle"></i>-->
-            <!--            <i class="iconSE fas fa-exclamation-circle"></i>-->
-            <!--            <small></small>-->
-            <!--        </div>-->
+            <div class="inputBox">
+                <label for="Address"><i class="fas fa-home"></i>Address</label>
+                <?php echo $form->fieldonly($customer, 'Address'); ?>
+            </div>
             <div class="inputBox">
                 <label for="Email"><i class="fas fa-envelope"></i>Email</label>
-                <?php echo $form->fieldonly($model,'Email')->emailField();?>
-                <i class="iconSE fas fa-check-circle"></i>
-                <i class="iconSE fas fa-exclamation-circle"></i>
-                <small></small>
+                <?php echo $form->fieldonly($customer, 'Email')->emailField(); ?>
             </div>
             <div class="inputBox">
-                <label for="contact"><i class="fas fa-phone"></i>Contact No</label>
-                <?php echo $form->fieldonly($model,'ContactNo');?>
-                <i class="iconSE fas fa-check-circle"></i>
-                <i class="iconSE fas fa-exclamation-circle"></i>
-                <small></small>
+                <label for="contact"><i class="fas fa-phone"></i>Contact</label>
+                <?php echo $form->fieldonly($customer, 'ContactNo'); ?>
             </div>
             <div class="inputBox">
                 <label for="Password"><i class="fas fa-key"></i>Password</label>
-                <?php echo $form->fieldonly($model,'Password')->passwordField();?>
-                <i class="iconSE fas fa-check-circle"></i>
-                <i class="iconSE fas fa-exclamation-circle"></i>
-                <small></small>
+                <?php echo $form->fieldonly($customer, 'Password')->passwordField(); ?>
             </div>
             <div class="inputBox">
                 <label for="PasswordR"><i class="fas fa-key"></i>Re-enter password</label>
-                <?php echo $form->fieldonly($model,'ConfirmPassword')->passwordField();?>
-                <i class="iconSE fas fa-check-circle"></i>
-                <i class="iconSE fas fa-exclamation-circle"></i>
-                <small></small>
+                <?php echo $form->fieldonly($customer, 'ConfirmPassword')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="city"><i class="fas fa-map-marked-alt"></i>Select city</label>
+                <?php echo $form->selectfieldonly($customer, 'City', ['Colombo' => 'Colombo', 'Maharagama' => 'Maharagama', 'Gampaha' => 'Gampaha', 'Nawala' => 'Nawala']); ?>
+            </div>
+            <div class="inputBox">
+                <label for="suburb"><i class="fas fa-street-view"></i>Select suburb</label>
+                <?php echo $form->selectfieldonly($customer, 'Suburb', ['Colombo' => 'Colombo', 'Maharagama' => 'Maharagama', 'Gampaha' => 'Gampaha', 'Nawala' => 'Nawala']); ?>
+            </div>
+            <?php echo $form->fieldonly($customer, 'Location')->hiddenField(); ?>
+            <?php echo $form->fieldonly($customer, 'PlaceID')->hiddenField(); ?>
+            <div class="inputBox map-inputBox">
+                <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>
+                <div id="map1"></div>
             </div>
             <div class="inputBox"></div>
             <div class="btn-align">
                 <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
-                <button id="accept" type="submit" class="btn submit">Accept Registration</button>
+                <button id="accept" type="submit" class="btn submit">Submit Registration</button>
             </div>
-        <?php echo $form::end() ?>
+            <?php echo $form::end() ?>
+        </div>
+        <div class="form-container scroller" data-name="shop">
+
+            <?php $form = \app\core\form\Form::begin("/shop/register", "post", "ShopRegister"); ?>
+            <div class="inputBox">
+                <label for="Name"><i class="fas fa-edit"></i>
+                    <?php echo $shop->labels()['Category'] ?></label>
+                <?php echo $form->selectfieldonly($shop, "Category", ['0' => 'Vegetables', '1' => 'Fruits', '2' => 'Grocery', '3' => 'Fish', '4' => 'Meat']); ?>
+            </div>
+            <div class="inputBox">
+                <label for="Name"><i class="fas fa-edit"></i>
+                    <?php echo $shop->labels()['Name'] ?></label>
+                <?php echo $form->fieldonly($shop, 'Name') ?>
+            </div>
+            <div class="inputBox">
+                <label for="Username"><i class="fas fa-store"></i>
+                    <?php echo $shop->labels()['ShopName'] ?></label>
+                <?php echo $form->fieldonly($shop, 'ShopName') ?>
+            </div>
+            <div class="inputBox">
+                <label for="Address"><i class="fas fa-home"></i>
+                    <?php echo $shop->labels()['Address'] ?></label>
+                <?php echo $form->fieldonly($shop, 'Address') ?>
+            </div>
+            <div class="inputBox">
+                <label for="Email"><i class="fas fa-envelope"></i>
+                    <?php echo $shop->labels()['Email'] ?>
+                </label>
+                <?php echo $form->fieldonly($shop, 'Email')->emailField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="contact"><i class="fas fa-phone"></i>
+                    <?php echo $shop->labels()['ContactNo'] ?></label>
+                <?php echo $form->fieldonly($shop, 'ContactNo'); ?>
+            </div>
+            <div class="inputBox">
+                <label for="Password"><i class="fas fa-key"></i>
+                    <?php echo $shop->labels()['Password'] ?></label>
+                <?php echo $form->fieldonly($shop, 'Password')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="PasswordR"><i class="fas fa-key"></i>
+                    <?php echo $shop->labels()['ConfirmPassword'] ?></label>
+                <?php echo $form->fieldonly($shop, 'ConfirmPassword')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="city"><i class="fas fa-map-marked-alt"></i>
+                    <?php echo $shop->labels()['City'] ?></label>
+                <?php echo $form->selectfieldonly($shop, 'City',
+                    ['Colombo' => 'Colombo',
+                        'Maharagama' => 'Maharagama',
+                        'Gampaha' => 'Gampaha',
+                        'Nawala' => 'Nawala']); ?>
+            </div>
+            <div class="inputBox">
+                <label for="suburb"><i class="fas fa-street-view"></i>
+                    <?php echo $shop->labels()['Suburb'] ?></label>
+                <?php echo $form->selectfieldonly($shop, 'Suburb',
+                    ['Colombo' => 'Colombo',
+                        'Maharagama' => 'Maharagama',
+                        'Gampaha' => 'Gampaha',
+                        'Nawala' => 'Nawala']); ?>
+            </div>
+            <div class="inputBox">
+                <label for="description"><i class="fas fa-hashtag"></i>
+                    <?php echo $shop->labels()['ShopDesc'] ?></label>
+                <?php echo $form->fieldonly($shop, 'ShopDesc'); ?>
+            </div>
+            <?php echo $form->fieldonly($shop, 'Location')->hiddenField(); ?>
+            <?php echo $form->fieldonly($shop, 'PlaceID')->hiddenField(); ?>
+            <div class="inputBox map-inputBox">
+                <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>
+                <div id="map2"></div>
+            </div>
+            <div class="inputBox"></div>
+            <div class="btn-align">
+                <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
+                <button id="accept" type="submit" class="btn submit">Submit Registration</button>
+            </div>
+            <?php echo $form->end(); ?>
+        </div>
+        <div class="form-container scroller" data-name="staff">
+            <?php $form = \app\core\form\Form::begin("/dashboard/staff/adduser", "post", ""); ?>
+            <div class="inputBox">
+                <label for="Name"><i class="fas fa-edit"></i>Name</label>
+                <?php echo $form->fieldonly($staff, 'Name'); ?>
+
+            </div>
+            <div class="inputBox">
+                <label for="Address"><i class="fas fa-home"></i>Address</label>
+                <input type="text" placeholder="Eg: No:56/B Example Rd, Example" id="address">
+
+            </div>
+            <div class="inputBox">
+                <label for="Email"><i class="fas fa-envelope"></i>Email</label>
+                <?php echo $form->fieldonly($staff, 'Email')->emailField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="contact"><i class="fas fa-phone"></i>Contact No</label>
+                <?php echo $form->fieldonly($staff, 'ContactNo'); ?>
+            </div>
+            <div class="inputBox">
+                <label for="Password"><i class="fas fa-key"></i>Password</label>
+                <?php echo $form->fieldonly($staff, 'Password')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="PasswordR"><i class="fas fa-key"></i>Re-enter password</label>
+                <?php echo $form->fieldonly($staff, 'ConfirmPassword')->passwordField(); ?>
+
+            </div>
+            <div class="inputBox"></div>
+            <div class="btn-align">
+                <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
+                <button id="accept" type="submit" class="btn submit">Submit Registration</button>
+            </div>
+            <?php \app\core\form\Form::end() ?>
+
+        </div>
     </section>
 </div>
