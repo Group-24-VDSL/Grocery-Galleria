@@ -115,6 +115,37 @@ class ShopController extends Controller
         return $this->render('shop/view-order-details',['shoporder'=>$shoporder,'cartitems'=>$cartitems, 'shopitem'=>$shopitems , 'item'=>$item, 'model'=>$shoporder]);
     }
 
+    public function updateStatus(Request $request)
+    {
+        $this->setLayout("dashboardL-shop");
+        $orderUpdated = new ShopOrder();
+
+        if ($request->isPost()) {
+            $orderUpdated->loadData($request->getBody());
+
+            $ShopID = $orderUpdated->ShopID ;
+            $CartID = $orderUpdated->CartID ;
+            $orderUpdated = ShopOrder::findOne(['ShopID'=>$ShopID,'CartID'=>$CartID]);
+
+            $orderUpdated->Status = 1;
+
+            if ($orderUpdated->validate('update') && $orderUpdated->update()) {
+
+                Application::$app->session->setFlash("success", "Order is Successfully Completed.");
+                Application::$app->response->redirect("#");
+            } else {
+                Application::$app->session->setFlash("warning", "Order is not Successfully Complete.");
+                return $this->render("shop/view-orders"
+                    , [
+                        'model' => $orderUpdated
+                    ]);
+            }
+        }
+        return $this->render("shop/view-orders"
+            , [
+                'model' => $orderUpdated
+            ]);
+    }
 
 
 
