@@ -80,7 +80,14 @@ class APIController extends Controller
         return json_encode($orders);
     }
 
-    
+    public function getDelivery(Request $request , Response $response)
+    {
+        $response->setContentTypeJSON();
+        $orders = Delivery::findOne(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($orders);
+    }
+
     public function getCart(Request $request,Response $response) // get all items from DB
     {
         $response->setContentTypeJSON();
