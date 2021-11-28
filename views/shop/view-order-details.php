@@ -5,6 +5,7 @@
 /** @var $item \app\models\Item **/
 /** @var $cartitems \app\models\OrderCart **/
 
+///** @var $model \app\models\Item **/
 use app\models\Item;
 use app\models\ShopItem;
 ?>
@@ -14,17 +15,13 @@ use app\models\ShopItem;
 <link rel="stylesheet" href="/css/all.css" />
 <link rel="stylesheet" href="/css/shop-order-details.css" />
 <script src="/js/jquery.min.js"></script>
-<script src="/js/shop-orders.js" defer></script>
+<!--//<script src="/js/shop-orders.js" defer></script>-->
+<script src="/js/shopOrderDetails.js" defer></script>
 
 
-<section class="section-home">
-    <div class="home-content">
+<section  class="section-home">
+    <div class="home-content" >
         <div class="overview-boxes" id = "order-box" >
-            <?php
-         //   var_dump($shoporder);
-            //var_dump($shoporder );
-            ?>
-
             <div class="box">
                 <div class="content">
                     <div class="box-topic">Order ID</div>
@@ -147,11 +144,18 @@ use app\models\ShopItem;
                                 </tr >
                                 </tbody>
                             </table>
-
+                        <?php $form = \app\core\form\Form::begin("","post","updateShopOrderStatus");?>
                         <?php
                         if($shoporder -> Status == 0): ?>
-                            <button class="complete-btn" type="submit" value="Complete">Mark as Completed</button>
+                            <?php
+
+                            echo $form->fieldonly($model, "ShopID")->setValue($shoporder-> ShopID)->numberField()->hiddenField();
+                            echo $form->fieldonly($model, "CartID")->setValue($shoporder-> CartID)->numberField()->hiddenField();
+                            echo $form->fieldonly($model, "Status")->setValue(1)->numberField()->hiddenField();?>
+                            <button type="submit" id="not-complete" class="complete-btn" value="Complete" onclick="markCompleted()"><span id = "status">Mark as Completed</span></button>
+                            <div style="display: none" id="completed" class="complete-div" type="submit" value="Complete"><span id = "status">Order is Completed !!!</span><img src="https://img.icons8.com/color/48/000000/checked-2--v1.png"/></div>
                         <?php endif; ?>
+                        <?php \app\core\form\Form::end()?>
 
                     </div>
                 </div>

@@ -27,7 +27,7 @@
             <div class="box">
                 <div class="content">
                     <div class="box-topic">Total(LKR)</div>
-                    <div class="number-details">2500.00</div>
+
                 </div>
                 <img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-cash-gambling-justicon-flat-justicon.png"/>
             </div>
