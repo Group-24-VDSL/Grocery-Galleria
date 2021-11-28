@@ -14,7 +14,7 @@
         </ul>
         <div class="table-header">
             <ul>
-                <li>Photo</li>
+                <li>Image</li>
                 <li>Name</li>
                 <li>Brand</li>
                 <li>Unit</li>
