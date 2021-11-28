@@ -286,13 +286,21 @@ table tbody tr td:first-child:before{ content: counter(no)".";
 .complete-div{
     align-items: flex-end;
     height: 50px;
-    width: 200px;
+    width: 210px;
     background-color: var(--classic-white);
     color: var(--first-color);
     border: 0px solid;
     border-radius: 8px;
     font-size: 16px;
     border-color:var(--first-color) ;
+    align-items: center;
+    justify-items: center;
+}
+.complete-div span{
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 1rem;
+    float: right;
 }
 
 .complete-btn:hover{
