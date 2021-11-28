@@ -10,8 +10,8 @@ class OrderCart extends DBModel
     public int $CartID = 0;
     public int $ShopID = 0;
     public int $CustomerID = 0 ;
-    public string $ItemID = '';
-    public string $Quantity = '';
+    public int $ItemID = 0;
+    public int $Quantity = 0;
     public float $ShopTotal = 0 ;
 
     public static function tableName(): string
