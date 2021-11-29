@@ -45,6 +45,7 @@ $(document).ready(function () {
                             const ItemRow = document.createElement('tr');
                             // itemRow.classList.add('tr');
                             ItemRow.innerHTML = `
+
                  <td></td>
                  <td id="Name" class="row-name">${Shop.ItemID}</td>
                  <td id="ItemImage" class="row-img">
@@ -59,7 +60,7 @@ $(document).ready(function () {
                 <td id="Stock" class="row-stock">${Shop.Stock}</td>
                 <td id="Enable" class="row-enable">${Shop.Enable}</td>
                 <td class="row-ubutton">
-                    <a  class="btn-row" type="submit">Update</a>
+                    <button data-href="${Shop.ItemID}" class="btn-row">Update</button></a>
                 </td>
                 
                 `
