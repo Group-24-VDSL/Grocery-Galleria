@@ -96,12 +96,12 @@ class StaffController extends Controller
 
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
-            $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID)-1), 5, '0', STR_PAD_LEFT));
-            if(isset($itemimg)){
+            $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
+            if (isset($itemimg)) {
                 $itemUpdated->ItemImage = $itemimg;
-            }else{
+            } else {
                 $body = $request->getBody();
-                $itemUpdated->ItemImage = (string)$body['ImgDis'];
+                $itemUpdated->ItemImage = (string)$body['ImgStr'];
             }
             if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item Updated Successfully.");
@@ -182,14 +182,46 @@ class StaffController extends Controller
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/users");
     }
-    public function profilesettings()
+    public function profilesettings(Request $request)
     {
+        // get logged staff ID
         $staff = new Staff();
         $user = new User();
+
+        $staffDB = $staff->findOne(['UserID' => 11]);
+        $staff = $staffDB;
+        $userDB = $user->findOne(['UserID' => 11]);
+        if ($request->isPost()) {
+            $success = false;
+            $type = $request->getBody()['type'];
+            if ($type == 'profileUpd') {
+                $staff->loadData($request->getBody());
+                if ($staff->validate('update') && $staff->update()) {
+                    $success = $staff->procedure('email_update',$staff->UserID);
+                }
+            }
+            elseif  ($type == 'passwordUpd') {
+                $user->loadData($request->getBody());
+                if ($user->validate('update') && $user->update()) {
+                    $success = true;
+                }
+            }
+            if ($success == true) {
+                Application::$app->session->setFlash('success', 'Update Success');
+                Application::$app->response->redirect('staff/profile-setting');
+            } else {
+                Application::$app->session->setFlash('danger', 'Update Failed');
+                $this->setLayout("dashboardL-staff");
+                return $this->render("staff/profile-setting", [
+                    'model' => $staff,
+                    'loginmodel' => $user
+                ]);
+            }
+        }
         $this->setLayout("dashboardL-staff");
-        return $this->render("staff/profile-setting",[
-            'Usermodel' =>$staff ,
-            'loginmodel' =>$user
+        return $this->render("staff/profile-setting", [
+            'model' => $staff,
+            'loginmodel' => $user
         ]);
     }
 
