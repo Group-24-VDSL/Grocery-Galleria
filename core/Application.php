@@ -77,9 +77,36 @@ class Application
         return (self::$app->session->get('role') === 'Staff');
     }
 
+    public static function isDeliveryRider(){
+        return (self::$app->session->get('role') === 'Rider');
+    }
+
     public static function isDelivery(){
         return (self::$app->session->get('role') === 'Delivery');
     }
+
+    public static function getCustomerID()
+    {
+        return self::isCustomer()?self::$app->session->get('user'):null;
+    }
+
+    public static function getShopID()
+    {
+        return self::isShop()?self::$app->session->get('user'):null;
+    }
+
+    public static function getStaffID()
+    {
+        return self::isStaff()?self::$app->session->get('user'):null;
+    }
+
+    public static function getRiderID()
+    {
+        return self::isDeliveryRider()?self::$app->session->get('user'):null;
+    }
+
+
+
 
     public function run()
     {
