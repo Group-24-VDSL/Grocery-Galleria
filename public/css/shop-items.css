@@ -126,3 +126,14 @@ button{
     width: 40px;
     height: 40px;
 }
+
+.btn-row {
+    display: inline-block;
+    background-color: var(--first-color);
+    color: var(--body-color);
+    padding: 0.5rem 0.8rem;
+    font-size: var(--smaller-font-size);
+    border-radius: 0.5rem;
+    transition: 0.3s;
+    cursor: pointer;
+}
