@@ -125,4 +125,13 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
+    //for your dirty queries
+    public static function query($string,$fetch_type)
+    {
+        $statement = self::prepare($string);
+        $statement->execute();
+        return $statement->fetch($fetch_type);
+    }
+
+
 }
