@@ -50,10 +50,10 @@ class Application
         $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
 
 
-        $userId = Application::$app->session->get('user');
-        if ($userId) {
+        $userID = Application::$app->session->get('user');
+        if ($userID) {
             $key = User::primaryKey();
-            $this->user = User::findOne([$key => $userId]);
+            $this->user = User::findOne([$key[0] => $userID]);
         }else{
             $this->user= null;
         }
