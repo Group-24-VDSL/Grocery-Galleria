@@ -97,8 +97,8 @@ $app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworder
 $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
-$app->router->get('/dashboard/shop/viewcompleteorder',[ShopController::class,'viewcompleteorder']);
-$app->router->post('/dashboard/shop/viewcompleteorder',[ShopController::class,'viewcompleteorder']);
+//$app->router->get('/dashboard/shop/viewcompleteorder',[ShopController::class,'viewcompleteorder']);
+$app->router->post('/dashboard/shop/vieworderdetails',[ShopController::class,'updateStatus']);
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 $app->router->post('/test',[TestController::class,'test']);
@@ -111,11 +111,12 @@ $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
 $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
 $app->router->get('/api/getcart',[CartController::class,'getCart']);
-$app->router->post('/api/addtocart',[CartController::class,'addToCart']);
-$app->router->patch('/api/addtocart',[CartController::class,'addToCart']);
-$app->router->post('/api/deletefromcart',[CartController::class,'deleteFromCart']);
-$app->router->get('/api/orders',[APIController::class,'getOrders']);
-$app->router->get('/api/getordercart',[APIController::class,'getOrderCart']);
+$app->router->post('/api/addtocart',[APIController::class,'addToCart']);
+$app->router->patch('/api/addtocart',[APIController::class,'addToCart']);
+$app->router->patch('/api/orders',[APIController::class,'getOrders']);
+$app->router->patch('/api/getordercart',[APIController::class,'getOrderCart']);
+$app->router->get('/api/getshoporders',[APIController::class,'getShopOrders']);
+$app->router->get('/api/getdelivery',[APIController::class,'getDelivery']);
 
 //rider
 $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);

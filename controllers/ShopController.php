@@ -7,8 +7,10 @@ use app\core\Controller;
 use app\controllers\APIController;
 use app\core\Request;
 use app\models\Item;
+use app\models\OrderCart;
 use app\models\Shop;
 use app\models\ShopItem;
+use app\models\ShopOrder;
 use SendGrid\Mail\TypeException;
 
 class ShopController extends Controller
@@ -81,10 +83,71 @@ class ShopController extends Controller
         return $this->render('shop/view-orders');
     }
 
-    public function vieworderdetails(){
+    public function vieworderdetails(Request $request){
+
+
+        $shoporder = new ShopOrder() ;
         $this->setLayout('headeronly-staff');
-        return $this->render('shop/view-order-details');
+
+        //var_dump($request ->getBody());
+        $ShopID = $request ->getBody()["ShopID"];
+        $CartID = $request ->getBody()["CartID"];
+
+        $shoporder = ShopOrder ::findOne([ "ShopID" => $ShopID ,"CartID" => $CartID]);
+
+        $cartitems = OrderCart ::findAll([ "ShopID" => $ShopID ,"CartID" => $CartID]);
+
+        //var_dump($cartitems);
+
+        $shopitems = [];
+
+        foreach($cartitems as $cartitem){
+            $shopitem = ShopItem::findOne(['ItemID'=>$cartitem->ItemID,'ShopID'=>$cartitem->ShopID]);
+            $item = Item::findOne(['ItemID'=>$cartitem->ItemID]);
+            //   var_dump($shopitem);
+            //   var_dump($item);
+            $shopitems[$cartitem->ShopID][$cartitem->ItemID]=[$shopitem,$item];
+            //   var_dump($shopitem);
+        }
+
+        //var_dump($cartitems);
+
+        return $this->render('shop/view-order-details',['shoporder'=>$shoporder,'cartitems'=>$cartitems, 'shopitem'=>$shopitems , 'item'=>$item, 'model'=>$shoporder]);
     }
+
+    public function updateStatus(Request $request)
+    {
+        $this->setLayout("dashboardL-shop");
+        $orderUpdated = new ShopOrder();
+
+        if ($request->isPost()) {
+            $orderUpdated->loadData($request->getBody());
+
+            $ShopID = $orderUpdated->ShopID ;
+            $CartID = $orderUpdated->CartID ;
+            $orderUpdated = ShopOrder::findOne(['ShopID'=>$ShopID,'CartID'=>$CartID]);
+
+            $orderUpdated->Status = 1;
+
+            if ($orderUpdated->validate('update') && $orderUpdated->update()) {
+
+                Application::$app->session->setFlash("success", "Order is Successfully Completed.");
+                Application::$app->response->redirect("#");
+            } else {
+                Application::$app->session->setFlash("warning", "Order is not Successfully Complete.");
+                return $this->render("shop/view-orders"
+                    , [
+                        'model' => $orderUpdated
+                    ]);
+            }
+        }
+        return $this->render("shop/view-orders"
+            , [
+                'model' => $orderUpdated
+            ]);
+    }
+
+
 
     public function viewcompleteorder(){
         $this->setLayout('headeronly-staff');

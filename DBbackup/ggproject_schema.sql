@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2021 at 09:02 AM
+-- Generation Time: Nov 30, 2021 at 02:27 PM
 -- Server version: 10.4.19-MariaDB
--- PHP Version: 7.4.10
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,17 +43,17 @@ CREATE TABLE `cart` (
 --
 
 CREATE TABLE `complaint` (
-  `ComplaintID` int(11) NOT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `StaffID` int(11) NOT NULL,
-  `OrderID` int(11) NOT NULL,
-  `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
-  `OrderDate` date NOT NULL,
-  `ComplaintDate` date NOT NULL,
-  `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-  `Priority` tinyint(1) NOT NULL,
-  `Regarding` tinyint(1) NOT NULL,
-  `Status` tinyint(1) NOT NULL
+                             `ComplaintID` int(11) NOT NULL,
+                             `CustomerID` int(11) NOT NULL,
+                             `StaffID` int(11) NOT NULL,
+                             `OrderID` int(11) NOT NULL,
+                             `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
+                             `OrderDate` date NOT NULL,
+                             `ComplaintDate` date NOT NULL,
+                             `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+                             `Priority` tinyint(1) NOT NULL,
+                             `Regarding` tinyint(1) NOT NULL,
+                             `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -63,15 +63,15 @@ CREATE TABLE `complaint` (
 --
 
 CREATE TABLE `customer` (
-  `CustomerID` int(11) NOT NULL,
-  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-  `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
+                            `CustomerID` int(11) NOT NULL,
+                            `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                            `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                            `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                            `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+                            `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                            `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                            `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                            `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -81,13 +81,13 @@ CREATE TABLE `customer` (
 --
 
 CREATE TABLE `delivery` (
-  `DeliveryID` int(11) NOT NULL,
-  `RiderID` int(11) NOT NULL,
-  `Date` date NOT NULL,
-  `Status` int(11) NOT NULL,
-  `CompDate` date DEFAULT NULL,
-  `CompTime` time DEFAULT NULL,
-  `OrderID` int(11) NOT NULL
+                            `DeliveryID` int(11) NOT NULL,
+                            `RiderID` int(11) NOT NULL,
+                            `Date` date NOT NULL,
+                            `Status` int(11) NOT NULL,
+                            `CompDate` date DEFAULT NULL,
+                            `CompTime` time DEFAULT NULL,
+                            `OrderID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -97,14 +97,14 @@ CREATE TABLE `delivery` (
 --
 
 CREATE TABLE `deliveryrider` (
-  `RiderID` int(11) NOT NULL,
-  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-  `NIC` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-  `ProfilePic` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `RiderType` int(11) NOT NULL DEFAULT 0
+                                 `RiderID` int(11) NOT NULL,
+                                 `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                                 `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                                 `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                                 `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+                                 `NIC` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+                                 `ProfilePic` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                                 `RiderType` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -114,9 +114,10 @@ CREATE TABLE `deliveryrider` (
 --
 
 CREATE TABLE `deliveryriderlocation` (
-  `RiderID` int(11) NOT NULL,
-  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `LastUpdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+                                         `RiderID` int(11) NOT NULL,
+                                         `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                                         `LastUpdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                                         `OrderID` int(11) DEFAULT NULL
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -126,15 +127,15 @@ CREATE TABLE `deliveryriderlocation` (
 --
 
 CREATE TABLE `item` (
-  `ItemID` int(11) NOT NULL,
-  `Name` varchar(125) COLLATE utf8mb4_bin NOT NULL,
-  `ItemImage` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Brand` varchar(125) COLLATE utf8mb4_bin DEFAULT NULL,
-  `UWeight` double NOT NULL,
-  `Unit` int(11) NOT NULL,
-  `MRP` double DEFAULT 0,
-  `MaxCount` float NOT NULL DEFAULT 0,
-  `Category` int(11) NOT NULL
+                        `ItemID` int(11) NOT NULL,
+                        `Name` varchar(125) COLLATE utf8mb4_bin NOT NULL,
+                        `ItemImage` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                        `Brand` varchar(125) COLLATE utf8mb4_bin DEFAULT NULL,
+                        `UWeight` double NOT NULL,
+                        `Unit` int(11) NOT NULL,
+                        `MRP` double DEFAULT 0,
+                        `MaxCount` float NOT NULL DEFAULT 0,
+                        `Category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -144,13 +145,13 @@ CREATE TABLE `item` (
 --
 
 CREATE TABLE `login` (
-  `UserID` int(11) NOT NULL,
-  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `PasswordHash` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-  `Name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `Verify_Flag` tinyint(1) NOT NULL DEFAULT 0,
-  `Delete_Flag` tinyint(1) NOT NULL DEFAULT 0,
-  `Role` varchar(10) COLLATE utf8mb4_bin NOT NULL
+                         `UserID` int(11) NOT NULL,
+                         `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                         `PasswordHash` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+                         `Name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+                         `Verify_Flag` tinyint(1) NOT NULL DEFAULT 0,
+                         `Delete_Flag` tinyint(1) NOT NULL DEFAULT 0,
+                         `Role` varchar(10) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -160,12 +161,11 @@ CREATE TABLE `login` (
 --
 
 CREATE TABLE `ordercart` (
-  `CartID` int(11) NOT NULL,
-  `ShopID` int(11) NOT NULL,
-  `ItemIDList` varchar(555) COLLATE utf8mb4_bin NOT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `QuantityList` varchar(555) COLLATE utf8mb4_bin NOT NULL,
-  `ShopTotal` double NOT NULL
+                             `CartID` int(11) NOT NULL,
+                             `ShopID` int(11) NOT NULL,
+                             `ItemID` int(11) NOT NULL,
+                             `Quantity` double NOT NULL,
+                             `Total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -189,9 +189,9 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `payment` (
-  `PaymentID` int(11) NOT NULL,
-  `OrderID` int(11) NOT NULL,
-  `TotalPrice` double NOT NULL
+                           `PaymentID` int(11) NOT NULL,
+                           `OrderID` int(11) NOT NULL,
+                           `TotalPrice` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -201,18 +201,18 @@ CREATE TABLE `payment` (
 --
 
 CREATE TABLE `shop` (
-  `ShopID` int(11) NOT NULL,
-  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-  `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-  `ShopName` varchar(125) COLLATE utf8mb4_bin NOT NULL,
-  `ShopDesc` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Category` int(11) NOT NULL,
-  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
+                        `ShopID` int(11) NOT NULL,
+                        `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                        `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                        `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                        `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+                        `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                        `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+                        `ShopName` varchar(125) COLLATE utf8mb4_bin NOT NULL,
+                        `ShopDesc` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                        `Category` int(11) NOT NULL,
+                        `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                        `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -222,11 +222,11 @@ CREATE TABLE `shop` (
 --
 
 CREATE TABLE `shopitem` (
-  `ItemID` int(11) NOT NULL,
-  `ShopID` int(11) NOT NULL,
-  `UnitPrice` double NOT NULL,
-  `Stock` float NOT NULL,
-  `Enabled` tinyint(1) NOT NULL DEFAULT 1
+                            `ItemID` int(11) NOT NULL,
+                            `ShopID` int(11) NOT NULL,
+                            `UnitPrice` double NOT NULL,
+                            `Stock` float NOT NULL,
+                            `Enabled` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -236,10 +236,10 @@ CREATE TABLE `shopitem` (
 --
 
 CREATE TABLE `shoporder` (
-  `ShopID` int(11) NOT NULL,
-  `CartID` int(11) NOT NULL,
-  `Date` date NOT NULL,
-  `ShopTotal` double NOT NULL
+                             `ShopID` int(11) NOT NULL,
+                             `CartID` int(11) NOT NULL,
+                             `Date` date NOT NULL,
+                             `ShopTotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -249,11 +249,11 @@ CREATE TABLE `shoporder` (
 --
 
 CREATE TABLE `staff` (
-  `StaffID` int(11) NOT NULL,
-  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
+                         `StaffID` int(11) NOT NULL,
+                         `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                         `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+                         `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+                         `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -263,11 +263,11 @@ CREATE TABLE `staff` (
 --
 
 CREATE TABLE `temporarycart` (
-  `ItemID` int(11) NOT NULL,
-  `ShopID` int(11) NOT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `Quantity` int(11) NOT NULL,
-  `Purchased` tinyint(1) NOT NULL DEFAULT 0
+                                 `ItemID` int(11) NOT NULL,
+                                 `ShopID` int(11) NOT NULL,
+                                 `CustomerID` int(11) NOT NULL,
+                                 `Quantity` int(11) NOT NULL,
+                                 `Purchased` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -277,9 +277,9 @@ CREATE TABLE `temporarycart` (
 --
 
 CREATE TABLE `verification` (
-  `UserID` int(11) NOT NULL,
-  `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
-  `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
+                                `UserID` int(11) NOT NULL,
+                                `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+                                `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -303,26 +303,26 @@ CREATE TABLE `deliverystaff` (
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`CartID`);
+    ADD PRIMARY KEY (`CartID`);
 
 --
 -- Indexes for table `complaint`
 --
 ALTER TABLE `complaint`
-  ADD PRIMARY KEY (`ComplaintID`) USING BTREE,
+    ADD PRIMARY KEY (`ComplaintID`) USING BTREE,
   ADD KEY `ComplaintID` (`ComplaintID`,`CustomerID`,`StaffID`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`CustomerID`);
+    ADD PRIMARY KEY (`CustomerID`);
 
 --
 -- Indexes for table `delivery`
 --
 ALTER TABLE `delivery`
-  ADD PRIMARY KEY (`DeliveryID`),
+    ADD PRIMARY KEY (`DeliveryID`),
   ADD KEY `RiderID` (`RiderID`,`OrderID`),
   ADD KEY `OrderID` (`OrderID`);
 
@@ -330,25 +330,25 @@ ALTER TABLE `delivery`
 -- Indexes for table `deliveryrider`
 --
 ALTER TABLE `deliveryrider`
-  ADD PRIMARY KEY (`RiderID`);
+    ADD PRIMARY KEY (`RiderID`);
 
 --
 -- Indexes for table `deliveryriderlocation`
 --
 ALTER TABLE `deliveryriderlocation`
-  ADD PRIMARY KEY (`RiderID`);
+    ADD PRIMARY KEY (`RiderID`);
 
 --
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`ItemID`);
+    ADD PRIMARY KEY (`ItemID`);
 
 --
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
-  ADD PRIMARY KEY (`UserID`);
+    ADD PRIMARY KEY (`UserID`);
 
 --
 -- Indexes for table `ordercart`
@@ -361,53 +361,53 @@ ALTER TABLE `ordercart`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`OrderID`),
+    ADD PRIMARY KEY (`OrderID`),
   ADD KEY `CartID` (`CartID`);
 
 --
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`PaymentID`),
+    ADD PRIMARY KEY (`PaymentID`),
   ADD KEY `OrderID` (`OrderID`);
 
 --
 -- Indexes for table `shop`
 --
 ALTER TABLE `shop`
-  ADD PRIMARY KEY (`ShopID`);
+    ADD PRIMARY KEY (`ShopID`);
 
 --
 -- Indexes for table `shopitem`
 --
 ALTER TABLE `shopitem`
-  ADD PRIMARY KEY (`ItemID`,`ShopID`),
+    ADD PRIMARY KEY (`ItemID`,`ShopID`),
   ADD KEY `ShopID` (`ShopID`);
 
 --
 -- Indexes for table `shoporder`
 --
 ALTER TABLE `shoporder`
-  ADD PRIMARY KEY (`ShopID`,`CartID`),
+    ADD PRIMARY KEY (`ShopID`,`CartID`),
   ADD KEY `CartID` (`CartID`);
 
 --
 -- Indexes for table `staff`
 --
 ALTER TABLE `staff`
-  ADD PRIMARY KEY (`StaffID`);
+    ADD PRIMARY KEY (`StaffID`);
 
 --
 -- Indexes for table `temporarycart`
 --
 ALTER TABLE `temporarycart`
-  ADD PRIMARY KEY (`ItemID`,`ShopID`,`CustomerID`);
+    ADD PRIMARY KEY (`ItemID`,`ShopID`,`CustomerID`);
 
 --
 -- Indexes for table `verification`
 --
 ALTER TABLE `verification`
-  ADD PRIMARY KEY (`UserID`),
+    ADD PRIMARY KEY (`UserID`),
   ADD UNIQUE KEY `UniqueID` (`UniqueID`);
 
 --
@@ -418,49 +418,49 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `ComplaintID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `ComplaintID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-  MODIFY `ShopID` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `ShopID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

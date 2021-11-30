@@ -11,6 +11,7 @@ class Orders extends DBModel
     public int $CartID = 0;
     public float $DeliveryCost = 0;
     public float $TotalCost = 0;
+    public int $Status = 0 ; /**[0-new , 1-completed] */
 
 
     public static function tableName(): string
@@ -20,7 +21,7 @@ class Orders extends DBModel
 
     public function attributes(): array
     {
-        return ['OrderDate','CartID','DeliveryCost','TotalCost'];
+        return ['OrderDate','CartID','DeliveryCost','TotalCost','Status'];
     }
 
     public static function primaryKey(): array
@@ -34,12 +35,13 @@ class Orders extends DBModel
             'OrderID'=> [self::RULE_REQUIRED,self::RULE_INT],
             'CartID'=> [self::RULE_REQUIRED,self::RULE_INT],
             'DeliveryCost' => [self::RULE_REQUIRED,self::RULE_FLOAT] ,
-            'TotalCost' => [self::RULE_REQUIRED,self::RULE_FLOAT]
+            'TotalCost' => [self::RULE_REQUIRED,self::RULE_FLOAT],
+            'Status' => [self::RULE_INT, self::RULE_REQUIRED]
         ];
     }
 
     public function jsonarray(): array
     {
-        return ['OrderID','CartID','DeliveryCost','TotalCost'];
+        return ['OrderID','CartID','DeliveryCost','TotalCost','Status'];
     }
 }

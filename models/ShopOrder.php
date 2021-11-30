@@ -10,6 +10,7 @@ class ShopOrder extends DBModel
     public int $CartID = 0;
     public string $Date = '';
     public float $ShopTotal = 0;
+    public int $Status = 0 ;
 
     public static function tableName(): string
     {
@@ -18,7 +19,7 @@ class ShopOrder extends DBModel
 
     public function attributes(): array
     {
-        return ['ShopID','CartID','Date','ShopTotal'];
+        return ['ShopID','CartID','Date','ShopTotal','Status'];
     }
 
     public static function primaryKey(): array
@@ -31,7 +32,7 @@ class ShopOrder extends DBModel
     {
        return [
            'ShopID'=>[self::RULE_REQUIRED],
-           'CartID'=>[self::RULE_REQUIRED],
+           'CartID'=>[self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]],
            'Date'=>[self::RULE_REQUIRED],
            'ShopTotal' => [self::RULE_REQUIRED]
        ];
