@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\core\Application;
 use app\core\Controller;
+use app\core\db\DBModel;
 use app\core\Request;
 use app\core\Response;
+use app\models\Customer;
 use app\models\ShopItem;
 use app\models\TemporaryCart;
 
@@ -84,4 +87,32 @@ class CartController extends Controller
         return $response->json('{"success":"fail"}');
 
     }
+
+    public function checkout(Request $request,Response $response)
+    {
+        $this->setLayout('checkoutL');
+        $customerid = Application::getCustomerID();
+        $customer = Customer::findOne(['CustomerID'=>$customerid]);
+        $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getCustomerID()." AND Purchased=0",\PDO::FETCH_COLUMN);
+        $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
+        $itemcount = DBModel::query("SELECT COUNT(*) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
+        $deliveryfee = $this->getDeliveryFee($shopcount);
+        $totalprice = $subprice + $deliveryfee;
+        return $this->render('customer/checkout',[
+            'customer' => $customer,
+            'shopcount' => $shopcount,
+            'subprice' => $subprice,
+            'itemcount' => $itemcount,
+            'deliveryfee' => $deliveryfee,
+            'totalprice' => $totalprice
+        ]);
+    }
+
+    public function getDeliveryFee(int $shopcount)
+    {
+        return ($shopcount > 1)?160:120;
+    }
+
+
+
 }

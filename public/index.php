@@ -49,7 +49,7 @@ $app->router->get('/customer/register',[CustomerController::class,'customerRegis
 $app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->get('/customer/profile',[CustomerController::class,'profile']);
 $app->router->get('/customer/cart',[CartController::class,'cart']);
-$app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
+$app->router->get('/customer/checkout',[CartController::class,'checkout']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
 $app->router->get('/gallery',[ShopController::class,'shopGallery']);
