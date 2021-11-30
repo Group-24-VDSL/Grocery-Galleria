@@ -9,7 +9,7 @@
     <div class="">
         <h3>Add Rider</h3>
         <div class="frm">
-            <?php $form = \app\core\form\Form::begin("","post",[],"multipart/form-data");?>
+            <?php $form = \app\core\form\Form::begin("","post","",[],"multipart/form-data");?>
                 <div class="display-grid delivery-view">
                     <div class="delivery-view-details">
                         <div><?php echo $form->field($model,"Name");?></div>
