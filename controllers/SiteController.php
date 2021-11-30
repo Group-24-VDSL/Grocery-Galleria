@@ -20,23 +20,5 @@ class SiteController extends Controller
         return $this->render('dashboard-links');
     }
 
-//    public function handleContact(Request $request){
-////        $body = Application::$app->request->getBody();
-////        var_dump($body);
-//        $body = $request->getBody();
-//        return 'handling data';
-//    }
-//
-//    //directly calling view from the
-//    public function contact(){
-//        return $this->render('contact');
-//    }
-//
-//    //passing parameters to the view
-//    public function home(){
-//        $params = ["name"=> "Vishwajith"]; //variable passing
-//        return $this->render('home',$params);
-//    }
-
 
 }
