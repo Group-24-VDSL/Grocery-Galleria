@@ -95,10 +95,10 @@ $app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem'])
 $app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
 $app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
 $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
+$app->router->post('/dashboard/shop/vieworderdetails',[ShopController::class,'updateStatus']);
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
-//$app->router->get('/dashboard/shop/viewcompleteorder',[ShopController::class,'viewcompleteorder']);
-$app->router->post('/dashboard/shop/vieworderdetails',[ShopController::class,'updateStatus']);
+
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 $app->router->post('/test',[TestController::class,'test']);
