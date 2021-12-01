@@ -35,19 +35,19 @@ class StaffController extends Controller
                     }
                 } else {
                     Application::$app->session->setFlash('danger', 'Registration Failed');
-                    $this->setLayout('dashboard-staff');
+                    $this->setLayout('dashboardL-staff');
                     return $this->render("staff/register", ['model' => $user]);
                 }
             } else {
                 Application::$app->session->setFlash('danger', 'Registration Failed ');
-                $this->setLayout('dashboard-staff');
+                $this->setLayout('dashboardL-staff');
                 return $this->render("staff/register", ['model' => $user]);
             }
 
         }
         return $this->render("staff/register", [
             'staff' => $user,
-            'customer' =>$customer,
+            'customer' => $customer,
             'shop' => $shop
         ]);
 
@@ -182,33 +182,23 @@ class StaffController extends Controller
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/users");
     }
+
     public function profilesettings(Request $request)
     {
         // get logged staff ID
         $staff = new Staff();
         $user = new User();
-
-        $staffDB = $staff->findOne(['UserID' => 11]);
-        $staff = $staffDB;
-        $userDB = $user->findOne(['UserID' => 11]);
+        $this->setLayout("dashboardL-staff");
+        $staff = $staff->findOne(['StaffID' => 11]);
+        $user = $user->findOne(['UserID' => 11]);
         if ($request->isPost()) {
             $success = false;
-            $type = $request->getBody()['type'];
-            if ($type == 'profileUpd') {
-                $staff->loadData($request->getBody());
-                if ($staff->validate('update') && $staff->update()) {
-                    $success = $staff->procedure('email_update',$staff->UserID);
-                }
-            }
-            elseif  ($type == 'passwordUpd') {
-                $user->loadData($request->getBody());
-                if ($user->validate('update') && $user->update()) {
-                    $success = true;
-                }
-            }
-            if ($success == true) {
+            $staff->loadData($request->getBody());
+            if ($staff->validate('update') && $staff->update()) {
+                $staff->callProcedure('email_update', $staff->StaffID, $staff->Email);
                 Application::$app->session->setFlash('success', 'Update Success');
-                Application::$app->response->redirect('staff/profile-setting');
+                $this->setLayout("dashboardL-staff");
+                Application::$app->response->redirect('/dashboard/staff/profilesettings');
             } else {
                 Application::$app->session->setFlash('danger', 'Update Failed');
                 $this->setLayout("dashboardL-staff");
@@ -218,7 +208,6 @@ class StaffController extends Controller
                 ]);
             }
         }
-        $this->setLayout("dashboardL-staff");
         return $this->render("staff/profile-setting", [
             'model' => $staff,
             'loginmodel' => $user

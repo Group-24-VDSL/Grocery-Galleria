@@ -37,6 +37,7 @@ $app->router->post('/dashboardlinks',[SiteController::class,'dashboard']);
 
 $app->router->get('/verify',[AuthController::class,'verify']);
 $app->router->get('/email-verified',[AuthController::class,'emailverified']);
+$app->router->get('/profileupdate',[AuthController::class,'profileUpdate']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);

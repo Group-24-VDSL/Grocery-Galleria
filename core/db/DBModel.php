@@ -125,4 +125,14 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
+    public function callProcedure($procedure,$id,$value)
+    {
+        $stmt = self::prepare("CALL $procedure(@id,@value)");
+        $stmt->bindValue("@id",$id);
+        $stmt->bindValue("@value",$value);
+        $stmt->execute();
+        return true;
+
+
+    }
 }
