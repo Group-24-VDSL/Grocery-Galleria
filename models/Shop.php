@@ -81,5 +81,15 @@ class Shop extends UserModel
         return ['ShopID','Name', 'Address', 'ContactNo', 'Location', 'City', 'Suburb','ShopName', 'ShopDesc','Category','PlaceID'];
     }
 
+    public function getEmail(): string
+    {
+        return $this->Email;
+    }
+
+    public function getUserID(): int
+    {
+        return $this->ShopID;
+    }
+
 
 }

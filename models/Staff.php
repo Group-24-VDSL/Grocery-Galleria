@@ -55,4 +55,14 @@ class Staff extends UserModel
     {
         return $this->attributes();
     }
+
+    public function getEmail(): string
+    {
+        return $this->Email;
+    }
+
+    public function getUserID(): int
+    {
+        return $this->StaffID;
+    }
 }
