@@ -12,8 +12,6 @@ class Staff extends UserModel
     public string $Name = '';
     public string $ContactNo = '';
     public string $Email = '';
-    public string $Password = '';
-    public string $ConfirmPassword = '';
 
     public function save()
     {
@@ -29,8 +27,8 @@ class Staff extends UserModel
     {
         return [
             'Email' => [self::RULE_EMAIL,self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]], //check if the user class has the same email or not.
-            'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
-            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],
+            'Password' => [[self::RULE_MIN,'min' => 8]],
+            'ConfirmPassword' => [[self::RULE_MATCH,'match' => 'Password']],
             'Name' => [self::RULE_REQUIRED],
             'ContactNo'=>[self::RULE_REQUIRED,[self::RULE_MAX,'max' => 10],[self::RULE_MIN,'min' => 10]],
         ];

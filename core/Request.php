@@ -118,4 +118,10 @@ class Request
       }
       return null;
     }
+
+    public function getPostId():string
+    {
+        return $_POST['id'];
+
+    }
 }
