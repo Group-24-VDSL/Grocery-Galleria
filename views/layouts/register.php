@@ -11,7 +11,7 @@
 
 
     <script src="/js/jquery.min.js"></script>
-    <title>Registration customer</title>
+    <title>Registration</title>
     <?php include_once("utils/pwa.php"); ?>
 </head>
 <body>

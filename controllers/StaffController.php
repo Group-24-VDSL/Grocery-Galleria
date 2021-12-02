@@ -35,19 +35,19 @@ class StaffController extends Controller
                     }
                 } else {
                     Application::$app->session->setFlash('danger', 'Registration Failed');
-                    $this->setLayout('dashboard-staff');
+                    $this->setLayout('dashboardL-staff');
                     return $this->render("staff/register", ['model' => $user]);
                 }
             } else {
                 Application::$app->session->setFlash('danger', 'Registration Failed ');
-                $this->setLayout('dashboard-staff');
+                $this->setLayout('dashboardL-staff');
                 return $this->render("staff/register", ['model' => $user]);
             }
 
         }
         return $this->render("staff/register", [
             'staff' => $user,
-            'customer' =>$customer,
+            'customer' => $customer,
             'shop' => $shop
         ]);
 
@@ -96,12 +96,12 @@ class StaffController extends Controller
 
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
-            $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID)-1), 5, '0', STR_PAD_LEFT));
-            if(isset($itemimg)){
+            $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
+            if (isset($itemimg)) {
                 $itemUpdated->ItemImage = $itemimg;
-            }else{
+            } else {
                 $body = $request->getBody();
-                $itemUpdated->ItemImage = (string)$body['ImgDis'];
+                $itemUpdated->ItemImage = (string)$body['ImgStr'];
             }
             if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item Updated Successfully.");
@@ -182,14 +182,36 @@ class StaffController extends Controller
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/users");
     }
-    public function profilesettings()
+
+    public function profilesettings(Request $request)
     {
+        // get logged staff ID
         $staff = new Staff();
+        $newObj = new Staff();
         $user = new User();
         $this->setLayout("dashboardL-staff");
-        return $this->render("staff/profile-setting",[
-            'Usermodel' =>$staff ,
-            'loginmodel' =>$user
+        $staff = $staff->findOne(['StaffID' => 11]);
+        $user = $user->findOne(['UserID' => 11]);
+        if ($request->isPost()) {
+            $newObj->loadData($request->getBody());
+//            $newObj->StaffID = Application::getCustomerID(); // get session id
+            $newObj->StaffID = 11;
+            if ($newObj->validate('update') && $newObj->update()) {
+                $newObj->singleProcedure('email_update', $newObj->StaffID, $newObj->Email);
+                Application::$app->session->setFlash('success','Update Success');
+                Application::$app->response->redirect('/dashboard/staff/profilesettings');
+            } else {
+                Application::$app->session->setFlash('danger', 'Update Failed');
+                $this->setLayout("dashboardL-staff");
+                return $this->render("staff/profile-setting", [
+                    'model' => $newObj,
+                    'loginmodel' => $user
+                ]);
+            }
+        }
+        return $this->render("staff/profile-setting", [
+            'model' => $staff,
+            'loginmodel' => $user
         ]);
     }
 

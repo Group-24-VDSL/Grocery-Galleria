@@ -49,7 +49,6 @@
     <div class="container-core">
         <div class="form-details register">
             <?php $form = \app\core\form\Form::begin("","post","itemUpdate",[],"multipart/form-data",);?>
-            <input id="ItemID" name="ItemID" value="" hidden>
             <div class="inputBox">
                 <label for="category">
                     <i class="fas fa-list"></i>

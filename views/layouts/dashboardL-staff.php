@@ -46,6 +46,12 @@
             </a>
         </li>
         <li>
+            <a href="/dashboard/staff/adduser">
+                <i class='bx bx-user-plus' ></i>
+                <span class="link-name">Register</span>
+            </a>
+        </li>
+        <li>
             <a href="/dashboard/staff/viewusers">
                 <i class="bx bxs-group"></i>
                 <span class="link-name">Users</span>
@@ -63,12 +69,6 @@
                 <span class="link-name">Complaints</span>
             </a>
         </li>
-<!--        <li>-->
-<!--            <a href="">-->
-<!--            <i class='bx bx-cycling'></i>-->
-<!--                <span class="link-name">Riders</span>-->
-<!--            </a>-->
-<!--        </li>-->
         <li>
             <a href="/dashboard/staff/profilesettings">
                 <i class="bx bx-cog"></i>
@@ -166,5 +166,6 @@
 <script src="/js/staff.js"></script>
 <script src="/js/dashboardScript.js"></script>
 <script src="/js/complaint.js"></script>
+<script src="/js/register.js"></script>
 </body>
 
