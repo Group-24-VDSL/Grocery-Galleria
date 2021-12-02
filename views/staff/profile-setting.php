@@ -1,53 +1,54 @@
 <?php
-/** @var $Usermodel \app\models\Staff */
-/** @var $loginmodel \app\models\User */
+/** @var $model \app\models\Staff **/
+/** @var $loginmodel \app\models\User **/
+/** @var $form app\core\form\Form  */
 
 ?>
 <!-- Profile section starts -->
 <div class="core">
     <h1 class="heading">Profile <span>Settings</span></h1>
     <div class="container-core">
-        <form action="">
+        <?php $form = \app\core\form\Form::begin("/dashboard/staff/profilesettings","post","staffUpdate",[]);?>
+<!--        --><?php //$form = \app\core\form\Form::begin("/test","post","staffUpdate",[]);?>
+<!--        <input id="StaffID" name="StaffID" value="11" hidden>-->
             <div class="inputBox">
                 <label for="Username"><i class="fas fa-user"></i>Name</label>
-                <input type="text" placeholder="" id="Name" />
+                <?php echo $form->fieldonly($model,"Name");?>
             </div>
             <div class="inputBox">
                 <label for="Email"><i class="fas fa-envelope"></i>Email</label>
-                <input type="email" placeholder="" id="Email" />
+                <?php echo $form->fieldonly($model,"Email");?>
             </div>
             <div class="inputBox">
                 <label for="contact"><i class="fas fa-phone"></i>Contact</label>
-                <input type="text" placeholder="" id="ContactNo" />
+                <?php echo $form->fieldonly($model,"ContactNo");?>
             </div>
-            <div class="inputBox">
-                <label for="Address"><i class="fas fa-home"></i>Address</label>
-                <input type="text" placeholder="" id="Address" />
-            </div>
-            <div class="inputBox"></div>
             <div class="inputBox btn-div">
                 <button type="submit" class="btn update">Update</button>
             </div>
-        </form>
+        <?php \app\core\form\Form::end()?>
+
     </div>
     <h1 class="heading">Change <span>Password</span></h1>
     <div class="container-core">
-        <form action="">
+        <?php $form = \app\core\form\Form::begin("/profileupdate","post","userUpdate",[]);?>
             <div class="inputBox">
-                <label for="Password"><i class="fas fa-key"></i>Password</label>
-                <input type="password" placeholder="" id="password" />
+                <label for="Password"><i class="fas fa-key"></i>Current Password</label>
+                <?php echo $form->fieldonly($loginmodel,"Password")->passwordField();?>
             </div>
             <div class="inputBox">
-                <label for="PasswordR"
-                ><i class="fas fa-key"></i>Re-enter password</label
-                >
-                <input type="passwordR" placeholder="" id="passwordR" />
+                <label for="NewPwd"><i class="fas fa-key"></i>Password</label>
+                <input type="password" placeholder="" id="NewPwd" name="NewPwd" />
             </div>
-            <div class="inputBox"></div>
+            <div class="inputBox">
+                <label for="ConfirmPwd"><i class="fas fa-key"></i>Confirm password</label>
+                <input type="password" placeholder="" id="ConfirmPwd" name="ConfirmPwd" />
+            </div>
+
             <div class="inputBox btn-div">
                 <button type="submit" class="btn update">Update</button>
             </div>
-        </form>
+        <?php \app\core\form\Form::end()?>
     </div>
 </div>
 <!-- Profile section ends -->

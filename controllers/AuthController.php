@@ -9,6 +9,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\Customer;
 use app\models\LoginForm;
+use app\models\Staff;
 use app\models\User;
 use app\models\Shop;
 use app\models\Verification;
@@ -125,6 +126,36 @@ class AuthController extends Controller
         $response->redirect('/');
     }
 
+    public function profileUpdate(Request $request)
+    {// get logged staff ID
+        $staff = new Staff();
+        $user = new User();
+        $user = $user->findOne(['UserID' => 11]);
+        if ($request->isPost()) {
+            $success = false;{
+                $user->loadData($request->getBody());
+                $user->loadData($request->getBody());
+                if ($user->validate('update') && $user->update()) {
+                    Application::$app->session->setFlash('success', 'Update Success');
+                }else{
+                    Application::$app->session->setFlash('danger', 'Update Failed');
+                    Application::$app->response->redirect('staff/profile-setting');
+                    $this->setLayout("dashboardL-staff");
+                    return $this->render("staff/profile-setting", [
+                        'model' => $staff,
+                        'loginmodel' => $user
+                    ]);
 
+                }
+
+            }
+        }
+        $this->setLayout("dashboardL-staff");
+        return $this->render("staff/profile-setting", [
+            'model' => $staff,
+            'loginmodel' => $user
+        ]);
+
+    }
 
 }
