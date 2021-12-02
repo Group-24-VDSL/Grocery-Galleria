@@ -4,6 +4,7 @@ namespace app\core\form;
 
 use app\core\Model;
 
+
 class Form
 {
     public static function begin($action, $method,$id,$classes=[],$enctype = '')
@@ -21,7 +22,7 @@ class Form
     }
 
     public function fieldonly(Model $model,$attribute,$classes=[]){
-        return new InputFieldOnly( $model,$attribute,$classes);
+        return new InputFieldOnly($model,$attribute,$classes);
     }
     public function numberfieldonly(Model $model,$attribute,$min,$max,$step,$classes=[]){
         return new NumberFieldOnly( $model,$attribute,$min,$max,$step,$classes);
