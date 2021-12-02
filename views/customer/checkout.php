@@ -19,11 +19,11 @@
                 <div class="shipping-details">
                     <div class="details"><i class="fas fa-user"></i> Name<span><?php echo $customer->Name ?></span></div>
                     <div class="details"><i class="fas fa-phone"></i> Phone Number(default)<span><?php echo $customer->ContactNo ?></span></div>
+                    <form action="" method="post">
                     <div class="details">
                         <label for="Recipient-name"><i class="fas fa-house-user"></i> Recipient Name</label>
-                        <input type="text" id="Recipient-name" name="Recipient-name">
+                        <input type="text" id="Recipient-name" name="recipient-name">
                     </div>
-                    <form action="" method="post">
                     <div class="details">
                         <label for="Recipient-contact"><i class="fas fa-phone-alt"></i> Recipient Contact</label>
                         <input type="text" id="Recipient-contact" name="recipient-contact">
