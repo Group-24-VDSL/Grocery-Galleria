@@ -8,7 +8,9 @@
 <div class="core">
     <h1 class="heading">Profile <span>Settings</span></h1>
     <div class="container-core">
-        <?php $form = \app\core\form\Form::begin("/dashboard/staff/profilesettings","post","staffUpdate",[],"multipart/form-data",);?>
+        <?php $form = \app\core\form\Form::begin("/dashboard/staff/profilesettings","post","staffUpdate",[]);?>
+<!--        --><?php //$form = \app\core\form\Form::begin("/test","post","staffUpdate",[]);?>
+<!--        <input id="StaffID" name="StaffID" value="11" hidden>-->
             <div class="inputBox">
                 <label for="Username"><i class="fas fa-user"></i>Name</label>
                 <?php echo $form->fieldonly($model,"Name");?>
@@ -29,7 +31,7 @@
     </div>
     <h1 class="heading">Change <span>Password</span></h1>
     <div class="container-core">
-        <?php $form = \app\core\form\Form::begin("/profileupdate","post","userUpdate",[],"multipart/form-data",);?>
+        <?php $form = \app\core\form\Form::begin("/profileupdate","post","userUpdate",[]);?>
             <div class="inputBox">
                 <label for="Password"><i class="fas fa-key"></i>Current Password</label>
                 <?php echo $form->fieldonly($loginmodel,"Password")->passwordField();?>
