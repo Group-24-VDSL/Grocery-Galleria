@@ -5,11 +5,16 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\core\db\DBModel;
+use app\core\exceptions\ForbiddenException;
 use app\core\Request;
 use app\core\Response;
 use app\models\Customer;
 use app\models\ShopItem;
 use app\models\TemporaryCart;
+use Stripe\Exception\ApiErrorException;
+use Stripe\Exception\SignatureVerificationException;
+use Stripe\Exception\UnexpectedValueException;
+use Stripe\Webhook;
 
 
 class CartController extends Controller
@@ -108,9 +113,101 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * @throws ApiErrorException
+     * @throws ForbiddenException
+     */
+    public function proceedToCheckout(Request $request, Response $response)
+    {
+        if(Application::isCustomer()) {
+            if ($request->isPost()) {
+                $notes = $request->getBody()['note'];
+                $recipient = $request->getBody()['recipient-contact'];
+
+                $domain = Application::$app->domain;
+
+                //There should be a procedure for checking the stock.
+                $this->checkStock(Application::getCustomerID());
+                //get the availible items
+                $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getCustomerID()." AND Purchased=0",\PDO::FETCH_COLUMN);
+                $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
+                $itemcount = DBModel::query("SELECT COUNT(*) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
+                $deliveryfee = $this->getDeliveryFee($shopcount);
+                $totalprice = $subprice + $deliveryfee;
+
+                $checkout_session = Application::$app->stripe->checkout->sessions->create([
+                    'payment_method_types' => ['card'],
+                    'customer_email' => Application::$app->user->getEmail(),
+                    'line_items' => [[
+                        'price_data' => [
+                            'currency' => 'lkr',
+                            'unit_amount' => $totalprice*100,
+                            'product_data'=>[
+                                'name' => 'Grocery Galleria Cart'
+                            ]
+                        ],
+                        'quantity' => 1,
+                    ]],
+                    'mode' => 'payment',
+                    'success_url' => $domain . 'pay/success',
+                    'cancel_url' => $domain . 'customer/cart',
+                ]);
+
+                return $response->redirect($checkout_session->url);
+
+            } else {
+                $response->redirect('/customer/checkout');
+            }
+        }
+        throw new ForbiddenException("Not Allowed",403);
+    }
+
     public function getDeliveryFee(int $shopcount)
     {
         return ($shopcount > 1)?160:120;
+    }
+
+    public function paymentProcessor(Request $request,Response $response)
+    {
+        $endpoint_secret = $_ENV['STRIPE_WEBHOOK_SECRET'];
+
+        $payload = @file_get_contents('php://input');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
+        $event = null;
+
+        try {
+            $event = Webhook::constructEvent(
+                $payload, $sig_header, $endpoint_secret
+            );
+        } catch(UnexpectedValueException $e) {
+            // Invalid payload
+            http_response_code(400);
+            exit();
+        } catch(SignatureVerificationException $e) {
+            // Invalid signature
+            http_response_code(400);
+            exit();
+        }
+
+        switch ($event->type) {
+            case 'checkout.session.completed':
+                http_response_code(200);
+                $checkoutSession = $event->data->object;
+                $this->fullfillOrder($checkoutSession);
+            default:
+                echo 'Received unknown event type ' . $event->type;
+        }
+
+
+    }
+
+    public function checkStock($user){
+
+    }
+
+    public function fullfillOrder($obj)
+    {
+
     }
 
 

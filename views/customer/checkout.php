@@ -23,9 +23,10 @@
                         <label for="Recipient-name"><i class="fas fa-house-user"></i> Recipient Name</label>
                         <input type="text" id="Recipient-name" name="Recipient-name">
                     </div>
+                    <form action="" method="post">
                     <div class="details">
                         <label for="Recipient-contact"><i class="fas fa-phone-alt"></i> Recipient Contact</label>
-                        <input type="text" id="Recipient-contact" name="Recipient-contact">
+                        <input type="text" id="Recipient-contact" name="recipient-contact">
                     </div>
                     <div class="details">
                         <i class="fas fa-home"></i>
@@ -36,7 +37,7 @@
                     </div>
                     <div class="details">
                         <label for="Note"><i class="fas fa-quote-left"></i> Notes</label>
-                        <textarea type="text" id="Note" name="Note" cols="20" rows="5"></textarea>
+                        <textarea type="text" id="Note" name="note" cols="20" rows="5"></textarea>
                     </div>
                 </div>
             </div>
@@ -49,7 +50,8 @@
                     <div class="details">Delivery Charges: <span><?php echo $deliveryfee ?></span></div>
                     <div class="details total">Total: <span>Rs <?php echo $totalprice ?></span></div>
                 </div>
-                <a href="" class="btn checkout">Proceed to Payment</a>
+                <button type="submit" class="btn checkout">Proceed to Payment</button>
+                </form>
             </div>
         </div>
     </div>
