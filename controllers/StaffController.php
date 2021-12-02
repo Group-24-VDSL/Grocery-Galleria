@@ -187,23 +187,24 @@ class StaffController extends Controller
     {
         // get logged staff ID
         $staff = new Staff();
+        $newObj = new Staff();
         $user = new User();
         $this->setLayout("dashboardL-staff");
         $staff = $staff->findOne(['StaffID' => 11]);
         $user = $user->findOne(['UserID' => 11]);
         if ($request->isPost()) {
-            $success = false;
-            $staff->loadData($request->getBody());
-            if ($staff->validate('update') && $staff->update()) {
-                $staff->callProcedure('email_update', $staff->StaffID, $staff->Email);
-                Application::$app->session->setFlash('success', 'Update Success');
-                $this->setLayout("dashboardL-staff");
+            $newObj->loadData($request->getBody());
+//            $newObj->StaffID = Application::getCustomerID(); // get session id
+            $newObj->StaffID = 11;
+            if ($newObj->validate('update') && $newObj->update()) {
+                $newObj->singleProcedure('email_update', $newObj->StaffID, $newObj->Email);
+                Application::$app->session->setFlash('success','Update Success');
                 Application::$app->response->redirect('/dashboard/staff/profilesettings');
             } else {
                 Application::$app->session->setFlash('danger', 'Update Failed');
                 $this->setLayout("dashboardL-staff");
                 return $this->render("staff/profile-setting", [
-                    'model' => $staff,
+                    'model' => $newObj,
                     'loginmodel' => $user
                 ]);
             }
