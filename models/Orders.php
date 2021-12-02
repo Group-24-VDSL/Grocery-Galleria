@@ -10,6 +10,7 @@ class Orders extends DBModel
     public string $OrderDate = '';
     public int $CartID = 0;
     public float $DeliveryCost = 0;
+    public string $RecipientName='';
     public string $Note = '';
     public float $RecipientContact = 0;
     public float $TotalCost = 0;
@@ -36,7 +37,7 @@ class Orders extends DBModel
         return [
             'OrderID'=> [self::RULE_REQUIRED,self::RULE_INT],
             'CartID'=> [self::RULE_REQUIRED,self::RULE_INT],
-            'DeliveryCost' => [self::RULE_REQUIRED,self::RULE_FLOAT] ,
+            'DeliveryCost' => [self::RULE_REQUIRED,self::RULE_FLOAT],
             'RecipientContact'=>[self::RULE_PHONE],
             'TotalCost' => [self::RULE_REQUIRED,self::RULE_FLOAT],
             'Status' => [self::RULE_INT, self::RULE_REQUIRED]
