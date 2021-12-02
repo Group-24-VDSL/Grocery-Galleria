@@ -121,22 +121,30 @@ class CartController extends Controller
     {
         if(Application::isCustomer()) {
             if ($request->isPost()) {
-                $notes = $request->getBody()['note'];
-                $recipient = $request->getBody()['recipient-contact'];
+                $recipient_name = filter_var($request->getBody()['recipient-name'],FILTER_SANITIZE_SPECIAL_CHARS);
+                $notes = filter_var($request->getBody()['note'],FILTER_SANITIZE_SPECIAL_CHARS);
+                $recipient_contact = filter_var($request->getBody()['recipient-contact'],FILTER_SANITIZE_NUMBER_INT);
 
                 $domain = Application::$app->domain;
 
                 //There should be a procedure for checking the stock.
                 $this->checkStock(Application::getCustomerID());
                 //get the availible items
-                $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getCustomerID()." AND Purchased=0",\PDO::FETCH_COLUMN);
-                $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
-                $itemcount = DBModel::query("SELECT COUNT(*) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
+                $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getCustomerID()." AND Purchased=1",\PDO::FETCH_COLUMN);
+                $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=1",\PDO::FETCH_COLUMN);
                 $deliveryfee = $this->getDeliveryFee($shopcount);
                 $totalprice = $subprice + $deliveryfee;
 
                 $checkout_session = Application::$app->stripe->checkout->sessions->create([
                     'payment_method_types' => ['card'],
+                    'metadata'=>[
+                        'userid' => Application::getCustomerID(),
+                        'recipient_name'=> $recipient_name,
+                        'notes' => $notes,
+                        'recipient_contact' => $recipient_contact,
+                        'deliverycost' => $deliveryfee,
+                        'totalcost' => $totalprice
+                    ],
                     'customer_email' => Application::$app->user->getEmail(),
                     'line_items' => [[
                         'price_data' => [
@@ -148,6 +156,7 @@ class CartController extends Controller
                         ],
                         'quantity' => 1,
                     ]],
+                    'expires_at'=> time() + 3600,
                     'mode' => 'payment',
                     'success_url' => $domain . 'pay/success',
                     'cancel_url' => $domain . 'customer/cart',
@@ -188,26 +197,34 @@ class CartController extends Controller
             http_response_code(400);
             exit();
         }
-
         switch ($event->type) {
             case 'checkout.session.completed':
-                http_response_code(200);
                 $checkoutSession = $event->data->object;
                 $this->fullfillOrder($checkoutSession);
+
+            case 'checkout.session.expired':
+                $checkoutSession = $event->data->object;
+                $userid = $checkoutSession->metadata->userid;
+                $this->cancelOrder($userid);
+                Application::$app->logger->debug("Canceled");
             default:
                 echo 'Received unknown event type ' . $event->type;
         }
-
+        http_response_code(200);
 
     }
 
     public function checkStock($user){
-
+        DBModel::callProcedure('checkStock',['ID'=>$user]);
     }
 
     public function fullfillOrder($obj)
     {
+        Application::$app->logger->debug($obj);
+    }
 
+    public function cancelOrder($user){
+        DBModel::callProcedure('cancelStock',['ID'=>$user]);
     }
 
 
