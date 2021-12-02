@@ -34,6 +34,8 @@ class Application
     public Logger $logger;
     public View $view;
     public static Application $app;
+    public string $domain;
+
     public function __construct($rootPath ,$config)
     {
         self::$app = $this;
@@ -49,6 +51,8 @@ class Application
         $this->session=new Session();
 
         $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
+
+        $this->domain=$_ENV['DOMAIN'];
 
         $this->logger = new Logger('Default');
         $this->logger->pushHandler(new StreamHandler($_ENV['LOG_FILE'],Logger::DEBUG));
