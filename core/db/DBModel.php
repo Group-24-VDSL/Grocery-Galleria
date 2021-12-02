@@ -125,14 +125,28 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
-    public function callProcedure($procedure,$id,$value)
+    public function singleProcedure($procedure,$id,$value)
     {
-        $stmt = self::prepare("CALL $procedure(@id,@value)");
-        $stmt->bindValue("@id",$id);
-        $stmt->bindValue("@value",$value);
+        $stmt = self::prepare("CALL $procedure(:id,:value)");
+        $stmt->bindValue(':id',$id);
+        $stmt->bindValue(':value',$value);
         $stmt->execute();
         return true;
-
-
     }
+    public function multiProcedure($procedure,$where=[],$values=[])
+    {
+        $keys = array_keys($where);
+        $sqlKeys = implode(",", array_map(fn($key) => ":$key", $keys));
+        $sqlParams = implode(',',array_map(fn($value) => ":$value",$values));
+        $stmt = self::prepare("CALL $procedure($sqlKeys,$sqlParams)");
+        foreach ($where as $key => $value) {
+            $stmt->bindValue(':key',$value);
+        }
+        foreach ($values as $value){
+            $stmt->bindValue(':value',$value);
+    }
+        $stmt->execute();
+        return true;
+    }
+
 }
