@@ -8,6 +8,7 @@ use app\core\db\DBModel;
 use app\core\exceptions\ForbiddenException;
 use app\core\Request;
 use app\core\Response;
+use app\models\Cart;
 use app\models\Customer;
 use app\models\ShopItem;
 use app\models\TemporaryCart;
@@ -98,9 +99,9 @@ class CartController extends Controller
         $this->setLayout('checkoutL');
         $customerid = Application::getCustomerID();
         $customer = Customer::findOne(['CustomerID'=>$customerid]);
-        $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getCustomerID()." AND Purchased=0",\PDO::FETCH_COLUMN);
-        $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
-        $itemcount = DBModel::query("SELECT COUNT(*) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
+        $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".$customerid." AND Purchased=0",\PDO::FETCH_COLUMN);
+        $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".$customerid." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
+        $itemcount = DBModel::query("SELECT COUNT(*) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".$customerid." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
         $deliveryfee = $this->getDeliveryFee($shopcount);
         $totalprice = $subprice + $deliveryfee;
         return $this->render('customer/checkout',[
@@ -220,7 +221,26 @@ class CartController extends Controller
 
     public function fullfillOrder($obj)
     {
-        Application::$app->logger->debug($obj);
+        $customerid = $obj->metadata->userid;
+        $customer_email=$obj->customer_email;
+        $notes=$obj->metadata->notes;
+        $rec_name=$obj->metadata->recipient_name;
+        $rec_contact=$obj->metadata->recipient_contact;
+        $delivery_fee=$obj->metadata->deliverycost;
+        $totalcost=$obj->metadata->totalcost;
+
+        $customer = Customer::findOne(['CustomerID' => $customerid]);
+        if($customer->Email == $customer_email){ //we are good to go
+            DBModel::callProcedure('fullfillOrder',[
+                'ID'=>$customerid,
+                'Note'=>$notes,
+                'Recipient_Name'=>$rec_name,
+                'Recipient_Num'=>$rec_contact,
+                'Delivery_Fee' => $delivery_fee,
+                'Total_Price' => $totalcost
+            ]);
+        }
+
     }
 
     public function cancelOrder($user){

@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 02:27 PM
+-- Generation Time: Dec 03, 2021 at 06:31 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -23,17 +23,70 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `ggproject` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE `ggproject`;
 
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `cancelOrder`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cancelOrder` (IN `ID` INT)  UPDATE temporarycart tc
+                                                                         SET tc.Purchased=0
+                                                                         WHERE
+                                                                                 tc.CustomerID=ID$$
+
+DROP PROCEDURE IF EXISTS `checkStock`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkStock` (IN `ID` INT)  UPDATE temporarycart tc
+                                                                            JOIN shopitem si ON
+                                                                            si.ItemID=tc.ItemID AND si.ShopID=tc.ShopID
+                                                                            SET tc.Purchased=1
+                                                                        WHERE
+                                                                            tc.CustomerID=ID AND
+                                                                            (si.Stock-tc.Quantity) > 0$$
+
+DROP PROCEDURE IF EXISTS `fullfillOrder`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fullfillOrder` (IN `ID` INT, IN `Note` VARCHAR(1000) CHARSET utf8, IN `Recipient_Name` VARCHAR(100) CHARSET utf8, IN `Recipient_Num` VARCHAR(100) CHARSET utf8, IN `Delivery_Fee` FLOAT, IN `Total_Price` FLOAT)  BEGIN
+DECLARE cartid INT DEFAULT 0;
+DECLARE orderid INT DEFAULT 0;
+INSERT INTO `cart` (CustomerID) VALUE (ID);
+SET @cartid = LAST_INSERT_ID();
+
+INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost) VALUES (@cartid,Recipient_Name,Note,Recipient_Num,Delivery_Fee,Total_Price);
+SET @orderid = LAST_INSERT_ID();
+INSERT INTO `ordercart` (CartID,ShopID,ItemID,Quantity,Total)
+SELECT @cartid AS CartID,tc.ShopID,tc.ItemID,tc.Quantity,(si.UnitPrice*tc.Quantity) AS Total from `temporarycart` AS tc
+                                                                                                      INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND tc.ItemID=si.ItemID
+WHERE tc.Purchased=1 AND tc.CustomerID=ID;
+
+INSERT INTO `shoporder` (ShopID,CartID,ShopTotal)
+SELECT  tc.ShopID,@cartid AS CartID,SUM(si.UnitPrice*tc.Quantity) from `temporarycart` AS tc
+                                                                           INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND si.ItemID=tc.ItemID
+WHERE tc.Purchased=1 AND tc.CustomerID=ID GROUP BY tc.ShopID;
+
+UPDATE `shopitem` si
+    JOIN temporarycart tc ON
+    tc.ItemID=si.ItemID AND tc.ShopID=si.ShopID
+    SET si.Stock=(si.Stock-tc.Quantity)
+WHERE
+    tc.CustomerID=ID AND
+    (si.Stock-tc.Quantity) > 0 AND
+    tc.Purchased=1;
+
+DELETE FROM `temporarycart` WHERE Purchased=1 AND CustomerID=ID;
+
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `cart`
 --
 
+DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
-  `CartID` int(11) NOT NULL,
-  `Date` date NOT NULL,
-  `Time` time NOT NULL,
-  `CustomerID` int(11) NOT NULL
+                        `CartID` int(11) NOT NULL,
+                        `CustomerID` int(11) NOT NULL,
+                        `DateTime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -42,6 +95,7 @@ CREATE TABLE `cart` (
 -- Table structure for table `complaint`
 --
 
+DROP TABLE IF EXISTS `complaint`;
 CREATE TABLE `complaint` (
                              `ComplaintID` int(11) NOT NULL,
                              `CustomerID` int(11) NOT NULL,
@@ -51,7 +105,7 @@ CREATE TABLE `complaint` (
                              `OrderDate` date NOT NULL,
                              `ComplaintDate` date NOT NULL,
                              `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-                             `Priority` tinyint(1) NOT NULL,
+                             `Prority` tinyint(1) NOT NULL,
                              `Regarding` tinyint(1) NOT NULL,
                              `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -62,6 +116,7 @@ CREATE TABLE `complaint` (
 -- Table structure for table `customer`
 --
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
                             `CustomerID` int(11) NOT NULL,
                             `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
@@ -80,6 +135,7 @@ CREATE TABLE `customer` (
 -- Table structure for table `delivery`
 --
 
+DROP TABLE IF EXISTS `delivery`;
 CREATE TABLE `delivery` (
                             `DeliveryID` int(11) NOT NULL,
                             `RiderID` int(11) NOT NULL,
@@ -96,6 +152,7 @@ CREATE TABLE `delivery` (
 -- Table structure for table `deliveryrider`
 --
 
+DROP TABLE IF EXISTS `deliveryrider`;
 CREATE TABLE `deliveryrider` (
                                  `RiderID` int(11) NOT NULL,
                                  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
@@ -113,6 +170,7 @@ CREATE TABLE `deliveryrider` (
 -- Table structure for table `deliveryriderlocation`
 --
 
+DROP TABLE IF EXISTS `deliveryriderlocation`;
 CREATE TABLE `deliveryriderlocation` (
                                          `RiderID` int(11) NOT NULL,
                                          `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
@@ -123,9 +181,26 @@ CREATE TABLE `deliveryriderlocation` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deliverystaff`
+--
+
+DROP TABLE IF EXISTS `deliverystaff`;
+CREATE TABLE `deliverystaff` (
+                                 `StaffID` int(11) NOT NULL,
+                                 `Name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+                                 `ContactNo` varchar(20) COLLATE utf8mb4_bin NOT NULL,
+                                 `Email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+                                 `City` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+                                 `Suburb` varchar(100) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `item`
 --
 
+DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
                         `ItemID` int(11) NOT NULL,
                         `Name` varchar(125) COLLATE utf8mb4_bin NOT NULL,
@@ -144,6 +219,7 @@ CREATE TABLE `item` (
 -- Table structure for table `login`
 --
 
+DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
                          `UserID` int(11) NOT NULL,
                          `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
@@ -160,6 +236,7 @@ CREATE TABLE `login` (
 -- Table structure for table `ordercart`
 --
 
+DROP TABLE IF EXISTS `ordercart`;
 CREATE TABLE `ordercart` (
                              `CartID` int(11) NOT NULL,
                              `ShopID` int(11) NOT NULL,
@@ -174,10 +251,14 @@ CREATE TABLE `ordercart` (
 -- Table structure for table `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
                           `OrderID` int(11) NOT NULL,
                           `CartID` int(11) NOT NULL,
-                          `OrderDate` date NOT NULL,
+                          `OrderDate` timestamp NOT NULL DEFAULT current_timestamp(),
+                          `RecipientName` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
+                          `Note` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
+                          `RecipientContact` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
                           `DeliveryCost` float NOT NULL,
                           `TotalCost` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -188,6 +269,7 @@ CREATE TABLE `orders` (
 -- Table structure for table `payment`
 --
 
+DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
                            `PaymentID` int(11) NOT NULL,
                            `OrderID` int(11) NOT NULL,
@@ -200,6 +282,7 @@ CREATE TABLE `payment` (
 -- Table structure for table `shop`
 --
 
+DROP TABLE IF EXISTS `shop`;
 CREATE TABLE `shop` (
                         `ShopID` int(11) NOT NULL,
                         `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
@@ -221,6 +304,7 @@ CREATE TABLE `shop` (
 -- Table structure for table `shopitem`
 --
 
+DROP TABLE IF EXISTS `shopitem`;
 CREATE TABLE `shopitem` (
                             `ItemID` int(11) NOT NULL,
                             `ShopID` int(11) NOT NULL,
@@ -235,10 +319,11 @@ CREATE TABLE `shopitem` (
 -- Table structure for table `shoporder`
 --
 
+DROP TABLE IF EXISTS `shoporder`;
 CREATE TABLE `shoporder` (
                              `ShopID` int(11) NOT NULL,
                              `CartID` int(11) NOT NULL,
-                             `Date` date NOT NULL,
+                             `Date` date NOT NULL DEFAULT current_timestamp(),
                              `ShopTotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -248,6 +333,7 @@ CREATE TABLE `shoporder` (
 -- Table structure for table `staff`
 --
 
+DROP TABLE IF EXISTS `staff`;
 CREATE TABLE `staff` (
                          `StaffID` int(11) NOT NULL,
                          `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
@@ -262,6 +348,7 @@ CREATE TABLE `staff` (
 -- Table structure for table `temporarycart`
 --
 
+DROP TABLE IF EXISTS `temporarycart`;
 CREATE TABLE `temporarycart` (
                                  `ItemID` int(11) NOT NULL,
                                  `ShopID` int(11) NOT NULL,
@@ -276,23 +363,11 @@ CREATE TABLE `temporarycart` (
 -- Table structure for table `verification`
 --
 
+DROP TABLE IF EXISTS `verification`;
 CREATE TABLE `verification` (
                                 `UserID` int(11) NOT NULL,
                                 `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
                                 `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
---
--- Table structure for table `deliverystaff`
---
-
-CREATE TABLE `deliverystaff` (
-                                 `StaffID` int(11) NOT NULL,
-                                 `Name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
-                                 `ContactNo` varchar(20) COLLATE utf8mb4_bin NOT NULL,
-                                 `Email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-                                 `City` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-                                 `Suburb` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -354,8 +429,7 @@ ALTER TABLE `login`
 -- Indexes for table `ordercart`
 --
 ALTER TABLE `ordercart`
-  ADD PRIMARY KEY (`CartID`),
-  ADD KEY `ShopID` (`ShopID`,`CustomerID`) USING BTREE;
+    ADD PRIMARY KEY (`CartID`,`ShopID`,`ItemID`);
 
 --
 -- Indexes for table `orders`
