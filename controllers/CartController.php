@@ -179,6 +179,7 @@ class CartController extends Controller
 
     public function paymentProcessor(Request $request,Response $response)
     {
+        $this->setLayout('empty');
         $endpoint_secret = $_ENV['STRIPE_WEBHOOK_SECRET'];
 
         $payload = @file_get_contents('php://input');
@@ -201,14 +202,14 @@ class CartController extends Controller
         switch ($event->type) {
             case 'checkout.session.completed':
                 $checkoutSession = $event->data->object;
-                Application::$app->logger->debug("checkout.session.completed");
                 $this->fullfillOrder($checkoutSession);
+                break;
 
             case 'checkout.session.expired':
                 $checkoutSession = $event->data->object;
                 $userid = $checkoutSession->metadata->userid;
                 $this->cancelOrder($userid);
-                Application::$app->logger->debug("Canceled");
+                break;
             default:
                 echo 'Received unknown event type ' . $event->type;
         }
@@ -217,36 +218,85 @@ class CartController extends Controller
     }
 
     public function checkStock($user){
-        DBModel::callProcedure('checkStock',['ID'=>$user]);
+        $sql="UPDATE temporarycart tc JOIN shopitem si ON si.ItemID=tc.ItemID AND si.ShopID=tc.ShopID SET tc.Purchased=1 WHERE tc.CustomerID=:user AND (si.Stock-tc.Quantity) > 0";
+        $result = Application::$app->db->pdo->prepare($sql);
+        $result->bindValue(":user",$user);
+        $result->execute();
     }
 
     public function fullfillOrder($obj)
     {
-        $customerid = $obj->metadata->userid;
-        $customer_email=$obj->customer_email;
-        $notes=$obj->metadata->notes;
-        $rec_name=$obj->metadata->recipient_name;
-        $rec_contact=$obj->metadata->recipient_contact;
-        $delivery_fee=$obj->metadata->deliverycost;
-        $totalcost=$obj->metadata->totalcost;
+        $customerid = filter_var($obj->metadata->userid,FILTER_SANITIZE_NUMBER_INT);
+        $customer_email=filter_var($obj->customer_email,FILTER_SANITIZE_EMAIL);
+        $notes=filter_var($obj->metadata->notes,FILTER_SANITIZE_SPECIAL_CHARS);
+        $rec_name=filter_var($obj->metadata->recipient_name,FILTER_SANITIZE_SPECIAL_CHARS);
+        $rec_contact=filter_var($obj->metadata->recipient_contact,FILTER_SANITIZE_NUMBER_INT);
+        $delivery_fee=filter_var($obj->metadata->deliverycost,FILTER_SANITIZE_NUMBER_FLOAT);
+        $totalcost=filter_var($obj->metadata->totalcost,FILTER_SANITIZE_NUMBER_FLOAT);
+        $pdo=Application::$app->db->pdo;
+
 
         $customer = Customer::findOne(['CustomerID' => $customerid]);
-        if($customer->Email == $customer_email){ //we are good to go
-            Application::$app->logger->debug("Ran the fullfill order");
-            DBModel::callProcedure('fullfillOrder',[
-                'ID'=>$customerid,
-                'Note'=>$notes,
-                'Recipient_Name'=>$rec_name,
-                'Recipient_Num'=>$rec_contact,
-                'Delivery_Fee' => $delivery_fee,
-                'Total_Price' => $totalcost
-            ]);
-        }
+        if($customer){
+                Application::$app->logger->debug("If I'm honest");
+                $sql="INSERT INTO `cart` (CustomerID) VALUES (:id);";
+                $result = $pdo->prepare($sql);
+                $result->bindValue(":id",$customerid);
+                $result->execute();
+
+                $cartid= $pdo->lastInsertId();
+
+                $sql="INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost) VALUES (:cartid,:rec_name,:notes,:rec_contact,:delivery_fee,:totalcost);";
+                $result = $pdo->prepare($sql);
+                $result->bindValue(":cartid",$cartid);
+                $result->bindValue(":rec_name",$rec_name);
+                $result->bindValue(":notes",$notes);
+                $result->bindValue(":rec_contact",$rec_contact);
+                $result->bindValue(":delivery_fee",$delivery_fee);
+                $result->bindValue(":totalcost",$totalcost);
+                $result->execute();
+
+                $orderid=$pdo->lastInsertId();
+
+                $sql="INSERT INTO `ordercart` (CartID,ShopID,ItemID,Quantity,Total) SELECT :cartid AS CartID,tc.ShopID,tc.ItemID,tc.Quantity,(si.UnitPrice*tc.Quantity) AS Total from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND tc.ItemID=si.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid;";
+                $result = $pdo->prepare($sql);
+                $result->bindValue(":cartid",$cartid);
+                $result->bindValue(":customerid",$customerid);
+                $result->execute();
+
+
+                $sql="INSERT INTO `shoporder` (ShopID,CartID,ShopTotal) SELECT  tc.ShopID,:cartid AS CartID,SUM(si.UnitPrice*tc.Quantity) from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND si.ItemID=tc.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid GROUP BY tc.ShopID;";
+                $result = $pdo->prepare($sql);
+                $result->bindValue(":cartid",$cartid);
+                $result->bindValue(":customerid",$customerid);
+                $result->execute();
+
+                $sql ="INSERT INTO `payment` (OrderID,TotalPrice) VALUES (:orderid,:totalcost);";
+                $result = $pdo->prepare($sql);
+                $result->bindValue(":orderid",$orderid);
+                $result->bindValue(":totalcost",$totalcost);
+                $result->execute();
+
+                $sql ="UPDATE `shopitem` si JOIN temporarycart tc ON tc.ItemID=si.ItemID AND tc.ShopID=si.ShopID SET si.Stock=(si.Stock-tc.Quantity) WHERE tc.CustomerID=:customerid AND (si.Stock-tc.Quantity) > 0 AND tc.Purchased=1;";
+                $result = $pdo->prepare($sql);
+                $result->bindValue(":customerid",$customerid);
+                $result->execute();
+
+                $sql="DELETE FROM `temporarycart` WHERE `temporarycart`.`Purchased`=1 AND `temporarycart`.`CustomerID`=:customerid;";
+                $result = $pdo->prepare($sql);
+                $result->bindValue(":customerid",$customerid);
+                $result->execute();
+            }
+
+
 
     }
 
     public function cancelOrder($user){
-        DBModel::callProcedure('cancelStock',['ID'=>$user]);
+        $sql="UPDATE temporarycart tc SET tc.Purchased=0 WHERE tc.CustomerID=:user;";
+        $result = Application::$app->db->pdo->prepare($sql);
+        $result->bindValue(":user",$user);
+        $result->execute();
     }
 
 
