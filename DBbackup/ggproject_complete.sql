@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2021 at 11:41 AM
+-- Generation Time: Dec 04, 2021 at 11:51 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -28,22 +28,25 @@ DELIMITER $$
 -- Procedures
 --
 DROP PROCEDURE IF EXISTS `cancelOrder`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cancelOrder` (IN `ID` INT)  UPDATE temporarycart tc
-                                                                         SET tc.Purchased=0
-                                                                         WHERE
-                                                                                 tc.CustomerID=ID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cancelOrder` (IN `ID` INT)  SQL SECURITY INVOKER
+UPDATE temporarycart tc
+SET tc.Purchased=0
+WHERE
+        tc.CustomerID=ID$$
 
 DROP PROCEDURE IF EXISTS `checkStock`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkStock` (IN `ID` INT)  UPDATE temporarycart tc
-                                                                            JOIN shopitem si ON
-                                                                            si.ItemID=tc.ItemID AND si.ShopID=tc.ShopID
-                                                                            SET tc.Purchased=1
-                                                                        WHERE
-                                                                            tc.CustomerID=ID AND
-                                                                            (si.Stock-tc.Quantity) > 0$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkStock` (IN `ID` INT)  SQL SECURITY INVOKER
+UPDATE temporarycart tc
+    JOIN shopitem si ON
+    si.ItemID=tc.ItemID AND si.ShopID=tc.ShopID
+    SET tc.Purchased=1
+WHERE
+    tc.CustomerID=ID AND
+    (si.Stock-tc.Quantity) > 0$$
 
 DROP PROCEDURE IF EXISTS `fullfillOrder`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `fullfillOrder` (IN `ID` INT, IN `Note` VARCHAR(1000) CHARSET utf8, IN `Recipient_Name` VARCHAR(100) CHARSET utf8, IN `Recipient_Num` VARCHAR(100) CHARSET utf8, IN `Delivery_Fee` FLOAT, IN `Total_Price` FLOAT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fullfillOrder` (IN `ID` INT, IN `Note` VARCHAR(1000) CHARSET utf8, IN `Recipient_Name` VARCHAR(100) CHARSET utf8, IN `Recipient_Num` VARCHAR(100) CHARSET utf8, IN `Delivery_Fee` FLOAT, IN `Total_Price` FLOAT)  SQL SECURITY INVOKER
+BEGIN
 DECLARE cartid INT DEFAULT 0;
 DECLARE orderid INT DEFAULT 0;
 INSERT INTO `cart` (CustomerID) VALUE (ID);
