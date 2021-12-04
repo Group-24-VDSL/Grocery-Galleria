@@ -201,6 +201,7 @@ class CartController extends Controller
         switch ($event->type) {
             case 'checkout.session.completed':
                 $checkoutSession = $event->data->object;
+                Application::$app->logger->debug("checkout.session.completed");
                 $this->fullfillOrder($checkoutSession);
 
             case 'checkout.session.expired':
@@ -231,6 +232,7 @@ class CartController extends Controller
 
         $customer = Customer::findOne(['CustomerID' => $customerid]);
         if($customer->Email == $customer_email){ //we are good to go
+            Application::$app->logger->debug("Ran the fullfill order");
             DBModel::callProcedure('fullfillOrder',[
                 'ID'=>$customerid,
                 'Note'=>$notes,
