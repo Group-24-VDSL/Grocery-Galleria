@@ -501,7 +501,7 @@ DROP TABLE IF EXISTS `shoporder`;
 CREATE TABLE `shoporder` (
                              `ShopID` int(11) NOT NULL,
                              `CartID` int(11) NOT NULL,
-                             `Date` date NOT NULL DEFAULT current_timestamp(),
+                             `Date` timestamp NOT NULL DEFAULT current_timestamp,
                              `ShopTotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
