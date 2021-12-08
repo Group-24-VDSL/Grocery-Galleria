@@ -16,7 +16,6 @@ const getUrlParameter = function getUrlParameter(sParam) {
 }
 
 const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-// const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
 const ItemType = ['Vegetables', 'Fruits', 'Grocery', 'Fish', 'Meat'];
 
 const host = window.location.origin; //http://domainname

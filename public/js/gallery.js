@@ -18,14 +18,8 @@ const getUrlParameter = function getUrlParameter(sParam) {
 const host = window.location.origin; //http://domainname
 
 //Api links
-const URLShopAPI = host+"/api/shop";
 const URLShopsAPI = host+"/api/shops";
-const URLShopItemAPI = host+"/api/shopitems";
-const URLFindItemAPI = host+"/api/item";
 
-const URLAddtoCartAPI = host+"/api/addtocart";
-
-const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
 const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
 
 const ShopCategory = getUrlParameter('Category');

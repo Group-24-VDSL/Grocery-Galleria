@@ -20,12 +20,9 @@ const host = window.location.origin; //http://domainname
 //const URLOrderAPI = host + "/api/orders";
 
 
-const URLFindCartAPI = host + "/api/getordercart";
 const URLShopOrders = host + "/api/getshoporders" ;
-const URLShopOrder = host + "/api/getshoporder" ;
 const URLDeliveryAPI = host + "/api/getdelivery";
 const URLGetOrder = URLShopOrders.concat('?ShopID=').concat('1');
-console.log(URLGetOrder);
 
 const ItemTableNew = document.getElementById('item-table-new');
 const ItemTableComplete = document.getElementById('item-table-complete');
@@ -35,11 +32,6 @@ $(document).ready(function () {
             ShopOrders.forEach(ShopOrder => {
 
                 const URLFindDelivery = URLDeliveryAPI.concat("?OrderID=").concat(ShopOrder.CartID);
-                console.log(URLFindDelivery);
-               // $.getJSON(URLFindDelivery, function (Deliveries) {
-               //     Deliveries.forEach(Delivery => {
-                        console.log(URLGetOrder);
-                        console.log(URLFindDelivery);
 
                 if (ShopOrder.Status === 0) {
                     $.getJSON(URLFindDelivery, function (Delivery) {

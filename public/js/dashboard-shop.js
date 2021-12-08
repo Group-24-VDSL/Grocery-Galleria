@@ -18,15 +18,10 @@ const host = window.location.origin; //http://domainname
 
 //Api links
 
-const URLShopAPI = host + "/api/shop";
+
 const URLShopItemAPI = host + "/api/shopitems";
 const URLFindItemAPI = host + "/api/items";
 
-const URLAddtoCartAPI = host + "/api/addtocart";
-const URLGetCartAPI = host + "/api/getcart";
-
-
-const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
 const URLGetShop = URLShopItemAPI.concat('?ShopID=').concat('5');
 
 const ItemTable = document.getElementById('item-table');
