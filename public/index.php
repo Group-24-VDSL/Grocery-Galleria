@@ -5,6 +5,7 @@ use app\controllers\APIController;
 use app\controllers\CartController;
 use app\controllers\CustomerController;
 use app\controllers\DeliveryController;
+use app\controllers\PaymentController;
 use app\controllers\ShopController;
 use app\controllers\StaffController;
 use app\controllers\TestController;
@@ -45,12 +46,16 @@ $app->router->get('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->post('/shop/register',[ShopController::class,'shopRegister']);
 $app->router->get('/logout',[AuthController::class,'logout']);
 
+//payment
+$app->router->post('/pay',[CartController::class,'paymentProcessor']);
+
 //customer
 $app->router->get('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->post('/customer/register',[CustomerController::class,'customerRegister']);
 $app->router->get('/customer/profile',[CustomerController::class,'profile']);
 $app->router->get('/customer/cart',[CartController::class,'cart']);
-$app->router->get('/customer/checkout',[CustomerController::class,'checkout']);
+$app->router->get('/customer/checkout',[CartController::class,'checkout']);
+$app->router->post('/customer/checkout',[CartController::class,'proceedToCheckout']);
 
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
 $app->router->get('/gallery',[ShopController::class,'shopGallery']);

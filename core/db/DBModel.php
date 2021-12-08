@@ -30,6 +30,7 @@ abstract class DBModel extends Model
         return true;
     }
 
+
     public function update(){
         $keys = $this->primaryKey();
         $tableName = $this->tableName();
@@ -125,6 +126,13 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
+    public function getLastInsertID()
+    {
+        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
+        $statement->execute();
+        return (int)$statement->fetchColumn();
+    }
+
 //    public function singleProcedure($procedure,$id,$value)
 //    {
 //        $stmt = self::prepare("CALL $procedure(:id,:value)");
@@ -133,20 +141,32 @@ abstract class DBModel extends Model
 //        $stmt->execute();
 //        return true;
 //    }
-    public function callProcedure($procedure,$where=[],$values=[])
+    public static function callProcedure($procedure,$values=[])
     {
-        $keys = array_keys($where);
-        $sqlKeys = implode(",", array_map(fn($key) => ":$key", $keys));
-        $sqlParams = implode(',',array_map(fn($value) => ":$value",$values));
-        $stmt = self::prepare("CALL $procedure($sqlKeys,$sqlParams)");
-        foreach ($where as $key => $value) {
-            $stmt->bindValue(':key',$value);
+        if(empty($values)){
+            $stmt = self::prepare("CALL $procedure()");
+            $stmt->execute();
+        }else{
+            $keys = array_keys($values);
+            $sqlKeys = implode(",", array_map(fn($key) => ":$key", $keys));
+            $stmt = self::prepare("CALL $procedure($sqlKeys)");
+            foreach ($values as $key => $value) {
+                $stmt->bindValue(":$key",$value);
+            }
+            $stmt->execute();
+
         }
-        foreach ($values as $value){
-            $stmt->bindValue(':value',$value);
-    }
-        $stmt->execute();
         return true;
+
     }
+
+    //for your dirty queries
+    public static function query($string,$fetch_type)
+    {
+        $statement = self::prepare($string);
+        $statement->execute();
+        return $statement->fetch($fetch_type);
+    }
+
 
 }

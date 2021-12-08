@@ -5,11 +5,14 @@ namespace app\core; //autoload
 use app\core\db\Database;
 use app\models\User;
 use Exception;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
 use SendGrid;
 use SendGrid\Mail\From;
+use Stripe\StripeClient;
 
 class Application
 {
@@ -26,9 +29,13 @@ class Application
     public Factory $secfactory;
     public Generator $generator;
     public SendGrid  $sendgrid;
+    public StripeClient $stripe;
     public From $emailfrom;
+    public Logger $logger;
     public View $view;
     public static Application $app;
+    public string $domain;
+
     public function __construct($rootPath ,$config)
     {
         self::$app = $this;
@@ -43,17 +50,24 @@ class Application
 
         $this->session=new Session();
 
+        $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
+
+        $this->domain=$_ENV['DOMAIN'];
+
+        $this->logger = new Logger('Default');
+        $this->logger->pushHandler(new StreamHandler($_ENV['LOG_FILE'],Logger::DEBUG));
+
         $this->sendgrid = new SendGrid($_ENV['SENDGRID_API_KEY']);
-        $this->emailfrom = new From('grocerygalleria@gmail.com','Grocery Galleria');
+        $this->emailfrom = new From($_ENV['SENDGRID_EMAIL'],$_ENV['SENDGRID_NAME']);
 
         $this->secfactory = new Factory();
         $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
 
 
-        $userId = Application::$app->session->get('user');
-        if ($userId) {
+        $userID = Application::$app->session->get('user');
+        if ($userID) {
             $key = User::primaryKey();
-            $this->user = User::findOne([$key => $userId]);
+            $this->user = User::findOne([$key[0] => $userID]);
         }else{
             $this->user= null;
         }
@@ -104,9 +118,6 @@ class Application
     {
         return self::isDeliveryRider()?self::$app->session->get('user'):null;
     }
-
-
-
 
     public function run()
     {
