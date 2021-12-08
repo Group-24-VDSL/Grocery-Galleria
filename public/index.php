@@ -29,9 +29,6 @@ $config = [
 $app = new Application(dirname(__DIR__), $config);
 
 $app->router->get('/',[SiteController::class,'welcome']);
-$app->router->get('/welcome',[SiteController::class,'welcome']);
-$app->router->get('/contact',[SiteController::class,'contact']);
-$app->router->post('/contact',[SiteController::class,'handleContact']);
 
 $app->router->get('/dashboardlinks',[SiteController::class,'dashboard']);
 $app->router->post('/dashboardlinks',[SiteController::class,'dashboard']);
@@ -110,16 +107,21 @@ $app->router->get('/test',[TestController::class,'test']);
 $app->router->post('/test',[TestController::class,'test']);
 
 //api
+
 $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
 $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
-$app->router->get('/api/getcart',[CartController::class,'getCart']);
+
+//api - customer
+$app->router->get('/api/getcart',[CartController::class,'getTempCart']);
 $app->router->post('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->post('/api/deletefromcart',[CartController::class,'deleteFromCart']);
+
+//api - shop
 $app->router->get('/api/orders',[APIController::class,'getOrders']);
 $app->router->get('/api/getordercart',[APIController::class,'getOrderCart']);
 
