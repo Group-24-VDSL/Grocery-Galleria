@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 02:28 PM
+-- Generation Time: Dec 03, 2021 at 06:33 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -26,7 +26,9 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `cart` (`CartID`, `CustomerID`, `DateTime`) VALUES
-    (1, 7, '2021-10-23 09:38:23');
+                                                            (1, 7, '2021-10-23 09:38:23'),
+                                                            (2, 3, '2021-12-03 13:24:20'),
+                                                            (3, 7, '2021-12-03 17:12:10');
 
 --
 -- Dumping data for table `customer`
@@ -83,14 +85,18 @@ INSERT INTO `login` (`UserID`, `Email`, `PasswordHash`, `Name`, `Verify_Flag`, `
 INSERT INTO `ordercart` (`CartID`, `ShopID`, `ItemID`, `Quantity`, `Total`) VALUES
                                                                                 (1, 5, 1, 10, 500),
                                                                                 (1, 5, 2, 14, 4000),
-                                                                                (1, 5, 3, 5, 1002);
+                                                                                (1, 5, 3, 5, 1002),
+                                                                                (3, 4, 12, 50, 7100),
+                                                                                (3, 5, 7, 10, 1100),
+                                                                                (3, 5, 8, 20, 6000);
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `DeliveryCost`, `TotalCost`) VALUES
-    (1, 1, '2021-10-23 09:00:00', 140, 1500);
+INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `RecipientName`, `Note`, `RecipientContact`, `DeliveryCost`, `TotalCost`) VALUES
+                                                                                                                                      (1, 1, '2021-10-23 09:00:00', NULL, NULL, NULL, 140, 1500),
+                                                                                                                                      (2, 3, '2021-12-03 17:12:10', '\"Hellow\"', '\"Something\"', '\"076764854', 160, 2000);
 
 --
 -- Dumping data for table `shop`
@@ -107,15 +113,23 @@ INSERT INTO `shop` (`ShopID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `
 INSERT INTO `shopitem` (`ItemID`, `ShopID`, `UnitPrice`, `Stock`, `Enabled`) VALUES
                                                                                  (1, 5, 280, 20, 0),
                                                                                  (2, 5, 100, 20, 0),
-                                                                                 (3, 5, 150, 20, 0),
-                                                                                 (4, 5, 380, 10, 0),
-                                                                                 (5, 5, 190, 15, 0),
-                                                                                 (6, 5, 380, 20, 0),
-                                                                                 (7, 5, 110, 20000, 0),
-                                                                                 (8, 5, 300, 25000, 0),
-                                                                                 (11, 4, 125, 15000, 0),
-                                                                                 (12, 4, 142, 10000, 0),
-                                                                                 (13, 4, 112, 9000, 0);
+                                                                                 (3, 5, 150, 20, 1),
+                                                                                 (4, 5, 380, 10, 1),
+                                                                                 (5, 5, 190, 5, 0),
+                                                                                 (6, 5, 380, 20, 1),
+                                                                                 (7, 5, 110, 200, 1),
+                                                                                 (8, 5, 300, 250, 1),
+                                                                                 (11, 4, 125, 150, 0),
+                                                                                 (12, 4, 142, 100, 1),
+                                                                                 (13, 4, 112, 90, 1);
+
+--
+-- Dumping data for table `shoporder`
+--
+
+INSERT INTO `shoporder` (`ShopID`, `CartID`, `Date`, `ShopTotal`) VALUES
+                                                                      (4, 3, '2021-12-03', 7100),
+                                                                      (5, 3, '2021-12-03', 7100);
 
 --
 -- Dumping data for table `staff`
@@ -129,14 +143,17 @@ INSERT INTO `staff` (`StaffID`, `Name`, `Address`, `ContactNo`, `Email`) VALUES
 --
 
 INSERT INTO `temporarycart` (`ItemID`, `ShopID`, `CustomerID`, `Quantity`, `Purchased`) VALUES
-                                                                                            (1, 5, 2, 10, 0),
-                                                                                            (2, 5, 2, 2, 0),
-                                                                                            (3, 5, 2, 4, 0),
+                                                                                            (1, 5, 2, 10, 1),
+                                                                                            (2, 5, 2, 2, 1),
+                                                                                            (3, 5, 2, 4, 1),
                                                                                             (5, 5, 2, 8, 0),
-                                                                                            (6, 5, 2, 4, 0),
-                                                                                            (7, 5, 2, 2, 0),
-                                                                                            (12, 4, 2, 1, 0),
-                                                                                            (13, 4, 2, 11, 0);
+                                                                                            (6, 5, 2, 4, 1),
+                                                                                            (7, 5, 2, 2, 1),
+                                                                                            (7, 5, 7, 10, 127),
+                                                                                            (8, 5, 7, 20, 127),
+                                                                                            (12, 4, 2, 1, 1),
+                                                                                            (12, 4, 7, 50, 50),
+                                                                                            (13, 4, 2, 11, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
