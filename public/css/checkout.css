@@ -111,17 +111,12 @@ section {
     grid-column: 1/3;
     grid-row: 1/3;
 }
-.container-refund {
-    grid-column: 3;
-    grid-row: 1/2;
-}
+
 .container-payment {
     grid-column: 3;
-    grid-row: 2/3;
 }
 .container-payment,
-.container-shipping,
-.container-refund {
+.container-shipping {
     text-align: left;
     font-size: var(--h1-font-size);
     padding: 2.5rem;
@@ -206,7 +201,7 @@ section {
     padding-bottom: 1rem;
 }
 .checkout .container .container-payment .checkout {
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     right: 0;
     float: right;

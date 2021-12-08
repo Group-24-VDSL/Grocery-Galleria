@@ -74,4 +74,14 @@ class User extends UserModel
     {
         return ['Email','Name','Delete_Flag','Role'];
     }
+
+    public function getEmail(): string
+    {
+        return $this->Email;
+    }
+
+    public function getUserID(): int
+    {
+        return 0;
+    }
 }
