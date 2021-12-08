@@ -35,7 +35,7 @@ class CartController extends Controller
         return $this->render('customer/cart', ['items' => $items, 'total' => $total, 'shopitems' => $shopitems]);
     }
 
-    public function getCart(Request $request, Response $response) // get all items from DB
+    public function getTempCart(Request $request, Response $response) // get all items from DB
     {
         $items = TemporaryCart::findAll(array_slice($request->getBody(), 1, null, true));
         $total = 0;
@@ -120,7 +120,7 @@ class CartController extends Controller
      */
     public function proceedToCheckout(Request $request, Response $response)
     {
-        if(Application::isCustomer()) {
+        if(Application::getUserRole() === "Customer") {
             if ($request->isPost()) {
                 $recipient_name = filter_var($request->getBody()['recipient-name'],FILTER_SANITIZE_SPECIAL_CHARS);
                 $notes = filter_var($request->getBody()['note'],FILTER_SANITIZE_SPECIAL_CHARS);
