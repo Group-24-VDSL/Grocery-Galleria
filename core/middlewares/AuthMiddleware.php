@@ -8,6 +8,14 @@ use app\core\exceptions\ForbiddenException;
 class AuthMiddleware extends BaseMiddleware
 {
     public array $actions;
+
+    /**
+     * @return array
+     */
+    public function getActions(): array
+    {
+        return $this->actions;
+    }
     /**
      * @param array $actions
      */
@@ -27,7 +35,7 @@ class AuthMiddleware extends BaseMiddleware
                 throw new ForbiddenException();
             }
         }else{
-            if(!in_array(Application::$app->controller->action,(array)$this->actions["Common"] ) || !in_array(Application::$app->controller->action,(array)$this->actions[Application::getUserRole()] ) ){ //checks the current action is in the actions array which are not protected.
+            if(Application::getUserRole()  && !in_array(Application::$app->controller->action,$this->actions[Application::getUserRole()]) && !in_array(Application::$app->controller->action,(array)$this->actions["Common"] )){ //checks the current action is in the actions array which are not protected.
                 throw new ForbiddenException();
             }
         }
