@@ -52,7 +52,7 @@ class CartController extends Controller
         if ($json) {
             $tempcart = new TemporaryCart();
             $tempcart->loadData($json);
-            $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => $tempcart->CustomerID]);
+            $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
             if ($request->isPost()) {
                 if ($checktemp) { //there exists such item
                     $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
