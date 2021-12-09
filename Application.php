@@ -53,13 +53,13 @@ class Application
         $this->session=new Session();
 
         $this->authMiddleware=new AuthMiddleware([
-            'Guest'=>['welcome','verify','emailverified','login','shopRegister','customerRegister','test'],
-            'Delivery'=>['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','profile'],
-            'Customer'=>['welcome','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart'],
+            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test'],
+            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','profile'],
+            'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart'],
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
             'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
             'Rider' => ['vieworder','order'],
-            "Common" =>['logout','profileUpdate','test']
+            "Common" => ['logout','profileUpdate','test']
         ]);
 
         $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
@@ -96,7 +96,11 @@ class Application
     }
 
     public static function getUserRole(){
-        return self::$app->user->Role;
+        return self::$app->user->Role??null;
+    }
+
+    public static function getUserID(){
+        return self::$app->session->get('user');
     }
 
     public function run()
