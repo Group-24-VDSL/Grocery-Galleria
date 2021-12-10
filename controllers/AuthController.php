@@ -25,6 +25,19 @@ class AuthController extends Controller
         $this->registerMiddleware(new AuthMiddleware(['profile']));
     }
 
+    public static function register(Request $request, string $type)
+    {
+        $user = new User();
+        $user->loadData($request->getBody());
+        $user->Role = $type;
+        if ($user->validate() && $user->save()) {
+            $temp = User::findOne(['Email' => $user->Email]);
+            return $temp->UserID;
+        } else {
+            return null;
+        }
+    }
+
     public function login(Request $request, Response $response)
     {
         $loginForm = new LoginForm();
