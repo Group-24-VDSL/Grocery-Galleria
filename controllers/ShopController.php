@@ -15,6 +15,36 @@ use SendGrid\Mail\TypeException;
 
 class ShopController extends Controller
 {
+    public function shopRegister(Request $request)
+    {
+        $this->setLayout('register');
+        $user = new Shop(); // Create customer
+        $user->loadData($request->getBody());
+        if ($request->isPost()) {
+            $userid = AuthController::register($request,'Shop');
+            if($userid){
+                $user->ShopID = $userid; //save the ShopID = UserID
+                if($user->validate() && $user->save()){
+                    Application::$app->session->setFlash('success', 'Registration Success');
+                    $status = AuthController::verificationSend($user->ShopID,$user->Name,$user->Email);
+                    if($status){
+                    Application::$app->response->redirect('/login');
+                    }
+                }else{
+                    Application::$app->session->setFlash('error', 'Registration Failed');
+                    $this->setLayout('register');
+                    return $this->render("shop/register", ['model' => $user]);
+                }
+            }else {
+                Application::$app->session->setFlash('error', 'Registration Failed');
+                $this->setLayout('register');
+                return $this->render("shop/register", ['model' => $user]);
+            }
+        }
+        return $this->render("shop/register", [
+            'model' => $user
+        ]);
+    }
 
     public function showShop()
     {
@@ -158,36 +188,6 @@ class ShopController extends Controller
     /**
      * @throws TypeException
      */
-    public function shopRegister(Request $request)
-    {
-        $this->setLayout('register');
-        $user = new Shop(); // Create customer
-        $user->loadData($request->getBody());
-        if ($request->isPost()) {
-            $userid = AuthController::register($request,'Shop');
-            if($userid){
-                $user->ShopID = $userid; //save the ShopID = UserID
-                if($user->validate() && $user->save()){
-                    Application::$app->session->setFlash('success', 'Registration Success');
-                    $status = AuthController::verificationSend($user->ShopID,$user->Name,$user->Email);
-                    if($status){
-                    Application::$app->response->redirect('/login');
-                    }
-                }else{
-                    Application::$app->session->setFlash('error', 'Registration Failed');
-                    $this->setLayout('register');
-                    return $this->render("shop/register", ['model' => $user]);
-                }
-            }else {
-                Application::$app->session->setFlash('error', 'Registration Failed');
-                $this->setLayout('register');
-                return $this->render("shop/register", ['model' => $user]);
-            }
-        }
-        return $this->render("shop/register", [
-            'model' => $user
-        ]);
-    }
 }
     
 
