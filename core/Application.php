@@ -3,6 +3,7 @@ namespace app\core; //autoload
 
 
 use app\core\db\Database;
+use app\core\middlewares\AuthMiddleware;
 use app\models\User;
 use Exception;
 use Monolog\Handler\StreamHandler;
@@ -33,6 +34,7 @@ class Application
     public From $emailfrom;
     public Logger $logger;
     public View $view;
+    public AuthMiddleware $authMiddleware;
     public static Application $app;
     public string $domain;
 
@@ -49,6 +51,16 @@ class Application
         $this->view = new View();
 
         $this->session=new Session();
+
+        $this->authMiddleware=new AuthMiddleware([
+            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test'],
+            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','profile'],
+            'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart'],
+            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
+            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
+            'Rider' => ['vieworder','order'],
+            "Common" => ['logout','profileUpdate','test']
+        ]);
 
         $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
 
@@ -79,44 +91,16 @@ class Application
         return !self::$app->user;
     }
 
-    public static function isCustomer(){
-        return (self::$app->session->get('role') === 'Customer');
+    public static function getUser(){
+        return self::$app->user;
     }
 
-    public static function isShop(){
-        return (self::$app->session->get('role') === 'Shop');
+    public static function getUserRole(){
+        return self::$app->user->Role??null;
     }
 
-    public static function isStaff(){
-        return (self::$app->session->get('role') === 'Staff');
-    }
-
-    public static function isDeliveryRider(){
-        return (self::$app->session->get('role') === 'Rider');
-    }
-
-    public static function isDelivery(){
-        return (self::$app->session->get('role') === 'Delivery');
-    }
-
-    public static function getCustomerID()
-    {
-        return self::isCustomer()?self::$app->session->get('user'):null;
-    }
-
-    public static function getShopID()
-    {
-        return self::isShop()?self::$app->session->get('user'):null;
-    }
-
-    public static function getStaffID()
-    {
-        return self::isStaff()?self::$app->session->get('user'):null;
-    }
-
-    public static function getRiderID()
-    {
-        return self::isDeliveryRider()?self::$app->session->get('user'):null;
+    public static function getUserID(){
+        return self::$app->session->get('user');
     }
 
     public function run()

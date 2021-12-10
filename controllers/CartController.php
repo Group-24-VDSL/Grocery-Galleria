@@ -35,7 +35,7 @@ class CartController extends Controller
         return $this->render('customer/cart', ['items' => $items, 'total' => $total, 'shopitems' => $shopitems]);
     }
 
-    public function getCart(Request $request, Response $response) // get all items from DB
+    public function getTempCart(Request $request, Response $response) // get all items from DB
     {
         $items = TemporaryCart::findAll(array_slice($request->getBody(), 1, null, true));
         $total = 0;
@@ -52,7 +52,7 @@ class CartController extends Controller
         if ($json) {
             $tempcart = new TemporaryCart();
             $tempcart->loadData($json);
-            $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => $tempcart->CustomerID]);
+            $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
             if ($request->isPost()) {
                 if ($checktemp) { //there exists such item
                     $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
@@ -97,7 +97,7 @@ class CartController extends Controller
     public function checkout(Request $request,Response $response)
     {
         $this->setLayout('checkoutL');
-        $customerid = Application::getCustomerID();
+        $customerid = Application::getUserID();
         $customer = Customer::findOne(['CustomerID'=>$customerid]);
         $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".$customerid." AND Purchased=0",\PDO::FETCH_COLUMN);
         $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".$customerid." AND tc.Purchased=0",\PDO::FETCH_COLUMN);
@@ -120,7 +120,7 @@ class CartController extends Controller
      */
     public function proceedToCheckout(Request $request, Response $response)
     {
-        if(Application::isCustomer()) {
+        if(Application::getUserRole() === "Customer") {
             if ($request->isPost()) {
                 $recipient_name = filter_var($request->getBody()['recipient-name'],FILTER_SANITIZE_SPECIAL_CHARS);
                 $notes = filter_var($request->getBody()['note'],FILTER_SANITIZE_SPECIAL_CHARS);
@@ -129,7 +129,7 @@ class CartController extends Controller
                 $domain = Application::$app->domain;
 
                 //There should be a procedure for checking the stock.
-                $this->checkStock(Application::getCustomerID());
+                $this->checkStock(Application::getUser()->getUserID());
                 //get the availible items
                 $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getCustomerID()." AND Purchased=1",\PDO::FETCH_COLUMN);
                 $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=1",\PDO::FETCH_COLUMN);

@@ -68,7 +68,7 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                         <span>quantity :</span>
                         <input class="quantity-input" type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight}>
                 </div>
-                    <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" ><i class="fas fa-cart-plus"></i> add to cart</button>
+                    <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this)"><i class="fas fa-cart-plus"></i> add to cart</button>
             `
         })
         ItemBox.appendChild(Item);
@@ -96,27 +96,25 @@ $(document).ready(function () {
         }
 
     }
-    const itemsBTNS = document.querySelectorAll('.addCart');
-    // console.log(itemsBTNS);
-    $(itemsBTNS).on('click', function () {
 
-        const itemidvalue = $(this).data("itemid");
-        const shopidvalue = $(this).data("shopid");
-        console.log(shopidvalue);
-
-        const value = $(this).parent().children(".quantity").find('.quantity-input').val();
-        // console.log(value);
-        const step = $(this).parent().children(".quantity").find('.quantity-input').attr('step');
-        // console.log(step);
-
-        var passingvalue = Math.trunc(value / step);
-        var obj = {"ItemID": itemidvalue, "ShopID": shopidvalue, "Quantity": passingvalue, "CustomerID": 2}; //keys and values should be enclosed in double quotes
-
-        $.post(URLAddtoCartAPI, JSON.stringify(obj));
-
-    });
 
 });
+
+const itemsBTNS = document.querySelectorAll('.addCart');
+
+function addtocart(item) {
+    const itemidvalue = $(item).data("itemid");
+    const shopidvalue = $(item).data("shopid");
+
+    const value = $(item).parent().children(".quantity").find('.quantity-input').val();
+    const step = $(item).parent().children(".quantity").find('.quantity-input').attr('step');
+
+    var passingvalue = Math.trunc(value / step);
+    var obj = {"ItemID": itemidvalue, "ShopID": shopidvalue, "Quantity": passingvalue}; //keys and values should be enclosed in double quotes
+
+    $.post(URLAddtoCartAPI, JSON.stringify(obj));
+
+}
 
 
 
