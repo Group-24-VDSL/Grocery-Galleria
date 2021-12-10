@@ -13,6 +13,7 @@ use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
 use app\models\TemporaryCart;
+use app\models\User;
 
 class APIController extends Controller
 {
@@ -101,6 +102,14 @@ class APIController extends Controller
     {
         $response->setContentTypeJSON();
         $orders = Orders::findAll(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($orders);
+    }
+
+    public function getUser(Request $request, Response $response)
+    {
+        $response->setContentTypeJSON();
+        $orders = User::findOne(array_slice($request->getBody(),1,null,true));
 
         return json_encode($orders);
     }
