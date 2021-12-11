@@ -131,6 +131,9 @@ $app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->get('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/order',[RiderController::class,'order']);
 
+$app->router->get('/changePwd',[AuthController::class,'changePassword']);
+$app->router->post('/changePwd',[AuthController::class,'changePassword']);
+
 $app->run();
 
 ?>

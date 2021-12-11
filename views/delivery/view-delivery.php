@@ -8,61 +8,6 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/shopOrder.js" defer></script>
 
-<div class="overview-boxes">
-    <div class="box">
-        <div class="content">
-            <div class="box-topic">Total Delivery</div>
-            <div class="number">1276</div>
-            <div class="indicator">
-                <i class="bx bxs-up-arrow-square"></i>
-                <span class="text">Up so far</span>
-            </div>
-        </div>
-        <!-- <i class='bx bx-cart-alt cart'></i> -->
-        <img src="https://img.icons8.com/external-konkapp-flat-konkapp/64/000000/external-delivery-logistic-and-delivery-konkapp-flat-konkapp.png"/>
-    </div>
-    <div class="box">
-        <div class="content">
-            <div class="box-topic">Total Revenue</div>
-            <div class="number">1276</div>
-            <div class="indicator">
-                <i class="bx bxs-up-arrow-square"></i>
-                <span class="text">Up so far</span>
-            </div>
-        </div>
-        <img
-            src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-revenue-money-and-economy-itim2101-lineal-color-itim2101.png"
-        />
-    </div>
-    <!-- <i class='bx bx-cart-alt cart'></i> -->
-
-    <div class="box">
-        <div class="content">
-            <div class="box-topic">Total Income</div>
-            <div class="number">12,876</div>
-            <div class="indicator">
-                <i class="down bx bxs-down-arrow-square"></i>
-                <span class="text">Down from today</span>
-            </div>
-        </div>
-        <img
-            src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-financial-mobile-payment-itim2101-lineal-color-itim2101.png"
-        />
-    </div>
-    <div class="box">
-        <div class="content">
-            <div class="box-topic">Total Orders</div>
-            <div class="number">11,086</div>
-            <div class="indicator">
-                <i class="down bx bxs-down-arrow-square"></i>
-                <span class="text">Down From Today</span>
-            </div>
-        </div>
-        <img
-            src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-order-online-shopping-itim2101-lineal-color-itim2101.png"
-        />
-    </div>
-</div>
 
 <div style="height: 460px; margin-top: 0; margin-bottom: 0" class="core staff-order">
     <h1 class="heading"> <span>Orders</span></h1>

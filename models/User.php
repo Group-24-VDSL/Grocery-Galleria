@@ -54,7 +54,7 @@ class User extends UserModel
         return [
             'Email' => 'Email',
             'Password' => 'Password',
-            'confirmPassword' => 'Confirm Password'
+            'ConfirmPassword' => 'Confirm Password'
         ];
     }
 

@@ -11,6 +11,8 @@ use app\models\Cart;
 use app\models\Customer;
 use app\models\Orders;
 use app\models\Rider;
+use app\models\Shop;
+use app\models\Staff;
 use app\models\User;
 use Exception;
 use SendGrid\Mail\Mail;
