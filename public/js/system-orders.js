@@ -95,7 +95,7 @@ $(document).ready(function () {
                 <td id="" class="rider-id">${Order.OrderDate}</td>  
                 <td id="Date" class="order-date">${Order.OrderTime}</td>
                 <td id="Time" class="order-time">${Order.CustomerID}</td>
-                <td id="noshops">4</td>
+                <td id="noshops">${NoShops.length}</td>
                 <td id="Total" class="shop-total">${Order.TotalCost}</td>
                 <td>${Customer.City}</td>
                 <td>${Customer.Suburb}</td>
