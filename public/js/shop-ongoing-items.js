@@ -49,8 +49,8 @@ $(document).ready(function () {
                     if (Shop.Enabled ===0)
                     {
                         if(!Item.Brand ){
-                          toString(Item.Brand ) ;
-                          Item.Brand = "-";
+                            toString(Item.Brand ) ;
+                            Item.Brand = "-";
                         }
 
                         const ItemRow = document.createElement('tr');
@@ -94,6 +94,10 @@ $(document).ready(function () {
     })
 
 });
+
+function setItemArray(Item){
+    itemArray.push(Item);
+}
 
 
 
