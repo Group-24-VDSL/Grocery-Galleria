@@ -99,5 +99,47 @@ function setItemArray(Item){
     itemArray.push(Item);
 }
 
+function updateShopItem(){
+    console.log(itemArray)
+    console.log(itemArray.length)
+    console.log(itemArray)
 
+    itemArray.forEach(item=>{
+
+        let unitprice = $('#'.concat(item.uPriceID)).val();
+        let stock = $('#'.concat(item.stockID)).val();
+
+        let oldStock = $('#'.concat(item.stockID)).attr('data-stock');
+        let oldUprice = $('#'.concat(item.uPriceID)).attr('data-unitPrice');
+
+        console.log(stock,oldStock)
+        console.log(unitprice,oldUprice)
+
+        if(oldStock!==stock || oldUprice!==unitprice){
+            let obj = {"ShopID":item.ShopID , "ItemID":item.ItemID, "UnitPrice":unitprice, "Stock":stock} ;
+
+            console.log("yes");
+
+            $.ajax({
+                url : URLUpdateItem,
+                data : JSON.stringify(obj),
+                type : 'PATCH',
+                dataType:'json',
+                processData: false,
+                contentType : 'application/json'
+            }).done(function (data){
+                if(JSON.parse(data)['success'] === 'ok'){
+
+                    templateAlert('green', 'Item '+item.ItemID+' is updated.');
+                }else{
+
+                    templateAlert('red', 'Item '+item.ItemID+' update is failed.');
+                }
+            });
+        }
+    })
+
+
+
+}
 
