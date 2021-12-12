@@ -183,6 +183,15 @@
   position: relative;
   display: none;
 }
+.form-container-delivery{
+  height: 500px;
+  border: 0.2rem solid rgba(43, 147, 72, 0.8);
+  border-radius: .4rem;
+  box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,0.1);
+  overflow: hidden;
+  position: relative;
+  /*display: none;*/
+}
 .scroller {
   height: 500px;
   overflow-y: scroll;
@@ -226,7 +235,7 @@
     width: 300px;
 }
 .row-checkbox input[type=checkbox]{
-  transform: scale(1.5);
+  /*transform: scale(1.5);*/
 }
 
 .register form .inputBox img{
@@ -234,15 +243,23 @@
   height: 48px;
 }
 
-.register form .inputBox .imageBox{
-  margin-left: 0.5rem;
-  border-radius: 0.5rem;
-}
 
 .select-radio{
   padding: .5rem 0;
   margin-bottom: 8px;
 
+}
+.fileInput{
+  /*align-items: center;*/
+}
+#ProfilePic{
+  width: 40%;
+  /*display: block;*/
+}
+#output{
+  height: 90px;
+  width: 90px;
+  float: right;
 }
 
 .select-radio .radio-label {
