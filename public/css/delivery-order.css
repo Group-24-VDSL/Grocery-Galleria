@@ -1,17 +1,16 @@
-
+.home-content .core .delivery-core{
+    border: none;
+}
 .table-scroll{
     width:100%;
     display: block;
     empty-cells: show;
-    /* Decoration */
-    /*height: 350px;*/
     border-spacing: 0;
-    /*border: 1px solid;*/
 }
 
 .table-scroll thead{
     border: 2px solid var(--home-color);
-    border-radius:8px;
+    border-radius: 0 0 8px 8px;
     position:relative;
     display: block;
     width:100%;
@@ -25,8 +24,8 @@
     display: block; position:relative;
     width:100%; overflow-y:scroll;
     /* Decoration */
-    border-radius: 8px;
-    border: 2px solid var(--home-color)
+    border-radius: 0 0 8px 8px;
+    border: 2px solid var(--home-color);
 }
 
 .table-scroll tr{
@@ -67,9 +66,9 @@
     flex-grow:1;
 }
 
-.table-scroll tbody tr:nth-child(2n){
-    background-color: var(--home-color);
-}
+/*.table-scroll tbody tr:nth-child(2n){*/
+/*    background-color: var(--home-color);*/
+/*}*/
 
 .body-half-screen{
     max-height: 30vh;
@@ -77,39 +76,21 @@
 
 .small-col{flex-basis:10%;}
 
-.btn-item {
-    display: inline-block;
-    /* margin-top: 1rem; */
-    align-content: center;
-    color: var(--body-color);
-    /* padding: 0rem 0rem; */
-    padding-left: 0.7rem;
-    padding-right: 0.7rem;
-    font-size: var(--smaller-font-size);
-    border-radius: 0.5rem;
-    transition: 0.3s;
-    border: 0px;
-    /*background-color: #FFF;*/
-    align-items: top;
-/*!* height: 25px;*/
-}
+
 
 .btn-item:hover {
-    background-color: darkgreen;
+    background-color: var(--first-color-alt);
 }
 
 .order-view {
     background-color:transparent;
-    font-size: 20px;
-    color: green;
-    padding-top: 0px;
-    margin-top: 0px;
+    font-size: var(--h2-font-size);
+    color: var(--first-color-alt);
+    /*padding-top: 0px;*/
+    /*margin-top: 0px;*/
+}
+.order-view i:hover{
+    color: red;
 }
 
-/*.order-view:nth-child(2n){*/
-/*    background-color: var(--home-color);*/
-/*}*/
 
-button{
-    background-color: transparent;
-}

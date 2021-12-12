@@ -1,13 +1,13 @@
 <!--<link rel="stylesheet" href="/css/Register.css">-->
-<link rel="stylesheet" href="/css/dashboardStyle.css" />
-<link rel="stylesheet" href="/css/all.css" />
-<link rel="stylesheet" href="/css/shop-order-details.css" />
+<link rel="stylesheet" href="/css/dashboardStyle.css"/>
+<link rel="stylesheet" href="/css/all.css"/>
+<link rel="stylesheet" href="/css/shop-order-details.css"/>
 <script src="/js/jquery.min.js"></script>
 
 
 <section class="section-home">
     <div class="home-content">
-        <div class="overview-boxes " id = "order-box" >
+        <div class="overview-boxes " id="order-box">
 
             <div class="box-item-list">
                 <div class="content">
@@ -25,17 +25,17 @@
                 <img src="https://img.icons8.com/external-becris-flat-becris/64/000000/external-history-literary-genres-becris-flat-becris.png"/>
             </div>
 
-<!--            <div class="box-item-list">-->
-<!--                <div class="content">-->
-<!--                    <div class="box-topic">Total(LKR)</div>-->
-<!--                    <div class="number-details">2500.00</div>-->
-<!--                </div>-->
-<!--                <img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-cash-gambling-justicon-flat-justicon.png"/>-->
-<!--            </div>-->
+            <!--            <div class="box-item-list">-->
+            <!--                <div class="content">-->
+            <!--                    <div class="box-topic">Total(LKR)</div>-->
+            <!--                    <div class="number-details">2500.00</div>-->
+            <!--                </div>-->
+            <!--                <img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-cash-gambling-justicon-flat-justicon.png"/>-->
+            <!--            </div>-->
             <div class="box-item-list">
                 <div class="content">
                     <div style=" font-size: 18.4px" class="box-topic">Delivery Cost(LKR)</div>
-                    <div class="number-details">  300.00</div>
+                    <div class="number-details"> 300.00</div>
                 </div>
                 <img src="https://img.icons8.com/external-konkapp-flat-konkapp/64/000000/external-delivery-logistic-and-delivery-konkapp-flat-konkapp.png"/>
             </div>
@@ -58,51 +58,13 @@
         </div>
 
 
-        <div style="height: auto" class="core">
-            <div class="customer-details">
-            <h1 class="heading"> <span>Delivery Route</span><span style="color: var(--text-color-light)" class="shop-id"></span></h1><div class = "map-section">
-                    <div class="inputBox map-inputBox">
-                        <!--                <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>-->
-                        <div id="map"></div>
-                    </div>
-                    <div>
-                        <span class="rider">Select Rider Type</span>
-                        <select class="rider-type">
-                            <option></option>
-                            <option class="a">Bike</option>
-                            <option class="a">Three wheel</option>
-                        </select>
-                    </div>
 
-                    <div>
-                        <span class="rider">Select Rider</span>
-                        <div class="select-scroll">
-                        <select class="rider-select">
-                            <option></option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                        </select>
-                        </div>
-                    </div>
-                    <button style="margin-top: auto" class="complete-btn" type="submit" value="Complete">Assign Rider</button>
-        </div>
-        </div>
-        </div>
 
 
         <div style="height: auto" class="core">
             <div class="customer-details">
-                <h1 class="heading"> <span>Customer Details</span><span style="color: var(--text-color-light)" class="shop-id"></span></h1>
+                <h1 class="heading"><span>Customer Details</span><span style="color: var(--text-color-light)"
+                                                                       class="shop-id"></span></h1>
                 <table class="cus-details">
                     <thead>
                     <tr>
@@ -127,7 +89,8 @@
 
         <div style="height: auto" class="core">
             <div class="container-order-details">
-                <h1 class="heading"> <span>Item List : </span><span style="color: var(--text-color-light)" class="shop-id">S12340</span></h1>
+                <h1 class="heading"><span>Item List : </span><span style="color: var(--text-color-light)"
+                                                                   class="shop-id">S12340</span></h1>
                 <div>
                     <div class="item-list">
                         <div class="complete-section">
@@ -277,7 +240,7 @@
                         </table>
                         <div class="complete-section">
 
-                            <table  class="staff-details">
+                            <table class="staff-details">
                                 <tbody>
                                 <tr>
                                     <th>Shop Total (LKR) :</th>
@@ -299,7 +262,8 @@
                 </div>
             </div>
             <div class="container-order-details">
-                <h1 class="heading"> <span>Item List : </span><span style="color: var(--text-color-light)" class="shop-id">S12340</span></h1>
+                <h1 class="heading"><span>Item List : </span><span style="color: var(--text-color-light)"
+                                                                   class="shop-id">S12340</span></h1>
                 <div>
                     <div class="item-list">
                         <div class="complete-section">
@@ -471,7 +435,8 @@
                 </div>
             </div>
             <div class="container-order-details">
-                <h1 class="heading"> <span>Item List : </span><span style="color: var(--text-color-light)" class="shop-id">S12340</span></h1>
+                <h1 class="heading"><span>Item List : </span><span style="color: var(--text-color-light)"
+                                                                   class="shop-id">S12340</span></h1>
                 <div>
                     <div class="item-list">
                         <div class="complete-section">
@@ -643,6 +608,49 @@
                 </div>
             </div>
         </div>
+            <div style="height: auto" class="core">
+                <div class="customer-details">
+                    <h1 class="heading"><span>Delivery Route</span><span style="color: var(--text-color-light)"
+                                                                         class="shop-id"></span></h1>
+                    <div class="map-section">
+                        <div class="inputBox map-inputBox">
+                            <!--                <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>-->
+                            <div id="map"></div>
+                        </div>
+                        <div>
+                            <span class="rider">Select Rider Type</span>
+                            <select class="rider-type">
+                                <option></option>
+                                <option class="a">Bike</option>
+                                <option class="a">Three wheel</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <span class="rider">Select Rider</span>
+                            <div class="select-scroll">
+                                <select class="rider-select">
+                                    <option></option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button style="margin-top: auto" class="complete-btn" type="submit" value="Complete">Assign Rider
+                        </button>
+                    </div>
+                </div>
+            </div>
     </div>
 </section>
 <script src="/js/delivery-assign.js"></script>
