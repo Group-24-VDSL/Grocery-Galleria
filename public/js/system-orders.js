@@ -69,6 +69,40 @@ $(document).ready(function () {
                     ItemTableNew.appendChild(ItemRowNew);
 
                 }
+                else if (Order.Status === 1) {
+                    const ItemRowOngoing = document.createElement('tr');
+
+                    ItemRowOngoing.innerHTML = `
+                <td></td>
+                <td id="ID" class="order-id">${Order.OrderID}</td>            
+                <td id="" class="rider-id">${Order.OrderDate}</td>  
+                <td id="Date" class="order-date">${Order.OrderTime}</td>
+                <td id="Time" class="order-time">${Order.CustomerID}</td>
+                <td id="noshops">${NoShops.length}</td>
+                <td id="Total" class="shop-total">${Order.TotalCost}</td>
+                <td>${Customer.City}</td>
+                <td>${Customer.Suburb}</td>
+                <td id="View" class="ubutton"> <a href="/dashboard/shop/vieworderdetails?OrderID=${Order.OrderID}" data-shopid = "${Order.OrderID}" data-orderid = "${Order.OrderID}"><button id="button" class="btn-item" onclick="abc(this);" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a></td>     
+                 `
+                    ItemTableOngoing.appendChild(ItemRowOngoing);
+
+                } else if (Order.Status === 2) {
+                    const ItemRowComplete = document.createElement('tr');
+
+                    ItemRowComplete.innerHTML = `
+                <td></td>
+                <td id="ID" class="order-id">${Order.OrderID}</td>            
+                <td id="" class="rider-id">${Order.OrderDate}</td>  
+                <td id="Date" class="order-date">${Order.OrderTime}</td>
+                <td id="Time" class="order-time">${Order.CustomerID}</td>
+                <td id="noshops">4</td>
+                <td id="Total" class="shop-total">${Order.TotalCost}</td>
+                <td>${Customer.City}</td>
+                <td>${Customer.Suburb}</td>
+                <td id="View" class="ubutton"> <a href="/dashboard/shop/vieworderdetails?OrderID=${Order.OrderID}" data-shopid = "${Order.OrderID}" data-orderid = "${Order.OrderID}"><button id="button" class="btn-item" onclick="abc(this);" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a></td>     
+                 `
+                    ItemTableComplete.appendChild(ItemRowComplete);
+                }
             })
 
             })
