@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/css/all.css">
 <link rel="stylesheet" href="/css/complaint.css">
 <link rel="stylesheet" href="/css/Register.css">
+<script src="/js/complaint.js" defer></script>
 
 <div class = "main-content" id="#complaint-section">
     <div class = "form-content">
