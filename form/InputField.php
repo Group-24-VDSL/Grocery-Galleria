@@ -10,6 +10,8 @@ class InputField extends BaseField
     const TYPE_TEXT = 'text';
     const TYPE_PASSWORD = 'password'; //add more types lists, checkboxes etc
     const TYPE_NUMBER = 'number';
+    const TYPE_RADIO = 'radio';
+    CONST TYPE_DATE = 'date' ;
 
 
     public string $type;
