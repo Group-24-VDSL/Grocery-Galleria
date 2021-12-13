@@ -41,6 +41,7 @@ let itemArray = [];
 
 $(document).ready(function () {
 
+
     $.getJSON(URLGetShop, function (Shops) {
         Shops.forEach(Shop => {
             const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);
@@ -79,6 +80,7 @@ $(document).ready(function () {
                         itemArray['ItemID'] = Shop.ItemID ;
                         itemArray['uPriceID'] = x ;
                         itemArray['stockID'] = y ;
+                        itemArray['StockData'] = [];
 
                         i = i+1 ;
 
@@ -96,6 +98,11 @@ $(document).ready(function () {
 
 function setItemArray(Item){
     itemArray.push(Item);
+    safetyStock(Item)
+}
+
+function safetyStock(Item){
+
 }
 
 function updateShopItem(){
@@ -136,9 +143,10 @@ function updateShopItem(){
                 }
             });
         }
+
+
     })
 
-
-
 }
+
 
