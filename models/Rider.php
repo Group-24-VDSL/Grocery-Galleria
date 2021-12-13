@@ -12,6 +12,10 @@ class Rider extends UserModel
     public string $Address = '';
     public string $Email = '';
     public string $ContactNo = '';
+    public string $Password = ''; //need this two
+    public string $ConfirmPassword = ''; //need this two
+    public string $City = '';
+    public string $Suburb = '';
     public string $NIC = '';
     public string $ProfilePic = '';
     public int $RiderType = 0; //0 = bike , 1 = threewheel
@@ -27,7 +31,7 @@ class Rider extends UserModel
 
     public function attributes(): array
     {
-        return ['RiderID','Name','Address','Email','ContactNo','NIC','ProfilePic','RiderType'];
+        return ['RiderID','Name','Address','Email','ContactNo','NIC','ProfilePic','City','Suburb','RiderType'];
     }
 
     public function labels(): array{
@@ -58,7 +62,9 @@ class Rider extends UserModel
             'Name' => [self::RULE_REQUIRED],
             'Address'=>[self::RULE_REQUIRED],
             'ContactNo'=>[self::RULE_REQUIRED, self::RULE_PHONE],
-            'NIC' =>[self::RULE_REQUIRED,self::RULE_NIC]
+            'NIC' =>[self::RULE_REQUIRED,self::RULE_NIC],
+            'City' =>[self::RULE_REQUIRED],
+            'Suburb' =>[self::RULE_REQUIRED]
         ];
     }
 

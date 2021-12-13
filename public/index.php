@@ -127,6 +127,8 @@ $app->router->get('/api/orders',[APIController::class,'getOrders']);
 $app->router->get('/api/getordercart',[APIController::class,'getOrderCart']);
 
 //rider
+$app->router->get('/rider/register',[RiderController::class,'riderRegister']);
+$app->router->post('/rider/register',[RiderController::class,'riderRegister']);
 $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->get('/rider/order',[RiderController::class,'order']);
