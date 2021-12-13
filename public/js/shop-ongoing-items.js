@@ -60,8 +60,7 @@ $(document).ready(function () {
                                 <td id="ItemImage" class="row-img">
                                     <img src="${Item.ItemImage}" alt="${Item.Name}" />
                                 </td>
-                                <td id="Name" class="row-name">${Item.Name}</td>
-                                
+                                <td id="Name" class="row-name">${Item.Name}</td>                                
                                 <td id="Brand" class="row-brand">${Item.Brand}</td>
                                 <td id="Unit" class="row-unit">${Item.Unit}</td>
                                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
