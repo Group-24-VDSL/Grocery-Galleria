@@ -65,10 +65,10 @@ $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'vi
 $app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
 $app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignrider']);
-$app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class,'viewdelivery']);
-$app->router->get('/dashboard/delivery/viewnewdelivery',[DeliveryController::class,'viewnewdelivery']);
-$app->router->get('/dashboard/delivery/viewongoingdelivery',[DeliveryController::class,'viewongoingdelivery']);
-$app->router->get('/dashboard/delivery/viewcompletedelivery',[DeliveryController::class,'viewcompletedelivery']);
+$app->router->get('/dashboard/delivery/newdelivery',[DeliveryController::class, 'newDelivery']);
+$app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
+$app->router->get('/dashboard/delivery/pastDelivery',[DeliveryController::class, 'pastDelivery']);
+$app->router->get('/dashboard/delivery/onDelivery',[DeliveryController::class, 'onDelivery']);
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 
 //system staff

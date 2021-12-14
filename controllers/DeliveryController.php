@@ -104,7 +104,7 @@ class DeliveryController extends Controller
     /**
      * @throws NotFoundException
      */
-    public function viewnewdelivery(Request $request, Response $response){
+    public function deliveryInfo(Request $request, Response $response){
         $this->setLayout('headeronly-staff');
         if($request->isSet("id")){
             $order = Orders::findOne(['OrderID' => $request->getBody()["id"]]);
@@ -125,19 +125,21 @@ class DeliveryController extends Controller
         return $this->render('delivery/view-new-delivery-details');
     }
 
-    public function viewongoingdelivery(){
+    public function pastDelivery(){
         $this->setLayout('headeronly-staff');
         return $this->render('delivery/view-ongoing-delivery-details');
     }
 
-    public function viewcompletedelivery(){
+    public function onDelivery(){
         $this->setLayout('headeronly-staff');
         return $this->render('delivery/view-complete-delivery-details');
     }
 
-    public function viewdelivery(){
+    public function newDelivery(){
+        $staffID = Application::getUserID();
+
         $this->setLayout('dashboard-delivery');
-        return $this->render('delivery/view-delivery');
+        return $this->render('delivery/new-delivery');
     }
 
     public function profile()
