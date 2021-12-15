@@ -69,5 +69,5 @@
         </div>
 
     </section>
-
+    <script src="/js/citySuburb.js" defer></script>
 </div>
