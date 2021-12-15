@@ -4,11 +4,13 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\db\DBModel;
 use app\core\exceptions\NotFoundException;
 use app\core\Request;
 use app\core\Response;
 use app\models\Cart;
 use app\models\Customer;
+use app\models\Delivery;
 use app\models\Orders;
 use app\models\Rider;
 use app\models\Shop;
@@ -31,16 +33,16 @@ class DeliveryController extends Controller
             $user->Password = Application::$app->generator->generateString(12);
             $user->ConfirmPassword = $user->Password;
             $riderpic = $request->loadFile("/img/rider-imgs/", "ProfilePic", '95' . str_pad((string)$rider->RiderID, 5, '0', STR_PAD_LEFT));
-            if (!is_null($riderpic) && !empty($riderpic)){
-                    $rider->loadData($request->getBody());
-                    $rider->ProfilePic = $riderpic;
+            if (!is_null($riderpic) && !empty($riderpic)) {
+                $rider->loadData($request->getBody());
+                $rider->ProfilePic = $riderpic;
                 if ($user->validate() && $user->save()) {
                     $temp = User::findOne(['Email' => $user->Email]);
                     $rider->RiderID = (int)$temp->UserID;
-                        if ($rider->validate() && $rider->save()) {
-                            Application::$app->session->setFlash('success', 'Rider Register Success');
-                            //send user verification
-                            $status = AuthController::verificationSend($rider->RiderID,$rider->Name,$user->Email);
+                    if ($rider->validate() && $rider->save()) {
+                        Application::$app->session->setFlash('success', 'Rider Register Success');
+                        //send user verification
+                        $status = AuthController::verificationSend($rider->RiderID, $rider->Name, $user->Email);
 //                            if($status){
 //                                $url = "http://localhost/changePwd?UserID=$rider->RiderID";
 //                                $to = new To($rider->Email, $rider->Name, ['password' => $user->Password, 'name' => $rider->Name,'link' => $url,]);
@@ -60,19 +62,19 @@ class DeliveryController extends Controller
 //                                }
 //                                Application::$app->response->redirect('/login');
 //                            }
-                            //send the register success email
-                            //id = d-4c34f31db7674b7d98f93f0eed9f23f5
+                        //send the register success email
+                        //id = d-4c34f31db7674b7d98f93f0eed9f23f5
 
 
-                            $this->setLayout('dashboard-delivery');
-                            Application::$app->response->redirect("/dashboard/delivery/addrider");
-                            exit;
-                        }
+                        $this->setLayout('dashboard-delivery');
+                        Application::$app->response->redirect("/dashboard/delivery/addrider");
+                        exit;
                     }
-                    Application::$app->session->setFlash('warning', 'Please Recheck Information entered, Rider might have already registered.');
-                    return $this->render('delivery/add-rider', [
-                        'model' => $rider
-                    ]);
+                }
+                Application::$app->session->setFlash('warning', 'Please Recheck Information entered, Rider might have already registered.');
+                return $this->render('delivery/add-rider', [
+                    'model' => $rider
+                ]);
 
             }
             Application::$app->session->setFlash('warning', 'Add a valid Rider Picture');
@@ -96,7 +98,8 @@ class DeliveryController extends Controller
         );
     }
 
-    public function assignrider(){
+    public function assignrider()
+    {
         $this->setLayout('headeronly-staff');
         return $this->render('delivery/assign-rider');
     }
@@ -104,43 +107,56 @@ class DeliveryController extends Controller
     /**
      * @throws NotFoundException
      */
-    public function deliveryInfo(Request $request, Response $response){
-        $this->setLayout('headeronly-staff');
-        if($request->isSet("id")){
-            $order = Orders::findOne(['OrderID' => $request->getBody()["id"]]);
-            if($order){
-                $cart = Cart::findOne(['CartID' => $order->CartID]);
-                if($cart) {
-                    $customer = Customer::findOne(['CustomerID' => $cart->CustomerID]);
-                    if($customer){
-
-                    }
-                }
-            }else{
-                $response->statusCode(404);
-                throw new NotFoundException();
-            }
-
-        }
+    public function deliveryInfo(Request $request, Response $response)
+    {
+        $this->setLayout('dashboard-delivery');
         return $this->render('delivery/view-new-delivery-details');
     }
 
-    public function pastDelivery(){
-        $this->setLayout('headeronly-staff');
-        return $this->render('delivery/view-ongoing-delivery-details');
+    public function viewDelivery()
+    {
+        $this->setLayout('dashboard-delivery');
+        return $this->render('delivery/view-delivery');
+    }
+    public function newDelivery()
+    {
+        $staff = new Staff();
+        $staffID = Application::getUserID();
+        $staff = $staff::findOne(['StaffID' => $staffID]);
+//        $activeCity = $staff->City;
+        $querySql =
+            "SELECT
+            orderTable.OrderID,
+            orderTable.OrderDate,
+            orderTable.RecipientName, 
+            orderTable.Note, 
+            orderTable.RecipientContact, 
+            orderTable.DeliveryCost,
+            orderTable.TotalCost,
+            orderTable.DeliveryState
+            FROM `orders` AS orderTable INNER JOIN cart as cartTable
+            ON orderTable.CartID = cartTable.CartID
+            INNER JOIN customer as customerTable
+            ON cartTable.CustomerID = customerTable.CustomerID
+            WHERE customerTable.City = 'Nugegoda' AND orderTable.DeliveryState = 0";
+        $newDeliveries = Orders::queryAll($querySql, \PDO::FETCH_CLASS);
+        return json_encode($newDeliveries);
+
+
     }
 
-    public function onDelivery(){
+    public function onDelivery()
+    {
         $this->setLayout('headeronly-staff');
         return $this->render('delivery/view-complete-delivery-details');
     }
 
-    public function newDelivery(){
-        $staffID = Application::getUserID();
-
-        $this->setLayout('dashboard-delivery');
-        return $this->render('delivery/new-delivery');
+    public function pastDelivery()
+    {
+        $this->setLayout('headeronly-staff');
+        return $this->render('delivery/view-ongoing-delivery-details');
     }
+
 
     public function profile()
     {
