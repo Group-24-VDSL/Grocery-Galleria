@@ -251,7 +251,6 @@ Object.keys(cityData).forEach(function(i){
     optionCity.value = cityData[i].cityID;
     optionCity.id = cityData[i].cityID + cityData[i].cityName;
     cityVal.add(optionCity);
-
     });
 
     $(cityVal).on('change', function (e) {
