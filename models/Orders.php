@@ -46,6 +46,7 @@ class Orders extends DBModel
 
     public function jsonarray(): array
     {
-        return ['OrderID','CartID','DeliveryCost','TotalCost','Status'];
+        return ['OrderID','OrderDate','CartID','DeliveryCost','RecipientName','Note','RecipientContact','TotalCost','Status'];
+
     }
 }
