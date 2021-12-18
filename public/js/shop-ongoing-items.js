@@ -203,6 +203,15 @@ function safetyStock(ShopItem){
 
                 console.log(maxLeadDays) ;
 
+
+                var maxDemand = demand.reduce(function(a, b) {
+                    return Math.max(a, b) ;
+                }, 0);
+
+                console.log(maxDemand) ;
+
+
+
             })
             var sum = function(leadTime) {
                 var total = 0;
