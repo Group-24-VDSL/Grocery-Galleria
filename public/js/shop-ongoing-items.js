@@ -196,6 +196,12 @@ function safetyStock(ShopItem){
 
 
                 }
+                console.log(leadTime);
+                var maxLeadDays = leadTime.reduce(function(a, b) {
+                    return Math.max(a, b);
+                }, 0);
+
+                console.log(maxLeadDays) ;
 
             })
             var sum = function(leadTime) {
