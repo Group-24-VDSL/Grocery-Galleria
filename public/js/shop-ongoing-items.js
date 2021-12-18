@@ -216,6 +216,11 @@ function safetyStock(ShopItem){
 
                 console.log(maxDemand) ;
 
+                s = (maxDemand * maxLeadDays) - (averageDemand*averageLeadDays) ;
+
+                console.log(s)
+                console.log(ShopItem.StockData)
+
 
 
             })
