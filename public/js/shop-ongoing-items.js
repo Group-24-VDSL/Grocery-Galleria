@@ -222,7 +222,24 @@ function safetyStock(ShopItem){
                 console.log(ShopItem.StockData)
 
 
+                var sum = function(leadTime) {
+                    var total = 0;
+                    for (var i = 0; i < leadTime.length; i++) {
+                        total += leadTime[i];
+                    }
+                    return total;
+                }
 
+                console.log(sum/leadTime.length)
+                // var max = l.reduce(function(a, b) {
+                //     return Math.max(a, b);
+                // }, 0);
+                //
+                // console.log(max)
+
+                //  })
+                //
+                // })
             })
             var sum = function(leadTime) {
                 var total = 0;
