@@ -134,6 +134,44 @@ function safetyStock(ShopItem){
 
             $.getJSON(URLFindShopOrder, function (ShopOrder) {
 
+
+                if (ShopOrder.Status ===1) {
+                    //
+                    // console.log(ShopOrder)
+                    // console.log(ShopOrder, ShopOrder.Date)
+                    var todayDate = new Date();
+                    var orderDate = ShopOrder.Date;
+                    var completeDate = ShopOrder.CompleteDate ;
+
+                    todayDate = todayDate.getFullYear() + '-' + (todayDate.getMonth() + 1) + '-' + todayDate.getDate();
+
+
+                    var date1 = new Date(todayDate);
+                    // console.log(date1)
+                    var date2 = new Date(orderDate);
+                    // console.log(date2)
+
+                    var date3 = new Date(completeDate);
+
+                    var dateDifference = (date1.getTime() - date2.getTime()) / (1000 * 3600 * 24);
+                    //
+                    // console.log(todayDate)
+                    // console.log(ShopOrder.Date)
+                    // console.log(dateDifference)
+
+
+                    //
+                    // URLFindShopItem  = URLShopItemAPI.concat("?ShopID=").concat(Item.ShopID).concat("&ItemID=").concat(Item.ItemID);
+                    // $.getJSON(URLFindShopItem, function (shopItem) {
+                    //     URLFindItem = URLItemAPI.concat("?ItemID=").concat(Item.ItemID);
+                    //     $.getJSON(URLFindItem, function (systemItem) {
+
+
+
+
+
+                }
+
             })
 
             // console.log(l);
