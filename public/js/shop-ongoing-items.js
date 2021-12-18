@@ -55,7 +55,7 @@ $(document).ready(function () {
             const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);
             $.getJSON(URLShopItems, function (Items) {
                 Items.forEach(Item => {
-                    if (Shop.Enabled ===0)
+                    if (Shop.Enabled === 1  && Shop.Stock >=5)
                     {
                         if(!Item.Brand ){
                             toString(Item.Brand ) ;
@@ -74,8 +74,8 @@ $(document).ready(function () {
                                 <td id="Unit" class="row-unit">${Item.Unit}</td>
                                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
-                                <td id="UPrice" class="row-uprice"><input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
-                                <td id="Stock" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"></td>                                                              
+                                <td id="UPrice" class="row-uprice">Rs.<input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
+                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"></td>                                                              
                                 `
                         ItemTable.appendChild(ItemRow);
 
