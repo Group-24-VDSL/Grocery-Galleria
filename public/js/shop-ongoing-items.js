@@ -88,7 +88,8 @@ $(document).ready(function () {
                         itemArray['ItemID'] = Shop.ItemID ;
                         itemArray['uPriceID'] = x ;
                         itemArray['stockID'] = y ;
-                        itemArray['StockData'] = [];
+                        itemArray['StockData'] = Shop.Stock;
+                        // itemArray['Stock']
 
                         i = i+1 ;
 
@@ -106,7 +107,15 @@ $(document).ready(function () {
 
 function setItemArray(Item){
     itemArray.push(Item);
-    safetyStock(Item)
+    // while(l.length > 0) {
+    //     // l.pop();
+    // }
+
+    safetyStock(Item);
+    console.log(Item);
+    console.log(itemArray);
+    console.log(s);
+
 }
 
 function safetyStock(Item){
