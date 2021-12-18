@@ -23,10 +23,12 @@ const URLShopItemsAPI = host + "/api/shopitems";
 const URLShopItemAPI = host + "/api/shopitem" ;
 const URLFindItemAPI = host + "/api/items";
 const URLItemAPI = host + "/api/item" ;
+const  URLShopOrderAPI = host+ "/api/getshoporder" ;
 
 const URLAddtoCartAPI = host + "/api/addtocart";
 const URLGetCartAPI = host + "/api/getcart";
-const URLUpdateItem = host+ "/api/updateshopitem"
+const URLUpdateItem = host+ "/api/updateshopitem" ;
+const URLGetOrderCart = host+ "/api/getordercart" ;
 
 
 const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
@@ -143,7 +145,6 @@ function updateShopItem(){
                 }
             });
         }
-
 
     })
 
