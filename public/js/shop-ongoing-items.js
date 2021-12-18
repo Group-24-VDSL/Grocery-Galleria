@@ -39,6 +39,12 @@ const ItemUpdate = document.getElementById('updateItem');
 
 let i = 0 ;
 let itemArray = [];
+// let demand= [] ;
+// let leadTime = [];
+// let demand = [];
+let l = [];
+let d = [];
+let s ;
 
 
 $(document).ready(function () {
