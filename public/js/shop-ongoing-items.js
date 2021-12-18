@@ -48,8 +48,6 @@ let s ;
 
 
 $(document).ready(function () {
-
-
     $.getJSON(URLGetShop, function (Shops) {
         Shops.forEach(Shop => {
             const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);
@@ -122,6 +120,31 @@ function safetyStock(Item){
 
 }
 
+//
+// function aa(l){
+//     // leadTime.push(l);
+//     console.log(leadTime)
+// }
+
+class Avg {
+    constructor() {}
+
+    static average(array) {
+        var total = 0;
+        var count = 0;
+
+        jQuery.each(array, function(index, value) {
+            total += value;
+            count++;
+        });
+
+        return total / count;
+    }
+}
+
+console.log(Avg.average(leadTime));
+
+
 function updateShopItem(){
     console.log(itemArray)
     console.log(itemArray.length)
@@ -140,6 +163,7 @@ function updateShopItem(){
 
         if(oldStock!==stock || oldUprice!==unitprice){
             let obj = {"ShopID":item.ShopID , "ItemID":item.ItemID, "UnitPrice":unitprice, "Stock":stock} ;
+            safetyStock(item)
 
             console.log("yes");
 
