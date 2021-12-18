@@ -167,16 +167,72 @@ function safetyStock(ShopItem){
                     //     $.getJSON(URLFindItem, function (systemItem) {
 
 
+                    if (dateDifference <= 365) {
+                        var leaddays = (date3.getTime() - date2.getTime()) / (1000 * 3600 * 24);
 
+                        // abc (leaddays,Item.Quantity);
+                        // l.push(leaddays);
+                        // d.push(Item.Quantity);
+
+                        // l.push(leaddays);
+                        // leadTime.push(leaddays);
+                        // demand.push(Item.Quantity);
+
+
+                        // aa(leaddays);
+
+                        leadTime[i] = leaddays ;
+                        demand[i] = Item.Quantity ;
+                        i+=1;
+                    }
+                    // console.log(l);
+                    // var max = l.reduce(function(a, b) {
+                    //     return Math.max(a, b);
+                    // }, 0);
+                    //
+                    // console.log(max)
+                    // console.log(leadTime)
+                    // console.log(demand)
 
 
                 }
 
             })
+            var sum = function(leadTime) {
+                var total = 0;
+                for (var i = 0; i < leadTime.length; i++) {
+                    total += leadTime[i];
+                }
+                return total;
+            }
 
+            console.log(sum/leadTime.length)
             // console.log(l);
+
+
         })
+
+        l.forEach(function(item, index, array) {
+            console.log(item, index)
+        })
+
     })
+
+    const promise1 = new Promise((resolve, reject) => {
+        resolve(l);
+    });
+
+    promise1.then((value) => {
+        aa();
+        // expected output: "Success!"
+    });
+
+    // console.log(l);
+    // var max = l.reduce(function(a, b) {
+    //     return Math.max(a, b);
+    // }, 0);
+    //
+    // console.log(max)
     console.log(l);
 
     // console.log(l.values())
