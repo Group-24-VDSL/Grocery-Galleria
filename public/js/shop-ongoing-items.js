@@ -203,6 +203,12 @@ function safetyStock(ShopItem){
 
                 console.log(maxLeadDays) ;
 
+                const averageLeadDays = leadTime.reduce((a,b) => a + b, 0) / leadTime.length;
+                const averageDemand = demand.reduce((a,b) => a + b, 0) / demand.length;
+
+                console.log(averageLeadDays);
+                console.log(demand);
+                console.log(averageDemand);
 
                 var maxDemand = demand.reduce(function(a, b) {
                     return Math.max(a, b) ;
