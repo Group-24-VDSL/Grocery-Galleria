@@ -221,6 +221,17 @@ function safetyStock(ShopItem){
                 console.log(s)
                 console.log(ShopItem.StockData)
 
+                if(s <= ShopItem.StockData ){
+                    console.log(ShopItem.Stock)
+                    // $('#'.concat(Item.stockID)).style.color = "red";
+                    document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid green";
+                    document.getElementById(''.concat(ShopItem.stockID)).innerHTML = "kk";
+                }
+                else if(s > ShopItem.StockData){
+                    document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid red";
+                    document.getElementById(''.concat(ShopItem.stockID)).innerHTML = ShopItem.stockID;
+                    // $('#'.concat(Item.stockID)).style.color = "red";
+                }
 
                 var sum = function(leadTime) {
                     var total = 0;
