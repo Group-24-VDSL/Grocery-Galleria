@@ -116,7 +116,33 @@ function setItemArray(Item){
 
 }
 
-function safetyStock(Item){
+
+
+function safetyStock(ShopItem){
+    let leadTime = [];
+    let demand = [];
+    console.log(ShopItem.StockData)
+
+    let i = 0;
+    URLFindShopOrderItem  = URLGetOrderCart.concat("?ShopID=").concat(ShopItem.ShopID).concat("&ItemID=").concat(ShopItem.ItemID);
+    console.log(URLFindShopOrderItem);
+    $.getJSON(URLFindShopOrderItem, function (Items) {
+        Items.forEach(Item => {
+            console.log(Item);
+            URLFindShopOrder = URLShopOrderAPI.concat("?ShopID=").concat(Item.ShopID).concat("&CartID=").concat(Item.CartID);
+            console.log(URLFindShopOrder);
+
+            $.getJSON(URLFindShopOrder, function (ShopOrder) {
+
+            })
+
+            // console.log(l);
+        })
+    })
+    console.log(l);
+
+    // console.log(l.values())
+
 
 }
 
