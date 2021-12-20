@@ -4,6 +4,7 @@ const host = window.location.origin; //http://domainname
 const newDeliveryURL = host+'/dashboard/delivery/newdelivery';
 const onDeliveryURL = host+'/dashboard/delivery/onDelivery';
 const pastDeliveryURL = host+'/dashboard/delivery/pastDelivery';
+const deliverInfoURL = host+'/dashboard/delivery/deliveryInfo';
 
 const newTab = document.getElementById('new-tab');
 const onTab = document.getElementById('on-tab');
@@ -18,6 +19,7 @@ $(document).ready(function (){
         $.getJSON(newDeliveryURL,function (deliveries){
             console.log(deliveries);
             deliveries.forEach(delivery=>{
+                const deliveryURL = deliverInfoURL+"?OrderID="+delivery.OrderID;
                 const orderRow = document.createElement('tr');
                 orderRow.innerHTML = `
                         <td>${delivery.OrderID}</td>
@@ -27,7 +29,7 @@ $(document).ready(function (){
                         <td>${delivery.RecipientContact}</td>
                         <td>${delivery.DeliveryCost}</td>
                         <td>${delivery.TotalCost}</td>
-                        <td> <a class="order-view" href="">
+                        <td> <a class="order-view" href=${deliveryURL}>
                         <i class="fas fa-arrow-circle-right"></i></a></td>
                 `
                 $('#new-delivery-table').append(orderRow);
