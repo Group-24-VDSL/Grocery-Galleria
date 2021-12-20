@@ -11,6 +11,7 @@ use app\core\Response;
 use app\models\Cart;
 use app\models\Customer;
 use app\models\Delivery;
+use app\models\OrderCart;
 use app\models\Orders;
 use app\models\Rider;
 use app\models\Shop;
@@ -109,8 +110,28 @@ class DeliveryController extends Controller
      */
     public function deliveryInfo(Request $request, Response $response)
     {
+        $order = Orders::findOne(array_slice($request->getBody(),1,null,true));
+        $cartID = $order->CartID;
+        $cart = Cart::findOne(['CartID'=>$cartID]);
+        $customer = Customer::findOne(['CustomerID'=>$cart->CustomerID]);
+        $orderSQL = "SELECT * FROM `ordercart` WHERE CartID=$cartID GROUP BY ShopID,ItemID";
+        $shopCountSQl = "SELECT COUNT(DISTINCT(ShopID)) AS ShopCount FROM `ordercart` WHERE CartID=$cartID";
+        $orderStmt = DBModel::prepare($orderSQL);
+        $shopCountStmt = DBModel::prepare($shopCountSQl);
+        $orderStmt->execute();
+        $shopCountStmt->execute();
+        $shopOrders = $orderStmt->fetchAll(\PDO::FETCH_ASSOC);
+        $shopCount = $shopCountStmt->fetchColumn(\PDO::FETCH_DEFAULT);
         $this->setLayout('dashboard-delivery');
-        return $this->render('delivery/view-new-delivery-details');
+        return $this->render('delivery/view-new-delivery-details',
+        [
+            'order'=>$order,
+            'cart'=>$cart,
+            'customer'=>$customer,
+            'shopOrders'=>$shopOrders,
+            'shopCount'=>$shopCount
+        ]
+        );
     }
 
     public function viewDelivery()
