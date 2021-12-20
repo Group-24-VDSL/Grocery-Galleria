@@ -1,4 +1,3 @@
-@import "variables.css";
 @import "dashboardStyle.css";
 
 
@@ -24,6 +23,7 @@
   border: 0.2rem solid var(--home-color);
   border-radius: 0.5rem 0.5rem 0 0;
   min-width: 128px;
+  cursor: pointer;
   /* border-bottom: none; */
 }
 .tabs .btn-tab:hover {

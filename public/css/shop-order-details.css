@@ -2,9 +2,8 @@
     text-align: left;
     color: var(--title-color);
     text-transform: uppercase;
-    padding: 1rem;
     font-size: var(--h2-font-size);
-    padding-bottom: 2rem;
+    padding: 1rem 1rem 2rem;
 }
 * {
     margin: 0;
@@ -36,15 +35,6 @@
     border-radius: 0.5rem;
 }
 
-@media (max-width: 991px) {
-    .header-1 {
-        padding: 2rem;
-    }
-
-    section {
-        padding: 2rem;
-    }
-}
 
 .logo {
     font-size: 4rem;
@@ -60,10 +50,6 @@
     transition: 0.3s;
 }
 
-.home-section .home-content {
-    position: relative;
-    padding-top: 1rem;
-}
 
 
 .section-home {
@@ -223,8 +209,7 @@
     text-align:left;
     font-size: 14px;
     /*font-weight: 500;*/
-    text-align: center;
-    position: center;
+     position: center;
 }
 .table-scroll th {
     font-size: 14px;
@@ -483,3 +468,12 @@ table tbody tr td:first-child:before{ content: counter(no)".";
     overflow:hidden;
 }
 
+@media (max-width: 991px) {
+    .header-1 {
+        padding: 2rem;
+    }
+
+    section {
+        padding: 2rem;
+    }
+}

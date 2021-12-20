@@ -92,5 +92,7 @@
 .order-view i:hover{
     color: red;
 }
-
+.display-off{
+    display: none;
+}
 
