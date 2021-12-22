@@ -1,3 +1,11 @@
+<?php
+/** @var int $orderid */
+/** @var int $cartid */
+/** @var array $cartitems */
+/** @var array $cartdetails */
+/** @var array $cart */
+/** @var array $customer */
+?>
 
 <div class="main-content">
     <div>
@@ -9,14 +17,12 @@
                 <th>OrderID</th>
                 <th>Destination</th>
                 <th>Price</th>
-                <th>Actions</th>
+                <th>Delivery Fee</th>
             </tr>
             <tr>
-                <td>2</td>
-                <td>222,Address Eka</td>
-                <td>Rs.3222.00</td>
-                <td><button type="button" class="btn btn-primary btn-icon-only order-view-button" data-href="/order/2"><i
-                            class="far fa-eye"></i></button></td>
+                <?php
+                echo sprintf("<td>%d</td><td>%s</td><td>Rs.%.2f</td><td>Rs.%.2f</td>",$orderid,$cart["Address"],$cartdetails["TotalCost"],$cartdetails["DeliveryCost"]);
+                ?>
             </tr>
         </table>
     </div>
@@ -29,9 +35,18 @@
     <div class="order-view-customer box-shadow margin-bottom">
         <h4>Destination</h4>
         <div class="order-view-customer-details">
-            <p><strong>Name:</strong>Kasun Rajakaruna</p>
-            <p><strong>Address:</strong>Kasun Rajakaruna</p>
-            <p><strong>Phone:</strong><a href="tel:0223311324">0223311324<i class="fas fa-phone-alt"></i></a></p>
+            <?php
+            echo sprintf("<p><strong>Name:</strong>%s</p>
+            <p><strong>Address:</strong>%s</p>
+            <p><strong>Phone:</strong><a href='tel:%s'>%s<i class='fas fa-phone-alt'></i></a></p>
+            <p><strong>Note:</strong>%s</p>",
+                $cartdetails["RecipientName"]?$cartdetails["RecipientName"]:$customer["Name"],
+            $cart["Address"],
+            $cartdetails["RecipientContact"]?$cartdetails["RecipientContact"]:$customer["ContactNo"],
+            $cartdetails["RecipientContact"]?$cartdetails["RecipientContact"]:$customer["ContactNo"],
+            $cartdetails["Note"]?$cartdetails["Note"]:"None"
+            );
+            ?>
         </div>
         <label></label>
 

@@ -19,7 +19,7 @@
                     <td>%d</td>
                     <td>%s</td>
                     <td>Rs.%.2f</td>
-                    <td><button type='button' class='btn btn-primary btn-icon-only order-view-button' data-href='/order/%d'><i class='far fa-eye'></i></button></td>
+                    <td><button type='button' class='btn btn-primary btn-icon-only order-view-button' data-href='/rider/vieworder?id=%d'><i class='far fa-eye'></i></button></td>
                 </tr></a>",
                     $order["OrderID"],
                     $order["Address"],
