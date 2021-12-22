@@ -126,12 +126,12 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
-    public function getLastInsertID()
-    {
-        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
-        $statement->execute();
-        return (int)$statement->fetchColumn();
-    }
+//    public function getLastInsertID()
+//    {
+//        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
+//        $statement->execute();
+//        return (int)$statement->fetchColumn();
+//    }
 
 //    public function singleProcedure($procedure,$id,$value)
 //    {
