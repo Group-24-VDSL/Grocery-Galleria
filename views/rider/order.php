@@ -1,6 +1,8 @@
-
+<?php
+/** @var array $orders */
+?>
 <div class="main-content">
-    <div><h2 class="header">Orders</h2></div>
+    <div class="rider-header-container"><h2 class="header">Orders</h2></div>
     <div class="order-view">
         <h3>New Orders</h3>
         <table>
@@ -11,12 +13,21 @@
                     <th>Price</th>
                     <th>Actions</th>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>222,Address Eka</td>
-                    <td>Rs.3222.00</td>
-                    <td><button type="button" class="btn btn-primary btn-icon-only order-view-button" data-href="/order/2"><i class="far fa-eye"></i></button></td>
-                </tr></a>
+                <?php
+                foreach($orders as $order){
+                    echo sprintf("<tr>
+                    <td>%d</td>
+                    <td>%s</td>
+                    <td>Rs.%.2f</td>
+                    <td><button type='button' class='btn btn-primary btn-icon-only order-view-button' data-href='/order/%d'><i class='far fa-eye'></i></button></td>
+                </tr></a>",
+                    $order["OrderID"],
+                    $order["Address"],
+                    $order["TotalCost"],
+                    $order["OrderID"]
+                    );
+                }
+                ?>
         </table>
     </div>
 </div>

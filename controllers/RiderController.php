@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\db\DBModel;
 use app\core\Request;
+use app\models\Orders;
 use app\models\Rider;
 
 class  RiderController extends Controller
@@ -51,6 +53,18 @@ class  RiderController extends Controller
     public function order()
     {
         $this->setLayout('rider-mobile');
-        return $this->render('rider/order');
+        $riderID = Application::getUserID();
+        $orders = DBModel::query("SELECT OrderID FROM `delivery` WHERE RiderID=$riderID AND Status=0",\PDO::FETCH_ASSOC,true);
+        foreach($orders as &$order){ //pass by reference
+            $orderid=$order['OrderID'];
+            $result = DBModel::query("SELECT CartID,TotalCost FROM `orders` WHERE OrderID=$orderid",\PDO::FETCH_ASSOC);
+            $order["TotalCost"] = $result["TotalCost"];
+            $cartid = $result["CartID"];
+            $order["Address"] = DBModel::query("SELECT Address FROM `cart` WHERE CartID=$cartid",\PDO::FETCH_COLUMN);
+        }
+
+        return $this->render('rider/order',[
+            'orders' => $orders
+        ]);
     }
 }
