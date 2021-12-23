@@ -60,17 +60,39 @@ class  RiderController extends Controller
                     $cartid = $order["CartID"];
                     $cart = DBModel::query("SELECT CustomerID,Address FROM `cart` WHERE CartID=$cartid",\PDO::FETCH_ASSOC);
                     $cartitems = DBModel::query("SELECT ShopID,ItemID,Quantity,Total FROM `ordercart` WHERE CartID=$cartid ORDER BY ShopID",\PDO::FETCH_ASSOC,true);
+                    $shopdetails = [];
+                    $itemdetails = [];
+                    $cartitemsfinal = []; //where we pass the items
+                    $uniqueshops = array_unique(array_map(function ($i){return $i["ShopID"];},$cartitems));
+                    foreach($cartitems as $cartitem){
+                        $shopid = $cartitem['ShopID'];
+                        $itemid = $cartitem['ItemID'];
+                        if(!isset($shopdetails[$shopid])){
+                            $details = DBModel::query("SELECT Name,Address,ContactNo,ShopName,Location,PlaceID FROM `shop` WHERE ShopID=$shopid",\PDO::FETCH_ASSOC);
+                            $shopdetails[$shopid] = $details;
+                        }
+                        if(!isset($itemdetails[$itemid])){
+                            $item = DBModel::query("SELECT Name,ItemImage,Brand,UWeight FROM `item` WHERE ItemID=$itemid",\PDO::FETCH_ASSOC);
+                            $itemdetails[$itemid]=$item;
+                        }
+                        $cartitemsfinal[$shopid][$itemid] = [$cartitem["Quantity"],$cartitem["Total"]];
+                    }
+
                     $cartdetails = DBModel::query("SELECT * FROM `orders` WHERE CartID=$cartid and OrderID=$orderid",\PDO::FETCH_ASSOC);
+
                     $customerid=$cart["CustomerID"];
-                    $customer = DBModel::query("SELECT Name,ContactNo,Location,PlaceID FROM `customer` WHERE CustomerID=$customerid",\PDO::FETCH_ASSOC);
+                    $customer = DBModel::query("SELECT Name,ContactNo,Suburb,Location,PlaceID FROM `customer` WHERE CustomerID=$customerid",\PDO::FETCH_ASSOC);
 
                     return $this->render('rider/view-order',[
                         'orderid' => $orderid,
                         'cartid' => $cartid,
-                        'cartitems' => $cartitems,
                         'cartdetails' => $cartdetails,
                         'cart' => $cart,
-                        'customer' => $customer
+                        'customer' => $customer,
+                        'shopdetails' => $shopdetails,
+                        'itemdetails' => $itemdetails,
+                        'uniqueshops' => $uniqueshops,
+                        'cartitemsfinal' => $cartitemsfinal
                     ]);
 
                 }
