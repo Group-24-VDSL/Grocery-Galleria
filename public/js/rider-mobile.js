@@ -88,7 +88,6 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer,map) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 rider=  new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-                console.log(rider)
                 //shops
                 let regex = /[+-]?\d+(\.\d+)?/g;
                 let mapz = document.getElementById("map");
@@ -101,17 +100,17 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer,map) {
                 shops.forEach(function (shop){
                     let shopdata = $(mapz).data('shop'.concat(shop));
                     let shopz = shopdata.split('|')[1].match(regex).map(function(v) { return parseFloat(v); });
-                    waypointsarray.push(new google.maps.LatLng(shopz[0], shopz[1]));
-                });
+                    waypointsarray.push({location:new google.maps.LatLng(shopz[0], shopz[1]),stopover:true});
 
+                });
+                console.log(waypointsarray);
                 directionsService
                     .route({
                         origin:rider,
                         destination:destination,
                         waypoints:waypointsarray,
                         optimizeWaypoints: true,
-                        travelMode: google.maps.TravelMode.DRIVING,
-
+                        travelMode: google.maps.TravelMode.DRIVING
                     })
                     .then((response) => {
                         directionsRenderer.setDirections(response);
@@ -125,7 +124,6 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer,map) {
     } else {
         // Browser doesn't support Geolocation
         rider = map.getCenter();
-        console.log("failed");
     }
 
 }
