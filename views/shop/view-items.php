@@ -34,26 +34,10 @@
                 <th>Stock</th>
                 <th></th>
 
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-center"> <input type="checkbox" name="selected[]" value="44">
-                                    </td>
-                                    <td class="text-left">Veg044</td>
-                                    <td class="text-center"> <img src="https://essstr.blob.core.windows.net/essimg/350x/Small/Pic914006.jpg" alt="carrot" class="img-thumbnail"> </td>
-                                    <td class="text-left">Big Onion</td>
-                                    <td class="text-left">Onion</td>
-                                    <td class="text-right"> <span>RS.50.00</span>
-                                    </td>
-                                    <td class="text-left">100 g</td>
-                                    <td class="text-right"> <span class="label label-success">50 Kg</span> </td>
-                                    <td class="text-left">Enabled</td>
-                                    <td class="action-button">
-                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="far fa-edit"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-primary btn-yellow" data-original-title="Edit"><i class="far fa-eye"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-primary btn-red" data-original-title="Edit"><i class="far fa-trash-alt"></i></a>
-                                    </td>
+            </tr>
+            </thead>
+            <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
+            <tbody id="item-table" class="item-table-body body-half-screen">
 
 
             </tbody>
