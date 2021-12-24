@@ -11,10 +11,11 @@ use app\models\ShopOrder;
 <script src="/js/jquery.min.js"></script>
 <link rel="stylesheet" href="/css/dashboardStyle.css">
 <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
-
-<div class="core" style="height: height: 580px">
-    <h1 class="heading">Ongoing <span>Products</span></h1>
-    <div class="container-items">
+<div class="content">
+    <div class="update-content">
+        <div class="core shop-item-table">
+            <h1 class="heading">Ongoing <span>Products</span></h1>
+            <div class="container-items">
 
                 <table class="table-item small-first-col">
                     <thead>
