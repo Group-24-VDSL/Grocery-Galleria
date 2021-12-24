@@ -166,3 +166,7 @@ button{
     /*border: 0.1rem solid var(--home-color);*/
 }
 
+.ipdateImage{
+    border: 0px solid;
+}
+
