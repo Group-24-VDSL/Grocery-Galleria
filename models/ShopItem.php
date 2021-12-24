@@ -27,6 +27,17 @@ class ShopItem extends DBModel
         return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
     }
 
+    public function labels(): array{
+        return [
+            'ItemID'=>'Item ID',
+            'Name'=>'Item Name',
+            'Stock'=>'Item Stock',
+            'UPrice'=>'Item Unit Price',
+            'Enable'=>'Item Enable',
+            'Image'=>'Item Image'
+        ];
+    }
+
     public static function primaryKey(): array
     {
         return ['ShopID','ItemID'] ;
