@@ -62,7 +62,7 @@ $(document).ready(function () {
                             Item.Brand = "-";
                         }
 
-                        const ItemRow = document.createElement('tr');
+                                                const ItemRow = document.createElement('tr');
                         ItemRow.innerHTML = `
                                 <td></td>
                                 <td id="Name" class="row-name">${Shop.ItemID}</td>
@@ -71,12 +71,13 @@ $(document).ready(function () {
                                 </td>
                                 <td id="Name" class="row-name">${Item.Name}</td>                                
                                 <td id="Brand" class="row-brand">${Item.Brand}</td>
-                                <td id="Unit" class="row-unit">${Item.Unit}</td>
+<!--                                <td id="Unit" class="row-unit">${Item.Unit}</td>-->
                                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                                 <td id="UPrice" class="row-uprice">Rs.<input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
-                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"></td>                                                              
-                                `
+                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>                                                              
+                                <td id="Safety_${Shop.ShopID}_${Shop.ItemID}"></td>
+`
                         ItemTable.appendChild(ItemRow);
 
                         let x  = 'uPrice_'.concat(Shop.ShopID).concat('_').concat(Shop.ItemID);
@@ -133,6 +134,7 @@ function safetyStock(ShopItem){
         if (Items.length == 0){
             console.log("array is null")
             document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid green";
+            document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
         }
 
         else {
@@ -238,9 +240,13 @@ function safetyStock(ShopItem){
                         // console.log(ShopItem.Stock)
                         // $('#'.concat(Item.stockID)).style.color = "red";
                         document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid green";
+                        document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
 
-                    } else if (s > ShopItem.StockData) {
-                        document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid red";
+
+                    } else if (s > ShopItem.StockData){
+                        document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/office/30/000000/high-risk.png\"/>";
+
+                    document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid red";
 
                         // $('#'.concat(Item.stockID)).style.color = "red";
                     }
