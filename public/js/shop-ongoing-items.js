@@ -61,8 +61,11 @@ $(document).ready(function () {
                             toString(Item.Brand ) ;
                             Item.Brand = "-";
                         }
+                        let Unit =  (Item.Unit === 0)  ? "Kg" : (Item.Unit ===1) ? "gram"  : (Item.Unit ===2) ? "Litre" : "Packs";
 
-                                                const ItemRow = document.createElement('tr');
+
+
+                        const ItemRow = document.createElement('tr');
                         ItemRow.innerHTML = `
                                 <td></td>
                                 <td id="Name" class="row-name">${Shop.ItemID}</td>
