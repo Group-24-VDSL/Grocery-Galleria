@@ -170,3 +170,12 @@ button{
     border: 0px solid;
 }
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 34px;
+}
+
+.switch input {display:none;}
+
