@@ -102,6 +102,8 @@ $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vie
 $app->router->post('/dashboard/shop/vieworderdetails',[ShopController::class,'updateStatus']);
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
+$app->router->post('/dashboard/shop/viewitems',[ShopController::class,'viewitems']);
+$app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
 
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
