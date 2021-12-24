@@ -42,104 +42,104 @@ use app\models\ShopOrder;
                     <?php \app\core\form\Form::end(); ?>
                 </table>
 
-    </div>
-</div>
-
-
-    <div class="core" id="Update">
-    <h1 class="heading">Update <span>Products</span></h1>
-
-    <div class="container-core">
-
-        <div class="form-details register">
-            <div id = "updateItem">
-
             </div>
-            <?php $form = \app\core\form\Form::begin("","post","itemUpdate",[],"multipart/form-data",);?>
+        </div>
 
-            <input id="ItemID" name="ItemID" value="" hidden>
-            <div class="inputBox">
-                <label for="ID">
-                    <i class="fas fa-sort-amount-down"></i>
-                    <?php echo $model->labels()['ItemID']?>
-                </label>
 
-                <span class="fileds" id = "updateID">
+
+        <div style="margin-left: 0" class="core" id="Update">
+
+            <h1 class="heading">Update <span>Products</span></h1>
+
+            <div style="border: 0" class="container-core ">
+
+                <div style="padding: 0" class="form-details register">
+                    <div id = "updateItem">
+
+                    </div>
+                    <?php $form = \app\core\form\Form::begin("","post","itemUpdate",[],"multipart/form-data",);?>
+
+                    <input id="ItemID" name="ItemID" value="" hidden>
+                    <input id="ShopID" name="ShopID" value="" hidden>
+                    <div class="inputBox">
+                        <label for="ID">
+                            <i class="fas fa-sort-amount-down"></i>
+                            <?php echo $model->labels()['ItemID']?>
+                        </label>
+
+                        <span class="fileds" id = "updateID">
 
                 </span>
-            </div>
-            <div class="inputBox">
-                <label for="Name">
-                    <i class="fas fa-edit"></i>
-                    <?php echo $model->labels()['Name']?>
-                </label>
+                    </div>
+                    <div class="inputBox">
+                        <label for="Name">
+                            <i class="fas fa-edit"></i>
+                            <?php echo $model->labels()['Name']?>
+                        </label>
 
-                <span class="fileds" id = "updateName">
+                        <span class="fileds" id = "updateName">
 
                 </span>
+                    </div>
+                    <div class="inputBox">
+                        <label for="Image">
+                            <i class="far fa-images"></i>
+                            <?php echo $model->labels()['Image']?>
+                        </label>
 
-            </div>
-            <div class="inputBox">
-                <label for="Image">
-                    <i class="far fa-images"></i>
-                    <?php echo $model->labels()['Image']?>
-                </label>
-
-                <span class="image-box" >
+                        <span class="image-box" >
                     <img id="updateImage" >
                 </span>
 
-            </div>
-            <div class="inputBox">
-                <label for="Stock">
-                   <i class="fas fa-boxes"></i>
-                    <?php echo $model->labels()['Stock']?>
-                </label>
-                <?php echo $form->numberfieldonly($model,"Stock",10,10000,10);?>
-            </div>
+                    </div>
+                    <div class="inputBox">
+                        <label for="Stock">
+                            <i class="fas fa-boxes"></i>
+                            <?php echo $model->labels()['Stock']?>
+                        </label>
+                        <?php echo $form->numberfieldonly($model,"Stock",10,10000,1);?>
+                    </div>
 
-            <div class="inputBox">
-                <label for="Uprice">
-                    <i class="fas fa-coins"></i>
-                    <?php echo $model->labels()['UPrice']?>
-                </label>
-                <?php echo $form->numberfieldonly($model,"UnitPrice",10,10000,10);?>
-            </div>
+                    <div class="inputBox">
+                        <label for="Uprice">
+                            <i class="fas fa-coins"></i>
+                            <?php echo $model->labels()['UPrice']?>
+                        </label>
+                        <?php
 
-            <div class="inputBox">
-                <label for="Enable">
-                    <i class="far fa-flag"></i>
-                    <?php echo $model->labels()['Enable']?>
-                </label>
+                        echo $form->numberfieldonly($model,"UnitPrice",10,10000,1);?>
+                    </div>
 
-                <div  id="bit00_3">
-                    <label class="switch">
-                        <input type="checkbox" id="checkbox1">
-                        <div class="slider round">
-                            <span class="on">Enable&nbsp&nbsp</span>
-                            <span class="off">&nbsp&nbspDisable</span>
+                    <div class="inputBox">
+                        <label for="Enable">
+                            <i class="far fa-flag"></i>
+                            <?php echo $model->labels()['Enable']?>
+                        </label>
+
+                        <div  id="bit00_3">
+                            <label class="switch">
+                                <input type="checkbox" id="checkbox1">
+                                <div class="slider round">
+                                    <span class="on">Enabled&nbsp&nbsp</span>
+                                    <span class="off">&nbsp&nbspDisabled</span>
+                                </div>
+                            </label>
                         </div>
-                    </label>
+
+                    </div>
+                    <!--            --><?php //echo $form->fieldonly($model,"ShopID")->hiddenField();?>
+                    <!--            --><?php //echo $form->fieldonly($model,"Enabled")->hiddenField();?>
+                    <input id="Enabled" name="Enabled" hidden>
+
+                    <!--                <div class="inputBox"></div>-->
+
+                    <div class="inputBox btn-div">
+                        <button type="submit" class="btn update">Update</button>
+                    </div>
+                    <?php \app\core\form\Form::end()?>
                 </div>
-
-<!--                --><?php //echo $form->numberfieldonly($model,"Enabled",0,1,1);?>
-<!--                <span style="color: #003d2e">Enable --><?php //echo $form->fieldonly($model,"Enabled")->radioField()->setValue(1); ?><!--</span>-->
-<!---->
-<!--                <span style="color: red">Disable --><?php //echo $form->fieldonly($model,"Enabled")->radioField()->setValue(0); ?><!--</span>-->
-
             </div>
-            <?php echo $form->fieldonly($model,"ShopID")->hiddenField();?>
-            <?php echo $form->fieldonly($model,"Enabled")->hiddenField();?>
 
-            <!--                <div class="inputBox"></div>-->
-
-            <div class="inputBox btn-div">
-                <button type="submit" class="btn update">Update</button>
-            </div>
-            <?php \app\core\form\Form::end()?>
         </div>
     </div>
 </div>
-
-
-
