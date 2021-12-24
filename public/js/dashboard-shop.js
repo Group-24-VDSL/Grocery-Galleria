@@ -87,6 +87,15 @@ function shopItemUpdate(itemID){
     console.log(GetShopItem)
     console.log(GetItem)
 
+    $.getJSON(GetItem, function (Item) {
+        $.getJSON(GetShopItem, function (ShopItem) {
+            document.getElementById("updateID").textContent= ShopItem.ItemID;
+            document.getElementById("updateName").textContent= Item.Name;
+            $('#updateImage').attr('src',Item.ItemImage);
+            $('input[id=Stock]').val(ShopItem.Stock);
+            $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
+        });
+    });
     // $("#").innerHTML("jj")
 
 
