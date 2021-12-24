@@ -8,6 +8,7 @@ use app\models\ShopOrder;
 
 <link rel="stylesheet" href="/css/shop-items.css">
 <script src="/js/dashboard-shop.js" defer></script>
+<script src="/js/jquery.min.js"></script>
 <link rel="stylesheet" href="/css/dashboardStyle.css">
 <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
 
@@ -15,25 +16,25 @@ use app\models\ShopOrder;
     <h1 class="heading">Ongoing <span>Products</span></h1>
     <div class="container-items">
 
-        <table class="table-item small-first-col">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Item ID</th>
-                <th>Item Image</th>
-                <th>Item Name</th>
-                <th>Brand</th>
-                <th>U/Weight</th>
-                <th>Max Price</th>
-                <th>U/Price</th>
-                <th>Unit Price</th>
-                <th>Stock</th>
-                <th>enable</th>
-                <th></th>
-            </tr>
-            </thead>
-            <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
-            <tbody id="item-table" class="item-table-body body-half-screen">
+                <table class="table-item small-first-col">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Item ID</th>
+                        <th>Item Image</th>
+                        <th>Item Name</th>
+                        <th>Brand</th>
+                        <th>Unit</th>
+                        <th>Unit Weight</th>
+                        <th>Max Price</th>
+                        <th>U/Price</th>
+                        <th>Stock</th>
+                        <th>enable</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
+                    <tbody id="item-table" class="item-table-body body-half-screen">
 
 
             </tbody>
