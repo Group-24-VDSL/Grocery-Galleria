@@ -81,6 +81,14 @@ class APIController extends Controller
         return json_encode($orders);
     }
 
+    public function getShopOrder(Request $request , Response $response)
+    {
+        $response->setContentTypeJSON();
+        $order = ShopOrder::findOne(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($order);
+    }
+
     public function getDelivery(Request $request , Response $response)
     {
         $response->setContentTypeJSON();
