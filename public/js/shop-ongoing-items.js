@@ -136,7 +136,7 @@ function safetyStock(ShopItem){
     $.getJSON(URLFindShopOrderItem, function (Items) {
         if (Items.length == 0){
             console.log("array is null")
-            document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid green";
+            // document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid green";
             document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
         }
 
@@ -242,14 +242,14 @@ function safetyStock(ShopItem){
                     if (s <= ShopItem.StockData || s === []) {
                         // console.log(ShopItem.Stock)
                         // $('#'.concat(Item.stockID)).style.color = "red";
-                        document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid green";
+                        // document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid green";
                         document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
 
 
                     } else if (s > ShopItem.StockData){
                         document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/office/30/000000/high-risk.png\"/>";
 
-                    document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid red";
+                    // document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid red";
 
                         // $('#'.concat(Item.stockID)).style.color = "red";
                     }
