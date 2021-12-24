@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
+use app\models\Customer;
 use app\models\Delivery;
 use app\models\Item;
 use app\models\OrderCart;
