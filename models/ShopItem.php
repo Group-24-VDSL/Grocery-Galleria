@@ -12,6 +12,11 @@ class ShopItem extends DBModel
     public float $Stock = 0;
     public int $Enabled = 0;
 
+    public function save()
+    {
+        return parent::save();
+    }
+
     public static function tableName(): string
     {
         return 'shopitem';
