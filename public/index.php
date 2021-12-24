@@ -94,7 +94,8 @@ $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'p
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->post('/dashboard/shop/products',[ShopController::class,'productOverview']);
-$app->router->get('/dashboard/shop/viewItem',[ShopController::class,'viewitem']);
+$app->router->get('/dashboard/shop/viewitems',[ShopController::class,'viewitems']);
+//$app->router->patch('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
 $app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
 $app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
 $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
