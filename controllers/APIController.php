@@ -106,6 +106,14 @@ class APIController extends Controller
 
     }
 
+    public function getCustomer(Request $request,Response $response) // get all items from DB
+    {
+        $response->setContentTypeJSON();
+        $customer =Customer::findOne(array_slice($request->getBody(),1,null,true));
+        return json_encode($customer);
+
+    }
+
     public function getOrders(Request $request, Response $response) // get all orders from DB
     {
         $response->setContentTypeJSON();
