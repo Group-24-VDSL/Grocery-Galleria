@@ -92,7 +92,10 @@ function shopItemUpdate(itemID, shopID){
             console.log(ShopItem.Enabled);
             document.getElementById("updateID").textContent= ShopItem.ItemID;
             document.getElementById("updateName").textContent= Item.Name;
-            $('#updateImage').attr('src',Item.ItemImage);
+            $('input[id=ShopID]').val(ShopItem.ShopID);
+            $('input[id=ItemID]').val(ShopItem.ItemID);
+            // $('#updateImage').attr('src',Item.ItemImage);
+            $('img[id=updateImage]').attr('src',Item.ItemImage);
             $('input[id=Stock]').val(ShopItem.Stock);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
             console.log(ShopItem.Enabled);
@@ -103,6 +106,8 @@ function shopItemUpdate(itemID, shopID){
             else {
                 document.getElementById("checkbox1").checked = false;
             }
+
+
 
         });
     });
