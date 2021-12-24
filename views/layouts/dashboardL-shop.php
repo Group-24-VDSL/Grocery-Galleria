@@ -24,20 +24,26 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/dashboard/shop/products">
+            <a href="/dashboard/shop/viewitems">
                 <i class="bx bx-grid-alt"></i>
                 <span class="link-name">Dashboard</span>
             </a>
         </li>
         <li>
             <a href="/dashboard/shop/additem">
-                <i class="bx bx-box"></i>
+                <i class="bx bx-add-to-queue"></i>
+                <span class="link-name">Products</span>
+            </a>
+        </li>
+        <li>
+            <a href="/dashboard/shop/products">
+                <i class="bx bx-edit"></i>
                 <span class="link-name">Products</span>
             </a>
         </li>
         <li>
             <a href="/dashboard/shop/vieworders">
-                <i class="bx bx-list-ul"></i>
+                <i class="bx bx-list-ol"></i>
                 <span class="link-name">Order list</span>
             </a>
         </li>
