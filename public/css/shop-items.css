@@ -242,3 +242,8 @@ input:checked + .slider:before {
     font-family: Verdana, sans-serif;
 }
 
+input:checked+ .slider .on
+{display: block;}
+
+input:checked + .slider .off
+{display: none;}
