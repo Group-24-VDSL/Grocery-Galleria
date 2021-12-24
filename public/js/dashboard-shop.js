@@ -37,6 +37,8 @@ $(document).ready(function () {
             $.getJSON(URLShopItems, function (Items) {
                     Items.forEach(Item => {
 
+
+
                             const ItemRow = document.createElement('tr');
                             // itemRow.classList.add('tr');
                             ItemRow.innerHTML = `
@@ -47,6 +49,7 @@ $(document).ready(function () {
                     <img src="${Item.ItemImage}" alt="${Item.Name}" />
                 </td>
                 <td id="Name" class="row-name">${Item.Name}</td>
+                
                 <td id="Brand" class="row-brand">${Item.Brand}</td>
                 <td id="Unit" class="row-unit">${Item.Unit}</td>
                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
@@ -55,11 +58,12 @@ $(document).ready(function () {
                 <td id="Stock" class="row-stock">${Shop.Stock}</td>
                 <td id="Enable" class="row-enable">${Shop.Enable}</td>
                 <td class="row-ubutton">
-                    <button data-href="${Shop.ItemID}" class="btn-row">Update</button></a>
+                    <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID})">Update</button></a>
                 </td>
                 
                 `
                             ItemTable.appendChild(ItemRow);
+                            console.log(Item.Name)
                         }
                     )
                 }
@@ -71,4 +75,10 @@ $(document).ready(function () {
     )
 ;});
 
+function shopItemUpdate(itemID){
+    console.log(itemID);
+
+
+
+}
 
