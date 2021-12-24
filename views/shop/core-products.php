@@ -38,14 +38,14 @@ use app\models\ShopOrder;
                     <tbody id="item-table" class="item-table-body body-half-screen">
 
 
-            </tbody>
-            <?php \app\core\form\Form::end(); ?>
-        </table>
+                    </tbody>
+                    <?php \app\core\form\Form::end(); ?>
+                </table>
 
     </div>
 </div>
 
-<a name = "update">
+
     <div class="core" id="Update">
     <h1 class="heading">Update <span>Products</span></h1>
 
@@ -141,5 +141,5 @@ use app\models\ShopOrder;
     </div>
 </div>
 
-</a>
+
 
