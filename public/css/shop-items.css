@@ -247,3 +247,17 @@ input:checked+ .slider .on
 
 input:checked + .slider .off
 {display: none;}
+
+.update-content {
+    display: flex;
+}
+
+/*.form-details{*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(2, 1fr);*/
+/*    grid-auto-rows: 50px;*/
+/*    grid-gap: 1.5rem;*/
+/*    align-items: center;*/
+/*    padding: 1rem;*/
+/*}*/
+
