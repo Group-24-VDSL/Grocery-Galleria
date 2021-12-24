@@ -128,6 +128,7 @@ $app->router->post('/api/deletefromcart',[CartController::class,'deleteFromCart'
 $app->router->get('/api/orders',[APIController::class,'getOrders']);
 $app->router->get('/api/getordercart',[APIController::class,'getOrderCart']);
 $app->router->get('/api/getdelivery',[APIController::class,'getDelivery']);
+$app->router->get('/api/getshoporders',[APIController::class,'getShopOrders']);
 
 //rider
 $app->router->get('/rider/register',[RiderController::class,'riderRegister']);
