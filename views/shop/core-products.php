@@ -1,6 +1,9 @@
 <?php
 /** @var $model \app\models\ShopItem **/
 /** @var $form app\core\form\Form */
+
+use app\models\ShopOrder;
+
 ?>
 
 <link rel="stylesheet" href="/css/shop-items.css">
@@ -127,6 +130,7 @@
             <?php echo $form->fieldonly($model,"Enabled")->hiddenField();?>
 
             <!--                <div class="inputBox"></div>-->
+
             <div class="inputBox btn-div">
                 <button type="submit" class="btn update">Update</button>
             </div>
