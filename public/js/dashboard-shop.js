@@ -63,7 +63,7 @@ $(document).ready(function () {
                 <td id="Stock" class="row-stock">${Shop.Stock}</td>
                 <td id="Enable" class="row-enable">${Shop.Enabled}</td>
                 <td class="row-ubutton">
-                    <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID})">Update</button></a>
+                    <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID},${Shop.ShopID})">Update</button></a>
                 </td>
                 
                 `
@@ -80,20 +80,23 @@ $(document).ready(function () {
     )
 ;});
 
-function shopItemUpdate(itemID){
+function shopItemUpdate(itemID, shopID){
     console.log(itemID);
-    const GetShopItem = URLShopItemAPI.concat("?ItemID=").concat(itemID);
+    const GetShopItem = URLShopItemAPI.concat("?ItemID=").concat(itemID).concat("&ShopID=").concat(shopID);
     const GetItem =  URLFindItemAPI.concat("?ItemID=").concat(itemID);
     console.log(GetShopItem)
     console.log(GetItem)
 
     $.getJSON(GetItem, function (Item) {
         $.getJSON(GetShopItem, function (ShopItem) {
+            console.log(ShopItem.Enabled);
             document.getElementById("updateID").textContent= ShopItem.ItemID;
             document.getElementById("updateName").textContent= Item.Name;
             $('#updateImage').attr('src',Item.ItemImage);
             $('input[id=Stock]').val(ShopItem.Stock);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
+
+
         });
     });
     // $("#").innerHTML("jj")
