@@ -261,3 +261,18 @@ input:checked + .slider .off
 /*    padding: 1rem;*/
 /*}*/
 
+.button-item-update:hover {
+    background-color: darkgreen;
+}
+.button-item-update {
+    align-items: flex-end;
+    height: 50px;
+    width: 200px;
+    background-color: var(--first-color);
+    color: var(--body-color);
+    border: 0px solid;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 2rem;
+    float: right;
+}
