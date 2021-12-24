@@ -61,7 +61,7 @@ $(document).ready(function () {
                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                 <td id="UPrice" class="row-uprice">${Shop.UnitPrice}</td>
                 <td id="Stock" class="row-stock">${Shop.Stock}</td>
-                <td id="Enable" class="row-enable">${Shop.Enable}</td>
+                <td id="Enable" class="row-enable">${Shop.Enabled}</td>
                 <td class="row-ubutton">
                     <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID})">Update</button></a>
                 </td>
