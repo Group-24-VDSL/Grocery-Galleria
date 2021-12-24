@@ -107,7 +107,16 @@ function shopItemUpdate(itemID, shopID){
                 document.getElementById("checkbox1").checked = false;
             }
 
-
+            $("#checkbox1").on('change', function(){
+                if ($('#checkbox1').is(':checked')) {
+                    $('input[id=Enabled]').val(1);
+                    console.log("checked=1")
+                }
+                else {
+                    $('input[id=Enabled]').val(0);
+                    console.log("unchecked=0")
+                }
+            })
 
         });
     });
