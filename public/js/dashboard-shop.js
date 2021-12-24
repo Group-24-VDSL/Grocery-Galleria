@@ -37,7 +37,10 @@ $(document).ready(function () {
             $.getJSON(URLShopItems, function (Items) {
                     Items.forEach(Item => {
 
-
+                        if(!Item.Brand ){
+                            toString(Item.Brand ) ;
+                            Item.Brand = "-";
+                        }
 
                             const ItemRow = document.createElement('tr');
                             // itemRow.classList.add('tr');
