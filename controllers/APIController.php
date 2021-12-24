@@ -123,5 +123,12 @@ class APIController extends Controller
     }
 
 
+    public function getOrder(Request $request, Response $response) // get all orders from DB
+    {
+        $response->setContentTypeJSON();
+        $order = Orders::findOne(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($order);
+    }
 
 }
