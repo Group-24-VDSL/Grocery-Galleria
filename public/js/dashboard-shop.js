@@ -95,7 +95,14 @@ function shopItemUpdate(itemID, shopID){
             $('#updateImage').attr('src',Item.ItemImage);
             $('input[id=Stock]').val(ShopItem.Stock);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
+            console.log(ShopItem.Enabled);
 
+            if (ShopItem.Enabled === 1){
+                document.getElementById("checkbox1").checked = true;
+            }
+            else {
+                document.getElementById("checkbox1").checked = false;
+            }
 
         });
     });
