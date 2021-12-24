@@ -19,10 +19,12 @@ const host = window.location.origin; //http://domainname
 //Api links
 
 
-const URLShopItemAPI = host + "/api/shopitems";
-const URLFindItemAPI = host + "/api/items";
+const URLShopItemsAPI = host + "/api/shopitems";
+const URLShopItemAPI = host + "/api/shopitem";
+const URLFindItemsAPI = host + "/api/items";
+const URLFindItemAPI = host + "/api/item";
 
-const URLGetShop = URLShopItemAPI.concat('?ShopID=').concat('5');
+const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat('5');
 
 const ItemTable = document.getElementById('item-table');
 // ItemTable.classList.add('item-table-body body-half-screen');
@@ -31,7 +33,7 @@ $(document).ready(function () {
     $.getJSON(URLGetShop, function (Shops) {
         Shops.forEach(Shop => {
             // itemRow.classList.add('row');
-            const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);
+            const URLShopItems = URLFindItemsAPI.concat("?ItemID=").concat(Shop.ItemID);
             console.log(URLShopItems);
 
             $.getJSON(URLShopItems, function (Items) {
@@ -80,7 +82,12 @@ $(document).ready(function () {
 
 function shopItemUpdate(itemID){
     console.log(itemID);
+    const GetShopItem = URLShopItemAPI.concat("?ItemID=").concat(itemID);
+    const GetItem =  URLFindItemAPI.concat("?ItemID=").concat(itemID);
+    console.log(GetShopItem)
+    console.log(GetItem)
 
+    // $("#").innerHTML("jj")
 
 
 }
