@@ -151,7 +151,6 @@ use app\models\ShopItem;
 
                             echo $form->fieldonly($model, "ShopID")->setValue($shoporder-> ShopID)->numberField()->hiddenField();
                             echo $form->fieldonly($model, "CartID")->setValue($shoporder-> CartID)->numberField()->hiddenField();
-                            echo $form->fieldonly($model, "CompleteDate")->setValue(date("d-m-Y"))->hiddenField();
                             echo $form->fieldonly($model, "Status")->setValue(1)->numberField()->hiddenField();?>
                             <button type="submit" id="not-complete" class="complete-btn" value="Complete" onclick="markCompleted()"><span id = "status">Mark as Completed</span></button>
                             <div style="display: none" id="completed" class="complete-div" type="submit" value="Complete"><span id = "status">Order is Completed !!!</span><img src="https://img.icons8.com/color/48/000000/checked-2--v1.png"/></div>
