@@ -140,7 +140,18 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
 }
-.home-content .core .container-core form .inputBox input:focus {
+
+.home-content .core .container-core form .inputBox textarea{
+  width: 90%;
+  margin-left: 0.5rem;
+  height: 58px;
+  border: 0.1rem solid var(--home-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.home-content .core .container-core form .inputBox input:focus,
+.home-content .core .container-core form .inputBox textarea:focus{
   outline: 0.1rem solid var(--text-color-light);
 }
 .home-content .core .container-core form .btn-div {
