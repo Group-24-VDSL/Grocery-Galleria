@@ -177,6 +177,9 @@ abstract class DBModel extends Model
         foreach ($where as $key => $item) {
             $statement->bindValue(":$key", $item);
         }
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_CLASS);
+//        return (int)$statement->fetchColumn();
 
     }
 
