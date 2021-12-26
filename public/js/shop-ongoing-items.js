@@ -381,6 +381,7 @@ function updateShopItem(){
         }
 
     })
+    location.reload();
 
 }
 
