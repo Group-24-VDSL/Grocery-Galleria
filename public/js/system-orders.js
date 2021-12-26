@@ -14,7 +14,7 @@
 //     return false;
 // }
 // const host = window.location.origin; //http://domainname
-console.log("aaa");
+
 const URLOrderAPI = host + "/api/orders";
 const URlCustomerAPI = host + "/api/getcustomer";
 const URLShops = host + "/api/shops";
