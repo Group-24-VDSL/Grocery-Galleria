@@ -60,7 +60,7 @@
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/shop/profilesettings">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>
