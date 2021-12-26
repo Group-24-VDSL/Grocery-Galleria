@@ -172,6 +172,7 @@ abstract class DBModel extends Model
     {
         $tableName = static::tableName();
         $attributes = array_keys($where);
+        $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
 
 
     }
