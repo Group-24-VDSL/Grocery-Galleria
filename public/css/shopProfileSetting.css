@@ -1,0 +1,13 @@
+.fileds {
+    width: 90%;
+    margin-left: 0.5rem;
+    height: 38px;
+    /*border: 0.1rem solid var(--home-color);*/
+    padding: 0.5rem;
+    color: var(--title-color);
+    padding: 0.5rem;
+    font-size: var(--small-font-size);
+    background: var(--input-background-color);
+    text-transform: none;
+    /*border: 0.2rem solid var(--home-color);*/
+}
