@@ -62,7 +62,7 @@ class Shop extends UserModel
 //            'ConfirmPassword' => [self::RULE_MATCH,'match' => 'Password'],//check if the user class has the same email or not.
             'Name' => [self::RULE_REQUIRED],
             'Address' => [self::RULE_REQUIRED],
-            'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE],
+            'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE,[self::RULE_MAX,'max' => 10],[self::RULE_MIN,'min' => 10]],
             'City' => [self::RULE_REQUIRED],
             'Suburb' => [self::RULE_REQUIRED],
             'Location' => [self::RULE_REQUIRED],
