@@ -9,7 +9,9 @@
 <div class="core">
     <h1 class="heading">Profile <span>Settings</span></h1>
     <div class="container-core" style="height: 420px">
-
+        <?php $form = \app\core\form\Form::begin("/dashboard/shop/profilesettings","post","shopUpdate",[]);?>
+        <!--        --><?php //$form = \app\core\form\Form::begin("/test","post","staffUpdate",[]);?>
+        <!--        <input id="StaffID" name="StaffID" value="11" hidden>-->
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-store'></i></i> Shop Name</label>
 
@@ -51,6 +53,8 @@
         <div class="inputBox btn-div">
             <button type="submit" class="btn update">Update</button>
         </div>
+        <?php \app\core\form\Form::end()?>
+
     </div>
 
     <h1 class="heading">Change <span>Password</span></h1>
