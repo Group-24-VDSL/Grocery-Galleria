@@ -77,9 +77,9 @@
         <?php \app\core\form\Form::end()?>
 
     </div>
-
     <h1 class="heading">Change <span>Password</span></h1>
     <div class="container-core">
+        <?php $form = \app\core\form\Form::begin("/dashboard/shop/profileupdate","post","userUpdate",[]);?>
         <div class="inputBox">
             <label for="Password"><i class="fas fa-key"></i>Current Password</label>
 
@@ -96,6 +96,6 @@
         <div class="inputBox btn-div">
             <button type="submit" class="btn update">Update</button>
         </div>
-
+        <?php \app\core\form\Form::end()?>
     </div>
 </div>
