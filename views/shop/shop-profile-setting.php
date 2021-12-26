@@ -82,7 +82,7 @@
         <?php $form = \app\core\form\Form::begin("/dashboard/shop/profileupdate","post","userUpdate",[]);?>
         <div class="inputBox">
             <label for="Password"><i class="fas fa-key"></i>Current Password</label>
-
+            <?php echo $form->fieldonly($loginmodel,"Password")->passwordField();?>
         </div>
         <div class="inputBox">
             <label for="NewPwd"><i class="fas fa-key"></i>Password</label>
