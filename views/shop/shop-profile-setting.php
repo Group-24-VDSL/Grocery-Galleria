@@ -20,7 +20,7 @@
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-category' ></i> Shop Category</label>
-
+                        <?php echo $form->fieldonly($model,"Category"); ?>
             <span class="fileds">
 
             </span>
