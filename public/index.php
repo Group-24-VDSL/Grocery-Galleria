@@ -105,6 +105,7 @@ $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'viewitems']);
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
+$app->router->get('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
 
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
