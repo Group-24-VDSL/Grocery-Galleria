@@ -118,6 +118,7 @@ $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
 $app->router->get('/api/shop',[APIController::class,'getShop']);
 $app->router->get('/api/shops',[APIController::class,'getAllShop']);
+$app->router->get('/api/getcustomer',[APIController::class,'getCustomer']);
 
 //api - customer
 $app->router->get('/api/getcart',[CartController::class,'getTempCart']);
