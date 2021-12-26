@@ -1,4 +1,9 @@
-
+<?php
+/** @var $model \app\models\Shop **/
+/** @var $loginmodel \app\models\User **/
+/** @var $form app\core\form\Form  */
+?>
+<!-- Profile section starts -->
 
 <link rel="stylesheet" href="/css/shopProfileSetting.css" />
 <div class="core">
