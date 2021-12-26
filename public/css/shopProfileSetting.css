@@ -10,4 +10,7 @@
     background: var(--input-background-color);
     text-transform: none;
     /*border: 0.2rem solid var(--home-color);*/
+    border-radius: 0.5rem;
+    border: 0px solid;
+    border-radius: 0.5rem;
 }
