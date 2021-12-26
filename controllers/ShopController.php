@@ -31,88 +31,80 @@ class ShopController extends Controller
         $item = new Item();
         $this->setLayout("dashboardL-shop");
 
-        if($request->isPost()){
+        if ($request->isPost()) {
             $item->loadData($request->getBody());
 
-            if($item->validate() && $item->update()){
+            if ($item->validate() && $item->update()) {
                 Application::$app->session->setFlash("success", "Item Updated Successfully.");
                 Application::$app->response->redirect("/dashboard/shop/products");
-            }else{
+            } else {
                 Application::$app->session->setFlash("warning", "Validation Failed.");
                 return $this->render("shop/core-products"
-                    ,[
+                    , [
                         'model' => $item
                     ]);
             }
         }
         return $this->render("shop/core-products"
-            ,[
+            , [
                 'model' => $item
             ]);
     }
 
-    public function additem(Request $request){
+    public function additem(Request $request)
+    {
 
-        $shopItem =new ShopItem();
+        $shopItem = new ShopItem();
         $this->setLayout('dashboardL-shop');
-        if($request->isPost()){
+        if ($request->isPost()) {
             $shopItem->loadData($request->getBody());
-            if($request->getBody()['Unit'] == "Kg"){
+            if ($request->getBody()['Unit'] == "Kg") {
                 $stock = $shopItem->Stock;
-                $stock = $stock*1000;
+                $stock = $stock * 1000;
                 $shopItem->Stock = $stock;
             }
-                if($shopItem->validate() && $shopItem->save()){
-                    Application::$app->session->setFlash("success", "Item Saved.");
-                    Application::$app->response->redirect("/dashboard/shop/additem");
-                }else{
-                    Application::$app->session->setFlash("warning", "Validation Failed.");
-                    return $this->render("shop/add-item"
-                        ,[
-                            'model' => $shopItem
-                        ]);
-                }
+            if ($shopItem->validate() && $shopItem->save()) {
+                Application::$app->session->setFlash("success", "Item Saved.");
+                Application::$app->response->redirect("/dashboard/shop/additem");
+            } else {
+                Application::$app->session->setFlash("warning", "Validation Failed.");
+                return $this->render("shop/add-item"
+                    , [
+                        'model' => $shopItem
+                    ]);
             }
-        return $this->render('shop/add-item',[
+        }
+        return $this->render('shop/add-item', [
             'model' => $shopItem
         ]);
     }
 
-    public function vieworders(){
+    public function vieworders()
+    {
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/view-orders');
     }
 
-    public function vieworderdetails(Request $request){
-
-
-        $shoporder = new ShopOrder() ;
+    public function vieworderdetails(Request $request)
+    {
+        $shoporder = new ShopOrder();
         $this->setLayout('headeronly-staff');
 
-        //var_dump($request ->getBody());
-        $ShopID = $request ->getBody()["ShopID"];
-        $CartID = $request ->getBody()["CartID"];
+        $ShopID = $request->getBody()["ShopID"];
+        $CartID = $request->getBody()["CartID"];
 
-        $shoporder = ShopOrder ::findOne([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
-        $cartitems = OrderCart ::findAll([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
-        //var_dump($cartitems);
-
+        $shoporder = ShopOrder::findOne(["ShopID" => $ShopID, "CartID" => $CartID]);
+        $cartitems = OrderCart::findAll(["ShopID" => $ShopID, "CartID" => $CartID]);
         $shopitems = [];
 
-        foreach($cartitems as $cartitem){
-            $shopitem = ShopItem::findOne(['ItemID'=>$cartitem->ItemID,'ShopID'=>$cartitem->ShopID]);
-            $item = Item::findOne(['ItemID'=>$cartitem->ItemID]);
-            //   var_dump($shopitem);
-            //   var_dump($item);
-            $shopitems[$cartitem->ShopID][$cartitem->ItemID]=[$shopitem,$item];
-            //   var_dump($shopitem);
+        foreach ($cartitems as $cartitem) {
+            $shopitem = ShopItem::findOne(['ItemID' => $cartitem->ItemID, 'ShopID' => $cartitem->ShopID]);
+            $item = Item::findOne(['ItemID' => $cartitem->ItemID]);
+            $shopitems[$cartitem->ShopID][$cartitem->ItemID] = [$shopitem, $item];
+
         }
 
-        //var_dump($cartitems);
-
-        return $this->render('shop/view-order-details',['shoporder'=>$shoporder,'cartitems'=>$cartitems, 'shopitem'=>$shopitems , 'item'=>$item, 'model'=>$shoporder]);
+        return $this->render('shop/view-order-details', ['shoporder' => $shoporder, 'cartitems' => $cartitems, 'shopitem' => $shopitems, 'model' => $shoporder]);
     }
 
     public function updateStatus(Request $request)
@@ -120,14 +112,16 @@ class ShopController extends Controller
         $this->setLayout("dashboardL-shop");
         $orderUpdated = new ShopOrder();
 
+
         if ($request->isPost()) {
             $orderUpdated->loadData($request->getBody());
 
-            $ShopID = $orderUpdated->ShopID ;
-            $CartID = $orderUpdated->CartID ;
-            $orderUpdated = ShopOrder::findOne(['ShopID'=>$ShopID,'CartID'=>$CartID]);
+            $ShopID = $orderUpdated->ShopID;
+            $CartID = $orderUpdated->CartID;
+            $orderUpdated = ShopOrder::findOne(['ShopID' => $ShopID, 'CartID' => $CartID]);
 
-            $orderUpdated->Status = 1;
+            $orderUpdated->Status = 1 ;
+            $orderUpdated->CompleteDate = date("Y-m-d");
 
             if ($orderUpdated->validate('update') && $orderUpdated->update()) {
 
@@ -164,21 +158,21 @@ class ShopController extends Controller
         $user = new Shop(); // Create customer
         $user->loadData($request->getBody());
         if ($request->isPost()) {
-            $userid = AuthController::register($request,'Shop');
-            if($userid){
+            $userid = AuthController::register($request, 'Shop');
+            if ($userid) {
                 $user->ShopID = $userid; //save the ShopID = UserID
-                if($user->validate() && $user->save()){
+                if ($user->validate() && $user->save()) {
                     Application::$app->session->setFlash('success', 'Registration Success');
-                    $status = AuthController::verificationSend($user->ShopID,$user->Name,$user->Email);
-                    if($status){
-                    Application::$app->response->redirect('/login');
+                    $status = AuthController::verificationSend($user->ShopID, $user->Name, $user->Email);
+                    if ($status) {
+                        Application::$app->response->redirect('/login');
                     }
-                }else{
+                } else {
                     Application::$app->session->setFlash('error', 'Registration Failed');
                     $this->setLayout('register');
                     return $this->render("shop/register", ['model' => $user]);
                 }
-            }else {
+            } else {
                 Application::$app->session->setFlash('error', 'Registration Failed');
                 $this->setLayout('register');
                 return $this->render("shop/register", ['model' => $user]);
@@ -188,7 +182,33 @@ class ShopController extends Controller
             'model' => $user
         ]);
     }
-}
-    
 
+
+    public function updateItem(Request $request)
+    {
+        $itemUpdated = new ShopItem();
+        $this->setLayout("dashboardL-shop");
+
+        if ($request->isPost()) {
+            $itemUpdated->loadData($request->getBody());
+
+            if ($itemUpdated->validate('update') && $itemUpdated->update()) {
+                Application::$app->session->setFlash("success", "Item update is success" );
+                Application::$app->response->redirect("/dashboard/shop/products");
+            } else {
+                Application::$app->session->setFlash("warning", "Validation Failed.");
+                return $this->render("shop/core-products"
+                    , [
+                        'model' => $itemUpdated
+                    ]);
+            }
+        }
+        return $this->render("shop/core-products"
+            , [
+                'model' => $itemUpdated
+            ]);
+    }
+
+
+}
 
