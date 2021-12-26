@@ -168,5 +168,10 @@ abstract class DBModel extends Model
         return $statement->fetch($fetch_type);
     }
 
+    public static function findCount($countSelect,$s,$where=[],$group,$limit=null)
+    {
+
+    }
+
 
 }
