@@ -211,7 +211,34 @@ class TestController extends Controller
         ]);
     }
 
-
+    public function profileUpdate(Request $request)
+    {// get logged staff ID
+        $staff = new Shop();
+        $user = new User();
+        $user = $user->findOne(['UserID' => 3]);
+        if ($request->isPost()) {
+            $success = false;{
+                $user->loadData($request->getBody());
+                $user->loadData($request->getBody());
+                if ($user->validate('update') && $user->update()) {
+                    Application::$app->session->setFlash('success', 'Update Success');
+                }else{
+                    Application::$app->session->setFlash('danger', 'Update Failed');
+                    Application::$app->response->redirect('shop/shop-profile-setting');
+                    $this->setLayout("dashboardL-shop");
+                    return $this->render("shop/shop-profile-setting", [
+                        'model' => $staff,
+                        'loginmodel' => $user
+                    ]);
+                }
+            }
+        }
+        $this->setLayout("dashboardL-shop");
+        return $this->render("shop/shop-profile-setting", [
+            'model' => $staff,
+            'loginmodel' => $user
+        ]);
+    }
 
 
 }
