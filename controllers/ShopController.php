@@ -32,8 +32,9 @@ class ShopController extends Controller
         return $this->render('gallery');
     }
 
-    public function productOverview(Request $request){
-        $item = new Item();
+    public function productOverview(Request $request)
+    {
+        $item = new ShopItem();
         $this->setLayout("dashboardL-shop");
 
         if ($request->isPost()) {
