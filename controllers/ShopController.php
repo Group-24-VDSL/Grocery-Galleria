@@ -249,5 +249,52 @@ class ShopController extends Controller
         return $response->json('{"success":"fail"}');
     }
 
+    public function profilesettings(Request $request)
+    {
+        // get logged staff ID
+        $shop = new Shop();
+        $newObj = new Shop();
+        $tempObj =new Shop();
+        $user = new User();
+
+        $this->setLayout("dashboardL-shop");
+
+        $shop = $shop->findOne(['ShopID' => 3]);
+        $user = $user->findOne(['UserID' => 3]);
+
+        if ($request->isPost()) {
+            $tempObj->loadData($request->getBody());
+
+            $newObj = Shop::findOne(['ShopID'=>3]);
+
+            $newObj->Name = $tempObj->Name ;
+            $newObj->ShopName = $tempObj->ShopName ;
+            $newObj->Email = $tempObj->Email ;
+            $newObj->ShopDesc = $tempObj->ShopDesc ;
+            $newObj->ContactNo = $tempObj->ContactNo ;
+
+
+
+//            $newObj->StaffID = Application::getCustomerID(); // get session id
+//            $newObj->ShopID = 3;
+            if ($newObj->validate('update') && $newObj->update()) {
+//                $newObj->singleProcedure('email_update', $newObj->ShopID, $newObj->Email);
+                Application::$app->session->setFlash('success','Update Success');
+                Application::$app->response->redirect('/dashboard/shop/profilesettings');
+            } else {
+                Application::$app->session->setFlash('danger', 'Update Failed');
+                $this->setLayout("dashboardL-shop");
+                return $this->render("shop/shop-profile-setting", [
+                    'model' => $newObj,
+                    'loginmodel' => $user
+                ]);
+            }
+        }
+        return $this->render("shop/shop-profile-setting", [
+            'model' => $shop,
+            'loginmodel' => $user
+        ]);
+    }
+
 }
 
