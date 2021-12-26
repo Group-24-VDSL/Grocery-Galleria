@@ -233,68 +233,69 @@ class StaffController extends Controller
             'loginmodel' => $user
         ]);
     }
+//-> view system order details by 19001541
 
-    public function vieworderdetails(Request $request)
-    {
-        $this->setLayout('headeronly-staff');
-        $OrderID = $request->getBody()["OrderID"];
-
-        $ShopCount = $request->getBody()["ShopCount"];
-
-//        var_dump($ShopCount);
-//        var_dump($OrderID);
-
-        $order = Orders::findOne(["OrderID" => $OrderID]);
-//        var_dump($order);
-        $CustomerID = $order->CustomerID;
-        $customer = Customer::findOne(["CustomerID" => $CustomerID]);
-
-        $carts = OrderCart::findAll(["CartID" => $order->CartID]);
-        $shopOrders = ShopOrder::findAll(["CartID" => $order->CartID]);
-
-
-        $shops = [];
-
-        foreach ($shopOrders as $shopOrder) {
-            $ItemsArray = [];
-            $itemList = [];
-            $shopWeight = 0;
-//            var_dump($shopOrder);
-
-
-            $shop = Shop::findOne(["ShopID" => $shopOrder->ShopID]);
-
-            $i = 0;
-            $orderCarts = OrderCart::findAll(["ShopID" => $shopOrder->ShopID, "CartID" => $order->CartID]);
-
-            foreach ($orderCarts as $cart) {
-//                var_dump($cart->ItemID);
-
-                $shopItem = ShopItem::findOne(["ItemID" => $cart->ItemID]);
-                $systemItem = Item::findOne(["ItemID" => $cart->ItemID]);
-
-//                $itemList[$i] = ["shopItem"=>$shopItem, "systemItem"=>$systemItem];
-
-
-                array_push($itemList, ["shopItem" => $shopItem, "systemItem" => $systemItem , "quantity" => $cart->Quantity]);
-
-                $shopWeight = ($cart->Quantity * $systemItem->UWeight) / 1000;
-//                var_dump($shopItem);
-
-            }
-
-            $ItemsArray[] = $itemList;
-            $i += 1;
-
-
-            $shops[$shopOrder->ShopID] = ["shop" => $shop, "shopOrder" => $shopOrder, "itemList" => $ItemsArray, "shopWeight" => $shopWeight];
-        }
-
-
-        return $this->render('staff/view-orders-details',
-            ['order' => $order, 'customer' => $customer, 'shops' => $shops]);
-
-
-    }
+//    public function vieworderdetails(Request $request)
+//    {
+//        $this->setLayout('headeronly-staff');
+//        $OrderID = $request->getBody()["OrderID"];
+//
+//        $ShopCount = $request->getBody()["ShopCount"];
+//
+////        var_dump($ShopCount);
+////        var_dump($OrderID);
+//
+//        $order = Orders::findOne(["OrderID" => $OrderID]);
+////        var_dump($order);
+//        $CustomerID = $order->CustomerID;
+//        $customer = Customer::findOne(["CustomerID" => $CustomerID]);
+//
+//        $carts = OrderCart::findAll(["CartID" => $order->CartID]);
+//        $shopOrders = ShopOrder::findAll(["CartID" => $order->CartID]);
+//
+//
+//        $shops = [];
+//
+//        foreach ($shopOrders as $shopOrder) {
+//            $ItemsArray = [];
+//            $itemList = [];
+//            $shopWeight = 0;
+////            var_dump($shopOrder);
+//
+//
+//            $shop = Shop::findOne(["ShopID" => $shopOrder->ShopID]);
+//
+//            $i = 0;
+//            $orderCarts = OrderCart::findAll(["ShopID" => $shopOrder->ShopID, "CartID" => $order->CartID]);
+//
+//            foreach ($orderCarts as $cart) {
+////                var_dump($cart->ItemID);
+//
+//                $shopItem = ShopItem::findOne(["ItemID" => $cart->ItemID]);
+//                $systemItem = Item::findOne(["ItemID" => $cart->ItemID]);
+//
+////                $itemList[$i] = ["shopItem"=>$shopItem, "systemItem"=>$systemItem];
+//
+//
+//                array_push($itemList, ["shopItem" => $shopItem, "systemItem" => $systemItem , "quantity" => $cart->Quantity]);
+//
+//                $shopWeight = ($cart->Quantity * $systemItem->UWeight) / 1000;
+////                var_dump($shopItem);
+//
+//            }
+//
+//            $ItemsArray[] = $itemList;
+//            $i += 1;
+//
+//
+//            $shops[$shopOrder->ShopID] = ["shop" => $shop, "shopOrder" => $shopOrder, "itemList" => $ItemsArray, "shopWeight" => $shopWeight];
+//        }
+//
+//
+//        return $this->render('staff/view-orders-details',
+//            ['order' => $order, 'customer' => $customer, 'shops' => $shops]);
+//
+//
+//    }
 
 }
