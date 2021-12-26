@@ -14,7 +14,8 @@
         <!--        <input id="StaffID" name="StaffID" value="11" hidden>-->
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-store'></i></i> Shop Name</label>
-
+            <?php echo $form->fieldonly($model,"ShopName"); ?>
+            <!--            <span class="fileds">--><?php //echo $model->ShopName ?><!--</span>-->
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-category' ></i> Shop Category</label>
@@ -29,6 +30,8 @@
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-user'></i></i> Address</label>
+            <!--            --><?php //echo $form->fieldonly($model,"Name"); ?>
+            <span class="fileds"><?php echo $model->Address ?></span>
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-business'></i></i> City </label>
