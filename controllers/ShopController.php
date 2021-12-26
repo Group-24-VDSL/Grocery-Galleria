@@ -6,11 +6,15 @@ use app\core\Application;
 use app\core\Controller;
 use app\controllers\APIController;
 use app\core\Request;
+use app\core\Response;
 use app\models\Item;
 use app\models\OrderCart;
 use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
+use app\models\Staff;
+use app\models\TemporaryCart;
+use app\models\User;
 use SendGrid\Mail\TypeException;
 
 class ShopController extends Controller
@@ -21,6 +25,7 @@ class ShopController extends Controller
         $this->setLayout('shop');
         return $this->render('shop');
     }
+
     public function shopGallery()
     {
         $this->setLayout('gallery');
