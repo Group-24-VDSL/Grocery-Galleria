@@ -20,9 +20,23 @@
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-category' ></i> Shop Category</label>
-                        <?php echo $form->fieldonly($model,"Category"); ?>
+            <!--            --><?php //echo $form->fieldonly($model,"Name"); ?>
             <span class="fileds">
-
+                <?php
+                if($model->Category === 0){
+                    $category = "Grocery";
+                }
+                elseif ($model->Category === 1){
+                    $category = "Vegetable";
+                }
+                elseif ($model->Category === 2){
+                    $category = "Meat";
+                }
+                elseif ($model->Category === 3){
+                    $category = "Fruits";
+                }
+                echo $category
+                ?>
             </span>
         </div>
         <div class="inputBox">
