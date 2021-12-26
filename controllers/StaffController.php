@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use app\models\Customer;
+use app\models\OrderCart;
 use app\models\Orders;
 use app\models\Shop;
+use app\models\ShopItem;
 use app\models\ShopOrder;
 use app\models\Staff;
 use app\core\Application;
@@ -158,9 +160,22 @@ class StaffController extends Controller
     public function addcomplaint(Request $request)
     {
         $complaint = new Complaint();
+
         $this->setLayout("headeronly-staff");
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
+
+            $complaint->ComplaintDate =  date("d-m-Y");
+
+            $OrderID = $complaint->OrderID ;
+            $order = Orders::findOne(['OrderID' => $OrderID]);
+            if(!$order){
+                Application::$app->session->setFlash("warning", "Order is not in the system");
+                Application::$app->response->redirect("/dashboard/staff/addcomplaint");
+            }
+            $complaint->OrderDate = $order->OrderDate;
+
+
 
             if ($complaint->validate() && $complaint->save()) {
                 Application::$app->session->setFlash("success", "Complaint Saved.");
