@@ -2,6 +2,7 @@
 /** @var $model \app\models\Shop **/
 /** @var $loginmodel \app\models\User **/
 /** @var $form app\core\form\Form  */
+
 ?>
 <!-- Profile section starts -->
 
@@ -26,7 +27,8 @@
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-user'></i></i> Owner Name</label>
-
+            <?php echo $form->fieldonly($model,"Name"); ?>
+            <!--            <span class="fileds">--><?php //echo $model->Name ?><!--</span>-->
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-user'></i></i> Address</label>
@@ -35,23 +37,25 @@
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-business'></i></i> City </label>
-
+            <!--            --><?php //echo $form->fieldonly($model,"Name"); ?>
+            <span class="fileds"><?php echo $model->City?></span>
         </div>
         <div class="inputBox">
             <label for="Username"><i class='bx bxs-buildings'></i> Suburb </label>
-
+            <!--            --><?php //echo $form->fieldonly($model,"Name"); ?>
+            <span class="fileds"><?php echo $model->Suburb ?></span>
         </div>
         <div class="inputBox">
             <label for="Email"><i class="fas fa-envelope"></i>Email</label>
-
+            <?php echo $form->fieldonly($model,"Email");?>
         </div>
         <div class="inputBox">
             <label for="contact"><i class="fas fa-phone"></i>Contact No</label>
-
+            <?php echo $form->fieldonly($model,"ContactNo");?>
         </div>
         <div class="inputBox">
             <label for="contact"><i class='bx bxs-book-open'></i>Description</label>
-
+            <?php echo $form->textAreaOnly($model,"ShopDesc");?>
         </div>
         <div class="inputBox btn-div">
             <button type="submit" class="btn update">Update</button>
