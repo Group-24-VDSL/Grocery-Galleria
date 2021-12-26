@@ -215,6 +215,39 @@ class ShopController extends Controller
             ]);
     }
 
+    public function updateOngoingShopItem(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        if ($json) {
+            $tempshopitem = new ShopItem();
+            $tempshopitem->loadData($json);
+
+            $checktemp = ShopItem::findOne(["ItemID" => $tempshopitem->ItemID, "ShopID" => $tempshopitem->ShopID]);
+
+            if ($request->isPost()) {
+                if ($checktemp) { //there exists such item
+                    if ($tempshopitem->validate('update') && $tempshopitem->update()) {
+                        return $response->json('{"success":"ok"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+
+            } elseif($request->isPatch()) {
+                if ($checktemp) { //there exists such item
+//                    Application::$app->logger->debug("iiiii");
+                    if ($tempshopitem->validate('update') && $tempshopitem->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewitems");
+//                        return $response->json('{"success":"ok"}');
+
+                    }
+
+                }
+                return $response->json('{"success":"fail"}');
+
+            }
+        }
+        return $response->json('{"success":"fail"}');
+    }
 
 }
 
