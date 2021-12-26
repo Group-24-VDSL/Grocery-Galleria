@@ -50,4 +50,50 @@ class TestController extends Controller
 
         //print_r($request -> getBody());
     }
+
+    public function updateOngoingShopItem(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        if ($json) {
+            $tempshopitem = new ShopItem();
+            $tempshopitem->loadData($json);
+
+//            Application::$app->session->setFlash("success", "hi1" );
+            $checktemp = ShopItem::findOne(["ItemID" => $tempshopitem->ItemID, "ShopID" => $tempshopitem->ShopID]);
+            if ($request->isPost()) {
+                if ($checktemp) { //there exists such item
+
+                    if ($tempshopitem->validate('update') && $tempshopitem->update()) {
+                        return $response->json('{"success":"ok"}');
+                    }
+                }
+
+//                else {
+//                    if ($tempshopitem->validate() && $tempshopitem->save()) {
+//                        return json_encode('{"success":"ok"}');
+//                    }
+//                }
+
+                return $response->json('{"success":"fail"}');
+
+            } elseif($request->isPatch()) {
+//                var_dump($tempshopitem);
+                $tempshopitem->loadData($checktemp);
+//                Application::$app->session->setFlash("success", "aaa" );
+//                Application::$app->session->setFlash("success", var_dump($tempshopitem) );
+                if ($checktemp) { //there exists such item
+                    $tempshopitem->loadData($checktemp);
+//                    $tempshopitem->Quantity = $json['Quantity'];
+//                    Application::$app->session->setFlash("success", var_dump($tempshopitem) );
+                    if ($tempshopitem>validate('update') && $tempshopitem->update()) {
+                        return $response->json('{"success":"ok"}');
+                    }
+                }
+            }
+        }
+        return $response->json('{"success":"fail"}');
+    }
+
+
+
 }
