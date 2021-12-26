@@ -27,7 +27,14 @@
                 <div class="content">
                     <div class="box-topic">Status</div>
                     <div class="number-details">
-
+                        <?php
+                        if ($order->Status == 0)
+                            echo "New";
+                        elseif ($order->Status == 1)
+                            echo "On-Going";
+                        elseif ($order->Status == 2)
+                            echo "Completed";
+                        ?>
                     </div>
                 </div>
                 <img src="https://img.icons8.com/external-becris-flat-becris/64/000000/external-history-literary-genres-becris-flat-becris.png"/>
@@ -114,6 +121,18 @@
                 $ItemList = $shops[$ShopID]["itemList"] ;
                 $ItemCount = count($ItemList[0]);
 
+                if ($shop["shop"]->Category === 0){
+                    $category = "Grocery" ;
+                }
+                elseif ($shop["shop"]->Category === 1){
+                    $category = "Vegetable" ;
+                }
+                elseif ($shop["shop"]->Category === 2){
+                    $category = "Meat" ;
+                }
+                elseif ($shop["shop"]->Category === 3){
+                    $category = "Fruit" ;
+                }
 
                 echo
                     '<div class="container-order-details">
