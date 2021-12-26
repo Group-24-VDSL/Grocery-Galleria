@@ -156,6 +156,61 @@ class TestController extends Controller
 
 
     }
+    public function profilesettings(Request $request)
+    {
+        // get logged staff ID
+        $shop = new Shop();
+        $newObj = new Shop();
+        $user = new User();
+
+        $this->setLayout("dashboardL-shop");
+
+        $shop = $shop->findOne(['ShopID' => 3]);
+        $user = $user->findOne(['UserID' => 3]);
+
+        $aa = ShopOrder::findCount("CartID","Date",['ShopID'=>1],"date_format(Date, '%M')",30);
+//        $aa = DBModel::query("SELECT COUNT(CartID) FROM shoporder WHERE ShopID =1 GROUP BY DATE ",\PDO::FETCH_COLUMN);
+
+
+
+        var_dump($aa);
+
+        if ($request->isPost()) {
+            $newObj->loadData($request->getBody());
+//            var_dump($newObj);
+//            $newObj->StaffID = Application::getCustomerID(); // get session id
+            $newObj->ShopID = 3;
+            $newObj->Category = $shop->Category;
+            $newObj->Address = $shop->Address;
+            $newObj->City = $shop->City;
+            $newObj->Suburb = $shop->Suburb;
+            $newObj->Location = $shop->Location;
+            $newObj->PlaceID = $shop->PlaceID ;
+//            $newObj->Password = "88" ;
+//            $newObj->ConfirmPassword = "88" ;
+            var_dump($newObj->ShopID);
+            var_dump($newObj);
+            if ($newObj->validate('update') && $newObj->update()) {
+                $newObj->singleProcedure('email_Update', 3, $newObj->Email);
+                Application::$app->session->setFlash('success','Update Success');
+                Application::$app->response->redirect('/dashboard/shop/profilesettings');
+            }
+
+            else {
+                Application::$app->session->setFlash('danger', 'Update Failed');
+                $this->setLayout("dashboardL-shop");
+                return $this->render("shop/shop-profile-setting", [
+                    'model' => $newObj,
+                    'loginmodel' => $user
+                ]);
+            }
+        }
+        return $this->render("shop/shop-profile-setting", [
+            'model' => $shop,
+            'loginmodel' => $user
+        ]);
+    }
+
 
 
 
