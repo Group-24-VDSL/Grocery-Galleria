@@ -56,9 +56,7 @@ class Shop extends UserModel
     public function rules(): array
     {
         return [
-            'Email' => [self::RULE_EMAIL, self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class]],
-            'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
-            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],//check if the user class has the same email or not.
+            'ShopID'=>[self::RULE_UNIQUE],
             'Name' => [self::RULE_REQUIRED],
             'Address' => [self::RULE_REQUIRED],
             'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE],
