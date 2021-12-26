@@ -133,14 +133,14 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
-//    public function singleProcedure($procedure,$id,$value)
-//    {
-//        $stmt = self::prepare("CALL $procedure(:id,:value)");
-//        $stmt->bindValue(':id',$id);
-//        $stmt->bindValue(':value',$value);
-//        $stmt->execute();
-//        return true;
-//    }
+    public function singleProcedure($procedure,$id,$value)
+    {
+        $stmt = self::prepare("CALL $procedure(:id,:value)");
+        $stmt->bindValue(':id',$id);
+        $stmt->bindValue(':value',$value);
+        $stmt->execute();
+        return true;
+    }
     public static function callProcedure($procedure,$values=[])
     {
         if(empty($values)){
