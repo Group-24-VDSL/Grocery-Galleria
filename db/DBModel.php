@@ -171,6 +171,8 @@ abstract class DBModel extends Model
     public static function findCount($countSelect,$s,$where=[],$group,$limit=null)
     {
         $tableName = static::tableName();
+        $attributes = array_keys($where);
+
 
     }
 
