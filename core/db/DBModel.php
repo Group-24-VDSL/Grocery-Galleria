@@ -126,21 +126,21 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
-    public function getLastInsertID()
-    {
-        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
-        $statement->execute();
-        return (int)$statement->fetchColumn();
-    }
-
-//    public function singleProcedure($procedure,$id,$value)
+//    public function getLastInsertID()
 //    {
-//        $stmt = self::prepare("CALL $procedure(:id,:value)");
-//        $stmt->bindValue(':id',$id);
-//        $stmt->bindValue(':value',$value);
-//        $stmt->execute();
-//        return true;
+//        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
+//        $statement->execute();
+//        return (int)$statement->fetchColumn();
 //    }
+
+    public function singleProcedure($procedure,$id,$value)
+    {
+        $stmt = self::prepare("CALL $procedure(:id,:value)");
+        $stmt->bindValue(':id',$id);
+        $stmt->bindValue(':value',$value);
+        $stmt->execute();
+        return true;
+    }
     public static function callProcedure($procedure,$values=[])
     {
         if(empty($values)){
@@ -161,16 +161,34 @@ abstract class DBModel extends Model
     }
 
     //for your dirty queries
-    public static function query($string,$fetch_type)
+    public static function query($string,$fetch_type,$fetchAll=null)
     {
         $statement = self::prepare($string);
         $statement->execute();
+        if($fetchAll){
+            return $statement->fetchAll($fetch_type);
+        }
         return $statement->fetch($fetch_type);
     }
     public static function queryAll($string,$fetch_type){
         $statement = self::prepare($string);
         $statement->execute();
         return $statement->fetchAll($fetch_type,static::class);
+    }
+
+    public static function findCount($countSelect,$s,$where=[],$group,$limit=null)
+    {
+        $tableName = static::tableName();
+        $attributes = array_keys($where);
+        $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
+        $statement = self::prepare("SELECT COUNT($countSelect),$s FROM $tableName WHERE $sql GROUP By ($group) LIMIT $limit");
+        foreach ($where as $key => $item) {
+            $statement->bindValue(":$key", $item);
+        }
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_CLASS);
+//        return (int)$statement->fetchColumn();
+
     }
 
 

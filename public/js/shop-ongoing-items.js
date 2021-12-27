@@ -32,7 +32,10 @@ const URLGetOrderCart = host+ "/api/getordercart" ;
 
 
 const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
+
 const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat('5');
+
+console.log(URLGetShop)
 
 const ItemTable = document.getElementById('item-table');
 const ItemUpdate = document.getElementById('updateItem');
@@ -44,8 +47,7 @@ let itemArray = [];
 // let demand = [];
 let l = [];
 let d = [];
-let s ;
-
+let s =0 ;
 
 $(document).ready(function () {
     $.getJSON(URLGetShop, function (Shops) {
@@ -59,6 +61,9 @@ $(document).ready(function () {
                             toString(Item.Brand ) ;
                             Item.Brand = "-";
                         }
+                        let Unit =  (Item.Unit === 0)  ? "Kg" : (Item.Unit ===1) ? "gram"  : (Item.Unit ===2) ? "Litre" : "Packs";
+
+
 
                         const ItemRow = document.createElement('tr');
                         ItemRow.innerHTML = `
@@ -69,12 +74,13 @@ $(document).ready(function () {
                                 </td>
                                 <td id="Name" class="row-name">${Item.Name}</td>                                
                                 <td id="Brand" class="row-brand">${Item.Brand}</td>
-                                <td id="Unit" class="row-unit">${Item.Unit}</td>
+<!--                                <td id="Unit" class="row-unit">${Item.Unit}</td>-->
                                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                                 <td id="UPrice" class="row-uprice">Rs.<input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
-                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"></td>                                                              
-                                `
+                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>                                                              
+                                <td id="Safety_${Shop.ShopID}_${Shop.ItemID}"></td>
+`
                         ItemTable.appendChild(ItemRow);
 
                         let x  = 'uPrice_'.concat(Shop.ShopID).concat('_').concat(Shop.ItemID);
@@ -87,6 +93,7 @@ $(document).ready(function () {
                         itemArray['uPriceID'] = x ;
                         itemArray['stockID'] = y ;
                         itemArray['StockData'] = Shop.Stock;
+                        itemArray['Enabled'] = Shop.Enabled ;
                         // itemArray['Stock']
 
                         i = i+1 ;
@@ -127,113 +134,146 @@ function safetyStock(ShopItem){
     URLFindShopOrderItem  = URLGetOrderCart.concat("?ShopID=").concat(ShopItem.ShopID).concat("&ItemID=").concat(ShopItem.ItemID);
     console.log(URLFindShopOrderItem);
     $.getJSON(URLFindShopOrderItem, function (Items) {
-        Items.forEach(Item => {
-            console.log(Item);
-            URLFindShopOrder = URLShopOrderAPI.concat("?ShopID=").concat(Item.ShopID).concat("&CartID=").concat(Item.CartID);
-            console.log(URLFindShopOrder);
+        if (Items.length == 0){
+            console.log("array is null")
+            // document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid green";
+            document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
+        }
 
-            $.getJSON(URLFindShopOrder, function (ShopOrder) {
-
-
-                if (ShopOrder.Status ===1) {
-                    //
-                    // console.log(ShopOrder)
-                    // console.log(ShopOrder, ShopOrder.Date)
-                    var todayDate = new Date();
-                    var orderDate = ShopOrder.Date;
-                    var completeDate = ShopOrder.CompleteDate ;
-
-                    todayDate = todayDate.getFullYear() + '-' + (todayDate.getMonth() + 1) + '-' + todayDate.getDate();
+        else {
 
 
-                    var date1 = new Date(todayDate);
-                    // console.log(date1)
-                    var date2 = new Date(orderDate);
-                    // console.log(date2)
+            Items.forEach(Item => {
+                console.log(Item);
+                URLFindShopOrder = URLShopOrderAPI.concat("?ShopID=").concat(Item.ShopID).concat("&CartID=").concat(Item.CartID);
+                console.log(URLFindShopOrder);
 
-                    var date3 = new Date(completeDate);
-
-                    var dateDifference = (date1.getTime() - date2.getTime()) / (1000 * 3600 * 24);
-                    //
-                    // console.log(todayDate)
-                    // console.log(ShopOrder.Date)
-                    // console.log(dateDifference)
+                $.getJSON(URLFindShopOrder, function (ShopOrder) {
 
 
-                    //
-                    // URLFindShopItem  = URLShopItemAPI.concat("?ShopID=").concat(Item.ShopID).concat("&ItemID=").concat(Item.ItemID);
-                    // $.getJSON(URLFindShopItem, function (shopItem) {
-                    //     URLFindItem = URLItemAPI.concat("?ItemID=").concat(Item.ItemID);
-                    //     $.getJSON(URLFindItem, function (systemItem) {
+                    if (ShopOrder.Status === 1) {
+                        //
+                        // console.log(ShopOrder)
+                        // console.log(ShopOrder, ShopOrder.Date)
+                        var todayDate = new Date();
+                        var orderDate = ShopOrder.Date;
+                        var completeDate = ShopOrder.CompleteDate;
+
+                        todayDate = todayDate.getFullYear() + '-' + (todayDate.getMonth() + 1) + '-' + todayDate.getDate();
 
 
-                    if (dateDifference <= 365) {
-                        var leaddays = (date3.getTime() - date2.getTime()) / (1000 * 3600 * 24);
+                        var date1 = new Date(todayDate);
+                        // console.log(date1)
+                        var date2 = new Date(orderDate);
+                        // console.log(date2)
 
-                        // abc (leaddays,Item.Quantity);
-                        // l.push(leaddays);
-                        // d.push(Item.Quantity);
+                        var date3 = new Date(completeDate);
 
-                        // l.push(leaddays);
-                        // leadTime.push(leaddays);
-                        // demand.push(Item.Quantity);
+                        var dateDifference = (date1.getTime() - date2.getTime()) / (1000 * 3600 * 24);
+                        //
+                        // console.log(todayDate)
+                        // console.log(ShopOrder.Date)
+                        // console.log(dateDifference)
 
 
-                        // aa(leaddays);
+                        //
+                        // URLFindShopItem  = URLShopItemAPI.concat("?ShopID=").concat(Item.ShopID).concat("&ItemID=").concat(Item.ItemID);
+                        // $.getJSON(URLFindShopItem, function (shopItem) {
+                        //     URLFindItem = URLItemAPI.concat("?ItemID=").concat(Item.ItemID);
+                        //     $.getJSON(URLFindItem, function (systemItem) {
 
-                        leadTime[i] = leaddays ;
-                        demand[i] = Item.Quantity ;
-                        i+=1;
+
+                        if (dateDifference <= 365) {
+                            var leaddays = (date3.getTime() - date2.getTime()) / (1000 * 3600 * 24);
+
+                            // abc (leaddays,Item.Quantity);
+                            // l.push(leaddays);
+                            // d.push(Item.Quantity);
+
+                            // l.push(leaddays);
+                            // leadTime.push(leaddays);
+                            // demand.push(Item.Quantity);
+
+
+                            // aa(leaddays);
+
+                            leadTime[i] = leaddays;
+                            demand[i] = Item.Quantity;
+                            i += 1;
+                        }
+                        // console.log(l);
+                        // var max = l.reduce(function(a, b) {
+                        //     return Math.max(a, b);
+                        // }, 0);
+                        //
+                        // console.log(max)
+                        // console.log(leadTime)
+                        // console.log(demand)
+
+
                     }
-                    // console.log(l);
+                    // console.log(leadTime);
+                    var maxLeadDays = leadTime.reduce(function (a, b) {
+                        return Math.max(a, b);
+                    }, 0);
+
+                    // console.log(maxLeadDays) ;
+
+                    const averageLeadDays = leadTime.reduce((a, b) => a + b, 0) / leadTime.length;
+                    const averageDemand = demand.reduce((a, b) => a + b, 0) / demand.length;
+
+                    console.log(averageLeadDays);
+                    console.log(demand);
+                    console.log(averageDemand);
+
+                    var maxDemand = demand.reduce(function (a, b) {
+                        return Math.max(a, b);
+                    }, 0);
+
+                    // console.log(maxDemand) ;
+
+                    s = (maxDemand * maxLeadDays) - (averageDemand * averageLeadDays); // safety stock formula
+                    console.log("S is ");
+                    console.log(s);
+
+                    // console.log(s)
+                    // console.log(ShopItem.StockData)
+
+                    if (s <= ShopItem.StockData || s === []) {
+                        // console.log(ShopItem.Stock)
+                        // $('#'.concat(Item.stockID)).style.color = "red";
+                        // document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid green";
+                        document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
+
+
+                    } else if (s > ShopItem.StockData){
+                        document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/office/30/000000/high-risk.png\"/>";
+
+                    // document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid red";
+
+                        // $('#'.concat(Item.stockID)).style.color = "red";
+                    }
+
+                    var sum = function (leadTime) {
+                        var total = 0;
+                        for (var i = 0; i < leadTime.length; i++) {
+                            total += leadTime[i];
+                        }
+                        return total;
+                    }
+
+                    console.log(sum / leadTime.length)
                     // var max = l.reduce(function(a, b) {
                     //     return Math.max(a, b);
                     // }, 0);
                     //
                     // console.log(max)
-                    // console.log(leadTime)
-                    // console.log(demand)
 
-
-                }
-                console.log(leadTime);
-                var maxLeadDays = leadTime.reduce(function(a, b) {
-                    return Math.max(a, b);
-                }, 0);
-
-                console.log(maxLeadDays) ;
-
-                const averageLeadDays = leadTime.reduce((a,b) => a + b, 0) / leadTime.length;
-                const averageDemand = demand.reduce((a,b) => a + b, 0) / demand.length;
-
-                console.log(averageLeadDays);
-                console.log(demand);
-                console.log(averageDemand);
-
-                var maxDemand = demand.reduce(function(a, b) {
-                    return Math.max(a, b) ;
-                }, 0);
-
-                console.log(maxDemand) ;
-
-                s = (maxDemand * maxLeadDays) - (averageDemand*averageLeadDays) ;
-
-                console.log(s)
-                console.log(ShopItem.StockData)
-
-                if(s <= ShopItem.StockData ){
-                    console.log(ShopItem.Stock)
-                    // $('#'.concat(Item.stockID)).style.color = "red";
-                    document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid green";
-                    document.getElementById(''.concat(ShopItem.stockID)).innerHTML = "kk";
-                }
-                else if(s > ShopItem.StockData){
-                    document.getElementById(''.concat(ShopItem.stockID)).style.border ="solid red";
-                    document.getElementById(''.concat(ShopItem.stockID)).innerHTML = ShopItem.stockID;
-                    // $('#'.concat(Item.stockID)).style.color = "red";
-                }
-
-                var sum = function(leadTime) {
+                    //  })
+                    //
+                    // })
+                })
+                var sum = function (leadTime) {
                     var total = 0;
                     for (var i = 0; i < leadTime.length; i++) {
                         total += leadTime[i];
@@ -241,30 +281,12 @@ function safetyStock(ShopItem){
                     return total;
                 }
 
-                console.log(sum/leadTime.length)
-                // var max = l.reduce(function(a, b) {
-                //     return Math.max(a, b);
-                // }, 0);
-                //
-                // console.log(max)
+                console.log(sum / leadTime.length)
+                // console.log(l);
 
-                //  })
-                //
-                // })
+
             })
-            var sum = function(leadTime) {
-                var total = 0;
-                for (var i = 0; i < leadTime.length; i++) {
-                    total += leadTime[i];
-                }
-                return total;
-            }
-
-            console.log(sum/leadTime.length)
-            // console.log(l);
-
-
-        })
+        }
 
         l.forEach(function(item, index, array) {
             console.log(item, index)
@@ -277,7 +299,7 @@ function safetyStock(ShopItem){
     });
 
     promise1.then((value) => {
-        aa();
+        // aa();
         // expected output: "Success!"
     });
 
@@ -316,8 +338,6 @@ class Avg {
     }
 }
 
-console.log(Avg.average(leadTime));
-
 
 function updateShopItem(){
     console.log(itemArray)
@@ -336,7 +356,8 @@ function updateShopItem(){
         console.log(unitprice,oldUprice)
 
         if(oldStock!==stock || oldUprice!==unitprice){
-            let obj = {"ShopID":item.ShopID , "ItemID":item.ItemID, "UnitPrice":unitprice, "Stock":stock} ;
+             console.log(item.Enabled)
+            let obj = {"ShopID":item.ShopID , "ItemID":item.ItemID, "UnitPrice":unitprice, "Stock":stock, "Enabled":item.Enabled} ;
             safetyStock(item)
 
             console.log("yes");
@@ -360,6 +381,7 @@ function updateShopItem(){
         }
 
     })
+    location.reload();
 
 }
 

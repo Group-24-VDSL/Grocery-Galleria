@@ -14,8 +14,6 @@ class Shop extends UserModel
     public string $Email = '';
     public string $ContactNo = '';
     public string $Location = '';
-    public string $City = '';
-    public string $Suburb = '';
     public string $ShopName = '';
     public string $PlaceID = '';
     public string $ShopDesc = '';
@@ -56,12 +54,13 @@ class Shop extends UserModel
     public function rules(): array
     {
         return [
-            'Email' => [self::RULE_EMAIL, self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class]],
-            'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
-            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],//check if the user class has the same email or not.
+            'ShopID'=>[self::RULE_UNIQUE],
+            'Email' => [self::RULE_EMAIL , self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class]],
+//            'Password' => [self::RULE_MIN,'min' => 8],
+//            'ConfirmPassword' => [self::RULE_MATCH,'match' => 'Password'],//check if the user class has the same email or not.
             'Name' => [self::RULE_REQUIRED],
             'Address' => [self::RULE_REQUIRED],
-            'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE],
+            'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE,[self::RULE_MAX,'max' => 10],[self::RULE_MIN,'min' => 10]],
             'City' => [self::RULE_REQUIRED],
             'Suburb' => [self::RULE_REQUIRED],
             'Location' => [self::RULE_REQUIRED],

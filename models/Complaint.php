@@ -8,8 +8,8 @@ class Complaint extends DBModel
 {
     public int $ComplaintID = 0;
     public int $CustomerID = 0;
-    public string $ComplaintDate = 'CURRENT_DATE';//'DATE(CURRENT_TIMESTAMP)';
-    public int $OrderID = 0;
+    public string $ComplaintDate = '' ;
+    public int $OrderID = 0 ;
     public string $OrderDate = '';
     public int $Regarding = 0 ; /**[0-shop , 1-delivery] */
     public int $Priority = 0; /**[0-high , 1-low] */
@@ -35,7 +35,7 @@ class Complaint extends DBModel
     public function rules(): array
     {
         return [
-            'OrderID' => [self::RULE_REQUIRED],
+            'OrderID' => [self::RULE_REQUIRED, [self::RULE_IFEXISTS,'class'=> Orders::class,'attribute' => 'OrderID']],
             'Nature' => [self::RULE_REQUIRED]
         ];
     }
