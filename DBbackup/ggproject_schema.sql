@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2021 at 07:33 PM
+-- Generation Time: Dec 27, 2021 at 08:16 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -91,9 +91,7 @@ CREATE TABLE `delivery` (
                             `Status` tinyint(1) NOT NULL,
                             `CompTime` timestamp NULL DEFAULT NULL,
                             `OrderID` int(11) NOT NULL,
-                            `CartID` int(11) NOT NULL,
-                            `City` int(11) NOT NULL,
-                            `Suburb` int(11) NOT NULL
+                            `CartID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -214,7 +212,10 @@ CREATE TABLE `orders` (
                           `Note` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
                           `RecipientContact` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
                           `DeliveryCost` float NOT NULL,
-                          `TotalCost` float NOT NULL
+                          `TotalCost` float NOT NULL,
+                          `Status` int(11) NOT NULL,
+                          `City` int(11) NOT NULL,
+                          `Suburb` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------

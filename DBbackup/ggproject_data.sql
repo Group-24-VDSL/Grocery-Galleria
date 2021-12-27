@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2021 at 07:34 PM
+-- Generation Time: Dec 27, 2021 at 08:16 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -42,8 +42,8 @@ INSERT INTO `customer` (`CustomerID`, `Name`, `Address`, `Email`, `ContactNo`, `
 -- Dumping data for table `delivery`
 --
 
-INSERT INTO `delivery` (`DeliveryID`, `RiderID`, `Date`, `Status`, `CompTime`, `OrderID`, `CartID`, `City`, `Suburb`) VALUES
-    (1, 9, '2021-12-22 15:05:06', 0, NULL, 1, 1, 1, 2);
+INSERT INTO `delivery` (`DeliveryID`, `RiderID`, `Date`, `Status`, `CompTime`, `OrderID`, `CartID`) VALUES
+    (1, 9, '2021-12-22 15:05:06', 0, NULL, 1, 1);
 
 --
 -- Dumping data for table `deliveryrider`
@@ -100,8 +100,8 @@ INSERT INTO `ordercart` (`CartID`, `ShopID`, `ItemID`, `Quantity`, `Total`) VALU
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `RecipientName`, `Note`, `RecipientContact`, `DeliveryCost`, `TotalCost`) VALUES
-    (1, 1, '2021-12-04 14:52:46', '', '', '', 160, 14360);
+INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `RecipientName`, `Note`, `RecipientContact`, `DeliveryCost`, `TotalCost`, `Status`, `City`, `Suburb`) VALUES
+    (1, 1, '2021-12-04 14:52:46', '', '', '', 160, 14360, 0, 1, 2);
 
 --
 -- Dumping data for table `payment`
