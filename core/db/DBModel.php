@@ -126,12 +126,12 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
-    public function getLastInsertID()
-    {
-        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
-        $statement->execute();
-        return (int)$statement->fetchColumn();
-    }
+//    public function getLastInsertID()
+//    {
+//        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
+//        $statement->execute();
+//        return (int)$statement->fetchColumn();
+//    }
 
     public function singleProcedure($procedure,$id,$value)
     {
@@ -161,10 +161,13 @@ abstract class DBModel extends Model
     }
 
     //for your dirty queries
-    public static function query($string,$fetch_type)
+    public static function query($string,$fetch_type,$fetchAll=null)
     {
         $statement = self::prepare($string);
         $statement->execute();
+        if($fetchAll){
+            return $statement->fetchAll($fetch_type);
+        }
         return $statement->fetch($fetch_type);
     }
     public static function queryAll($string,$fetch_type){
