@@ -5,7 +5,7 @@
     <div class="content">
         <span>Grocery to doorStep</span>
         <h3>your daily need products</h3>
-        <a href="#category" class="btn">Explore Now</a>
+        <a href="/login" class="btn">Explore Now</a>
         <a href="/customer/register" class="btn">Regsiter Now</a>
     </div>
     <div class="image">
@@ -74,7 +74,7 @@
         <div class="content">
             <h3>Deliver with Us</h3>
             <p>Get Register Now</p>
-            <a href="#contactUs" class="btn">Click here</a>
+            <a href="/rider/register" class="btn">Click here</a>
         </div>
     </div>
 

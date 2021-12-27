@@ -54,6 +54,8 @@ $app->router->get('/customer/cart',[CartController::class,'cart']);
 $app->router->get('/customer/checkout',[CartController::class,'checkout']);
 $app->router->post('/customer/checkout',[CartController::class,'proceedToCheckout']);
 
+$app->router->get('/pay/success',[CustomerController::class,'paymentSuccess']);
+
 $app->router->get('/gallery/shop',[ShopController::class,'showshop']);
 $app->router->get('/gallery',[ShopController::class,'shopGallery']);
 
