@@ -9,6 +9,7 @@ class Orders extends DBModel
     public int $OrderID = 0;
     public string $OrderDate = '';
     public int $CartID = 0;
+    public string $CustomerID = '' ;
     public float $DeliveryCost = 0;
     public string $RecipientName='';
     public string $Note = '';
@@ -25,7 +26,7 @@ class Orders extends DBModel
 
     public function attributes(): array
     {
-        return ['OrderDate','CartID','DeliveryCost','TotalCost','Status'];
+        return ['OrderDate','CartID','CustomerID','DeliveryCost','TotalCost','Status'];
     }
 
     public static function primaryKey(): array
