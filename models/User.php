@@ -23,6 +23,8 @@ class User extends UserModel
     public int $UserID = 0;
     public string $Role = '';
     public string $ConfirmPassword = '';
+    public int $City = 0;
+    public int $Suburb = 0;
 
 
     public function save()
@@ -41,13 +43,15 @@ class User extends UserModel
         return [
             'Email' => [self::RULE_EMAIL,self::RULE_REQUIRED,[self::RULE_UNIQUE,'class'=> self::class]], //check if the user class has the same email or not.
             'Password' => [[self::RULE_MIN,'min' => 8],self::RULE_REQUIRED],
-            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']]
+            'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],
+            'City'=>[self::RULE_REQUIRED],
+            'Suburb'=>[self::RULE_REQUIRED]
         ];
     }
 
     public function attributes(): array
     {
-        return ['Email','Name','PasswordHash','Verify_Flag','Delete_Flag','Role'];
+        return ['Email','Name','PasswordHash','Verify_Flag','Delete_Flag','Role','City','Suburb'];
     }
 
     public function labels(): array{
@@ -72,7 +76,7 @@ class User extends UserModel
 
     public function jsonarray(): array
     {
-        return ['Email','Name','Delete_Flag','Role'];
+        return ['Email','Name','Delete_Flag','Role','City','Suburb'];
     }
 
     public function getEmail(): string

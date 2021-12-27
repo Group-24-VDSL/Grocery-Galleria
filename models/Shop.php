@@ -14,8 +14,8 @@ class Shop extends UserModel
     public string $Email = '';
     public string $ContactNo = '';
     public string $Location = '';
-    public string $City = '';
-    public string $Suburb = '';
+    public int $City = 0;
+    public int $Suburb = 0;
     public string $ShopName = '';
     public string $PlaceID = '';
     public string $ShopDesc = '';

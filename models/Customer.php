@@ -11,8 +11,8 @@ class Customer extends UserModel
     public string $Name = '';
     public string $Address = '';
     public string $ContactNo = '';
-    public string $City = '';
-    public string $Suburb = '';
+    public int $City = 0;
+    public int $Suburb = 0;
     public string $Location = '';
     public string $PlaceID = '';
 

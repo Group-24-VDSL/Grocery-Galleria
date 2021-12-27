@@ -14,15 +14,11 @@ class Rider extends UserModel
     public string $ContactNo = '';
     public string $Password = ''; //need this two
     public string $ConfirmPassword = ''; //need this two
-    public string $City = '';
-    public string $Suburb = '';
+    public int $City = 0;
+    public int $Suburb = 0;
     public string $NIC = '';
     public string $ProfilePic = '';
     public int $RiderType = 0; //0 = bike , 1 = threewheel
-    public string $City = '';
-    public string $Suburb = '';
-    public string $Password = '';
-    public string $ConfirmPassword = '';
 
     public static function tableName(): string
     {
