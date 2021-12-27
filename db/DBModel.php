@@ -161,10 +161,20 @@ abstract class DBModel extends Model
     }
 
     //for your dirty queries
-    public static function query($string,$fetch_type)
+//    public static function query($string,$fetch_type)
+//    {
+//        $statement = self::prepare($string);
+//        $statement->execute();
+//        return $statement->fetch($fetch_type);
+//    }
+
+    public static function query($string,$fetch_type,$fetchAll=null)
     {
         $statement = self::prepare($string);
         $statement->execute();
+        if($fetchAll){
+            return $statement->fetchAll($fetch_type);
+        }
         return $statement->fetch($fetch_type);
     }
 
