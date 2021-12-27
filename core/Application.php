@@ -104,7 +104,7 @@ class Application
     }
 
     public static function getSuburb(){
-        return self::$app->session->get('Suburb');
+        return self::$app->session->get('suburb');
     }
 
     public function run()

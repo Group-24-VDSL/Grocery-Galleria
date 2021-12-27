@@ -6,6 +6,7 @@ use app\core\Application;
 use app\core\Controller;
 use app\controllers\APIController;
 use app\core\Request;
+use app\core\Response;
 use app\models\Item;
 use app\models\OrderCart;
 use app\models\Shop;
@@ -127,7 +128,7 @@ class ShopController extends Controller
 
         $cartitems = OrderCart ::findAll([ "ShopID" => $ShopID ,"CartID" => $CartID]);
 
-        //var_dump($cartitems);
+
 
         $shopitems = [];
 
@@ -140,7 +141,6 @@ class ShopController extends Controller
             //   var_dump($shopitem);
         }
 
-        //var_dump($cartitems);
 
         return $this->render('shop/view-order-details',['shoporder'=>$shoporder,'cartitems'=>$cartitems, 'shopitem'=>$shopitems , 'item'=>$item, 'model'=>$shoporder]);
     }
@@ -185,9 +185,22 @@ class ShopController extends Controller
     }
 
 
-    /**
-     * @throws TypeException
-     */
+    // Shop section
+    public function getShop(Request $request, Response $response) // get shop details from DB
+    {
+        $response->setContentTypeJSON();
+        $shop = Shop::findOne(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
+        return json_encode($shop);
+    }
+
+
+    public function getAllShop(Request $request,Response $response)
+    {
+        $response->setContentTypeJSON();
+        $shops = Shop::findAll(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
+        return json_encode($shops);
+
+    }
 }
     
 

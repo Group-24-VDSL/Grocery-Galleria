@@ -18,6 +18,8 @@ class Shop extends UserModel
     public string $PlaceID = '';
     public string $ShopDesc = '';
     public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']
+    public int $City = 0;
+    public int $Suburb = 0;
 
     public string $Password = '';
     public string $ConfirmPassword = '';
@@ -61,8 +63,8 @@ class Shop extends UserModel
             'Name' => [self::RULE_REQUIRED],
             'Address' => [self::RULE_REQUIRED],
             'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE,[self::RULE_MAX,'max' => 10],[self::RULE_MIN,'min' => 10]],
-            'City' => [self::RULE_REQUIRED],
-            'Suburb' => [self::RULE_REQUIRED],
+            'City' => [self::RULE_INT,self::RULE_REQUIRED],
+            'Suburb' => [self::RULE_INT,self::RULE_REQUIRED],
             'Location' => [self::RULE_REQUIRED],
             'ShopName' => [self::RULE_REQUIRED],
             'ShopDesc' => [self::RULE_REQUIRED,[self::RULE_MAX,'max'=>30]],
