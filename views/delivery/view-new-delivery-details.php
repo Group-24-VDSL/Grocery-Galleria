@@ -635,42 +635,16 @@
                 </div>
             </div>
         </div>
-            <div style="height: auto" class="core">
-                <div class="customer-details">
+            <div class="core">
+                <div class="dynamic-map">
                     <h1 class="heading">Select <span>Rider</span></h1>
                     <div class="map-section">
                         <div class="inputBox map-inputBox">
-                            <!--                <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>-->
                             <div id="map"></div>
-                        </div>
-                        <div>
-                            <span class="rider">Select Rider Type</span>
-                            <select class="rider-type">
-                                <option></option>
-                                <option class="a">Bike</option>
-                                <option class="a">Three wheel</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <span class="rider">Select Rider</span>
-                            <div class="select-scroll">
-                                <select class="rider-select">
-                                    <option></option>
-                                    <option class="a">0011</option>
-                                    <option class="a">0087</option>
-                                    <option class="a">0090</option>
-                                    <option class="a">0011</option>
-                                    <option class="a">0087</option>
-                                    <option class="a">0090</option>
-                                    <option class="a">0011</option>
-                                    <option class="a">0087</option>
-                                    <option class="a">0090</option>
-                                    <option class="a">0011</option>
-                                    <option class="a">0087</option>
-                                    <option class="a">0090</option>
-                                </select>
-                            </div>
+                    <a id="getRider-btn"
+                       data-city = "<?php echo $customer->City?>"
+                       data-suburb = "<?php echo $customer->Suburb?>"
+                       class="refresh-map"><i class='bx bx-refresh'></i>Get Riders</a>
                         </div>
                         <button style="margin-top: auto" class="complete-btn" type="submit" value="Complete">Assign Rider
                         </button>
@@ -680,5 +654,6 @@
     </div>
 </section>
 <script src="/js/delivery-assign.js"></script>
+<script src="/js/getRiders.js"></script>
 <script src="/js/order.js"></script>
 

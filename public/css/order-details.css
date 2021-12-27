@@ -1,3 +1,4 @@
+@import "variables.css";
 .boxes-t2{
     /*border: .2rem solid var(--first-color-alt);*/
     border-radius: .5rem;
@@ -19,4 +20,22 @@
 }
 .home-content .overview-boxes{
  justify-content: space-around;
+}
+.refresh-map{
+    font-size: var(--h3-font-size);
+    float: right;
+    text-decoration: none;
+    /*margin-right: 64px;*/
+    border: .1rem solid var(--first-color-alt);
+    border-radius: .5rem;
+    padding: .5rem;
+    align-items: center;
+    color: var(--text-color);
+    cursor: pointer;
+
+}
+
+.refresh-map:hover{
+    background-color: var(--first-color);
+    color: white;
 }

@@ -133,7 +133,6 @@ class DeliveryController extends Controller
         ]
         );
     }
-
     public function viewDelivery()
     {
         $this->setLayout('dashboard-delivery');
@@ -142,9 +141,7 @@ class DeliveryController extends Controller
     public function newDelivery()
     {
         $staff = new Staff();
-        $staffID = Application::getUserID();
-        $staff = $staff::findOne(['StaffID' => $staffID]);
-//        $activeCity = $staff->City;
+        $city = Application::getCity();
         $querySql =
             "SELECT
             orderTable.OrderID,
@@ -159,7 +156,7 @@ class DeliveryController extends Controller
             ON orderTable.CartID = cartTable.CartID
             INNER JOIN customer as customerTable
             ON cartTable.CustomerID = customerTable.CustomerID
-            WHERE customerTable.City = 'Nugegoda' AND orderTable.DeliveryState = 0";
+            WHERE customerTable.City = $city AND orderTable.DeliveryState = 0";
         $newDeliveries = Orders::queryAll($querySql, \PDO::FETCH_CLASS);
         return json_encode($newDeliveries);
 

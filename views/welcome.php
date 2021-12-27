@@ -1,7 +1,6 @@
 <!-- Home section start -->
 <section class="home" id="home">
 
-    
     <div class="content">
         <span>Grocery to doorStep</span>
         <h3>your daily need products</h3>
