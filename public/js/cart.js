@@ -107,7 +107,6 @@ function updatebutton(ShopID,ItemID) {
             templateAlert('red', 'Item update failed.');
         }
     });
-
 }
 
 function update(ShopID,ItemID,UWeight,UnitPrice,MaxCount,method) {

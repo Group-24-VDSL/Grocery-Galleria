@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\Customer;
+use app\models\Orders;
 use app\models\Shop;
+use app\models\ShopOrder;
 use app\models\Staff;
 use app\core\Application;
 use app\core\Controller;

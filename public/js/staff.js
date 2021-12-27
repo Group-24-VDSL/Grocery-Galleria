@@ -35,7 +35,7 @@ $(document).ready(function () {
                     itemRow.classList.add('row');
                     itemRow.innerHTML = `
                  <li class="row-img">
-                    <img src="${Item.ItemImage}" alt="" />
+                    <img src="${Item.ItemImage}" alt="${Item.Name}" />
                 </li>
                 <li class="row-name">${Item.Name}</li>
                 <li class="row-brand">${Item.Brand}</li>
@@ -54,6 +54,7 @@ $(document).ready(function () {
             const itemBtns = document.getElementsByClassName('btn-row');
             $(itemBtns).click(function () {
                 const URLFindItem = URLItemAPI.concat($(this).data("href"));
+                console.log(URLFindItem);
                 $.getJSON(URLFindItem, function (Item) {
                     $('#ItemID').val(Item.ItemID);
                     $('#Category').val(Item.Category);
@@ -61,7 +62,7 @@ $(document).ready(function () {
                     $('#Unit').val(Item.Unit);
                     // console.log(document.getElementById('Unit').value);
                     $('#Name').val(Item.Name);
-                    // console.log(document.getElementById('Name').value);
+                    console.log(document.getElementById('Name').value);
                     $('#ImgDis').attr('src',Item.ItemImage);
                     // console.log(Item.ItemImage);
                     $('#Brand').val(Item.Brand);

@@ -12,6 +12,11 @@ class ShopItem extends DBModel
     public float $Stock = 0;
     public int $Enabled = 0;
 
+    public function save()
+    {
+        return parent::save();
+    }
+
     public static function tableName(): string
     {
         return 'shopitem';
@@ -22,6 +27,17 @@ class ShopItem extends DBModel
         return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
     }
 
+    public function labels(): array{
+        return [
+            'ItemID'=>'Item ID',
+            'Name'=>'Item Name',
+            'Stock'=>'Item Stock',
+            'UPrice'=>'Item Unit Price',
+            'Enable'=>'Item Enable',
+            'Image'=>'Item Image'
+        ];
+    }
+
     public static function primaryKey(): array
     {
         return ['ShopID','ItemID'] ;
@@ -30,8 +46,9 @@ class ShopItem extends DBModel
     public function rules(): array
     {
         return [
+            'ShopID'=> [self::RULE_REQUIRED],
             'UnitPrice' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_MAX_VAL_CLASS,'class'=> Item::class,'checkattribute'=>'MRP','where'=>'ItemID']],
-            'Stock' => [[self::RULE_MIN_VAL,'minValue'=>5]]
+            'Stock' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>5]]
         ];
     }
 
