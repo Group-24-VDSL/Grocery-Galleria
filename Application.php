@@ -99,8 +99,12 @@ class Application
         return self::$app->user->Role??null;
     }
 
-    public static function getUserID(){
-        return self::$app->session->get('user');
+    public static function getCity(){
+        return self::$app->session->get('city');
+    }
+
+    public static function getSuburb(){
+        return self::$app->session->get('Suburb');
     }
 
     public function run()
@@ -135,6 +139,8 @@ class Application
         $primaryValue = $user->{$primaryKey[0]};
         $this->session->set('user',$primaryValue);
         $this->session->set('role',$user->Role);
+        $this->session->set('city',$user->City);
+        $this->session->set('suburb',$user->Suburb);
         return true;
     }
 
