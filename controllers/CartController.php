@@ -239,9 +239,10 @@ class CartController extends Controller
         $customer = Customer::findOne(['CustomerID' => $customerid]);
         if($customer){
                 Application::$app->logger->debug("If I'm honest");
-                $sql="INSERT INTO `cart` (CustomerID) VALUES (:id);";
+                $sql="INSERT INTO `cart` (CustomerID,Address) VALUES (:id,:address);";
                 $result = $pdo->prepare($sql);
                 $result->bindValue(":id",$customerid);
+                $result->bindValue(":address",$customer->Address);
                 $result->execute();
 
                 $cartid= $pdo->lastInsertId();

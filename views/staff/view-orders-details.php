@@ -1,3 +1,8 @@
+<?php
+/** @var $order \app\models\Orders **/
+/** @var $customer \app\models\Customer **/
+/** @var $shops  **/
+?>
 <!--<link rel="stylesheet" href="/css/Register.css">-->
 <link rel="stylesheet" href="/css/dashboardStyle.css" />
 <link rel="stylesheet" href="/css/all.css" />
