@@ -1,0 +1,22 @@
+.boxes-t2{
+    /*border: .2rem solid var(--first-color-alt);*/
+    border-radius: .5rem;
+    margin: 1rem 1rem;
+    /*background-color: var(--first-color);*/
+    background-color: mediumseagreen;
+    padding: 0 1rem;
+}
+.sub-box-t2{
+    margin: 1rem 1rem;
+}
+
+.section-home {
+    padding-top: 0;
+}
+.home-section .order-content {
+    padding-top: 0;
+
+}
+.home-content .overview-boxes{
+ justify-content: space-around;
+}

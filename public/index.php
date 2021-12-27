@@ -62,13 +62,14 @@ $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'ri
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'viewriders']);
 $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'viewrider']);
-$app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
+//$app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
 $app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignrider']);
-$app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class,'viewdelivery']);
-$app->router->get('/dashboard/delivery/viewnewdelivery',[DeliveryController::class,'viewnewdelivery']);
-$app->router->get('/dashboard/delivery/viewongoingdelivery',[DeliveryController::class,'viewongoingdelivery']);
-$app->router->get('/dashboard/delivery/viewcompletedelivery',[DeliveryController::class,'viewcompletedelivery']);
+$app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class, 'viewDelivery']);
+$app->router->get('/dashboard/delivery/newdelivery',[DeliveryController::class, 'newDelivery']);
+$app->router->get('/dashboard/delivery/pastDelivery',[DeliveryController::class, 'pastDelivery']);
+$app->router->get('/dashboard/delivery/onDelivery',[DeliveryController::class, 'onDelivery']);
+$app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 
 //system staff
@@ -147,6 +148,9 @@ $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->get('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/order',[RiderController::class,'order']);
+
+$app->router->get('/changePwd',[AuthController::class,'changePassword']);
+$app->router->post('/changePwd',[AuthController::class,'changePassword']);
 
 $app->run();
 

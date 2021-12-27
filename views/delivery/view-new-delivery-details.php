@@ -1,54 +1,89 @@
-<!--<link rel="stylesheet" href="/css/Register.css">-->
-<link rel="stylesheet" href="/css/dashboardStyle.css" />
-<link rel="stylesheet" href="/css/all.css" />
-<link rel="stylesheet" href="/css/shop-order-details.css" />
-<script src="/js/jquery.min.js"></script>
+<?php
+/** @var $order **/
+/** @var $cart **/
+/** @var $customer **/
+/** @var $shopOrders **/
+/** @var $shopCount **/
+//echo '<pre>'; print_r($order); echo '</pre>';
+//echo '<pre>'; print_r($cart); echo '</pre>';
+//echo '<pre>'; print_r($customer); echo '</pre>';
+//echo '<pre>'; print_r($shopCount); echo '</pre>';
+//echo '<pre>'; print_r($shopOrders); echo '</pre>';
+// <?php echo
+?>
+<link rel="stylesheet" href="/css/shop-order-details.css"/>
+<link rel="stylesheet" href="/css/order-details.css"/>
 
 
 <section class="section-home">
-    <div class="home-content">
-        <div class="overview-boxes " id = "order-box" >
-
-            <div class="box-item-list">
+    <div class="home-content order-content">
+        <div class="overview-boxes boxes-t2" id="">
+            <div class="box-item-list sub-box-t2">
                 <div class="content">
-                    <div class="box-topic">Delivery ID</div>
-                    <div class="number-details">11034</div>
+                    <div class="box-topic">Order ID</div>
+                    <div class="number-details"><?php echo $order->OrderID?></div>
                 </div>
                 <img src="https://img.icons8.com/external-wanicon-flat-wanicon/64/000000/external-delivery-supermarket-wanicon-flat-wanicon.png"/>
             </div>
-
-            <div class="box-item-list">
+            <div class="box-item-list sub-box-t2">
                 <div class="content">
                     <div class="box-topic">Status</div>
                     <div class="number-details">New</div>
                 </div>
-                <img src="https://img.icons8.com/external-becris-flat-becris/64/000000/external-history-literary-genres-becris-flat-becris.png"/>
+                <img src="https://img.icons8.com/color/48/000000/unknown-status.png"/>
             </div>
-
-<!--            <div class="box-item-list">-->
-<!--                <div class="content">-->
-<!--                    <div class="box-topic">Total(LKR)</div>-->
-<!--                    <div class="number-details">2500.00</div>-->
-<!--                </div>-->
-<!--                <img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-cash-gambling-justicon-flat-justicon.png"/>-->
-<!--            </div>-->
-            <div class="box-item-list">
+            <div class="box-item-list sub-box-t2">
                 <div class="content">
-                    <div style=" font-size: 18.4px" class="box-topic">Delivery Cost(LKR)</div>
-                    <div class="number-details">  300.00</div>
+                    <div class="box-topic">Date</div>
+                    <div class="number-details"><?php echo $order->OrderDate ?></div>
+                </div>
+                <img src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/000000/external-date-ecommerce-icongeek26-linear-colour-icongeek26.png"/>
+            </div>
+            <div class="box-item-list sub-box-t2">
+                <div class="content">
+                    <div class="box-topic">Total</div>
+                    <div class="number-details"><?php echo $order->TotalCost ?></div>
+                </div>
+                <img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-cash-gambling-justicon-flat-justicon.png"/>
+            </div>
+            <div class="box-item-list sub-box-t2">
+                <div class="content">
+                    <div style=" font-size: 18.4px" class="box-topic">Delivery Charge</div>
+                    <div class="number-details"><?php echo $order->DeliveryCost ?></div>
                 </div>
                 <img src="https://img.icons8.com/external-konkapp-flat-konkapp/64/000000/external-delivery-logistic-and-delivery-konkapp-flat-konkapp.png"/>
             </div>
 
-            <div class="box-item-list">
+        </div>
+        <div class="overview-boxes boxes-t2">
+            <div class="box-item-list sub-box-t2">
+                <div class="content">
+                    <div class="box-topic">Recipient Name</div>
+                    <div class="number-details"><?php echo $order->RecipientName ?></div>
+                </div>
+                <img src="https://img.icons8.com/color/48/000000/person-male.png"/>
+            </div><div class="box-item-list sub-box-t2">
+                <div class="content">
+                    <div class="box-topic">Contact No</div>
+                    <div class="number-details"><?php echo $order->RecipientContact ?></div>
+                </div>
+                <img src="https://img.icons8.com/emoji/48/000000/telephone.png"/>
+            </div><div class="box-item-list sub-box-t2">
+                <div class="content">
+                    <div class="box-topic">Note</div>
+                    <div class="number-details"><?php echo $order->Note?></div>
+                </div>
+                <img src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/000000/external-note-documents-icongeek26-linear-colour-icongeek26.png"/>
+            </div>
+            <div class="box-item-list sub-box-t2">
                 <div class="content">
                     <div class="box-topic">Shop Count</div>
-                    <div class="number-details">3</div>
+                    <div class="number-details"><?php echo $shopCount?></div>
                 </div>
-                <img src="https://img.icons8.com/cute-clipart/64/000000/shop.png"/>
+                <img src="https://img.icons8.com/color/48/000000/shop.png"/>
             </div>
 
-            <div class="box-item-list">
+            <div class="box-item-list sub-box-t2">
                 <div class="content">
                     <div class="box-topic">Total Weight</div>
                     <div class="number-details">10 Kg</div>
@@ -57,81 +92,36 @@
             </div>
         </div>
 
-
         <div style="height: auto" class="core">
             <div class="customer-details">
-            <h1 class="heading"> <span>Delivery Route</span><span style="color: var(--text-color-light)" class="shop-id"></span></h1><div class = "map-section">
-                    <div class="inputBox map-inputBox">
-                        <!--                <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>-->
-                        <div id="map"></div>
-                    </div>
-                    <div>
-                        <span class="rider">Select Rider Type</span>
-                        <select class="rider-type">
-                            <option></option>
-                            <option class="a">Bike</option>
-                            <option class="a">Three wheel</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <span class="rider">Select Rider</span>
-                        <div class="select-scroll">
-                        <select class="rider-select">
-                            <option></option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                            <option class="a">0011</option>
-                            <option class="a">0087</option>
-                            <option class="a">0090</option>
-                        </select>
-                        </div>
-                    </div>
-                    <button style="margin-top: auto" class="complete-btn" type="submit" value="Complete">Assign Rider</button>
-        </div>
-        </div>
-        </div>
-
-
-        <div style="height: auto" class="core">
-            <div class="customer-details">
-                <h1 class="heading"> <span>Customer Details</span><span style="color: var(--text-color-light)" class="shop-id"></span></h1>
+                <h1 class="heading">Customer <span>Details</span></h1>
                 <table class="cus-details">
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Address</th>
+                        <th>Email</th>
                         <th>Contact No</th>
                     </tr>
                     </thead>
                     <tbody class="">
                     <tr>
-                        <td>C00987</td>
-                        <td>Sanduni Siriwardhane</td>
-                        <td>No. 20 , Dhammadhinna Rd, Tangalle</td>
-                        <td>0715800177</td>
+                        <td><?php echo $customer->Name?></td>
+                        <td><?php echo $customer->Address?></td>
+                        <td><?php echo $customer->Email?></td>
+                        <td><?php echo $customer->ContactNo?></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
         </div>
-
         <div style="height: auto" class="core">
             <div class="container-order-details">
-                <h1 class="heading"> <span>Item List : </span><span style="color: var(--text-color-light)" class="shop-id">S12340</span></h1>
+                <h1 class="heading">Item <span>List</span></h1>
                 <div>
                     <div class="item-list">
                         <div class="complete-section">
-
                             <table class="shop-details">
                                 <tbody>
                                 <tr>
@@ -277,7 +267,7 @@
                         </table>
                         <div class="complete-section">
 
-                            <table  class="staff-details">
+                            <table class="staff-details">
                                 <tbody>
                                 <tr>
                                     <th>Shop Total (LKR) :</th>
@@ -299,7 +289,8 @@
                 </div>
             </div>
             <div class="container-order-details">
-                <h1 class="heading"> <span>Item List : </span><span style="color: var(--text-color-light)" class="shop-id">S12340</span></h1>
+                <h1 class="heading"><span>Item List : </span><span style="color: var(--text-color-light)"
+                                                                   class="shop-id">S12340</span></h1>
                 <div>
                     <div class="item-list">
                         <div class="complete-section">
@@ -471,7 +462,8 @@
                 </div>
             </div>
             <div class="container-order-details">
-                <h1 class="heading"> <span>Item List : </span><span style="color: var(--text-color-light)" class="shop-id">S12340</span></h1>
+                <h1 class="heading"><span>Item List : </span><span style="color: var(--text-color-light)"
+                                                                   class="shop-id">S12340</span></h1>
                 <div>
                     <div class="item-list">
                         <div class="complete-section">
@@ -643,7 +635,50 @@
                 </div>
             </div>
         </div>
+            <div style="height: auto" class="core">
+                <div class="customer-details">
+                    <h1 class="heading">Select <span>Rider</span></h1>
+                    <div class="map-section">
+                        <div class="inputBox map-inputBox">
+                            <!--                <label for="location"><i class="fas fa-map-marker-alt"></i>Location</label>-->
+                            <div id="map"></div>
+                        </div>
+                        <div>
+                            <span class="rider">Select Rider Type</span>
+                            <select class="rider-type">
+                                <option></option>
+                                <option class="a">Bike</option>
+                                <option class="a">Three wheel</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <span class="rider">Select Rider</span>
+                            <div class="select-scroll">
+                                <select class="rider-select">
+                                    <option></option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                    <option class="a">0011</option>
+                                    <option class="a">0087</option>
+                                    <option class="a">0090</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button style="margin-top: auto" class="complete-btn" type="submit" value="Complete">Assign Rider
+                        </button>
+                    </div>
+                </div>
+            </div>
     </div>
 </section>
 <script src="/js/delivery-assign.js"></script>
+<script src="/js/order.js"></script>
 

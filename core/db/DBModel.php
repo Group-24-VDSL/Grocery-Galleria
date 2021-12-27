@@ -167,6 +167,11 @@ abstract class DBModel extends Model
         $statement->execute();
         return $statement->fetch($fetch_type);
     }
+    public static function queryAll($string,$fetch_type){
+        $statement = self::prepare($string);
+        $statement->execute();
+        return $statement->fetchAll($fetch_type,static::class);
+    }
 
     public static function findCount($countSelect,$s,$where=[],$group,$limit=null)
     {

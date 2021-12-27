@@ -19,7 +19,10 @@ class Rider extends UserModel
     public string $NIC = '';
     public string $ProfilePic = '';
     public int $RiderType = 0; //0 = bike , 1 = threewheel
-
+    public string $City = '';
+    public string $Suburb = '';
+    public string $Password = '';
+    public string $ConfirmPassword = '';
 
     public static function tableName(): string
     {
@@ -38,7 +41,12 @@ class Rider extends UserModel
             'Email'=>'Email',
             'ContactNo'=>'Contact Number',
             'NIC'=>'National ID',
-            'ProfilePic' => 'Profile Picture'
+            'ProfilePic' => 'Profile Picture',
+            'RiderType' => 'Vehicle Type',
+            'Password' => 'Enter password',
+            'ConfirmPassword'=> 'Confirm password',
+            'City' => 'City',
+            'Suburb' => 'Suburb'
         ];
     }
 

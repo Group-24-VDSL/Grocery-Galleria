@@ -199,7 +199,7 @@ class StaffController extends Controller
 //            $newObj->StaffID = Application::getCustomerID(); // get session id
             $newObj->StaffID = 11;
             if ($newObj->validate('update') && $newObj->update()) {
-                $newObj->singleProcedure('email_update', $newObj->StaffID, $newObj->Email);
+                $newObj->callProcedure('email_update', ['StaffID'=>$newObj->StaffID], [$newObj->Email]);
                 Application::$app->session->setFlash('success','Update Success');
                 Application::$app->response->redirect('/dashboard/staff/profilesettings');
             } else {
