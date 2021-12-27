@@ -1,0 +1,45 @@
+.core{
+    flex-wrap: wrap;
+
+}
+
+.core-orders , .core-revenue{
+    width: 100%;
+
+}
+
+.charts{
+    /*border: 0.2rem solid var(--home-color);*/
+    flex-direction: row;
+    display: flex;
+    /*flex-wrap: wrap;*/
+    /*flex-direction: column;*/
+
+    column-gap: 2rem;
+
+}
+
+.heading {
+    text-align: left;
+    color: var(--title-color);
+    text-transform: uppercase;
+    font-size: var(--h2-font-size);
+    padding: 1rem;
+}
+.core-orders .barChart, .core-revenue .barChart,
+.core-orders .lineChart,.core-revenue .lineChart{
+    position: relative;
+    border: 3px solid var(--home-color);
+    border-radius: 10px;
+    width: 100%;
+    height: 20rem;
+}
+
+.analytics{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
