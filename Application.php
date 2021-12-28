@@ -147,6 +147,8 @@ class Application
     public function logout(){
         $this->user = null;
         $this->session->remove('user');
-
+        $this->session->remove('role');
+        $this->session->remove('city');
+        $this->session->remove('suburb');
     }
 }
