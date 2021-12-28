@@ -32,7 +32,10 @@
     border: 3px solid var(--home-color);
     border-radius: 10px;
     width: 100%;
-    height: 20rem;
+    height: 22rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .analytics{
@@ -42,4 +45,11 @@
     margin-top: auto;
     margin-bottom: auto;
 
+}
+
+.average{
+    margin-top: auto;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    font-size: 12px;
 }

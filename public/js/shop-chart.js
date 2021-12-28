@@ -1,55 +1,113 @@
-$( document ).ready(function() {
-    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues = [55, 49, 44, 24, 150];
-    var barColors = "red";
+const host = window.location.origin; //http://domainname
 
-    new Chart("myChart1", {
-        type: "bar",
-        data: {
-            labels: xValues,
-            datasets: [{
-                backgroundColor: "green",
-                data: yValues
-            }]
-        },
-        options: {
-            legend: {display: false},
-            title: {
-                display: true,
-                text: "World Wine Production 2018"
+//Api links
+
+const URLMonthOrders = host + "/api/getshoplastmonthorders" ;
+const URLMonthlyOrders = host + "/api/getshopmonthlyorders" ;
+
+
+$( document ).ready(function() {
+    $.getJSON(URLMonthlyOrders, function (orderlist) {
+        let xValues = [] ;
+        let yValues = [] ;
+
+        let a = Object.values(orderlist)[0]
+        console.log(a["NumberOfOrders"]);
+        console.log(Object.keys(orderlist).length)
+        for (let i = 0; i < Object.keys(orderlist).length; i++) {
+            yValues.push(parseInt(Object.values(orderlist)[i]["NumberOfOrders"]));
+
+        }
+        xValues = Object.keys(orderlist);
+
+        const orderAverage = yValues.reduce((a, b) => a + b) / yValues.length;
+        const sum = yValues.reduce((a, b) => {
+            return a + b;
+        });
+
+        document.getElementById("order-barchart-average").innerHTML = orderAverage.toFixed(2);
+        document.getElementById("order-barchart-sum").innerHTML = sum;
+
+        new Chart("orderBarchart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: 'Orders in month',
+                    backgroundColor: "green",
+                    borderColor: "green",
+                    data: yValues
+                }]
             },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Orders Per Month',
-                    color: 'green'
+            options: {
+                legend: {display: false},
+
+                scales: {},
+
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'ORDERS IN LAST YEAR',
+                        color: 'green',
+                        font: {
+                            size: 14
+                        }
+                    }
                 }
             }
-        }
+        });
     });
 
-    var xValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+    $.getJSON(URLMonthOrders, function (orders) {
+        let xValues = [];
+        let yValues = [];
 
-    new Chart("myChart2", {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-                data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
-                borderColor: "green",
-                fill: true
-            }]
-        },
-        options: {
-            legend: {display: false},
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Orders Per Day',
-                    color: 'green'
+        let b = Object.values(orders)[0] ;
+
+        console.log(b["NumberOfOrders"]);
+        console.log(Object.keys(orders).length)
+
+        for (let i = 0; i < Object.keys(orders).length; i++) {
+            yValues.push(parseInt(Object.values(orders)[i]["NumberOfOrders"]))
+        }
+
+        xValues = Object.keys(orders);
+
+        const orderAverage = yValues.reduce((a, b) => a + b) / yValues.length;
+        const sum = yValues.reduce((a, b) => {
+            return a + b;
+        });
+
+        document.getElementById("order-linechart-average").innerHTML = orderAverage.toFixed(2);
+        document.getElementById("order-linechart-sum").innerHTML = sum;
+
+        new Chart("orderLinechart", {
+            type: "line",
+            data: {
+                labels: xValues.reverse(),
+                datasets: [{
+                    label: 'Orders in day',
+                    data: yValues.reverse(),
+                    borderColor: "green",
+                    fill: true
+                }]
+            },
+            options: {
+                legend: {display: false},
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'ORDERS IN LAST MONTH',
+                        color: 'green',
+                        layout: {
+                            padding: 5
+                        },
+                        font: {
+                            size: 14
+                        }
+                    }
                 }
-            }
-        },
-
+            },
+        });
     });
 });
