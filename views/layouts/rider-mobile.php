@@ -11,7 +11,18 @@
     <!--Javascript-->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/rider-mobile.js"></script>
-    <?php include_once("utils/pwa.php"); ?>
+    <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+    <script>
+        const beamsClient = new PusherPushNotifications.Client({
+            instanceId: 'd248ec3c-fd1b-484f-902b-82c20393efcb',
+        });
+
+        beamsClient.start()
+            .then(() => beamsClient.addDeviceInterest('hello'))
+            .then(() => console.log('Successfully registered and subscribed!'))
+            .catch(console.error);
+    </script>
+    <?php include_once("utils/pwa-rider.php"); ?>
 </head>
 <body>
 <?php include_once("utils/sessions.php"); ?>

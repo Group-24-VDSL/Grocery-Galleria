@@ -102,6 +102,10 @@ class Application
         return self::$app->user;
     }
 
+    public static function getUserID(){
+        return self::$app->user->getUserID();
+    }
+
     public static function getUserRole(){
         return self::$app->user->Role??null;
     }
