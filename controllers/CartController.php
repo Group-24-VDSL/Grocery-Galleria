@@ -129,7 +129,7 @@ class CartController extends Controller
                 $domain = Application::$app->domain;
 
                 //There should be a procedure for checking the stock.
-                $this->checkStock(Application::getUser()->getUserID());
+                $this->checkStock(Application::getUserID());
                 //get the availible items
                 $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getUserID()." AND Purchased=1",\PDO::FETCH_COLUMN);
                 $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getUserID()." AND tc.Purchased=1",\PDO::FETCH_COLUMN);
@@ -140,6 +140,8 @@ class CartController extends Controller
                     'payment_method_types' => ['card'],
                     'metadata'=>[
                         'userid' => Application::getUserID(),
+                        'city'=> Application::getCity(),
+                        'suburb'=> Application::getSuburb(),
                         'recipient_name'=> $recipient_name,
                         'notes' => $notes,
                         'recipient_contact' => $recipient_contact,
@@ -227,9 +229,10 @@ class CartController extends Controller
     public function fullfillOrder($obj)
     {
         $customerid = filter_var($obj->metadata->userid,FILTER_SANITIZE_NUMBER_INT);
-        $customer_email=filter_var($obj->customer_email,FILTER_SANITIZE_EMAIL);
         $notes=filter_var($obj->metadata->notes,FILTER_SANITIZE_SPECIAL_CHARS);
         $rec_name=filter_var($obj->metadata->recipient_name,FILTER_SANITIZE_SPECIAL_CHARS);
+        $city=filter_var($obj->metadata->city,FILTER_SANITIZE_NUMBER_INT);
+        $suburb=filter_var($obj->metadata->suburb,FILTER_SANITIZE_NUMBER_INT);
         $rec_contact=filter_var($obj->metadata->recipient_contact,FILTER_SANITIZE_NUMBER_INT);
         $delivery_fee=filter_var($obj->metadata->deliverycost,FILTER_SANITIZE_NUMBER_FLOAT);
         $totalcost=filter_var($obj->metadata->totalcost,FILTER_SANITIZE_NUMBER_FLOAT);
@@ -238,7 +241,6 @@ class CartController extends Controller
 
         $customer = Customer::findOne(['CustomerID' => $customerid]);
         if($customer){
-                Application::$app->logger->debug("If I'm honest");
                 $sql="INSERT INTO `cart` (CustomerID,Address) VALUES (:id,:address);";
                 $result = $pdo->prepare($sql);
                 $result->bindValue(":id",$customerid);
@@ -247,7 +249,7 @@ class CartController extends Controller
 
                 $cartid= $pdo->lastInsertId();
 
-                $sql="INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost) VALUES (:cartid,:rec_name,:notes,:rec_contact,:delivery_fee,:totalcost);";
+                $sql="INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost,City,Suburb) VALUES (:cartid,:rec_name,:notes,:rec_contact,:delivery_fee,:totalcost,:city,:suburb);";
                 $result = $pdo->prepare($sql);
                 $result->bindValue(":cartid",$cartid);
                 $result->bindValue(":rec_name",$rec_name);
@@ -255,6 +257,8 @@ class CartController extends Controller
                 $result->bindValue(":rec_contact",$rec_contact);
                 $result->bindValue(":delivery_fee",$delivery_fee);
                 $result->bindValue(":totalcost",$totalcost);
+                $result->bindValue(":city",$city);
+                $result->bindValue(":suburb",$suburb);
                 $result->execute();
 
                 $orderid=$pdo->lastInsertId();
