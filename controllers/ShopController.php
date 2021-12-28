@@ -5,7 +5,9 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\controllers\APIController;
+use app\core\db\DBModel;
 use app\core\Request;
+use app\core\Response;
 use app\models\Item;
 use app\models\OrderCart;
 use app\models\Shop;
@@ -49,6 +51,41 @@ class ShopController extends Controller
             ,[
                 'model' => $item
             ]);
+    }
+
+    public function shopOrderAnalytics(Request $request,Response $response){
+        $response->setContentTypeJSON();
+
+        $shopID =  1 ;
+        $yms = array();
+        $now = date('Y-m');
+        for($x = 12; $x >= 1; $x--) {
+            $ym = date('Y M', strtotime($now . " -$x month"));
+            $year = date('Y', strtotime($now . " -$x month"));
+            $month = date('m', strtotime($now . " -$x month"));
+            $orders = DBModel::query("SELECT COUNT(CartID) AS NumberOfOrders FROM `shoporder` WHERE YEAR (Date) =  ".$year." AND  MONTH (Date)= ".$month." AND ShopID = ".$shopID."  ",\PDO::FETCH_ASSOC,true);
+            $yms[$ym] = $orders[0];
+        }
+//        echo "<pre>";
+//        print_r($yms);
+//        echo "</pre>";
+        return $response->json($yms) ;
+    }
+
+    public function getmonthorders(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $shopID =  1 ;
+        $yms = array();
+        $now = date('Y-m-d');
+        for($x = 30 ; $x >= 1; $x--) {
+            $ym = date('M d', strtotime($now . " -$x days"));
+            $year = date('Y', strtotime($now . " -$x days"));
+            $month = date('m', strtotime($now . " -$x days"));
+            $day = date('d', strtotime($now . " -$x days"));
+            $orders = DBModel::query("SELECT COUNT(CartID) AS NumberOfOrders FROM `shoporder` WHERE YEAR (Date) =  ".$year." AND  MONTH (Date)= ".$month." AND  DAY (Date)= ".$day." AND ShopID = ".$shopID."  ",\PDO::FETCH_ASSOC,true);
+            $yms[$ym] = $orders[0];
+        }
+        return $response->json(array_reverse($yms)) ;
     }
 
     public function additem(Request $request){
