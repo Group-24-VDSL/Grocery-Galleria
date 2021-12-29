@@ -3,7 +3,7 @@
 
 }
 
-.core-orders , .core-revenue{
+.core-orders , .core-revenue, .core-itemAverage{
     width: 100%;
 
 }
@@ -53,3 +53,134 @@
     margin-left: 1rem;
     font-size: 12px;
 }
+
+.chartWrapper {/* w w w. j a v  a2 s.co  m*/
+    position: relative;
+}
+.chartWrapper > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events:none;
+}
+.chartAreaWrapper {
+    width: 800px;
+    /*overflow-x: scroll;*/
+}
+
+.charts-shopItem{
+    border: 3px solid var(--home-color);
+    padding: 2rem;
+    border-radius: 10px;
+    height: 37.5rem;
+    margin-top: 2rem;
+    width: 90%;
+}
+
+.dropbtn-item {
+    background-color: var(--home-color) ;
+    color: var(--text-color-light);
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 18rem;
+    height: 5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.dropbtn-item:hover, .dropbtn-item:focus {
+    background-color: var(--first-color);
+    color: var(--classic-white);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--home-color);
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 30rem;
+    overflow-y: scroll;
+}
+
+.dropdown-content a, .dropdown-content tr {
+    width: 17rem;
+    color: black;
+
+    text-decoration: none;
+    display: block;
+    border-bottom: solid 1px var(--first-color);
+}
+
+.dropdown-content td, .item tr td{
+    /*width: 7.5rem;*/
+    border: none;
+    font-size: 12px;
+}
+
+.dropdown a:hover ,.dropdown-content tr:hover{background-color: #ddd;}
+
+.dropdown-content tr:focus> .dropdown-content tr:active{
+    background-color: #51ac37;
+}
+
+.show {display: block;}
+
+.row-img img {
+    width: 40px;
+    height: 40px;
+}
+
+.chart-image{
+    width: 50px;
+    height: 50px;
+}
+
+.core-content{
+    display: flex ;
+    column-gap: 5rem;
+}
+
+.item-button{
+    width: 17rem;
+    /*display: none;*/
+}
+
+.myChart{
+    margin-bottom: 3rem;
+}
+
+.chart-name{
+    color: var(--text-color-light);
+}
+
+.box-green, .box-red {
+    float: left;
+    height: 15px;
+    width: 20px;
+    /*margin-bottom: 15px;*/
+    border: none;
+
+    clear: both;
+}
+
+.box-green {
+    background-color: green;
+}
+
+.box-red{
+    background-color: #51ac37;
+}
+
+
