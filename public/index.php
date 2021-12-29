@@ -102,7 +102,7 @@ $app->router->post('/dashboard/shop/vieworderdetails',[ShopController::class,'up
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->get('/dashboard/shop/analytics',[TestController::class,'test']);
-//$app->router->post('/dashboard/shop/additem',[TestController::class,'shopOrderAnalytics']);
+$app->router->get('/dashboard/shop/itemsales',[TestController::class,'abc']);
 
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
@@ -128,6 +128,11 @@ $app->router->get('/api/orders',[APIController::class,'getOrders']);
 $app->router->get('/api/getordercart',[APIController::class,'getOrderCart']);
 $app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
 $app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);
+$app->router->get('/api/getshoplastmonthlyrevenues',[ShopController::class,'getmonthlyrevenues']);
+$app->router->get('/api/getshoplastmonthrevenues',[ShopController::class,'getmonthrevenues']);
+$app->router->get('/api/getshopitemlist',[ShopController::class,'getShopItemList']);
+$app->router->get('/api/getshopitemsales',[ShopController::class,'getsales']);
+
 
 //rider
 $app->router->get('/rider/register',[RiderController::class,'riderRegister']);

@@ -8,6 +8,7 @@ use app\controllers\APIController;
 use app\core\db\DBModel;
 use app\core\Request;
 use app\core\Response;
+use app\models\Delivery;
 use app\models\Item;
 use app\models\OrderCart;
 use app\models\Shop;
@@ -58,8 +59,8 @@ class ShopController extends Controller
 
         $shopID =  1 ;
         $yms = array();
-        $now = date('Y-m');
-        for($x = 12; $x >= 1; $x--) {
+        $now = date('Y-m-d');
+        for($x = 13; $x >= 1; $x--) {
             $ym = date('Y M', strtotime($now . " -$x month"));
             $year = date('Y', strtotime($now . " -$x month"));
             $month = date('m', strtotime($now . " -$x month"));
@@ -86,6 +87,99 @@ class ShopController extends Controller
             $yms[$ym] = $orders[0];
         }
         return $response->json(array_reverse($yms)) ;
+    }
+
+    public function getmonthlyrevenues(Request $request,Response $response){
+        $response->setContentTypeJSON();
+
+        $shopID =  1 ;
+        $yms = array();
+        $now = date('Y-m-d');
+        for($x = 13; $x >= 1; $x--) {
+            $ym = date('Y M', strtotime($now . " -$x month"));
+            $year = date('Y', strtotime($now . " -$x month"));
+            $month = date('m', strtotime($now . " -$x month"));
+            $revenue = DBModel::query("SELECT SUM(ShopTotal) AS Total FROM `shoporder` WHERE YEAR (Date) =  ".$year." AND  MONTH (Date)= ".$month." AND ShopID = ".$shopID."  ",\PDO::FETCH_ASSOC,true);
+            if($revenue[0] == null){
+                $revenue[0] =0 ;
+            }
+            $yms[$ym] = $revenue[0];
+        }
+//        echo "<pre>";
+//        print_r($yms);
+//        echo "</pre>";
+        return $response->json(array_reverse($yms)) ;
+    }
+
+    public function getmonthrevenues(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $shopID =  1 ;
+        $yms = array();
+        $now = date('Y-m-d');
+        for($x = 30 ; $x >= 1; $x--) {
+            $ym = date('M d', strtotime($now . " -$x days"));
+            $year = date('Y', strtotime($now . " -$x days"));
+            $month = date('m', strtotime($now . " -$x days"));
+            $day = date('d', strtotime($now . " -$x days"));
+            $revenue = DBModel::query("SELECT SUM(ShopTotal) AS Total FROM `shoporder` WHERE YEAR (Date) =  ".$year." AND  MONTH (Date)= ".$month." AND  DAY (Date)= ".$day." AND ShopID = ".$shopID."  ",\PDO::FETCH_ASSOC,true);
+            if($revenue[0] == null){
+                $revenue[0] =0 ;
+            }
+            $yms[$ym] = $revenue[0];
+        }
+        return $response->json(array_reverse($yms)) ;
+    }
+
+    public function getShopItemList(Request $request,Response $response){
+        $response->setContentTypeJSON();
+
+        $shopID =  5 ;
+
+        $itemdetails = array();
+
+        $shopitems = DBModel::query("SELECT ItemID  From shopitem WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
+
+//        echo $shopitems[0]["ItemID"] ;
+
+        $q = DBModel::query("SELECT ItemID,ShopID  From shopitemsales WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
+
+
+        foreach ($shopitems as $item){
+
+            $itemID =  $item["ItemID"] ;
+
+            $x = DBModel::query("SELECT ItemID, Name,ItemImage From item WHERE  ItemID = ".$itemID." ",\PDO::FETCH_OBJ,true);
+
+            array_push($itemdetails,$x);
+        }
+
+
+        return json_encode($itemdetails);
+
+    }
+
+    public function getsales(Request $request,Response $response){
+
+        $response->setContentTypeJSON();
+
+        $shopID =  5 ;
+        $itemID = $request->getBody()["ItemID"] ;
+        $yms = array();
+
+        $now = date('Y-m-d');
+        for($x = 13; $x >= 1; $x--) {
+            $ym = date('Y M', strtotime($now . " -$x month"));
+            $year = date('Y', strtotime($now . " -$x month"));
+            $month = date('m', strtotime($now . " -$x month"));
+            $sales = DBModel::query("SELECT SUM(Quantity) AS sales FROM `shopitemsales` WHERE YEAR (Date) =  ".$year." AND  MONTH (Date)= ".$month." AND ShopID = ".$shopID." AND ItemID = ".$itemID."  ",\PDO::FETCH_ASSOC,true);
+            $yms[$ym] = $sales[0];
+        }
+
+//        echo "<pre>";
+//        print_r($yms);
+//        echo "</pre>";
+
+        return $response->json($yms) ;
     }
 
     public function additem(Request $request){
