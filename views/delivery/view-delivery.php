@@ -79,7 +79,6 @@
                         <th>Customer ID</th>
                         <th>Rider ID</th>
                         <th>Deliver Price(LKR)</th>
-                        <th>No. Of Shop</th>
                         <th>View</th>
                     </tr>
                     </thead>
