@@ -77,4 +77,12 @@ class TestController extends Controller
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/shop-analytics');
     }
+
+    public function abc(Request $request)
+    {
+
+//        $user = new Shop;
+        $this->setLayout('dashboardL-shop');
+        return $this->render('shop/sales-analytics');
+    }
 }
