@@ -99,11 +99,6 @@ class DeliveryController extends Controller
         );
     }
 
-    public function assignrider()
-    {
-        $this->setLayout('headeronly-staff');
-        return $this->render('delivery/assign-rider');
-    }
 
     /**
      * @throws NotFoundException
@@ -143,30 +138,16 @@ class DeliveryController extends Controller
         $staff = new Staff();
         $city = Application::getCity();
         $querySql =
-            "SELECT
-            orderTable.OrderID,
-            orderTable.OrderDate,
-            orderTable.RecipientName, 
-            orderTable.Note, 
-            orderTable.RecipientContact, 
-            orderTable.DeliveryCost,
-            orderTable.TotalCost,
-            orderTable.DeliveryState
-            FROM `orders` AS orderTable INNER JOIN cart as cartTable
-            ON orderTable.CartID = cartTable.CartID
-            INNER JOIN customer as customerTable
-            ON cartTable.CustomerID = customerTable.CustomerID
-            WHERE customerTable.City = $city AND orderTable.DeliveryState = 0";
+            "SELECT * FROM `orders` AS orderTable 
+            WHERE orderTable.City = $city AND orderTable.Status = 0";
         $newDeliveries = Orders::queryAll($querySql, \PDO::FETCH_CLASS);
         return json_encode($newDeliveries);
-
 
     }
 
     public function onDelivery()
     {
-        $this->setLayout('headeronly-staff');
-        return $this->render('delivery/view-complete-delivery-details');
+
     }
 
     public function pastDelivery()
@@ -179,6 +160,43 @@ class DeliveryController extends Controller
     public function profile()
     {
         return $this->render('delivery/profile');
+    }
+
+    public function assignRider(Request $request,Response $response)
+    {
+        $delivery = new Delivery();
+        $deliveryRider = new Rider();
+        $order = new Orders();
+        $body = $request->getBody();
+        $orderID = $body['OrderID'];
+        $riderID = $body['RiderID'];
+        //order
+        $order = $order->findOne(['OrderID'=>$orderID]);
+        $order->Status = 1;
+        $cartID = $order->CartID;
+        //delivery
+        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID]);
+        $stmt = DBModel::prepare("INSERT INTO `delivery`(`RiderID`,`OrderID`, `CartID`) VALUES ($riderID,$orderID,$cartID)");
+
+        if($order->update() && $deliveryRider->update() && $stmt->execute()){
+            Application::$app->session->setFlash('success', 'Rider allocation Success');
+            Application::$app->response->redirect('/dashboard/delivery/viewdelivery');
+
+        }else{
+            $redirectURL = "/dashboard/delivery/deliveryInfo?OrderID=$orderID";
+            Application::$app->response->redirect($redirectURL);
+
+        }
+
+
+
+
+
+
+
+
+
+
     }
 
 
