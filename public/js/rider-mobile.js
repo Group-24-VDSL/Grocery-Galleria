@@ -59,7 +59,6 @@ $(function(){
 
         }
 
-
         // Append the 'script' element to 'head'
         document.head.appendChild(script);
     }

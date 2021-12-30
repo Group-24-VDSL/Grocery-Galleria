@@ -129,7 +129,6 @@ class AuthController extends Controller
         if ($request->isPost()) {
             $success = false;{
                 $user->loadData($request->getBody());
-                $user->loadData($request->getBody());
                 if ($user->validate('update') && $user->update()) {
                     Application::$app->session->setFlash('success', 'Update Success');
                 }else{
