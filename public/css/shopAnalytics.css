@@ -131,7 +131,8 @@
 
 .dropdown a:hover ,.dropdown-content tr:hover{background-color: #ddd;}
 
-.dropdown-content tr:focus> .dropdown-content tr:active{
+/*.dropdown-content tr:focus*/
+.dropdown-content tr:active{
     background-color: #51ac37;
 }
 

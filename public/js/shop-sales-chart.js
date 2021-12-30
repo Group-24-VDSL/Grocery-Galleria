@@ -9,6 +9,7 @@ const ItemTable = document.getElementById('itemList');
 
 function myFunction() {
     document.getElementById("itemDropdown").classList.toggle("show");
+
 }
 
 // Close the dropdown if the user clicks outside of it
@@ -22,6 +23,7 @@ window.onclick = function(event) {
         for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
+
                 // openDropdown.classList.remove('show');
 
             }
@@ -44,9 +46,6 @@ items.forEach(item=>{
                     <td id="ItemImage" class="row-img">
                      <img src="${item[0].ItemImage}" alt="" />
                   <td id="Name" class="row-name">${item[0].Name}</td></button>
-
-                
-                
                 `
     ItemTable.appendChild(ItemRow);
 })
