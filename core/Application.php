@@ -8,6 +8,7 @@ use app\models\User;
 use Exception;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Pusher\Pusher;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
@@ -32,6 +33,7 @@ class Application
     public SendGrid  $sendgrid;
     public StripeClient $stripe;
     public From $emailfrom;
+    public Pusher $pusher;
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
@@ -75,6 +77,8 @@ class Application
         $this->secfactory = new Factory();
         $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
 
+
+        $this->pusher = new Pusher($_ENV['PUSHER_APP_KEY'],$_ENV['PUSHER_APP_SECRET'],$_ENV['PUSHER_APP_ID'],['cluster'=>$_ENV['PUSHER_APP_CLUSTER'],'useTLS'=>true]);
 
         $userID = Application::$app->session->get('user');
         if ($userID) {

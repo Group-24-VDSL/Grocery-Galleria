@@ -12,6 +12,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/rider-mobile.js"></script>
     <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
         const beamsClient = new PusherPushNotifications.Client({
             instanceId: 'd248ec3c-fd1b-484f-902b-82c20393efcb',
@@ -21,6 +22,18 @@
             .then(() => beamsClient.addDeviceInterest('hello'))
             .then(() => console.log('Successfully registered and subscribed!'))
             .catch(console.error);
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('f08578b185d66fb3cf59', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('get-location', function(data) {
+            alert(JSON.stringify(data));
+        });
     </script>
     <?php include_once("utils/pwa-rider.php"); ?>
 </head>
