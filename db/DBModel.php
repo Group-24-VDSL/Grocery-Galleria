@@ -176,20 +176,7 @@ abstract class DBModel extends Model
         return $statement->fetchAll($fetch_type,static::class);
     }
 
-    public static function findCount($countSelect,$s,$where=[],$group,$limit=null)
-    {
-        $tableName = static::tableName();
-        $attributes = array_keys($where);
-        $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
-        $statement = self::prepare("SELECT COUNT($countSelect),$s FROM $tableName WHERE $sql GROUP By ($group) LIMIT $limit");
-        foreach ($where as $key => $item) {
-            $statement->bindValue(":$key", $item);
-        }
-        $statement->execute();
-        return $statement->fetchAll(\PDO::FETCH_CLASS);
-//        return (int)$statement->fetchColumn();
 
-    }
 
 
 }
