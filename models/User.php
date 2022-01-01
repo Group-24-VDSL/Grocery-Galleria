@@ -74,7 +74,7 @@ class User extends UserModel
 
     public function jsonarray(): array
     {
-        return ['Email','Name','Delete_Flag','Role'];
+        return ['Email','Name','Verify_Flag','Delete_Flag','Role','City','Suburb'];
     }
 
     public function getEmail(): string
