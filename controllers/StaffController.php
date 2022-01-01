@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\core\db\DBModel;
 use app\models\Customer;
 use app\models\Orders;
 use app\models\Shop;
@@ -14,6 +15,7 @@ use app\models\Item;
 use app\models\Complaint;
 use app\models\User;
 use app\models\Verification;
+use app\models\SystemReports;
 
 class StaffController extends Controller
 {
@@ -187,34 +189,34 @@ class StaffController extends Controller
 
     public function profilesettings(Request $request)
     {
-        // get logged staff ID
-        $staff = new Staff();
-        $newObj = new Staff();
+        $userID = Application::getUserID();
+        $model = new Staff();
         $user = new User();
         $this->setLayout("dashboardL-staff");
-        $staff = $staff->findOne(['StaffID' => 11]);
-        $user = $user->findOne(['UserID' => 11]);
+        $model = $model->findOne(['StaffID' => $userID]);
+//        $user = $user->findOne(['UserID' => 11]);
         if ($request->isPost()) {
+            $newObj = new Staff();
             $newObj->loadData($request->getBody());
 //            $newObj->StaffID = Application::getCustomerID(); // get session id
-            $newObj->StaffID = 11;
+            $newObj->StaffID = $userID;
             if ($newObj->validate('update') && $newObj->update()) {
-                $newObj->callProcedure('email_update', ['StaffID'=>$newObj->StaffID], [$newObj->Email]);
-                Application::$app->session->setFlash('success','Update Success');
+                $newObj->callProcedure('email_update', ['UserID' => $newObj->StaffID, 'Email' => $newObj->Email]);
+                Application::$app->session->setFlash('success', 'Update Success');
                 Application::$app->response->redirect('/dashboard/staff/profilesettings');
             } else {
                 Application::$app->session->setFlash('danger', 'Update Failed');
                 $this->setLayout("dashboardL-staff");
                 return $this->render("staff/profile-setting", [
-                    'model' => $newObj,
-                    'loginmodel' => $user
+                    'model' => $newObj
                 ]);
             }
         }
         return $this->render("staff/profile-setting", [
-            'model' => $staff,
+            'model' => $model,
             'loginmodel' => $user
         ]);
     }
+
 
 }
