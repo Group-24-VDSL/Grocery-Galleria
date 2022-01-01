@@ -10,6 +10,8 @@ class DeliveryStaff extends UserModel
     public string $Name = '';
     public string $ContactNo = '';
     public string $Email = '';
+    public string $City = '';
+    public string $Suburb = '';
 
     public function save()
     {
@@ -59,6 +61,5 @@ class DeliveryStaff extends UserModel
     {
         return $this->DelStaffID;
     }
-
 
 }

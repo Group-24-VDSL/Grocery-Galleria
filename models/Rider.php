@@ -14,6 +14,8 @@ class Rider extends UserModel
     public string $ContactNo = '';
     public string $Password = ''; //need this two
     public string $ConfirmPassword = ''; //need this two
+    public string $City = '';
+    public string $Suburb = '';
     public string $NIC = '';
     public string $ProfilePic = '';
     public int $RiderType = 0; //0 = bike , 1 = threewheel
