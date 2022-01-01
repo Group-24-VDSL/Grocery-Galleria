@@ -23,22 +23,22 @@
 
     <div class="box-container">
         <div class="box">
-            <h3>vegitables</h3>
+            <h3>vegetables</h3>
             <p>Farm Fresh</p>
             <img src="/img/welcome/vegeShop.jpg" alt="">
-            <a href="/gallery?Category=0" class="btn">shop now</a>
+            <a href="/gallery?Category=1" class="btn">shop now</a>
         </div>
         <div class="box">
             <h3>fruits</h3>
             <p>Natural Fresh</p>
             <img src="/img/welcome/Shop.jpg" alt="">
-            <a href="/gallery?Category=1" class="btn">shop now</a>
+            <a href="/gallery?Category=4" class="btn">shop now</a>
         </div>
         <div class="box">
             <h3>Grocery</h3>
             <p>High Quality</p>
             <img src="/img/welcome/groceryShop.jpg" alt="">
-            <a href="/gallery?Category=2" class="btn">shop now</a>
+            <a href="/gallery?Category=0" class="btn">shop now</a>
         </div>
         <div class="box">
             <h3>Fish</h3>
@@ -50,7 +50,7 @@
             <h3>meat</h3>
             <p>Farm Fresh</p>
             <img src="/img/welcome/meatShop.jpg" alt="">
-            <a href="/gallery?Category=4" class="btn">shop now</a>
+            <a href="/gallery?Category=2" class="btn">shop now</a>
         </div>
 
     </div>
