@@ -14,6 +14,9 @@
     <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
+
+        let endpoint = window.location.origin + "/rider/getlocation";
+
         const beamsClient = new PusherPushNotifications.Client({
             instanceId: 'd248ec3c-fd1b-484f-902b-82c20393efcb',
         });
@@ -34,8 +37,11 @@
         channel.bind('get-location',  async function (data) {
             console.log(data);
             let position = await  getPosition();
+            let pos = {"lat":position["coords"]["latitude"],"lng":position["coords"]["longitude"]};
+            console.log(pos);
             console.log(position);
-        });
+            $.post(endpoint,JSON.stringify(pos));
+        })
 
         function getPosition() {
             // Simple wrapper
@@ -44,10 +50,6 @@
             });
         }
 
-        // async function main() {
-        //     // wait for getPosition to complete
-        //     console.log(position);
-        // }
     </script>
     <?php include_once("utils/pwa-rider.php"); ?>
 </head>
