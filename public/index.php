@@ -146,6 +146,8 @@ $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingS
 //api - delivery
 $app->router->get('/api/getrider',[APIController::class,'getRider']);
 $app->router->get('/api/getriders',[APIController::class,'getRiders']);
+$app->router->get('/api/getriderlocation',[DeliveryController::class,'getRiderLocation']);
+$app->router->get('/api/getriderlocationdata',[DeliveryController::class,'getRiderLocationData']);
 //rider
 $app->router->get('/rider/register',[RiderController::class,'riderRegister']);
 $app->router->post('/rider/register',[RiderController::class,'riderRegister']);
@@ -153,6 +155,7 @@ $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->get('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/order',[RiderController::class,'order']);
+$app->router->post('/rider/getlocation',[RiderController::class,'riderLocation']);
 
 $app->router->get('/changePwd',[AuthController::class,'changePassword']);
 $app->router->post('/changePwd',[AuthController::class,'changePassword']);
