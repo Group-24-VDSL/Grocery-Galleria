@@ -56,11 +56,11 @@ class Application
 
         $this->authMiddleware=new AuthMiddleware([
             'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
-            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','assignRider'],
+            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','assignRider','getRiderLocationData'],
             'Customer' => ['welcome','getTempCart','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
             'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
-            'Rider' => ['vieworder','order'],
+            'Rider' => ['vieworder','order','riderLocation'],
             "Common" => ['logout','profileUpdate','test']
         ]);
 
@@ -112,7 +112,7 @@ class Application
     }
 
     public static function getSuburb(){
-        return self::$app->session->get('Suburb');
+        return self::$app->session->get('suburb');
     }
 
     public function run()
