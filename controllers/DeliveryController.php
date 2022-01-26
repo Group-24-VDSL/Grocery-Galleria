@@ -116,7 +116,7 @@ class DeliveryController extends Controller
         $orderStmt->execute();
         $shopCountStmt->execute();
         $shopOrders = $orderStmt->fetchAll(\PDO::FETCH_ASSOC);
-        $shopCount = $shopCountStmt->fetchColumn(\PDO::FETCH_DEFAULT);
+        $shopCount = $shopCountStmt->fetchColumn();
         $this->setLayout('dashboard-delivery');
         return $this->render('delivery/view-new-delivery-details',
         [
@@ -190,10 +190,22 @@ class DeliveryController extends Controller
 
     }
 
-    public function getRiderLocation()
+    public function getRiderLocation(Request $request,Response $response)
     {
+        $response->setContentTypeJSON();
+        $this->setLayout('empty');
         $data['City'] = Application::getCity();
         Application::$app->pusher->trigger('my-channel', 'get-location',$data,);
+    }
+
+    public function getRiderLocationData(Request $request,Response $response)
+    {
+        $type=$request->getBody()['type'];
+        $response->setContentTypeJSON();
+        $this->setLayout('empty');
+        $city = Application::getCity();
+        $res = DBModel::query("SELECT d.RiderID,d.LocationLat,d.LocationLng,dr.Name,dr.ContactNo FROM `deliveryriderlocation` AS d INNER JOIN `deliveryrider` AS dr ON dr.RiderID = d.RiderID WHERE d.LastUpdate >= NOW() - INTERVAL 5 MINUTE AND dr.Status=0 AND dr.RiderType=$type AND dr.City=$city;",\PDO::FETCH_ASSOC,true);
+        return $response->json(Application::getUser());
     }
 
 
