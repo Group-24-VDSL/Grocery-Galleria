@@ -31,9 +31,23 @@
         });
 
         var channel = pusher.subscribe('my-channel');
-        channel.bind('get-location', function(data) {
-            alert(JSON.stringify(data));
+        channel.bind('get-location',  async function (data) {
+            console.log(data);
+            let position = await  getPosition();
+            console.log(position);
         });
+
+        function getPosition() {
+            // Simple wrapper
+            return new Promise((res, rej) => {
+                navigator.geolocation.getCurrentPosition(res, rej);
+            });
+        }
+
+        // async function main() {
+        //     // wait for getPosition to complete
+        //     console.log(position);
+        // }
     </script>
     <?php include_once("utils/pwa-rider.php"); ?>
 </head>
