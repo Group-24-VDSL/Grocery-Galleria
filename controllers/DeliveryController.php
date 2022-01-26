@@ -140,7 +140,7 @@ class DeliveryController extends Controller
         $querySql =
             "SELECT * FROM `orders` AS orderTable 
             WHERE orderTable.City = $city AND orderTable.Status = 0";
-        $newDeliveries = Orders::queryAll($querySql, \PDO::FETCH_CLASS);
+        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
         return json_encode($newDeliveries);
 
     }
@@ -188,15 +188,12 @@ class DeliveryController extends Controller
 
         }
 
+    }
 
-
-
-
-
-
-
-
-
+    public function getRiderLocation()
+    {
+        $data['City'] = Application::getCity();
+        Application::$app->pusher->trigger('my-channel', 'get-location',$data,);
     }
 
 
