@@ -8,6 +8,75 @@ const host = window.location.origin; //http://domainname
 //API urls
 const RiderURL = host + '/api/getrider';
 const RidersURL = host + '/api/getriders';
+const RiderLocationURL = host + '/api/getriderlocation';
+const RiderLocationDataURL = host + '/api/getriderlocationdata?type=';
+let map;
+
+$(function(){
+        // Create the script tag, set the appropriate attributes
+        let script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwYJrYLyEaQGRUYEnh10GS5luyYnt2a5U&callback=initMap';
+        // script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap';
+        script.async = true;
+
+
+        window.initMap = function () {
+
+            const geocoder = new google.maps.Geocoder();
+
+
+            let infoWindow = new google.maps.InfoWindow({
+                content: "Customer",
+            });
+
+            let customer = $(document.getElementById("map")).data('location');
+
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: customer,
+                zoom: 16,
+            });
+            var cus_icon = {
+                url: host + '/img/human_icon.png', // url
+                scaledSize: new google.maps.Size(25,25), // scaled size
+                origin: new google.maps.Point(0,0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
+            let myMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(customer['lat'], customer['lng']),
+                icon:cus_icon,
+            });
+
+            myMarker.setMap(map);
+
+            myMarker.addListener("mouseover", () => {
+                infoWindow.open({
+                    anchor: myMarker,
+                    map,
+                    shouldFocus: false,
+                });
+            });
+            myMarker.addListener("mouseout", () => {
+                infoWindow.close();
+            });
+
+        }
+
+
+        // Append the 'script' element to 'head'
+        document.head.appendChild(script);
+    }
+
+);
+function mapUpdateRiders(type){
+    $.getJSON(RiderLocationDataURL+type,function (data){
+        console.log(data);
+    });
+    return true;
+}
+
+function mapUpdateRider(val) {
+    return undefined;
+}
 
 $(document).ready(function () {
 
@@ -48,6 +117,7 @@ $(document).ready(function () {
         });
     });
     $(getRiderBtn).click(function () {
+        $.get(RiderLocationURL);
         $.getJSON(setRidersURL, function (riders) {
             $(riderSelect).find('option').remove().end();
             Object.keys(riders).forEach(function (i) {
@@ -60,6 +130,7 @@ $(document).ready(function () {
             });
 
         });
+        setTimeout(mapUpdateRiders($(':radio').val()),5000); //wait 5 sec
 
     });
 
