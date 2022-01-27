@@ -100,7 +100,7 @@ class Application
     }
 
     public static function getUserID(){
-        return self::$app->user->getUserID();
+        return self::$app->session->get('user');
     }
 
     public static function getUserRole(){
