@@ -175,7 +175,7 @@ class DeliveryController extends Controller
         $order->Status = 1;
         $cartID = $order->CartID;
         //delivery
-        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID]);
+        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID,'Status' => 0]); //check the rider was assigned or not
         $stmt = DBModel::prepare("INSERT INTO `delivery`(`RiderID`,`OrderID`, `CartID`) VALUES ($riderID,$orderID,$cartID)");
 
         if($order->update() && $deliveryRider->update() && $stmt->execute()){
