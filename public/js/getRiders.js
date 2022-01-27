@@ -12,6 +12,9 @@ const RiderLocationURL = host + '/api/getriderlocation';
 const RiderLocationDataURL = host + '/api/getriderlocationdata?type=';
 let map;
 
+let riderMarkers=[];
+let infoWindows=[];
+
 $(function(){
         // Create the script tag, set the appropriate attributes
         let script = document.createElement('script');
@@ -35,7 +38,7 @@ $(function(){
                 center: customer,
                 zoom: 16,
             });
-            var cus_icon = {
+            let cus_icon = {
                 url: host + '/img/human_icon.png', // url
                 scaledSize: new google.maps.Size(25,25), // scaled size
                 origin: new google.maps.Point(0,0), // origin
@@ -67,16 +70,61 @@ $(function(){
     }
 
 );
-function mapUpdateRiders(type){
+function mapUpdateRiders(){
+    let type = document.querySelector('input[name="vehicle"]:checked').value;
+    console.log(type)
+    let rider_icon  = {
+        url: host + '/img/bike_icon.png', // url
+        scaledSize: new google.maps.Size(25,25), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+    };
+    let tuk_icon  = {
+        url: host + '/img/tuk_icon.png', // url
+        scaledSize: new google.maps.Size(25,25), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+    };
+
     $.getJSON(RiderLocationDataURL+type,function (data){
-        console.log(data);
+        riderMarkers.forEach(curRider => {
+            curRider.setMap(null);
+        })
+        riderMarkers = [];
+        infoWindows=[];
+        data.forEach((rider,i) => {
+            if(type === 1){
+                riderMarkers[i] = new google.maps.Marker({
+                    position: new google.maps.LatLng(rider['LocationLat'], rider['LocationLng']),
+                    icon:tuk_icon,
+                });
+            }else{
+                riderMarkers[i] = new google.maps.Marker({
+                    position: new google.maps.LatLng(rider['LocationLat'], rider['LocationLng']),
+                    icon:rider_icon,
+                });
+            }
+            infoWindows[i] = new google.maps.InfoWindow({
+                content: "<h4>"+rider['Name']+"</h4><p><strong>ContactNo: </strong><a href='tel:"+rider['ContactNo']+"'>"+rider['ContactNo']+"</a></p>",
+            });
+            riderMarkers[i].setMap(map);
+
+            riderMarkers[i].addListener("mouseover", () => {
+                infoWindows[i].open({
+                    anchor: riderMarkers[i],
+                    map,
+                    shouldFocus: false,
+                });
+            });
+            riderMarkers[i].addListener("mouseout", () => {
+                infoWindows[i].close();
+            });
+
+        })
     });
     return true;
 }
 
-function mapUpdateRider(val) {
-    return undefined;
-}
 
 $(document).ready(function () {
 
@@ -130,7 +178,7 @@ $(document).ready(function () {
             });
 
         });
-        setTimeout(mapUpdateRiders($(':radio').val()),5000); //wait 5 sec
+        setTimeout(mapUpdateRiders,3000); //wait 5 sec
 
     });
 

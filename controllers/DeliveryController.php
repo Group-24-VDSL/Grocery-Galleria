@@ -205,7 +205,7 @@ class DeliveryController extends Controller
         $this->setLayout('empty');
         $city = Application::getCity();
         $res = DBModel::query("SELECT d.RiderID,d.LocationLat,d.LocationLng,dr.Name,dr.ContactNo FROM `deliveryriderlocation` AS d INNER JOIN `deliveryrider` AS dr ON dr.RiderID = d.RiderID WHERE d.LastUpdate >= NOW() - INTERVAL 5 MINUTE AND dr.Status=0 AND dr.RiderType=$type AND dr.City=$city;",\PDO::FETCH_ASSOC,true);
-        return $response->json(Application::getUser());
+        return $response->json($res);
     }
 
 
