@@ -68,13 +68,14 @@ $app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'v
 $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'viewrider']);
 //$app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
-$app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignrider']);
+$app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
 $app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class, 'viewDelivery']);
 $app->router->get('/dashboard/delivery/newdelivery',[DeliveryController::class, 'newDelivery']);
-$app->router->get('/dashboard/delivery/pastDelivery',[DeliveryController::class, 'pastDelivery']);
 $app->router->get('/dashboard/delivery/onDelivery',[DeliveryController::class, 'onDelivery']);
-$app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
+$app->router->get('/dashboard/delivery/pastDelivery',[DeliveryController::class, 'pastDelivery']);
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
+$app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
+$app->router->post('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
 
 //system staff
 $app->router->get('/dashboard/staff/adduser',[StaffController::class, 'Register']);
@@ -145,7 +146,9 @@ $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
 
-
+//api - delivery
+$app->router->get('/api/getrider',[APIController::class,'getRider']);
+$app->router->get('/api/getriders',[APIController::class,'getRiders']);
 //rider
 $app->router->get('/rider/register',[RiderController::class,'riderRegister']);
 $app->router->post('/rider/register',[RiderController::class,'riderRegister']);
