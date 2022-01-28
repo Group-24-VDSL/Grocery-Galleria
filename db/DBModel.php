@@ -181,8 +181,4 @@ abstract class DBModel extends Model
         $statement->execute();
         return $statement->fetchAll($fetch_type,static::class);
     }
-
-
-
-
 }

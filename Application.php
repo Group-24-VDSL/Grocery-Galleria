@@ -54,11 +54,11 @@ class Application
 
         $this->authMiddleware=new AuthMiddleware([
             'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
-            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','profile','pwdUpdate'],
-            'Customer' => ['welcome','getTempCart','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess','pwdUpdate'],
-            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','pwdUpdate'],
-            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','pwdUpdate'],
-            'Rider' => ['vieworder','order','pwdUpdate'],
+            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','assignRider'],
+            'Customer' => ['welcome','getTempCart','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
+            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
+            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
+            'Rider' => ['vieworder','order'],
             "Common" => ['logout','profileUpdate','test']
         ]);
 
