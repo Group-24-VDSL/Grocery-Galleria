@@ -48,4 +48,8 @@ class CustomerController extends Controller
         return $this->render('customer/profile');
     }
 
+    public function paymentSuccess(){
+        return $this->render('customer/success');
+    }
+
 }

@@ -10,6 +10,7 @@ use app\models\Delivery;
 use app\models\Item;
 use app\models\OrderCart;
 use app\models\Orders;
+use app\models\Rider;
 use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
@@ -115,13 +116,6 @@ class APIController extends Controller
 
     }
 
-    public function getOrders(Request $request, Response $response) // get all orders from DB
-    {
-        $response->setContentTypeJSON();
-        $orders = Orders::findAll(array_slice($request->getBody(),1,null,true));
-
-        return json_encode($orders);
-    }
 
     public function getUser(Request $request, Response $response)
     {
@@ -138,6 +132,30 @@ class APIController extends Controller
         $order = Orders::findOne(array_slice($request->getBody(),1,null,true));
 
         return json_encode($order);
+    }
+
+    public function getOrders(Request $request, Response $response) // get all orders from DB
+    {
+        $response->setContentTypeJSON();
+        $orders = Orders::findAll(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($orders);
+    }
+    public function getRider(Request $request,Response $response)
+    {
+        $response->setContentTypeJSON();
+        $riders = Rider::findOne(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($riders);
+
+    }
+    public function getRiders(Request $request,Response $response)
+    {
+        $response->setContentTypeJSON();
+        $riders = Rider::findAll(array_slice($request->getBody(),1,null,true));
+
+        return json_encode($riders);
+
     }
 
 }
