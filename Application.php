@@ -94,7 +94,9 @@ class Application
     {
         return !self::$app->user;
     }
-
+    public static function getUserID(){
+        return self::$app->session->get('user');
+    }
     public static function getUser(){
         return self::$app->user;
     }
@@ -155,6 +157,7 @@ class Application
     public function logout(){
         $this->user = null;
         $this->session->remove('user');
+        return true;
 
     }
 }
