@@ -42,6 +42,12 @@ abstract class DBModel extends Model
         $dbObjarr = array_slice((array)$dbObj, 0, -1); // db object to array
         $objarr = array_slice((array)$this, 0, -1); // this object to array
         $result = array_diff_assoc($objarr,$dbObjarr);
+        if(array_key_exists('Password',$result)){
+            unset($result['Password']);
+        }
+        if(array_key_exists('ConfirmPassword',$result)){
+            unset($result['ConfirmPassword']);
+        }
         if(!empty($result)){
             $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($result)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
             foreach ($result as $key => $value) {
@@ -175,10 +181,4 @@ abstract class DBModel extends Model
         $statement->execute();
         return $statement->fetchAll($fetch_type,static::class);
     }
-
-
-
-
-
-
 }
