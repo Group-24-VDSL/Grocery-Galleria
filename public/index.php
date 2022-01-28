@@ -36,6 +36,8 @@ $app->router->post('/dashboardlinks',[SiteController::class,'dashboard']);
 $app->router->get('/verify',[AuthController::class,'verify']);
 $app->router->get('/email-verified',[AuthController::class,'emailverified']);
 $app->router->get('/profileupdate',[AuthController::class,'profileUpdate']);
+$app->router->get('/settings',[AuthController::class,'pwdUpdate']);
+$app->router->post('/settings',[AuthController::class,'pwdUpdate']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
@@ -95,6 +97,7 @@ $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'v
 $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
+
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
