@@ -63,7 +63,17 @@ class User extends UserModel
         return ['UserID'];
     }
 
-
+    public function homepage(): string
+    {
+        return match ($this->Role) {
+            'Customer' => '/',
+            'Shop' => '/dashboard/shop/products',
+            'Rider' => '/rider/order',
+            'Delivery' => '/dashboard/delivery/vieworder',
+            'Staff' => '/dashboard/staff/products',
+            default => '/',
+        };
+    }
 
     public function getDisplayName(): string
     {
