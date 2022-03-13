@@ -143,7 +143,26 @@ class Application
         $this->session->set('role',$user->Role);
         $this->session->set('city',$user->City);
         $this->session->set('suburb',$user->Suburb);
-        return true;
+        switch ($user->Role){
+            case 'Customer':
+                $url ='/';
+                break;
+            case 'Shop':
+                $url ='/dashboard/shop/products';
+                break;
+            case 'Rider':
+                $url ='/rider/order';
+                break;
+            case 'Delivery':
+                $url ='/dashboard/delivery/vieworder';
+                break;
+            case 'Staff':
+                $url ='/dashboard/staff/products';
+                break;
+            default:
+                $url ='/';
+        }
+        return $url;
     }
 
     public function logout(){
