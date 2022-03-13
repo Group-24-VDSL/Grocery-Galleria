@@ -172,22 +172,6 @@ class ShopController extends Controller
     }
 
 
-    // Shop section
-    public function getShop(Request $request, Response $response) // get shop details from DB
-    {
-        $response->setContentTypeJSON();
-        $shop = Shop::findOne(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
-        return json_encode($shop);
-    }
-
-
-    public function getAllShop(Request $request,Response $response)
-    {
-        $response->setContentTypeJSON();
-        $shops = Shop::findAll(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
-        return json_encode($shops);
-
-    }
 }
     
 
