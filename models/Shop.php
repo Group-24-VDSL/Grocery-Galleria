@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\core\Model;
 use app\core\UserModel;
 
 class Shop extends UserModel
@@ -91,5 +90,9 @@ class Shop extends UserModel
         return $this->ShopID;
     }
 
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
+    }
 
 }

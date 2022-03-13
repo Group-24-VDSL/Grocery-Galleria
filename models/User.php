@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-
-
 use app\core\UserModel;
 
 class User extends UserModel
@@ -84,6 +82,11 @@ class User extends UserModel
 
     public function getUserID(): int
     {
-        return 0;
+        return $this->UserID;
+    }
+
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
     }
 }

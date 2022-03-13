@@ -53,4 +53,9 @@ class Orders extends DBModel
         return ['OrderID','OrderDate','CartID','DeliveryCost','RecipientName','Note','RecipientContact','TotalCost','Status','City','Suburb'];
 
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
+    }
 }
