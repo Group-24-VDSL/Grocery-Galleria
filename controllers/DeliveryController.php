@@ -175,17 +175,22 @@ class DeliveryController extends Controller
         $order->Status = 1;
         $cartID = $order->CartID;
         //delivery
-        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID]);
+        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID,'Status'=>0]);
         $stmt = DBModel::prepare("INSERT INTO `delivery`(`RiderID`,`OrderID`, `CartID`) VALUES ($riderID,$orderID,$cartID)");
+        if($deliveryRider){
+            if ($order->update() && $deliveryRider->update() && $stmt->execute()) {
+                Application::$app->session->setFlash('success', 'Rider allocation Success');
+                Application::$app->response->redirect('/dashboard/delivery/viewdelivery');
 
-        if($order->update() && $deliveryRider->update() && $stmt->execute()){
-            Application::$app->session->setFlash('success', 'Rider allocation Success');
-            Application::$app->response->redirect('/dashboard/delivery/viewdelivery');
+            } else {
+                $redirectURL = "/dashboard/delivery/deliveryInfo?OrderID=$orderID";
+                Application::$app->response->redirect($redirectURL);
 
+            }
         }else{
+            Application::$app->session->setFlash('warning', 'Rider already Assigned, try another!');
             $redirectURL = "/dashboard/delivery/deliveryInfo?OrderID=$orderID";
             Application::$app->response->redirect($redirectURL);
-
         }
 
 
