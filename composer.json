@@ -18,8 +18,9 @@
         "phpmailer/phpmailer": "^6.5",
         "sendgrid/sendgrid": "~7",
         "ext-json": "*",
-        "stripe/stripe-php": "7.103",
+        "stripe/stripe-php": "^7.103",
         "monolog/monolog": "^2.3",
+        "pusher/pusher-php-server": "^7.0",
         "koolreport/core": "^5.5"
     }
 }

@@ -16,10 +16,10 @@ use app\core\Application;
 </pre>
 
 <pre>
-<?php var_dump(Application::$app->getController()->getMiddlewares()) ;?>
-</pre>
-<pre>
-<?php var_dump(Application::$app->authMiddleware->actions) ;?>
+    <?php var_dump(Application::getUserID()) ;?>
+    <?php var_dump(Application::$app->session->get('user')) ;?>
+    <?php var_dump(Application::$app->session->get('city')) ;?>
+    <?php var_dump(Application::$app->session->get('suburb')) ;?>
 </pre>
 
 

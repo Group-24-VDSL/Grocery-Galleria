@@ -22,12 +22,14 @@ class APIController extends Controller
     // Item section
     public function getItem(Request $request,Response $response) // get item details from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $item=Item::findOne(array_slice($request->getBody(),1,null,true));
         return json_encode($item->jsonSerialize());
     }
     public function getItemAll(Request $request,Response $response) // get all items from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $items =Item::findAll(array_slice($request->getBody(),1,null,true));
         return json_encode($items);
@@ -36,6 +38,7 @@ class APIController extends Controller
 
     public function getShopItem(Request $request, Response $response) // get all shop items from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $shopItem=ShopItem::findOne(array_slice($request->getBody(),1,null,true));
         return json_encode($shopItem);
@@ -43,6 +46,7 @@ class APIController extends Controller
 
     public function getShopItems(Request $request, Response $response) // get all shop items from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $shopItem=ShopItem::findAll(array_slice($request->getBody(),1,null,true));
         return json_encode($shopItem);
@@ -52,6 +56,7 @@ class APIController extends Controller
     // Shop section
     public function getShop(Request $request, Response $response) // get shop details from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $shop = Shop::findOne(array_slice($request->getBody(),1,null,true));
         return json_encode($shop);
@@ -60,6 +65,7 @@ class APIController extends Controller
 
     public function getAllShop(Request $request,Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $shops = Shop::findAll(array_slice($request->getBody(),1,null,true));
         return json_encode($shops);
@@ -70,6 +76,7 @@ class APIController extends Controller
 
     public function getOrderCart(Request $request , Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $carts = OrderCart::findAll(array_slice($request->getBody(),1,null,true));
         return json_encode($carts);
@@ -77,6 +84,7 @@ class APIController extends Controller
 
     public function getShopOrders(Request $request , Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $orders = ShopOrder::findAll(array_slice($request->getBody(),1,null,true));
 
@@ -85,6 +93,7 @@ class APIController extends Controller
 
     public function getShopOrder(Request $request , Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $order = ShopOrder::findOne(array_slice($request->getBody(),1,null,true));
 
@@ -93,6 +102,7 @@ class APIController extends Controller
 
     public function getDelivery(Request $request , Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $orders = Delivery::findOne(array_slice($request->getBody(),1,null,true));
 
@@ -101,6 +111,7 @@ class APIController extends Controller
 
     public function getCart(Request $request,Response $response) // get all items from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $items =TemporaryCart::findAll(array_slice($request->getBody(),1,null,true));
 
@@ -110,6 +121,7 @@ class APIController extends Controller
 
     public function getCustomer(Request $request,Response $response) // get all items from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $customer =Customer::findOne(array_slice($request->getBody(),1,null,true));
         return json_encode($customer);
@@ -119,6 +131,7 @@ class APIController extends Controller
 
     public function getUser(Request $request, Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $orders = User::findOne(array_slice($request->getBody(),1,null,true));
 
@@ -128,6 +141,7 @@ class APIController extends Controller
 
     public function getOrder(Request $request, Response $response) // get all orders from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $order = Orders::findOne(array_slice($request->getBody(),1,null,true));
 
@@ -136,6 +150,7 @@ class APIController extends Controller
 
     public function getOrders(Request $request, Response $response) // get all orders from DB
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $orders = Orders::findAll(array_slice($request->getBody(),1,null,true));
 
@@ -143,6 +158,7 @@ class APIController extends Controller
     }
     public function getRider(Request $request,Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $riders = Rider::findOne(array_slice($request->getBody(),1,null,true));
 
@@ -151,6 +167,7 @@ class APIController extends Controller
     }
     public function getRiders(Request $request,Response $response)
     {
+        $this->setLayout('empty');
         $response->setContentTypeJSON();
         $riders = Rider::findAll(array_slice($request->getBody(),1,null,true));
 

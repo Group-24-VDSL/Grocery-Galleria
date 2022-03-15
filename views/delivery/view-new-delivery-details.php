@@ -59,21 +59,21 @@
             <div class="box-item-list sub-box-t2">
                 <div class="content">
                     <div class="box-topic">Recipient Name</div>
-                    <div class="number-details"><?php echo $order->RecipientName ?></div>
+                    <div class="number-details"><?php if(empty($order->RecipientName)){ echo $customer->Name;}else{echo $order->RecipientName;}  ?></div>
                 </div>
                 <img src="https://img.icons8.com/color/48/000000/person-male.png"/>
             </div>
             <div class="box-item-list sub-box-t2">
                 <div class="content">
                     <div class="box-topic">Contact No</div>
-                    <div class="number-details"><?php echo $order->RecipientContact ?></div>
+                    <div class="number-details"><?php if(empty($order->RecipientContact)){ echo $customer->ContactNo;}else{echo $order->RecipientContact;}  ?></div>
                 </div>
                 <img src="https://img.icons8.com/emoji/48/000000/telephone.png"/>
             </div>
             <div class="box-item-list sub-box-t2">
                 <div class="content">
                     <div class="box-topic">Note</div>
-                    <div class="number-details"><?php echo $order->Note ?></div>
+                    <div class="number-details"><?php if(empty($order->Note)){ echo "None";}else{echo $order->Note;} ?></div>
                 </div>
                 <img src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/64/000000/external-note-documents-icongeek26-linear-colour-icongeek26.png"/>
             </div>
@@ -642,7 +642,7 @@
                 <h1 class="heading">Select <span>Rider</span></h1>
                 <div class="map-section">
                     <div class="inputBox map-inputBox">
-                        <div id="map"></div>
+                        <div id="map" data-location=<?php echo $customer->Location ?> > </div>
                         <div class="vehicle-select">
                             <span>Select Vehicle Type:</span>
                             <div class="vehicle-radio">
@@ -680,7 +680,6 @@
         </div>
     </div>
 </section>
-<script src="/js/delivery-assign.js"></script>
 <script src="/js/getRiders.js"></script>
 <script src="/js/order.js"></script>
 
