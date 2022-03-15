@@ -56,4 +56,9 @@ class ShopItem extends DBModel
     {
         return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
+    }
 }

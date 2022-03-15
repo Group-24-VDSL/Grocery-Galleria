@@ -13,7 +13,7 @@ class Orders extends DBModel
     public float $DeliveryCost = 0;
     public string $RecipientName='';
     public string $Note = '';
-    public float $RecipientContact = 0;
+    public string $RecipientContact = '';
     public float $TotalCost = 0;
     public int $Status = 0 ; /**[0-new , 1-completed] */
     public int $City = 0;
@@ -52,5 +52,10 @@ class Orders extends DBModel
     {
         return ['OrderID','OrderDate','CartID','DeliveryCost','RecipientName','Note','RecipientContact','TotalCost','Status','City','Suburb'];
 
+    }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
     }
 }

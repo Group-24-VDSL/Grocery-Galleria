@@ -10,6 +10,8 @@ class DeliveryStaff extends UserModel
     public string $Name = '';
     public string $ContactNo = '';
     public string $Email = '';
+    public int $City = 0;
+    public int $Suburb = 0;
 
     public function save()
     {
@@ -60,5 +62,9 @@ class DeliveryStaff extends UserModel
         return $this->DelStaffID;
     }
 
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
+    }
 
 }

@@ -37,7 +37,7 @@ class CartController extends Controller
 
     public function getTempCart(Request $request, Response $response) // get all items from DB
     {
-        $items = TemporaryCart::findAll(array_slice($request->getBody(), 1, null, true));
+        $items = TemporaryCart::findAll(["CustomerID" => Application::getUserID(),"Purchased"=> 0]);
         $total = 0;
         foreach ($items as $item) {
             $shopitem = ShopItem::findOne(['ItemID' => $item->ItemID, 'ShopID' => $item->ShopID]);
@@ -69,7 +69,6 @@ class CartController extends Controller
                 return $response->json('{"success":"fail"}');
             } elseif($request->isPatch()) {
                 if ($checktemp) { //there exists such item
-                    $tempcart->loadData($checktemp);
                     $tempcart->Quantity = $json['Quantity'];
                     if ($tempcart->validate('update') && $tempcart->update()) {
                         return $response->json('{"success":"ok-reupdated"}');

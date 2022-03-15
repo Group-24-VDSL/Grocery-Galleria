@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-
-
 use app\core\UserModel;
 
 class User extends UserModel
@@ -23,8 +21,8 @@ class User extends UserModel
     public int $UserID = 0;
     public string $Role = '';
     public string $ConfirmPassword = '';
-    public ?int $City = null;
-    public ?int $Suburb = null;
+    public int $City = 0;
+    public int $Suburb = 0;
 
 
     public function save()
@@ -49,7 +47,7 @@ class User extends UserModel
 
     public function attributes(): array
     {
-        return ['Email','Name','PasswordHash','Verify_Flag','Delete_Flag','Role','City','Suburb'];
+        return ['Email','Name','PasswordHash','Verify_Flag','Delete_Flag','Role'];
     }
 
     public function labels(): array{
@@ -65,7 +63,17 @@ class User extends UserModel
         return ['UserID'];
     }
 
-
+    public function homepage(): string
+    {
+        return match ($this->Role) {
+            'Customer' => '/',
+            'Shop' => '/dashboard/shop/products',
+            'Rider' => '/rider/order',
+            'Delivery' => '/dashboard/delivery/vieworder',
+            'Staff' => '/dashboard/staff/products',
+            default => '/',
+        };
+    }
 
     public function getDisplayName(): string
     {
@@ -74,7 +82,7 @@ class User extends UserModel
 
     public function jsonarray(): array
     {
-        return ['Email','Name','Delete_Flag','Role'];
+        return ['Email','Name','Verify_Flag','Delete_Flag','Role','City','Suburb'];
     }
 
     public function getEmail(): string
@@ -84,6 +92,11 @@ class User extends UserModel
 
     public function getUserID(): int
     {
-        return 0;
+        return $this->UserID;
+    }
+
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
     }
 }
