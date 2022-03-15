@@ -59,11 +59,11 @@ class CartController extends Controller
                     $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
                     $tempcart->Quantity = $newQuantity;
                     if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok-updated"}');
+                        return $response->json('{"success":"ok"}');
                     }
                 } else {
                     if ($tempcart->validate() && $tempcart->save()) {
-                        return json_encode('{"success":"ok-saved"}');
+                        return json_encode('{"success":"ok"}');
                     }
                 }
                 return $response->json('{"success":"fail"}');
@@ -71,7 +71,7 @@ class CartController extends Controller
                 if ($checktemp) { //there exists such item
                     $tempcart->Quantity = $json['Quantity'];
                     if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok-reupdated"}');
+                        return $response->json('{"success":"ok"}');
                     }
                 }
             }
