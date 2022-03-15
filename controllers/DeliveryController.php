@@ -99,11 +99,6 @@ class DeliveryController extends Controller
         );
     }
 
-    public function assignrider()
-    {
-        $this->setLayout('headeronly-staff');
-        return $this->render('delivery/assign-rider');
-    }
 
     /**
      * @throws NotFoundException
@@ -121,7 +116,7 @@ class DeliveryController extends Controller
         $orderStmt->execute();
         $shopCountStmt->execute();
         $shopOrders = $orderStmt->fetchAll(\PDO::FETCH_ASSOC);
-        $shopCount = $shopCountStmt->fetchColumn(\PDO::FETCH_DEFAULT);
+        $shopCount = $shopCountStmt->fetchColumn();
         $this->setLayout('dashboard-delivery');
         return $this->render('delivery/view-new-delivery-details',
         [
@@ -133,7 +128,6 @@ class DeliveryController extends Controller
         ]
         );
     }
-
     public function viewDelivery()
     {
         $this->setLayout('dashboard-delivery');
@@ -142,34 +136,18 @@ class DeliveryController extends Controller
     public function newDelivery()
     {
         $staff = new Staff();
-        $staffID = Application::getUserID();
-        $staff = $staff::findOne(['StaffID' => $staffID]);
-//        $activeCity = $staff->City;
+        $city = Application::getCity();
         $querySql =
-            "SELECT
-            orderTable.OrderID,
-            orderTable.OrderDate,
-            orderTable.RecipientName, 
-            orderTable.Note, 
-            orderTable.RecipientContact, 
-            orderTable.DeliveryCost,
-            orderTable.TotalCost,
-            orderTable.DeliveryState
-            FROM `orders` AS orderTable INNER JOIN cart as cartTable
-            ON orderTable.CartID = cartTable.CartID
-            INNER JOIN customer as customerTable
-            ON cartTable.CustomerID = customerTable.CustomerID
-            WHERE customerTable.City = 'Nugegoda' AND orderTable.DeliveryState = 0";
-        $newDeliveries = Orders::queryAll($querySql, \PDO::FETCH_CLASS);
+            "SELECT * FROM `orders` AS orderTable 
+            WHERE orderTable.City = $city AND orderTable.Status = 0";
+        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
         return json_encode($newDeliveries);
-
 
     }
 
     public function onDelivery()
     {
-        $this->setLayout('headeronly-staff');
-        return $this->render('delivery/view-complete-delivery-details');
+
     }
 
     public function pastDelivery()
@@ -182,6 +160,52 @@ class DeliveryController extends Controller
     public function profile()
     {
         return $this->render('delivery/profile');
+    }
+
+    public function assignRider(Request $request,Response $response)
+    {
+        $delivery = new Delivery();
+        $deliveryRider = new Rider();
+        $order = new Orders();
+        $body = $request->getBody();
+        $orderID = $body['OrderID'];
+        $riderID = $body['RiderID'];
+        //order
+        $order = $order->findOne(['OrderID'=>$orderID]);
+        $order->Status = 1;
+        $cartID = $order->CartID;
+        //delivery
+        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID,'Status' => 0]); //check the rider was assigned or not
+        $stmt = DBModel::prepare("INSERT INTO `delivery`(`RiderID`,`OrderID`, `CartID`) VALUES ($riderID,$orderID,$cartID)");
+
+        if($order->update() && $deliveryRider->update() && $stmt->execute()){
+            Application::$app->session->setFlash('success', 'Rider allocation Success');
+            Application::$app->response->redirect('/dashboard/delivery/viewdelivery');
+
+        }else{
+            $redirectURL = "/dashboard/delivery/deliveryInfo?OrderID=$orderID";
+            Application::$app->response->redirect($redirectURL);
+
+        }
+
+    }
+
+    public function getRiderLocation(Request $request,Response $response)
+    {
+        $response->setContentTypeJSON();
+        $this->setLayout('empty');
+        $data['City'] = Application::getCity();
+        Application::$app->pusher->trigger('my-channel', 'get-location',$data,);
+    }
+
+    public function getRiderLocationData(Request $request,Response $response)
+    {
+        $type=$request->getBody()['type'];
+        $response->setContentTypeJSON();
+        $this->setLayout('empty');
+        $city = Application::getCity();
+        $res = DBModel::query("SELECT d.RiderID,d.LocationLat,d.LocationLng,dr.Name,dr.ContactNo FROM `deliveryriderlocation` AS d INNER JOIN `deliveryrider` AS dr ON dr.RiderID = d.RiderID WHERE d.LastUpdate >= NOW() - INTERVAL 5 MINUTE AND dr.Status=0 AND dr.RiderType=$type AND dr.City=$city;",\PDO::FETCH_ASSOC,true);
+        return $response->json($res);
     }
 
 
