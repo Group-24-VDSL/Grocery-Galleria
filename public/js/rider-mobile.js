@@ -33,36 +33,35 @@ $(function(){
 });
 
 $(function(){
-    // Create the script tag, set the appropriate attributes
-    let script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwYJrYLyEaQGRUYEnh10GS5luyYnt2a5U&callback=initMap';
-    // script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap';
-    script.async = true;
+    if(window.location.pathname !== '/rider/order') {
+        // Create the script tag, set the appropriate attributes
+        let script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwYJrYLyEaQGRUYEnh10GS5luyYnt2a5U&callback=initMap';
+        // script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap';
+        script.async = true;
 
-    let map;
+        let map;
 
-    window.initMap = function () {
+        window.initMap = function () {
 
-        const directionsService = new google.maps.DirectionsService();
-        const directionsRenderer = new google.maps.DirectionsRenderer();
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer();
 
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 6.9271, lng: 79.8612 },
-            zoom: 8,
-        });
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {lat: 6.9271, lng: 79.8612},
+                zoom: 8,
+            });
 
-        directionsRenderer.setMap(map);
+            directionsRenderer.setMap(map);
 
-        calculateAndDisplayRoute(directionsService,directionsRenderer,map);
+            calculateAndDisplayRoute(directionsService, directionsRenderer, map);
 
 
+        }
 
+        // Append the 'script' element to 'head'
+        document.head.appendChild(script);
     }
-
-
-
-    // Append the 'script' element to 'head'
-    document.head.appendChild(script);
 });
 
 function openMaps(){

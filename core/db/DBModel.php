@@ -176,13 +176,10 @@ abstract class DBModel extends Model
         }
         return $statement->fetch($fetch_type);
     }
+
     public static function queryAll($string,$fetch_type){
         $statement = self::prepare($string);
         $statement->execute();
         return $statement->fetchAll($fetch_type,static::class);
     }
-
-
-
-
 }

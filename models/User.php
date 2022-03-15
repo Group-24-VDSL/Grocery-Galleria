@@ -23,8 +23,8 @@ class User extends UserModel
     public int $UserID = 0;
     public string $Role = '';
     public string $ConfirmPassword = '';
-    public ?int $City = null;
-    public ?int $Suburb = null;
+    public int $City = 0;
+    public int $Suburb = 0;
 
 
     public function save()
@@ -49,7 +49,7 @@ class User extends UserModel
 
     public function attributes(): array
     {
-        return ['Email','Name','PasswordHash','Verify_Flag','Delete_Flag','Role','City','Suburb'];
+        return ['Email','Name','PasswordHash','Verify_Flag','Delete_Flag','Role'];
     }
 
     public function labels(): array{

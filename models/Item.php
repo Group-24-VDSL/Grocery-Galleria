@@ -14,7 +14,7 @@ class Item extends DBModel
     public float $UWeight = 0.0;
     public int $Unit = 0; //[kg = 0, g = 1, l = 2]
     public float $MRP = 0.0;
-    public int $Category = 0;//['0'=>'Vegetables','1'=>'Fruits','2'=>'Grocery','3'=>'Fish','4'=>'Meat']
+    public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetables','2'=>'Meat''3'=>'Fish','4'=>'Fruits',]
     public int $MaxCount = 0; // cabbage: (250g/Unit)*8 = 2000g(max selling weigh) // MaxCount=8
 
     public function save()
