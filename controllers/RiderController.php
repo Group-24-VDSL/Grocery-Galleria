@@ -7,6 +7,7 @@ use app\core\Controller;
 use app\core\db\DBModel;
 use app\core\exceptions\NotFoundException;
 use app\core\Request;
+use app\core\Response;
 use app\models\Orders;
 use app\models\Rider;
 
@@ -118,4 +119,25 @@ class  RiderController extends Controller
             'orders' => $orders
         ]);
     }
+
+    public function riderLocation(Request $request)
+    {
+        if(Application::getUserRole() === 'Rider'){
+            if($request->isPost()){
+                $json = $request->getJson();
+                if($json){
+                    $positionLat = $json["lat"];
+                    $positionLng = $json["lng"];//{&quot;lat&quot;:6.871714052860769,&quot;lng&quot;:79.89268108720779}
+                    //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE
+                    //name="A", age=19
+                    $riderid = Application::$app->session->get('user');;
+                    DBModel::query("INSERT INTO `deliveryriderlocation` (RiderID,LocationLat,LocationLng) VALUES ($riderid,$positionLat,$positionLng )ON DUPLICATE KEY UPDATE LocationLat=$positionLat,LocationLng=$positionLng",\PDO::FETCH_COLUMN);
+                }
+            }
+        }
+
+    }
+
+
+    
 }

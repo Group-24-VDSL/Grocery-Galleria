@@ -8,6 +8,7 @@ use app\models\User;
 use Exception;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Pusher\Pusher;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
@@ -32,6 +33,7 @@ class Application
     public SendGrid  $sendgrid;
     public StripeClient $stripe;
     public From $emailfrom;
+    public Pusher $pusher;
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
@@ -54,11 +56,11 @@ class Application
 
         $this->authMiddleware=new AuthMiddleware([
             'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
-            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','assignRider'],
+            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','assignRider','getRiderLocationData'],
             'Customer' => ['welcome','getTempCart','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
             'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
-            'Rider' => ['vieworder','order'],
+            'Rider' => ['vieworder','order','riderLocation'],
             "Common" => ['logout','profileUpdate','test']
         ]);
 
@@ -75,6 +77,8 @@ class Application
         $this->secfactory = new Factory();
         $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
 
+
+        $this->pusher = new Pusher($_ENV['PUSHER_APP_KEY'],$_ENV['PUSHER_APP_SECRET'],$_ENV['PUSHER_APP_ID'],['cluster'=>$_ENV['PUSHER_APP_CLUSTER'],'useTLS'=>true]);
 
         $userID = Application::$app->session->get('user');
         if ($userID) {
@@ -97,6 +101,10 @@ class Application
         return self::$app->user;
     }
 
+    public static function getUserID(){
+        return self::$app->session->get('user');
+    }
+
     public static function getUserRole(){
         return self::$app->user->Role??null;
     }
@@ -106,7 +114,7 @@ class Application
     }
 
     public static function getSuburb(){
-        return self::$app->session->get('Suburb');
+        return self::$app->session->get('suburb');
     }
 
     public function run()
