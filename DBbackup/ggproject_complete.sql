@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 15, 2022 at 06:10 AM
+-- Generation Time: Mar 15, 2022 at 06:23 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.25
 
@@ -20,7 +20,191 @@ SET time_zone = "+00:00";
 --
 -- Database: `ggproject`
 --
+CREATE DATABASE IF NOT EXISTS `ggproject` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+USE `ggproject`;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `CartID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `DateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `cart`
+--
+
+TRUNCATE TABLE `cart`;
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`CartID`, `CustomerID`, `Address`, `DateTime`) VALUES
+(1, 7, 'Address eka', '2021-12-04 14:52:46'),
+(2, 2, '', '2021-12-27 19:32:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `complaint`
+--
+
+CREATE TABLE `complaint` (
+  `ComplaintID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `StaffID` int(11) NOT NULL,
+  `OrderID` int(11) NOT NULL,
+  `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
+  `OrderDate` date NOT NULL,
+  `ComplaintDate` date NOT NULL,
+  `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+  `Prority` tinyint(1) NOT NULL,
+  `Regarding` tinyint(1) NOT NULL,
+  `Status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `complaint`
+--
+
+TRUNCATE TABLE `complaint`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `CustomerID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `customer`
+--
+
+TRUNCATE TABLE `customer`;
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`CustomerID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `Suburb`, `Location`, `PlaceID`) VALUES
+(2, 'Dilshan Thenuka', '22/2 Old Kesbewa Road, Nugegoda.', 'customer1@gmail.com', '+9477 8571737', '0', '8', '{&quot;lat&quot;:6.871714052860769,&quot;lng&quot;:79.89268108720779}', 'ChIJCSTj6ENa4joReFLBb54J8rk'),
+(7, 'Nadil Sankara', '22, 40 Old Kesbewa Rd, Nugegoda', 'customer2@mailinator.com', '+94774381695', '0', '8', '{&quot;lat&quot;:6.871743345215753,&quot;lng&quot;:79.89361717815399}', 'ChIJL9QBVg5b4joRH8BMOlx_Mk8');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery`
+--
+
+CREATE TABLE `delivery` (
+  `DeliveryID` int(11) NOT NULL,
+  `RiderID` int(11) NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Status` tinyint(1) NOT NULL,
+  `CompTime` timestamp NULL DEFAULT NULL,
+  `OrderID` int(11) NOT NULL,
+  `CartID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `delivery`
+--
+
+TRUNCATE TABLE `delivery`;
+--
+-- Dumping data for table `delivery`
+--
+
+INSERT INTO `delivery` (`DeliveryID`, `RiderID`, `Date`, `Status`, `CompTime`, `OrderID`, `CartID`) VALUES
+(1, 9, '2021-12-22 15:05:06', 0, NULL, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deliveryrider`
+--
+
+CREATE TABLE `deliveryrider` (
+  `RiderID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `NIC` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `ProfilePic` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '/public/img/placeholder-150.png',
+  `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `RiderType` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `deliveryrider`
+--
+
+TRUNCATE TABLE `deliveryrider`;
+--
+-- Dumping data for table `deliveryrider`
+--
+
+INSERT INTO `deliveryrider` (`RiderID`, `Name`, `Address`, `Email`, `ContactNo`, `NIC`, `ProfilePic`, `City`, `Suburb`, `RiderType`) VALUES
+(9, 'Kamal Jayawardhana', '32, Pelawatta Rd, Nugegoda', 'rider1@gmail.com', '0715555468', '981557852V', '/public/img/placeholder-150.png', '0', '8', 0),
+(11, 'Seenath Batagedara', '13, Edirigoda Road, Nugegoda', 'rider2@gmail.com', '0754555257', '985452455V', '/public/img/placeholder-150.png', '0', '8', 0),
+(12, 'Janith Jaalitha', '19 A1, Chapel Rd, Nugegoda', 'rider3@gmail.com', '0754555257', '985478545V', '/public/img/placeholder-150.png', '0', '8', 1),
+(13, 'Sunil Keerthi', 'Chapel Rd, Nugegoda', 'rider4@gmail.com', '0754555257', '984578645V', '/public/img/placeholder-150.png', '0', '8', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deliveryriderlocation`
+--
+
+CREATE TABLE `deliveryriderlocation` (
+  `RiderID` int(11) NOT NULL,
+  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `OrderID` int(11) DEFAULT NULL
+) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `deliveryriderlocation`
+--
+
+TRUNCATE TABLE `deliveryriderlocation`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deliverystaff`
+--
+
+CREATE TABLE `deliverystaff` (
+  `StaffID` int(11) NOT NULL,
+  `Name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(20) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `City` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `Suburb` varchar(100) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `deliverystaff`
+--
+
+TRUNCATE TABLE `deliverystaff`;
 -- --------------------------------------------------------
 
 --
@@ -39,6 +223,11 @@ CREATE TABLE `item` (
   `Category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+--
+-- Truncate table before insert `item`
+--
+
+TRUNCATE TABLE `item`;
 --
 -- Dumping data for table `item`
 --
@@ -80,15 +269,393 @@ INSERT INTO `item` (`ItemID`, `Name`, `ItemImage`, `Brand`, `UWeight`, `Unit`, `
 (34, 'Pineapple', '/img/product-imgs/9500033.jpg', '', 500, 1, 125, 10, 4),
 (35, 'Ginger', '/img/product-imgs/9500034.jpg', '', 500, 1, 115, 10, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE `login` (
+  `UserID` int(11) NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `PasswordHash` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+  `Name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `Verify_Flag` tinyint(1) NOT NULL DEFAULT '0',
+  `Delete_Flag` tinyint(1) NOT NULL DEFAULT '0',
+  `Role` varchar(10) COLLATE utf8mb4_bin NOT NULL,
+  `City` int(11) DEFAULT NULL,
+  `Suburb` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `login`
+--
+
+TRUNCATE TABLE `login`;
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`UserID`, `Email`, `PasswordHash`, `Name`, `Verify_Flag`, `Delete_Flag`, `Role`, `City`, `Suburb`) VALUES
+(2, 'customer1@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Dilshan Thenuka', 1, 0, 'Customer', 0, 8),
+(3, 'shop1@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Pussallawa Meat Shop', 1, 0, 'Shop', 0, 8),
+(4, 'shop2@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'D&J Mini Mart', 1, 0, 'Shop', 0, 8),
+(5, 'shop3@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Deli Market', 0, 0, 'Shop', 0, 8),
+(7, 'customer2@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Nadil Sankara', 1, 0, 'Customer', 0, 8),
+(8, 'delivery1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Delivery One', 1, 0, 'Delivery', 0, 8),
+(9, 'rider1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Kamal Jayawardhana', 1, 0, 'Rider', 0, 8),
+(10, 'staff1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Staff One', 1, 0, 'Staff', NULL, NULL),
+(11, 'rider2@gmail.com', '$2y$10$N1rtCYTVup.hvDPrNvtt8.zOkLrT.VJ/fC6qnKD6wCRO6Lvj3OQVS', 'Seenath Batagedara', 1, 0, 'Rider', 0, 8),
+(12, 'rider3@gmail.com', '$2y$10$N1rtCYTVup.hvDPrNvtt8.zOkLrT.VJ/fC6qnKD6wCRO6Lvj3OQVS', 'Janith Jaalitha', 1, 0, 'Rider', 0, 8),
+(13, 'rider4@gmail.com', '$2y$10$N1rtCYTVup.hvDPrNvtt8.zOkLrT.VJ/fC6qnKD6wCRO6Lvj3OQVS', 'Sunil Keerthi', 1, 0, 'Rider', 0, 8),
+(14, 'shop4@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Delmage Meats', 0, 0, 'Shop', 0, 8),
+(15, 'shop5@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Geenath Traders', 0, 0, 'Shop', 0, 8),
+(16, 'shop6@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Kamala Enterprises', 1, 0, 'Shop', 0, 8),
+(17, 'shop7@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Nugegoda Fruit Shop', 1, 0, 'Shop', 0, 8),
+(18, 'shop8@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Akku Fresh Fruits', 1, 0, 'Shop', 0, 8),
+(19, 'shop9@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Meegamu Fish', 1, 0, 'Shop', 0, 8),
+(20, 'shop10@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Ceylon Fisheries', 1, 0, 'Shop', 0, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ordercart`
+--
+
+CREATE TABLE `ordercart` (
+  `CartID` int(11) NOT NULL,
+  `ShopID` int(11) NOT NULL,
+  `ItemID` int(11) NOT NULL,
+  `Quantity` double NOT NULL,
+  `Total` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `ordercart`
+--
+
+TRUNCATE TABLE `ordercart`;
+--
+-- Dumping data for table `ordercart`
+--
+
+INSERT INTO `ordercart` (`CartID`, `ShopID`, `ItemID`, `Quantity`, `Total`) VALUES
+(1, 4, 12, 50, 7100),
+(1, 5, 7, 10, 1100),
+(1, 5, 8, 20, 6000),
+(2, 4, 12, 1, 142),
+(2, 4, 13, 11, 1232),
+(2, 5, 2, 2, 200),
+(2, 5, 3, 4, 600),
+(2, 5, 7, 2, 220);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `OrderID` int(11) NOT NULL,
+  `CartID` int(11) NOT NULL,
+  `OrderDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `RecipientName` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
+  `Note` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
+  `RecipientContact` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
+  `DeliveryCost` float NOT NULL,
+  `TotalCost` float NOT NULL,
+  `Status` int(11) NOT NULL,
+  `City` int(11) NOT NULL,
+  `Suburb` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `orders`
+--
+
+TRUNCATE TABLE `orders`;
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `RecipientName`, `Note`, `RecipientContact`, `DeliveryCost`, `TotalCost`, `Status`, `City`, `Suburb`) VALUES
+(1, 1, '2021-12-04 14:52:46', '', '', '', 160, 14360, 0, 1, 2),
+(2, 2, '2021-12-27 19:32:18', '', '', '', 160, 2554, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `PaymentID` int(11) NOT NULL,
+  `OrderID` int(11) NOT NULL,
+  `TotalPrice` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `payment`
+--
+
+TRUNCATE TABLE `payment`;
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`PaymentID`, `OrderID`, `TotalPrice`) VALUES
+(1, 1, 14360),
+(2, 2, 2554);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shop`
+--
+
+CREATE TABLE `shop` (
+  `ShopID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `City` int(11) NOT NULL,
+  `Suburb` int(11) NOT NULL,
+  `ShopName` varchar(125) COLLATE utf8mb4_bin NOT NULL,
+  `ShopDesc` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Category` int(11) NOT NULL,
+  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `shop`
+--
+
+TRUNCATE TABLE `shop`;
+--
+-- Dumping data for table `shop`
+--
+
+INSERT INTO `shop` (`ShopID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `Suburb`, `ShopName`, `ShopDesc`, `Category`, `Location`, `PlaceID`) VALUES
+(3, 'Farhir Fazil', '10 Chapel Rd, Nugegoda', 'shop1@gmail.com', '+94777854845', 0, 8, 'Pussallawa Meat Shop', 'Fresh Meats', 2, '{&quot;lat&quot;:6.8727925429239685,&quot;lng&quot;:79.89321484680175}', 'ChIJJ1JA2ENa4joRbWhiruJI4sI'),
+(4, 'Harin Jayawardhana', 'Chapel Ln, Nugegoda', 'shop2@gmail.com', '+94777875619', 0, 8, 'D&J Mini Mart', 'Everything at One Place', 0, '{&quot;lat&quot;:6.872643418517776,&quot;lng&quot;:79.89244505281448}', 'ChIJS5thDMZb4joRcFj3-om0oto'),
+(5, 'Sandun Kaluhitha', '22b Station Ln, Nugegoda 10250', 'shop3@gmail.com', '+94772369469', 0, 8, 'Deli Market', 'One Stop for All Your Needs', 0, '{&quot;lat&quot;:6.871969695171068,&quot;lng&quot;:79.8919622551918}', 'ChIJ3XwA50Na4joR_nza5cs8jWc'),
+(14, 'Saantha Pansilu', '45 Jambugasmulla Rd, Nugegoda', 'shop4@gmail.com', '+94772358741', 0, 8, 'Delmage Meats', 'Processed Meats', 2, '{&quot;lat&quot;:6.871000384017071,&quot;lng&quot;:79.89284738416671}', 'ChIJ6YqpvENa4joRAemVeNt6ur0'),
+(15, 'Saantha Pansilu', '45 Jambugasmulla Rd, Nugegoda', 'shop5@gmail.com', '+94772365985', 0, 8, 'Geenath Traders', 'Vegetable Importers', 1, '{&quot;lat&quot;:6.8728644421745475,&quot;lng&quot;:79.89126756305694}', 'ChIJuyUCVUFa4joRg9mBFNK_wy4'),
+(16, 'Kamala Geegana', '1 Edirigoda Rd, Nugegoda', 'shop6@gmail.com', '+94772344582', 0, 8, 'Kamala Enterprises', 'Fresh Vegetables', 1, '{&quot;lat&quot;:6.873250567593335,&quot;lng&quot;:79.89270522708892}', 'ChIJF1avXUFa4joR_25N3N_SnyM'),
+(17, 'Thisara Prabudda', '107/1/1,Stanley Thilakarathna Mawatha,Nugegoda', 'shop7@gmail.com', '+9477556982', 0, 8, 'Nugegoda Fruit Shop', 'All Kinds of Fruits', 4, '{&quot;lat&quot;:6.872374461881273,&quot;lng&quot;:79.89076598997116}', 'ChIJgXatAkRa4joRcYX_75Xt09U'),
+(18, 'Falil Ahmed', '15/4,St Joseph\'s Rd,Nugegoda', 'shop8@gmail.com', '+9471300982', 0, 8, 'Nugegoda Fruit Shop', 'Fruit Importers and Distributors', 4, '{&quot;lat&quot;:6.86985331888307,&quot;lng&quot;:79.89195554966926}', 'ChIJuW2he0Na4joROPealbMO0_k'),
+(19, 'Gagana Randeepa', '107,Samudradevi Rd, Nugegoda', 'shop9@gmail.com', '+9470006982', 0, 8, 'Meegamu Fish', 'All Kinds of Fish', 3, '{&quot;lat&quot;:6.870877888510723,&quot;lng&quot;:79.89095106239319}', 'ChIJ3brXfURa4joRT3lK547-66E'),
+(20, 'Jalitha Kumara', '15/4,Stanley Tilakaratne Mawatha, Nugegoda', 'shop10@gmail.com', '+9478222582', 0, 8, 'Ceylon Fisheries', 'Fish Importers and Distributors', 3, '{&quot;lat&quot;:6.871463736298677,&quot;lng&quot;:79.88989427204132}', 'ChIJEbwlPkRa4joRjjCy7M_tmOs');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shopitem`
+--
+
+CREATE TABLE `shopitem` (
+  `ItemID` int(11) NOT NULL,
+  `ShopID` int(11) NOT NULL,
+  `UnitPrice` double NOT NULL,
+  `Stock` float NOT NULL,
+  `Enabled` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `shopitem`
+--
+
+TRUNCATE TABLE `shopitem`;
+--
+-- Dumping data for table `shopitem`
+--
+
+INSERT INTO `shopitem` (`ItemID`, `ShopID`, `UnitPrice`, `Stock`, `Enabled`) VALUES
+(1, 5, 280, 20, 0),
+(2, 5, 100, 18, 0),
+(3, 5, 150, 16, 1),
+(4, 5, 380, 10, 1),
+(5, 5, 190, 5, 0),
+(6, 5, 380, 20, 1),
+(7, 5, 110, 188, 1),
+(8, 5, 300, 230, 1),
+(11, 4, 125, 150, 0),
+(12, 4, 142, 49, 1),
+(13, 4, 112, 79, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shoporder`
+--
+
+CREATE TABLE `shoporder` (
+  `ShopID` int(11) NOT NULL,
+  `CartID` int(11) NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ShopTotal` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `shoporder`
+--
+
+TRUNCATE TABLE `shoporder`;
+--
+-- Dumping data for table `shoporder`
+--
+
+INSERT INTO `shoporder` (`ShopID`, `CartID`, `Date`, `ShopTotal`) VALUES
+(4, 1, '2021-12-04 00:00:00', 7100),
+(4, 2, '2021-12-28 00:00:00', 1374),
+(5, 1, '2021-12-04 00:00:00', 7100),
+(5, 2, '2021-12-28 00:00:00', 1020);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `StaffID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `staff`
+--
+
+TRUNCATE TABLE `staff`;
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`StaffID`, `Name`, `Address`, `ContactNo`, `Email`) VALUES
+(10, 'Staff One', 'Address Eka', '0714584685', 'staff1@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temporarycart`
+--
+
+CREATE TABLE `temporarycart` (
+  `ItemID` int(11) NOT NULL,
+  `ShopID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Purchased` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `temporarycart`
+--
+
+TRUNCATE TABLE `temporarycart`;
+--
+-- Dumping data for table `temporarycart`
+--
+
+INSERT INTO `temporarycart` (`ItemID`, `ShopID`, `CustomerID`, `Quantity`, `Purchased`) VALUES
+(1, 5, 2, 10, 0),
+(5, 5, 2, 10, 0),
+(6, 5, 2, 5, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verification`
+--
+
+CREATE TABLE `verification` (
+  `UserID` int(11) NOT NULL,
+  `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+  `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Truncate table before insert `verification`
+--
+
+TRUNCATE TABLE `verification`;
+--
+-- Dumping data for table `verification`
+--
+
+INSERT INTO `verification` (`UserID`, `VerificationCode`, `UniqueID`) VALUES
+(11, 'yGM5xcT9Z2Si3d8EC4xBYdRM', 'GWxnwqSqH9xnaBB0614reDfJ');
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`CartID`);
+
+--
+-- Indexes for table `complaint`
+--
+ALTER TABLE `complaint`
+  ADD PRIMARY KEY (`ComplaintID`) USING BTREE,
+  ADD KEY `ComplaintID` (`ComplaintID`,`CustomerID`,`StaffID`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`CustomerID`);
+
+--
+-- Indexes for table `delivery`
+--
+ALTER TABLE `delivery`
+  ADD PRIMARY KEY (`DeliveryID`),
+  ADD KEY `RiderID` (`RiderID`,`OrderID`,`CartID`);
+
+--
+-- Indexes for table `deliveryrider`
+--
+ALTER TABLE `deliveryrider`
+  ADD PRIMARY KEY (`RiderID`);
+
+--
+-- Indexes for table `deliveryriderlocation`
+--
+ALTER TABLE `deliveryriderlocation`
+  ADD PRIMARY KEY (`RiderID`);
 
 --
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`ItemID`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`UserID`);
+
+--
+-- Indexes for table `ordercart`
+--
+ALTER TABLE `ordercart`
+  ADD PRIMARY KEY (`CartID`,`ShopID`,`ItemID`);
+
+--
+-- Indexes for table `shop`
+--
+ALTER TABLE `shop`
+  ADD PRIMARY KEY (`ShopID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -99,6 +666,12 @@ ALTER TABLE `item`
 --
 ALTER TABLE `item`
   MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `login`
+--
+ALTER TABLE `login`
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
