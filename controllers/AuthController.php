@@ -80,8 +80,8 @@ class AuthController extends Controller
 
         if ($request->isPost()) {
             $loginForm->loadData($request->getBody());
-            if ($loginForm->validate() && $loginForm->login()) {
-                Application::$app->response->redirect('/');
+            if ($loginForm->validate() && $url=$loginForm->login()) {
+                Application::$app->response->redirect($url);
                 return;
             }
 

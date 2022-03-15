@@ -67,4 +67,9 @@ class Item extends DBModel
         return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
     }
 
+    public function excludeonupdateattributes(): array
+    {
+        return [];
+    }
+
 }

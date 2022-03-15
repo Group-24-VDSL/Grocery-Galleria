@@ -85,4 +85,9 @@ class Rider extends UserModel
     {
         return $this->RiderID;
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
+    }
 }

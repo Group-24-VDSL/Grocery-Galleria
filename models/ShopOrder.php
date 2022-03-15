@@ -43,4 +43,9 @@ class ShopOrder extends DBModel
     {
         return $this->attributes();
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
+    }
 }

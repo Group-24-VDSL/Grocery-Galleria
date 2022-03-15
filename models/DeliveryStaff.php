@@ -62,4 +62,9 @@ class DeliveryStaff extends UserModel
         return $this->DelStaffID;
     }
 
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
+    }
+
 }

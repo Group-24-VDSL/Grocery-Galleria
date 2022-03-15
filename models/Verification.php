@@ -38,4 +38,9 @@ class Verification extends DBModel
     {
         return [];
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
+    }
 }
