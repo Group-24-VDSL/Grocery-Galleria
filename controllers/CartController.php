@@ -52,17 +52,18 @@ class CartController extends Controller
         if ($json) {
             $tempcart = new TemporaryCart();
             $tempcart->loadData($json);
+            $tempcart->CustomerID=Application::getUserID();
             $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
             if ($request->isPost()) {
                 if ($checktemp) { //there exists such item
                     $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
                     $tempcart->Quantity = $newQuantity;
                     if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok"}');
+                        return $response->json('{"success":"ok-updated"}');
                     }
                 } else {
                     if ($tempcart->validate() && $tempcart->save()) {
-                        return json_encode('{"success":"ok"}');
+                        return json_encode('{"success":"ok-saved"}');
                     }
                 }
                 return $response->json('{"success":"fail"}');
@@ -71,7 +72,7 @@ class CartController extends Controller
                     $tempcart->loadData($checktemp);
                     $tempcart->Quantity = $json['Quantity'];
                     if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok"}');
+                        return $response->json('{"success":"ok-reupdated"}');
                     }
                 }
             }
