@@ -14,6 +14,8 @@ abstract class DBModel extends Model
 
     abstract public function attributes():array;
 
+    abstract public function excludeonupdateattributes():array;
+
     abstract  public static function primaryKey():array;
 
 
@@ -42,6 +44,13 @@ abstract class DBModel extends Model
         $dbObjarr = array_slice((array)$dbObj, 0, -1); // db object to array
         $objarr = array_slice((array)$this, 0, -1); // this object to array
         $result = array_diff_assoc($objarr,$dbObjarr);
+        if(!empty($this->excludeonupdateattributes())) {
+            foreach ($this->excludeonupdateattributes() as $excludedkey) { //remove from the result. like confirmpassword etc.
+                if (array_key_exists($excludedkey, $result)) {
+                    unset($result[$excludedkey]);
+                }
+            }
+        }
         if(!empty($result)){
             $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($result)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
             foreach ($result as $key => $value) {
@@ -170,26 +179,10 @@ abstract class DBModel extends Model
         }
         return $statement->fetch($fetch_type);
     }
+
     public static function queryAll($string,$fetch_type){
         $statement = self::prepare($string);
         $statement->execute();
         return $statement->fetchAll($fetch_type,static::class);
     }
-
-    public static function findCount($countSelect,$s,$where=[],$group,$limit=null)
-    {
-        $tableName = static::tableName();
-        $attributes = array_keys($where);
-        $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes)); // $email = :email AND $password = :password
-        $statement = self::prepare("SELECT COUNT($countSelect),$s FROM $tableName WHERE $sql GROUP By ($group) LIMIT $limit");
-        foreach ($where as $key => $item) {
-            $statement->bindValue(":$key", $item);
-        }
-        $statement->execute();
-        return $statement->fetchAll(\PDO::FETCH_CLASS);
-//        return (int)$statement->fetchColumn();
-
-    }
-
-
 }
