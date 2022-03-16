@@ -20,36 +20,36 @@ use app\models\Item;
 
 class TestController extends Controller
 {
-    public function test(Request $request){
-
-        $this->setLayout('headeronly-staff');
-
-        $ShopID = $request ->getBody()["ShopID"];
-        $CartID = $request ->getBody()["CartID"];
-
-        $shoporder = ShopOrder ::findOne([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
-        $ShopTotal = $shoporder->ShopTotal ;
-
-
-        $cartitems = OrderCart ::findAll([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
-        $shopitems = [];
-        $i = 0 ;
-        $itemprice = [] ;
-
-        foreach($cartitems as $cartitem){
-            $shopitem = ShopItem::findOne(['ItemID'=>$cartitem->ItemID,'ShopID'=>$cartitem->ShopID]);
-            $item = Item::findOne(['ItemID'=>$cartitem->ItemID]);
-
-            $shopitems[$cartitem->ShopID][$cartitem->ItemID]=[$shopitem,$item];
-
-        }
-
-        //return $this->render('shop/view-order-details',['shoporder'=>$shopitem]);
-
-        //print_r($request -> getBody());
-    }
+//    public function test(Request $request){
+//
+//        $this->setLayout('headeronly-staff');
+//
+//        $ShopID = $request ->getBody()["ShopID"];
+//        $CartID = $request ->getBody()["CartID"];
+//
+//        $shoporder = ShopOrder ::findOne([ "ShopID" => $ShopID ,"CartID" => $CartID]);
+//
+//        $ShopTotal = $shoporder->ShopTotal ;
+//
+//
+//        $cartitems = OrderCart ::findAll([ "ShopID" => $ShopID ,"CartID" => $CartID]);
+//
+//        $shopitems = [];
+//        $i = 0 ;
+//        $itemprice = [] ;
+//
+//        foreach($cartitems as $cartitem){
+//            $shopitem = ShopItem::findOne(['ItemID'=>$cartitem->ItemID,'ShopID'=>$cartitem->ShopID]);
+//            $item = Item::findOne(['ItemID'=>$cartitem->ItemID]);
+//
+//            $shopitems[$cartitem->ShopID][$cartitem->ItemID]=[$shopitem,$item];
+//
+//        }
+//
+//        //return $this->render('shop/view-order-details',['shoporder'=>$shopitem]);
+//
+//        //print_r($request -> getBody());
+//    }
 
     public function updateOngoingShopItem(Request $request, Response $response)
     {
@@ -157,41 +157,36 @@ class TestController extends Controller
 
     }
     public function profilesettings(Request $request)
+
     {
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();
         $user = new User();
 
+
         $this->setLayout("dashboardL-shop");
 
-        $shop = $shop->findOne(['ShopID' => 3]);
-        $user = $user->findOne(['UserID' => 3]);
-
-        $aa = ShopOrder::findCount("CartID","Date",['ShopID'=>1],"date_format(Date, '%M')",30);
-//        $aa = DBModel::query("SELECT COUNT(CartID) FROM shoporder WHERE ShopID =1 GROUP BY DATE ",\PDO::FETCH_COLUMN);
+        $shop = $shop->findOne(['ShopID' => Application::getUserID()]);
+        $user = $user->findOne(['UserID' => Application::getUserID()]);
+        var_dump($user);
 
 
-
-        var_dump($aa);
+        var_dump( Application::getUserID());
 
         if ($request->isPost()) {
             $newObj->loadData($request->getBody());
 //            var_dump($newObj);
 //            $newObj->StaffID = Application::getCustomerID(); // get session id
-            $newObj->ShopID = 3;
+            $newObj->ShopID = Application::getUserID();
             $newObj->Category = $shop->Category;
             $newObj->Address = $shop->Address;
             $newObj->City = $shop->City;
             $newObj->Suburb = $shop->Suburb;
             $newObj->Location = $shop->Location;
             $newObj->PlaceID = $shop->PlaceID ;
-//            $newObj->Password = "88" ;
-//            $newObj->ConfirmPassword = "88" ;
-            var_dump($newObj->ShopID);
-            var_dump($newObj);
             if ($newObj->validate('update') && $newObj->update()) {
-                $newObj->singleProcedure('email_Update', 3, $newObj->Email);
+                $newObj->singleProcedure('email_Update', Application::getUserID(), $newObj->Email);
                 Application::$app->session->setFlash('success','Update Success');
                 Application::$app->response->redirect('/dashboard/shop/profilesettings');
             }
@@ -211,33 +206,141 @@ class TestController extends Controller
         ]);
     }
 
-    public function profileUpdate(Request $request)
+    public function test(Request $request)
     {// get logged staff ID
-        $staff = new Shop();
+        $shop = new Shop();
         $user = new User();
-        $user = $user->findOne(['UserID' => 3]);
-        if ($request->isPost()) {
-            $success = false;{
-                $user->loadData($request->getBody());
-                $user->loadData($request->getBody());
-                if ($user->validate('update') && $user->update()) {
-                    Application::$app->session->setFlash('success', 'Update Success');
-                }else{
-                    Application::$app->session->setFlash('danger', 'Update Failed');
-                    Application::$app->response->redirect('shop/shop-profile-setting');
-                    $this->setLayout("dashboardL-shop");
-                    return $this->render("shop/shop-profile-setting", [
-                        'model' => $staff,
-                        'loginmodel' => $user
-                    ]);
-                }
-            }
-        }
         $this->setLayout("dashboardL-shop");
-        return $this->render("shop/shop-profile-setting", [
-            'model' => $staff,
+//        $user = $user->findOne(['UserID' => Application::getUserID()]);
+//        if ($request->isPost()) {
+//            $success = false;{
+//                $user->loadData($request->getBody());
+//                $user->loadData($request->getBody());
+//                var_dump("cccc");
+//                if ($user->validate('update') && $user->update()) {
+//                    Application::$app->session->setFlash('success', 'Update Success');
+//                }else{
+//                    Application::$app->session->setFlash('danger', 'Update Failed');
+////                    Application::$app->response->redirect('shop/shop-profile-setting');
+//                    $this->setLayout("dashboardL-shop");
+//                    return $this->render("shop/shop-profile-setting", [
+//                        'model' => $shop,
+//                        'loginmodel' => $user
+//                    ]);
+//                }
+//            }
+//        }
+        $this->setLayout("dashboardL-shop");
+        return $this->render("shop/profile-update", [
+            'model' => $shop,
             'loginmodel' => $user
         ]);
+    }
+
+    public function abc(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        if ($json) {
+            $tempuser = new User();
+            $tempuser->loadData($json);
+
+
+
+
+            $checktemp = User::findOne(["UserID" => Application::getUserID()]);
+
+
+            $currenPwdHash =  password_hash($json["OldPwd"],PASSWORD_BCRYPT);
+
+
+
+            if ($request->isPost()) {
+                if (strlen($json["OldPwd"]) == 0) {
+                    return $response->json('{"success":"currentRequire"}');
+                } elseif (strlen($json["NewPwd"]) == 0) {
+                    return $response->json('{"success":"newRequire"}');
+                } elseif (strlen($json["ConfirmPwd"]) == 0) {
+                    return $response->json('{"success":"confirmRequire"}');
+                } else {
+
+                    if ($checktemp) { //there exists such user
+
+                        if(password_verify($json["OldPwd"], $checktemp->PasswordHash)){
+//
+                            if(strlen($json["NewPwd"])>=8) {
+                                if ($json["NewPwd"] === $json["ConfirmPwd"]) {
+                                    $tempuser = $checktemp ;
+                                    $tempuser->PasswordHash = password_hash($json["NewPwd"] ,PASSWORD_BCRYPT);
+                                    if ($tempuser->update()) {
+//                                        Application::$app->response->redirect("/test");
+                                        return $response->json('{"success":"ok"}');
+                                    }
+
+
+                                } else {
+                                    return $response->json('{"success":"newConfirmFail"}');
+                                }
+                            }
+                            else{
+                                return $response->json('{"success":"sizeFail"}') ;
+                            }
+
+                        }
+                        else{
+                            return $response->json('{"success":"currentFail"}');
+                        }
+                    }
+                    return $response->json('{"success":"fail"}');
+
+                }
+            }elseif($request->isPatch()) {
+
+            }
+
+//            if(password_verify($json["OldPwd"],$checktemp->PasswordHash)){
+//                if(strlen($json["NewPwd"])>=8) {
+//                    if (password_verify($json["NewPwd"], $json["ConfirmPwd"])) {
+//
+//
+//                    } else {
+//                        return $response->json('{"success":"newConfirmFail"}');
+//                    }
+//                }
+//                else{
+//                    return $response->json('{"success":"sizeFail"}') ;
+//                }
+//
+//            }
+//            else{
+//                return $response->json('{"success":"currentFail"}');
+//            }
+//
+//            var_dump($checktemp->PasswordHash);
+
+
+//            if ($request->isPost()) {
+//                if ($checktemp) { //there exists such item
+//                    if ($tempuser->validate('update') && $tempuser->update()) {
+//                        return $response->json('{"success1":"ok"}');
+//                    }
+//                }
+//                return $response->json('{"success2":"fail"}');
+//
+//            } elseif($request->isPatch()) {
+//                if ($checktemp) { //there exists such item
+////                    Application::$app->logger->debug("iiiii");
+//                    if ($tempuser->validate('update') && $tempuser->update()) {
+//                        Application::$app->response->redirect("/test");
+//                        return $response->json('{"success":"ok"}');
+//
+//                    }
+//
+//                }
+//                return $response->json('{"success4":"fail1"}');
+//
+//            }
+        }
+        return $response->json('{"success5":"fail"}');
     }
 
 

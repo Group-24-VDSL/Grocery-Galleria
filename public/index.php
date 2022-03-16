@@ -108,6 +108,7 @@ $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOng
 $app->router->get('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
 $app->router->post('dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
+$app->router->get('dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
 
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
@@ -138,6 +139,7 @@ $app->router->get('/api/getshoporder',[APIController::class,'getShopOrder']);
 $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
+$app->router->post('/api/updatepassword',[TestController::class,'abc']);
 
 
 //rider

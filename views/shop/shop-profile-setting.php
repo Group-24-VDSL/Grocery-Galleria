@@ -7,7 +7,8 @@
 <!-- Profile section starts -->
 
 <link rel="stylesheet" href="/css/shopProfileSetting.css" />
-<div class="core">
+<script src="/js/password-update.js"></script>
+<div class="core" style="height: 800px">
     <h1 class="heading">Profile <span>Settings</span></h1>
     <div class="container-core" style="height: 420px">
         <?php $form = \app\core\form\Form::begin("/dashboard/shop/profilesettings","post","shopUpdate",[]);?>
@@ -79,7 +80,7 @@
     </div>
     <h1 class="heading">Change <span>Password</span></h1>
     <div class="container-core">
-        <?php $form = \app\core\form\Form::begin("/dashboard/shop/profileupdate","post","userUpdate",[]);?>
+        <form>
         <div class="inputBox">
             <label for="Password"><i class="fas fa-key"></i>Current Password</label>
             <?php echo $form->fieldonly($loginmodel,"Password")->passwordField();?>
@@ -94,8 +95,8 @@
         </div>
 
         <div class="inputBox btn-div">
-            <button type="submit" class="btn update">Update</button>
+            <button  class="btn update" onclick="updatepassword()">Update</button>
         </div>
-        <?php \app\core\form\Form::end()?>
     </div>
+    </form>
 </div>

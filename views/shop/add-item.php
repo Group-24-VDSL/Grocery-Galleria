@@ -34,8 +34,21 @@
             <?php echo $form->fieldonly($model, "Stock", '') ?>
         </div>
         <div class="inputBox">
+            <label for="Stock"><i class="fa fa-clock-o" ></i>Maximum Lead Time</label>
+            <?php echo $form->fieldonly($model, "Stock", '') ?>
+        </div>
+        <div class="inputBox">
+            <label for="Stock"><i class="fas fa-coins"></i>Minimum Lead Time</label>
+            <?php echo $form->fieldonly($model, "Stock", '')->placeHolder("ggggg") ?>
+        </div>
+        <div class="inputBox">
+            <p style="font-size: 10px ; color: #a94442">Lead Time : time that needs to ......</p>
+        </div>
+        <div class="inputBox">
             <?php echo $form->fieldonly($model, "ShopID")->setValue(5)->hiddenField()?>
         </div>
+
+
         <div class="inputBox"></div>
         <button class="btn">Submit</button>
         <script src="/js/AddItem.js"></script>

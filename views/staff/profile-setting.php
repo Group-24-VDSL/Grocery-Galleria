@@ -5,7 +5,7 @@
 
 ?>
 <!-- Profile section starts -->
-<div class="core">
+<div class="core" >
     <h1 class="heading">Profile <span>Settings</span></h1>
     <div class="container-core">
         <?php $form = \app\core\form\Form::begin("/dashboard/staff/profilesettings","post","staffUpdate",[]);?>

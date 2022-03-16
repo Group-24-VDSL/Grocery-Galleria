@@ -5,7 +5,7 @@ $(function () {
     const UWeight = document.getElementById("UWeight");
 
     const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-    const URLItems = "http://localhost/api/items?Category=0";
+    const URLItems = "http://localhost/api/items?Category=1";
     const URLShopItems = "http://localhost/api/shopitems?ShopID=5";
 
 

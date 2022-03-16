@@ -65,9 +65,9 @@ class ShopController extends Controller
         if ($request->isPost()) {
             $shopItem->loadData($request->getBody());
             if ($request->getBody()['Unit'] == "Kg") {
-                $stock = $shopItem->Stock;
-                $stock = $stock * 1000;
-                $shopItem->Stock = $stock;
+                $stock = $shopItem->Stock ;
+                $stock = $stock * 1000 ;
+                $shopItem->Stock = $stock ;
             }
             if ($shopItem->validate() && $shopItem->save()) {
                 Application::$app->session->setFlash("success", "Item Saved.");
@@ -163,6 +163,7 @@ class ShopController extends Controller
         $this->setLayout('register');
         $user = new Shop(); // Create customer
         $user->loadData($request->getBody());
+
         if ($request->isPost()) {
             $userid = AuthController::register($request, 'Shop');
             if ($userid) {
@@ -188,7 +189,6 @@ class ShopController extends Controller
             'model' => $user
         ]);
     }
-
 
     public function updateItem(Request $request)
     {
