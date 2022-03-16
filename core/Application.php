@@ -6,6 +6,7 @@ use app\core\db\Database;
 use app\core\middlewares\AuthMiddleware;
 use app\models\User;
 use Exception;
+use koolreport\KoolReport;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Pusher\Pusher;
@@ -39,6 +40,7 @@ class Application
     public AuthMiddleware $authMiddleware;
     public static Application $app;
     public string $domain;
+    public KoolReport $koolReport;
 
     public function __construct($rootPath ,$config)
     {
@@ -58,7 +60,8 @@ class Application
             'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
             'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','assignRider','getRiderLocationData'],
             'Customer' => ['welcome','getTempCart','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
-            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
+            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings',
+                'profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','itemReport','salesReport','deliveryReport','shopReport'],
             'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
             'Rider' => ['vieworder','order','riderLocation'],
             "Common" => ['logout','profileUpdate','test']

@@ -13,6 +13,7 @@ use app\core\Application;
 use app\controllers\SiteController;
 use app\controllers\AuthController;
 use app\controllers\RiderController;
+use app\controllers\Reports;
 
 
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -97,7 +98,7 @@ $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'v
 $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
-
+$app->router->get('/dashboard/staff/itemReport',[Reports::class,'itemReport']);
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
