@@ -18,6 +18,7 @@ class InputFieldOnly
     public string $value;
     public $classes = [];
     public string $interaction ='';
+    public string $placeHolder= '' ;
 
     public function __construct(Model $model, string $attribute,$classes=[]){
         $this->type = self::TYPE_TEXT;
@@ -63,6 +64,11 @@ class InputFieldOnly
         return $this;
     }
 
+    public function placeHolder(string $placeholder){
+        $this->placeHolder =$placeholder;
+        return $this;
+    }
+
     public function setInteraction(string $interaction)
     {
         $this->interaction = $interaction;
@@ -71,7 +77,7 @@ class InputFieldOnly
     public function __toString()
     {
         return sprintf('
-    <input type="%s" id="%s" name="%s" style="%s" value="%s" class="%s" %s >
+    <input  type="%s" id="%s" name="%s" style="%s" value="%s" class="%s" %s >
     <div><small style="color: red">%s</small></div>
     ',
             $this->type,
@@ -81,6 +87,7 @@ class InputFieldOnly
             $this->value,
             $this->classes ? implode(" ",$this->classes): "",
             $this->interaction,
+//            $this->placeHolder(),
             $this->model->getFirstError($this->attribute)
         );
     }
