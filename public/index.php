@@ -98,7 +98,10 @@ $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'v
 $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
-$app->router->get('/dashboard/staff/itemReport',[Reports::class,'itemReport']);
+$app->router->get('/dashboard/staff/systemreports',[Reports::class,'systemReports']);
+$app->router->get('/dashboard/staff/itemreport',[Reports::class,'itemReport']);
+$app->router->get('/dashboard/staff/salesreportcurrent',[Reports::class,'salesReportCurrent']);
+$app->router->get('/dashboard/staff/salesreportlast',[Reports::class,'salesReportLast']);
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);

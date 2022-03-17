@@ -327,9 +327,28 @@
   scrollbar-width: thin;
 }
 */
+/*chart css*/
+.chart-div{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+.chart{
+  display: flex;
+  position: relative;
+  width: 50rem;
+  /*height: 200px;*/
 
-
-
+}
+.report-brief{
+  width: 30rem;
+  /*height: 200px;*/
+  border: .1rem solid var(--text-color-light);
+  border-radius: .5rem;
+  padding: .5rem;
+}
 
 
 

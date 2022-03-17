@@ -58,9 +58,19 @@
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/staff/systemreports">
                 <i class="bx bxs-pie-chart-alt"></i>
-                <span class="link-name">Analytics</span>
+                <span class="link-name">System Analytics</span>
+            </a>
+        </li><li>
+            <a href="/dashboard/staff/renderreport">
+                <i class="bx bxs-pie-chart-alt"></i>
+                <span class="link-name">Shop Analytics</span>
+            </a>
+        </li><li>
+            <a href="/dashboard/staff/renderreport">
+                <i class="bx bxs-pie-chart-alt"></i>
+                <span class="link-name">Product Analytics</span>
             </a>
         </li>
         <li>
