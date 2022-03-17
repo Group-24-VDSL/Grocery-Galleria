@@ -194,11 +194,9 @@ class StaffController extends Controller
         $user = new User();
         $this->setLayout("dashboardL-staff");
         $model = $model->findOne(['StaffID' => $userID]);
-//        $user = $user->findOne(['UserID' => 11]);
         if ($request->isPost()) {
             $newObj = new Staff();
             $newObj->loadData($request->getBody());
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
             $newObj->StaffID = $userID;
             if ($newObj->validate('update') && $newObj->update()) {
                 $newObj->callProcedure('email_update', ['UserID' => $newObj->StaffID, 'Email' => $newObj->Email]);

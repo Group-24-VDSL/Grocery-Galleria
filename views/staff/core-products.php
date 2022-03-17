@@ -58,7 +58,7 @@
                     <i class="far fa-images"></i>
                     Current Image
                 </label>
-                <img id="ImgDis" class="imageBox" src="">
+                <img id="ImgDis" class="imageBox" src="" alt="">
                 <input id="ImgStr" name="ImgStr" hidden>
             </div>
 
