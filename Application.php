@@ -151,7 +151,7 @@ class Application
         $this->session->set('role',$user->Role);
         $this->session->set('city',$user->City);
         $this->session->set('suburb',$user->Suburb);
-        return true;
+        return $this->user->homepage();
     }
 
     public function logout(){
