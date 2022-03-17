@@ -37,4 +37,9 @@ class Cart extends DBModel
     {
         return ['CartID','DateTime','CustomerID'];
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
+    }
 }
