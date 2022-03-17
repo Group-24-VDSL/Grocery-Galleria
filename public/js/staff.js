@@ -74,10 +74,35 @@ $(document).ready(function () {
                     $('#MRP').val(Item.MRP);
                     // console.log(document.getElementById('MRP').value);
                 })
+                const searchbox = document.getElementById("product-search");
+                searchbox.addEventListener("focus",function (){
+                    console.log("hello")
+                    const itemBtn = document.getElementsByClassName('btn-row')[0];
+                    $(itemBtn).trigger("click");
+                })
+                searchbox.addEventListener("keyup",function (){
+                    let input = document.getElementById("product-search").value.toUpperCase();
+                    let table = document.getElementById("item-table");
+                    items = table.getElementsByClassName("row");
+                    Array.prototype.forEach.call(items,function(ulelement) {
+                        let brand = ulelement.getElementsByClassName("row-brand")[0].textContent || ulelement.getElementsByClassName("row-brand")[0].innerText;
+                        let name = ulelement.getElementsByClassName("row-name")[0].textContent || ulelement.getElementsByClassName("row-name")[0].innerText;
+                        if (name.toUpperCase().indexOf(input) > -1 || brand.toUpperCase().indexOf(input) >-1 ) {
+                            ulelement.style.display = "";
+                        } else {
+                            ulelement.style.display = "none";
+                        }
+
+                    });
+                })
+
+
             });
         })
     })
     $('#btn-vege').trigger('click');
+
+
 })
 
 

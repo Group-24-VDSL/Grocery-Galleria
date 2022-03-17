@@ -8,7 +8,6 @@ use app\core\db\DBModel;
 use app\core\exceptions\ForbiddenException;
 use app\core\Request;
 use app\core\Response;
-use app\models\Cart;
 use app\models\Customer;
 use app\models\ShopItem;
 use app\models\TemporaryCart;
