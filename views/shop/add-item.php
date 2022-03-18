@@ -13,7 +13,7 @@
         </div>
         <div class="inputBox lock">
             <label for="MRP"
-            ><i class="fas fa-arrow-circle-up"></i>MRP</label>
+            ><i class="fas fa-arrow-circle-up"></i>Maximum System price</label>
             <input id="MRP" name="MRP" type="text" readonly/>
         </div>
         <div class="inputBox lock">
@@ -34,12 +34,12 @@
             <?php echo $form->fieldonly($model, "Stock", '') ?>
         </div>
         <div class="inputBox">
-            <label for="Stock"><i class="fa fa-clock-o" ></i>Maximum Lead Time</label>
-            <?php echo $form->fieldonly($model, "Stock", '') ?>
+            <label for="Stock"><i class="fa fa-clock-o" ></i>Maximum Lead Time (in days)</label>
+            <?php echo $form->fieldonly($model, "MaxLeadTime", '')?>
         </div>
         <div class="inputBox">
-            <label for="Stock"><i class="fas fa-coins"></i>Minimum Lead Time</label>
-            <?php echo $form->fieldonly($model, "Stock", '')->placeHolder("ggggg") ?>
+            <label for="Stock"><i class="fas fa-coins"></i>Minimum Lead Time (in days)</label>
+            <?php echo $form->fieldonly($model, "MinLeadTime", '') ?>
         </div>
         <div class="inputBox">
             <p style="font-size: 10px ; color: #a94442">Lead Time : time that needs to ......</p>

@@ -7,6 +7,7 @@ function updatePassword(){
        let newPwd = $('#NewPwd').val();
        let conPwd = $('#ConfirmPwd').val();
        let obj = {"OldPwd":oldPwd ,"NewPwd": newPwd, "ConfirmPwd":conPwd}
+
        $.ajax({
            url : URLUpdatePassword,
            data : JSON.stringify(obj),

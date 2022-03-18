@@ -5,7 +5,7 @@ $(function () {
     const UWeight = document.getElementById("UWeight");
 
     const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-    const URLItems = "http://localhost/api/items?Category=1";
+    const URLItems = "http://localhost/api/items?Category=0";
     const URLShopItems = "http://localhost/api/shopitems?ShopID=5";
 
 
@@ -20,9 +20,9 @@ $(function () {
                     }
                 })
             });
-            MRP.setAttribute("value", items[0].MRP);
+            MRP.setAttribute("value", "Rs. "+items[0].MRP);
             Unit.setAttribute("value", UnitTag[items[0].Unit]);
-            UWeight.setAttribute("value", items[0].UWeight);
+            UWeight.setAttribute("value", items[0].UWeight+" g");
 
             select.addEventListener('change', function () {
                 items.forEach(item=>{
@@ -30,6 +30,7 @@ $(function () {
                         MRP.setAttribute("value", item.MRP);
                         Unit.setAttribute("value", UnitTag[item.Unit]);
                         UWeight.setAttribute("value", item.UWeight);
+
                     }
                 })
 

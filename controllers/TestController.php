@@ -169,10 +169,10 @@ class TestController extends Controller
 
         $shop = $shop->findOne(['ShopID' => Application::getUserID()]);
         $user = $user->findOne(['UserID' => Application::getUserID()]);
-        var_dump($user);
+//        var_dump($user);
 
 
-        var_dump( Application::getUserID());
+//        var_dump( Application::getUserID());
 
         if ($request->isPost()) {
             $newObj->loadData($request->getBody());
@@ -240,12 +240,11 @@ class TestController extends Controller
     public function abc(Request $request, Response $response)
     {
         $json = $request->getJson();
+        var_dump("in password");
         if ($json) {
+            var_dump("in password");
             $tempuser = new User();
             $tempuser->loadData($json);
-
-
-
 
             $checktemp = User::findOne(["UserID" => Application::getUserID()]);
 
@@ -342,6 +341,84 @@ class TestController extends Controller
         }
         return $response->json('{"success5":"fail"}');
     }
+
+
+    public function safetystock(Request $request, Response $response)
+    {
+        $newObj = new ShopItem();
+//        $user = $user->findOne(['UserID' => Application::getUserID()]);
+        $json = $request->getJson();
+
+//        var_dump($request->getBody() , "  mmmmm",(int)$request->getJson()['ShopID']);
+        $itemID = (int)$request->getJson()['ItemID'] ;
+        $shopID = (int)$request->getJson()['ShopID'];
+
+//        var_dump($itemID,$shopID);
+
+       $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
+//        var_dump($result);
+
+
+        if ($json) {
+
+
+            if ($request->isPost()) {
+
+//                var_dump("inside 2", $result["SafetyStock"]);
+
+                    return $response->json($result);
+
+
+            }elseif($request->isPatch()) {
+
+            }
+
+//            if(password_verify($json["OldPwd"],$checktemp->PasswordHash)){
+//                if(strlen($json["NewPwd"])>=8) {
+//                    if (password_verify($json["NewPwd"], $json["ConfirmPwd"])) {
+//
+//
+//                    } else {
+//                        return $response->json('{"success":"newConfirmFail"}');
+//                    }
+//                }
+//                else{
+//                    return $response->json('{"success":"sizeFail"}') ;
+//                }
+//
+//            }
+//            else{
+//                return $response->json('{"success":"currentFail"}');
+//            }
+//
+//            var_dump($checktemp->PasswordHash);
+
+
+//            if ($request->isPost()) {
+//                if ($checktemp) { //there exists such item
+//                    if ($tempuser->validate('update') && $tempuser->update()) {
+//                        return $response->json('{"success1":"ok"}');
+//                    }
+//                }
+//                return $response->json('{"success2":"fail"}');
+//
+//            } elseif($request->isPatch()) {
+//                if ($checktemp) { //there exists such item
+////                    Application::$app->logger->debug("iiiii");
+//                    if ($tempuser->validate('update') && $tempuser->update()) {
+//                        Application::$app->response->redirect("/test");
+//                        return $response->json('{"success":"ok"}');
+//
+//                    }
+//
+//                }
+//                return $response->json('{"success4":"fail1"}');
+//
+//            }
+        }
+        return $response->json($result);
+    }
+
 
 
 }

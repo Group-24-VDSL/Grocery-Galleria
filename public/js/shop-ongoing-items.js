@@ -29,6 +29,7 @@ const URLAddtoCartAPI = host + "/api/addtocart";
 const URLGetCartAPI = host + "/api/getcart";
 const URLUpdateItem = host+ "/api/updateshopitem" ;
 const URLGetOrderCart = host+ "/api/getordercart" ;
+const URLSafetyStock = host+ "/api/getsafetystock" ;
 
 
 const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
@@ -77,8 +78,10 @@ $(document).ready(function () {
 <!--                                <td id="Unit" class="row-unit">${Item.Unit}</td>-->
                                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
-                                <td id="UPrice" class="row-uprice">Rs.<input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
+                                <td id="UPrice" class="row-uprice">Rs. <input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
                                 <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>                                                              
+                                <td id="Safety_stock_${Shop.ShopID}_${Shop.ItemID}"></td>
+                                <td id="ReOrder_point${Shop.ShopID}_${Shop.ItemID}"></td>
                                 <td id="Safety_${Shop.ShopID}_${Shop.ItemID}"></td>
 `
                         ItemTable.appendChild(ItemRow);
@@ -126,6 +129,55 @@ function setItemArray(Item){
 
 
 function safetyStock(ShopItem){
+
+
+    // new safety stock 2022 03 17
+
+    let obj = {"ShopID":ShopItem.ShopID , "ItemID":ShopItem.ItemID} ;
+
+    $.ajax({
+        url : URLSafetyStock,
+        data : JSON.stringify(obj),
+        type : 'POST',
+        dataType:'json',
+        processData: false,
+        contentType : 'application/json'
+    }).done(function (data){
+
+        if (data["SafetyStock"]=== null || data["ReOrderPoint"] === null){
+            data["SafetyStock"] = "0.000" ;
+            data["ReOrderPoint"] = "0.000" ;
+        }
+
+        if (data["SafetyStock"]=== "0.000" ){
+            data["SafetyStock"] = "1.000" ;
+
+        }
+
+        if ( data["ReOrderPoint"] === "0.000"){
+            data["ReOrderPoint"] = "1.000" ;
+        }
+
+        console.log(ShopItem.StockData)
+        document.getElementById('Safety_stock_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = data["SafetyStock"]+" Kg";
+        document.getElementById('ReOrder_point'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = data["ReOrderPoint"]+" Kg";
+
+        if(parseFloat(data["SafetyStock"]) <= ShopItem.StockData){
+            document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
+
+        }
+        else {
+            document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/office/30/000000/high-risk.png\"/>";
+        }
+
+    });
+
+    // 2022 03 17
+
+
+
+
+
     let leadTime = [];
     let demand = [];
     console.log(ShopItem.StockData)
@@ -149,6 +201,9 @@ function safetyStock(ShopItem){
                 console.log(URLFindShopOrder);
 
                 $.getJSON(URLFindShopOrder, function (ShopOrder) {
+
+
+
 
 
                     if (ShopOrder.Status === 1) {
@@ -243,11 +298,11 @@ function safetyStock(ShopItem){
                         // console.log(ShopItem.Stock)
                         // $('#'.concat(Item.stockID)).style.color = "red";
                         // document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid green";
-                        document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
+                        // document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
 
 
                     } else if (s > ShopItem.StockData){
-                        document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/office/30/000000/high-risk.png\"/>";
+                        // document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/office/30/000000/high-risk.png\"/>";
 
                     // document.getElementById(''.concat(ShopItem.stockID)).style.border = "solid red";
 
@@ -381,6 +436,7 @@ function updateShopItem(){
         }
 
     })
+
     location.reload();
 
 }

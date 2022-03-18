@@ -13,10 +13,10 @@
     <div class="container-items">
         <div class="safety-details">
             <img src="https://img.icons8.com/emoji/16/26e07f/check-mark-button-emoji.png"/>
-            <span>: Stock is Safe </span>
+            <span>: Item stock is Safe </span>
             <br>
             <img src="https://img.icons8.com/office/16/000000/high-risk.png"/>
-            <span>: Stock is not Safe </span>
+            <span>: Item stock is not Safe </span>
         </div>
 
         <table class="table-item small-first-col">
@@ -26,13 +26,16 @@
                 <th>Item ID</th>
                 <th>Item Image</th>
                 <th>Item Name</th>
-                <th>Brand</th>
+                <th>Brand Name</th>
                 <!--                <th>Unit</th>-->
                 <th>Unit Weight</th>
                 <th>MRP</th>
                 <th>Unit Price</th>
                 <th>Stock</th>
+                <th>Safety Stock</th>
+                <th>Re order level</th>
                 <th></th>
+
 
             </tr>
             </thead>

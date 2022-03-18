@@ -140,6 +140,7 @@ $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
 $app->router->post('/api/updatepassword',[TestController::class,'abc']);
+$app->router->post('/api/getsafetystock',[TestController::class,'safetystock']);
 
 
 //rider

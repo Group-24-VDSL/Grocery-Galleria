@@ -11,6 +11,8 @@ class ShopItem extends DBModel
     public float $UnitPrice = 0.0;
     public float $Stock = 0;
     public int $Enabled = 0;
+    public int $MaxLeadTime = 1;
+    public int $MinLeadTime = 1;
 
     public function save()
     {
@@ -24,7 +26,7 @@ class ShopItem extends DBModel
 
     public function attributes(): array
     {
-        return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
+        return ['ItemID','ShopID','UnitPrice','Stock','Enabled','MaxLeadTime','MinLeadTime'];
     }
 
     public function labels(): array{
@@ -54,6 +56,6 @@ class ShopItem extends DBModel
 
     public function jsonarray(): array
     {
-        return ['ItemID','ShopID','UnitPrice','Stock','Enabled'];
+        return ['ItemID','ShopID','UnitPrice','Stock','Enabled','MaxLeadTime','MinLeadTime'];
     }
 }

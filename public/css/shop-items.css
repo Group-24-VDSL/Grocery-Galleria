@@ -132,7 +132,7 @@ button{
     display: inline-block;
     background-color: var(--first-color);
     color: var(--body-color);
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.5rem;
     font-size: var(--smaller-font-size);
     border-radius: 0.5rem;
     transition: 0.3s;
