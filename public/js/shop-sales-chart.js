@@ -44,7 +44,7 @@ items.forEach(item=>{
      ItemRow.onclick = function() {getchart(item[0].ItemID, item[0].ItemImage,item[0].Name)};
     ItemRow.innerHTML = `
                     <td id="ItemImage" class="row-img">
-                     <img src="${item[0].ItemImage}" alt="" />
+                     <img src="${item[0].ItemImage}" alt="Item Image" />
                   <td id="Name" class="row-name">${item[0].Name}</td></button>
                 `
     ItemTable.appendChild(ItemRow);
@@ -68,7 +68,7 @@ function getchart(ItemID,ItemImage,ItemName){
         console.log(yValues)
 
         let a = Object.values(sales)[0]
-        console.log(a["sales"]);
+        console.log(a);
         console.log(Object.keys(sales).length)
         for (let i = 0; i < Object.keys(sales).length; i++) {
             if(Object.values(sales)[i]["sales"] == null){
@@ -88,7 +88,14 @@ function getchart(ItemID,ItemImage,ItemName){
 
 
 
-        const sum = yValues.reduce((a, b) => {var ctx = document.getElementById("myChart").getContext("2d");
+        const sum = yValues.reduce((a, b) => {
+            return a + b;
+        });
+
+
+        var ctx = document.getElementById("myChart").getContext("2d");
+        document.getElementById("order-linechart-average").innerHTML = sum/12
+        document.getElementById("order-linechart-sum").innerHTML = sum
 
             var data = {
                 labels:xValues,
@@ -155,8 +162,7 @@ function getchart(ItemID,ItemImage,ItemName){
 
                 }
             });
-            return a + b;
-        });
+
 
 
 

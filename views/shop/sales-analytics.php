@@ -27,7 +27,7 @@
                             <h2 class="chart-name"> Sales of Item in previous year</h2>
                             <table id="item" class="item">
                                 <tr>
-                                    <td><img class="chart-image" id="chart-image" src=""  /></td>
+                                    <td><img class="chart-image" id="chart-image" src="" alt="Item image" /></td>
                                     <td><span class="chart-item-name" id="chart-item-name"></span></td>
                                 </tr>
                                 <tr>
@@ -40,15 +40,15 @@
 
                         </div>
 
-                        <canvas id="myChart" height="350" width="950" style="margin-bottom: 1rem "></canvas>
+                        <canvas id="myChart" height="350" width="850" style="margin-bottom: 1rem "></canvas>
                     </div>
                     <canvas id="myChartAxis" height="600" width="0"></canvas>
                 </div>
 
                 <div class= "average" >
-                    Average Sales Per Day in Previous Month : <span id="order-linechart-average"></span> Kg
+                    Average Sales Per Month in Previous Year : <span id="order-linechart-average"></span> Kg
                     <br>
-                    Total sales in Previous Month  : <span id="order-linechart-sum"></span> Kg
+                    Total Sales in Previous Year  : <span id="order-linechart-sum"></span> Kg
                 </div>
             </div>
 

@@ -101,8 +101,8 @@ $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vie
 $app->router->post('/dashboard/shop/vieworderdetails',[ShopController::class,'updateStatus']);
 $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
-$app->router->get('/dashboard/shop/analytics',[TestController::class,'test']);
-$app->router->get('/dashboard/shop/itemsales',[TestController::class,'abc']);
+$app->router->get('/dashboard/shop/analytics',[ShopController::class,'shopincome']);
+$app->router->get('/dashboard/shop/itemsales',[ShopController::class,'itemsales']);
 
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
