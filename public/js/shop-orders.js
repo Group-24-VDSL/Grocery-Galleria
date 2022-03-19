@@ -36,6 +36,8 @@ $(document).ready(function () {
                 if (ShopOrder.Status === 0) {
                     $.getJSON(URLFindDelivery, function (Delivery) {
 
+                        console.log("this is status");
+
                         const ItemRowNew = document.createElement('tr');
 
                         ItemRowNew.innerHTML = `
@@ -68,7 +70,6 @@ $(document).ready(function () {
                         ItemTableComplete.appendChild(ItemRowComplete);
                     })
                 }
-
 
             });
         }

@@ -139,6 +139,8 @@
     </div>
 </section>
 <script src="/js/dashboardScript.js"></script>
+<script src="/js/delivery-order.js"></script>
+
 <script src="/js/citySuburb.js" defer></script>
 </body>
 </html>

@@ -356,3 +356,12 @@ ul {
   border: 0.2rem solid var(--home-color);
   font-size: var(--normal-font-size);
 }
+
+.shop-item-table{
+  width: 65%;
+  height: 560px;
+}
+
+.safety-details{
+  padding-bottom: 10px;
+}

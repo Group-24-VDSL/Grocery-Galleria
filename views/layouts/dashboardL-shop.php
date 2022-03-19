@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/dashboardStyle.css">
+    <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
     <link rel="stylesheet" href="/css/template.css">
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
     <script src="/js/jquery.min.js"></script>
@@ -24,20 +25,26 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/dashboard/shop/products">
+            <a href="/dashboard/shop/viewitems">
                 <i class="bx bx-grid-alt"></i>
                 <span class="link-name">Dashboard</span>
             </a>
         </li>
         <li>
             <a href="/dashboard/shop/additem">
-                <i class="bx bx-box"></i>
+                <i class="bx bx-add-to-queue"></i>
+                <span class="link-name">Products</span>
+            </a>
+        </li>
+        <li>
+            <a href="/dashboard/shop/products">
+                <i class="bx bx-edit"></i>
                 <span class="link-name">Products</span>
             </a>
         </li>
         <li>
             <a href="/dashboard/shop/vieworders">
-                <i class="bx bx-list-ul"></i>
+                <i class="bx bx-list-ol"></i>
                 <span class="link-name">Order list</span>
             </a>
         </li>
@@ -54,7 +61,7 @@
             </a>
         </li>
         <li>
-            <a href="">
+            <a href="/dashboard/shop/profilesettings">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>

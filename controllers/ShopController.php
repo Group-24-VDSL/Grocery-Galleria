@@ -114,33 +114,20 @@ class ShopController extends Controller
     }
 
     public function vieworderdetails(Request $request){
-
-
-        $shoporder = new ShopOrder() ;
         $this->setLayout('headeronly-staff');
-
-        //var_dump($request ->getBody());
         $ShopID = $request ->getBody()["ShopID"];
         $CartID = $request ->getBody()["CartID"];
 
         $shoporder = ShopOrder ::findOne([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
         $cartitems = OrderCart ::findAll([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
-        //var_dump($cartitems);
-
         $shopitems = [];
 
         foreach($cartitems as $cartitem){
             $shopitem = ShopItem::findOne(['ItemID'=>$cartitem->ItemID,'ShopID'=>$cartitem->ShopID]);
             $item = Item::findOne(['ItemID'=>$cartitem->ItemID]);
-            //   var_dump($shopitem);
-            //   var_dump($item);
             $shopitems[$cartitem->ShopID][$cartitem->ItemID]=[$shopitem,$item];
-            //   var_dump($shopitem);
         }
 
-        //var_dump($cartitems);
 
         return $this->render('shop/view-order-details',['shoporder'=>$shoporder,'cartitems'=>$cartitems, 'shopitem'=>$shopitems , 'item'=>$item, 'model'=>$shoporder]);
     }

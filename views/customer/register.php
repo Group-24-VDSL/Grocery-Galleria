@@ -34,11 +34,11 @@
         </div>
         <div class="inputBox">
             <label for="city"><i class="fas fa-map-marked-alt"></i>Select city</label>
-            <?php echo $form->selectfieldonly($model,'City',['Colombo'=>'Colombo','Maharagama'=>'Maharagama','Gampaha'=>'Gampaha','Nawala'=>'Nawala']);?>
+            <?php echo $form->selectfieldonly($model,'City');?>
         </div>
         <div class="inputBox">
             <label for="suburb"><i class="fas fa-street-view"></i>Select suburb</label>
-            <?php echo $form->selectfieldonly($model,'Suburb',['Colombo'=>'Colombo','Maharagama'=>'Maharagama','Gampaha'=>'Gampaha','Nawala'=>'Nawala']);?>
+            <?php echo $form->selectfieldonly($model,'Suburb');?>
         </div>
 
         <div class="inputBox" >
@@ -50,3 +50,4 @@
 <!--        <div class="inputBox"><button type="reset" class="btn" >Cancel</button></div>-->
     <?php echo $form::end() ?>
 </section>
+<script src="/js/citySuburb.js" defer></script>

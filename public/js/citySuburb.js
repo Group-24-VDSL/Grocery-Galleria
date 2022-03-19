@@ -1,240 +1,240 @@
 $(document).ready(function (){
 let cityData = [
     {
-        "cityID": 0,
+       "cityID": 1,
         "cityName": "Nugegoda",
         "suburbs": [
             {
-                "cityID": 0,
-                "suburbID": 0,
+               "cityID": 1,
+                "suburbID": 1,
                 "suburbName": "Delkanda - Nugegoda"
             },
             {
-                "cityID": 0,
-                "suburbID": 1,
+               "cityID": 1,
+                "suburbID": 2,
                 "suburbName": "Embuldeniya"
             },
             {
-                "cityID": 0,
-                "suburbID": 2,
+               "cityID": 1,
+                "suburbID": 3,
                 "suburbName": "Gangodavila"
             },
             {
-                "cityID": 0,
-                "suburbID": 3,
+               "cityID": 1,
+                "suburbID": 4,
                 "suburbName": "Jambugasmulla"
             },
             {
-                "cityID": 0,
-                "suburbID": 4,
+               "cityID": 1,
+                "suburbID": 5,
                 "suburbName": "Jubilee Kanuwa"
             },
             {
-                "cityID": 0,
-                "suburbID": 5,
+               "cityID": 1,
+                "suburbID": 6,
                 "suburbName": "Kattiya Junction"
             },
             {
-                "cityID": 0,
-                "suburbID": 6,
+               "cityID": 1,
+                "suburbID": 7,
                 "suburbName": "Mirihana"
             },
             {
-                "cityID": 0,
-                "suburbID": 7,
+               "cityID": 1,
+                "suburbID": 8,
                 "suburbName": "Nawala"
             },
             {
-                "cityID": 0,
-                "suburbID": 8,
+               "cityID": 1,
+                "suburbID": 9,
                 "suburbName": "Nugegoda"
             },
             {
-                "cityID": 0,
-                "suburbID": 9,
+               "cityID": 1,
+                "suburbID": 10,
                 "suburbName": "Pagoda"
             },
             {
-                "cityID": 0,
-                "suburbID": 10,
+               "cityID": 1,
+                "suburbID": 11,
                 "suburbName": "Pathiragoda"
             },
             {
-                "cityID": 0,
-                "suburbID": 11,
+               "cityID": 1,
+                "suburbID": 12,
                 "suburbName": "Udahamulla"
             },
             {
-                "cityID": 0,
-                "suburbID": 12,
+               "cityID": 1,
+                "suburbID": 13,
                 "suburbName": "Wijerama"
             }
         ]
     },
     {
-        "cityID": 1,
+       "cityID": 2,
         "cityName": "Sri Jayawardanapura",
         "suburbs": [
             {
-                "cityID": 1,
-                "suburbID": 13,
+               "cityID": 2,
+                "suburbID": 14,
                 "suburbName": "Akuragoda"
             },
             {
-                "cityID": 1,
-                "suburbID": 14,
+               "cityID": 2,
+                "suburbID": 15,
                 "suburbName": "Baddagana"
             },
             {
-                "cityID": 1,
-                "suburbID": 15,
+               "cityID": 2,
+                "suburbID": 16,
                 "suburbName": "Bandaranayakepura - Rajagiriya"
             },
             {
-                "cityID": 1,
-                "suburbID": 16,
+               "cityID": 2,
+                "suburbID": 17,
                 "suburbName": "Diyawanna Gardens - Pelawatta"
             },
             {
-                "cityID": 1,
-                "suburbID": 17,
+               "cityID": 2,
+                "suburbID": 18,
                 "suburbName": "Ethulkotte"
             },
             {
-                "cityID": 1,
-                "suburbID": 18,
+               "cityID": 2,
+                "suburbID": 19,
                 "suburbName": "Gamage Watta"
             },
             {
-                "cityID": 1,
-                "suburbID": 19,
+               "cityID": 2,
+                "suburbID": 20,
                 "suburbName": "Gothamipura - Borella"
             },
             {
-                "cityID": 1,
-                "suburbID": 20,
+               "cityID": 2,
+                "suburbID": 21,
                 "suburbName": "Koswatta"
             },
             {
-                "cityID": 1,
-                "suburbID": 21,
+               "cityID": 2,
+                "suburbID": 22,
                 "suburbName": "Kotuwegoda - Rajagiriya"
             },
             {
-                "cityID": 1,
-                "suburbID": 22,
+               "cityID": 2,
+                "suburbID": 23,
                 "suburbName": "Madinnagoda"
             },
             {
-                "cityID": 1,
-                "suburbID": 23,
+               "cityID": 2,
+                "suburbID": 24,
                 "suburbName": "Moragasmulla"
             },
             {
-                "cityID": 1,
-                "suburbID": 24,
+               "cityID": 2,
+                "suburbID": 25,
                 "suburbName": "Pitakotte"
             },
             {
-                "cityID": 1,
-                "suburbID": 25,
+               "cityID": 2,
+                "suburbID": 26,
                 "suburbName": "Rajagiriya"
             },
             {
-                "cityID": 1,
-                "suburbID": 26,
+               "cityID": 2,
+                "suburbID": 27,
                 "suburbName": "Royal Park - Rajagiriya"
             },
             {
-                "cityID": 1,
-                "suburbID": 27,
+               "cityID": 2,
+                "suburbID": 28,
                 "suburbName": "Welikada"
             }
         ]
     },
     {
-        "cityID": 2,
+       "cityID": 3,
         "cityName": "Kohuwala",
         "suburbs": [
             {
-                "cityID": 2,
-                "suburbID": 28,
+               "cityID": 3,
+                "suburbID": 29,
                 "suburbName": "Dutugemunu"
             },
             {
-                "cityID": 2,
-                "suburbID": 29,
+               "cityID": 3,
+                "suburbID": 30,
                 "suburbName": "Hathbodhiya"
             },
             {
-                "cityID": 2,
-                "suburbID": 30,
+               "cityID": 3,
+                "suburbID": 31,
                 "suburbName": "Kirula"
             },
             {
-                "cityID": 2,
-                "suburbID": 31,
+               "cityID": 3,
+                "suburbID": 32,
                 "suburbName": "Kirulapone"
             },
             {
-                "cityID": 2,
-                "suburbID": 32,
+               "cityID": 3,
+                "suburbID": 33,
                 "suburbName": "Kohuwala"
             },
             {
-                "cityID": 2,
-                "suburbID": 33,
+               "cityID": 3,
+                "suburbID": 34,
                 "suburbName": "Pamankada"
             },
             {
-                "cityID": 2,
-                "suburbID": 34,
+               "cityID": 3,
+                "suburbID": 35,
                 "suburbName": "Vilawala"
             }
         ]
     },
     {
-        "cityID": 3,
+       "cityID": 4,
         "cityName": "Maharagama",
         "suburbs": [
             {
-                "cityID": 3,
-                "suburbID": 35,
+               "cityID": 4,
+                "suburbID": 36,
                 "suburbName": "Dambahena"
             },
             {
-                "cityID": 3,
-                "suburbID": 36,
+               "cityID": 4,
+                "suburbID": 37,
                 "suburbName": "Egodawatta"
             },
             {
-                "cityID": 3,
-                "suburbID": 37,
+               "cityID": 4,
+                "suburbID": 38,
                 "suburbName": "Godigamuwa"
             },
             {
-                "cityID": 3,
-                "suburbID": 38,
+               "cityID": 4,
+                "suburbID": 39,
                 "suburbName": "Maharagama"
             },
             {
-                "cityID": 3,
-                "suburbID": 39,
+               "cityID": 4,
+                "suburbID": 40,
                 "suburbName": "Navinna - Maharagama"
             },
             {
-                "cityID": 3,
-                "suburbID": 40,
+               "cityID": 4,
+                "suburbID": 41,
                 "suburbName": "Nawinna"
             },
             {
-                "cityID": 3,
-                "suburbID": 41,
+               "cityID": 4,
+                "suburbID": 42,
                 "suburbName": "Neelammahara"
             },
             {
-                "cityID": 3,
-                "suburbID": 42,
+               "cityID": 4,
+                "suburbID": 43,
                 "suburbName": "Pamunuwa"
             }
         ]
@@ -250,13 +250,13 @@ Object.keys(cityData).forEach(function(i){
     optionCity.text = cityData[i].cityName;
     optionCity.value = cityData[i].cityID;
     optionCity.id = cityData[i].cityID + cityData[i].cityName;
+    console.log(optionCity);
     cityVal.add(optionCity);
-
     });
 
     $(cityVal).on('change', function (e) {
         $(suburbVal).find('option').remove().end();
-        let valueSelected = this.value;
+        let valueSelected = this.value -1;
         Object.keys(cityData[valueSelected].suburbs).forEach(function (j){
             // console.log(cityData[valueSelected].suburbs[j]);
             let optionSuburb = document.createElement('option');
@@ -265,6 +265,6 @@ Object.keys(cityData).forEach(function(i){
             suburbVal.add(optionSuburb);
         })
     });
-    $('#0Nugegoda').trigger('change');
+    $('#1Nugegoda').trigger('change');
 });
 

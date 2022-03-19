@@ -8,7 +8,9 @@ use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
 use app\models\Customer;
+use app\models\DeliveryStaff;
 use app\models\LoginForm;
+use app\models\Rider;
 use app\models\Staff;
 use app\models\User;
 use app\models\Shop;
@@ -38,6 +40,18 @@ class AuthController extends Controller
         ]);
     }
 
+    public static function register(Request $request, string $type)
+    {
+        $user = new User();
+        $user->loadData($request->getBody());
+        $user->Role = $type;
+        if($user->validate() && $user->save()){
+            $temp = User::findOne(['Email' => $user->Email]);
+            return $temp->UserID;
+        }else{
+            return null;
+        }
+    }
 
     /**
      * @throws TypeException
@@ -75,9 +89,8 @@ class AuthController extends Controller
         } else { //validation or save failed.
             return null;
         }
-        return null;
-    }
 
+    }
 
     public function verify(Request $request)
     {
@@ -87,13 +100,10 @@ class AuthController extends Controller
             if ($verify && ($verify->VerificationCode === $request->getBody()['verifycode'])) {
                 $user = User::findOne(['UserID' => $verify->UserID]);
                 if ($user) {
-                    $user->Verify_Flag = 1;
-                    if ($user->update()) {
+                    //update the user
+                    $userTemp = new User();
+                    if ($userTemp->update(['Verify_Flag' => 1], ['UserID' => $user->UserID])) {
                         Verification::delete(['UserID' => $user->UserID]);
-                        if($user->Role =='Rider'){
-                            Application::$app->session->setFlash('success', 'Email Verified Successfully');
-                            Application::$app->response->redirect("/changePwd?UserID=$user->UserID");
-                        }
                         return $this->render('email-verified', [
                             'invalid' => 'false'
                         ]);
@@ -113,54 +123,58 @@ class AuthController extends Controller
         $response->redirect('/');
     }
 
-    public function profileUpdate(Request $request)
-    {// get logged staff ID
-        $staff = new Staff();
+    public function pwdUpdate(Request $request)
+    {
+        $login = Application::getUser();
+        $userID = Application::getUserID();
+        if ($login->Role == 'Customer') {
+            $this->setLayout('register');
+        }
+        elseif ($login->Role == 'Staff') {
+            $this->setLayout("dashboardL-staff");
+        }
+        elseif ($login->Role == 'Shop') {
+            $this->setLayout("dashboardL-shop");
+        }
+        elseif ($login->Role == 'Delivery') {
+            $this->setLayout("dashboardL-staff");
+        }
+//        elseif ($login->Role == 'Rider') {
+//            $model = new Rider();
+//        }
         $user = new User();
-        $user = $user->findOne(['UserID' => 11]);
         if ($request->isPost()) {
-            $success = false;
-            {
-                $user->loadData($request->getBody());
-                $user->loadData($request->getBody());
-                if ($user->validate('update') && $user->update()) {
-                    Application::$app->session->setFlash('success', 'Update Success');
+            $userNew = new User();
+            $body = $request->getBody();
+            $arrayUser = (array)User::findOne(['UserID' => $userID]);
+            $hashPWD = $arrayUser['PasswordHash'];
+            $userNew->loadData($arrayUser);
+            $userNew->loadData($body);
+            $userNew->PasswordHash = password_hash($userNew->Password,PASSWORD_BCRYPT);
+            if (password_verify($body['currentPWD'], $hashPWD)) {
+                if ($userNew->validate('update') && $userNew->update()) {
+                    Application::$app->session->setFlash('success', 'Password Updated.');
+                    Application::$app->logout();
+                    Application::$app->response->redirect('/login');
+
                 } else {
-                    Application::$app->session->setFlash('danger', 'Update Failed');
-                    Application::$app->response->redirect('staff/profile-setting');
-                    $this->setLayout("dashboardL-staff");
-                    return $this->render("staff/profile-setting", [
-                        'model' => $staff,
+                    Application::$app->session->setFlash('warning', 'Password Updated failed!');
+
+                    return $this->render("/settings", [
                         'loginmodel' => $user
                     ]);
-
                 }
-
+            } else {
+                Application::$app->session->setFlash('danger', 'Incorrect current password!');
+                return $this->render("/settings", [
+                    'loginmodel' => $user
+                ]);
             }
+
         }
-        $this->setLayout("dashboardL-staff");
-        return $this->render("staff/profile-setting", [
-            'model' => $staff,
+        return $this->render("/settings", [
             'loginmodel' => $user
         ]);
-
     }
 
-    public function changePassword(Request $request)
-    {
-        $user = new User();
-        $this->setLayout('register');
-        if($request->isPost()){
-            $body = $request->getBody();
-            $user = User::findOne(['UserID'=>$user->UserID]);
-            $user->Password = $body['Password'];
-            $user->ConfirmPassword = $body['ConfirmPassword'];
-            if($user->update()){
-                Application::$app->response->redirect('/login');
-            }
-        }
-        return $this->render('password-change', [
-            'model' => $user
-        ]);
-    }
 }

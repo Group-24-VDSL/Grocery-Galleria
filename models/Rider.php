@@ -12,13 +12,14 @@ class Rider extends UserModel
     public string $Address = '';
     public string $Email = '';
     public string $ContactNo = '';
+    public string $Password = ''; //need this two
+    public string $ConfirmPassword = ''; //need this two
+    public int $City = 0;
+    public int $Suburb = 0;
     public string $NIC = '';
     public string $ProfilePic = '';
     public int $RiderType = 0; //0 = bike , 1 = threewheel
-    public string $City = '';
-    public string $Suburb = '';
-    public string $Password = '';
-    public string $ConfirmPassword = '';
+    public int $Status = 0;
 
     public static function tableName(): string
     {
@@ -42,7 +43,8 @@ class Rider extends UserModel
             'Password' => 'Enter password',
             'ConfirmPassword'=> 'Confirm password',
             'City' => 'City',
-            'Suburb' => 'Suburb'
+            'Suburb' => 'Suburb',
+            'Status'=>'Status'
         ];
     }
 
@@ -58,7 +60,9 @@ class Rider extends UserModel
             'Name' => [self::RULE_REQUIRED],
             'Address'=>[self::RULE_REQUIRED],
             'ContactNo'=>[self::RULE_REQUIRED, self::RULE_PHONE],
-            'NIC' =>[self::RULE_REQUIRED,self::RULE_NIC]
+            'NIC' =>[self::RULE_REQUIRED,self::RULE_NIC],
+            'City' =>[self::RULE_REQUIRED],
+            'Suburb' =>[self::RULE_REQUIRED]
         ];
     }
 
@@ -80,5 +84,10 @@ class Rider extends UserModel
     public function getUserID(): int
     {
         return $this->RiderID;
+    }
+
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
     }
 }

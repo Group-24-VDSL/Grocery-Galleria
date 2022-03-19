@@ -14,6 +14,8 @@ abstract class DBModel extends Model
 
     abstract public function attributes():array;
 
+    abstract public function excludeonupdateattributes():array;
+
     abstract  public static function primaryKey():array;
 
 
@@ -42,6 +44,13 @@ abstract class DBModel extends Model
         $dbObjarr = array_slice((array)$dbObj, 0, -1); // db object to array
         $objarr = array_slice((array)$this, 0, -1); // this object to array
         $result = array_diff_assoc($objarr,$dbObjarr);
+        if(!empty($this->excludeonupdateattributes())) {
+            foreach ($this->excludeonupdateattributes() as $excludedkey) { //remove from the result. like confirmpassword etc.
+                if (array_key_exists($excludedkey, $result)) {
+                    unset($result[$excludedkey]);
+                }
+            }
+        }
         if(!empty($result)){
             $stmt  = self::prepare("UPDATE $tableName SET ".implode(", ",array_map(fn($attr) => "$attr=:$attr", array_keys($result)))." WHERE ".implode(" AND ", array_map(fn($attr) => "$attr=:$attr", array_keys($where))));
             foreach ($result as $key => $value) {
@@ -126,21 +135,21 @@ abstract class DBModel extends Model
         return (int)$statement->fetchColumn();
     }
 
-    public function getLastInsertID()
-    {
-        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
-        $statement->execute();
-        return (int)$statement->fetchColumn();
-    }
-
-//    public function singleProcedure($procedure,$id,$value)
+//    public function getLastInsertID()
 //    {
-//        $stmt = self::prepare("CALL $procedure(:id,:value)");
-//        $stmt->bindValue(':id',$id);
-//        $stmt->bindValue(':value',$value);
-//        $stmt->execute();
-//        return true;
+//        $statement = self::prepare("SELECT MAX($primary[0]) FROM $tableName");
+//        $statement->execute();
+//        return (int)$statement->fetchColumn();
 //    }
+
+    public function singleProcedure($procedure,$id,$value)
+    {
+        $stmt = self::prepare("CALL $procedure(:id,:value)");
+        $stmt->bindValue(':id',$id);
+        $stmt->bindValue(':value',$value);
+        $stmt->execute();
+        return true;
+    }
     public static function callProcedure($procedure,$values=[])
     {
         if(empty($values)){
@@ -161,12 +170,19 @@ abstract class DBModel extends Model
     }
 
     //for your dirty queries
-    public static function query($string,$fetch_type)
+    public static function query($string,$fetch_type,$fetchAll=null)
     {
         $statement = self::prepare($string);
         $statement->execute();
+        if($fetchAll){
+            return $statement->fetchAll($fetch_type);
+        }
         return $statement->fetch($fetch_type);
     }
 
-
+    public static function queryAll($string,$fetch_type){
+        $statement = self::prepare($string);
+        $statement->execute();
+        return $statement->fetchAll($fetch_type,static::class);
+    }
 }

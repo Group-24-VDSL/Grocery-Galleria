@@ -2,6 +2,7 @@
 /** @var $model \app\models\Rider * */
 /** @var $form \core\form\Form */
 ?>
+
 <div class="core">
     <section class="register" id="register">
         <h1 class="heading">Registration <span>Form</span> Rider</h1>
@@ -69,5 +70,5 @@
         </div>
 
     </section>
-
+    <script src="/js/citySuburb.js" defer></script>
 </div>

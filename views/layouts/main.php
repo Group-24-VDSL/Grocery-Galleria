@@ -17,7 +17,11 @@
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
-        <a href="" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        <?php if (\app\core\Application::isGuest()):?>
+        <a href="/login" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        <?php else:; ?>
+        <a href="/login" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        <?php endif; ?>
     </div>
     <div class="header-2">
         <nav class="navbar">
@@ -36,12 +40,17 @@
                 </form>
             </div>
         </div>
+
+
         <div class="part">
-            <div class="icons">
+         <div class="icons">
+             <?php if (!\app\core\Application::isGuest()):?>
                 <a href="/customer/cart" class="fas fa-shopping-cart"></a>
                 <a href="/customer/profile" class="fas fa-user"></a>
+             <?php endif; ?>
             </div>
         </div>
+
     </div>
 </header>
 <!-- Header end -->
