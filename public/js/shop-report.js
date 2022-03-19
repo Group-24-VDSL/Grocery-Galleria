@@ -68,8 +68,27 @@ $(document).ready(function () {
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Top 10 Shops of this Month'
+                            text: 'Top 10 Shops of this Month',
                         }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                align: 'end',
+                                text: 'Shop Name',
+
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                align: 'end',
+                                text: 'Shop Revenue',
+
+                            }
+                        },
+
                     }
                 }
             }
@@ -120,6 +139,25 @@ $(document).ready(function () {
                             display: true,
                             text: 'Top 10 Shops of the Year'
                         }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                align: 'end',
+                                text: 'Shop Name',
+
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                align: 'end',
+                                text: 'Shop Revenue',
+
+                            }
+                        },
+
                     }
                 }
             }
