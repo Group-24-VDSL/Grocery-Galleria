@@ -2,16 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height">
     <!--    Jquery-->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/template.js"></script>
+
     <!--Stylesheets-->
-    <link rel="stylesheet" href="/css/all.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/all.css"/>
+    <link rel="stylesheet" href="/css/fonts.css"/>
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
     <link rel="stylesheet" href="/css/template.css">
+
+
     <link
             href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
             rel="stylesheet"
@@ -19,12 +22,12 @@
     <title>Dashboard-Staff</title>
     <?php include_once("utils/pwa.php"); ?>
 </head>
-    <?php include_once("utils/sessions.php"); ?>
+<?php include_once("utils/sessions.php"); ?>
 <body>
 <div class="sidebar active">
     <div class="sidebar-logo">
-        <img src="../../img/logo_only_color.png" alt="" />
-        <img class="text" src="../../img/text_white-min.png" alt="" />
+        <img src="../../img/logo_only_color.png" alt=""/>
+        <img class="text" src="../../img/text_white-min.png" alt=""/>
     </div>
     <ul class="nav-links">
         <li>
@@ -47,7 +50,7 @@
         </li>
         <li>
             <a href="/dashboard/staff/adduser">
-                <i class='bx bx-user-plus' ></i>
+                <i class='bx bx-user-plus'></i>
                 <span class="link-name">Register</span>
             </a>
         </li>
@@ -62,17 +65,14 @@
                 <i class="bx bxs-pie-chart-alt"></i>
                 <span class="link-name">System Analytics</span>
             </a>
-        </li><li>
-            <a href="/dashboard/staff/renderreport">
+        </li>
+        <li>
+            <a href="/dashboard/staff/shopreports">
                 <i class="bx bxs-pie-chart-alt"></i>
                 <span class="link-name">Shop Analytics</span>
             </a>
-        </li><li>
-            <a href="/dashboard/staff/renderreport">
-                <i class="bx bxs-pie-chart-alt"></i>
-                <span class="link-name">Product Analytics</span>
-            </a>
         </li>
+
         <li>
             <a href="/dashboard/staff/viewcomplaints">
                 <i class="bx bx-message-error"></i>
@@ -108,7 +108,7 @@
             <span style="width:300px" class="dashboard">Staff Dashboard</span>
         </div>
         <div class="search-box">
-            <input type="search" id="" placeholder="Search.... " />
+            <input type="search" id="" placeholder="Search.... "/>
             <button class="bx bx-search search"></button>
         </div>
         <div class="profile-details">
@@ -118,63 +118,7 @@
     </nav>
 
     <div class="home-content">
-        <div class="overview-boxes">
-            <div class="box">
-                <div class="content">
-                    <div class="box-topic">Total Orders</div>
-                    <div class="number">1276</div>
-                    <div class="indicator">
-                        <i class="bx bxs-up-arrow-square"></i>
-                        <span class="text">Up so far</span>
-                    </div>
-                </div>
-                <!-- <i class='bx bx-cart-alt cart'></i> -->
-                <img
-                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-delivery-box-shopping-and-ecommerce-itim2101-lineal-color-itim2101.png"
-                />
-            </div>
-            <div class="box">
-                <div class="content">
-                    <div class="box-topic">Total Revenue</div>
-                    <div class="number">1276</div>
-                    <div class="indicator">
-                        <i class="bx bxs-up-arrow-square"></i>
-                        <span class="text">Up so far</span>
-                    </div>
-                </div>
-                <img
-                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-revenue-money-and-economy-itim2101-lineal-color-itim2101.png"
-                />
-            </div>
-            <!-- <i class='bx bx-cart-alt cart'></i> -->
 
-            <div class="box">
-                <div class="content">
-                    <div class="box-topic">Total Shops</div>
-                    <div class="number">12,876</div>
-                    <div class="indicator">
-                        <i class="bx bxs-up-arrow-square"></i>
-                        <span class="text">Up so far</span>
-                    </div>
-                </div>
-                <img
-                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-financial-mobile-payment-itim2101-lineal-color-itim2101.png"
-                />
-            </div>
-            <div class="box">
-                <div class="content">
-                    <div class="box-topic">Total Riders</div>
-                    <div class="number">11,086</div>
-                    <div class="indicator">
-                        <i class="bx bxs-up-arrow-square"></i>
-                        <span class="text">Up so far</span>
-                    </div>
-                </div>
-                <img
-                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-order-online-shopping-itim2101-lineal-color-itim2101.png"
-                />
-            </div>
-        </div>
         {{content}}
     </div>
 </section>
@@ -183,5 +127,9 @@
 <script src="/js/dashboardScript.js"></script>
 <script src="/js/complaint.js"></script>
 <script src="/js/register.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 
