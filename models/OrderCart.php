@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\controllers\CustomerController;
 use app\core\db\DBModel;
 
 class OrderCart extends DBModel
@@ -42,5 +41,10 @@ class OrderCart extends DBModel
     public function jsonarray(): array
     {
         return ['CartID','ShopID','CustomerID','ItemID','Quantity','ShopTotal'];
+    }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
     }
 }

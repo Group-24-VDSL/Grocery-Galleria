@@ -140,7 +140,7 @@ class DeliveryController extends Controller
         $querySql =
             "SELECT * FROM `orders` AS orderTable 
             WHERE orderTable.City = $city AND orderTable.Status = 0";
-        $newDeliveries = Orders::queryAll($querySql, \PDO::FETCH_CLASS);
+        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
         return json_encode($newDeliveries);
 
     }
@@ -175,7 +175,7 @@ class DeliveryController extends Controller
         $order->Status = 1;
         $cartID = $order->CartID;
         //delivery
-        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID,'Status'=>0]);
+        $deliveryRider = $deliveryRider->findOne(['RiderID'=>$riderID,'Status' => 0]); //check the rider was assigned or not
         $stmt = DBModel::prepare("INSERT INTO `delivery`(`RiderID`,`OrderID`, `CartID`) VALUES ($riderID,$orderID,$cartID)");
         if($deliveryRider){
             if ($order->update() && $deliveryRider->update() && $stmt->execute()) {
@@ -193,15 +193,24 @@ class DeliveryController extends Controller
             Application::$app->response->redirect($redirectURL);
         }
 
+    }
 
+    public function getRiderLocation(Request $request,Response $response)
+    {
+        $response->setContentTypeJSON();
+        $this->setLayout('empty');
+        $data['City'] = Application::getCity();
+        Application::$app->pusher->trigger('my-channel', 'get-location',$data,);
+    }
 
-
-
-
-
-
-
-
+    public function getRiderLocationData(Request $request,Response $response)
+    {
+        $type=$request->getBody()['type'];
+        $response->setContentTypeJSON();
+        $this->setLayout('empty');
+        $city = Application::getCity();
+        $res = DBModel::query("SELECT d.RiderID,d.LocationLat,d.LocationLng,dr.Name,dr.ContactNo FROM `deliveryriderlocation` AS d INNER JOIN `deliveryrider` AS dr ON dr.RiderID = d.RiderID WHERE d.LastUpdate >= NOW() - INTERVAL 5 MINUTE AND dr.Status=0 AND dr.RiderType=$type AND dr.City=$city;",\PDO::FETCH_ASSOC,true);
+        return $response->json($res);
     }
 
 

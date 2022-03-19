@@ -74,4 +74,9 @@ class Customer extends UserModel
     {
         return $this->CustomerID;
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
+    }
 }

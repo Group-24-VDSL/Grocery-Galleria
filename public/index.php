@@ -36,6 +36,8 @@ $app->router->post('/dashboardlinks',[SiteController::class,'dashboard']);
 $app->router->get('/verify',[AuthController::class,'verify']);
 $app->router->get('/email-verified',[AuthController::class,'emailverified']);
 $app->router->get('/profileupdate',[AuthController::class,'profileUpdate']);
+$app->router->get('/settings',[AuthController::class,'pwdUpdate']);
+$app->router->post('/settings',[AuthController::class,'pwdUpdate']);
 
 $app->router->get('/login',[AuthController::class,'login']);
 $app->router->post('/login',[AuthController::class,'login']);
@@ -96,6 +98,7 @@ $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'v
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 
+
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->post('/dashboard/shop/products',[ShopController::class,'productOverview']);
@@ -111,7 +114,15 @@ $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'viewitems
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
 $app->router->get('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
-$app->router->post('dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
+$app->router->post('/dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
+
+//rider
+$app->router->get('/rider/register',[RiderController::class,'riderRegister']);
+$app->router->post('/rider/register',[RiderController::class,'riderRegister']);
+$app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
+$app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
+$app->router->get('/rider/order',[RiderController::class,'order']);
+$app->router->post('/rider/order',[RiderController::class,'order']);
 
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
@@ -146,6 +157,10 @@ $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingS
 //api - delivery
 $app->router->get('/api/getrider',[APIController::class,'getRider']);
 $app->router->get('/api/getriders',[APIController::class,'getRiders']);
+
+
+$app->router->get('/api/getriderlocation',[DeliveryController::class,'getRiderLocation']);
+$app->router->get('/api/getriderlocationdata',[DeliveryController::class,'getRiderLocationData']);
 //rider
 $app->router->get('/rider/register',[RiderController::class,'riderRegister']);
 $app->router->post('/rider/register',[RiderController::class,'riderRegister']);
@@ -153,6 +168,8 @@ $app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->get('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/order',[RiderController::class,'order']);
+$app->router->post('/rider/getlocation',[RiderController::class,'riderLocation']);
+
 
 $app->router->get('/changePwd',[AuthController::class,'changePassword']);
 $app->router->post('/changePwd',[AuthController::class,'changePassword']);

@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\core\Model;
 use app\core\UserModel;
 
 class Shop extends UserModel
@@ -19,7 +18,7 @@ class Shop extends UserModel
     public string $ShopName = '';
     public string $PlaceID = '';
     public string $ShopDesc = '';
-    public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']
+    public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=> 'Fish', '4'=>'Fruit']
 
     public string $Password = '';
     public string $ConfirmPassword = '';
@@ -91,5 +90,9 @@ class Shop extends UserModel
         return $this->ShopID;
     }
 
+    public function excludeonupdateattributes(): array
+    {
+        return ['Password','ConfirmPassword'];
+    }
 
 }
