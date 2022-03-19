@@ -328,39 +328,136 @@
 }
 */
 /*chart css*/
-.chart-div{
-  display: flex;
+.chart-div-core{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
   align-items: center;
   justify-content: space-around;
-  gap: .5rem;
-  flex-wrap: wrap;
+  gap: 1rem;
+}
+.chart-div{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+
+
 }
 .chart{
   display: flex;
   position: relative;
-  width: 50rem;
+  width: 40rem;
+  padding: .5rem;
+  align-items: center;
   /*height: 200px;*/
 
 }
 .report-brief{
-  width: 30rem;
+  /*width: 30rem;*/
   /*height: 200px;*/
   border: .1rem solid var(--text-color-light);
   border-radius: .5rem;
   padding: .5rem;
+
+}
+.report-brief .details{
+  font-size: var(--h3-font-size);
+
+}
+.home-content .core .container-core .reports-core{
+  height: 400px;
+}
+
+.sub-heading {
+  text-align: left;
+  color: var(--title-color);
+  text-transform: uppercase;
+  font-size: var(--h2-font-size);
+  padding: 1rem;
+}
+.sub-heading span {
+  color: var(--first-color);
+  text-transform: uppercase;
 }
 
 
+.table-section{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  padding: .5rem;
+}
+.table-section .table-title{
+  padding: .5rem;
+  font-size: var(--h3-font-size);
+  border: .1rem solid var(--first-color-alt);
+  border-radius: .5rem;
+  margin: .5rem;
+}
+.table-section .table-title i{
+  color: var(--text-color);
+  size: 1rem;
+}
+.table-info{
+  border: .1rem solid var(--text-color-light);
+  border-radius: .5rem;
+  font-size: var(--normal-font-size);
+  padding: .5rem;
+  margin: .5rem;
 
 
 
+}
+.table-info tr{
+  text-align: left;
+}
+.table-info tr> th{
+  font-size: var(--normal-font-size);
+  text-align: center;
+}.table-info tr> td{
+  font-size: var(--small-font-size);
+}
+.home-content .core-special{
+  height: 800px;
+}
 
 
+#SalesDate {
+  margin: .5rem;
 
+}
 
+.chart-heading{
+  font-size: var(--h2-font-size);
+  margin: .5rem;
+  padding: .5rem;
 
+}
+/*.chart-data{*/
+/*  border: .1rem solid var(--text-color-light);*/
+/*  border-radius: .5rem;*/
+/*}*/
+.chart-div-new {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+}
+.chart-new{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  padding: .5rem;
+  align-items: center;
+}
 
-
+.headings{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
 
 
 
