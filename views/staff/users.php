@@ -1,15 +1,16 @@
+<script src="/js/jquery.min.js"></script>
 <div class="core">
     <h1 class="heading">System <span>Users</span></h1>
     <div class="container-core">
         <ul class="tabs">
-            <li><button class="btn-tab">Shops</button></li>
-            <li><button class="btn-tab">Delivery Riders</button></li>
-            <li><button class="btn-tab">Delivery Staff</button></li>
-            <li><button class="btn-tab">System Staff</button></li>
+            <li><button data-user="shop" class="btn-tab">Shops</button></li>
+            <li><button data-user="rider" class="btn-tab">Delivery Riders</button></li>
+            <li><button data-user="delivery" class="btn-tab">Delivery Staff</button></li>
+            <li><button data-user="system" class="btn-tab">System Staff</button></li>
         </ul>
-        <div class="table-header">
+        <div id="table-header" class="table-header">
             <ul>
-                <li>#Reg</li>
+                <li>UserID</li>
                 <li>Name</li>
                 <li>Email</li>
                 <li>Contact</li>
@@ -17,7 +18,7 @@
                 <li>Status</li>
             </ul>
         </div>
-        <div class="table-details scroller">
+        <div id="item-table" class="table-details scroller">
             <ul class="row">
                 <li class="row-no">#1</li>
                 <li class="row-name">Senarath</li>
@@ -31,3 +32,6 @@
         </div>
     </div>
 </div>
+
+
+<script src="/js/staff-usertable.js"></script>
