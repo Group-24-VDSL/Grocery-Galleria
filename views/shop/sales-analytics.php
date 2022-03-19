@@ -46,12 +46,14 @@
                 </div>
 
                 <div class= "average" >
-                    Average Orders Per Day in Previous Month : <span id="order-linechart-average"></span>
+                    Average Sales Per Day in Previous Month : <span id="order-linechart-average"></span> Kg
                     <br>
-                    Total Orders in Previous Month  : <span id="order-linechart-sum"></span>
+                    Total sales in Previous Month  : <span id="order-linechart-sum"></span> Kg
                 </div>
             </div>
+
         </div>
+
     </div>
 
 
