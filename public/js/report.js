@@ -73,6 +73,24 @@ $.getJSON(URLCurYrData, function (queryData) {
                     display: true,
                     text: 'Current Year Sales Report'
                 }
+            },scales: {
+                y: {
+                    title: {
+                        display: true,
+                        align: 'end',
+                        text: 'Revenue(LKR)',
+
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        align: 'end',
+                        text: 'Month',
+
+                    }
+                },
+
             }
         }
     }
@@ -135,6 +153,24 @@ $.getJSON(URLLastYrData, function (queryData) {
                     display: true,
                     text: 'Last Year Sales Report'
                 }
+            },scales: {
+                y: {
+                    title: {
+                        display: true,
+                        align: 'end',
+                        text: 'Revenue(LKR)',
+
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        align: 'end',
+                        text: 'Month',
+
+                    }
+                },
+
             }
         }
     }
@@ -191,7 +227,28 @@ dateElement.addEventListener('change',(event)=>{
         };
         const config1={
             type:'line',
-            data:data1
+            data:data1,
+            options: {
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            align: 'end',
+                            text: 'Revenue(LKR)',
+
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            align: 'end',
+                            text: 'Hour Intervals',
+
+                        }
+                    },
+
+                }
+            }
         }
         const myChart3 = new Chart(ctx1,config1);
     });
@@ -216,7 +273,28 @@ dateElement.addEventListener('change',(event)=>{
 
         const config2={
             type:'line',
-            data:data2
+            data:data2,
+            options: {
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            align: 'end',
+                            text: 'Count',
+
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            align: 'end',
+                            text: 'Hour Intervals',
+
+                        }
+                    },
+
+                }
+            }
         }
         const myChart4 = new Chart(ctx2,config2);
     });
