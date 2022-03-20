@@ -11,10 +11,22 @@ const ItemTable = document.getElementById('item-table');
 $(document).ready(function () {
     $(".btn-tab").click(function () {
         $('#item-table').empty();
+        $('#table-header').empty();
         let URLUser;
         switch ($(this).data("user")) {
             case "shop":
                 URLUser=URLShop;
+                const headerRow = document.createElement('ul');
+                headerRow.innerHTML = `
+                <ul>
+                <li>UserID</li>
+                <li>Name</li>
+                <li>Email</li>
+                <li>Contact</li>
+                <li>NIC</li>
+                <li>Status</li>
+                </ul>
+                `;
                 break;
             case "rider":
                 URLUser=URLRider;
@@ -30,7 +42,11 @@ $(document).ready(function () {
             Items.forEach(Item => {
                     const itemRow = document.createElement('ul');
                     itemRow.classList.add('row');
-                    itemRow.innerHTML = `
+                switch ($(this).data("user")) {
+                    case "shop":
+
+                        itemRow.innerHTML = `
+                <li class="row-name">${Item.ShopID}</li>
                 <li class="row-name">${Item.Name}</li>
                 <li class="row-brand">${Item.Brand}</li>
                 <li class="row-unit">${Item.Unit}</li>
@@ -40,12 +56,55 @@ $(document).ready(function () {
                 <li class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </li>
-                `
-                    ItemTable.appendChild(itemRow);
+                `;
+
+                        break;
+                    case "rider":
+                        itemRow.innerHTML = `
+                <li class="row-name">${Item.ShopID}</li>
+                <li class="row-name">${Item.Name}</li>
+                <li class="row-brand">${Item.Brand}</li>
+                <li class="row-unit">${Item.Unit}</li>
+                <li class="row-minWeight">${Item.UWeight}</li>
+                <li class="row-mrp">${Item.MRP}</li>
+                <li class="row-IncStep">${Item.MaxCount}</li>
+                <li class="row-ubutton">
+                    <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
+                </li>
+                `;
+                        break;
+                    case "delivery":
+                        itemRow.innerHTML = `
+                <li class="row-name">${Item.ShopID}</li>
+                <li class="row-name">${Item.Name}</li>
+                <li class="row-brand">${Item.Brand}</li>
+                <li class="row-unit">${Item.Unit}</li>
+                <li class="row-minWeight">${Item.UWeight}</li>
+                <li class="row-mrp">${Item.MRP}</li>
+                <li class="row-IncStep">${Item.MaxCount}</li>
+                <li class="row-ubutton">
+                    <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
+                </li>
+                `;
+                        break;
+                    case "system":
+                        itemRow.innerHTML = `
+                <li class="row-name">${Item.ShopID}</li>
+                <li class="row-name">${Item.Name}</li>
+                <li class="row-brand">${Item.Brand}</li>
+                <li class="row-unit">${Item.Unit}</li>
+                <li class="row-minWeight">${Item.UWeight}</li>
+                <li class="row-mrp">${Item.MRP}</li>
+                <li class="row-IncStep">${Item.MaxCount}</li>
+                <li class="row-ubutton">
+                    <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
+                </li>
+                `;
+                }
+                ItemTable.appendChild(itemRow);
                 }
             )
         }).then(function (){
-
 
             const searchbox = document.getElementById("product-search");
             searchbox.addEventListener("focus",function (){
