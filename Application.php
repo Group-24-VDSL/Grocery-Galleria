@@ -8,13 +8,13 @@ use app\models\User;
 use Exception;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Pusher\Pusher;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
 use SendGrid;
 use SendGrid\Mail\From;
 use Stripe\StripeClient;
-use Pusher\Pusher;
 
 class Application
 {
@@ -32,8 +32,9 @@ class Application
     public Generator $generator;
     public SendGrid  $sendgrid;
     public StripeClient $stripe;
-    public Pusher $pusher;
     public From $emailfrom;
+    public Pusher $pusher;
+//    public From $emailfrom;
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
@@ -105,6 +106,7 @@ class Application
     public static function getUser(){
         return self::$app->user;
     }
+
 
     public static function getUserRole(){
         return self::$app->user->Role??null;
