@@ -24,6 +24,8 @@ abstract class Model implements JsonSerializable
     public const RULE_MAX_VAL_CLASS = 'maxValueClass';
     public const RULE_DATETIME = 'dateTime';
     public const RULE_IFEXISTS = 'ifexists';
+    public const RULE_IF_ONLY_THEN = 'ifonlythen';
+
 
     public const REGEXP_PHONE_NL = "/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/";
     public const REGEXP_NIC = "/([0-9]){9}V$|(^(19[0-9][0-9]|20[0-9][0-9])([0-9]){8}$)/";
@@ -86,7 +88,8 @@ abstract class Model implements JsonSerializable
             self::RULE_MAX_VAL => 'Max value of this field must be {maxValue}',
             self::RULE_MAX_VAL_CLASS => 'Value should be less than {maxValue}',
             self::RULE_DATETIME =>  'Invalid Date and Time',
-            self::RULE_IFEXISTS => 'There is no such record exists'
+            self::RULE_IFEXISTS => 'There is no such record exists',
+            self::RULE_IF_ONLY_THEN=>''
         ];
     }
 
@@ -151,6 +154,7 @@ abstract class Model implements JsonSerializable
                         $this->addErrorForRule($attribute, self::RULE_UNIQUE, ['field' => $this->getLabel($attribute)]);
                     }
                 }
+
                 if($ruleName === self::RULE_IFEXISTS){
                     $className = $rule['class'];
                     $uniqAttribute = $rule['attribute'] ?? $attribute; //if the rule has a different class and an attribute to match
@@ -179,6 +183,28 @@ abstract class Model implements JsonSerializable
                     if($record){
                         if($this->{$attribute} > $record[$checkAttribute]){
                             $this->addErrorForRule($attribute, self::RULE_MAX_VAL_CLASS, ['maxValue' => $record[$checkAttribute]]);
+                        }
+                    }
+
+                }
+                if($ruleName===self::RULE_IF_ONLY_THEN){
+                    $className = $rule['class'];
+                    $checkAttribute1 = $rule['CheckAttribute1']; //if the rule has a different class and an attribute to match
+                    $matchAttribute1 = $rule['matchAttribute1'];
+                    $matchVal = $rule['ValMatch'];
+                    $where = $rule['where'];
+                    $tableName = $className::tableName();
+
+                    $db = Application::$app->db;
+                    $statement = $db->prepare("SELECT $checkAttribute1,$matchAttribute1 FROM $tableName WHERE $where = :$where");
+                    $statement->bindValue(":$where", $this->{$where});
+                    $statement->execute();
+                    $record = $statement->fetch(PDO::FETCH_ASSOC);
+                    if($record){
+                        if($record["$matchAttribute1"]==$matchVal){
+                            if ($this->{$attribute} > $record[$checkAttribute1]) {
+                                $this->addErrorForRule($attribute, self::RULE_MAX_VAL_CLASS, ['maxValue' => $record[$checkAttribute1]]);
+                            }
                         }
                     }
 
