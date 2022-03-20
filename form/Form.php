@@ -46,8 +46,8 @@ class Form
         return new SelectField($model,$attribute,$options,$classes);
     }
 
-    public function imagefield(Model $model,$attribute){
-        return new ImageField($model,$attribute);
+    public function imagefield(Model $model,$attribute,$classes=[]){
+        return new ImageField($model,$attribute,$classes);
     }
 
     public function inputfile(Model $model,$attribute,$class=[],$accept='')

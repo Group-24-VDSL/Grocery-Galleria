@@ -53,18 +53,18 @@ class Application
         $this->session=new Session();
 
         $this->authMiddleware=new AuthMiddleware([
-            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister'],
+            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
 
-            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','profile'],
+            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','getRiderLocationData'],
 
-            'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart'],
+            'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
 
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','getItem', 'getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','getCustomer','vieworderdetails'],
 
             'Shop' => ['vieworder','productOverview','productOverview','viewitems','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'
                        ,'updateOngoingShopItem','updateOngoingShopItem','getShopOrders','getShopOrder','getDelivery','getShopItems','updateItem','profilesettings','profileUpdate','abc','safetystock'],
 
-            'Rider' => ['vieworder','order'],
+            'Rider' => ['vieworder','order','riderLocation'],
 
             "Common" => ['logout','profileUpdate','test']
         ]);
@@ -82,6 +82,8 @@ class Application
         $this->secfactory = new Factory();
         $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
 
+
+        $this->pusher = new Pusher($_ENV['PUSHER_APP_KEY'],$_ENV['PUSHER_APP_SECRET'],$_ENV['PUSHER_APP_ID'],['cluster'=>$_ENV['PUSHER_APP_CLUSTER'],'useTLS'=>true]);
 
         $userID = Application::$app->session->get('user');
         if ($userID) {
@@ -106,8 +108,12 @@ class Application
         return self::$app->user->Role??null;
     }
 
-    public static function getUserID(){
-        return self::$app->session->get('user');
+    public static function getCity(){
+        return self::$app->session->get('city');
+    }
+
+    public static function getSuburb(){
+        return self::$app->session->get('suburb');
     }
 
     public function run()
@@ -142,12 +148,15 @@ class Application
         $primaryValue = $user->{$primaryKey[0]};
         $this->session->set('user',$primaryValue);
         $this->session->set('role',$user->Role);
-        return true;
+        $this->session->set('city',$user->City);
+        $this->session->set('suburb',$user->Suburb);
+        return $this->user->homepage();
     }
 
     public function logout(){
         $this->user = null;
         $this->session->remove('user');
+        return true;
 
     }
 }
