@@ -13,6 +13,7 @@ use app\core\Application;
 use app\controllers\SiteController;
 use app\controllers\AuthController;
 use app\controllers\RiderController;
+use app\controllers\Reports;
 
 
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -97,7 +98,20 @@ $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'v
 $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
-
+$app->router->get('/dashboard/staff/systemreports',[Reports::class,'systemReports']);
+$app->router->get('/dashboard/staff/shopreports',[Reports::class,'shopReports']);
+$app->router->get('/dashboard/staff/productreports',[Reports::class,'productReports']);
+$app->router->get('/dashboard/staff/gettotalorders',[Reports::class,'getTotalOrders']);
+$app->router->get('/dashboard/staff/gettotalusers',[Reports::class,'getTotalUsers']);
+$app->router->get('/dashboard/staff/shopsreportmonthly',[Reports::class,'shopsReportMonthly']);
+$app->router->get('/dashboard/staff/shopsreportyearly',[Reports::class,'shopsReportYearly']);
+$app->router->get('/dashboard/staff/itemreport',[Reports::class,'itemReport']);
+$app->router->get('/dashboard/staff/salesreportcurrent',[Reports::class,'salesReportCurrent']);
+$app->router->get('/dashboard/staff/salesreportlast',[Reports::class,'salesReportLast']);
+$app->router->get('/dashboard/staff/itemreport',[Reports::class,'itemReport']);
+$app->router->get('/dashboard/staff/getitemweekreport',[Reports::class,'getItemWeekReport']);
+$app->router->get('/dashboard/staff/dailyrevenue',[Reports::class,'dailyRevenue']);
+$app->router->get('/dashboard/staff/dailytotorders',[Reports::class,'dailyTotOrders']);
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
