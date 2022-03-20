@@ -12,10 +12,11 @@ class InputFile
     public array $class;
 
 
-    public function __construct(Model $model, string $attribute,array $class = [] ,string $accept=''){
+    public function __construct(Model $model, string $attribute, array $class = [] ,string $accept = '')
+    {
         $this->model = $model;
         $this->attribute = $attribute;
-        $this->accept= $accept;
+        $this->accept = $accept;
         $this->class = $class;
     }
 
@@ -25,7 +26,7 @@ class InputFile
 <div><small style="color: red">%s</small></div>',
             $this->attribute,
             $this->attribute,
-            $this->class ? implode(" ",$this->class): "",
+            $this->class ? implode(" ", $this->class) : "",
 //            $this->model->{$this->attribute} ?? '/img/placeholder-150.png',
             $this->accept,
             $this->model->getFirstError($this->attribute));

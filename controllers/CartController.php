@@ -131,15 +131,15 @@ class CartController extends Controller
                 //There should be a procedure for checking the stock.
                 $this->checkStock(Application::getUser()->getUserID());
                 //get the availible items
-                $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getCustomerID()." AND Purchased=1",\PDO::FETCH_COLUMN);
-                $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getCustomerID()." AND tc.Purchased=1",\PDO::FETCH_COLUMN);
+                $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getUserID()." AND Purchased=1",\PDO::FETCH_COLUMN);
+                $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getUserID()." AND tc.Purchased=1",\PDO::FETCH_COLUMN);
                 $deliveryfee = $this->getDeliveryFee($shopcount);
                 $totalprice = $subprice + $deliveryfee;
 
                 $checkout_session = Application::$app->stripe->checkout->sessions->create([
                     'payment_method_types' => ['card'],
                     'metadata'=>[
-                        'userid' => Application::getCustomerID(),
+                        'userid' => Application::getUserID(),
                         'recipient_name'=> $recipient_name,
                         'notes' => $notes,
                         'recipient_contact' => $recipient_contact,
@@ -239,9 +239,10 @@ class CartController extends Controller
         $customer = Customer::findOne(['CustomerID' => $customerid]);
         if($customer){
                 Application::$app->logger->debug("If I'm honest");
-                $sql="INSERT INTO `cart` (CustomerID) VALUES (:id);";
+                $sql="INSERT INTO `cart` (CustomerID,Address) VALUES (:id,:address);";
                 $result = $pdo->prepare($sql);
                 $result->bindValue(":id",$customerid);
+                $result->bindValue(":address",$customer->Address);
                 $result->execute();
 
                 $cartid= $pdo->lastInsertId();

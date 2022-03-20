@@ -64,24 +64,6 @@
         <small></small>
     </div>
     <div class="inputBox">
-        <label for="city"><i class="fas fa-map-marked-alt"></i>
-            City</label>
-        <?php echo $form->selectfieldonly($model, 'City',
-            ['Colombo' => 'Colombo',
-                'Maharagama' => 'Maharagama',
-                'Gampaha' => 'Gampaha',
-                'Nawala' => 'Nawala']); ?>
-    </div>
-    <div class="inputBox">
-        <label for="suburb"><i class="fas fa-street-view"></i>
-            Suburb</label>
-        <?php echo $form->selectfieldonly($model, 'Suburb',
-            ['Colombo' => 'Colombo',
-                'Maharagama' => 'Maharagama',
-                'Gampaha' => 'Gampaha',
-                'Nawala' => 'Nawala']); ?>
-    </div>
-    <div class="inputBox">
         <label for="suburb"><i class="fas fa-truck"></i>
             Vehicle Type</label>
         <?php echo $form->selectfieldonly($model, 'RiderType',
@@ -89,7 +71,18 @@
                 '1' => 'Threewheel']); ?>
     </div>
     <div class="inputBox">
+        <label for="city"><i class="fas fa-map-marked-alt"></i>
+            City</label>
+        <?php echo $form->selectfieldonly($model, 'City'); ?>
+    </div>
+    <div class="inputBox">
+        <label for="suburb"><i class="fas fa-street-view"></i>
+            Suburb</label>
+        <?php echo $form->selectfieldonly($model, 'Suburb'); ?>
+    </div>
+    <div class="inputBox">
         <button id="accept" type="submit" class="btn button submit">Submit Registration</button>
     </div>
     <?php echo $form->end(); ?>
 </section>
+<script src="/js/citySuburb.js" defer></script>

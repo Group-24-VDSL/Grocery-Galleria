@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 04, 2021 at 11:58 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.6
+-- Host: localhost
+-- Generation Time: Mar 15, 2022 at 06:23 AM
+-- Server version: 5.7.36
+-- PHP Version: 7.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -23,74 +23,17 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `ggproject` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE `ggproject`;
 
-DELIMITER $$
---
--- Procedures
---
-DROP PROCEDURE IF EXISTS `cancelOrder`$$
-CREATE PROCEDURE `cancelOrder` (IN `ID` INT)  SQL SECURITY INVOKER
-UPDATE temporarycart tc
-SET tc.Purchased=0
-WHERE
-        tc.CustomerID=ID$$
-
-DROP PROCEDURE IF EXISTS `checkStock`$$
-CREATE PROCEDURE `checkStock` (IN `ID` INT)  SQL SECURITY INVOKER
-UPDATE temporarycart tc
-    JOIN shopitem si ON
-    si.ItemID=tc.ItemID AND si.ShopID=tc.ShopID
-    SET tc.Purchased=1
-WHERE
-    tc.CustomerID=ID AND
-    (si.Stock-tc.Quantity) > 0$$
-
-DROP PROCEDURE IF EXISTS `fullfillOrder`$$
-CREATE PROCEDURE `fullfillOrder` (IN `ID` INT, IN `Note` VARCHAR(1000) CHARSET utf8, IN `Recipient_Name` VARCHAR(100) CHARSET utf8, IN `Recipient_Num` VARCHAR(100) CHARSET utf8, IN `Delivery_Fee` FLOAT, IN `Total_Price` FLOAT)  SQL SECURITY INVOKER
-BEGIN
-DECLARE cartid INT DEFAULT 0;
-DECLARE orderid INT DEFAULT 0;
-INSERT INTO `cart` (CustomerID) VALUE (ID);
-SET @cartid = LAST_INSERT_ID();
-
-INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost) VALUES (@cartid,Recipient_Name,Note,Recipient_Num,Delivery_Fee,Total_Price);
-SET @orderid = LAST_INSERT_ID();
-
-INSERT INTO `ordercart` (CartID,ShopID,ItemID,Quantity,Total)
-SELECT @cartid AS CartID,tc.ShopID,tc.ItemID,tc.Quantity,(si.UnitPrice*tc.Quantity) AS Total from `temporarycart` AS tc
-                                                                                                      INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND tc.ItemID=si.ItemID
-WHERE tc.Purchased=1 AND tc.CustomerID=ID;
-
-INSERT INTO `shoporder` (ShopID,CartID,ShopTotal)
-SELECT  tc.ShopID,@cartid AS CartID,SUM(si.UnitPrice*tc.Quantity) from `temporarycart` AS tc
-                                                                           INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND si.ItemID=tc.ItemID
-WHERE tc.Purchased=1 AND tc.CustomerID=ID GROUP BY tc.ShopID;
-
-UPDATE `shopitem` si
-    JOIN temporarycart tc ON
-    tc.ItemID=si.ItemID AND tc.ShopID=si.ShopID
-    SET si.Stock=(si.Stock-tc.Quantity)
-WHERE
-    tc.CustomerID=ID AND
-    (si.Stock-tc.Quantity) > 0 AND
-    tc.Purchased=1;
-
-DELETE FROM `temporarycart` WHERE Purchased=1 AND CustomerID=ID;
-
-END$$
-
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `cart`
 --
 
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
-                        `CartID` int(11) NOT NULL,
-                        `CustomerID` int(11) NOT NULL,
-                        `DateTime` timestamp NOT NULL DEFAULT current_timestamp()
+  `CartID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `DateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -102,11 +45,9 @@ TRUNCATE TABLE `cart`;
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`CartID`, `CustomerID`, `DateTime`) VALUES
-                                                            (1, 7, '2021-10-23 09:38:23'),
-                                                            (2, 3, '2021-12-03 13:24:20'),
-                                                            (3, 7, '2021-12-03 17:12:10'),
-                                                            (4, 7, '2021-12-04 10:11:49');
+INSERT INTO `cart` (`CartID`, `CustomerID`, `Address`, `DateTime`) VALUES
+(1, 7, 'Address eka', '2021-12-04 14:52:46'),
+(2, 2, '', '2021-12-27 19:32:18');
 
 -- --------------------------------------------------------
 
@@ -114,19 +55,18 @@ INSERT INTO `cart` (`CartID`, `CustomerID`, `DateTime`) VALUES
 -- Table structure for table `complaint`
 --
 
-DROP TABLE IF EXISTS `complaint`;
 CREATE TABLE `complaint` (
-                             `ComplaintID` int(11) NOT NULL,
-                             `CustomerID` int(11) NOT NULL,
-                             `StaffID` int(11) NOT NULL,
-                             `OrderID` int(11) NOT NULL,
-                             `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
-                             `OrderDate` date NOT NULL,
-                             `ComplaintDate` date NOT NULL,
-                             `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-                             `Prority` tinyint(1) NOT NULL,
-                             `Regarding` tinyint(1) NOT NULL,
-                             `Status` tinyint(1) NOT NULL
+  `ComplaintID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `StaffID` int(11) NOT NULL,
+  `OrderID` int(11) NOT NULL,
+  `Nature` varchar(555) COLLATE utf8mb4_bin NOT NULL,
+  `OrderDate` date NOT NULL,
+  `ComplaintDate` date NOT NULL,
+  `SpecialDetails` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+  `Prority` tinyint(1) NOT NULL,
+  `Regarding` tinyint(1) NOT NULL,
+  `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -140,17 +80,16 @@ TRUNCATE TABLE `complaint`;
 -- Table structure for table `customer`
 --
 
-DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
-                            `CustomerID` int(11) NOT NULL,
-                            `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                            `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                            `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                            `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-                            `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                            `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                            `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                            `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
+  `CustomerID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -163,8 +102,8 @@ TRUNCATE TABLE `customer`;
 --
 
 INSERT INTO `customer` (`CustomerID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `Suburb`, `Location`, `PlaceID`) VALUES
-                                                                                                                            (2, 'Customer One', 'Address eka', 'customer1@gmail.com', '0332222548', 'Colombo', 'Colombo', '{&quot;lat&quot;:6.943458914658162,&quot;lng&quot;:79.9875427734375}', ''),
-                                                                                                                            (7, 'Customer Two', 'Address eka', 'customer2@mailinator.com', '0713004458', 'Colombo', 'Colombo', '{&quot;lat&quot;:6.932553034671361,&quot;lng&quot;:79.97106328125}', 'GhIJkSVzLO-6G0ARIvau5iX-U0A');
+(2, 'Dilshan Thenuka', '22/2 Old Kesbewa Road, Nugegoda.', 'customer1@gmail.com', '+9477 8571737', '0', '8', '{&quot;lat&quot;:6.871714052860769,&quot;lng&quot;:79.89268108720779}', 'ChIJCSTj6ENa4joReFLBb54J8rk'),
+(7, 'Nadil Sankara', '22, 40 Old Kesbewa Rd, Nugegoda', 'customer2@mailinator.com', '+94774381695', '0', '8', '{&quot;lat&quot;:6.871743345215753,&quot;lng&quot;:79.89361717815399}', 'ChIJL9QBVg5b4joRH8BMOlx_Mk8');
 
 -- --------------------------------------------------------
 
@@ -172,15 +111,14 @@ INSERT INTO `customer` (`CustomerID`, `Name`, `Address`, `Email`, `ContactNo`, `
 -- Table structure for table `delivery`
 --
 
-DROP TABLE IF EXISTS `delivery`;
 CREATE TABLE `delivery` (
-                            `DeliveryID` int(11) NOT NULL,
-                            `RiderID` int(11) NOT NULL,
-                            `Date` date NOT NULL,
-                            `Status` int(11) NOT NULL,
-                            `CompDate` date DEFAULT NULL,
-                            `CompTime` time DEFAULT NULL,
-                            `OrderID` int(11) NOT NULL
+  `DeliveryID` int(11) NOT NULL,
+  `RiderID` int(11) NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Status` tinyint(1) NOT NULL,
+  `CompTime` timestamp NULL DEFAULT NULL,
+  `OrderID` int(11) NOT NULL,
+  `CartID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -188,22 +126,30 @@ CREATE TABLE `delivery` (
 --
 
 TRUNCATE TABLE `delivery`;
+--
+-- Dumping data for table `delivery`
+--
+
+INSERT INTO `delivery` (`DeliveryID`, `RiderID`, `Date`, `Status`, `CompTime`, `OrderID`, `CartID`) VALUES
+(1, 9, '2021-12-22 15:05:06', 0, NULL, 1, 1);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `deliveryrider`
 --
 
-DROP TABLE IF EXISTS `deliveryrider`;
 CREATE TABLE `deliveryrider` (
-                                 `RiderID` int(11) NOT NULL,
-                                 `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                                 `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                                 `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                                 `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-                                 `NIC` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-                                 `ProfilePic` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                                 `RiderType` int(11) NOT NULL DEFAULT 0
+  `RiderID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `NIC` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `ProfilePic` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '/public/img/placeholder-150.png',
+  `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `RiderType` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -215,8 +161,11 @@ TRUNCATE TABLE `deliveryrider`;
 -- Dumping data for table `deliveryrider`
 --
 
-INSERT INTO `deliveryrider` (`RiderID`, `Name`, `Address`, `Email`, `ContactNo`, `NIC`, `ProfilePic`, `RiderType`) VALUES
-    (9, 'Rider One', 'Address eka', 'rider1@gmail.com', '0715555468', '981557852V', '/public/img/placeholder-150.png', 0);
+INSERT INTO `deliveryrider` (`RiderID`, `Name`, `Address`, `Email`, `ContactNo`, `NIC`, `ProfilePic`, `City`, `Suburb`, `RiderType`) VALUES
+(9, 'Kamal Jayawardhana', '32, Pelawatta Rd, Nugegoda', 'rider1@gmail.com', '0715555468', '981557852V', '/public/img/placeholder-150.png', '0', '8', 0),
+(11, 'Seenath Batagedara', '13, Edirigoda Road, Nugegoda', 'rider2@gmail.com', '0754555257', '985452455V', '/public/img/placeholder-150.png', '0', '8', 0),
+(12, 'Janith Jaalitha', '19 A1, Chapel Rd, Nugegoda', 'rider3@gmail.com', '0754555257', '985478545V', '/public/img/placeholder-150.png', '0', '8', 1),
+(13, 'Sunil Keerthi', 'Chapel Rd, Nugegoda', 'rider4@gmail.com', '0754555257', '984578645V', '/public/img/placeholder-150.png', '0', '8', 1);
 
 -- --------------------------------------------------------
 
@@ -224,12 +173,11 @@ INSERT INTO `deliveryrider` (`RiderID`, `Name`, `Address`, `Email`, `ContactNo`,
 -- Table structure for table `deliveryriderlocation`
 --
 
-DROP TABLE IF EXISTS `deliveryriderlocation`;
 CREATE TABLE `deliveryriderlocation` (
-                                         `RiderID` int(11) NOT NULL,
-                                         `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                                         `LastUpdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-                                         `OrderID` int(11) DEFAULT NULL
+  `RiderID` int(11) NOT NULL,
+  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `LastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `OrderID` int(11) DEFAULT NULL
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -243,14 +191,13 @@ TRUNCATE TABLE `deliveryriderlocation`;
 -- Table structure for table `deliverystaff`
 --
 
-DROP TABLE IF EXISTS `deliverystaff`;
 CREATE TABLE `deliverystaff` (
-                                 `StaffID` int(11) NOT NULL,
-                                 `Name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
-                                 `ContactNo` varchar(20) COLLATE utf8mb4_bin NOT NULL,
-                                 `Email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-                                 `City` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-                                 `Suburb` varchar(100) COLLATE utf8mb4_bin NOT NULL
+  `StaffID` int(11) NOT NULL,
+  `Name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(20) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `City` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `Suburb` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -264,17 +211,16 @@ TRUNCATE TABLE `deliverystaff`;
 -- Table structure for table `item`
 --
 
-DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
-                        `ItemID` int(11) NOT NULL,
-                        `Name` varchar(125) COLLATE utf8mb4_bin NOT NULL,
-                        `ItemImage` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                        `Brand` varchar(125) COLLATE utf8mb4_bin DEFAULT NULL,
-                        `UWeight` double NOT NULL,
-                        `Unit` int(11) NOT NULL,
-                        `MRP` double DEFAULT 0,
-                        `MaxCount` float NOT NULL DEFAULT 0,
-                        `Category` int(11) NOT NULL
+  `ItemID` int(11) NOT NULL,
+  `Name` varchar(125) COLLATE utf8mb4_bin NOT NULL,
+  `ItemImage` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Brand` varchar(125) COLLATE utf8mb4_bin DEFAULT NULL,
+  `UWeight` double NOT NULL,
+  `Unit` int(11) NOT NULL,
+  `MRP` double DEFAULT '0',
+  `MaxCount` float NOT NULL DEFAULT '0',
+  `Category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -287,19 +233,41 @@ TRUNCATE TABLE `item`;
 --
 
 INSERT INTO `item` (`ItemID`, `Name`, `ItemImage`, `Brand`, `UWeight`, `Unit`, `MRP`, `MaxCount`, `Category`) VALUES
-                                                                                                                  (1, 'Brinjol', '/img/product-imgs/9500000.jpg', '', 300, 0, 310, 10, 0),
-                                                                                                                  (2, 'Beetroot', '/img/product-imgs/9500001.jpg', '', 200, 0, 110, 6, 0),
-                                                                                                                  (3, 'Cabbage', '/img/product-imgs/9500002.jpg', '', 300, 0, 170, 4, 0),
-                                                                                                                  (4, 'Capsicum', '/img/product-imgs/9500003.jpg', '', 300, 0, 400, 5, 0),
-                                                                                                                  (5, 'Carrot', '/img/product-imgs/9500004.jpg', '', 300, 0, 190, 10, 0),
-                                                                                                                  (6, 'Green beans', '/img/product-imgs/9500005.jpg', '', 300, 0, 390, 10, 0),
-                                                                                                                  (7, 'Cucumber', '/img/product-imgs/9500006.jpg', '', 500, 0, 120, 5, 0),
-                                                                                                                  (8, 'Knol Khol', '/img/product-imgs/9500007.jpg', '', 300, 0, 210, 5, 0),
-                                                                                                                  (9, 'Leeks', '/img/product-imgs/9500008.jpg', '', 300, 0, 280, 10, 0),
-                                                                                                                  (10, 'Drumsticks', '/img/product-imgs/9500009.jpg', '', 300, 0, 330, 5, 0),
-                                                                                                                  (11, 'Potatoes', '/img/product-imgs/9500010.jpg', '', 500, 0, 190, 8, 0),
-                                                                                                                  (12, 'Tomatoes', '/img/product-imgs/9500011.jpg', '', 300, 0, 140, 4, 0),
-                                                                                                                  (13, 'Green Chilies', '/img/product-imgs/9500012.jpg', '', 100, 0, 280, 20, 0);
+(1, 'Brinjol', '/img/product-imgs/9500000.jpg', '', 300, 0, 310, 10, 1),
+(2, 'Beetroot', '/img/product-imgs/9500001.jpg', '', 1000, 0, 490, 5, 1),
+(3, 'Cabbage', '/img/product-imgs/9500002.jpg', '', 300, 0, 170, 4, 1),
+(4, 'Capsicum', '/img/product-imgs/9500003.jpg', '', 300, 0, 400, 5, 1),
+(5, 'Carrot', '/img/product-imgs/9500004.jpg', '', 300, 0, 190, 10, 1),
+(6, 'Green beans', '/img/product-imgs/9500005.jpg', '', 300, 0, 390, 10, 1),
+(7, 'Cucumber', '/img/product-imgs/9500006.jpg', '', 500, 0, 120, 5, 1),
+(8, 'Knol Khol', '/img/product-imgs/9500007.jpg', '', 300, 0, 210, 5, 1),
+(9, 'Leeks', '/img/product-imgs/9500008.jpg', '', 300, 0, 280, 10, 1),
+(10, 'Drumsticks', '/img/product-imgs/9500009.jpg', '', 300, 0, 330, 5, 1),
+(11, 'Potatoes', '/img/product-imgs/9500010.jpg', '', 500, 0, 190, 8, 1),
+(12, 'Tomatoes', '/img/product-imgs/9500011.jpg', '', 300, 0, 140, 4, 1),
+(13, 'Green Chilies', '/img/product-imgs/9500012.jpg', '', 100, 0, 280, 20, 1),
+(14, 'Papaya', '/img/product-imgs/9500013.jpg', '', 500, 1, 105, 20, 4),
+(15, 'Banana - Ambul', '/img/product-imgs/9500014.jpg', '', 500, 1, 50, 10, 4),
+(16, 'Avocado', '/img/product-imgs/9500015.jpg', '', 500, 1, 225, 10, 4),
+(17, 'Harischandra Kurakkan Flour 400g', '/img/product-imgs/9500016.jpg', 'Harischandra', 400, 1, 400, 10, 0),
+(18, 'Maliban Chocolate Cream Biscuits 100g', '/img/product-imgs/9500017.jpg', 'Maliban', 100, 1, 75, 10, 0),
+(19, 'Motha Jelly Mixed Fruit 100g', '/img/product-imgs/9500018.jpg', 'Motha', 100, 1, 100, 10, 0),
+(20, 'Marina Vegetable Oil Pack 500ml', '/img/product-imgs/9500019.jpg', 'Marina', 500, 1, 435, 10, 0),
+(21, 'Kumbalawa', '/img/product-imgs/9500020.jpg', '', 500, 1, 420, 10, 3),
+(22, 'Paraw Fish Slices', '/img/product-imgs/9500021.jpg', '', 400, 1, 768, 10, 3),
+(23, 'Tuna Cubes', '/img/product-imgs/9500022.jpg', '', 200, 1, 648, 10, 3),
+(24, 'Tuna Fish', '/img/product-imgs/9500023.jpg', '', 500, 1, 875, 10, 3),
+(25, 'Ritzbury Revello Milk Chocolate 170g', '/img/product-imgs/9500024.jpg', 'Ritzbury', 170, 1, 370, 10, 3),
+(26, 'Mdk Koththu Roti 1kg', '/img/product-imgs/9500025.jpg', 'MDK', 1000, 1, 285, 10, 0),
+(27, 'Chicken Drumsticks Skinless', '/img/product-imgs/9500026.jpg', '', 500, 1, 520, 10, 2),
+(28, 'Chicken Full Breast Skinless', '/img/product-imgs/9500027.jpg', '', 500, 1, 455, 10, 2),
+(29, 'Chicken Gizzard', '/img/product-imgs/9500028.jpg', '', 500, 1, 395, 10, 2),
+(30, 'Chicken Whole Legs Skin On', '/img/product-imgs/9500029.jpg', '', 500, 1, 445, 10, 2),
+(31, 'Melon', '/img/product-imgs/9500030.jpg', '', 500, 1, 175, 10, 4),
+(32, 'Mandarin - Local ', '/img/product-imgs/9500031.jpg', '', 500, 1, 210, 10, 4),
+(33, 'Mango - K/C', '/img/product-imgs/9500032.jpg', '', 500, 1, 110, 10, 4),
+(34, 'Pineapple', '/img/product-imgs/9500033.jpg', '', 500, 1, 125, 10, 4),
+(35, 'Ginger', '/img/product-imgs/9500034.jpg', '', 500, 1, 115, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -307,15 +275,16 @@ INSERT INTO `item` (`ItemID`, `Name`, `ItemImage`, `Brand`, `UWeight`, `Unit`, `
 -- Table structure for table `login`
 --
 
-DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
-                         `UserID` int(11) NOT NULL,
-                         `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                         `PasswordHash` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-                         `Name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-                         `Verify_Flag` tinyint(1) NOT NULL DEFAULT 0,
-                         `Delete_Flag` tinyint(1) NOT NULL DEFAULT 0,
-                         `Role` varchar(10) COLLATE utf8mb4_bin NOT NULL
+  `UserID` int(11) NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `PasswordHash` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+  `Name` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `Verify_Flag` tinyint(1) NOT NULL DEFAULT '0',
+  `Delete_Flag` tinyint(1) NOT NULL DEFAULT '0',
+  `Role` varchar(10) COLLATE utf8mb4_bin NOT NULL,
+  `City` int(11) DEFAULT NULL,
+  `Suburb` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -327,15 +296,25 @@ TRUNCATE TABLE `login`;
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`UserID`, `Email`, `PasswordHash`, `Name`, `Verify_Flag`, `Delete_Flag`, `Role`) VALUES
-                                                                                                          (2, 'customer1@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Customer One', 1, 0, 'Customer'),
-                                                                                                          (3, 'shop1@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Shop One', 1, 0, 'Shop'),
-                                                                                                          (4, 'shop2@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Shop Two', 1, 0, 'Shop'),
-                                                                                                          (5, 'shop3@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Shop Three', 0, 0, 'Shop'),
-                                                                                                          (7, 'customer2@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Customer Two', 1, 0, 'Customer'),
-                                                                                                          (8, 'delivery1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Delivery One', 1, 0, 'Delivery'),
-                                                                                                          (9, 'rider1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Rider One', 1, 0, 'Rider'),
-                                                                                                          (10, 'staff1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Staff One', 1, 0, 'Staff');
+INSERT INTO `login` (`UserID`, `Email`, `PasswordHash`, `Name`, `Verify_Flag`, `Delete_Flag`, `Role`, `City`, `Suburb`) VALUES
+(2, 'customer1@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Dilshan Thenuka', 1, 0, 'Customer', 0, 8),
+(3, 'shop1@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Pussallawa Meat Shop', 1, 0, 'Shop', 0, 8),
+(4, 'shop2@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'D&J Mini Mart', 1, 0, 'Shop', 0, 8),
+(5, 'shop3@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Deli Market', 0, 0, 'Shop', 0, 8),
+(7, 'customer2@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Nadil Sankara', 1, 0, 'Customer', 0, 8),
+(8, 'delivery1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Delivery One', 1, 0, 'Delivery', 0, 8),
+(9, 'rider1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Kamal Jayawardhana', 1, 0, 'Rider', 0, 8),
+(10, 'staff1@gmail.com', '$2y$10$t0N5xYthgYV63x9DKNxFH.RipNC9S.KNJK/QLw0sSNAK9Sk4x4Sfu', 'Staff One', 1, 0, 'Staff', NULL, NULL),
+(11, 'rider2@gmail.com', '$2y$10$N1rtCYTVup.hvDPrNvtt8.zOkLrT.VJ/fC6qnKD6wCRO6Lvj3OQVS', 'Seenath Batagedara', 1, 0, 'Rider', 0, 8),
+(12, 'rider3@gmail.com', '$2y$10$N1rtCYTVup.hvDPrNvtt8.zOkLrT.VJ/fC6qnKD6wCRO6Lvj3OQVS', 'Janith Jaalitha', 1, 0, 'Rider', 0, 8),
+(13, 'rider4@gmail.com', '$2y$10$N1rtCYTVup.hvDPrNvtt8.zOkLrT.VJ/fC6qnKD6wCRO6Lvj3OQVS', 'Sunil Keerthi', 1, 0, 'Rider', 0, 8),
+(14, 'shop4@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Delmage Meats', 0, 0, 'Shop', 0, 8),
+(15, 'shop5@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Geenath Traders', 0, 0, 'Shop', 0, 8),
+(16, 'shop6@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Kamala Enterprises', 1, 0, 'Shop', 0, 8),
+(17, 'shop7@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Nugegoda Fruit Shop', 1, 0, 'Shop', 0, 8),
+(18, 'shop8@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Akku Fresh Fruits', 1, 0, 'Shop', 0, 8),
+(19, 'shop9@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Meegamu Fish', 1, 0, 'Shop', 0, 8),
+(20, 'shop10@gmail.com', '$2y$10$LccaU64pC43mF4yhFgDMbu5HEqVaTdcRKz/5cPjEEaOiwdJuuR4aK', 'Ceylon Fisheries', 1, 0, 'Shop', 0, 8);
 
 -- --------------------------------------------------------
 
@@ -343,13 +322,12 @@ INSERT INTO `login` (`UserID`, `Email`, `PasswordHash`, `Name`, `Verify_Flag`, `
 -- Table structure for table `ordercart`
 --
 
-DROP TABLE IF EXISTS `ordercart`;
 CREATE TABLE `ordercart` (
-                             `CartID` int(11) NOT NULL,
-                             `ShopID` int(11) NOT NULL,
-                             `ItemID` int(11) NOT NULL,
-                             `Quantity` double NOT NULL,
-                             `Total` double NOT NULL
+  `CartID` int(11) NOT NULL,
+  `ShopID` int(11) NOT NULL,
+  `ItemID` int(11) NOT NULL,
+  `Quantity` double NOT NULL,
+  `Total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -362,12 +340,14 @@ TRUNCATE TABLE `ordercart`;
 --
 
 INSERT INTO `ordercart` (`CartID`, `ShopID`, `ItemID`, `Quantity`, `Total`) VALUES
-                                                                                (1, 5, 1, 10, 500),
-                                                                                (1, 5, 2, 14, 4000),
-                                                                                (1, 5, 3, 5, 1002),
-                                                                                (3, 4, 12, 50, 7100),
-                                                                                (3, 5, 7, 10, 1100),
-                                                                                (3, 5, 8, 20, 6000);
+(1, 4, 12, 50, 7100),
+(1, 5, 7, 10, 1100),
+(1, 5, 8, 20, 6000),
+(2, 4, 12, 1, 142),
+(2, 4, 13, 11, 1232),
+(2, 5, 2, 2, 200),
+(2, 5, 3, 4, 600),
+(2, 5, 7, 2, 220);
 
 -- --------------------------------------------------------
 
@@ -375,16 +355,18 @@ INSERT INTO `ordercart` (`CartID`, `ShopID`, `ItemID`, `Quantity`, `Total`) VALU
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
-                          `OrderID` int(11) NOT NULL,
-                          `CartID` int(11) NOT NULL,
-                          `OrderDate` timestamp NOT NULL DEFAULT current_timestamp(),
-                          `RecipientName` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-                          `Note` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
-                          `RecipientContact` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-                          `DeliveryCost` float NOT NULL,
-                          `TotalCost` float NOT NULL
+  `OrderID` int(11) NOT NULL,
+  `CartID` int(11) NOT NULL,
+  `OrderDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `RecipientName` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
+  `Note` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
+  `RecipientContact` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
+  `DeliveryCost` float NOT NULL,
+  `TotalCost` float NOT NULL,
+  `Status` int(11) NOT NULL,
+  `City` int(11) NOT NULL,
+  `Suburb` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -396,10 +378,9 @@ TRUNCATE TABLE `orders`;
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `RecipientName`, `Note`, `RecipientContact`, `DeliveryCost`, `TotalCost`) VALUES
-                                                                                                                                      (1, 1, '2021-10-23 09:00:00', NULL, NULL, NULL, 140, 1500),
-                                                                                                                                      (2, 3, '2021-12-03 17:12:10', '\"Hellow\"', '\"Something\"', '\"076764854', 160, 2000),
-                                                                                                                                      (3, 4, '2021-12-04 10:11:49', 'Test2', 'Test', '0764854828', 120, 1500);
+INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `RecipientName`, `Note`, `RecipientContact`, `DeliveryCost`, `TotalCost`, `Status`, `City`, `Suburb`) VALUES
+(1, 1, '2021-12-04 14:52:46', '', '', '', 160, 14360, 0, 1, 2),
+(2, 2, '2021-12-27 19:32:18', '', '', '', 160, 2554, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -407,11 +388,10 @@ INSERT INTO `orders` (`OrderID`, `CartID`, `OrderDate`, `RecipientName`, `Note`,
 -- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
-                           `PaymentID` int(11) NOT NULL,
-                           `OrderID` int(11) NOT NULL,
-                           `TotalPrice` double NOT NULL
+  `PaymentID` int(11) NOT NULL,
+  `OrderID` int(11) NOT NULL,
+  `TotalPrice` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -419,26 +399,33 @@ CREATE TABLE `payment` (
 --
 
 TRUNCATE TABLE `payment`;
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`PaymentID`, `OrderID`, `TotalPrice`) VALUES
+(1, 1, 14360),
+(2, 2, 2554);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `shop`
 --
 
-DROP TABLE IF EXISTS `shop`;
 CREATE TABLE `shop` (
-                        `ShopID` int(11) NOT NULL,
-                        `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                        `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                        `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                        `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-                        `City` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                        `Suburb` varchar(55) COLLATE utf8mb4_bin NOT NULL,
-                        `ShopName` varchar(125) COLLATE utf8mb4_bin NOT NULL,
-                        `ShopDesc` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                        `Category` int(11) NOT NULL,
-                        `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                        `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
+  `ShopID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `City` int(11) NOT NULL,
+  `Suburb` int(11) NOT NULL,
+  `ShopName` varchar(125) COLLATE utf8mb4_bin NOT NULL,
+  `ShopDesc` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Category` int(11) NOT NULL,
+  `Location` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `PlaceID` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -451,8 +438,16 @@ TRUNCATE TABLE `shop`;
 --
 
 INSERT INTO `shop` (`ShopID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `Suburb`, `ShopName`, `ShopDesc`, `Category`, `Location`, `PlaceID`) VALUES
-                                                                                                                                                        (4, 'Shop Two', 'Address Eka', 'shop2@gmail.com', '0701122412', 'Colombo', 'Colombo', 'Kalinga Stores', 'Fresh Stuff', 0, '{&quot;lat&quot;:6.938006006240303,&quot;lng&quot;:79.916131640625}', 'ChIJI4abT9RZ4joR83K0Sg1HrtI'),
-                                                                                                                                                        (5, 'Shop Three', '22/2 Old Kesbewa Road, Nugegoda.', 'shop3@gmail.com', '0778571737', 'Colombo', 'Colombo', 'Senarath Grocery', 'Farm Fresh Goods', 0, '{&quot;lat&quot;:6.8672672,&quot;lng&quot;:79.8856714}', 'ChIJr_pa_k9a4joR0Lc1vOefaMQ');
+(3, 'Farhir Fazil', '10 Chapel Rd, Nugegoda', 'shop1@gmail.com', '+94777854845', 0, 8, 'Pussallawa Meat Shop', 'Fresh Meats', 2, '{&quot;lat&quot;:6.8727925429239685,&quot;lng&quot;:79.89321484680175}', 'ChIJJ1JA2ENa4joRbWhiruJI4sI'),
+(4, 'Harin Jayawardhana', 'Chapel Ln, Nugegoda', 'shop2@gmail.com', '+94777875619', 0, 8, 'D&J Mini Mart', 'Everything at One Place', 0, '{&quot;lat&quot;:6.872643418517776,&quot;lng&quot;:79.89244505281448}', 'ChIJS5thDMZb4joRcFj3-om0oto'),
+(5, 'Sandun Kaluhitha', '22b Station Ln, Nugegoda 10250', 'shop3@gmail.com', '+94772369469', 0, 8, 'Deli Market', 'One Stop for All Your Needs', 0, '{&quot;lat&quot;:6.871969695171068,&quot;lng&quot;:79.8919622551918}', 'ChIJ3XwA50Na4joR_nza5cs8jWc'),
+(14, 'Saantha Pansilu', '45 Jambugasmulla Rd, Nugegoda', 'shop4@gmail.com', '+94772358741', 0, 8, 'Delmage Meats', 'Processed Meats', 2, '{&quot;lat&quot;:6.871000384017071,&quot;lng&quot;:79.89284738416671}', 'ChIJ6YqpvENa4joRAemVeNt6ur0'),
+(15, 'Saantha Pansilu', '45 Jambugasmulla Rd, Nugegoda', 'shop5@gmail.com', '+94772365985', 0, 8, 'Geenath Traders', 'Vegetable Importers', 1, '{&quot;lat&quot;:6.8728644421745475,&quot;lng&quot;:79.89126756305694}', 'ChIJuyUCVUFa4joRg9mBFNK_wy4'),
+(16, 'Kamala Geegana', '1 Edirigoda Rd, Nugegoda', 'shop6@gmail.com', '+94772344582', 0, 8, 'Kamala Enterprises', 'Fresh Vegetables', 1, '{&quot;lat&quot;:6.873250567593335,&quot;lng&quot;:79.89270522708892}', 'ChIJF1avXUFa4joR_25N3N_SnyM'),
+(17, 'Thisara Prabudda', '107/1/1,Stanley Thilakarathna Mawatha,Nugegoda', 'shop7@gmail.com', '+9477556982', 0, 8, 'Nugegoda Fruit Shop', 'All Kinds of Fruits', 4, '{&quot;lat&quot;:6.872374461881273,&quot;lng&quot;:79.89076598997116}', 'ChIJgXatAkRa4joRcYX_75Xt09U'),
+(18, 'Falil Ahmed', '15/4,St Joseph\'s Rd,Nugegoda', 'shop8@gmail.com', '+9471300982', 0, 8, 'Nugegoda Fruit Shop', 'Fruit Importers and Distributors', 4, '{&quot;lat&quot;:6.86985331888307,&quot;lng&quot;:79.89195554966926}', 'ChIJuW2he0Na4joROPealbMO0_k'),
+(19, 'Gagana Randeepa', '107,Samudradevi Rd, Nugegoda', 'shop9@gmail.com', '+9470006982', 0, 8, 'Meegamu Fish', 'All Kinds of Fish', 3, '{&quot;lat&quot;:6.870877888510723,&quot;lng&quot;:79.89095106239319}', 'ChIJ3brXfURa4joRT3lK547-66E'),
+(20, 'Jalitha Kumara', '15/4,Stanley Tilakaratne Mawatha, Nugegoda', 'shop10@gmail.com', '+9478222582', 0, 8, 'Ceylon Fisheries', 'Fish Importers and Distributors', 3, '{&quot;lat&quot;:6.871463736298677,&quot;lng&quot;:79.88989427204132}', 'ChIJEbwlPkRa4joRjjCy7M_tmOs');
 
 -- --------------------------------------------------------
 
@@ -460,13 +455,12 @@ INSERT INTO `shop` (`ShopID`, `Name`, `Address`, `Email`, `ContactNo`, `City`, `
 -- Table structure for table `shopitem`
 --
 
-DROP TABLE IF EXISTS `shopitem`;
 CREATE TABLE `shopitem` (
-                            `ItemID` int(11) NOT NULL,
-                            `ShopID` int(11) NOT NULL,
-                            `UnitPrice` double NOT NULL,
-                            `Stock` float NOT NULL,
-                            `Enabled` tinyint(1) NOT NULL DEFAULT 1
+  `ItemID` int(11) NOT NULL,
+  `ShopID` int(11) NOT NULL,
+  `UnitPrice` double NOT NULL,
+  `Stock` float NOT NULL,
+  `Enabled` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -479,17 +473,17 @@ TRUNCATE TABLE `shopitem`;
 --
 
 INSERT INTO `shopitem` (`ItemID`, `ShopID`, `UnitPrice`, `Stock`, `Enabled`) VALUES
-                                                                                 (1, 5, 280, 20, 0),
-                                                                                 (2, 5, 100, 20, 0),
-                                                                                 (3, 5, 150, 20, 1),
-                                                                                 (4, 5, 380, 10, 1),
-                                                                                 (5, 5, 190, 5, 0),
-                                                                                 (6, 5, 380, 20, 1),
-                                                                                 (7, 5, 110, 200, 1),
-                                                                                 (8, 5, 300, 250, 1),
-                                                                                 (11, 4, 125, 150, 0),
-                                                                                 (12, 4, 142, 100, 1),
-                                                                                 (13, 4, 112, 90, 1);
+(1, 5, 280, 20, 0),
+(2, 5, 100, 18, 0),
+(3, 5, 150, 16, 1),
+(4, 5, 380, 10, 1),
+(5, 5, 190, 5, 0),
+(6, 5, 380, 20, 1),
+(7, 5, 110, 188, 1),
+(8, 5, 300, 230, 1),
+(11, 4, 125, 150, 0),
+(12, 4, 142, 49, 1),
+(13, 4, 112, 79, 1);
 
 -- --------------------------------------------------------
 
@@ -497,12 +491,11 @@ INSERT INTO `shopitem` (`ItemID`, `ShopID`, `UnitPrice`, `Stock`, `Enabled`) VAL
 -- Table structure for table `shoporder`
 --
 
-DROP TABLE IF EXISTS `shoporder`;
 CREATE TABLE `shoporder` (
-                             `ShopID` int(11) NOT NULL,
-                             `CartID` int(11) NOT NULL,
-                             `Date` timestamp NOT NULL DEFAULT current_timestamp,
-                             `ShopTotal` double NOT NULL
+  `ShopID` int(11) NOT NULL,
+  `CartID` int(11) NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ShopTotal` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -515,8 +508,10 @@ TRUNCATE TABLE `shoporder`;
 --
 
 INSERT INTO `shoporder` (`ShopID`, `CartID`, `Date`, `ShopTotal`) VALUES
-                                                                      (4, 3, '2021-12-03', 7100),
-                                                                      (5, 3, '2021-12-03', 7100);
+(4, 1, '2021-12-04 00:00:00', 7100),
+(4, 2, '2021-12-28 00:00:00', 1374),
+(5, 1, '2021-12-04 00:00:00', 7100),
+(5, 2, '2021-12-28 00:00:00', 1020);
 
 -- --------------------------------------------------------
 
@@ -524,13 +519,12 @@ INSERT INTO `shoporder` (`ShopID`, `CartID`, `Date`, `ShopTotal`) VALUES
 -- Table structure for table `staff`
 --
 
-DROP TABLE IF EXISTS `staff`;
 CREATE TABLE `staff` (
-                         `StaffID` int(11) NOT NULL,
-                         `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                         `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-                         `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
-                         `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
+  `StaffID` int(11) NOT NULL,
+  `Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `Address` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `ContactNo` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `Email` varchar(55) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -543,7 +537,7 @@ TRUNCATE TABLE `staff`;
 --
 
 INSERT INTO `staff` (`StaffID`, `Name`, `Address`, `ContactNo`, `Email`) VALUES
-    (10, 'Staff One', 'Address Eka', '0714584685', 'staff1@gmail.com');
+(10, 'Staff One', 'Address Eka', '0714584685', 'staff1@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -551,13 +545,12 @@ INSERT INTO `staff` (`StaffID`, `Name`, `Address`, `ContactNo`, `Email`) VALUES
 -- Table structure for table `temporarycart`
 --
 
-DROP TABLE IF EXISTS `temporarycart`;
 CREATE TABLE `temporarycart` (
-                                 `ItemID` int(11) NOT NULL,
-                                 `ShopID` int(11) NOT NULL,
-                                 `CustomerID` int(11) NOT NULL,
-                                 `Quantity` int(11) NOT NULL,
-                                 `Purchased` tinyint(1) NOT NULL DEFAULT 0
+  `ItemID` int(11) NOT NULL,
+  `ShopID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Purchased` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -570,17 +563,9 @@ TRUNCATE TABLE `temporarycart`;
 --
 
 INSERT INTO `temporarycart` (`ItemID`, `ShopID`, `CustomerID`, `Quantity`, `Purchased`) VALUES
-                                                                                            (1, 5, 2, 10, 1),
-                                                                                            (2, 5, 2, 2, 1),
-                                                                                            (3, 5, 2, 4, 1),
-                                                                                            (5, 5, 2, 8, 0),
-                                                                                            (6, 5, 2, 4, 1),
-                                                                                            (7, 5, 2, 2, 1),
-                                                                                            (7, 5, 7, 10, 0),
-                                                                                            (8, 5, 7, 20, 0),
-                                                                                            (12, 4, 2, 1, 1),
-                                                                                            (12, 4, 7, 50, 0),
-                                                                                            (13, 4, 2, 11, 1);
+(1, 5, 2, 10, 0),
+(5, 5, 2, 10, 0),
+(6, 5, 2, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -588,11 +573,10 @@ INSERT INTO `temporarycart` (`ItemID`, `ShopID`, `CustomerID`, `Quantity`, `Purc
 -- Table structure for table `verification`
 --
 
-DROP TABLE IF EXISTS `verification`;
 CREATE TABLE `verification` (
-                                `UserID` int(11) NOT NULL,
-                                `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
-                                `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
+  `UserID` int(11) NOT NULL,
+  `VerificationCode` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+  `UniqueID` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -601,6 +585,13 @@ CREATE TABLE `verification` (
 
 TRUNCATE TABLE `verification`;
 --
+-- Dumping data for table `verification`
+--
+
+INSERT INTO `verification` (`UserID`, `VerificationCode`, `UniqueID`) VALUES
+(11, 'yGM5xcT9Z2Si3d8EC4xBYdRM', 'GWxnwqSqH9xnaBB0614reDfJ');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -608,163 +599,79 @@ TRUNCATE TABLE `verification`;
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-    ADD PRIMARY KEY (`CartID`);
+  ADD PRIMARY KEY (`CartID`);
 
 --
 -- Indexes for table `complaint`
 --
 ALTER TABLE `complaint`
-    ADD PRIMARY KEY (`ComplaintID`) USING BTREE,
+  ADD PRIMARY KEY (`ComplaintID`) USING BTREE,
   ADD KEY `ComplaintID` (`ComplaintID`,`CustomerID`,`StaffID`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-    ADD PRIMARY KEY (`CustomerID`);
+  ADD PRIMARY KEY (`CustomerID`);
 
 --
 -- Indexes for table `delivery`
 --
 ALTER TABLE `delivery`
-    ADD PRIMARY KEY (`DeliveryID`),
-  ADD KEY `RiderID` (`RiderID`,`OrderID`),
-  ADD KEY `OrderID` (`OrderID`);
+  ADD PRIMARY KEY (`DeliveryID`),
+  ADD KEY `RiderID` (`RiderID`,`OrderID`,`CartID`);
 
 --
 -- Indexes for table `deliveryrider`
 --
 ALTER TABLE `deliveryrider`
-    ADD PRIMARY KEY (`RiderID`);
+  ADD PRIMARY KEY (`RiderID`);
 
 --
 -- Indexes for table `deliveryriderlocation`
 --
 ALTER TABLE `deliveryriderlocation`
-    ADD PRIMARY KEY (`RiderID`);
+  ADD PRIMARY KEY (`RiderID`);
 
 --
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-    ADD PRIMARY KEY (`ItemID`);
+  ADD PRIMARY KEY (`ItemID`);
 
 --
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
-    ADD PRIMARY KEY (`UserID`);
+  ADD PRIMARY KEY (`UserID`);
 
 --
 -- Indexes for table `ordercart`
 --
 ALTER TABLE `ordercart`
-    ADD PRIMARY KEY (`CartID`,`ShopID`,`ItemID`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-    ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `CartID` (`CartID`);
-
---
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-    ADD PRIMARY KEY (`PaymentID`),
-  ADD KEY `OrderID` (`OrderID`);
+  ADD PRIMARY KEY (`CartID`,`ShopID`,`ItemID`);
 
 --
 -- Indexes for table `shop`
 --
 ALTER TABLE `shop`
-    ADD PRIMARY KEY (`ShopID`);
-
---
--- Indexes for table `shopitem`
---
-ALTER TABLE `shopitem`
-    ADD PRIMARY KEY (`ItemID`,`ShopID`),
-  ADD KEY `ShopID` (`ShopID`);
-
---
--- Indexes for table `shoporder`
---
-ALTER TABLE `shoporder`
-    ADD PRIMARY KEY (`ShopID`,`CartID`),
-  ADD KEY `CartID` (`CartID`);
-
---
--- Indexes for table `staff`
---
-ALTER TABLE `staff`
-    ADD PRIMARY KEY (`StaffID`);
-
---
--- Indexes for table `temporarycart`
---
-ALTER TABLE `temporarycart`
-    ADD PRIMARY KEY (`ItemID`,`ShopID`,`CustomerID`);
-
---
--- Indexes for table `verification`
---
-ALTER TABLE `verification`
-    ADD PRIMARY KEY (`UserID`),
-  ADD UNIQUE KEY `UniqueID` (`UniqueID`);
+  ADD PRIMARY KEY (`ShopID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `cart`
---
-ALTER TABLE `cart`
-    MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `complaint`
---
-ALTER TABLE `complaint`
-    MODIFY `ComplaintID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `delivery`
---
-ALTER TABLE `delivery`
-    MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-    MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-    MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-    MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-    MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `shop`
---
-ALTER TABLE `shop`
-    MODIFY `ShopID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

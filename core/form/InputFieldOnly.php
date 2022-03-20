@@ -15,7 +15,7 @@ class InputFieldOnly
     public string $type;
     public Model $model;
     public string $attribute;
-    public string $value;
+    public ?string $value ;
     public $classes = [];
     public string $interaction ='';
     public string $placeHolder= '' ;

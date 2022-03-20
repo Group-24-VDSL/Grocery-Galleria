@@ -99,7 +99,7 @@ abstract class Model implements JsonSerializable
                 if (!is_string($ruleName)) {
                     $ruleName = $rule[0];
                 }
-                if ($ruleName === self::RULE_REQUIRED && !$value && $value !== 0 && $value !== '0') {
+                if ($ruleName === self::RULE_REQUIRED  && !$value && $value !== 0 && $value !== '0') {
                     $this->addErrorForRule($attribute, self::RULE_REQUIRED);
                 }
                 if ($ruleName === self::RULE_EMAIL &&  !filter_var($value, FILTER_VALIDATE_EMAIL)) {

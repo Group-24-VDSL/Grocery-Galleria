@@ -9,3 +9,13 @@ sidebarBtn.onclick = function () {
         sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
     } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
 };
+
+const imageInput = document.getElementById('ProfilePic');
+const imageOutput = document.getElementById('output');
+imageInput.onchange = evt => {
+    const [file] = imageInput.files;
+    if (file) {
+        imageOutput.src = URL.createObjectURL(file);
+    }
+
+}
