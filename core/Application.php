@@ -14,6 +14,7 @@ use SecurityLib\Strength;
 use SendGrid;
 use SendGrid\Mail\From;
 use Stripe\StripeClient;
+use Pusher\Pusher;
 
 class Application
 {
@@ -31,6 +32,7 @@ class Application
     public Generator $generator;
     public SendGrid  $sendgrid;
     public StripeClient $stripe;
+    public Pusher $pusher;
     public From $emailfrom;
     public Logger $logger;
     public View $view;
