@@ -69,7 +69,7 @@ class User extends UserModel
             'Customer' => '/',
             'Shop' => '/dashboard/shop/products',
             'Rider' => '/rider/order',
-            'Delivery' => '/dashboard/delivery/vieworder',
+            'Delivery' => '/dashboard/delivery/viewdelivery',
             'Staff' => '/dashboard/staff/products',
             default => '/',
         };
