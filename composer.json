@@ -20,7 +20,6 @@
         "ext-json": "*",
         "stripe/stripe-php": "^7.103",
         "monolog/monolog": "^2.3",
-        "pusher/pusher-php-server": "^7.0",
-        "koolreport/core": "^5.5"
+        "pusher/pusher-php-server": "^7.0"
     }
 }
