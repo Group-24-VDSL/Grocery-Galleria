@@ -65,14 +65,36 @@ class User extends UserModel
 
     public function homepage(): string
     {
-        return match ($this->Role) {
-            'Customer' => '/',
-            'Shop' => '/dashboard/shop/products',
-            'Rider' => '/rider/order',
-            'Delivery' => '/dashboard/delivery/vieworder',
-            'Staff' => '/dashboard/staff/products',
-            default => '/',
-        };
+        $url = '' ;
+        switch ($this->Role) {
+            case 'Customer':
+                $url = '/';
+                break ;
+            case 'Shop':
+                $url = '/dashboard/shop/products';
+                break ;
+            case 'Rider':
+                $url = '/rider/order';
+                break ;
+            case 'Delivery':
+                $url = '/dashboard/delivery/vieworder';
+                break ;
+            case 'Staff':
+                $url = '/dashboard/staff/products';
+                break ;
+            default :
+                $url = '/' ;
+        }
+        return $url ;
+
+//            case 'Customer' : return ['/'] ,
+//            'Shop' => '/dashboard/shop/products',
+//            'Rider' => '/rider/order',
+//            'Delivery' => '/dashboard/delivery/vieworder',
+//            'Staff' => '/dashboard/staff/products',
+//            default => '/',
+//        ;
+
     }
 
     public function getDisplayName(): string
