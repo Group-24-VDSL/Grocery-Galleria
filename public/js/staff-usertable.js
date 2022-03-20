@@ -6,130 +6,144 @@ const URLRider = host + "/api/getriderstaff";
 const URLDelivery = host + "/api/getdeliverystaff";
 const URLSystem = host + "/api/getsystemstaff";
 
-const ItemTable = document.getElementById('item-table');
+const ItemHeader = document.getElementById('user-table-head');
+const ItemBody = document.getElementById('user-table-body');
 
 $(document).ready(function () {
     $(".btn-tab").click(function () {
-        $('#item-table').empty();
-        $('#table-header').empty();
+        $(ItemHeader).empty();
+        $(ItemBody).empty();
         let URLUser;
+        let User = $(this).data("user");
+        const headerRow = document.createElement('tr');
         switch ($(this).data("user")) {
             case "shop":
-                URLUser=URLShop;
-                const headerRow = document.createElement('ul');
+                URLUser = URLShop;
                 headerRow.innerHTML = `
-                <ul>
-                <li>UserID</li>
-                <li>Name</li>
-                <li>Email</li>
-                <li>Contact</li>
-                <li>NIC</li>
-                <li>Status</li>
-                </ul>
+                <th>Shop ID</th>
+                <th>Shop Name</th>
+                <th>Address</th>
+                <th>Contact Person</th>
+                <th>Contact Number</th>
+                <th>City</th>
+                <th>Suburb</th>
+                <th>Category</th>
+                <th>Actions</th>
                 `;
                 break;
             case "rider":
-                URLUser=URLRider;
+                URLUser = URLRider;
+                headerRow.innerHTML = `
+                <th>Rider ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>NIC</th>
+                <th>Contact Number</th>
+                <th>City</th>
+                <th>Suburb</th>
+                <th>Rider Type</th>
+                <th>Actions</th>
+                `;
                 break;
             case "delivery":
-                URLUser=URLDelivery;
+                URLUser = URLDelivery;
+                headerRow.innerHTML = `
+                <th>Delivery Staff ID</th>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>City</th>
+                <th>Suburb</th>
+                <th>Actions</th>
+                `;
                 break;
             case "system":
-                URLUser=URLSystem;
+                URLUser = URLSystem;
+                headerRow.innerHTML = `
+                <th>Staff ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Actions</th>
+                `;
+                break;
         }
-
+        ItemHeader.appendChild(headerRow);
         $.getJSON(URLUser, function (Items) {
             Items.forEach(Item => {
-                    const itemRow = document.createElement('ul');
-                    itemRow.classList.add('row');
-                switch ($(this).data("user")) {
+                const itemRow = document.createElement('tr');
+                switch (User) {
                     case "shop":
-
                         itemRow.innerHTML = `
-                <li class="row-name">${Item.ShopID}</li>
-                <li class="row-name">${Item.Name}</li>
-                <li class="row-brand">${Item.Brand}</li>
-                <li class="row-unit">${Item.Unit}</li>
-                <li class="row-minWeight">${Item.UWeight}</li>
-                <li class="row-mrp">${Item.MRP}</li>
-                <li class="row-IncStep">${Item.MaxCount}</li>
-                <li class="row-ubutton">
+                <td>${Item.ShopID}</td>
+                <td>${Item.ShopName}</td>
+                <td>${Item.Address}</td>
+                <td>${Item.Name}</td>
+                <td>${Item.ContactNo}</td>
+                <td>${Item.City}</td>
+                <td>${Item.Suburb}</td>
+                <td>${Item.RiderType}</td>
+                <td class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
-                </li>
+                </td>
                 `;
-
                         break;
                     case "rider":
                         itemRow.innerHTML = `
-                <li class="row-name">${Item.ShopID}</li>
-                <li class="row-name">${Item.Name}</li>
-                <li class="row-brand">${Item.Brand}</li>
-                <li class="row-unit">${Item.Unit}</li>
-                <li class="row-minWeight">${Item.UWeight}</li>
-                <li class="row-mrp">${Item.MRP}</li>
-                <li class="row-IncStep">${Item.MaxCount}</li>
-                <li class="row-ubutton">
+                <td class="row-name">${Item.Name}</td>
+                <td class="row-name">${Item.StaffID}</td>
+                <td class="row-unit">${Item.Email}</td>
+                <td class="row-mrp">${Item.ContactNo}</td>
+                <td class="row-IncStep">${Item.City}</td>
+                <td class="row-IncStep">${Item.Suburb}</td>
+                <td class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
-                </li>
+                </td>
                 `;
                         break;
                     case "delivery":
                         itemRow.innerHTML = `
-                <li class="row-name">${Item.ShopID}</li>
-                <li class="row-name">${Item.Name}</li>
-                <li class="row-brand">${Item.Brand}</li>
-                <li class="row-unit">${Item.Unit}</li>
-                <li class="row-minWeight">${Item.UWeight}</li>
-                <li class="row-mrp">${Item.MRP}</li>
-                <li class="row-IncStep">${Item.MaxCount}</li>
-                <li class="row-ubutton">
+                <td class="row-name">${Item.StaffID}</td>
+                <td class="row-name">${Item.Name}</td>
+                <td class="row-unit">${Item.Email}</td>
+                <td class="row-mrp">${Item.ContactNo}</td>
+                <td class="row-IncStep">${Item.City}</td>
+                <td class="row-IncStep">${Item.Suburb}</td>
+                <td class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
-                </li>
+                </td>
+                
                 `;
                         break;
                     case "system":
                         itemRow.innerHTML = `
-                <li class="row-name">${Item.ShopID}</li>
-                <li class="row-name">${Item.Name}</li>
-                <li class="row-brand">${Item.Brand}</li>
-                <li class="row-unit">${Item.Unit}</li>
-                <li class="row-minWeight">${Item.UWeight}</li>
-                <li class="row-mrp">${Item.MRP}</li>
-                <li class="row-IncStep">${Item.MaxCount}</li>
-                <li class="row-ubutton">
+                <td class="row-name">${Item.StaffID}</td>
+                <td class="row-name">${Item.Name}</td>
+                <td class="row-unit">${Item.Email}</td>
+                <td class="row-mrp">${Item.ContactNo}</td>
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
-                </li>
+                <td class="row-ubutton">
+                </td>
                 `;
+                        ItemBody.appendChild(itemRow);
+                        break;
+                    default:
+                        itemRow.innerHTML = `<td>Error</td>
+                        `
+
                 }
-                ItemTable.appendChild(itemRow);
-                }
-            )
-        }).then(function (){
+
+                ItemBody.appendChild(itemRow);
+                console.log(ItemBody);
+            }
+        )
+        }).then(function () {
 
             const searchbox = document.getElementById("product-search");
-            searchbox.addEventListener("focus",function (){
-                console.log("hello")
-                const itemBtn = document.getElementsByClassName('btn-row')[0];
-                $(itemBtn).trigger("click");
-            })
-            searchbox.addEventListener("keyup",function (){
-                let input = document.getElementById("product-search").value.toUpperCase();
-                let table = document.getElementById("item-table");
-                items = table.getElementsByClassName("row");
-                Array.prototype.forEach.call(items,function(ulelement) {
-                    let brand = ulelement.getElementsByClassName("row-brand")[0].textContent || ulelement.getElementsByClassName("row-brand")[0].innerText;
-                    let name = ulelement.getElementsByClassName("row-name")[0].textContent || ulelement.getElementsByClassName("row-name")[0].innerText;
-                    if (name.toUpperCase().indexOf(input) > -1 || brand.toUpperCase().indexOf(input) >-1 ) {
-                        ulelement.style.display = "";
-                    } else {
-                        ulelement.style.display = "none";
-                    }
 
-                });
-            });
         })
     })
-    $('#btn-vege').trigger('click');
 
 
 })
