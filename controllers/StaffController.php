@@ -4,8 +4,10 @@ namespace app\controllers;
 
 use app\core\db\DBModel;
 use app\models\Customer;
+use app\models\OrderCart;
 use app\models\Orders;
 use app\models\Shop;
+use app\models\ShopItem;
 use app\models\ShopOrder;
 use app\models\Staff;
 use app\core\Application;
@@ -131,11 +133,13 @@ class StaffController extends Controller
         return $this->render('staff/view-orders');
     }
 
-    public function vieworderdetails()
-    {
-        $this->setLayout('headeronly-staff');
-        return $this->render('staff/view-orders-details');
-    }
+//    public function vieworderdetails(Request $request)
+//    {
+//        $this->setLayout('headeronly-staff');
+//        $OrderID = $request->getBody()["OrderID"];
+//
+//        return $this->render('staff/view-orders-details');
+//    }
 
     public function viewitems()
     {
@@ -160,9 +164,22 @@ class StaffController extends Controller
     public function addcomplaint(Request $request)
     {
         $complaint = new Complaint();
+
         $this->setLayout("headeronly-staff");
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
+
+            $complaint->ComplaintDate =  date("d-m-Y");
+
+            $OrderID = $complaint->OrderID ;
+            $order = Orders::findOne(['OrderID' => $OrderID]);
+            if(!$order){
+                Application::$app->session->setFlash("warning", "Order is not in the system");
+                Application::$app->response->redirect("/dashboard/staff/addcomplaint");
+            }
+            $complaint->OrderDate = $order->OrderDate;
+
+
 
             if ($complaint->validate() && $complaint->save()) {
                 Application::$app->session->setFlash("success", "Complaint Saved.");
@@ -217,6 +234,70 @@ class StaffController extends Controller
             'loginmodel' => $user
         ]);
     }
+//-> view system order details by 19001541
+
+//    public function vieworderdetails(Request $request)
+//    {
+//        $this->setLayout('headeronly-staff');
+//        $OrderID = $request->getBody()["OrderID"];
+//
+//        $ShopCount = $request->getBody()["ShopCount"];
+//
+////        var_dump($ShopCount);
+////        var_dump($OrderID);
+//
+//        $order = Orders::findOne(["OrderID" => $OrderID]);
+////        var_dump($order);
+//        $CustomerID = $order->CustomerID;
+//        $customer = Customer::findOne(["CustomerID" => $CustomerID]);
+//
+//        $carts = OrderCart::findAll(["CartID" => $order->CartID]);
+//        $shopOrders = ShopOrder::findAll(["CartID" => $order->CartID]);
+//
+//
+//        $shops = [];
+//
+//        foreach ($shopOrders as $shopOrder) {
+//            $ItemsArray = [];
+//            $itemList = [];
+//            $shopWeight = 0;
+////            var_dump($shopOrder);
+//
+//
+//            $shop = Shop::findOne(["ShopID" => $shopOrder->ShopID]);
+//
+//            $i = 0;
+//            $orderCarts = OrderCart::findAll(["ShopID" => $shopOrder->ShopID, "CartID" => $order->CartID]);
+//
+//            foreach ($orderCarts as $cart) {
+////                var_dump($cart->ItemID);
+//
+//                $shopItem = ShopItem::findOne(["ItemID" => $cart->ItemID]);
+//                $systemItem = Item::findOne(["ItemID" => $cart->ItemID]);
+//
+////                $itemList[$i] = ["shopItem"=>$shopItem, "systemItem"=>$systemItem];
+//
+//
+//                array_push($itemList, ["shopItem" => $shopItem, "systemItem" => $systemItem , "quantity" => $cart->Quantity]);
+//
+//                $shopWeight = ($cart->Quantity * $systemItem->UWeight) / 1000;
+////                var_dump($shopItem);
+//
+//            }
+//
+//            $ItemsArray[] = $itemList;
+//            $i += 1;
+//
+//
+//            $shops[$shopOrder->ShopID] = ["shop" => $shop, "shopOrder" => $shopOrder, "itemList" => $ItemsArray, "shopWeight" => $shopWeight];
+//        }
+//
+//
+//        return $this->render('staff/view-orders-details',
+//            ['order' => $order, 'customer' => $customer, 'shops' => $shops]);
+//
+//
+//    }
 
 
 }
