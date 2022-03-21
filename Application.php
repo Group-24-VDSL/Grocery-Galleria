@@ -57,19 +57,13 @@ class Application
 
         $this->authMiddleware=new AuthMiddleware([
             'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
-
             'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','getRiderLocationData'],
-
             'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
-
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','getItem', 'getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','getCustomer','vieworderdetails'],
-
             'Shop' => ['vieworder','productOverview','productOverview','viewitems','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'
                        ,'updateOngoingShopItem','updateOngoingShopItem','getShopOrders','getShopOrder','getDelivery','getShopItems','updateItem','profilesettings','profileUpdate','abc','safetystock'],
-
             'Rider' => ['vieworder','order','riderLocation'],
-
-            "Common" => ['logout','profileUpdate','test']
+            'Common' => ['logout','profileUpdate','test']
         ]);
 
         $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
@@ -118,7 +112,7 @@ class Application
 
     public static function getSuburb(){
         return self::$app->session->get('suburb');
-    }
+}
 
     public function run()
     {
@@ -160,7 +154,9 @@ class Application
     public function logout(){
         $this->user = null;
         $this->session->remove('user');
+        $this->session->remove('role');
+        $this->session->remove('city');
+        $this->session->remove('suburb');
         return true;
-
     }
 }
