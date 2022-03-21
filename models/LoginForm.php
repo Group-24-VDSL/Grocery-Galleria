@@ -3,7 +3,6 @@
 namespace app\models;
 
 use app\core\Application;
-
 use app\core\Model;
 
 
@@ -39,4 +38,5 @@ class LoginForm extends Model
     {
         return [];
     }
+
 }

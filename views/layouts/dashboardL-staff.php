@@ -71,6 +71,12 @@
         </li>
         <li>
             <a href="/dashboard/staff/profilesettings">
+                <i class='bx bxs-user'></i>
+                <span class="link-name">Profile</span>
+            </a>
+        </li>
+        <li>
+            <a href="/settings">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>

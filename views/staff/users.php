@@ -25,7 +25,7 @@
                 <li class="row-contact">0777685432</li>
                 <li class="row-nic">976754341V</li>
                 <li class="row-checkbox">
-                        <input type="checkbox" />
+                    <input type="checkbox" />
                 </li>
             </ul>
         </div>

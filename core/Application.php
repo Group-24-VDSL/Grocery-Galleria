@@ -8,6 +8,7 @@ use app\models\User;
 use Exception;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Pusher\Pusher;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
@@ -32,6 +33,7 @@ class Application
     public SendGrid  $sendgrid;
     public StripeClient $stripe;
     public From $emailfrom;
+    public Pusher $pusher;
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
@@ -53,11 +55,12 @@ class Application
         $this->session=new Session();
 
         $this->authMiddleware=new AuthMiddleware([
-            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','shopOrderAnalytics'],
+            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor','shopOrderAnalytics'],
             'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','profile'],
-            'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart'],
+            'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
-            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','shopOrderAnalytics','getshopmonthlyorders','getmonthorders','getmonthrevenues','getmonthlyrevenues','itemsales','getsales','getShopItemList','shopOrderAnalytics','shopincome'],
+            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','shopOrderAnalytics','getshopmonthlyorders','getmonthorders','getmonthrevenues',
+                'getmonthlyrevenues','itemsales','getsales','getShopItemList','shopOrderAnalytics','shopincome'],
             'Rider' => ['vieworder','order'],
             "Common" => ['logout','profileUpdate','test']
         ]);
@@ -76,6 +79,8 @@ class Application
         $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
 
 
+        $this->pusher = new Pusher($_ENV['PUSHER_APP_KEY'],$_ENV['PUSHER_APP_SECRET'],$_ENV['PUSHER_APP_ID'],['cluster'=>$_ENV['PUSHER_APP_CLUSTER'],'useTLS'=>true]);
+
         $userID = Application::$app->session->get('user');
         if ($userID) {
             $key = User::primaryKey();
@@ -90,18 +95,25 @@ class Application
     {
         return !self::$app->user;
     }
-
+    public static function getUserID(){
+        return self::$app->session->get('user');
+    }
     public static function getUser(){
         return self::$app->user;
     }
+
 
     public static function getUserRole(){
         return self::$app->user->Role??null;
     }
 
-    public static function getUserID(){
-        return self::$app->session->get('user');
+    public static function getCity(){
+        return self::$app->session->get('city');
     }
+
+    public static function getSuburb(){
+        return self::$app->session->get('suburb');
+}
 
     public function run()
     {
@@ -135,12 +147,15 @@ class Application
         $primaryValue = $user->{$primaryKey[0]};
         $this->session->set('user',$primaryValue);
         $this->session->set('role',$user->Role);
-        return true;
+        $this->session->set('city',$user->City);
+        $this->session->set('suburb',$user->Suburb);
+        return $this->user->homepage();
     }
 
     public function logout(){
         $this->user = null;
         $this->session->remove('user');
+        return true;
 
     }
 }

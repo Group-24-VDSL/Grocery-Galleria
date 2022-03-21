@@ -41,4 +41,9 @@ class TemporaryCart extends DBModel
     {
         return ['ItemID','ShopID', 'CustomerID', 'Quantity'];
     }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
+    }
 }

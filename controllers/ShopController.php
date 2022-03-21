@@ -15,9 +15,42 @@ use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
 use SendGrid\Mail\TypeException;
+/**
+ * @throws TypeException
+ */
 
 class ShopController extends Controller
 {
+    public function shopRegister(Request $request)
+    {
+        $this->setLayout('register');
+        $user = new Shop(); // Create customer
+        $user->loadData($request->getBody());
+        if ($request->isPost()) {
+            $userid = AuthController::register($request,'Shop');
+            if($userid){
+                $user->ShopID = $userid; //save the ShopID = UserID
+                if($user->validate() && $user->save()){
+                    Application::$app->session->setFlash('success', 'Registration Success');
+                    $status = AuthController::verificationSend($user->ShopID,$user->Name,$user->Email);
+                    if($status){
+                    Application::$app->response->redirect('/login');
+                    }
+                }else{
+                    Application::$app->session->setFlash('error', 'Registration Failed');
+                    $this->setLayout('register');
+                    return $this->render("shop/register", ['model' => $user]);
+                }
+            }else {
+                Application::$app->session->setFlash('error', 'Registration Failed');
+                $this->setLayout('register');
+                return $this->render("shop/register", ['model' => $user]);
+            }
+        }
+        return $this->render("shop/register", [
+            'model' => $user
+        ]);
+    }
 
     public function showShop()
     {
@@ -215,33 +248,20 @@ class ShopController extends Controller
     }
 
     public function vieworderdetails(Request $request){
-
-
-        $shoporder = new ShopOrder() ;
         $this->setLayout('headeronly-staff');
-
-        //var_dump($request ->getBody());
         $ShopID = $request ->getBody()["ShopID"];
         $CartID = $request ->getBody()["CartID"];
 
         $shoporder = ShopOrder ::findOne([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
         $cartitems = OrderCart ::findAll([ "ShopID" => $ShopID ,"CartID" => $CartID]);
-
-        //var_dump($cartitems);
-
         $shopitems = [];
 
         foreach($cartitems as $cartitem){
             $shopitem = ShopItem::findOne(['ItemID'=>$cartitem->ItemID,'ShopID'=>$cartitem->ShopID]);
             $item = Item::findOne(['ItemID'=>$cartitem->ItemID]);
-            //   var_dump($shopitem);
-            //   var_dump($item);
             $shopitems[$cartitem->ShopID][$cartitem->ItemID]=[$shopitem,$item];
-            //   var_dump($shopitem);
         }
 
-        //var_dump($cartitems);
 
         return $this->render('shop/view-order-details',['shoporder'=>$shoporder,'cartitems'=>$cartitems, 'shopitem'=>$shopitems , 'item'=>$item, 'model'=>$shoporder]);
     }
@@ -286,39 +306,39 @@ class ShopController extends Controller
     }
 
 
-    /**
-     * @throws TypeException
-     */
-    public function shopRegister(Request $request)
-    {
-        $this->setLayout('register');
-        $user = new Shop(); // Create customer
-        $user->loadData($request->getBody());
-        if ($request->isPost()) {
-            $userid = AuthController::register($request,'Shop');
-            if($userid){
-                $user->ShopID = $userid; //save the ShopID = UserID
-                if($user->validate() && $user->save()){
-                    Application::$app->session->setFlash('success', 'Registration Success');
-                    $status = AuthController::verificationSend($user->ShopID,$user->Name,$user->Email);
-                    if($status){
-                    Application::$app->response->redirect('/login');
-                    }
-                }else{
-                    Application::$app->session->setFlash('error', 'Registration Failed');
-                    $this->setLayout('register');
-                    return $this->render("shop/register", ['model' => $user]);
-                }
-            }else {
-                Application::$app->session->setFlash('error', 'Registration Failed');
-                $this->setLayout('register');
-                return $this->render("shop/register", ['model' => $user]);
-            }
-        }
-        return $this->render("shop/register", [
-            'model' => $user
-        ]);
-    }
+//    /**
+//     * @throws TypeException
+//     */
+//    public function shopRegister(Request $request)
+//    {
+//        $this->setLayout('register');
+//        $user = new Shop(); // Create customer
+//        $user->loadData($request->getBody());
+//        if ($request->isPost()) {
+//            $userid = AuthController::register($request,'Shop');
+//            if($userid){
+//                $user->ShopID = $userid; //save the ShopID = UserID
+//                if($user->validate() && $user->save()){
+//                    Application::$app->session->setFlash('success', 'Registration Success');
+//                    $status = AuthController::verificationSend($user->ShopID,$user->Name,$user->Email);
+//                    if($status){
+//                    Application::$app->response->redirect('/login');
+//                    }
+//                }else{
+//                    Application::$app->session->setFlash('error', 'Registration Failed');
+//                    $this->setLayout('register');
+//                    return $this->render("shop/register", ['model' => $user]);
+//                }
+//            }else {
+//                Application::$app->session->setFlash('error', 'Registration Failed');
+//                $this->setLayout('register');
+//                return $this->render("shop/register", ['model' => $user]);
+//            }
+//        }
+//        return $this->render("shop/register", [
+//            'model' => $user
+//        ]);
+//    }
 
     public function itemsales(Request $request)
     {

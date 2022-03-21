@@ -11,7 +11,7 @@ class ShopOrder extends DBModel
     public string $Date = '';
     public float $ShopTotal = 0;
     public int $Status = 0 ;
-    public string $CompleteDate = '' ;
+    public string $CompleteDate = '';
 
     public static function tableName(): string
     {
@@ -42,5 +42,10 @@ class ShopOrder extends DBModel
     public function jsonarray(): array
     {
         return $this->attributes();
+    }
+
+    public function excludeonupdateattributes(): array
+    {
+        return [];
     }
 }
