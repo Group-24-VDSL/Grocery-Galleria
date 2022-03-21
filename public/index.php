@@ -119,6 +119,9 @@ $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOng
 $app->router->get('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
+$app->router->get('/dashboard/shop/analytics',[ShopController::class,'shopincome']);
+$app->router->get('/dashboard/shop/itemsales',[ShopController::class,'itemsales']);
+
 
 //rider
 $app->router->get('/rider/register',[RiderController::class,'riderRegister']);
@@ -138,8 +141,8 @@ $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
-$app->router->get('/api/shop',[APIController::class,'getShop']);
-$app->router->get('/api/shops',[APIController::class,'getAllShop']);
+$app->router->get('/api/shop',[ShopController::class,'getShop']);
+$app->router->get('/api/shops',[ShopController::class,'getAllShop']);
 $app->router->get('/api/getcustomer',[APIController::class,'getCustomer']);
 
 //api - customer
@@ -156,9 +159,15 @@ $app->router->get('/api/getshoporders',[APIController::class,'getShopOrders']);
 $app->router->get('/api/getshoporder',[APIController::class,'getShopOrder']);
 $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
-$app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
-$app->router->post('/api/updatepassword',[TestController::class,'abc']);
-$app->router->post('/api/getsafetystock',[TestController::class,'safetystock']);
+$app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem'])
+
+$app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
+$app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);
+$app->router->get('/api/getshoplastmonthlyrevenues',[ShopController::class,'getmonthlyrevenues']);
+$app->router->get('/api/getshoplastmonthrevenues',[ShopController::class,'getmonthrevenues']);
+$app->router->get('/api/getshopitemlist',[ShopController::class,'getShopItemList']);
+$app->router->get('/api/getshopitemsales',[ShopController::class,'getsales']);
+
 
 //api - delivery
 $app->router->get('/api/getrider',[APIController::class,'getRider']);
