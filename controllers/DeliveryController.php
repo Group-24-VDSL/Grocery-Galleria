@@ -138,8 +138,12 @@ class DeliveryController extends Controller
         $staff = new Staff();
         $city = Application::getCity();
         $querySql =
-            "SELECT * FROM `orders` AS orderTable 
-            WHERE orderTable.City = $city AND orderTable.Status = 0";
+            "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost FROM orders od
+                INNER JOIN cart crt ON
+                od.CartID = crt.CartID
+                INNER JOIN customer cus ON
+                crt.CustomerID = cus.CustomerID
+                WHERE od.Status=0 AND od.City=$city";
         $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
         return json_encode($newDeliveries);
 
@@ -147,6 +151,20 @@ class DeliveryController extends Controller
 
     public function onDelivery()
     {
+        $staff = new Staff();
+        $city = Application::getCity();
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=1 AND od.City=$city";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
 
     }
 
