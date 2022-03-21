@@ -116,8 +116,8 @@ $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'viewitems']);
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
-$app->router->get('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
-$app->router->post('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
+//$app->router->get('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
+$app->router->post('/dashboard/shop/profilesettings',[TestController::class,'abc']);
 $app->router->post('/dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
 
 //rider

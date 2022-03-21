@@ -14,7 +14,7 @@ use app\models\ShopOrder;
 <div class="content">
     <div class="update-content">
         <div class="core shop-item-table">
-            <h1 class="heading">Ongoing <span>Products</span></h1>
+            <h1 class="heading">Shop <span>Products</span></h1>
             <div class="container-items">
 
                 <table class="table-item small-first-col">

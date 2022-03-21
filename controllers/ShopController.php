@@ -205,7 +205,7 @@ class ShopController extends Controller
 
             if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item update is success" );
-                Application::$app->response->redirect("/dashboard/shop/products");
+//                Application::$app->response->redirect("/dashboard/shop/products");
             } else {
                 Application::$app->session->setFlash("warning", "Validation Failed.");
                 return $this->render("shop/core-products"

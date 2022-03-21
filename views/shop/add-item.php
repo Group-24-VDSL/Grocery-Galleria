@@ -45,7 +45,7 @@
             <?php echo $form->fieldonly($model, "MinLeadTime", '') ?>
         </div>
         <div class="inputBox">
-            <p style="font-size: 12px ; color: #a94442">Lead Time : Time taken to supply the shop items</p>
+            <p style="font-size: 12px ; color: #a94442">Lead Time : Time taken to supply the shop items <br> * SPECIAL - Lead time sections can only be filled when particular item is added </p>
         </div>
         <div class="inputBox">
             <?php echo $form->fieldonly($model, "ShopID")->setValue(5)->hiddenField()?>

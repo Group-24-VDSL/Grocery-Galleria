@@ -82,14 +82,14 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span class="dashboard">Shop Dashboard</span>
         </div>
-        <div class="search-box">
-            <input type="search" id="" placeholder="Search.... " />
-            <button class="bx bx-search search"></button>
-        </div>
-        <div class="profile-details">
-            <i class="bx bx-user"></i>
-            <span class="user-name">Dilshan98</span>
-        </div>
+<!--        <div class="search-box">-->
+<!--            <input type="search" id="" placeholder="Search.... " />-->
+<!--            <button class="bx bx-search search"></button>-->
+<!--        </div>-->
+<!--        <div class="profile-details">-->
+<!--            <i class="bx bx-user"></i>-->
+<!--            <span class="user-name">Dilshan98</span>-->
+<!--        </div>-->
     </nav>
 
     <div class="home-content">
