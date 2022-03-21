@@ -41,8 +41,11 @@ abstract class DBModel extends Model
             $where[$key] = $this->{$key};
         }
         $dbObj = self::findOne($where);
-        $dbObjarr = array_slice((array)$dbObj, 0, -1); // db object to array
-        $objarr = array_slice((array)$this, 0, -1); // this object to array
+
+        $dbObjarr = (array)$dbObj; // db object to array
+        $objarr = (array)$this; // this object to array
+        unset($objarr['errors']);
+        unset($dbObjarr['errors']);
         $result = array_diff_assoc($objarr,$dbObjarr);
         if(!empty($this->excludeonupdateattributes())) {
             foreach ($this->excludeonupdateattributes() as $excludedkey) { //remove from the result. like confirmpassword etc.
