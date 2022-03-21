@@ -15,6 +15,7 @@
 3. Populate the .env file referencing the .env.sample
 4. Use Stripe CLI to enable forwarding of the payment webhooks
 `stripe listen --forward-to localhost/pay`
+5. https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2
 
 
 ---

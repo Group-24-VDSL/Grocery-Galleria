@@ -306,39 +306,6 @@ class ShopController extends Controller
     }
 
 
-//    /**
-//     * @throws TypeException
-//     */
-//    public function shopRegister(Request $request)
-//    {
-//        $this->setLayout('register');
-//        $user = new Shop(); // Create customer
-//        $user->loadData($request->getBody());
-//        if ($request->isPost()) {
-//            $userid = AuthController::register($request,'Shop');
-//            if($userid){
-//                $user->ShopID = $userid; //save the ShopID = UserID
-//                if($user->validate() && $user->save()){
-//                    Application::$app->session->setFlash('success', 'Registration Success');
-//                    $status = AuthController::verificationSend($user->ShopID,$user->Name,$user->Email);
-//                    if($status){
-//                    Application::$app->response->redirect('/login');
-//                    }
-//                }else{
-//                    Application::$app->session->setFlash('error', 'Registration Failed');
-//                    $this->setLayout('register');
-//                    return $this->render("shop/register", ['model' => $user]);
-//                }
-//            }else {
-//                Application::$app->session->setFlash('error', 'Registration Failed');
-//                $this->setLayout('register');
-//                return $this->render("shop/register", ['model' => $user]);
-//            }
-//        }
-//        return $this->render("shop/register", [
-//            'model' => $user
-//        ]);
-//    }
 
     public function itemsales(Request $request)
     {
@@ -354,6 +321,23 @@ class ShopController extends Controller
 //        $user = new Shop;
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/shop-analytics');
+
+    // Shop section
+    public function getShop(Request $request, Response $response) // get shop details from DB
+    {
+        $response->setContentTypeJSON();
+        $shop = Shop::findOne(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
+        return json_encode($shop);
+    }
+
+
+    public function getAllShop(Request $request,Response $response)
+    {
+        $response->setContentTypeJSON();
+        $shops = Shop::findAll(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
+        return json_encode($shops);
+
+
     }
 }
     
