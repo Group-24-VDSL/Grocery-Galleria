@@ -62,7 +62,7 @@ class Application
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings',
                 'profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','itemReport','salesReportCurrent','salesReportLast','systemReports',
                 'shopReports','shopsReportMonthly','shopsReportYearly','getTotalOrders','getTotalUsers','productReports','getItemWeekReport','dailyRevenue','dailyTotOrders','pwdUpdate'],
-            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','pwdUpdate'],
+            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','pwdUpdate','profilesettings'],
             'Rider' => ['vieworder','order','riderLocation','pwdUpdate'],
             "Common" => ['logout','profileUpdate','test']
         ]);
