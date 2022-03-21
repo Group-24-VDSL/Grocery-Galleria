@@ -52,6 +52,7 @@ $(document).ready(function () {
                 <th>Delivery Staff ID</th>
                 <th>Name</th>
                 <th>Contact Number</th>
+                <th>Email</th>
                 <th>City</th>
                 <th>Suburb</th>
                 <th>Actions</th>
@@ -62,7 +63,6 @@ $(document).ready(function () {
                 headerRow.innerHTML = `
                 <th>Staff ID</th>
                 <th>Name</th>
-                <th>Address</th>
                 <th>Email</th>
                 <th>Contact Number</th>
                 <th>Actions</th>
@@ -83,7 +83,7 @@ $(document).ready(function () {
                 <td>${Item.ContactNo}</td>
                 <td>${Item.City}</td>
                 <td>${Item.Suburb}</td>
-                <td>${Item.RiderType}</td>
+                <td>${Item.Category}</td>
                 <td class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </td>
@@ -91,12 +91,15 @@ $(document).ready(function () {
                         break;
                     case "rider":
                         itemRow.innerHTML = `
+                <td class="row-name">${Item.RiderID}</td>
                 <td class="row-name">${Item.Name}</td>
-                <td class="row-name">${Item.StaffID}</td>
+                <td class="row-unit">${Item.Address}</td>
                 <td class="row-unit">${Item.Email}</td>
+                <td class="row-unit">${Item.NIC}</td>
                 <td class="row-mrp">${Item.ContactNo}</td>
                 <td class="row-IncStep">${Item.City}</td>
-                <td class="row-IncStep">${Item.Suburb}</td>
+                <td class="row-IncStep">${Item.City}</td>
+                <td class="row-IncStep">${Item.RiderType}</td>
                 <td class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </td>
@@ -104,12 +107,12 @@ $(document).ready(function () {
                         break;
                     case "delivery":
                         itemRow.innerHTML = `
-                <td class="row-name">${Item.StaffID}</td>
+                <td class="row-name">${Item.DelStaffID}</td>
                 <td class="row-name">${Item.Name}</td>
-                <td class="row-unit">${Item.Email}</td>
                 <td class="row-mrp">${Item.ContactNo}</td>
-                <td class="row-IncStep">${Item.City}</td>
-                <td class="row-IncStep">${Item.Suburb}</td>
+                <td class="row-unit">${Item.Email}</td>
+                <td class="row-unit">${Item.City}</td>
+                <td class="row-unit">${Item.Suburb}</td>
                 <td class="row-ubutton">
                     <button data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </td>
@@ -135,15 +138,15 @@ $(document).ready(function () {
                 }
 
                 ItemBody.appendChild(itemRow);
-                console.log(ItemBody);
             }
         )
         }).then(function () {
 
-            const searchbox = document.getElementById("product-search");
 
+            $('#user-table').DataTable();
         })
     })
+    $('#shop-tab').trigger('click');
 
 
 })
