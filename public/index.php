@@ -159,7 +159,7 @@ $app->router->get('/api/getshoporders',[APIController::class,'getShopOrders']);
 $app->router->get('/api/getshoporder',[APIController::class,'getShopOrder']);
 $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
-$app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem'])
+$app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
 
 $app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
 $app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);

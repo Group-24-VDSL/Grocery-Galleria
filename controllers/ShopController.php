@@ -342,7 +342,7 @@ class ShopController extends Controller
 //        $user = new Shop;
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/shop-analytics');
-
+    }
     // Shop section
     public function getShop(Request $request, Response $response) // get shop details from DB
     {
@@ -360,7 +360,7 @@ class ShopController extends Controller
 
 
     }
-}
+
     
 
 
