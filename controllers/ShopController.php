@@ -6,6 +6,7 @@ use app\core\Application;
 use app\core\Controller;
 use app\controllers\APIController;
 use app\core\Request;
+use app\core\Response;
 use app\models\Item;
 use app\models\OrderCart;
 use app\models\Shop;
@@ -172,6 +173,22 @@ class ShopController extends Controller
     }
 
 
+    // Shop section
+    public function getShop(Request $request, Response $response) // get shop details from DB
+    {
+        $response->setContentTypeJSON();
+        $shop = Shop::findOne(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
+        return json_encode($shop);
+    }
+
+
+    public function getAllShop(Request $request,Response $response)
+    {
+        $response->setContentTypeJSON();
+        $shops = Shop::findAll(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
+        return json_encode($shops);
+
+    }
 }
     
 

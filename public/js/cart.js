@@ -10,7 +10,7 @@ const URLAddtoCartAPI = host + "/api/addtocart";
 const URLDeletefromCartAPI = host + "/api/deletefromcart";
 const URLGetCartAPI = host + "/api/getcart";
 
-const URLGetCart = URLGetCartAPI.concat('?CustomerID=').concat('2');
+const URLGetCart = URLGetCartAPI;
 
 const totallabel = $('#GTotal');
 const subtotallabel = $('#subTotal');
@@ -92,7 +92,7 @@ function updatebutton(ShopID,ItemID) {
     let uweight = $('#quantity'.concat(ShopID).concat(ItemID)).attr('step');
 
     let passingvalue = Math.trunc(quantity / uweight);
-    let obj = {"ItemID": ItemID, "ShopID": ShopID, "Quantity": passingvalue, "CustomerID": 2}; //keys and values should be enclosed in double quotes
+    let obj = {"ItemID": ItemID, "ShopID": ShopID, "Quantity": passingvalue}; //keys and values should be enclosed in double quotes
     $.ajax({
         url : URLAddtoCartAPI,
         data : JSON.stringify(obj),
@@ -144,7 +144,7 @@ function update(ShopID,ItemID,UWeight,UnitPrice,MaxCount,method) {
 
 function remove(ShopID,ItemID,UnitPrice){
 
-    let obj = {"ItemID":ItemID,"ShopID":ShopID,"CustomerID":2};
+    let obj = {"ItemID":ItemID,"ShopID":ShopID};
     $.post(URLDeletefromCartAPI,JSON.stringify(obj)).done(function (data){
         if(JSON.parse(data)['success'] === 'ok'){
             let numofshops = parseInt(numberofshops.text());
