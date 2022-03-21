@@ -8,11 +8,13 @@ class ImageField
 {
     public Model $model;
     public string $attribute;
+    public $classes = [];
 
 
-    public function __construct(Model $model, string $attribute){
+    public function __construct(Model $model, string $attribute, $classes = []){
         $this->model = $model;
         $this->attribute = $attribute;
+        $this->classes=$classes;
     }
 
     public function __toString(): string
