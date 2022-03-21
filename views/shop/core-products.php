@@ -127,11 +127,8 @@ use app\models\ShopOrder;
                         </div>
 
                     </div>
-                    <!--            --><?php //echo $form->fieldonly($model,"ShopID")->hiddenField();?>
-                    <!--            --><?php //echo $form->fieldonly($model,"Enabled")->hiddenField();?>
-                    <input id="Enabled" name="Enabled" hidden>
 
-                    <!--                <div class="inputBox"></div>-->
+                    <input id="Enabled" name="Enabled" hidden>
 
                     <div class="inputBox btn-div">
                         <button type="submit" class="btn update">Update</button>

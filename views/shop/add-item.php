@@ -2,6 +2,9 @@
 /** @var $model \app\models\ShopItem * */
 /** @var $form app\core\form\Form */
 ?>
+
+<script src="/js/AddItem.js"></script>
+
 <div class="core sub-core">
     <h1 class="heading">Add <span>Products</span></h1>
     <div class="container-items">
@@ -42,7 +45,7 @@
             <?php echo $form->fieldonly($model, "MinLeadTime", '') ?>
         </div>
         <div class="inputBox">
-            <p style="font-size: 10px ; color: #a94442">Lead Time : time that needs to ......</p>
+            <p style="font-size: 12px ; color: #a94442">Lead Time : Time taken to supply the shop items</p>
         </div>
         <div class="inputBox">
             <?php echo $form->fieldonly($model, "ShopID")->setValue(5)->hiddenField()?>
@@ -51,7 +54,7 @@
 
         <div class="inputBox"></div>
         <button class="btn">Submit</button>
-        <script src="/js/AddItem.js"></script>
+
         </form>
     </div>
 </div>

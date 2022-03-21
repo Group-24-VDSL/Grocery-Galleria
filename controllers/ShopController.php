@@ -242,17 +242,15 @@ class ShopController extends Controller
 //                    Application::$app->logger->debug("iiiii");
                     if ($tempshopitem->validate('update') && $tempshopitem->update()) {
                         Application::$app->response->redirect("/dashboard/shop/viewitems");
-//                        return $response->json('{"success":"ok"}');
-
+                        return $response->json('{"success":"ok"}');
                     }
-
                 }
                 return $response->json('{"success":"fail"}');
-
             }
         }
         return $response->json('{"success":"fail"}');
     }
+
 
     public function profilesettings(Request $request)
     {
