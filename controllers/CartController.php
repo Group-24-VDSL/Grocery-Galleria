@@ -17,6 +17,8 @@ use Stripe\Exception\SignatureVerificationException;
 use Stripe\Exception\UnexpectedValueException;
 use Stripe\Webhook;
 
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 
 class CartController extends Controller
 {
@@ -117,7 +119,32 @@ class CartController extends Controller
     /**
      * @throws ApiErrorException
      * @throws ForbiddenException
+     *
+     * [
+        'price_data' => [
+            'currency' => 'usd',
+            'unit_amount' => 1000,
+            'product_data' =>
+     *          [
+                'name' => 'test1',
+                ],
+            ],
+            'quantity' => 1,
+        ]
+     *
+     * [
+        'price_data' => [
+            'currency' => 'lkr',
+            'unit_amount' => $totalprice*100,
+            'product_data'=>[
+            'name' => 'Grocery Galleria Cart'
+            ]
+        ],
+        'quantity' => 1,
+    ]
      */
+
+
     public function proceedToCheckout(Request $request, Response $response)
     {
         if(Application::getUserRole() === "Customer") {
@@ -129,12 +156,28 @@ class CartController extends Controller
                 $domain = Application::$app->domain;
 
                 //There should be a procedure for checking the stock.
-                $this->checkStock(Application::getUserID());
+                $items = $this->checkStock(Application::getUserID());
                 //get the availible items
+
                 $shopcount = DBModel::query("SELECT COUNT(DISTINCT `ShopID`) FROM `temporarycart` WHERE CustomerID=".Application::getUserID()." AND Purchased=1",\PDO::FETCH_COLUMN);
                 $subprice = DBModel::query("SELECT SUM(tc.Quantity*si.UnitPrice) FROM temporarycart AS tc,shopitem AS si WHERE tc.ItemID = si.ItemID AND tc.ShopID = si.ShopID AND tc.CustomerID=".Application::getUserID()." AND tc.Purchased=1",\PDO::FETCH_COLUMN);
                 $deliveryfee = $this->getDeliveryFee($shopcount);
                 $totalprice = $subprice + $deliveryfee;
+
+                $arr = [];
+                foreach ($items as $index=>$item){
+                  $arr[$index] =   [
+                        'price_data' => [
+                            'currency' => 'lkr',
+                            'unit_amount' => $item["UnitPrice"]*100,
+                            'product_data' => [
+                                'name' => $item["Name"],
+                                'images' => [rtrim(Application::$app->domain, '/').$item["ItemImage"]],
+                            ],
+                        ],
+                        'quantity' => $item["Quantity"],
+                    ];
+                }
 
                 $checkout_session = Application::$app->stripe->checkout->sessions->create([
                     'payment_method_types' => ['card'],
@@ -149,16 +192,7 @@ class CartController extends Controller
                         'totalcost' => $totalprice
                     ],
                     'customer_email' => Application::$app->user->getEmail(),
-                    'line_items' => [[
-                        'price_data' => [
-                            'currency' => 'lkr',
-                            'unit_amount' => $totalprice*100,
-                            'product_data'=>[
-                                'name' => 'Grocery Galleria Cart'
-                            ]
-                        ],
-                        'quantity' => 1,
-                    ]],
+                    'line_items' => $arr,
                     'expires_at'=> time() + 3600,
                     'mode' => 'payment',
                     'success_url' => $domain . 'pay/success',
@@ -201,9 +235,13 @@ class CartController extends Controller
             http_response_code(400);
             exit();
         }
+        Application::$app->logger->debug($event->type);
+        Application::$app->logger->debug($event);
+        Application::$app->logger->debug("Veni");
         switch ($event->type) {
             case 'checkout.session.completed':
                 $checkoutSession = $event->data->object;
+                Application::$app->logger->debug("Vidi");
                 $this->fullfillOrder($checkoutSession);
                 break;
 
@@ -224,6 +262,11 @@ class CartController extends Controller
         $result = Application::$app->db->pdo->prepare($sql);
         $result->bindValue(":user",$user);
         $result->execute();
+        $sql ="SELECT tc.ItemID,tc.ShopID,tc.Quantity,si.UnitPrice,it.ItemImage,it.Name from `temporarycart` tc INNER JOIN `shopitem` si ON tc.ItemID = si.ItemID AND si.ShopID=tc.ShopID INNER JOIN `item` it ON it.ItemID=tc.ItemID WHERE tc.CustomerID=:user";
+        $result = Application::$app->db->pdo->prepare($sql);
+        $result->bindValue(":user",$user);
+        $result->execute();
+        return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function fullfillOrder($obj)
@@ -238,62 +281,69 @@ class CartController extends Controller
         $totalcost=filter_var($obj->metadata->totalcost,FILTER_SANITIZE_NUMBER_FLOAT);
         $pdo=Application::$app->db->pdo;
 
+        Application::$app->logger->debug("Vici");
 
         $customer = Customer::findOne(['CustomerID' => $customerid]);
-        if($customer){
-                $sql="INSERT INTO `cart` (CustomerID,Address) VALUES (:id,:address);";
-                $result = $pdo->prepare($sql);
-                $result->bindValue(":id",$customerid);
-                $result->bindValue(":address",$customer->Address);
-                $result->execute();
-
-                $cartid= $pdo->lastInsertId();
-
-                $sql="INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost,City,Suburb) VALUES (:cartid,:rec_name,:notes,:rec_contact,:delivery_fee,:totalcost,:city,:suburb);";
-                $result = $pdo->prepare($sql);
-                $result->bindValue(":cartid",$cartid);
-                $result->bindValue(":rec_name",$rec_name);
-                $result->bindValue(":notes",$notes);
-                $result->bindValue(":rec_contact",$rec_contact);
-                $result->bindValue(":delivery_fee",$delivery_fee);
-                $result->bindValue(":totalcost",$totalcost);
-                $result->bindValue(":city",$city);
-                $result->bindValue(":suburb",$suburb);
-                $result->execute();
-
-                $orderid=$pdo->lastInsertId();
-
-                $sql="INSERT INTO `ordercart` (CartID,ShopID,ItemID,Quantity,Total) SELECT :cartid AS CartID,tc.ShopID,tc.ItemID,tc.Quantity,(si.UnitPrice*tc.Quantity) AS Total from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND tc.ItemID=si.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid;";
-                $result = $pdo->prepare($sql);
-                $result->bindValue(":cartid",$cartid);
-                $result->bindValue(":customerid",$customerid);
-                $result->execute();
 
 
-                $sql="INSERT INTO `shoporder` (ShopID,CartID,ShopTotal) SELECT  tc.ShopID,:cartid AS CartID,SUM(si.UnitPrice*tc.Quantity) from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND si.ItemID=tc.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid GROUP BY tc.ShopID;";
-                $result = $pdo->prepare($sql);
-                $result->bindValue(":cartid",$cartid);
-                $result->bindValue(":customerid",$customerid);
-                $result->execute();
+            try{
+                if($customer){
+                    $sql="INSERT INTO `cart` (CustomerID,Date,Time) VALUES (:id,CURRENT_DATE,CURRENT_TIME);";
+                    $result = $pdo->prepare($sql);
+                    $result->bindValue(":id",$customerid);
+                    $result->execute();
+                    Application::$app->logger->debug("step 1");
+                    $cartid= $pdo->lastInsertId();
 
-                $sql ="INSERT INTO `payment` (OrderID,TotalPrice) VALUES (:orderid,:totalcost);";
-                $result = $pdo->prepare($sql);
-                $result->bindValue(":orderid",$orderid);
-                $result->bindValue(":totalcost",$totalcost);
-                $result->execute();
+                    $sql="INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost,City,Suburb,Status) VALUES (:cartid,:rec_name,:notes,:rec_contact,:delivery_fee,:totalcost,:city,:suburb,0);";
+                    $result = $pdo->prepare($sql);
+                    $result->bindValue(":cartid",$cartid);
+                    $result->bindValue(":rec_name",$rec_name);
+                    $result->bindValue(":notes",$notes);
+                    $result->bindValue(":rec_contact",$rec_contact);
+                    $result->bindValue(":delivery_fee",$delivery_fee);
+                    $result->bindValue(":totalcost",$totalcost);
+                    $result->bindValue(":city",$city);
+                    $result->bindValue(":suburb",$suburb);
+                    $result->execute();
 
-                $sql ="UPDATE `shopitem` si JOIN temporarycart tc ON tc.ItemID=si.ItemID AND tc.ShopID=si.ShopID SET si.Stock=(si.Stock-tc.Quantity) WHERE tc.CustomerID=:customerid AND (si.Stock-tc.Quantity) > 0 AND tc.Purchased=1;";
-                $result = $pdo->prepare($sql);
-                $result->bindValue(":customerid",$customerid);
-                $result->execute();
+                    $orderid=$pdo->lastInsertId();
+                    Application::$app->logger->debug("step 2");
 
-                $sql="DELETE FROM `temporarycart` WHERE `temporarycart`.`Purchased`=1 AND `temporarycart`.`CustomerID`=:customerid;";
-                $result = $pdo->prepare($sql);
-                $result->bindValue(":customerid",$customerid);
-                $result->execute();
+                    $sql="INSERT INTO `ordercart` (CartID,ShopID,ItemID,Quantity,Total) SELECT :cartid AS CartID,tc.ShopID,tc.ItemID,tc.Quantity,(si.UnitPrice*tc.Quantity) AS Total from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND tc.ItemID=si.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid;";
+                    $result = $pdo->prepare($sql);
+                    $result->bindValue(":cartid",$cartid);
+                    $result->bindValue(":customerid",$customerid);
+                    $result->execute();
+
+                    Application::$app->logger->debug("step 3");
+                    $sql="INSERT INTO `shoporder` (ShopID,CartID,ShopTotal,Status) SELECT  tc.ShopID,:cartid AS CartID,SUM(si.UnitPrice*tc.Quantity), 0 AS Status from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND si.ItemID=tc.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid GROUP BY tc.ShopID;";
+                    $result = $pdo->prepare($sql);
+                    $result->bindValue(":cartid",$cartid);
+                    $result->bindValue(":customerid",$customerid);
+                    $result->execute();
+                    Application::$app->logger->debug("step 4");
+
+                    $sql ="INSERT INTO `payment` (OrderID,TotalPrice) VALUES (:orderid,:totalcost);";
+                    $result = $pdo->prepare($sql);
+                    $result->bindValue(":orderid",$orderid);
+                    $result->bindValue(":totalcost",$totalcost);
+                    $result->execute();
+                    Application::$app->logger->debug("step 5");
+                    $sql ="UPDATE `shopitem` si JOIN temporarycart tc ON tc.ItemID=si.ItemID AND tc.ShopID=si.ShopID SET si.Stock=(si.Stock-tc.Quantity) WHERE tc.CustomerID=:customerid AND (si.Stock-tc.Quantity) > 0 AND tc.Purchased=1;";
+                    $result = $pdo->prepare($sql);
+                    $result->bindValue(":customerid",$customerid);
+                    $result->execute();
+                    Application::$app->logger->debug("step 6");
+                    $sql="DELETE FROM `temporarycart` WHERE `temporarycart`.`Purchased`=1 AND `temporarycart`.`CustomerID`=:customerid;";
+                    $result = $pdo->prepare($sql);
+                    $result->bindValue(":customerid",$customerid);
+                    $result->execute();
+                }
+
+                }catch (\PDOException $pdoex){
+                Application::$app->logger->debug($pdoex);
             }
-
-
 
     }
 
