@@ -41,8 +41,11 @@ abstract class DBModel extends Model
             $where[$key] = $this->{$key};
         }
         $dbObj = self::findOne($where);
-        $dbObjarr = array_slice((array)$dbObj, 0, -1); // db object to array
-        $objarr = array_slice((array)$this, 0, -1); // this object to array
+
+        $dbObjarr = (array)$dbObj; // db object to array
+        $objarr = (array)$this; // this object to array
+        unset($objarr['errors']);
+        unset($dbObjarr['errors']);
         $result = array_diff_assoc($objarr,$dbObjarr);
         if(!empty($this->excludeonupdateattributes())) {
             foreach ($this->excludeonupdateattributes() as $excludedkey) { //remove from the result. like confirmpassword etc.
@@ -150,6 +153,17 @@ abstract class DBModel extends Model
         $stmt->execute();
         return true;
     }
+
+    public static function returnProcedure($procedure,$input1,$input2)
+    {
+        $stmt = self::prepare("CALL $procedure(:ItemID,:ShopID)");
+        $stmt->bindValue(':ItemID',$input1);
+        $stmt->bindValue(':ShopID',$input2);
+        $stmt->execute();
+        $table = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $table;
+    }
+
     public static function callProcedure($procedure,$values=[])
     {
         if(empty($values)){
@@ -167,6 +181,25 @@ abstract class DBModel extends Model
         }
         return true;
 
+    }
+//SP to return values
+    public static function callProcedure1($procedure,$values=[],$out1,$out2)
+    {
+        if(empty($values)){
+            $stmt = self::prepare("CALL $procedure()");
+            $stmt->execute();
+        }else{
+            $keys = array_keys($values);
+            $sqlKeys = implode(",", array_map(fn($key) => ":$key", $keys));
+            $stmt = self::prepare("CALL $procedure($sqlKeys)");
+            foreach ($values as $key => $value) {
+                $stmt->bindValue(":$key",$value);
+            }
+            $stmt->execute();
+            $table = $stmt->fetch(\PDO::FETCH_CLASS);
+
+        }
+        return $table ;
     }
 
     //for your dirty queries
