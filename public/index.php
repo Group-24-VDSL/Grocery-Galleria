@@ -93,7 +93,8 @@ $app->router->get('/dashboard/staff/viewusers',[StaffController::class,'viewUser
 $app->router->get('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);
-$app->router->get('/dashboard/staff/vieworders',[StaffController::class,'vieworders']);
+$app->router->get('/dashboard/staff/vieworders',[StaffController::class,'viewOrders']);
+$app->router->get('/dashboard/staff/vieworder',[StaffController::class,'viewOrder']);
 $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
 $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
