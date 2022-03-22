@@ -2,12 +2,12 @@
 /** @var $model \app\models\Item * */
 /** @var $form app\core\form\Form */
 ?>
-<div class="core">
+<div class="core overflow-fix">
     <h1 class="heading">System <span>Products</span></h1>
     <div class="container-core">
         <ul id="tab=btns" class="tabs">
             <li>
-                <button data-href="?Category=0" id="btn-vege" class="btn-tab">Vegetables</button>
+                <button data-href="?Category=0" id="veg-tab-items" class="btn-tab">Vegetables</button>
             </li>
             <li>
                 <button data-href="?Category=1" class="btn-tab">Fruits</button>
@@ -22,33 +22,26 @@
                 <button data-href="?Category=4" class="btn-tab">Meat</button>
             </li>
         </ul>
-        <div class="table-header">
-            <ul>
-                <li>Image</li>
-                <li>Name</li>
-                <li>Brand</li>
-                <li>Unit</li>
-                <li>UnitWeight</li>
-                <li>MRP</li>
-                <li>MaxCount</li>
-                <li>Update</li>
-            </ul>
-        </div>
-        <div id="item-table" class="table-details scroller">
-            <!--            <ul class="row">-->
-            <!--                <li id="ItemImage" class="row-img">-->
-            <!--                    <img src="/views/shop/img/Pic915013.jpg" alt="" />-->
-            <!--                </li>-->
-            <!--                <li id="Name" class="row-name">Potato</li>-->
-            <!--                <li id="Brand" class="row-brand">Null</li>-->
-            <!--                <li id="Unit" class="row-unit">Kg</li>-->
-            <!--                <li id="UWeight" class="row-minWeight">300</li>-->
-            <!--                <li id="MRP" class="row-mrp">67</li>-->
-            <!--                <li id="MaxCount" class="row-IncStep">7</li>-->
-            <!--                <li class="row-ubutton">-->
-            <!--                    <a  class="btn-row" type="submit">Update</a>-->
-            <!--                </li>-->
-            <!--            </ul>-->
+
+        <div class="tab-content">
+            <div id="new" data-tab-content class="active">
+                <table id="Items" class="">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Unit</th>
+                        <th>UnitWeight</th>
+                        <th>MRP</th>
+                        <th>MaxCount</th>
+                        <th>Update</th>
+                    </tr>
+                    </thead>
+                    <tbody id="Item-info-rows" class="">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -166,7 +159,7 @@
                 </label>
                 <label class="switch">
                     <input type="checkbox" id="Status" name="Status" value="1" checked>
-<!--                    --><?php //echo $form->fieldonly($model,"Status")->checkBoxField()?>
+                    <!--                    --><?php //echo $form->fieldonly($model,"Status")->checkBoxField()?>
                     <span class="slider round"></span>
                 </label>
             </div>
