@@ -61,7 +61,7 @@ class Application
             'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','viewOrders','viewOrder','vieworderdetails',
                 'profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','itemReport','salesReportCurrent','salesReportLast','systemReports',
                 'shopReports','shopsReportMonthly','shopsReportYearly','getTotalOrders','getTotalUsers','productReports','getItemWeekReport','dailyRevenue','dailyTotOrders','pwdUpdate',
-                'newOrders','onOrders','pastOrders'],
+                'newOrders','onOrders','pastOrders','monthReport','getMonthCost',],
             'Shop' => ['productOverview','productOverview','viewitems','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'
                 ,'updateOngoingShopItem','updateOngoingShopItem','getShopOrders','getShopOrder','getDelivery','getShopItems','updateItem','profilesettings','profileUpdate','abc','safetystock','pwdUpdate'],
             'Rider' => ['vieworder','order','riderLocation','pwdUpdate'],
