@@ -153,12 +153,12 @@ abstract class DBModel extends Model
 
     public static function returnProcedure($procedure,$input1,$input2)
     {
-        $stmt = self::prepare("CALL $procedure(:ItemID,:ShopID)");
-        $stmt->bindValue(':ItemID',$input1);
-        $stmt->bindValue(':ShopID',$input2);
+        $stmt = self::prepare("CALL $procedure(:in1,:in2)");
+        $stmt->bindValue(':in1',$input1);
+        $stmt->bindValue(':in2',$input2);
         $stmt->execute();
-        $table = $stmt->fetch(\PDO::FETCH_ASSOC);
-        return $table;
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result;
     }
 
     public static function callProcedure($procedure,$values=[])
