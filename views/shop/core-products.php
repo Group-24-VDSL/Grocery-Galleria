@@ -14,7 +14,7 @@ use app\models\ShopOrder;
 <div class="content">
     <div class="update-content">
         <div class="core shop-item-table">
-            <h1 class="heading">Ongoing <span>Products</span></h1>
+            <h1 class="heading">Shop <span>Products</span></h1>
             <div class="container-items">
 
                 <table class="table-item small-first-col">
@@ -30,7 +30,7 @@ use app\models\ShopOrder;
                         <th>Max Price</th>
                         <th>U/Price</th>
                         <th>Stock</th>
-                        <th>enable</th>
+                        <th>Item Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -52,7 +52,6 @@ use app\models\ShopOrder;
             <h1 class="heading">Update <span>Products</span></h1>
 
             <div style="border: 0" class="container-core ">
-
                 <div style="padding: 0" class="form-details register">
                     <div id = "updateItem">
 
@@ -66,32 +65,20 @@ use app\models\ShopOrder;
                             <i class="fas fa-sort-amount-down"></i>
                             <?php echo $model->labels()['ItemID']?>
                         </label>
-
-                        <span class="fileds" id = "updateID">
-
-                </span>
+                        <span class="fileds" id = "updateID"></span>
                     </div>
                     <div class="inputBox">
                         <label for="Name">
                             <i class="fas fa-edit"></i>
                             <?php echo $model->labels()['Name']?>
                         </label>
-
-                        <span class="fileds" id = "updateName">
-
-                </span>
+                        <span class="fileds" id = "updateName"> </span>
                     </div>
                     <div class="inputBox">
                         <label for="Image">
                             <i class="far fa-images"></i>
                             <?php echo $model->labels()['Image']?>
-                        </label>
-
-                        <span class="image-box" >
-                    <img id="updateImage" >
-                </span>
-
-                    </div>
+                        </label> <span class="image-box" ><img id="updateImage" ></span></div>
                     <div class="inputBox">
                         <label for="Stock">
                             <i class="fas fa-boxes"></i>
@@ -125,7 +112,6 @@ use app\models\ShopOrder;
                                 </div>
                             </label>
                         </div>
-
                     </div>
 
                     <input id="Enabled" name="Enabled" hidden>

@@ -107,7 +107,6 @@ $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'p
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->post('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewitems',[ShopController::class,'viewitems']);
-//$app->router->patch('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
 $app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
 $app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
 $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
@@ -116,11 +115,9 @@ $app->router->get('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/additem',[ShopController::class,'additem']);
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'viewitems']);
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
-$app->router->get('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
-$app->router->post('/dashboard/shop/profilesettings',[TestController::class,'profilesettings']);
+$app->router->get('/dashboard/shop/profilesettings',[ShopController::class,'profilesettings']);
+$app->router->post('/dashboard/shop/profilesettings',[ShopController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
-$app->router->get('/dashboard/shop/analytics',[ShopController::class,'shopincome']);
-$app->router->get('/dashboard/shop/itemsales',[ShopController::class,'itemsales']);
 
 
 //for debugging purposes
@@ -133,8 +130,8 @@ $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
-$app->router->get('/api/shop',[ShopController::class,'getShop']);
-$app->router->get('/api/shops',[ShopController::class,'getAllShop']);
+$app->router->get('/api/shop',[APIController::class,'getShop']);
+$app->router->get('/api/shops',[APIController::class,'getAllShop']);
 $app->router->get('/api/getcustomer',[APIController::class,'getCustomer']);
 
 //api - customer
@@ -152,6 +149,8 @@ $app->router->get('/api/getshoporder',[APIController::class,'getShopOrder']);
 $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
+$app->router->post('/api/updatepassword',[ShopController::class,'changepassword']);
+$app->router->post('/api/getsafetystock',[ShopController::class,'safetystock']);
 
 $app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
 $app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);
@@ -159,7 +158,7 @@ $app->router->get('/api/getshoplastmonthlyrevenues',[ShopController::class,'getm
 $app->router->get('/api/getshoplastmonthrevenues',[ShopController::class,'getmonthrevenues']);
 $app->router->get('/api/getshopitemlist',[ShopController::class,'getShopItemList']);
 $app->router->get('/api/getshopitemsales',[ShopController::class,'getsales']);
-
+$app->router->get('/api/getshopcards',[ShopController::class,'shopcards']);
 
 //api - delivery
 $app->router->get('/api/getrider',[APIController::class,'getRider']);
@@ -176,6 +175,7 @@ $app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->get('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/getlocation',[RiderController::class,'riderLocation']);
+
 
 $app->router->get('/changePwd',[AuthController::class,'changePassword']);
 $app->router->post('/changePwd',[AuthController::class,'changePassword']);

@@ -25,7 +25,7 @@
 
             <div class = "tab-content">
                 <div id="new" data-tab-content class="active">
-                    <table class="table-item small-first-col">
+                    <table class="table-item small-first-col" id="order-table">
                         <thead>
                         <tr>
                             <th></th>
@@ -45,7 +45,7 @@
                     </table>
                 </div>
                 <div id="completed" data-tab-content >
-                    <table class="table-item small-first-col">
+                    <table class="table-item small-first-col" id="order-table">
                         <thead>
                         <tr>
                             <th></th>

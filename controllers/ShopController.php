@@ -374,7 +374,7 @@ class ShopController extends Controller
 
             if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item update is success" );
-                Application::$app->response->redirect("/dashboard/shop/products");
+//                Application::$app->response->redirect("/dashboard/shop/products");
             } else {
                 Application::$app->session->setFlash("warning", "Validation Failed.");
                 return $this->render("shop/core-products"
@@ -422,38 +422,41 @@ class ShopController extends Controller
 
 
     public function profilesettings(Request $request)
+
     {
+
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();
-        $tempObj =new Shop();
         $user = new User();
+
 
         $this->setLayout("dashboardL-shop");
 
-        $shop = $shop->findOne(['ShopID' => 3]);
-        $user = $user->findOne(['UserID' => 3]);
+        $shop = $shop->findOne(['ShopID' => Application::getUserID()]);
+        $user = $user->findOne(['UserID' => Application::getUserID()]);
+
 
         if ($request->isPost()) {
-            $tempObj->loadData($request->getBody());
+            $newObj->loadData($request->getBody());
+            $newObj->ShopID = Application::getUserID();
+            $newObj->Category = $shop->Category;
+            $newObj->Address = $shop->Address;
+            $newObj->City = $shop->City;
+            $newObj->Suburb = $shop->Suburb;
+            $newObj->Location = $shop->Location;
+            $newObj->PlaceID = $shop->PlaceID ;
+            $newObj->Password = 123;
+            $newObj->ConfirmPassword = 123 ;
 
-            $newObj = Shop::findOne(['ShopID'=>3]);
 
-            $newObj->Name = $tempObj->Name ;
-            $newObj->ShopName = $tempObj->ShopName ;
-            $newObj->Email = $tempObj->Email ;
-            $newObj->ShopDesc = $tempObj->ShopDesc ;
-            $newObj->ContactNo = $tempObj->ContactNo ;
+            if ($newObj->update() && $newObj->validate('update')){
+                    $newObj->singleProcedure('email_Update', $newObj->ShopID, $newObj->Email);
+                    Application::$app->session->setFlash('success', 'Update Success');
+                    Application::$app->response->redirect('/dashboard/shop/profilesettings');
 
-
-
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
-//            $newObj->ShopID = 3;
-            if ($newObj->validate('update') && $newObj->update()) {
-//                $newObj->singleProcedure('email_update', $newObj->ShopID, $newObj->Email);
-                Application::$app->session->setFlash('success','Update Success');
-                Application::$app->response->redirect('/dashboard/shop/profilesettings');
-            } else {
+            }
+            else {
                 Application::$app->session->setFlash('danger', 'Update Failed');
                 $this->setLayout("dashboardL-shop");
                 return $this->render("shop/shop-profile-setting", [
@@ -466,6 +469,102 @@ class ShopController extends Controller
             'model' => $shop,
             'loginmodel' => $user
         ]);
+    }
+
+    // shop-change password(garbage)
+    public function changepassword(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        var_dump("in password");
+        if ($json) {
+            var_dump("in password");
+            $tempuser = new User();
+            $tempuser->loadData($json);
+
+            $checktemp = User::findOne(["UserID" => Application::getUserID()]);
+
+
+            $currenPwdHash =  password_hash($json["OldPwd"],PASSWORD_BCRYPT);
+
+
+
+            if ($request->isPost()) {
+                if (strlen($json["OldPwd"]) == 0) {
+                    return $response->json('{"success":"currentRequire"}');
+                } elseif (strlen($json["NewPwd"]) == 0) {
+                    return $response->json('{"success":"newRequire"}');
+                } elseif (strlen($json["ConfirmPwd"]) == 0) {
+                    return $response->json('{"success":"confirmRequire"}');
+                } else {
+
+                    if ($checktemp) { //there exists such user
+
+                        if(password_verify($json["OldPwd"], $checktemp->PasswordHash)){
+//
+                            if(strlen($json["NewPwd"])>=8) {
+                                if ($json["NewPwd"] === $json["ConfirmPwd"]) {
+                                    $tempuser = $checktemp ;
+                                    $tempuser->PasswordHash = password_hash($json["NewPwd"] ,PASSWORD_BCRYPT);
+                                    if ($tempuser->update()) {
+//                                        Application::$app->response->redirect("/test");
+                                        return $response->json('{"success":"ok"}');
+                                    }
+
+
+                                } else {
+                                    return $response->json('{"success":"newConfirmFail"}');
+                                }
+                            }
+                            else{
+                                return $response->json('{"success":"sizeFail"}') ;
+                            }
+
+                        }
+                        else{
+                            return $response->json('{"success":"currentFail"}');
+                        }
+                    }
+                    return $response->json('{"success":"fail"}');
+
+                }
+            }elseif($request->isPatch()) {
+
+            }
+
+        }
+        return $response->json('{"success5":"fail"}');
+    }
+
+    public function safetystock(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+
+        $itemID = (int)$request->getJson()['ItemID'] ;
+        $shopID = (int)$request->getJson()['ShopID'];
+
+
+        $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
+
+        if ($json) {
+            if ($request->isPost()) {
+                return $response->json($result);
+            }elseif($request->isPatch()) {
+
+            }
+
+        }
+        return $response->json($result);
+    }
+
+    public function shopcards(Request $request, Response $response)
+    {
+        $shopID = Application::getUserID();
+
+        $json = $request->getJson();
+
+        $result = DBModel:: returnProcedure('shop_Summary', $shopID, 1);
+        return $response->json($result);
+
     }
 
 }

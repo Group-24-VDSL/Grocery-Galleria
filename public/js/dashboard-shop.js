@@ -38,54 +38,63 @@ $(document).ready(function () {
 
             $.getJSON(URLShopItems, function (Items) {
                     Items.forEach(Item => {
+                        let UnitSymbol ;
+                            switch (Item.Unit){
+                        case 0 : UnitSymbol = 'Kg' ;
+                            break ;
+                        case 1 : UnitSymbol = 'g' ;
+                            break ;
+                        case 2 : UnitSymbol = 'l' ;
+                            break ;
+                        case 3 : UnitSymbol = 'Unit' ;
+                            break ;
+                        }
 
                         if(!Item.Brand ){
                             toString(Item.Brand ) ;
                             Item.Brand = "-";
                         }
+                        if (Shop.Enabled ===0){
+                            Shop.Enabled  = '<i style="color: red" class="fa fa-circle" aria-hidden="true"></i>' ;
+                        }
+                        else {
+                            Shop.Enabled  = '<i style="color: lawngreen" class="fa fa-circle" aria-hidden="true"></i>' ;
+                        }
 
                             const ItemRow = document.createElement('tr');
-                            // itemRow.classList.add('tr');
+
                             ItemRow.innerHTML = `
 
                  <td></td>
                  <td id="Name" class="row-name">${Shop.ItemID}</td>
-                 <td id="ItemImage" class="row-img">
-                    <img src="${Item.ItemImage}" alt="${Item.Name}" />
-                </td>
-                <td id="Name" class="row-name">${Item.Name}</td>
-                
+                 <td id="ItemImage" class="row-img"><img src="${Item.ItemImage}" alt="${Item.Name}" /> </td>
+                <td id="Name" class="row-name">${Item.Name}</td>          
                 <td id="Brand" class="row-brand">${Item.Brand}</td>
-                <td id="Unit" class="row-unit">${Item.Unit}</td>
+                <td id="Unit" class="row-unit">${UnitSymbol}</td>
                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                 <td id="UPrice" class="row-uprice">${Shop.UnitPrice}</td>
                 <td id="Stock" class="row-stock">${Shop.Stock}</td>
-                <td id="Enable" class="row-enable">${Shop.Enabled}</td>
+                <td id="Enable" class="row-enable">${Shop.Enabled}</i></td>
                 <td class="row-ubutton">
                     <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID},${Shop.ShopID})">Update</button></a>
-                </td>
-                
+                </td>               
                 `
                             ItemTable.appendChild(ItemRow);
-                            console.log(Item.Name)
                         }
                     )
                 }
             )
-
-
         });
     }
-    )
-;});
+    );
+}
+);
 
 function shopItemUpdate(itemID, shopID){
-    console.log(itemID);
+
     const GetShopItem = URLShopItemAPI.concat("?ItemID=").concat(itemID).concat("&ShopID=").concat(shopID);
     const GetItem =  URLFindItemAPI.concat("?ItemID=").concat(itemID);
-    console.log(GetShopItem)
-    console.log(GetItem)
 
     $.getJSON(GetItem, function (Item) {
         $.getJSON(GetShopItem, function (ShopItem) {
@@ -94,11 +103,9 @@ function shopItemUpdate(itemID, shopID){
             document.getElementById("updateName").textContent= Item.Name;
             $('input[id=ShopID]').val(ShopItem.ShopID);
             $('input[id=ItemID]').val(ShopItem.ItemID);
-            // $('#updateImage').attr('src',Item.ItemImage);
             $('img[id=updateImage]').attr('src',Item.ItemImage);
             $('input[id=Stock]').val(ShopItem.Stock);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
-            console.log(ShopItem.Enabled);
 
             if (ShopItem.Enabled === 1){
                 document.getElementById("checkbox1").checked = true;
@@ -120,8 +127,5 @@ function shopItemUpdate(itemID, shopID){
 
         });
     });
-    // $("#").innerHTML("jj")
-
-
 }
 

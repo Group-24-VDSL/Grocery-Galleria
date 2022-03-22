@@ -17,9 +17,6 @@ const host = window.location.origin; //http://domainname
 
 //Api links
 
-//const URLOrderAPI = host + "/api/orders";
-
-
 const URLShopOrders = host + "/api/getshoporders" ;
 const URLDeliveryAPI = host + "/api/getdelivery";
 const URLGetOrder = URLShopOrders.concat('?ShopID=').concat('1');
@@ -35,8 +32,6 @@ $(document).ready(function () {
 
                 if (ShopOrder.Status === 0) {
                     $.getJSON(URLFindDelivery, function (Delivery) {
-
-                        console.log("this is status");
 
                         const ItemRowNew = document.createElement('tr');
 
@@ -73,7 +68,9 @@ $(document).ready(function () {
 
             });
         }
-    );
+    ).then(function (){
+        $('#order-table').DataTable();
+    });
 
 });
 

@@ -55,13 +55,13 @@
             </a>
         </li>
         <li>
-            <a href="">
-                <i class="bx bx-data"></i>
-                <span class="link-name">Stock</span>
+            <a href="/dashboard/shop/profilesettings">
+                <i class="bx bx-user"></i>
+                <span class="link-name">Profile</span>
             </a>
         </li>
         <li>
-            <a href="/dashboard/shop/profilesettings">
+            <a href="/dashboard/shop/changepassword">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>
@@ -82,14 +82,14 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span class="dashboard">Shop Dashboard</span>
         </div>
-<!--        <div class="search-box">-->
-<!--            <input type="search" id="" placeholder="Search.... " />-->
-<!--            <button class="bx bx-search search"></button>-->
-<!--        </div>-->
-<!--        <div class="profile-details">-->
-<!--            <i class="bx bx-user"></i>-->
-<!--            <span class="user-name">Dilshan98</span>-->
-<!--        </div>-->
+        <div class="search-box">
+            <input type="search" id="" placeholder="Search.... " />
+            <button class="bx bx-search search"></button>
+        </div>
+        <div class="profile-details">
+            <i class="bx bx-user"></i>
+            <span class="user-name">Dilshan98</span>
+        </div>
     </nav>
 
     <div class="home-content">
@@ -97,7 +97,7 @@
             <div class="box">
                 <div class="content">
                     <div class="box-topic">Total Orders</div>
-                    <div class="number">1276</div>
+                    <div class="number" id="total-orders"></div>
                     <div class="indicator">
                         <i class="bx bxs-up-arrow-square"></i>
                         <span class="text">Up so far</span>
@@ -110,8 +110,8 @@
             </div>
             <div class="box">
                 <div class="content">
-                    <div class="box-topic">Total Revenue</div>
-                    <div class="number">1276</div>
+                    <div class="box-topic">Total Revenue (LKR)</div>
+                    <div class="number" id="total-revenue"></div>
                     <div class="indicator">
                         <i class="bx bxs-up-arrow-square"></i>
                         <span class="text">Up so far</span>
@@ -125,8 +125,8 @@
 
             <div class="box">
                 <div class="content">
-                    <div class="box-topic">Total Income</div>
-                    <div class="number">12,876</div>
+                    <div class="box-topic">Total Income (LKR)</div>
+                    <div class="number" id="today-revenue"></div>
                     <div class="indicator">
                         <i class="down bx bxs-down-arrow-square"></i>
                         <span class="text">Down from today</span>
@@ -139,7 +139,7 @@
             <div class="box">
                 <div class="content">
                     <div class="box-topic">Total Orders</div>
-                    <div class="number">11,086</div>
+                    <div class="number" id="today-orders"></div>
                     <div class="indicator">
                         <i class="down bx bxs-down-arrow-square"></i>
                         <span class="text">Down From Today</span>
@@ -154,5 +154,6 @@
     </div>
   </section>
 <script src="/js/dashboardScript.js"></script>
+<script src="/js/shop-cards.js"></script>
 </body>
 </html>

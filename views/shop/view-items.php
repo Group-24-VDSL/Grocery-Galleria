@@ -3,14 +3,10 @@
 /** @var $form app\core\form\Form */
 ?>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/css/shop-items.css">
-<script src="/js/shop-ongoing-items.js" defer></script>
 <link rel="stylesheet" href="/css/dashboardStyle.css">
 <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
 
-<div class="core" style="height: height: 580px">
+<div class="core" style=" height: 580px">
     <h1 class="heading">Ongoing <span>Products</span></h1>
     <div class="container-items">
         <div class="safety-details">
@@ -30,7 +26,7 @@
                 <th>Item Name</th>
                 <th>Brand Name</th>
                 <th>Unit Weight</th>
-                <th>MRP</th>
+                <th>Max price</th>
                 <th>Unit Price</th>
                 <th>Stock</th>
                 <th>Safety Stock</th>
@@ -52,3 +48,8 @@
 
     </div>
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/css/shop-items.css">
+<script src="/js/shop-ongoing-items.js" defer></script>

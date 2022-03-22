@@ -102,18 +102,19 @@ use app\models\ShopItem;
                                     $itemimage = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->ItemImage;
                                     $itemname = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->Name;
                                     $itemuweight = $shopitem[$cartitem->ShopID][$cartitem->ItemID][1]->UWeight;
-                                    $itemuprice = $shopitem[$cartitem->ShopID][$cartitem->ItemID][0]->UnitPrice;
+                                    $itemuprice = number_format($shopitem[$cartitem->ShopID][$cartitem->ItemID][0]->UnitPrice,2);
+
                                     $quantity = $cartitem->Quantity;
-                                    $price = $quantity * $itemuprice;
+                                    $price = number_format($quantity * $itemuprice,2);
                                     echo '<tr>';
                                     echo '<td></td>' ;
-                                    echo '<td>'.$itemid.'</td>';
-                                    echo '<td><img class="item-img" src='.$itemimage.'></td>';
-                                    echo '<td>'.$itemname.'</td>';
-                                    echo '<td>'.$itemuweight.'</td>';
-                                    echo '<td>'.$itemuprice.'</td>';
-                                    echo ' <td>'.$quantity.'</td>';
-                                    echo '<td>'.$price.'</td>';
+                                    echo '<td style="text-align:center">'.$itemid.'</td>';
+                                    echo '<td style="text-align:center"><img class="item-img" src='.$itemimage.'></td>';
+                                    echo '<td style="text-align:center">'.$itemname.'</td>';
+                                    echo '<td style="text-align:center">'.$itemuweight.'</td>';
+                                    echo '<td style="text-align:center">'.$itemuprice.'</td>';
+                                    echo ' <td style="text-align:center">'.$quantity.'</td>';
+                                    echo '<td style="text-align:center">'.$price.'</td>';
                                     echo '</tr>';
                                  }
                                 ?>
