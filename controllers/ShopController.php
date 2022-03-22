@@ -347,7 +347,7 @@ class ShopController extends Controller
     public function getShop(Request $request, Response $response) // get shop details from DB
     {
         $response->setContentTypeJSON();
-        $shop = Shop::findOne(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
+        $shop = Shop::findOne(['ShopID'=>$request->getBody()["ShopID"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
         return json_encode($shop);
     }
 
