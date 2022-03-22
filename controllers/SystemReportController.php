@@ -153,4 +153,25 @@ GROUP BY HOUR(TIME(OrderDate))";
         return json_encode($result);
     }
 
+    public function monthReport(Request $request)
+    {
+        $body = $request->getBody();
+        $date = $body['SalesMonth1'];
+        $querySQL = "SELECT SUM(od.TotalCost) AS TotIncome, SUM(od.DeliveryCost) AS DelIncome FROM orders od 
+                    WHERE MONTH(od.OrderDate) = MONTH ('$date') AND YEAR(od.OrderDate) = YEAR('$date')
+                    GROUP BY MONTH (od.OrderDate)";
+        $results = DBModel::query($querySQL,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
+        return json_encode($results);
+
+    }
+
+    public function getMonthCost(Request $request)
+    {
+        $body = $request->getBody();
+        $date = $body['SalesMonth1'];
+        $querySQL = "SELECT Cost FROM systemcost WHERE MONTH(Date)= MONTH ('$date') AND YEAR(Date) = YEAR('$date')";
+        $result = DBModel::query($querySQL,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
+        return json_encode($result);
+    }
+
 }
