@@ -126,6 +126,7 @@ $(".btn-tab").click(function () {
             })
             // console.log(URLFindItem);
             $.getJSON(URLFindItem, function (Item) {
+                console.log(Item)
                 $('#item-data').empty().append(Item.Name + ' Report');
                 $('#ItemID').val(Item.ItemID);
                 $('#Category').val(Item.Category);
@@ -144,6 +145,9 @@ $(".btn-tab").click(function () {
                 // console.log(document.getElementById('MaxCount').value);
                 $('#MRP').val(Item.MRP);
                 // console.log(document.getElementById('MRP').value);
+                $('#Status').val(Item.Status).checked();
+
+
             })
         })
     }).then(function () {
@@ -218,7 +222,19 @@ $(".btn-tab").click(function () {
 
 $('#btn-vege').trigger('click');
 
+// $('#Status').val(1);
+$('#Status').change(function (){
+    if($(this).is(':checked')){
+        $(this).val(1);
+        console.log($(this).val())
+        // console.log(document.getElementById('Status'))
+    }else{
+        $(this).val(0);
+        console.log($(this).val())
+        // console.log(document.getElementById('Status'))
 
+    }
+})
 
 
 

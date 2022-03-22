@@ -159,7 +159,18 @@
                 </label>
                 <?php echo $form->numberfieldonly($model, "MRP", 1, 10000, 1); ?>
             </div>
-            <!--                <div class="inputBox"></div>-->
+            <div class="inputBox">
+                <label for="Status">
+                    <i class="fas fa-cog"></i>
+                    <?php echo $model->labels()['Status'] ?>
+                </label>
+                <label class="switch">
+                    <input type="checkbox" id="Status" name="Status" value="1" checked>
+<!--                    --><?php //echo $form->fieldonly($model,"Status")->checkBoxField()?>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="inputBox"></div>
             <div class="inputBox btn-div">
                 <button type="submit" class="btn update">Update</button>
             </div>
