@@ -6,7 +6,7 @@ use app\core\Controller;
 use app\core\db\DBModel;
 use app\core\Request;
 
-class Reports extends Controller
+class SystemReportController extends Controller
 {
 
     public function systemReports()
