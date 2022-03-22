@@ -68,6 +68,11 @@ $app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'v
 $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'viewrider']);
 //$app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
+//$app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignrider']);
+//$app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class,'viewdelivery']);
+//$app->router->get('/dashboard/delivery/viewnewdelivery',[DeliveryController::class,'viewnewdelivery']);
+//$app->router->get('/dashboard/delivery/viewongoingdelivery',[DeliveryController::class,'viewongoingdelivery']);
+//$app->router->get('/dashboard/delivery/viewcompletedelivery',[DeliveryController::class,'viewcompletedelivery']);
 $app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
 $app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class, 'viewDelivery']);
 $app->router->get('/dashboard/delivery/newdelivery',[DeliveryController::class, 'newDelivery']);
@@ -98,7 +103,6 @@ $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'v
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 
-
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->post('/dashboard/shop/products',[ShopController::class,'productOverview']);
@@ -119,14 +123,6 @@ $app->router->get('/dashboard/shop/analytics',[ShopController::class,'shopincome
 $app->router->get('/dashboard/shop/itemsales',[ShopController::class,'itemsales']);
 
 
-//rider
-$app->router->get('/rider/register',[RiderController::class,'riderRegister']);
-$app->router->post('/rider/register',[RiderController::class,'riderRegister']);
-$app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
-$app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
-$app->router->get('/rider/order',[RiderController::class,'order']);
-$app->router->post('/rider/order',[RiderController::class,'order']);
-
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
 $app->router->post('/test',[TestController::class,'test']);
@@ -137,8 +133,8 @@ $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
-$app->router->get('/api/shop',[APIController::class,'getShop']);
-$app->router->get('/api/shops',[APIController::class,'getAllShop']);
+$app->router->get('/api/shop',[ShopController::class,'getShop']);
+$app->router->get('/api/shops',[ShopController::class,'getAllShop']);
 $app->router->get('/api/getcustomer',[APIController::class,'getCustomer']);
 
 //api - customer
@@ -156,6 +152,7 @@ $app->router->get('/api/getshoporder',[APIController::class,'getShopOrder']);
 $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
+
 $app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
 $app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);
 $app->router->get('/api/getshoplastmonthlyrevenues',[ShopController::class,'getmonthlyrevenues']);
@@ -179,7 +176,6 @@ $app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
 $app->router->get('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/order',[RiderController::class,'order']);
 $app->router->post('/rider/getlocation',[RiderController::class,'riderLocation']);
-
 
 $app->router->get('/changePwd',[AuthController::class,'changePassword']);
 $app->router->post('/changePwd',[AuthController::class,'changePassword']);

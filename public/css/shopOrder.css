@@ -221,42 +221,6 @@ ul {
 .home-section nav .profile-details i {
     font-size: var(--h1-font-size);
 }
-/* .home-content .overview-boxes {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.home-content .overview-boxes .box {
-  border: 0.1rem solid black;
-  width: 40%;
-  text-align: left;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.home-content .overview-boxes .box .content {
-  padding: 0.5rem;
-}
-.home-content .overview-boxes .box .content .box-topic {
-  font-size: var(--h2-font-size);
-}
-.home-content .overview-boxes .box .content .number {
-  font-size: var(--biggest-font-size);
-  font-weight: 400;
-}
-.home-content .overview-boxes .box .content .indicator {
-}
-.home-content .overview-boxes .box .content .indicator i {
-  font-size: var(--h2-font-size);
-  background-color: var(--first-color-alt);
-  border-radius: 5rem;
-  margin-right: 2%;
-}
-.home-content .overview-boxes .box img {
-  height: 4rem;
-} */
 
 .home-content .core-order {
     background-color: white;
@@ -264,7 +228,7 @@ ul {
     padding: 0 1rem;
     margin: 0 1rem;
     border-radius: 0.5rem;
-    height: 430px;
+    height: 32rem;
 }
 .home-content .core-order .container-items {
     width: 100%;
@@ -451,7 +415,6 @@ ul {
 .home-content .core-order .container-items .ongoing-items ul {
     display: flex;
     font-size: var(--small-font-size);
-    align-items:left;
     justify-content: space-between;
     gap: 2.5rem;
     flex-wrap: wrap;
@@ -518,7 +481,6 @@ ul {
     border-bottom: 1px solid #ccc;
 }
 
-
 .tab {
     cursor: pointer;
     padding: 10px;
@@ -530,7 +492,6 @@ ul {
 }
 
 .tabs {
-    /* margin-bottom: 100rem; */
     padding-bottom: 1px;
 }
 
@@ -571,19 +532,14 @@ ul {
 
 .btn-item {
     display: inline-block;
-    /* margin-top: 1rem; */
     align-content: center;
     color: var(--body-color);
-    /* padding: 0rem 0rem; */
     padding-left: 0.7rem;
     padding-right: 0.7rem;
     font-size: var(--smaller-font-size);
     border-radius: 0.5rem;
     transition: 0.3s;
     border: 0px;
-    /*background-color: #FFF;*/
-    align-items: top;
-    /*!* height: 25px;*/
 }
 
 .btn-item:hover {
@@ -598,9 +554,6 @@ ul {
     margin-top: 0px;
 }
 
-/*.order-view:nth-child(2n){*/
-/*    background-color: var(--home-color);*/
-/*}*/
 
 button{
     background-color: transparent;
@@ -621,7 +574,6 @@ button{
     border: 0px;
     background-color: #FFF;
     align-items: top;
-    /* height: 25px; */
 }
 
 

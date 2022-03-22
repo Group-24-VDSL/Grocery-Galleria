@@ -34,6 +34,7 @@ class Application
     public StripeClient $stripe;
     public From $emailfrom;
     public Pusher $pusher;
+//    public From $emailfrom;
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
@@ -55,14 +56,14 @@ class Application
         $this->session=new Session();
 
         $this->authMiddleware=new AuthMiddleware([
-            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor','shopOrderAnalytics'],
-            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','profile'],
+            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
+            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','assignrider','viewdelivery','viewnewdelivery','viewongoingdelivery','viewcompletedelivery','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','getRiderLocationData'],
             'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
-            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'],
-            'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','shopOrderAnalytics','getshopmonthlyorders','getmonthorders','getmonthrevenues',
-                'getmonthlyrevenues','itemsales','getsales','getShopItemList','shopOrderAnalytics','shopincome'],
-            'Rider' => ['vieworder','order'],
-            "Common" => ['logout','profileUpdate','test']
+            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','getItem', 'getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','getCustomer','vieworderdetails'],
+            'Shop' => ['vieworder','productOverview','productOverview','viewitems','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'
+                       ,'updateOngoingShopItem','updateOngoingShopItem','getShopOrders','getShopOrder','getDelivery','getShopItems','updateItem','profilesettings','profileUpdate','abc','safetystock'],
+            'Rider' => ['vieworder','order','riderLocation'],
+            'Common' => ['logout','profileUpdate','test']
         ]);
 
         $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
@@ -95,13 +96,14 @@ class Application
     {
         return !self::$app->user;
     }
-    public static function getUserID(){
-        return self::$app->session->get('user');
-    }
+
     public static function getUser(){
         return self::$app->user;
     }
 
+    public static function getUserID(){
+        return self::$app->session->get('user');
+    }
 
     public static function getUserRole(){
         return self::$app->user->Role??null;
@@ -155,7 +157,9 @@ class Application
     public function logout(){
         $this->user = null;
         $this->session->remove('user');
+        $this->session->remove('role');
+        $this->session->remove('city');
+        $this->session->remove('suburb');
         return true;
-
     }
 }
