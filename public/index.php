@@ -107,7 +107,6 @@ $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'p
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->post('/dashboard/shop/products',[ShopController::class,'productOverview']);
 $app->router->get('/dashboard/shop/viewitems',[ShopController::class,'viewitems']);
-//$app->router->patch('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
 $app->router->get('/dashboard/shop/vieworder',[ShopController::class,'vieworder']);
 $app->router->get('/dashboard/shop/vieworders',[ShopController::class,'vieworders']);
 $app->router->get('/dashboard/shop/vieworderdetails',[ShopController::class,'vieworderdetails']);
@@ -118,19 +117,8 @@ $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'viewitems
 $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOngoingShopItem']);
 $app->router->get('/dashboard/shop/profilesettings',[ShopController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profilesettings',[ShopController::class,'profilesettings']);
-$app->router->post('/dashboard/shop/changepassword',[AuthController::class,'pwdUpdate']);
-$app->router->get('/dashboard/shop/changepassword',[AuthController::class,'pwdUpdate']);
-$app->router->get('/dashboard/shop/profilesetting',[TestController::class,'t']);
-$app->router->post('/dashboard/shop/profilesetting',[TestController::class,'t']); // new profile update
+$app->router->post('/dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
 
-
-//rider
-$app->router->get('/rider/register',[RiderController::class,'riderRegister']);
-$app->router->post('/rider/register',[RiderController::class,'riderRegister']);
-$app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
-$app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
-$app->router->get('/rider/order',[RiderController::class,'order']);
-$app->router->post('/rider/order',[RiderController::class,'order']);
 
 //for debugging purposes
 $app->router->get('/test',[TestController::class,'test']);
@@ -161,9 +149,16 @@ $app->router->get('/api/getshoporder',[APIController::class,'getShopOrder']);
 $app->router->get('/api/updateshopitem',[ShopController::class,'updateItem']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
-$app->router->post('/api/updatepassword',[TestController::class,'abc']);
-$app->router->post('/api/getsafetystock',[TestController::class,'safetystock']);
-$app->router->get('/api/getshopcards',[TestController::class,'shopcards']);
+$app->router->post('/api/updatepassword',[ShopController::class,'changepassword']);
+$app->router->post('/api/getsafetystock',[ShopController::class,'safetystock']);
+
+$app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
+$app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);
+$app->router->get('/api/getshoplastmonthlyrevenues',[ShopController::class,'getmonthlyrevenues']);
+$app->router->get('/api/getshoplastmonthrevenues',[ShopController::class,'getmonthrevenues']);
+$app->router->get('/api/getshopitemlist',[ShopController::class,'getShopItemList']);
+$app->router->get('/api/getshopitemsales',[ShopController::class,'getsales']);
+$app->router->get('/api/getshopcards',[ShopController::class,'shopcards']);
 
 //api - delivery
 $app->router->get('/api/getrider',[APIController::class,'getRider']);

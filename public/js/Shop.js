@@ -68,7 +68,7 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                         <span>quantity :</span>
                         <input class="quantity-input" type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight}>
                 </div>
-                    <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this)"><i class="fas fa-cart-plus"></i> add to cart</button>
+                    <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this);"><i class="fas fa-cart-plus"></i> add to cart</button>
             `
         })
         ItemBox.appendChild(Item);
