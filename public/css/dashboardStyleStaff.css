@@ -528,3 +528,15 @@ input:checked + .slider:before {
   border-radius: .5rem;
   margin: .2rem;
 }
+.row-img img{
+  height: 48px;
+  width: 48px;
+}
+.item-table{
+  overflow: hidden;
+  position: relative;
+}
+
+.overflow-fix{
+  overflow: auto;
+}
