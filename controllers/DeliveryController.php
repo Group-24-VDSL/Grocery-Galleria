@@ -170,8 +170,20 @@ class DeliveryController extends Controller
 
     public function pastDelivery()
     {
-        $this->setLayout('headeronly-staff');
-        return $this->render('delivery/view-ongoing-delivery-details');
+        $staff = new Staff();
+        $city = Application::getCity();
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=2 AND od.City=$city";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
     }
 
 
