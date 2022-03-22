@@ -521,7 +521,7 @@ input:checked + .slider:before {
 }
 .components{
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: repeat(3,1fr);
 }
 .components .report{
   border: .05rem solid var(--text-color-light);
@@ -539,4 +539,48 @@ input:checked + .slider:before {
 
 .overflow-fix{
   overflow: auto;
+}
+.header-field{
+  padding: .5rem;
+  align-items: center;
+}
+#SalesDateLabel1,#LCost{
+  font-weight: bold;
+}
+#SalesDate1,
+#ECost{
+  padding: 4px;
+  border-radius: .2rem;
+  border: .1rem solid var(--text-color);
+}
+#report-btn{
+  padding: .4rem;
+  font-weight: 600;
+  color: white;
+  border-radius: .5rem;
+  margin-left: .5rem;
+  border: .1rem solid var(--text-color);
+  background-color: var(--first-color-alt);
+  font-size: var(--small-font-size);
+
+}
+#report-btn:hover{
+  color: red;
+  background-color: white;
+  transition: .3s;
+}
+.details{
+  padding: 1rem;
+}
+.details .details-div{
+display: flex;
+  justify-content: space-between;
+  padding: .4rem;
+
+}
+.details .details-div label{
+  font-weight: bold;
+}
+.details .details-div input{
+  padding: 4px;
 }
