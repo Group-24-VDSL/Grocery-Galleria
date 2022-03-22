@@ -206,6 +206,7 @@ dateElement.addEventListener('change',(event)=>{
     const URLGetDailyRev = URLDailyRev.concat('?SalesDate='+event.target.value);
     const URLGetDailyOrd = URLDailyOrd.concat('?SalesDate='+event.target.value);
     console.log(URLGetDailyRev);
+    console.log(URLGetDailyOrd);
     const labelsArr = ['8-9','9-10','10-11','11-12','12-13','13-14','14-15','15-16','16-17','17-18','18-19','19-20','20-21'];
     $.getJSON(URLGetDailyRev,function (dailyRevenue){
         console.log(dailyRevenue)
@@ -299,8 +300,28 @@ dateElement.addEventListener('change',(event)=>{
         const myChart4 = new Chart(ctx2,config2);
     });
 
+})
+// month report section
+const urlMonthReport = host+'/dashboard/staff/monthreport';
+const urlMonthCost = host+'/dashboard/staff/getmonthcost';
+const monthInput = document.getElementById('SalesMonth1');
+monthInput.addEventListener('change',(event)=>{
+    const URLGetMonthReport = urlMonthReport.concat("?SalesMonth1="+event.target.value+"-01")
 
-
+    $.getJSON(URLGetMonthReport,function (monthData){
+        const URLGetMonthCost = urlMonthCost.concat("?SalesMonth1="+event.target.value+"-01")
+        $.getJSON(URLGetMonthCost,function (monthCost){
+            const Income = (monthData[0].TotIncome*0.03).toFixed(2);
+            const profit = (Income-monthCost[0].Cost).toFixed(2);
+            const profitPer = ((profit/monthCost[0].Cost)*100).toFixed(2);
+            const profitMargin = ((profit/Income)*100).toFixed(2);
+            $('#Cost1').val(monthCost[0].Cost);
+            $('#revenue1').val(Income)
+            $('#profit1').val(profit)
+            $('#profitP1').val(profitPer+' %')
+            $('#profitM1').val(profitMargin+' %')
+        })
+    })
 
 })
 
