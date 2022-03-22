@@ -11,6 +11,7 @@ class InputFieldOnly
     const TYPE_PASSWORD = 'password';
     const TYPE_NUMBER = 'number';
     const TYPE_HIDDEN = 'hidden'; //add more types lists, checkboxes etc
+    const TYPE_CHECKBOX = 'checkbox';
 
     public string $type;
     public Model $model;
@@ -51,6 +52,13 @@ class InputFieldOnly
     {
         $this->type =self::TYPE_HIDDEN;
         return $this;
+    }
+
+    public function checkBoxField()
+    {
+        $this->type=self::TYPE_CHECKBOX;
+        return$this;
+
     }
 
     public function setStyle(): string
