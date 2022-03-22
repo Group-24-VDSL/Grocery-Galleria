@@ -13,7 +13,7 @@ use app\core\Application;
 use app\controllers\SiteController;
 use app\controllers\AuthController;
 use app\controllers\RiderController;
-use app\controllers\Reports;
+use app\controllers\SystemReportController;
 
 
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -72,8 +72,8 @@ $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vi
 $app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
 $app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class, 'viewDelivery']);
 $app->router->get('/dashboard/delivery/newdelivery',[DeliveryController::class, 'newDelivery']);
-$app->router->get('/dashboard/delivery/onDelivery',[DeliveryController::class, 'onDelivery']);
-$app->router->get('/dashboard/delivery/pastDelivery',[DeliveryController::class, 'pastDelivery']);
+$app->router->get('/dashboard/delivery/ondelivery',[DeliveryController::class, 'onDelivery']);
+$app->router->get('/dashboard/delivery/pastdelivery',[DeliveryController::class, 'pastDelivery']);
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 $app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
 $app->router->post('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
@@ -98,20 +98,20 @@ $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'v
 $app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
-$app->router->get('/dashboard/staff/systemreports',[Reports::class,'systemReports']);
-$app->router->get('/dashboard/staff/shopreports',[Reports::class,'shopReports']);
-$app->router->get('/dashboard/staff/productreports',[Reports::class,'productReports']);
-$app->router->get('/dashboard/staff/gettotalorders',[Reports::class,'getTotalOrders']);
-$app->router->get('/dashboard/staff/gettotalusers',[Reports::class,'getTotalUsers']);
-$app->router->get('/dashboard/staff/shopsreportmonthly',[Reports::class,'shopsReportMonthly']);
-$app->router->get('/dashboard/staff/shopsreportyearly',[Reports::class,'shopsReportYearly']);
-$app->router->get('/dashboard/staff/itemreport',[Reports::class,'itemReport']);
-$app->router->get('/dashboard/staff/salesreportcurrent',[Reports::class,'salesReportCurrent']);
-$app->router->get('/dashboard/staff/salesreportlast',[Reports::class,'salesReportLast']);
-$app->router->get('/dashboard/staff/itemreport',[Reports::class,'itemReport']);
-$app->router->get('/dashboard/staff/getitemweekreport',[Reports::class,'getItemWeekReport']);
-$app->router->get('/dashboard/staff/dailyrevenue',[Reports::class,'dailyRevenue']);
-$app->router->get('/dashboard/staff/dailytotorders',[Reports::class,'dailyTotOrders']);
+$app->router->get('/dashboard/staff/systemreports',[SystemReportController::class,'systemReports']);
+$app->router->get('/dashboard/staff/shopreports',[SystemReportController::class,'shopReports']);
+$app->router->get('/dashboard/staff/productreports',[SystemReportController::class,'productReports']);
+$app->router->get('/dashboard/staff/gettotalorders',[SystemReportController::class,'getTotalOrders']);
+$app->router->get('/dashboard/staff/gettotalusers',[SystemReportController::class,'getTotalUsers']);
+$app->router->get('/dashboard/staff/shopsreportmonthly',[SystemReportController::class,'shopsReportMonthly']);
+$app->router->get('/dashboard/staff/shopsreportyearly',[SystemReportController::class,'shopsReportYearly']);
+$app->router->get('/dashboard/staff/itemreport',[SystemReportController::class,'itemReport']);
+$app->router->get('/dashboard/staff/salesreportcurrent',[SystemReportController::class,'salesReportCurrent']);
+$app->router->get('/dashboard/staff/salesreportlast',[SystemReportController::class,'salesReportLast']);
+$app->router->get('/dashboard/staff/itemreport',[SystemReportController::class,'itemReport']);
+$app->router->get('/dashboard/staff/getitemweekreport',[SystemReportController::class,'getItemWeekReport']);
+$app->router->get('/dashboard/staff/dailyrevenue',[SystemReportController::class,'dailyRevenue']);
+$app->router->get('/dashboard/staff/dailytotorders',[SystemReportController::class,'dailyTotOrders']);
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
