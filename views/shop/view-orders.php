@@ -38,7 +38,7 @@
                         </tr>
                         </thead>
                         <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
-                        <tbody id="item-table-new" class="item-table-body body-half-screen">
+                        <tbody style="height: 7rem" id="item-table-new" class="item-table-body body-half-screen">
 
                         </tbody>
                         <?php \app\core\form\Form::end(); ?>
@@ -58,7 +58,7 @@
                         </tr>
                         </thead>
                         <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
-                        <tbody id="item-table-complete" class="item-table-body body-half-screen" onload="document.refresh();">
+                        <tbody style="height: 7rem" id="item-table-complete" class="item-table-body body-half-screen" onload="document.refresh();">
 
                         </tbody>
                         <?php \app\core\form\Form::end(); ?>

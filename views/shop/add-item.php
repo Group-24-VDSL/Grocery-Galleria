@@ -2,6 +2,9 @@
 /** @var $model \app\models\ShopItem * */
 /** @var $form app\core\form\Form */
 ?>
+
+<script src="/js/AddItem.js"></script>
+
 <div class="core sub-core">
     <h1 class="heading">Add <span>Products</span></h1>
     <div class="container-items">
@@ -13,7 +16,7 @@
         </div>
         <div class="inputBox lock">
             <label for="MRP"
-            ><i class="fas fa-arrow-circle-up"></i>MRP</label>
+            ><i class="fas fa-arrow-circle-up"></i>Maximum System price</label>
             <input id="MRP" name="MRP" type="text" readonly/>
         </div>
         <div class="inputBox lock">
@@ -34,11 +37,24 @@
             <?php echo $form->fieldonly($model, "Stock", '') ?>
         </div>
         <div class="inputBox">
+            <label for="Stock"><i class="fa fa-clock-o" ></i>Maximum Lead Time (in days)</label>
+            <?php echo $form->fieldonly($model, "MaxLeadTime", '')?>
+        </div>
+        <div class="inputBox">
+            <label for="Stock"><i class="fas fa-coins"></i>Minimum Lead Time (in days)</label>
+            <?php echo $form->fieldonly($model, "MinLeadTime", '') ?>
+        </div>
+        <div class="inputBox">
+            <p style="font-size: 12px ; color: #a94442">Lead Time : Time taken to supply the shop items</p>
+        </div>
+        <div class="inputBox">
             <?php echo $form->fieldonly($model, "ShopID")->setValue(5)->hiddenField()?>
         </div>
+
+
         <div class="inputBox"></div>
         <button class="btn">Submit</button>
-        <script src="/js/AddItem.js"></script>
+
         </form>
     </div>
 </div>
