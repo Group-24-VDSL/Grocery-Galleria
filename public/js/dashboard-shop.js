@@ -54,6 +54,12 @@ $(document).ready(function () {
                             toString(Item.Brand ) ;
                             Item.Brand = "-";
                         }
+                        if (Shop.Enabled ===0){
+                            Shop.Enabled  = '<i style="color: red" class="fa fa-circle" aria-hidden="true"></i>' ;
+                        }
+                        else {
+                            Shop.Enabled  = '<i style="color: lawngreen" class="fa fa-circle" aria-hidden="true"></i>' ;
+                        }
 
                             const ItemRow = document.createElement('tr');
 
@@ -69,7 +75,7 @@ $(document).ready(function () {
                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                 <td id="UPrice" class="row-uprice">${Shop.UnitPrice}</td>
                 <td id="Stock" class="row-stock">${Shop.Stock}</td>
-                <td id="Enable" class="row-enable">${Shop.Enabled}</td>
+                <td id="Enable" class="row-enable">${Shop.Enabled}</i></td>
                 <td class="row-ubutton">
                     <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID},${Shop.ShopID})">Update</button></a>
                 </td>               

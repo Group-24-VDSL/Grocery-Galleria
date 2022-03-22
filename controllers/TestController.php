@@ -156,9 +156,14 @@ class TestController extends Controller
 
 
     }
-    public function profilesettings(Request $request)
+
+
+
+
+    public function t(Request $request)
 
     {
+//        var_dump($request);
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();
@@ -169,15 +174,10 @@ class TestController extends Controller
 
         $shop = $shop->findOne(['ShopID' => Application::getUserID()]);
         $user = $user->findOne(['UserID' => Application::getUserID()]);
-//        var_dump($user);
 
-
-//        var_dump( Application::getUserID());
 
         if ($request->isPost()) {
             $newObj->loadData($request->getBody());
-//            var_dump($newObj);
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
             $newObj->ShopID = Application::getUserID();
             $newObj->Category = $shop->Category;
             $newObj->Address = $shop->Address;
@@ -185,10 +185,11 @@ class TestController extends Controller
             $newObj->Suburb = $shop->Suburb;
             $newObj->Location = $shop->Location;
             $newObj->PlaceID = $shop->PlaceID ;
+
             if ($newObj->validate('update') && $newObj->update()) {
-                $newObj->singleProcedure('email_Update', Application::getUserID(), $newObj->Email);
+                $newObj->callProcedure('email_Update', ['UserID'=>$newObj->ShopID,'Email'=> $newObj->Email]);
                 Application::$app->session->setFlash('success','Update Success');
-                Application::$app->response->redirect('/dashboard/shop/profilesettings');
+                Application::$app->response->redirect('/dashboard/shop/profilesetting');
             }
 
             else {
@@ -231,7 +232,7 @@ class TestController extends Controller
 //            }
 //        }
         $this->setLayout("dashboardL-shop");
-        return $this->render("shop/profile-update", [
+        return $this->render("shop/shop-profile-setting", [
             'model' => $shop,
             'loginmodel' => $user
         ]);
@@ -346,30 +347,17 @@ class TestController extends Controller
     public function safetystock(Request $request, Response $response)
     {
         $newObj = new ShopItem();
-//        $user = $user->findOne(['UserID' => Application::getUserID()]);
         $json = $request->getJson();
-
-//        var_dump($request->getBody() , "  mmmmm",(int)$request->getJson()['ShopID']);
         $itemID = (int)$request->getJson()['ItemID'] ;
         $shopID = (int)$request->getJson()['ShopID'];
 
-//        var_dump($itemID,$shopID);
-
        $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
-//        var_dump($result);
-
 
         if ($json) {
-
-
             if ($request->isPost()) {
-
-//                var_dump("inside 2", $result["SafetyStock"]);
-
-                    return $response->json($result);
-
-
-            }elseif($request->isPatch()) {
+                return $response->json($result);
+            }
+            elseif($request->isPatch()) {
 
             }
 
@@ -419,6 +407,38 @@ class TestController extends Controller
         return $response->json($result);
     }
 
+    public function shopcards(Request $request, Response $response)
+    {
+
+        $shopID = 5;
+//        var_dump($shopID);
+        $json = $request->getJson();
+//        var_dump($json);
 
 
+        $result = DBModel:: returnProcedure('shop_Summary', $shopID, 1);
+        return $response->json($result);
+
+//        if ($json) {
+//            var_dump("im in jason");
+//        }
+//            if ($request->isPost()) {
+//                return $response->json($result);
+//            } elseif ($request->isPatch()) {
+//
+//
+////        $shopID = Application::getUserID();
+//
+//
+//            var_dump($result);
+//            return $response->json($result);
+//
+//        }
+    }
+
+
+        public function temp(){
+            $this->setLayout('dashboardL-shop');
+            return $this->render('shop/shop-profile-setting');
+    }
 }

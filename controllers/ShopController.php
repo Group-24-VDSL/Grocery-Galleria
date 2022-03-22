@@ -254,6 +254,7 @@ class ShopController extends Controller
 
     public function profilesettings(Request $request)
     {
+        $this->setLayout("dashboardL-shop");
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();
