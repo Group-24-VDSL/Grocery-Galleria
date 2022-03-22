@@ -338,8 +338,6 @@ class ShopController extends Controller
 
     public function shopincome(Request $request)
     {
-
-//        $user = new Shop;
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/shop-analytics');
     }

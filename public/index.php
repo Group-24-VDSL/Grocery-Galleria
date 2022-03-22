@@ -118,6 +118,9 @@ $app->router->post('/dashboard/shop/viewitems',[ShopController::class,'updateOng
 $app->router->get('/dashboard/shop/profilesettings',[ShopController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profilesettings',[ShopController::class,'profilesettings']);
 $app->router->post('/dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
+$app->router->get('/dashboard/shop/analytics',[ShopController::class,'shopincome']);
+$app->router->get('/dashboard/shop/itemsales',[ShopController::class,'itemsales']);
+
 
 
 //for debugging purposes
