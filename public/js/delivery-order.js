@@ -1,15 +1,9 @@
 
 const host = window.location.origin; //http://domainname
 
-// const newDeliveryURL = host+'/dashboard/delivery/newdelivery';
-// const onDeliveryURL = host+'/dashboard/delivery/onDelivery';
-// const pastDeliveryURL = host+'/dashboard/delivery/pastDelivery';
 const deliverInfoURL = host+'/dashboard/delivery/deliveryInfo';
 const deliveryURL = host+'/dashboard/delivery/'
 
-const newTab = document.getElementById('new-tab');
-const onTab = document.getElementById('on-tab');
-const pastTab = document.getElementById('past-tab');
 
 $(document).ready(function (){
     $('.btn-tab').click(function (){
@@ -17,7 +11,6 @@ $(document).ready(function (){
         const getDeliveryInfoURL = deliveryURL.concat($(this).data("href"));
         console.log(getDeliveryInfoURL)
         $.getJSON(getDeliveryInfoURL,function (deliveries){
-            console.log("hello");
             deliveries.forEach(delivery=>{
                 const deliveryURL = deliverInfoURL+"?OrderID="+delivery.OrderID;
                 const orderRow = document.createElement('tr');
