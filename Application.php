@@ -59,9 +59,10 @@ class Application
             'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
             'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','vieworders','vieworder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','assignRider','getRiderLocationData','pwdUpdate'],
             'Customer' => ['welcome','getTempCart','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess','pwdUpdate'],
-            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings',
+            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','viewOrders','viewOrder','vieworderdetails','profilesettings',
                 'profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','itemReport','salesReportCurrent','salesReportLast','systemReports',
-                'shopReports','shopsReportMonthly','shopsReportYearly','getTotalOrders','getTotalUsers','productReports','getItemWeekReport','dailyRevenue','dailyTotOrders','pwdUpdate'],
+                'shopReports','shopsReportMonthly','shopsReportYearly','getTotalOrders','getTotalUsers','productReports','getItemWeekReport','dailyRevenue','dailyTotOrders','pwdUpdate',
+                'newOrders','onOrders','pastOrders'],
             'Shop' => ['productOverview','productOverview','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','pwdUpdate'],
             'Rider' => ['vieworder','order','riderLocation','pwdUpdate'],
             "Common" => ['logout','profileUpdate','test']
