@@ -10,8 +10,8 @@
     <div class="container-core delivery-core ">
         <ul class="tabs">
             <li><a data-href="newdelivery" class="btn-tab" id="newDel">New</a></li>
-            <li><a data-href="onDelivery" class="btn-tab">On-Going</a></li>
-            <li><a data-href="pastDelivery" class="btn-tab">Past</a></li>
+            <li><a data-href="ondelivery" class="btn-tab">On-Going</a></li>
+            <li><a data-href="pastdelivery" class="btn-tab">Past</a></li>
         </ul>
         <div class = "tab-content">
             <div id="new" data-tab-content class="active">
