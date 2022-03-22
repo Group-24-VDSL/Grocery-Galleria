@@ -55,7 +55,7 @@
             </a>
         </li>
         <li>
-            <a href="/dashboard/shop/profilesetting">
+            <a href="/dashboard/shop/profilesettings">
                 <i class="bx bx-user"></i>
                 <span class="link-name">Profile</span>
             </a>

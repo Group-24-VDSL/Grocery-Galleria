@@ -253,39 +253,45 @@ class ShopController extends Controller
 
 
     public function profilesettings(Request $request)
+
     {
-        $this->setLayout("dashboardL-shop");
+
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();
-        $tempObj =new Shop();
         $user = new User();
+
 
         $this->setLayout("dashboardL-shop");
 
-        $shop = $shop->findOne(['ShopID' => 3]);
-        $user = $user->findOne(['UserID' => 3]);
+        $shop = $shop->findOne(['ShopID' => Application::getUserID()]);
+        $user = $user->findOne(['UserID' => Application::getUserID()]);
+
 
         if ($request->isPost()) {
-            $tempObj->loadData($request->getBody());
+            $newObj->loadData($request->getBody());
+            $newObj->ShopID = Application::getUserID();
+            $newObj->Category = $shop->Category;
+            $newObj->Address = $shop->Address;
+            $newObj->City = $shop->City;
+            $newObj->Suburb = $shop->Suburb;
+            $newObj->Location = $shop->Location;
+            $newObj->PlaceID = $shop->PlaceID ;
+            $newObj->Password = 123;
+            $newObj->ConfirmPassword = 123 ;
 
-            $newObj = Shop::findOne(['ShopID'=>3]);
 
-            $newObj->Name = $tempObj->Name ;
-            $newObj->ShopName = $tempObj->ShopName ;
-            $newObj->Email = $tempObj->Email ;
-            $newObj->ShopDesc = $tempObj->ShopDesc ;
-            $newObj->ContactNo = $tempObj->ContactNo ;
+//            if ($newObj->validate('update') && $newObj->update()) {
+            if ($newObj->update() && $newObj->validate('update')){
 
+                    var_dump("im update and validate");
+//                    Application::$app->session->setFlash('success', 'validate Success');
+                    $newObj->singleProcedure('email_Update', $newObj->ShopID, $newObj->Email);
+                    Application::$app->session->setFlash('success', 'Update Success');
+                    Application::$app->response->redirect('/dashboard/shop/profilesettings');
 
-
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
-//            $newObj->ShopID = 3;
-            if ($newObj->validate('update') && $newObj->update()) {
-//                $newObj->singleProcedure('email_update', $newObj->ShopID, $newObj->Email);
-                Application::$app->session->setFlash('success','Update Success');
-                Application::$app->response->redirect('/dashboard/shop/profilesettings');
-            } else {
+            }
+            else {
                 Application::$app->session->setFlash('danger', 'Update Failed');
                 $this->setLayout("dashboardL-shop");
                 return $this->render("shop/shop-profile-setting", [

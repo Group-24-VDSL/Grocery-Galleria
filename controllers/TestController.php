@@ -160,10 +160,10 @@ class TestController extends Controller
 
 
 
-    public function t(Request $request)
+    public function profilesettings(Request $request)
 
     {
-//        var_dump($request);
+
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();
@@ -185,11 +185,19 @@ class TestController extends Controller
             $newObj->Suburb = $shop->Suburb;
             $newObj->Location = $shop->Location;
             $newObj->PlaceID = $shop->PlaceID ;
+            $newObj->Password = 123;
+            $newObj->ConfirmPassword = 123 ;
 
-            if ($newObj->validate('update') && $newObj->update()) {
-                $newObj->callProcedure('email_Update', ['UserID'=>$newObj->ShopID,'Email'=> $newObj->Email]);
-                Application::$app->session->setFlash('success','Update Success');
-                Application::$app->response->redirect('/dashboard/shop/profilesetting');
+//            if ($newObj->validate('update') && $newObj->update()) {
+            if ($newObj->update()){
+                var_dump("im validate");
+                Application::$app->session->setFlash('success', 'Validate Success');
+             if($newObj->validate('update')) {
+                 var_dump("im updated");
+                 $newObj->singleProcedure('email_Update', $newObj->ShopID, $newObj->Email);
+                 Application::$app->session->setFlash('success', 'Update Success');
+                 Application::$app->response->redirect('/dashboard/shop/profilesetting');
+             }
             }
 
             else {
@@ -411,29 +419,12 @@ class TestController extends Controller
     {
 
         $shopID = 5;
-//        var_dump($shopID);
-        $json = $request->getJson();
-//        var_dump($json);
 
+        $json = $request->getJson();
 
         $result = DBModel:: returnProcedure('shop_Summary', $shopID, 1);
         return $response->json($result);
 
-//        if ($json) {
-//            var_dump("im in jason");
-//        }
-//            if ($request->isPost()) {
-//                return $response->json($result);
-//            } elseif ($request->isPatch()) {
-//
-//
-////        $shopID = Application::getUserID();
-//
-//
-//            var_dump($result);
-//            return $response->json($result);
-//
-//        }
     }
 
 
