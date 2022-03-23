@@ -100,7 +100,7 @@ class ShopController extends Controller
     public function shopOrderAnalytics(Request $request,Response $response){
         $response->setContentTypeJSON();
 
-        $shopID =  1 ;
+        $shopID =   Application::getUserID()  ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 13; $x >= 1; $x--) {
@@ -118,7 +118,7 @@ class ShopController extends Controller
 
     public function getmonthorders(Request $request,Response $response){
         $response->setContentTypeJSON();
-        $shopID =  1 ;
+        $shopID =   Application::getUserID()  ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 30 ; $x >= 1; $x--) {
@@ -135,7 +135,7 @@ class ShopController extends Controller
     public function getmonthlyrevenues(Request $request,Response $response){
         $response->setContentTypeJSON();
 
-        $shopID =  1 ;
+        $shopID =   Application::getUserID()  ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 13; $x >= 1; $x--) {
@@ -156,7 +156,7 @@ class ShopController extends Controller
 
     public function getmonthrevenues(Request $request,Response $response){
         $response->setContentTypeJSON();
-        $shopID =  1 ;
+        $shopID =  Application::getUserID() ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 30 ; $x >= 1; $x--) {

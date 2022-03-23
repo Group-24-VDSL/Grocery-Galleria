@@ -124,7 +124,6 @@ function getchart(ItemID,ItemImage,ItemName){
                         data: average
                     }
                 ]
-
             };
 
             var data2 = {
@@ -142,10 +141,6 @@ function getchart(ItemID,ItemImage,ItemName){
                         // pointHighlightStroke: "rgba(220,220,220,1)",
                         data: yValues
                     },
-
-
-
-
                 ]
 
             };
@@ -163,55 +158,6 @@ function getchart(ItemID,ItemImage,ItemName){
                 }
             });
 
-
-
-
-        // var ctx = document.getElementById("myChart").getContext("2d");
-        //
-        //  new Chart(ctx, {
-        //     // type: "bar",
-        //     data: {
-        //         labels: xValues,
-        //         datasets: [{
-        //             type: "bar",
-        //             label: 'Orders in month',
-        //             backgroundColor: "#55a630ff",
-        //             borderColor: "#55a630ff",
-        //             data: yValues
-        //         },{
-        //             type: "line",
-        //             label: 'Orders in month',
-        //             backgroundColor: "#55a630ff",
-        //             borderColor: "#55a630ff",
-        //             data: yValues
-        //         }
-        //
-        //         ]
-        //     },
-        //     options: {
-        //         legend: {display: false},
-        //
-        //         scales: {
-        //             yAxes: [{
-        //                 scaleLabel: {
-        //                     display: true,
-        //                     labelString: 'probability'
-        //                 }
-        //             }]
-        //         },
-        //
-        //         plugins: {
-        //             title: {
-        //                 display: true,
-        //                 text: 'ORDERS IN LAST YEAR',
-        //                 color: '#55a630ff',
-        //                 font: {
-        //                     size: 14
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
 
 
     });
