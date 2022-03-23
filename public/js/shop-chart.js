@@ -26,7 +26,7 @@ $( document ).ready(function() {
             return a + b;
         });
 
-        document.getElementById("order-barchart-average").innerHTML = orderAverage.toFixed(2);
+        document.getElementById("order-barchart-average").innerHTML = Math.ceil(orderAverage);
         document.getElementById("order-barchart-sum").innerHTML = sum;
 
         new Chart("orderBarchart", {
@@ -90,7 +90,7 @@ $( document ).ready(function() {
             return a + b;
         });
 
-        document.getElementById("order-linechart-average").innerHTML = orderAverage.toFixed(2);
+        document.getElementById("order-linechart-average").innerHTML = Math.ceil(orderAverage);
         document.getElementById("order-linechart-sum").innerHTML = sum;
 
         new Chart("orderLinechart", {
@@ -107,11 +107,11 @@ $( document ).ready(function() {
                     label: 'Orders in day',
                     data: yValues.reverse(),
                     borderColor: "#55a630ff",
-                    fill: true
+                    fill: false
                 }]
             },
             options: {
-                legend: {display: false},
+                legend: {display: true},
                 plugins: {
                     title: {
                         display: true,
@@ -123,9 +123,40 @@ $( document ).ready(function() {
                         font: {
                             size: 14
                         }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Value'
+                            },
+                        },
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            // forces step size to be 50 units
+                            stepSize: 50
+                        }
                     }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            stepSize: 1
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
                 }
             },
+
         });
 
     });
@@ -142,7 +173,7 @@ $( document ).ready(function() {
                 yValues.push(0);
             }
             else {
-                yValues.push(parseInt(Object.values(orderlist)[i]["Total"]))
+                yValues.push(parseFloat(Object.values(orderlist)[i]["Total"]))
             }
 
         }
@@ -164,7 +195,7 @@ $( document ).ready(function() {
                     fill: true,
                     backgroundColor: '#a6cee3',
                     borderColor: '#a6cee3',
-                    label: 'Orders in month',
+                    label: 'Income in month',
                     backgroundColor: "green",
                     borderColor: "green",
                     data: yValues
@@ -178,7 +209,7 @@ $( document ).ready(function() {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'ORDERS IN LAST YEAR',
+                        text: 'LAST YEAR INCOME',
                         color: 'green',
                         font: {
                             size: 14
@@ -195,15 +226,12 @@ $( document ).ready(function() {
 
         let b = Object.values(orders)[0] ;
 
-        console.log(b["NumberOfOrders"]);
-        console.log(Object.keys(orders).length)
-
         for (let i = 0; i < Object.keys(orders).length; i++) {
             if(Object.values(orders)[i]["Total"] == null){
                 yValues.push(0);
             }
             else {
-                yValues.push(parseInt(Object.values(orders)[i]["Total"]))
+                yValues.push(parseFloat(Object.values(orders)[i]["Total"]))
             }
         }
 
@@ -215,7 +243,7 @@ $( document ).ready(function() {
         });
 
         document.getElementById("revenue-linechart-average").innerHTML = orderAverage.toFixed(2);
-        document.getElementById("revenue-linechart-sum").innerHTML = sum.toFixed(2);
+        document.getElementById("revenue-linechart-sum").innerHTML = parseFloat(sum,2);
 
         new Chart("revenueLinechart", {
             type: "line",
@@ -224,11 +252,11 @@ $( document ).ready(function() {
                 datasets: [{
                     lineTension: 0.4,
                     borderWidth:1.5,
-                    label: 'Orders in day',
+                    label: 'Income in day',
                     fill: true,
                     data: yValues.reverse(),
                     borderColor: "green",
-                    fill: true
+                    fill: false
                 }]
             },
             options: {
@@ -236,7 +264,7 @@ $( document ).ready(function() {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'ORDERS IN LAST MONTH',
+                        text: 'Last Month Income',
                         color: 'green',
                         layout: {
                             padding: 5

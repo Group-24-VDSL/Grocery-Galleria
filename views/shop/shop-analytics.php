@@ -4,10 +4,10 @@
 <script src="/js/jquery.min.js" defer></script>
 <div class = "core" style="height: 60rem;">
     <div class = "core-orders" >
-        <h1 class="heading">Shop Item <span>Analytics</span></h1>
+        <h1 class="heading">Shop <span>Orders</span></h1>
         <div class="charts">
             <div class="barChart" ">
-                <canvas class="analytics" height="120rem" id="orderBarchart"  style= " position: absolute; max-width:600px"></canvas>
+                <canvas class="analytics" height="120rem" id="orderBarchart"  style= " position: absolute; max-width:7700px"></canvas>
                 <div class= "average" >
                     Average Orders Per Month in Previous Year : <span id="order-barchart-average"></span>
                     <br>
@@ -16,7 +16,7 @@
             </div>
 
             <div class="lineChart" ">
-                <canvas id="orderLinechart" height="120rem"  style="position: absolute; max-width:600px"></canvas>
+                <canvas id="orderLinechart" height="120rem"  style="position: absolute; max-width:700px"></canvas>
                 <div class= "average" >
                     Average Orders Per Day in Previous Month : <span id="order-linechart-average"></span>
                     <br>
@@ -28,10 +28,10 @@
     </div>
 
     <div class="core-revenue">
-        <h1 class="heading">Income <span>Analytics</span></h1>
+        <h1 style="margin-top: 3rem;" class="heading">Shop <span>Income</span></h1>
         <div class="charts">
             <div class="barChart">
-                <canvas class="analytics" height="120rem" id="revenueBarchart"  style= " position: absolute; max-width:600px"></canvas>
+                <canvas class="analytics" height="120rem" id="revenueBarchart"  style= " position: absolute; max-width:700px"></canvas>
                 <div class= "average" >
                     Average Revenue Per Month in Previous Year : Rs. <span id="revenue-barchart-average"></span>
                     <br>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="lineChart">
-                <canvas id="revenueLinechart" height="120rem"  style="position: absolute; max-width:600px"></canvas>
+                <canvas id="revenueLinechart" height="120rem"  style="position: absolute; max-width:700px"></canvas>
                 <div class= "average" >
                     Average Orders Per Day in Previous Month : Rs. <span id="revenue-linechart-average"></span>
                     <br>
