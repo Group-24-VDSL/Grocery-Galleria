@@ -399,6 +399,7 @@ class ShopController extends Controller
             if ($request->isPost()) {
                 if ($checktemp) { //there exists such item
                     if ($tempshopitem->validate('update') && $tempshopitem->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewitems");
                         return $response->json('{"success":"ok"}');
                     }
                 }
@@ -406,7 +407,6 @@ class ShopController extends Controller
 
             } elseif($request->isPatch()) {
                 if ($checktemp) { //there exists such item
-//                    Application::$app->logger->debug("iiiii");
                     if ($tempshopitem->validate('update') && $tempshopitem->update()) {
                         Application::$app->response->redirect("/dashboard/shop/viewitems");
                         return $response->json('{"success":"ok"}');
@@ -420,9 +420,7 @@ class ShopController extends Controller
 
 
     public function profilesettings(Request $request)
-
     {
-
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();

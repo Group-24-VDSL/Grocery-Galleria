@@ -515,35 +515,15 @@ tbody {
   }
   
   
-  /* @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-  }
-  
-  @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-  } */
-  
+
   .close {
     color: white;
     background-color: #2b9348;
+      width: 2rem;
+      height: 2rem;
     border-radius: 3px;
     float: right;
-    font-size: 2rem;
-    height: 1.5rem;
-    padding-right: 1.1rem;
-    padding-left: 1rem;
-    /* padding-right: 0.3rem; */
-    padding-bottom: 3rem;
-    margin-bottom: 2rem;
-    /* margin-right: 2rem; */
-    margin-left: 3rem;
-    /* align-items: center; */
-    vertical-align: middle;
-    text-align: center;
-    width: 3rem;
-    text-align: center;
+    font-size: 1.3rem;
   }
   
   .close-bar {
@@ -710,4 +690,17 @@ tbody {
 button .back {
     height: 50px;
     background-color: #fff;
+}
+
+.attend-button{
+    background-color: yellow;
+    border-radius: 3px;
+    border: 5px;
+    height: 1.5rem;
+    width: 4rem;
+}
+
+.attend-button:hover{
+    background-color: var(--first-color);
+    color: var(--body-color);
 }

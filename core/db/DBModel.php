@@ -44,6 +44,7 @@ abstract class DBModel extends Model
 
         $dbObjarr = (array)$dbObj; // db object to array
         $objarr = (array)$this; // this object to array
+        print_r($objarr);
         unset($objarr['errors']);
         unset($dbObjarr['errors']);
         $result = array_diff_assoc($objarr,$dbObjarr);
@@ -182,6 +183,7 @@ abstract class DBModel extends Model
         return true;
 
     }
+
 
     //for your dirty queries
     public static function query($string,$fetch_type,$fetchAll=null)

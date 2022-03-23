@@ -11,7 +11,7 @@
 <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"/>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/shopOrder.js" defer></script>
-<script src="/js/shop-orders.js" defer></script>
+
 
 <div class="home-content">
 
@@ -70,3 +70,5 @@
     </div>
 </div>
 </div>
+
+<script src="/js/shop-orders.js" defer></script>

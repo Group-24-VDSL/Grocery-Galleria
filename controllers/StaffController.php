@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\core\db\DBModel;
+use app\core\Response;
 use app\models\Customer;
 use app\models\OrderCart;
 use app\models\Orders;
@@ -18,6 +19,12 @@ use app\models\Complaint;
 use app\models\User;
 use app\models\Verification;
 use app\models\SystemReports;
+use SendGrid\Mail\TypeException;
+
+/**
+ * @throws TypeException
+ */
+
 
 class StaffController extends Controller
 {
@@ -102,8 +109,8 @@ class StaffController extends Controller
 
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
-            $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
-            if (isset($itemimg)) {
+            if (isset($request->getBody()['ItemImage'])) {
+                $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
                 $itemUpdated->ItemImage = $itemimg;
             } else {
                 $body = $request->getBody();
@@ -127,7 +134,12 @@ class StaffController extends Controller
     }
 
 
-    public function vieworders()
+    public function viewOrder()
+    {
+        $this->setLayout('dashboardL-staff');
+        return $this->render('staff/view-orders');
+    }
+    public function viewOrders()
     {
         $this->setLayout('dashboardL-staff');
         return $this->render('staff/view-orders');
@@ -151,15 +163,90 @@ class StaffController extends Controller
             ]);
     }
 
-    public function viewcomplaints()
+    public function viewcomplaints(Request $request,Response $response)
     {
         $complaints = Complaint::findAll();
+
+        $complaint = new Complaint() ;
+
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/view-complaint",
             [
-                'comlist' => $complaints
+                'complaintlist' => $complaints, 'model'=> $complaint
             ]);
     }
+
+    public function u(Request $request, Response $response)
+    {
+        $complaint = new Complaint() ;
+
+
+        $json = $request->getJson();
+        $complaintID = (int)$json["ComplaintID"];
+        $temp = Complaint::findOne(['ComplaintID' => $complaintID]);
+
+        $complaint->loadData($json);
+
+
+//        $temp->Status = 1;
+
+
+        if ($temp->validate('update') && $temp->update()){}
+
+        if ($json) {
+            if ($request->isPost()) {
+                $complaintID = (int)$json["ComplaintID"];
+                $complaint = Complaint::findOne(['ComplaintID' => $complaintID]);
+                $complaint->Status = 1;
+                if (1) {
+
+//                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
+
+                        return $response->json('{"success":"ok"}');
+                    }
+
+            }
+        }
+
+//        $json = $request->getJson();
+//
+//        if ($json) {
+//
+//            if ($request->isPost()) {
+//
+//                $complaintID = (int)$json["ComplaintID"];
+//                $complaint = Complaint::findOne(['ComplaintID' => $complaintID]);
+//                $complaint->Status = 1;
+//
+//                    if ($complaint->validate('update') && $complaint->update()) {
+////                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
+//                        return $response->json('{"success":"ok"}');
+//                    }
+//                    else{
+//                        return $response->json('{"success":"fail"}');
+//                    }
+//            }
+//                elseif
+//                ($request->isPatch()) {
+//                    $complaintID = (int)$json["ComplaintID"];
+//                    $complaint = Complaint::findOne(['ComplaintID' => $complaintID]);
+//                    $complaint->Status = 1;
+//
+//                    if ($complaint->validate('update') && $complaint->update()) {
+//                        return $response->json('{"success":"ok"}');
+//
+//                    }
+//                    else{
+//                        return $response->json('{"success":"fail"}');
+//
+//                    }
+//
+//                }
+//                return $response->json('{"success":"fail"}');
+
+
+
+        }
 
     public function addcomplaint(Request $request)
     {
@@ -234,6 +321,55 @@ class StaffController extends Controller
             'loginmodel' => $user
         ]);
     }
+    public function newOrders()
+    {
+
+        $querySql =
+            "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost FROM orders od
+                INNER JOIN cart crt ON
+                od.CartID = crt.CartID
+                INNER JOIN customer cus ON
+                crt.CustomerID = cus.CustomerID
+                WHERE od.Status=0";
+        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
+        return json_encode($newDeliveries);
+
+    }
+
+    public function onOrders()
+    {
+
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=1";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
+
+    }
+
+    public function pastOrders()
+    {
+
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=2 AND";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
+    }
 //-> view system order details by 19001541
 
 //    public function vieworderdetails(Request $request)
@@ -299,5 +435,43 @@ class StaffController extends Controller
 //
 //    }
 
+    public function updateComplaint(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        if ($json) {
+            $temp = new Complaint();
+            $temp->loadData($json);
+
+            $temp->Status =1;
+
+
+            $checktemp = Complaint::findOne(["ComplaintID" => $temp->ComplaintID ]);
+
+
+
+            if ($request->isPost()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
+                        return $response->json('{"success":"ok"}');
+                    }
+                    else {
+                        return $response->json('{"success":"fail"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+
+            } elseif($request->isPatch()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewcomplaints");
+                        return $response->json('{"success":"ok"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+            }
+        }
+        return $response->json('{"success":"fail"}');
+    }
 
 }

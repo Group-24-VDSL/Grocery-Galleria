@@ -11,7 +11,7 @@ class Complaint extends DBModel
     public string $ComplaintDate = '' ;
     public int $OrderID = 0 ;
     public string $OrderDate = '';
-    public int $Regarding = 0 ; /**[0-shop , 1-delivery] */
+    public int $Regarding = 0 ; /**[0-shop , 1-delivery , 2-both shop and rider] */
     public int $Priority = 0; /**[0-high , 1-low] */
     public int $Status = 0; /**[0-new , 1-attended] */
     public string $Nature = '';
@@ -24,7 +24,7 @@ class Complaint extends DBModel
 
     public function attributes(): array
     {
-        return ['ComplaintDate','OrderID','OrderDate','Regarding','Priority','Status','Nature','SpecialDetails'];
+        return ['ComplaintID','ComplaintDate','OrderID','OrderDate','Regarding','Priority','Status','Nature','SpecialDetails'];
     }
 
     public static function primaryKey(): array
@@ -35,8 +35,8 @@ class Complaint extends DBModel
     public function rules(): array
     {
         return [
-            'OrderID' => [self::RULE_REQUIRED, [self::RULE_IFEXISTS,'class'=> Orders::class,'attribute' => 'OrderID']],
-            'Nature' => [self::RULE_REQUIRED]
+            'OrderID' => [self::RULE_REQUIRED, ], //[self::RULE_IFEXISTS,'class'=> Orders::class,'attribute' => 'OrderID']
+
         ];
     }
 

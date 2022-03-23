@@ -65,6 +65,7 @@
                 <label for="MRP">
                     <i class="fas fa-coins"></i>
                     <?php echo $model->labels()['MRP']?>
+                    <small style="color: red; font-size:15px ">( Applicable only for Grocery items! )</small>
                 </label>
                 <?php echo $form->numberfieldonly($model,"MRP",1,10000,1);?>
             </div>
