@@ -62,11 +62,14 @@ class Application
 
             'Customer' => ['welcome','getTempCart','paymentProcessor','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess'],
 
-            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','getItem', 'getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','getCustomer','vieworderdetails'],
+            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','vieworders','vieworderdetails','profilesettings','getItem', 'getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','getCustomer','vieworderdetails'
+                ,'profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','itemReport','salesReportCurrent','salesReportLast','systemReports',
+                'shopReports','shopsReportMonthly','shopsReportYearly','getTotalOrders','getTotalUsers','productReports','getItemWeekReport','dailyRevenue','dailyTotOrders','pwdUpdate',
+                'newOrders','onOrders','pastOrders','monthReport','getMonthCost','getComplaints','updateComplaint'],
 
             'Shop' => ['vieworder','productOverview','productOverview','viewitems','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'
                        ,'updateOngoingShopItem','updateOngoingShopItem','getShopOrders','getShopOrder','getDelivery','getShopItems','updateItem','profilesettings','profileUpdate','abc','safetystock','shopcards','pwdUpdate','shopOrderAnalytics','getshopmonthlyorders','getmonthorders','getmonthrevenues',
-                'getmonthlyrevenues','itemsales','getsales','getShopItemList','shopOrderAnalytics','shopincome','pwdUpdate'],
+                'getmonthlyrevenues','itemsales','getsales','getShopItemList','shopOrderAnalytics','shopincome','pwdUpdate','getComplaints','ViewOrders'],
 
             'Rider' => ['vieworder','order','riderLocation'],
 
@@ -111,7 +114,6 @@ class Application
     public static function getUserID(){
         return self::$app->session->get('user');
     }
-
 
     public static function getUserRole(){
         return self::$app->user->Role??null;
