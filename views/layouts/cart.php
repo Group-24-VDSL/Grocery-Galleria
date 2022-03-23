@@ -17,7 +17,7 @@
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
-        <a href="/welcome" class="back"><i class="fas fa-step-backward"></i></a>
+        <a href="javascript:history.back()" class="back"><i class="fas fa-step-backward"></i></a>
     </div>
 </header>
 {{content}}
