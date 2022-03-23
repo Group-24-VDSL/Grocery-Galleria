@@ -48,6 +48,7 @@ $(document).ready(function () {
                 <td class="row-minWeight">${Item.UWeight}</td>
                 <td class="row-mrp">${Item.MRP}</td>
                 <td class="row-IncStep">${Item.MaxCount}</td>
+                <td class="row-Status">${Item.Status}</td>
                 <td class="row-ubutton">
                     <button id="ItemID=${Item.ItemID}" data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </td>
@@ -208,6 +209,7 @@ $(document).ready(function () {
                     $('#Name').val(Item.Name);
                     // console.log(document.getElementById('Name').value);
                     $('#ImgDis').attr('src', Item.ItemImage);
+                    $('#ImgStr').val(Item.ItemImage);
                     // console.log(Item.ItemImage);
                     $('#Brand').val(Item.Brand);
                     // console.log(document.getElementById('Brand').value);
@@ -217,24 +219,22 @@ $(document).ready(function () {
                     // console.log(document.getElementById('MaxCount').value);
                     $('#MRP').val(Item.MRP);
                     // console.log(document.getElementById('MRP').value);
-                    $('#Status').val(Item.Status).checked();
+                    // $('#Status').val(Item.Status);
 
                 })
             })
 
         })
     })
-// $('#Status').val(1);
+
     $('#Status').change(function () {
         if ($(this).is(':checked')) {
             $(this).val(1);
-            console.log($(this).val())
             // console.log(document.getElementById('Status'))
         } else {
             $(this).val(0);
-            console.log($(this).val())
+            $(this).prop('checked', false);
             // console.log(document.getElementById('Status'))
-
         }
     })
 

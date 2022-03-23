@@ -30,7 +30,7 @@ class Item extends DBModel
 
     public function attributes(): array
     {
-        return ['Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
+        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category','Status'];
     }
 
     public function labels(): array{

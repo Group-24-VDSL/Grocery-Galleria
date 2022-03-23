@@ -33,8 +33,9 @@
                         <th>Brand</th>
                         <th>Unit</th>
                         <th>UnitWeight</th>
-                        <th>MRP</th>
+                        <th>Price</th>
                         <th>MaxCount</th>
+                        <th>Status</th>
                         <th>Update</th>
                     </tr>
                     </thead>
@@ -46,43 +47,13 @@
     </div>
 </div>
 
-<div class="core" id="productAnalytics">
-    <h1 class="heading">Product <span>Report</span></h1>
-    <div class="headings">
-        <h1 class="heading chart-heading">Month <span>Analysis</span></h1>
-        <h1 class="heading chart-heading">Week <span>Analysis</span></h1>
-        <div></div>
-        <div>
-            <label id="SalesDateLabel" for="SalesDate">Select date:</label>
-            <input type="date" id="SalesDate" name="SalesDate" min="2020-01-01" value="">
-
-        </div>
-    </div>
-    <input id="storeItemID" type="hidden" value="">
-    <div>
-        <p class="sub-heading" id="item-data"></p>
-    </div>
-    <div class="chart-div-core">
-        <div id="chartDiv1" class="chart-div">
-            <div class="chart">
-                <canvas id="myChart1"></canvas>
-            </div>
-        </div>
-        <div id="chartDiv2" class="chart-div">
-            <div id="" class="chart">
-                <canvas id="myChart2"></canvas>
-            </div>
-        </div>
-    </div>
-
-
-</div>
 
 <div class="core" id="Update">
     <h1 class="heading">Update <span>Products</span></h1>
     <div class="container-core">
         <div class="form-details register">
-            <?php $form = \app\core\form\Form::begin("", "post", "itemUpdate", [], "multipart/form-data",); ?>
+            <?php $form = \app\core\form\Form::begin("", "post", "", [], "multipart/form-data",); ?>
+            <input type="text" id="ItemID" name="ItemID" hidden>
             <div class="inputBox">
                 <label for="category">
                     <i class="fas fa-list"></i>
@@ -98,12 +69,12 @@
                 <?php echo $form->fieldonly($model, "Name"); ?>
             </div>
             <div class="inputBox">
-                <label for="ItemImage">
+                <label for="ImgStr">
                     <i class="far fa-images"></i>
                     Current Image
                 </label>
-                <img id="ImgDis" class="imageBox" src="">
-                <input id="ImgStr" name="ImgStr" hidden>
+                <img id="ImgDis" class="imageBox" src="" alt="">
+                <input type="text" id="ImgStr" name="ImgStr" hidden>
             </div>
 
             <div class="inputBox">
@@ -153,13 +124,12 @@
                 <?php echo $form->numberfieldonly($model, "MRP", 1, 10000, 1); ?>
             </div>
             <div class="inputBox">
-                <label for="Status">
+                <label>
                     <i class="fas fa-cog"></i>
                     <?php echo $model->labels()['Status'] ?>
                 </label>
-                <label class="switch">
+                <label for="Status" class="switch-staff">
                     <input type="checkbox" id="Status" name="Status" value="1" checked>
-                    <!--                    --><?php //echo $form->fieldonly($model,"Status")->checkBoxField()?>
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -170,5 +140,36 @@
             <?php \app\core\form\Form::end() ?>
         </div>
     </div>
+</div>
+
+<div class="core" id="productAnalytics">
+    <h1 class="heading">Product <span>Report</span></h1>
+    <div class="headings">
+        <h1 class="heading chart-heading">Month <span>Analysis</span></h1>
+        <h1 class="heading chart-heading">Week <span>Analysis</span></h1>
+        <div></div>
+        <div>
+            <label id="SalesDateLabel" for="SalesDate">Select date:</label>
+            <input type="date" id="SalesDate" name="SalesDate" min="2020-01-01" value="">
+
+        </div>
+    </div>
+    <input id="storeItemID" type="hidden" value="">
+    <div>
+        <p class="sub-heading" id="item-data"></p>
+    </div>
+    <div class="chart-div-core">
+        <div id="chartDiv1" class="chart-div">
+            <div class="chart">
+                <canvas id="myChart1"></canvas>
+            </div>
+        </div>
+        <div id="chartDiv2" class="chart-div">
+            <div id="" class="chart">
+                <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+    </div>
+
 </div>
 
