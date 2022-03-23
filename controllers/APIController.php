@@ -53,24 +53,6 @@ class APIController extends Controller
     }
 
 
-    // Shop section
-    public function getShop(Request $request, Response $response) // get shop details from DB
-    {
-        $this->setLayout('empty');
-        $response->setContentTypeJSON();
-        $shop = Shop::findOne(array_slice($request->getBody(),1,null,true));
-        return json_encode($shop);
-    }
-
-
-    public function getAllShop(Request $request,Response $response)
-    {
-        $this->setLayout('empty');
-        $response->setContentTypeJSON();
-        $shops = Shop::findAll(array_slice($request->getBody(),1,null,true));
-        return json_encode($shops);
-
-    }
 
     //cart
 
