@@ -55,7 +55,7 @@
             </a>
         </li>
         <li class="logout">
-            <a href="">
+            <a href="/logout">
                 <i class="bx bx-log-out"></i>
                 <span class="link-name">Log out</span>
             </a>
