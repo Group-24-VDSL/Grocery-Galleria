@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
     <link rel="stylesheet" href="/css/template.css">
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <script src="/js/jquery.min.js"></script>
     <script src="/js/template.js"></script>
+
     <title>Dashboard-Shop</title>
     <?php include_once("utils/pwa.php"); ?>
 </head>
@@ -67,7 +70,7 @@
             </a>
         </li>
         <li class="logout">
-            <a href="/login">
+            <a href="/logout">
                 <i class="bx bx-log-out"></i>
                 <span class="link-name">Log out</span>
             </a>
@@ -82,14 +85,7 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span class="dashboard">Shop Dashboard</span>
         </div>
-        <div class="search-box">
-            <input type="search" id="" placeholder="Search.... " />
-            <button class="bx bx-search search"></button>
-        </div>
-        <div class="profile-details">
-            <i class="bx bx-user"></i>
-            <span class="user-name">Dilshan98</span>
-        </div>
+
     </nav>
 
     <div class="home-content">
@@ -155,5 +151,11 @@
   </section>
 <script src="/js/dashboardScript.js"></script>
 <script src="/js/shop-cards.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 </body>
 </html>

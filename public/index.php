@@ -120,6 +120,8 @@ $app->router->post('/dashboard/shop/profilesettings',[ShopController::class,'pro
 $app->router->post('/dashboard/shop/profileupdate',[TestController::class,'profileUpdate']);
 $app->router->get('/dashboard/shop/analytics',[ShopController::class,'shopincome']);
 $app->router->get('/dashboard/shop/itemsales',[ShopController::class,'itemsales']);
+$app->router->get('/dashboard/shop/changepassword',[AuthController::class,'pwdUpdate']);
+$app->router->post('/dashboard/shop/changepassword',[AuthController::class,'pwdUpdate']);
 
 
 

@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/dashboardStyle.css">
 <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
 
-<div class="core" style=" height: 580px">
+<div class="core" style=" height: 780px">
     <h1 class="heading">Ongoing <span>Products</span></h1>
     <div class="container-items">
         <div class="safety-details">
@@ -20,7 +20,7 @@
         <table class="table-item small-first-col" id="ongoing-item-table">
             <thead>
             <tr>
-                <th></th>
+
                 <th>Item ID</th>
                 <th>Item Image</th>
                 <th>Item Name</th>
@@ -45,6 +45,8 @@
         </table>
 
         <button type="submit" id="updateItems" class="button-item-update" onclick="updateShopItem()"><span id="status">Update Items</span></button>
+        <p style="margin-bottom: 2rem"><br> <br>
+            Safety Stock : <br>Re Order Level : </p>
 
     </div>
 </div>

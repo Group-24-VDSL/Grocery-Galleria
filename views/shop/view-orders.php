@@ -25,10 +25,10 @@
 
             <div class = "tab-content">
                 <div id="new" data-tab-content class="active">
-                    <table class="table-item small-first-col" id="order-table">
+                    <table class="table-item small-first-col" id="order-table-new">
                         <thead>
                         <tr>
-                            <th></th>
+
                             <th>Order ID</th>
                             <th>Rider ID</th>
                             <th>Order Date</th>
@@ -44,8 +44,9 @@
                         <?php \app\core\form\Form::end(); ?>
                     </table>
                 </div>
+
                 <div id="completed" data-tab-content >
-                    <table class="table-item small-first-col" id="order-table">
+                    <table class="table-item small-first-col" id="order-table-old">
                         <thead>
                         <tr>
                             <th></th>

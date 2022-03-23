@@ -65,8 +65,6 @@ function getchart(ItemID,ItemImage,ItemName){
         let xValues = [] ;
         let yValues = [] ;
 
-        console.log(yValues)
-
         let a = Object.values(sales)[0]
         console.log(a);
         console.log(Object.keys(sales).length)
@@ -94,8 +92,8 @@ function getchart(ItemID,ItemImage,ItemName){
 
 
         var ctx = document.getElementById("myChart").getContext("2d");
-        document.getElementById("order-linechart-average").innerHTML = sum/12
-        document.getElementById("order-linechart-sum").innerHTML = sum
+        document.getElementById("order-linechart-average").innerHTML = (sum/12).toFixed(2);
+        document.getElementById("order-linechart-sum").innerHTML = parseFloat(sum,2);
 
             var data = {
                 labels:xValues,

@@ -53,7 +53,6 @@ $(function () {
                             case 3 : UnitSymbol = 'Unit' ;
                                 break ;
                         }
-                        console.log(item)
                         MRP.setAttribute("value", item.MRP);
                         Unit.setAttribute("value", UnitTag[item.Unit]);
                         UWeight.setAttribute("value", item.UWeight+" "+UnitSymbol);

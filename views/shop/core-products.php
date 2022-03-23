@@ -17,11 +17,11 @@ use app\models\ShopOrder;
             <h1 class="heading">Shop <span>Products</span></h1>
             <div class="container-items">
 
-                <table class="table-item small-first-col">
+                <table id="shop-products" class="table-item small-first-col">
                     <thead>
                     <tr>
-                        <th></th>
-                        <th>Item ID</th>
+<!--                        <th></th>-->
+<!--                        <th>Item ID</th>-->
                         <th>Item Image</th>
                         <th>Item Name</th>
                         <th>Brand</th>
@@ -35,7 +35,7 @@ use app\models\ShopOrder;
                     </tr>
                     </thead>
                     <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
-                    <tbody id="item-table" class="item-table-body body-half-screen">
+                    <tbody style="" id="item-table" class="item-table-body body-half-screen">
 
 
                     </tbody>
@@ -56,7 +56,7 @@ use app\models\ShopOrder;
                     <div id = "updateItem">
 
                     </div>
-                    <?php $form = \app\core\form\Form::begin("","post","itemUpdate",[],"multipart/form-data",);?>
+                    <?php $form = \app\core\form\Form::begin("","post","itemUpdate-shop",[],"multipart/form-data",);?>
 
                     <input id="ItemID" name="ItemID" value="" hidden>
                     <input id="ShopID" name="ShopID" value="" hidden>

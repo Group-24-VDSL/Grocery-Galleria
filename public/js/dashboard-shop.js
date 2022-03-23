@@ -30,11 +30,17 @@ const ItemTable = document.getElementById('item-table');
 // ItemTable.classList.add('item-table-body body-half-screen');
 
 $(document).ready(function () {
+        // var table = $('#shop-products').DataTable();
+        // table.destroy() ;
+
     $.getJSON(URLGetShop, function (Shops) {
+
         Shops.forEach(Shop => {
             // itemRow.classList.add('row');
             const URLShopItems = URLFindItemsAPI.concat("?ItemID=").concat(Shop.ItemID);
             console.log(URLShopItems);
+            // // document.getElementById("itemUpdate-shop").style.gridAutoColumns="100px" ;
+            // document.getElementById('itemUpdate-sho').setAttribute("style","gridAutoColumns:100px");
 
             $.getJSON(URLShopItems, function (Items) {
                     Items.forEach(Item => {
@@ -65,8 +71,8 @@ $(document).ready(function () {
 
                             ItemRow.innerHTML = `
 
-                 <td></td>
-                 <td id="Name" class="row-name">${Shop.ItemID}</td>
+
+
                  <td id="ItemImage" class="row-img"><img src="${Item.ItemImage}" alt="${Item.Name}" /> </td>
                 <td id="Name" class="row-name">${Item.Name}</td>          
                 <td id="Brand" class="row-brand">${Item.Brand}</td>
@@ -81,15 +87,20 @@ $(document).ready(function () {
                 </td>               
                 `
                             ItemTable.appendChild(ItemRow);
-                        }
-                    )
-                }
-            )
-        });
-    }
-    );
+
+                        })
+                }).then(function (){
+                $('#shop-products').DataTable();
+            })
+        })
+    })
+});
+
+function  setDataTable(){
+    // var table = $('#shop-products').DataTable();
+    // table.destroy() ;
+    // $('#shop-products').DataTable();
 }
-);
 
 function shopItemUpdate(itemID, shopID){
 

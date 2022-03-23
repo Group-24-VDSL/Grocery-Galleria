@@ -39,10 +39,15 @@ const ItemUpdate = document.getElementById('updateItem');
 let itemArray = [];
 
 $(document).ready(function () {
+    var table = $('#ongoing-item-table').DataTable();
+    table.destroy() ;
     $.getJSON(URLGetShop, function (Shops) {
         Shops.forEach(Shop => {
             const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);
+            console.log(URLShopItems)
             $.getJSON(URLShopItems, function (Items) {
+                Items.sort();
+                console.log(Items)
                 Items.forEach(Item => {
                     if (Shop.Enabled === 1  && Shop.Stock >= 5)
                     {
@@ -54,7 +59,7 @@ $(document).ready(function () {
 
                         const ItemRow = document.createElement('tr');
                         ItemRow.innerHTML = `
-                                <td></td>
+                                
                                 <td id="Name" class="row-name">${Shop.ItemID}</td>
                                 <td id="ItemImage" class="row-img"><img src="${Item.ItemImage}" alt="${Item.Name}" /></td>
                                 <td id="Name" class="row-name">${Item.Name}</td>                                
@@ -98,6 +103,7 @@ $(document).ready(function () {
 function setItemArray(Item){
     itemArray.push(Item);
     safetyStock(Item);
+    $('#ongoing-item-table').DataTable();
 }
 
 function safetyStock(ShopItem){
