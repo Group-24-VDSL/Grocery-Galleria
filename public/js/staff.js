@@ -31,35 +31,31 @@ const URLItemWeekReport = host + '/dashboard/staff/getitemweekreport';
 
 $(document).ready(function () {
     $(".btn-tab").click(function () {
-        let table = $('#Items').DataTable();
-        table.destroy();
-        $('#Item-info-rows').empty();
+        $('#item-table').empty();
         let URLFindItems = URLItemsAPI.concat($(this).data("href"));
         $.getJSON(URLFindItems, function (Items) {
             Items.forEach(Item => {
-                const itemRow = document.createElement('tr');
+                const itemRow = document.createElement('ul');
+                itemRow.classList.add('row');
                 itemRow.innerHTML = `
-                 <td class="row-img">
+                 <li class="row-img">
                     <img src="${Item.ItemImage}" alt="${Item.Name}" />
-                </td>
-                <td class="row-name">${Item.Name}</td>
-                <td class="row-brand">${Item.Brand}</td>
-                <td class="row-unit">${Item.Unit}</td>
-                <td class="row-minWeight">${Item.UWeight}</td>
-                <td class="row-mrp">${Item.MRP}</td>
-                <td class="row-IncStep">${Item.MaxCount}</td>
-                <td class="row-Status">${Item.Status}</td>
-                <td class="row-ubutton">
+                </li>
+                <li class="row-name">${Item.Name}</li>
+                <li class="row-brand">${Item.Brand}</li>
+                <li class="row-unit">${Item.Unit}</li>
+                <li class="row-minWeight">${Item.UWeight}</li>
+                <li class="row-mrp">${Item.MRP}</li>
+                <li class="row-IncStep">${Item.MaxCount}</li>
+                <li class="row-Status">${Item.Status}</li>
+                <li class="row-ubutton">
                     <button id="ItemID=${Item.ItemID}" data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
-                </td>
+                </li>
                 `
-                $('#Item-info-rows').append(itemRow);
+                ItemTable.appendChild(itemRow);
             })
         }).then(function () {
-            $('#Items').DataTable({
-                "pageLength": 5,
-            });
-            ////
+
             console.log("here")
             const itemBtns = document.getElementsByClassName('btn-row');
             $(itemBtns).click(function () {
@@ -196,6 +192,15 @@ $(document).ready(function () {
                             const myChart = new Chart(ctx, config);
                         })
                     })
+                    Date.prototype.toDateInputValue = (function () {
+                        const local = new Date(this);
+                        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                        return local.toJSON().slice(0, 10);
+                    });
+
+                    $('#SalesDate').val(new Date().toDateInputValue());
+                    const fireEvent = new Event('change');
+                    document.getElementById('SalesDate').dispatchEvent(fireEvent);
                 })
                 // console.log(URLFindItem);
                 $.getJSON(URLFindItem, function (Item) {

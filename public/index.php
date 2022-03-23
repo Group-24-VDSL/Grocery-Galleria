@@ -118,6 +118,7 @@ $app->router->get('/dashboard/staff/getmonthcost',[SystemReportController::class
 $app->router->get('/dashboard/staff/neworders',[StaffController::class, 'newOrders']);
 $app->router->get('/dashboard/staff/onorders',[StaffController::class, 'onOrders']);
 $app->router->get('/dashboard/staff/pastorders',[StaffController::class, 'pastOrders']);
+$app->router->get('/dashboard/staff/getnewusercount',[SystemReportController::class, 'getNewUserCount']);
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);

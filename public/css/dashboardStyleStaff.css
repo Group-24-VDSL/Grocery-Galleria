@@ -582,5 +582,6 @@ display: flex;
   font-weight: bold;
 }
 .details .details-div input{
-  padding: 4px;
+  padding: 6px;
+  font-weight: 600;
 }

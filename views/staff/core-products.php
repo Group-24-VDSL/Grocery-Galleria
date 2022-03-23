@@ -2,7 +2,7 @@
 /** @var $model \app\models\Item * */
 /** @var $form app\core\form\Form */
 ?>
-<div class="core overflow-fix">
+<div class="core">
     <h1 class="heading">System <span>Products</span></h1>
     <div class="container-core">
         <ul id="tab=btns" class="tabs">
@@ -22,28 +22,20 @@
                 <button data-href="?Category=4" class="btn-tab">Meat</button>
             </li>
         </ul>
-
-        <div class="tab-content">
-            <div id="new" data-tab-content class="active">
-                <table id="Items" class="">
-                    <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Brand</th>
-                        <th>Unit</th>
-                        <th>UnitWeight</th>
-                        <th>Price</th>
-                        <th>MaxCount</th>
-                        <th>Status</th>
-                        <th>Update</th>
-                    </tr>
-                    </thead>
-                    <tbody id="Item-info-rows" class="">
-                    </tbody>
-                </table>
-            </div>
+        <div class="table-header">
+            <ul>
+                <li>Image</li>
+                <li>Name</li>
+                <li>Brand</li>
+                <li>Unit</li>
+                <li>UnitWeight</li>
+                <li>MRP</li>
+                <li>MaxCount</li>
+                <li>Status</li>
+                <li>Update</li>
+            </ul>
         </div>
+        <div id="item-table" class="table-details scroller"></div>
     </div>
 </div>
 

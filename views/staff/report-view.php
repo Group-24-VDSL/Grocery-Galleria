@@ -73,7 +73,7 @@
                     <input type="text" id="Cost1" readonly>
                 </div>
                 <div class="details-div">
-                    <label>Sales Revenue(LKR):</label>
+                    <label>3% Sales Revenue(LKR):</label>
                     <input type="text" id="revenue1" readonly>
                 </div>
                 <div class="details-div">
@@ -97,7 +97,32 @@
         </div>
         <div class="report">
             <h1 class="heading chart-heading">New <span>Users</span></h1>
-            <canvas id="myChart7"></canvas>
+            <div class="details">
+                <div class="details-div">
+                    <label>Total new users:</label>
+                    <input type="text" id="TNew" readonly>
+                </div>
+                <div class="details-div">
+                    <label>#New Customers:</label>
+                    <input type="text" id="NCust" readonly>
+                </div>
+                <div class="details-div">
+                    <label>#New Shops:</label>
+                    <input type="text" id="NShop" readonly>
+                </div>
+                <div class="details-div">
+                    <label>#New System Staff:</label>
+                    <input type="text" id="NSStaff" readonly>
+                </div>
+                <div class="details-div">
+                    <label>#New Delivery Staff:</label>
+                    <input type="text" id="NDStaff" readonly>
+                </div>
+                <div class="details-div">
+                    <label>#New Riders:</label>
+                    <input type="text" id="NDRider" readonly>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -125,11 +150,9 @@
     <h1 class="heading">Year <span>Analytics</span></h1>
     <div class="chart-div">
         <div class="chart">
-
             <canvas id="myChart2"></canvas>
         </div>
         <div class="chart">
-
             <canvas id="myChart1"></canvas>
         </div>
         <div class="report-brief">
