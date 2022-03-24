@@ -224,27 +224,42 @@ $(document).ready(function () {
                     // console.log(document.getElementById('MaxCount').value);
                     $('#MRP').val(Item.MRP);
                     // console.log(document.getElementById('MRP').value);
-                    // $('#Status').val(Item.Status);
+                    $('#Status').val(Item.Status);
 
-                })
+                }).then(changeState)
             })
 
         })
+
     })
+
+    function changeState() {
+        console.log("changeState");
+        if ($('#Status').val()==="1") {
+            console.log(document.getElementById('Status'))
+            $('#Status').prop('checked', true);
+        } else {
+            console.log(document.getElementById('Status'))
+            $('#Status').prop('checked', false);
+        }
+
+    }
 
     $('#Status').change(function () {
         if ($(this).is(':checked')) {
             $(this).val(1);
-            // console.log(document.getElementById('Status'))
+            console.log(document.getElementById('Status'))
         } else {
             $(this).val(0);
-            $(this).prop('checked', false);
-            // console.log(document.getElementById('Status'))
+            $(this).attr('checked', false);
+            console.log(document.getElementById('Status'))
         }
     })
-
     $('#veg-tab-items').trigger("click");
 })
+
+
+
 
 
 

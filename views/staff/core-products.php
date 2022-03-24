@@ -29,7 +29,7 @@
                 <li>Brand</li>
                 <li>Unit</li>
                 <li>UnitWeight</li>
-                <li>MRP</li>
+                <li>ItemPrice</li>
                 <li>MaxCount</li>
                 <li>Status</li>
                 <li>Update</li>
@@ -157,7 +157,7 @@
             </div>
         </div>
         <div id="chartDiv2" class="chart-div">
-            <div id="" class="chart">
+            <div class="chart">
                 <canvas id="myChart2"></canvas>
             </div>
         </div>
