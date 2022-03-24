@@ -151,7 +151,9 @@ class Application
                 'getOrders',
                 'getOrderCart',
                 'getCustomer',
-                'vieworderdetails'],
+                'vieworderdetails',
+                'ViewOrders',
+                'viewOrder'],
             'Shop' => [
                 'vieworder',
                 'productOverview',
