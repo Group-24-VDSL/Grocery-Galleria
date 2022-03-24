@@ -41,7 +41,7 @@ class Item extends DBModel
             'UWeight'=>'Unit Weight in gram',
             'Unit'=>'Unit',
             'Category'=>'Category',
-            'MRP'=>'Item Price (LKR)',
+            'MRP'=>'Item Price',
             'MaxCount' => 'Max Count',
             'Status'=>'Active Status'
         ];
