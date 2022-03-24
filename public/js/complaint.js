@@ -1,14 +1,3 @@
-$(function(){
-  $(".btn-description").on("click",function(){
-    // $(this).closest("div.description").show();
-    $(this).siblings('.description').show();
-  });
-
-  $(".close").on("click",function(){
-    // $(this).closest("div.description").show();
-    $(this).closest('.description').hide();
-  });
-});
 
 // const getUrlParameter = function getUrlParameter(sParam) {
 //   let sPageURL = window.location.search.substring(1),
@@ -58,11 +47,9 @@ $(document).ready(function complaint() {
             case 2 : regarding = "Shop/Delivery"; break ;
         }
 
-
         switch (Complaint.Status){
             case 0 : status = "New";
                 complaintRow.innerHTML = `
-
                 <td>${Complaint.ComplaintID}</td> 
                 <td>${Complaint.ComplaintDate}</td> 
                 <td>${Complaint.OrderID}</td> 
@@ -75,7 +62,6 @@ $(document).ready(function complaint() {
                      <div id="desc${Complaint.ComplaintID}" class="description">
                      <div class="description-content">
                      <div class="close-bar">
-
                      <span id="close${Complaint.ComplaintID} "  class="complaint-id" >Complaint ID: ${Complaint.ComplaintID}</span>
                       <button onclick="closeDescription(${Complaint.ComplaintID})" class="close"> &times; </button>
                       </div>
@@ -136,25 +122,19 @@ $(document).ready(function complaint() {
                       <td></td>         
                  `
                 ComplaintTable.appendChild(complaintRow);break ;
-        }
-
-
-
-
-
-
+            }
 
         })
 
-  }).then(function (){$('#complaint-table').DataTable();});
+  }).then(function (){
+      $('#complaint-table').DataTable();
+  });
 });
 
 function showDescription(ComplaintID){
     console.log(ComplaintID)
     $('#'.concat('desc').concat(ComplaintID)).show();
 }
-
-
 
 function closeDescription(ComplaintID){
     console.log(ComplaintID)
@@ -164,9 +144,8 @@ function closeDescription(ComplaintID){
 const URLUpdateComplaint = host+ "/api/updatecomplaint" ;
 
 function updatecomplaint(complaintID){
-    console.log(complaintID)
-    let obj = {"ComplaintID":complaintID} ;
 
+    let obj = {"ComplaintID":complaintID} ;
 
     $.ajax({
         url : URLUpdateComplaint,
@@ -176,18 +155,13 @@ function updatecomplaint(complaintID){
         processData: false,
         contentType : 'application/json'
     }).done(function (data){
-
         if (JSON.parse(data)['success'] !== 'ok') {
-            templateAlert('green', 'Item is updated.');
+            templateAlert('green', 'Update Success');
         } else if (JSON.parse(data)['success'] === 'fail') {
-
-            templateAlert('red', 'Item update is failed.');
+            templateAlert('yellow', 'Update Failed');
         }
     })
-
     $('#'.concat('attendBtn_').concat(complaintID)).hide();
-
-
 }
 
 // old complaint description popup

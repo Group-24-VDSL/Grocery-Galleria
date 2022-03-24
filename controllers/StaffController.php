@@ -176,77 +176,42 @@ class StaffController extends Controller
             ]);
     }
 
-    public function u(Request $request, Response $response)
+    public function updateComplaint(Request $request, Response $response)
     {
-        $complaint = new Complaint() ;
-
-
         $json = $request->getJson();
-        $complaintID = (int)$json["ComplaintID"];
-        $temp = Complaint::findOne(['ComplaintID' => $complaintID]);
-
-        $complaint->loadData($json);
-
-
-//        $temp->Status = 1;
-
-
-        if ($temp->validate('update') && $temp->update()){}
-
         if ($json) {
+            $temp = new Complaint();
+            $temp->loadData($json);
+
+            $temp->Status =1;
+            $checktemp = Complaint::findOne(["ComplaintID" => $temp->ComplaintID ]);
+
             if ($request->isPost()) {
-                $complaintID = (int)$json["ComplaintID"];
-                $complaint = Complaint::findOne(['ComplaintID' => $complaintID]);
-                $complaint->Status = 1;
-                if (1) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        return $response->json('{"success":"ok"}');
+                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
 
-//                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
+                    }
+                    else {
+                        return $response->json('{"success":"fail"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
 
+            } elseif($request->isPatch()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewcomplaints");
                         return $response->json('{"success":"ok"}');
                     }
-
+                }
+                return $response->json('{"success":"fail"}');
             }
         }
+        return $response->json('{"success":"fail"}');
+    }
 
-//        $json = $request->getJson();
-//
-//        if ($json) {
-//
-//            if ($request->isPost()) {
-//
-//                $complaintID = (int)$json["ComplaintID"];
-//                $complaint = Complaint::findOne(['ComplaintID' => $complaintID]);
-//                $complaint->Status = 1;
-//
-//                    if ($complaint->validate('update') && $complaint->update()) {
-////                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
-//                        return $response->json('{"success":"ok"}');
-//                    }
-//                    else{
-//                        return $response->json('{"success":"fail"}');
-//                    }
-//            }
-//                elseif
-//                ($request->isPatch()) {
-//                    $complaintID = (int)$json["ComplaintID"];
-//                    $complaint = Complaint::findOne(['ComplaintID' => $complaintID]);
-//                    $complaint->Status = 1;
-//
-//                    if ($complaint->validate('update') && $complaint->update()) {
-//                        return $response->json('{"success":"ok"}');
-//
-//                    }
-//                    else{
-//                        return $response->json('{"success":"fail"}');
-//
-//                    }
-//
-//                }
-//                return $response->json('{"success":"fail"}');
-
-
-
-        }
 
     public function addcomplaint(Request $request)
     {
@@ -256,12 +221,12 @@ class StaffController extends Controller
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
 
-            $complaint->ComplaintDate =  date("d-m-Y");
+            $complaint->ComplaintDate =  date("Y-m-d");
 
             $OrderID = $complaint->OrderID ;
             $order = Orders::findOne(['OrderID' => $OrderID]);
             if(!$order){
-                Application::$app->session->setFlash("warning", "Order is not in the system");
+                Application::$app->session->setFlash("warning", "Order is not exist in the system.");
                 Application::$app->response->redirect("/dashboard/staff/addcomplaint");
             }
             $complaint->OrderDate = $order->OrderDate;
@@ -435,43 +400,5 @@ class StaffController extends Controller
 //
 //    }
 
-    public function updateComplaint(Request $request, Response $response)
-    {
-        $json = $request->getJson();
-        if ($json) {
-            $temp = new Complaint();
-            $temp->loadData($json);
-
-            $temp->Status =1;
-
-
-            $checktemp = Complaint::findOne(["ComplaintID" => $temp->ComplaintID ]);
-
-
-
-            if ($request->isPost()) {
-                if ($checktemp) { //there exists such item
-                    if ($temp->validate('update') && $temp->update()) {
-                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
-                        return $response->json('{"success":"ok"}');
-                    }
-                    else {
-                        return $response->json('{"success":"fail"}');
-                    }
-                }
-                return $response->json('{"success":"fail"}');
-
-            } elseif($request->isPatch()) {
-                if ($checktemp) { //there exists such item
-                    if ($temp->validate('update') && $temp->update()) {
-                        Application::$app->response->redirect("/dashboard/shop/viewcomplaints");
-                        return $response->json('{"success":"ok"}');
-                    }
-                }
-                return $response->json('{"success":"fail"}');
-            }
-        }
-        return $response->json('{"success":"fail"}');
-    }
 
 }
