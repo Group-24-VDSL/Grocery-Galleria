@@ -240,7 +240,7 @@ abstract class Model implements JsonSerializable
         return $this->errors;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $attributes = $this->jsonarray();
         $dataobj = [];
