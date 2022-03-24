@@ -119,7 +119,6 @@ class Application
                 'viewUsers',
                 'addcomplaint',
                 'viewcomplaints',
-                'vieworders',
                 'vieworderdetails',
                 'profilesettings',
                 'getItem',
@@ -152,7 +151,7 @@ class Application
                 'getOrderCart',
                 'getCustomer',
                 'vieworderdetails',
-                'ViewOrders',
+                'viewOrders',
                 'viewOrder'],
             'Shop' => [
                 'vieworder',
