@@ -1,18 +1,4 @@
-const getUrlParameter = function getUrlParameter(sParam) {
-    let sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
-    }
-    return false;
-}
 
 const host = window.location.origin; //http://domainname
 
@@ -24,14 +10,14 @@ const URLShopItemAPI = host + "/api/shopitem" ;
 const URLFindItemAPI = host + "/api/items";
 const URLItemAPI = host + "/api/item" ;
 const  URLShopOrderAPI = host+ "/api/getshoporder" ;
-const URLAddtoCartAPI = host + "/api/addtocart";
 const URLGetCartAPI = host + "/api/getcart";
 const URLUpdateItem = host+ "/api/updateshopitem" ;
 const URLGetOrderCart = host+ "/api/getordercart" ;
 const URLSafetyStock = host+ "/api/getsafetystock" ;
+const ShopID =  host + "/api/getshopid";
+const shopID = ShopID ;
 
 
-const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat('5');
 
 const ItemTable = document.getElementById('item-table');
 const ItemUpdate = document.getElementById('updateItem');
@@ -39,22 +25,36 @@ const ItemUpdate = document.getElementById('updateItem');
 let itemArray = [];
 
 $(document).ready(function () {
-    var table = $('#ongoing-item-table').DataTable();
-    table.destroy() ;
+
+
+    $.getJSON(ShopID, function (shopID) {
+
+    const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat(shopID);
+
     $.getJSON(URLGetShop, function (Shops) {
+
+        var table = $('#ongoing-item-table').DataTable();
+        table.destroy() ;
+
         Shops.forEach(Shop => {
             const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);
-            console.log(URLShopItems)
+
             $.getJSON(URLShopItems, function (Items) {
                 Items.sort();
-                console.log(Items)
+
                 Items.forEach(Item => {
-                    if (Shop.Enabled === 1  && Shop.Stock >= 5)
+                    console.log( Shop)
+                    if (Shop.Enabled === 1  && Shop.Stock >= Shop.MinStock)
                     {
                         if(!Item.Brand ){
                             toString(Item.Brand ) ;
                             Item.Brand = "-";
                         }
+
+                        if(Item.Category === 0) {
+                            console.log("hhhhhf")
+                        }
+
                         let Unit =  (Item.Unit === 0)  ? "Kg" : (Item.Unit ===1) ? "gram"  : (Item.Unit ===2) ? "Litre" : "Packs";
 
                         const ItemRow = document.createElement('tr');
@@ -95,7 +95,7 @@ $(document).ready(function () {
                 // $('#ongoing-item-table').DataTable();
             })
         })
-
+    })
     })
 
 });

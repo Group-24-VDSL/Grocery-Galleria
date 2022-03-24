@@ -97,7 +97,7 @@ $app->router->post('/dashboard/staff/viewcomplaints',[StaffController::class,'vi
 $app->router->get('/dashboard/staff/vieworders',[StaffController::class,'viewOrders']);
 $app->router->get('/dashboard/staff/vieworder',[StaffController::class,'viewOrder']);
 $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
-$app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
+$app->router->post('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->get('/dashboard/staff/systemreports',[SystemReportController::class,'systemReports']);
@@ -178,6 +178,8 @@ $app->router->get('/api/complaints',[APIController::class,'getComplaints']);
 $app->router->patch('/api/updateshopitem',[ShopController::class,'updateOngoingShopItem']);
 $app->router->post('/api/updatepassword',[ShopController::class,'changepassword']);
 $app->router->post('/api/getsafetystock',[ShopController::class,'safetystock']);
+$app->router->get('/api/getshopcategory',[ShopController::class,'getShopCategory']);
+$app->router->get('/api/getshopid',[ShopController::class,'getShopID']);
 
 $app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
 $app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);

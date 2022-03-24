@@ -176,7 +176,7 @@ class ShopController extends Controller
     public function getShopItemList(Request $request,Response $response){
         $response->setContentTypeJSON();
 
-        $shopID =  5 ;
+        $shopID =  Application::getUserID() ;
 
         $itemdetails = array();
 
@@ -191,9 +191,9 @@ class ShopController extends Controller
 
             $itemID =  $item["ItemID"] ;
 
-            $x = DBModel::query("SELECT ItemID, Name,ItemImage From item WHERE  ItemID = ".$itemID." ",\PDO::FETCH_OBJ,true);
+            $item = DBModel::query("SELECT ItemID, Name,ItemImage From item WHERE  ItemID = ".$itemID." ",\PDO::FETCH_OBJ,true);
 
-            array_push($itemdetails,$x);
+            array_push($itemdetails,$item);
         }
 
 
@@ -205,7 +205,7 @@ class ShopController extends Controller
 
         $response->setContentTypeJSON();
 
-        $shopID =  5 ;
+        $shopID =  Application::getUserID() ;
         $itemID = $request->getBody()["ItemID"] ;
         $yms = array();
 
@@ -218,17 +218,15 @@ class ShopController extends Controller
             $yms[$ym] = $sales[0];
         }
 
-//        echo "<pre>";
-//        print_r($yms);
-//        echo "</pre>";
-
         return $response->json($yms) ;
     }
 
     public function additem(Request $request){
-
         $shopItem = new ShopItem();
+        $shopItem->ShopID = Application::getUserID() ;
+
         $this->setLayout('dashboardL-shop');
+
         if ($request->isPost()) {
             $shopItem->loadData($request->getBody());
             if ($request->getBody()['Unit'] == "Kg") {
@@ -561,6 +559,21 @@ class ShopController extends Controller
         $result = DBModel:: returnProcedure('shop_Summary', $shopID, 1);
         return $response->json($result);
 
+    }
+
+    public function getShopCategory(Request $request,Response $response)
+    {
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+        $shop =Shop::findOne(["ShopID" => Application::getUserID()]);
+        return json_encode($shop->Category);
+    }
+
+    public function getShopID(Request $request,Response $response)
+    {
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+        return json_encode(Application::getUserID());
     }
 
 }

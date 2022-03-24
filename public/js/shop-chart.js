@@ -59,7 +59,7 @@ $( document ).ready(function() {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'ORDERS IN LAST YEAR',
+                        text: 'TOTAL ORDERS IN LAST YEAR',
                         color: '#55a630ff',
                         font: {
                             size: 14
@@ -115,7 +115,7 @@ $( document ).ready(function() {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'ORDERS IN LAST MONTH',
+                        text: 'TOTAL ORDERS IN LAST MONTH',
                         color: '#55a630ff',
                         layout: {
                             padding: 5

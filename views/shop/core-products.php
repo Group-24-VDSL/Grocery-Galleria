@@ -22,16 +22,17 @@ use app\models\ShopOrder;
                     <tr>
 <!--                        <th></th>-->
 <!--                        <th>Item ID</th>-->
-                        <th>Item Image</th>
-                        <th>Item Name</th>
+                        <th>Image</th>
+                        <th>Name</th>
                         <th>Brand</th>
+                        <th>System Price</th>
+                        <th>Unit<br>Price</th>
+                        <th>Unit<br>Weight</th>
                         <th>Unit</th>
-                        <th>Unit Weight</th>
-                        <th>Max Price</th>
-                        <th>U/Price</th>
+                        <th>Min<br>Stock</th>
                         <th>Stock</th>
-                        <th>Item Status</th>
-                        <th>Action</th>
+                        <th>Status</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
@@ -84,7 +85,7 @@ use app\models\ShopOrder;
                             <i class="fas fa-boxes"></i>
                             <?php echo $model->labels()['Stock']?>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"Stock",10,10000,1);?>
+                        <?php echo $form->numberfieldonly($model,"Stock",'','',1);?>
                     </div>
 
                     <div class="inputBox">

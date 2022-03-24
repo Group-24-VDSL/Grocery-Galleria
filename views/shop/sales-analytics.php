@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/shopAnalytics.css">
 <script src="/js/shop-sales-chart.js" defer></script>
-<!--<script src="/js/chart.min.js" defer></script>-->
+
 <script type="text/javascript" src="https://rawgit.com/nnnick/Chart.js/v1.0.2/Chart.min.js"></script>
 <script src="/js/jquery.min.js" defer></script>
 <div class = "core" style="height: 100rem;">
@@ -9,7 +9,7 @@
     <h1 class="heading">Item <span>Sale Average</span></h1>
         <div class="core-content">
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn-item" id = "dropbtn-item">Select Item</button>
+                <button onclick="itemDropDownBtn()" class="dropbtn-item" id = "dropbtn-item">Select Item</button>
                 <div id="itemDropdown" class="dropdown-content">
 <!--                    <a href="#home">Home</a>-->
 <!--                    <a href="#about">About</a>-->
@@ -40,9 +40,9 @@
 
                         </div>
 
-                        <canvas id="myChart" height="350" width="850" style="margin-bottom: 1rem "></canvas>
+                        <canvas id="salesChart" height="350" width="850" style="margin-bottom: 1rem "></canvas>
                     </div>
-                    <canvas id="myChartAxis" height="600" width="0"></canvas>
+                    <canvas id="salesChartAxis" height="600" width="0"></canvas>
                 </div>
 
                 <div class= "average" >
