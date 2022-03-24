@@ -94,7 +94,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 7%;
+  padding: 3rem 7%;
   box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
   position: relative;
 }
@@ -725,4 +725,17 @@ i {
   /* .header-2 .part .search-bar{
     margin-left: 5%;
 } */
+}
+
+.header-1 .backward {
+  font-size: 3rem;
+  color: var(--title-color);
+  padding: 0 1rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.backward:hover {
+  background-color: #e63946;
+  transition: 0.3s;
 }

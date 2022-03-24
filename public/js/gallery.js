@@ -18,23 +18,35 @@ const getUrlParameter = function getUrlParameter(sParam) {
 const host = window.location.origin; //http://domainname
 
 //Api links
-const URLShopsAPI = host+"/api/shops";
+const URLShopsAPI = host + "/api/shops";
 
-const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
+const ShopType = ["Vegetable", "Fruit", "Grocery", "Fish", "Meat"];
 
 const ShopCategory = getUrlParameter('Category');
 document.getElementById('CategoryType').innerHTML = `${ShopType[ShopCategory]}`;
 
-const URLFindShops = URLShopsAPI.concat("?Category=").concat(ShopCategory);
+const URLGetCity = host + '/api/getcity';
+const URLGetCitySuburb = host + '/api/getcitysuburb';
+
 
 const galleryBox = document.getElementById('gallery-box');
-
-$.getJSON(URLFindShops, function (Shops) {
-    Shops.forEach(Shop => {
-        const shopBox = document.createElement('div');
-        const shopURl = "/gallery/shop?ShopID=".concat(Shop.ShopID);
-        shopBox.classList.add('box');
-        shopBox.innerHTML = `
+$.getJSON(URLGetCitySuburb, function (data) {
+    // $.getJSON("getCity.json", function (cityData) {
+    //     $('#city-name').html(
+    //         cityData.forEach(city => {
+    //                 console.log(city.cityName)
+    //             }
+    //         ))
+    // })
+    // $('#city-name').html(data.City)
+    const URLFindShops = URLShopsAPI.concat("?Category=").concat(ShopCategory).concat("&City=" + data.City + "&Suburb=" + data.Suburb);
+    console.log(URLFindShops);
+    $.getJSON(URLFindShops, function (Shops) {
+        Shops.forEach(Shop => {
+            const shopBox = document.createElement('div');
+            const shopURl = "/gallery/shop?ShopID=".concat(Shop.ShopID);
+            shopBox.classList.add('box');
+            shopBox.innerHTML = `
         <img src="/img/welcome/logo.png" alt="">
             <h3>${Shop.ShopName}</h3>
             <div class="stars">
@@ -48,6 +60,7 @@ $.getJSON(URLFindShops, function (Shops) {
             <a href=${shopURl} class="btn">
                 <i class="fas fa-external-link-alt"></i> Visit Store</a>
         `
-        galleryBox.appendChild(shopBox);
+            galleryBox.appendChild(shopBox);
+        });
     });
-});
+})

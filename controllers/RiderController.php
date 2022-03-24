@@ -59,7 +59,7 @@ class  RiderController extends Controller
             if($order){
                 if(Application::getUserID() == $order["RiderID"]){ //authorized rider views the order
                     $cartid = $order["CartID"];
-                    $cart = DBModel::query("SELECT CustomerID,Address FROM `cart` WHERE CartID=$cartid",\PDO::FETCH_ASSOC);
+                    $cart = DBModel::query("SELECT cus.CustomerID,cus.Address FROM `cart` AS c JOIN `customer` AS cus ON c.CustomerID=cus.CustomerID WHERE CartID=$cartid  ",\PDO::FETCH_ASSOC);
                     $cartitems = DBModel::query("SELECT ShopID,ItemID,Quantity,Total FROM `ordercart` WHERE CartID=$cartid ORDER BY ShopID",\PDO::FETCH_ASSOC,true);
                     $shopdetails = [];
                     $itemdetails = [];
@@ -80,7 +80,7 @@ class  RiderController extends Controller
                     }
 
                     $cartdetails = DBModel::query("SELECT * FROM `orders` WHERE CartID=$cartid and OrderID=$orderid",\PDO::FETCH_ASSOC);
-
+                    print_r($cartdetails);
                     $customerid=$cart["CustomerID"];
                     $customer = DBModel::query("SELECT Name,ContactNo,Suburb,Location,PlaceID FROM `customer` WHERE CustomerID=$customerid",\PDO::FETCH_ASSOC);
 
@@ -112,7 +112,7 @@ class  RiderController extends Controller
             $result = DBModel::query("SELECT CartID,TotalCost FROM `orders` WHERE OrderID=$orderid",\PDO::FETCH_ASSOC);
             $order["TotalCost"] = $result["TotalCost"];
             $cartid = $result["CartID"];
-            $order["Address"] = DBModel::query("SELECT Address FROM `cart` WHERE CartID=$cartid",\PDO::FETCH_COLUMN);
+            $order["Address"] = DBModel::query("SELECT cus.Address FROM `cart` AS c JOIN `customer` AS cus ON c.CustomerID=cus.CustomerID WHERE c.CartID=$cartid",\PDO::FETCH_COLUMN);
         }
 
         return $this->render('rider/order',[

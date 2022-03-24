@@ -142,6 +142,9 @@ $app->router->get('/api/getcart',[CartController::class,'getTempCart']);
 $app->router->post('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->post('/api/deletefromcart',[CartController::class,'deleteFromCart']);
+$app->router->get('/api/getcity',[APIController::class,'getCity']);
+$app->router->get('/api/getsuburb',[APIController::class,'getSuburb']);
+$app->router->get('/api/getcitysuburb',[APIController::class,'getCitySuburb']);
 
 //api - shop
 $app->router->get('/api/orders',[APIController::class,'getOrders']);

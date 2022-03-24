@@ -33,12 +33,6 @@
         </nav>
         <div class="part">
             <div id="menu-bar" class="fas fa-bars"></div>
-            <div id="search-bar">
-                <form action="" class="search-box-container">
-                    <input type="search" id="search-box" placeholder="Search shop..">
-                    <button class="fas fa-search search "></button>
-                </form>
-            </div>
         </div>
 
 
