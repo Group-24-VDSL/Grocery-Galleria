@@ -17,17 +17,17 @@ const getUrlParameter = function getUrlParameter(sParam) {
 
 
 const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
+const ShopType = ["Vegetable", "Fruit", "Grocery", "Fish", "Meat"];
 
 
 const host = window.location.origin; //http://domainname
 
 //Api links
-const URLShopAPI = host+"/api/shop";
-const URLShopItemAPI = host+"/api/shopitems";
-const URLFindItemAPI = host+"/api/item";
+const URLShopAPI = host + "/api/shop";
+const URLShopItemAPI = host + "/api/shopitems";
+const URLFindItemAPI = host + "/api/item";
 
-const URLAddtoCartAPI = host+"/api/addtocart";
+const URLAddtoCartAPI = host + "/api/addtocart";
 
 const shopName = document.getElementById('ShopName');
 const shopCity = document.getElementById('City');
@@ -53,11 +53,12 @@ const ItemBox = document.getElementById('ItemBox');
 $.getJSON(URLFindShopItems, function (ShopItems) {
     console.log(ShopItems)
     ShopItems.forEach(shopItem => {
-        const Item = document.createElement('div');
-        Item.classList.add('box');
-        const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
-        $.getJSON(URLShopItem, function (item) {
-            Item.innerHTML = `
+        if ((shopItem.Stock > shopItem.MinStock) && (shopItem.Enabled === 1)) {
+            const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
+            const Item = document.createElement('div');
+            Item.classList.add('box');
+            $.getJSON(URLShopItem, function (item) {
+                Item.innerHTML = `
             <img id="ItemImage" alt="ItemImage" src="${item.ItemImage}" >
                 <h3 id="Name">${item.Name}</h3>
                 <div class="price">
@@ -71,8 +72,9 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                 </div>
                     <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this);"><i class="fas fa-cart-plus"></i> add to cart</button>
             `
-        })
-        ItemBox.appendChild(Item);
+            })
+            ItemBox.appendChild(Item);
+        }
     })
 
 });
