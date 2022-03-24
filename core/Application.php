@@ -35,7 +35,6 @@ class Application
     public SendGrid $sendgrid;
     public StripeClient $stripe;
     public From $emailfrom;
-//    public From $emailfrom;
     public Pusher $pusher;
     public Logger $logger;
     public View $view;

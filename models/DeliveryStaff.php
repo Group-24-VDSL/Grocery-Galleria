@@ -34,7 +34,7 @@ class DeliveryStaff extends UserModel
 
     public function attributes(): array
     {
-        return ['DelStaffID','Name','Email','ContactNo'];
+        return ['DelStaffID','Name','Email','ContactNo', 'City', 'Suburb'];
     }
 
     public static function primaryKey():array
