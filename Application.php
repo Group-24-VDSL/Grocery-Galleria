@@ -127,6 +127,26 @@ class Application
                 'getShopItems',
                 'getShopItem',
                 'getShop',
+                'systemReports',
+                'shopReports',
+                'productReports',
+                'itemReport',
+                'getItemWeekReport',
+                'getTotalOrders',
+                'getTotalUsers',
+                'salesReportCurrent',
+                'salesReportLast',
+                'shopsReportMonthly',
+                'shopsReportYearly',
+                'dailyRevenue',
+                'dailyTotOrders',
+                'monthReport',
+                'getMonthCost',
+                'getNewUserCount',
+                'getShopStaff',
+                'getRiderStaff',
+                'getDeliveryStaff',
+                'getSystemStaff',
                 'getAllShop',
                 'getOrders',
                 'getOrderCart',
@@ -170,7 +190,8 @@ class Application
             'Common' => [
                 'logout',
                 'profileUpdate',
-                'test'
+                'test',
+                'pwdUpdate'
             ]
         ]);
 
