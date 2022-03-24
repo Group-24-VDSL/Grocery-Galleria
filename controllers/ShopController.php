@@ -76,8 +76,11 @@ class ShopController extends Controller
         $item = new ShopItem();
         $this->setLayout("dashboardL-shop");
 
+
         if ($request->isPost()) {
             $item->loadData($request->getBody());
+
+//            Application::$app->logger->debug($item->loadData($request->getBody()));
 
             if ($item->validate() && $item->update()) {
                 Application::$app->session->setFlash("success", "Item Updated Successfully.");
@@ -385,9 +388,12 @@ class ShopController extends Controller
             ]);
     }
 
+
+
     public function updateOngoingShopItem(Request $request, Response $response)
     {
         $json = $request->getJson();
+        Application::$app->logger->debug('ikik');
         if ($json) {
             $tempshopitem = new ShopItem();
             $tempshopitem->loadData($json);

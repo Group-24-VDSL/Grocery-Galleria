@@ -10,6 +10,7 @@ class ShopItem extends DBModel
     public int $ShopID = 0;
     public float $UnitPrice = 0.0;
     public float $Stock = 0.0 ;
+    public int $Enabled = 0 ;
     public int $MaxLeadTime = 1;
     public int $MinLeadTime = 1;
     public float $MinStock = 1;

@@ -34,16 +34,21 @@ $(document).ready(function () {
     $.getJSON(ShopID, function (shopID) {
 
         const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat(shopID);
+        console.log(URLGetShop)
 
         $.getJSON(URLGetShop, function (Shops) {
 
             Shops.forEach(Shop => {
 
                 const URLShopItems = URLFindItemsAPI.concat("?ItemID=").concat(Shop.ItemID);
+                console.log(URLShopItems)
 
                 $.getJSON(URLShopItems, function (Items) {
                     Items.forEach(Item => {
-                        let UnitSymbol;
+
+                        console.log(Shop.Enabled)
+
+                        let UnitSymbol = '';
                         switch (Item.Unit) {
                             case 0 :
                                 UnitSymbol = 'Kg';
@@ -63,7 +68,7 @@ $(document).ready(function () {
                             toString(Item.Brand);
                             Item.Brand = "-";
                         }
-                        if (Shop.Enabled === 0) {
+                        if (Shop.Enabled == 0) {
                             Shop.Enabled = '<i style="color: red" class="fa fa-circle" aria-hidden="true"></i>';
                         } else {
                             Shop.Enabled = '<i style="color: lawngreen" class="fa fa-circle" aria-hidden="true"></i>';
@@ -104,6 +109,8 @@ function  setDataTable(){
 
 function shopItemUpdate(itemID, shopID){
 
+    console.log('im updte')
+
     const GetShopItem = URLShopItemAPI.concat("?ItemID=").concat(itemID).concat("&ShopID=").concat(shopID);
     const GetItem =  URLFindItemAPI.concat("?ItemID=").concat(itemID);
 
@@ -117,7 +124,7 @@ function shopItemUpdate(itemID, shopID){
             $('input[id=Stock]').val(ShopItem.Stock);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
 
-            if (ShopItem.Enabled === 1){
+            if (ShopItem.Enabled == 1){
                 document.getElementById("checkbox1").checked = true;
             }
             else {
@@ -125,8 +132,10 @@ function shopItemUpdate(itemID, shopID){
             }
 
             $("#checkbox1").on('change', function(){
+                console.log("checkbox")
                 if ($('#checkbox1').is(':checked')) {
                     $('input[id=Enabled]').val(1);
+                    document.getElementById("Enabled").setAttribute('value',1);
                     console.log("checked=1")
                 }
                 else {

@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" href="/css/dashboardStyle.css">
 <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
+<script src="/js/shop-ongoing-items.js" defer></script>
 
 <div class="core" style=" height: 780px">
     <h1 class="heading">Ongoing <span>Products</span></h1>
@@ -54,4 +55,4 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" href="/css/shop-items.css">
-<script src="/js/shop-ongoing-items.js" defer></script>
+

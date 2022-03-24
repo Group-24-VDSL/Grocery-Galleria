@@ -44,18 +44,18 @@ $(document).ready(function () {
 
                 Items.forEach(Item => {
                     console.log( Shop)
-                    if (Shop.Enabled === 1  && Shop.Stock >= Shop.MinStock)
+                    if (Shop.Enabled == 1  && Shop.Stock >= Shop.MinStock)
                     {
                         if(!Item.Brand ){
                             toString(Item.Brand ) ;
                             Item.Brand = "-";
                         }
 
-                        if(Item.Category === 0) {
+                        if(Item.Category == 0) {
                             console.log("hhhhhf")
                         }
 
-                        let Unit =  (Item.Unit === 0)  ? "Kg" : (Item.Unit ===1) ? "gram"  : (Item.Unit ===2) ? "Litre" : "Packs";
+                        let Unit =  (Item.Unit == 0)  ? "Kg" : (Item.Unit ==1) ? "g"  : (Item.Unit ==2) ? "Litre" : "Units";
 
                         const ItemRow = document.createElement('tr');
                         ItemRow.innerHTML = `

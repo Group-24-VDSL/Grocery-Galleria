@@ -10,7 +10,7 @@ use app\models\ShopOrder;
 <script src="/js/dashboard-shop.js" defer></script>
 <script src="/js/jquery.min.js"></script>
 <link rel="stylesheet" href="/css/dashboardStyle.css">
-<link rel="stylesheet" href="/css/dashboardStyleStaff.css">
+<!--<link rel="stylesheet" href="/css/dashboardStyleStaff.css">-->
 <div class="content">
     <div class="update-content">
         <div class="core shop-item-table">
@@ -95,7 +95,8 @@ use app\models\ShopOrder;
                         </label>
                         <?php
 
-                        echo $form->numberfieldonly($model,"UnitPrice",10,10000,1);?>
+                        echo $form->numberfieldonly($model,"UnitPrice",10,10000,1);
+                        echo $form->numberfieldonly($model,"MinStock",'','',1)->hiddenField();?>
                     </div>
 
                     <div class="inputBox">
@@ -114,6 +115,8 @@ use app\models\ShopOrder;
                             </label>
                         </div>
                     </div>
+
+                    <?php echo $form->numberfieldonly($model,"Enabled",'','',1)->hiddenField();?>
 
                     <input id="Enabled" name="Enabled" hidden>
 
