@@ -51,6 +51,7 @@ class CartController extends Controller
         if ($json) {
             $tempcart = new TemporaryCart();
             $tempcart->loadData($json);
+            if($this->checkCurrentCart($tempcart->ShopID,Application::getUserID())){
             if ($tempcart->Quantity > 0) {
                 $tempcart->CustomerID = Application::getUserID();
                 $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
@@ -76,8 +77,21 @@ class CartController extends Controller
                     }
                 }
             }
+            }
         }
         return $response->json('{"success":"fail"}');
+    }
+
+    //api - helper function to return a
+    public function checkCurrentCart($shopid,$customerid){
+        $shops = DBModel::query("SELECT DISTINCT ShopID FROM temporarycart WHERE Purchased=0 AND CustomerID=$customerid",\PDO::FETCH_COLUMN,true);
+        if(in_array($shopid,$shops) && count($shops)<6){
+            return true;
+        }elseif ((count($shops)+1)<6){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function deleteFromCart(Request $request, Response $response)

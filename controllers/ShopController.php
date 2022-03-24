@@ -335,8 +335,6 @@ class ShopController extends Controller
 
     public function shopincome(Request $request)
     {
-
-//        $user = new Shop;
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/shop-analytics');
     }
@@ -439,10 +437,8 @@ class ShopController extends Controller
 
 
 
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
-//            $newObj->ShopID = 3;
+
             if ($newObj->validate('update') && $newObj->update()) {
-//                $newObj->singleProcedure('email_update', $newObj->ShopID, $newObj->Email);
                 Application::$app->session->setFlash('success','Update Success');
                 Application::$app->response->redirect('/dashboard/shop/profilesettings');
             } else {
