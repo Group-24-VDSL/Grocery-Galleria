@@ -1,7 +1,5 @@
 <?php
-
-namespace app\core;
-
+namespace app\core; //autoload
 
 
 use app\core\db\Database;
@@ -20,13 +18,12 @@ use Stripe\StripeClient;
 
 class Application
 {
-    public static string $ROOT_DIR;
-    public static Application $app;
     public string $layout = 'main';
     public Router $router;
     public Request $request;
     public Response $response;
     public Session $session;
+    public static string $ROOT_DIR;
     public ?Controller $controller = null;
     public Database $db;
     public ?UserModel $user;
@@ -39,14 +36,15 @@ class Application
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
+    public static Application $app;
     public string $domain;
 
-    public function __construct($rootPath, $config)
+    public function __construct($rootPath,$config)
     {
         self::$app = $this;
         self::$ROOT_DIR = $rootPath;
-        $this->request = new Request();
-        $this->response = new Response();
+        $this->request=new Request();
+        $this->response=new Response();
 
         $this->router = new Router($this->request, $this->response);
         $this->db = new Database($config['db']);
@@ -196,8 +194,8 @@ class Application
         if ($userID) {
             $key = User::primaryKey();
             $this->user = User::findOne([$key[0] => $userID]);
-        } else {
-            $this->user = null;
+        }else{
+            $this->user= null;
         }
 
     }
@@ -207,38 +205,33 @@ class Application
         return !self::$app->user;
     }
 
-    public static function getUser()
-    {
+    public static function getUser(){
         return self::$app->user;
     }
 
-    public static function getUserID()
-    {
+    public static function getUserID(){
         return self::$app->session->get('user');
     }
 
-    public static function getUserRole()
-    {
-        return self::$app->user->Role ?? null;
+    public static function getUserRole(){
+        return self::$app->user->Role??null;
     }
 
-    public static function getCity()
-    {
+    public static function getCity(){
         return self::$app->session->get('city');
     }
 
-    public static function getSuburb()
-    {
+    public static function getSuburb(){
         return self::$app->session->get('suburb');
     }
 
     public function run()
     {
-        try { //try catch for the exception handling
+        try{ //try catch for the exception handling
             echo $this->router->resolve();
-        } catch (Exception $e) {
+        }catch (Exception $e){
             $this->response->statusCode((int)$e->getCode());
-            echo $this->view->renderView('_error', [
+            echo $this->view->renderView('_error',[
                 'exception' => $e
             ]);
         }
@@ -262,10 +255,10 @@ class Application
         $this->user = $user;
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey[0]};
-        $this->session->set('user', $primaryValue);
-        $this->session->set('role', $user->Role);
-        $this->session->set('city', $user->City);
-        $this->session->set('suburb', $user->Suburb);
+        $this->session->set('user',$primaryValue);
+        $this->session->set('role',$user->Role);
+        $this->session->set('city',$user->City);
+        $this->session->set('suburb',$user->Suburb);
         return $this->user->homepage();
     }
 

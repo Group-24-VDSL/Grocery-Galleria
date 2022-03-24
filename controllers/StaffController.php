@@ -105,8 +105,8 @@ class StaffController extends Controller
 
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
-            $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
-            if (isset($itemimg)) {
+            if (isset($request->getBody()['ItemImage'])) {
+                $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
                 $itemUpdated->ItemImage = $itemimg;
             } else {
                 $body = $request->getBody();
@@ -130,17 +130,24 @@ class StaffController extends Controller
     }
 
 
-    public function vieworders()
+    public function viewOrder()
+    {
+        $this->setLayout('dashboardL-staff');
+        return $this->render('staff/view-orders');
+    }
+    public function viewOrders()
     {
         $this->setLayout('dashboardL-staff');
         return $this->render('staff/view-orders');
     }
 
-    public function vieworderdetails()
-    {
-        $this->setLayout('headeronly-staff');
-        return $this->render('staff/view-orders-details');
-    }
+//    public function vieworderdetails(Request $request)
+//    {
+//        $this->setLayout('headeronly-staff');
+//        $OrderID = $request->getBody()["OrderID"];
+//
+//        return $this->render('staff/view-orders-details');
+//    }
 
     public function viewitems()
     {
@@ -232,6 +239,56 @@ class StaffController extends Controller
             'loginmodel' => $user
         ]);
     }
+    public function newOrders()
+    {
+
+        $querySql =
+            "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost FROM orders od
+                INNER JOIN cart crt ON
+                od.CartID = crt.CartID
+                INNER JOIN customer cus ON
+                crt.CustomerID = cus.CustomerID
+                WHERE od.Status=0";
+        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
+        return json_encode($newDeliveries);
+
+    }
+
+    public function onOrders()
+    {
+
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=1";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
+
+    }
+
+    public function pastOrders()
+    {
+
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=2 AND";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
+    }
+//-> view system order details by 19001541
 
     //apis
     public function getShopStaff(Request $request,Response $response){
