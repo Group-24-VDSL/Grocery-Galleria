@@ -182,10 +182,7 @@ class ShopController extends Controller
 
         $shopitems = DBModel::query("SELECT ItemID  From shopitem WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
 
-//        echo $shopitems[0]["ItemID"] ;
-
         $q = DBModel::query("SELECT ItemID,ShopID  From shopitemsales WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
-
 
         foreach ($shopitems as $item){
 

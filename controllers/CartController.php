@@ -51,26 +51,28 @@ class CartController extends Controller
         if ($json) {
             $tempcart = new TemporaryCart();
             $tempcart->loadData($json);
-            $tempcart->CustomerID=Application::getUserID();
-            $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
-            if ($request->isPost()) {
-                if ($checktemp) { //there exists such item
-                    $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
-                    $tempcart->Quantity = $newQuantity;
-                    if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok"}');
+            if ($tempcart->Quantity > 0) {
+                $tempcart->CustomerID = Application::getUserID();
+                $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
+                if ($request->isPost()) {
+                    if ($checktemp) { //there exists such item
+                        $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
+                        $tempcart->Quantity = $newQuantity;
+                        if ($tempcart->validate('update') && $tempcart->update()) {
+                            return $response->json('{"success":"ok"}');
+                        }
+                    } else {
+                        if ($tempcart->validate() && $tempcart->save()) {
+                            return json_encode('{"success":"ok"}');
+                        }
                     }
-                } else {
-                    if ($tempcart->validate() && $tempcart->save()) {
-                        return json_encode('{"success":"ok"}');
-                    }
-                }
-                return $response->json('{"success":"fail"}');
-            } elseif($request->isPatch()) {
-                if ($checktemp) { //there exists such item
-                    $tempcart->Quantity = $json['Quantity'];
-                    if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok"}');
+                    return $response->json('{"success":"fail"}');
+                } elseif ($request->isPatch()) {
+                    if ($checktemp) { //there exists such item
+                        $tempcart->Quantity = $json['Quantity'];
+                        if ($tempcart->validate('update') && $tempcart->update()) {
+                            return $response->json('{"success":"ok"}');
+                        }
                     }
                 }
             }
@@ -175,6 +177,17 @@ class CartController extends Controller
                         'quantity' => $item["Quantity"],
                     ];
                 }
+
+                $arr[] = [
+                    'price_data' => [
+                        'currency' => 'lkr',
+                        'unit_amount' => $deliveryfee*100,
+                        'product_data' => [
+                            'name' => "Delivery Fee"
+                        ],
+                    ],
+                    'quantity' =>1,
+                ];
 
                 $checkout_session = Application::$app->stripe->checkout->sessions->create([
                     'payment_method_types' => ['card'],
