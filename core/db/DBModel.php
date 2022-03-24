@@ -41,10 +41,8 @@ abstract class DBModel extends Model
             $where[$key] = $this->{$key};
         }
         $dbObj = self::findOne($where);
-
         $dbObjarr = (array)$dbObj; // db object to array
         $objarr = (array)$this; // this object to array
-        print_r($objarr);
         unset($objarr['errors']);
         unset($dbObjarr['errors']);
         $result = array_diff_assoc($objarr,$dbObjarr);

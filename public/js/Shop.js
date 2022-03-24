@@ -51,7 +51,6 @@ const ItemBox = document.getElementById('ItemBox');
 
 
 $.getJSON(URLFindShopItems, function (ShopItems) {
-    console.log(ShopItems)
     ShopItems.forEach(shopItem => {
         if ((shopItem.Stock > shopItem.MinStock) && (shopItem.Enabled === 1)) {
             const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
@@ -68,7 +67,7 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                 </div>
                 <div class="quantity">
                         <span>Qty :</span>
-                        <input class="quantity-input" type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight}>
+                        <input class="quantity-input" type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight} onkeydown="return false;">
                 </div>
                     <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this);"><i class="fas fa-cart-plus"></i> add to cart</button>
             `
@@ -77,6 +76,10 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
         }
     })
 
+}).then(function (){
+    $(".quantity-input").keypress(function (evt) {
+        evt.preventDefault();
+    });
 });
 
 $(document).ready(function () {
@@ -112,10 +115,21 @@ function addtocart(item) {
     const value = $(item).parent().children(".quantity").find('.quantity-input').val();
     const step = $(item).parent().children(".quantity").find('.quantity-input').attr('step');
 
-    var passingvalue = Math.trunc(value / step);
-    var obj = {"ItemID": itemidvalue, "ShopID": shopidvalue, "Quantity": passingvalue}; //keys and values should be enclosed in double quotes
+    if(value > 0){
+        var passingvalue = Math.trunc(value / step);
+        var obj = {"ItemID": itemidvalue, "ShopID": shopidvalue, "Quantity": passingvalue}; //keys and values should be enclosed in double quotes
 
-    $.post(URLAddtoCartAPI, JSON.stringify(obj));
+        $.post(URLAddtoCartAPI, JSON.stringify(obj)).done(function (res){
+            if(JSON.parse(res)['success'] === 'ok'){
+                templateAlert('green', 'Item updated.');
+            }else{
+                templateAlert('red', 'Item update failed.');
+            }
+        });
+    }else{
+        templateAlert('red', 'Invalid quantity passed.');
+    }
+
 
 }
 
