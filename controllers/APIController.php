@@ -153,7 +153,6 @@ class APIController extends Controller
         $this->setLayout('empty');
         $response->setContentTypeJSON();
         $riders = Rider::findAll(array_slice($request->getBody(),1,null,true));
-
         return json_encode($riders);
 
     }

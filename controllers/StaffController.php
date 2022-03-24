@@ -3,9 +3,12 @@
 namespace app\controllers;
 
 use app\core\db\DBModel;
+use app\core\Response;
 use app\models\Customer;
 use app\models\OrderCart;
+use app\models\DeliveryStaff;
 use app\models\Orders;
+use app\models\Rider;
 use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
@@ -102,8 +105,8 @@ class StaffController extends Controller
 
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
-            $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
-            if (isset($itemimg)) {
+            if (isset($request->getBody()['ItemImage'])) {
+                $itemimg = $request->loadFile("/img/product-imgs/", "ItemImage", '95' . str_pad((string)(($itemUpdated->ItemID) - 1), 5, '0', STR_PAD_LEFT));
                 $itemUpdated->ItemImage = $itemimg;
             } else {
                 $body = $request->getBody();
@@ -127,7 +130,12 @@ class StaffController extends Controller
     }
 
 
-    public function vieworders()
+    public function viewOrder()
+    {
+        $this->setLayout('dashboardL-staff');
+        return $this->render('staff/view-orders');
+    }
+    public function viewOrders()
     {
         $this->setLayout('dashboardL-staff');
         return $this->render('staff/view-orders');
@@ -164,7 +172,6 @@ class StaffController extends Controller
     public function addcomplaint(Request $request)
     {
         $complaint = new Complaint();
-
         $this->setLayout("headeronly-staff");
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
@@ -211,11 +218,9 @@ class StaffController extends Controller
         $user = new User();
         $this->setLayout("dashboardL-staff");
         $model = $model->findOne(['StaffID' => $userID]);
-//        $user = $user->findOne(['UserID' => 11]);
         if ($request->isPost()) {
             $newObj = new Staff();
             $newObj->loadData($request->getBody());
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
             $newObj->StaffID = $userID;
             if ($newObj->validate('update') && $newObj->update()) {
                 $newObj->callProcedure('email_update', ['UserID' => $newObj->StaffID, 'Email' => $newObj->Email]);
@@ -234,70 +239,82 @@ class StaffController extends Controller
             'loginmodel' => $user
         ]);
     }
+    public function newOrders()
+    {
+
+        $querySql =
+            "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost FROM orders od
+                INNER JOIN cart crt ON
+                od.CartID = crt.CartID
+                INNER JOIN customer cus ON
+                crt.CustomerID = cus.CustomerID
+                WHERE od.Status=0";
+        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
+        return json_encode($newDeliveries);
+
+    }
+
+    public function onOrders()
+    {
+
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=1";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
+
+    }
+
+    public function pastOrders()
+    {
+
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+                    INNER JOIN cart crt ON
+                    od.CartID = crt.CartID
+                    INNER JOIN customer cus ON
+                    crt.CustomerID = cus.CustomerID
+                    INNER JOIN delivery del ON
+                    del.OrderID = od.OrderID
+                    INNER JOIN deliveryrider delR ON
+                    delR.RiderID = del.RiderID
+                    WHERE od.Status=1 AND del.Status=2 AND";
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        return json_encode($onDeliveries);
+    }
 //-> view system order details by 19001541
 
-//    public function vieworderdetails(Request $request)
-//    {
-//        $this->setLayout('headeronly-staff');
-//        $OrderID = $request->getBody()["OrderID"];
-//
-//        $ShopCount = $request->getBody()["ShopCount"];
-//
-////        var_dump($ShopCount);
-////        var_dump($OrderID);
-//
-//        $order = Orders::findOne(["OrderID" => $OrderID]);
-////        var_dump($order);
-//        $CustomerID = $order->CustomerID;
-//        $customer = Customer::findOne(["CustomerID" => $CustomerID]);
-//
-//        $carts = OrderCart::findAll(["CartID" => $order->CartID]);
-//        $shopOrders = ShopOrder::findAll(["CartID" => $order->CartID]);
-//
-//
-//        $shops = [];
-//
-//        foreach ($shopOrders as $shopOrder) {
-//            $ItemsArray = [];
-//            $itemList = [];
-//            $shopWeight = 0;
-////            var_dump($shopOrder);
-//
-//
-//            $shop = Shop::findOne(["ShopID" => $shopOrder->ShopID]);
-//
-//            $i = 0;
-//            $orderCarts = OrderCart::findAll(["ShopID" => $shopOrder->ShopID, "CartID" => $order->CartID]);
-//
-//            foreach ($orderCarts as $cart) {
-////                var_dump($cart->ItemID);
-//
-//                $shopItem = ShopItem::findOne(["ItemID" => $cart->ItemID]);
-//                $systemItem = Item::findOne(["ItemID" => $cart->ItemID]);
-//
-////                $itemList[$i] = ["shopItem"=>$shopItem, "systemItem"=>$systemItem];
-//
-//
-//                array_push($itemList, ["shopItem" => $shopItem, "systemItem" => $systemItem , "quantity" => $cart->Quantity]);
-//
-//                $shopWeight = ($cart->Quantity * $systemItem->UWeight) / 1000;
-////                var_dump($shopItem);
-//
-//            }
-//
-//            $ItemsArray[] = $itemList;
-//            $i += 1;
-//
-//
-//            $shops[$shopOrder->ShopID] = ["shop" => $shop, "shopOrder" => $shopOrder, "itemList" => $ItemsArray, "shopWeight" => $shopWeight];
-//        }
-//
-//
-//        return $this->render('staff/view-orders-details',
-//            ['order' => $order, 'customer' => $customer, 'shops' => $shops]);
-//
-//
-//    }
+    //apis
+    public function getShopStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $shops  = Shop::findAll();
+        return $response->json($shops);
+
+    }
+    public function getRiderStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $riders = Rider::findAll();
+        return $response->json($riders);
+
+    }
+    public function getDeliveryStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $deliverys = DeliveryStaff::findAll();
+        return $response->json($deliverys);
+
+    }
+    public function getSystemStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $systems  = Staff::findAll();
+        return $response->json($systems);
+
+    }
 
 
 }

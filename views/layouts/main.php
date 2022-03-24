@@ -20,7 +20,7 @@
         <?php if (\app\core\Application::isGuest()):?>
         <a href="/login" class="logout"><i class="fas fa-sign-out-alt"></i></a>
         <?php else:; ?>
-        <a href="/login" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        <a href="/logout" class="logout"><i class="fas fa-sign-out-alt"></i></a>
         <?php endif; ?>
     </div>
     <div class="header-2">

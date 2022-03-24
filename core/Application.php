@@ -1,7 +1,5 @@
 <?php
-
-namespace app\core;
-//autoload
+namespace app\core; //autoload
 
 
 use app\core\db\Database;
@@ -20,13 +18,12 @@ use Stripe\StripeClient;
 
 class Application
 {
-    public static string $ROOT_DIR;
-    public static Application $app;
     public string $layout = 'main';
     public Router $router;
     public Request $request;
     public Response $response;
     public Session $session;
+    public static string $ROOT_DIR;
     public ?Controller $controller = null;
     public Database $db;
     public ?UserModel $user;
@@ -35,19 +32,19 @@ class Application
     public SendGrid $sendgrid;
     public StripeClient $stripe;
     public From $emailfrom;
-//    public From $emailfrom;
     public Pusher $pusher;
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
+    public static Application $app;
     public string $domain;
 
-    public function __construct($rootPath, $config)
+    public function __construct($rootPath,$config)
     {
         self::$app = $this;
         self::$ROOT_DIR = $rootPath;
-        $this->request = new Request();
-        $this->response = new Response();
+        $this->request=new Request();
+        $this->response=new Response();
 
         $this->router = new Router($this->request, $this->response);
         $this->db = new Database($config['db']);
@@ -57,25 +54,145 @@ class Application
         $this->session = new Session();
 
         $this->authMiddleware = new AuthMiddleware([
-            'Guest' => ['welcome', 'verify', 'emailverified', 'login', 'shopRegister', 'customerRegister', 'test',
-                'riderRegister', 'paymentProcessor'],
-            'Delivery' => ['riderRegister', 'riderRegister', 'viewriders', 'viewrider', 'vieworders', 'vieworder',
-                'viewDelivery', 'assignrider', 'viewdelivery', 'viewnewdelivery', 'viewongoingdelivery',
-                'viewcompletedelivery', 'newDelivery', 'onDelivery', 'pastDelivery', 'profile', 'getRiders', 'getRider',
-                'getRiderLocation', 'getRiderLocationData'],
-            'Customer' => ['welcome', 'getTempCart', 'paymentProcessor', 'profile', 'cart', 'checkout', 'proceedToCheckout',
-                'showshop', 'shopGallery', 'getItem', 'getItemAll', 'getShopItems', 'getShopItem', 'getShop', 'getAllShop',
-                'getCart', 'addToCart', 'deleteFromCart', 'paymentSuccess','getCity','getSuburb','getCitySuburb'],
-            'Staff' => ['Register', 'addItem', 'updateItem', 'viewitems', 'user', 'viewcustomers', 'viewshops', 'viewUsers',
-                'addcomplaint', 'viewcomplaints', 'vieworders', 'vieworderdetails', 'profilesettings', 'getItem',
-                'getItemAll', 'getShopItems', 'getShopItem', 'getShop', 'getAllShop', 'getOrders', 'getOrderCart', 'getCustomer', 'vieworderdetails'],
-            'Shop' => ['vieworder', 'productOverview', 'productOverview', 'viewitems', 'vieworder', 'vieworders',
-                'vieworderdetails', 'updateStatus', 'additem', 'getItem', 'getItemAll', 'getShopItems', 'getShopItem',
-                'getShop', 'getAllShop', 'getOrders', 'getOrderCart'
-                , 'updateOngoingShopItem', 'updateOngoingShopItem', 'getShopOrders', 'getShopOrder', 'getDelivery',
-                'getShopItems', 'updateItem', 'profilesettings', 'profileUpdate', 'abc', 'safetystock'],
-            'Rider' => ['vieworder', 'order', 'riderLocation'],
-            'Common' => ['logout', 'profileUpdate', 'test']
+            'Guest' => [
+                'welcome',
+                'verify',
+                'emailverified',
+                'login',
+                'shopRegister',
+                'customerRegister',
+                'test',
+                'riderRegister',
+                'paymentProcessor'
+            ],
+            'Delivery' => [
+                'riderRegister',
+                'riderRegister',
+                'viewriders',
+                'viewrider',
+                'vieworders',
+                'vieworder',
+                'viewDelivery',
+                'assignrider',
+                'viewdelivery',
+                'viewnewdelivery',
+                'viewongoingdelivery',
+                'viewcompletedelivery',
+                'newDelivery',
+                'onDelivery',
+                'pastDelivery',
+                'profile',
+                'getRiders',
+                'getRider',
+                'getRiderLocation',
+                'getRiderLocationData'],
+            'Customer' => ['welcome',
+                'getTempCart',
+                'paymentProcessor',
+                'profile',
+                'cart',
+                'checkout',
+                'proceedToCheckout',
+                'showshop',
+                'shopGallery',
+                'getItem',
+                'getItemAll',
+                'getShopItems',
+                'getShopItem',
+                'getShop',
+                'getAllShop',
+                'getCart',
+                'addToCart',
+                'deleteFromCart',
+                'paymentSuccess',
+                'getCity',
+                'getSuburb',
+                'getCitySuburb'],
+            'Staff' => [
+                'Register',
+                'addItem',
+                'updateItem',
+                'viewitems',
+                'user',
+                'viewcustomers',
+                'viewshops',
+                'viewUsers',
+                'addcomplaint',
+                'viewcomplaints',
+                'vieworders',
+                'vieworderdetails',
+                'profilesettings',
+                'getItem',
+                'getItemAll',
+                'getShopItems',
+                'getShopItem',
+                'getShop',
+                'systemReports',
+                'shopReports',
+                'productReports',
+                'itemReport',
+                'getItemWeekReport',
+                'getTotalOrders',
+                'getTotalUsers',
+                'salesReportCurrent',
+                'salesReportLast',
+                'shopsReportMonthly',
+                'shopsReportYearly',
+                'dailyRevenue',
+                'dailyTotOrders',
+                'monthReport',
+                'getMonthCost',
+                'getNewUserCount',
+                'getShopStaff',
+                'getRiderStaff',
+                'getDeliveryStaff',
+                'getSystemStaff',
+                'getAllShop',
+                'getOrders',
+                'getOrderCart',
+                'getCustomer',
+                'vieworderdetails'],
+            'Shop' => [
+                'vieworder',
+                'productOverview',
+                'productOverview',
+                'viewitems',
+                'vieworder',
+                'vieworders',
+                'vieworderdetails',
+                'updateStatus',
+                'additem',
+                'getItem',
+                'getItemAll',
+                'getShopItems',
+                'getShopItem',
+                'getShop',
+                'getAllShop',
+                'getOrders',
+                'getOrderCart',
+                'updateOngoingShopItem',
+                'updateOngoingShopItem',
+                'getShopOrders',
+                'getShopOrder',
+                'getDelivery',
+                'getShopItems',
+                'updateItem',
+                'profilesettings',
+                'profileUpdate',
+                'abc',
+                'safetystock'
+            ],
+            'Rider' => [
+                'vieworder',
+                'order',
+                'riderLocation'
+            ],
+            'Common' => [
+                'logout',
+                'profileUpdate',
+                'test',
+                'pwdUpdate'
+            ]
         ]);
 
         $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
@@ -98,8 +215,8 @@ class Application
         if ($userID) {
             $key = User::primaryKey();
             $this->user = User::findOne([$key[0] => $userID]);
-        } else {
-            $this->user = null;
+        }else{
+            $this->user= null;
         }
 
     }
@@ -109,38 +226,33 @@ class Application
         return !self::$app->user;
     }
 
-    public static function getUser()
-    {
+    public static function getUser(){
         return self::$app->user;
     }
 
-    public static function getUserID()
-    {
+    public static function getUserID(){
         return self::$app->session->get('user');
     }
 
-    public static function getUserRole()
-    {
-        return self::$app->user->Role ?? null;
+    public static function getUserRole(){
+        return self::$app->user->Role??null;
     }
 
-    public static function getCity()
-    {
+    public static function getCity(){
         return self::$app->session->get('city');
     }
 
-    public static function getSuburb()
-    {
+    public static function getSuburb(){
         return self::$app->session->get('suburb');
     }
 
     public function run()
     {
-        try { //try catch for the exception handling
+        try{ //try catch for the exception handling
             echo $this->router->resolve();
-        } catch (Exception $e) {
+        }catch (Exception $e){
             $this->response->statusCode((int)$e->getCode());
-            echo $this->view->renderView('_error', [
+            echo $this->view->renderView('_error',[
                 'exception' => $e
             ]);
         }
@@ -164,10 +276,10 @@ class Application
         $this->user = $user;
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey[0]};
-        $this->session->set('user', $primaryValue);
-        $this->session->set('role', $user->Role);
-        $this->session->set('city', $user->City);
-        $this->session->set('suburb', $user->Suburb);
+        $this->session->set('user',$primaryValue);
+        $this->session->set('role',$user->Role);
+        $this->session->set('city',$user->City);
+        $this->session->set('suburb',$user->Suburb);
         return $this->user->homepage();
     }
 

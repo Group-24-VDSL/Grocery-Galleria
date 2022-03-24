@@ -77,7 +77,7 @@ class User extends UserModel
                 $url = '/rider/order';
                 break ;
             case 'Delivery':
-                $url = '/dashboard/delivery/vieworder';
+                $url = '/dashboard/delivery/viewdelivery';
                 break ;
             case 'Staff':
                 $url = '/dashboard/staff/products';
@@ -86,14 +86,6 @@ class User extends UserModel
                 $url = '/' ;
         }
         return $url ;
-
-//            case 'Customer' : return ['/'] ,
-//            'Shop' => '/dashboard/shop/products',
-//            'Rider' => '/rider/order',
-//            'Delivery' => '/dashboard/delivery/vieworder',
-//            'Staff' => '/dashboard/staff/products',
-//            default => '/',
-//        ;
 
     }
 

@@ -13,6 +13,7 @@ use app\core\Application;
 use app\controllers\SiteController;
 use app\controllers\AuthController;
 use app\controllers\RiderController;
+use app\controllers\SystemReportController;
 
 
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -66,18 +67,12 @@ $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'ri
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'viewriders']);
 $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'viewrider']);
-//$app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
-//$app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignrider']);
-//$app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class,'viewdelivery']);
-//$app->router->get('/dashboard/delivery/viewnewdelivery',[DeliveryController::class,'viewnewdelivery']);
-//$app->router->get('/dashboard/delivery/viewongoingdelivery',[DeliveryController::class,'viewongoingdelivery']);
-//$app->router->get('/dashboard/delivery/viewcompletedelivery',[DeliveryController::class,'viewcompletedelivery']);
 $app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
 $app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class, 'viewDelivery']);
 $app->router->get('/dashboard/delivery/newdelivery',[DeliveryController::class, 'newDelivery']);
-$app->router->get('/dashboard/delivery/onDelivery',[DeliveryController::class, 'onDelivery']);
-$app->router->get('/dashboard/delivery/pastDelivery',[DeliveryController::class, 'pastDelivery']);
+$app->router->get('/dashboard/delivery/ondelivery',[DeliveryController::class, 'onDelivery']);
+$app->router->get('/dashboard/delivery/pastdelivery',[DeliveryController::class, 'pastDelivery']);
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 $app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
 $app->router->post('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
@@ -97,11 +92,31 @@ $app->router->get('/dashboard/staff/viewusers',[StaffController::class,'viewUser
 $app->router->get('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->post('/dashboard/staff/addcomplaint',[StaffController::class,'addcomplaint']);
 $app->router->get('/dashboard/staff/viewcomplaints',[StaffController::class,'viewcomplaints']);
-$app->router->get('/dashboard/staff/vieworders',[StaffController::class,'vieworders']);
+$app->router->get('/dashboard/staff/vieworders',[StaffController::class,'viewOrders']);
+$app->router->get('/dashboard/staff/vieworder',[StaffController::class,'viewOrder']);
 $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
-$app->router->post('/dashboard/staff/vieworderdetails',[TestController::class,'vieworderdetails']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
+$app->router->get('/dashboard/staff/systemreports',[SystemReportController::class,'systemReports']);
+$app->router->get('/dashboard/staff/shopreports',[SystemReportController::class,'shopReports']);
+$app->router->get('/dashboard/staff/productreports',[SystemReportController::class,'productReports']);
+$app->router->get('/dashboard/staff/gettotalorders',[SystemReportController::class,'getTotalOrders']);
+$app->router->get('/dashboard/staff/gettotalusers',[SystemReportController::class,'getTotalUsers']);
+$app->router->get('/dashboard/staff/shopsreportmonthly',[SystemReportController::class,'shopsReportMonthly']);
+$app->router->get('/dashboard/staff/shopsreportyearly',[SystemReportController::class,'shopsReportYearly']);
+$app->router->get('/dashboard/staff/itemreport',[SystemReportController::class,'itemReport']);
+$app->router->get('/dashboard/staff/salesreportcurrent',[SystemReportController::class,'salesReportCurrent']);
+$app->router->get('/dashboard/staff/salesreportlast',[SystemReportController::class,'salesReportLast']);
+$app->router->get('/dashboard/staff/itemreport',[SystemReportController::class,'itemReport']);
+$app->router->get('/dashboard/staff/getitemweekreport',[SystemReportController::class,'getItemWeekReport']);
+$app->router->get('/dashboard/staff/dailyrevenue',[SystemReportController::class,'dailyRevenue']);
+$app->router->get('/dashboard/staff/dailytotorders',[SystemReportController::class,'dailyTotOrders']);
+$app->router->get('/dashboard/staff/monthreport',[SystemReportController::class, 'monthReport']);
+$app->router->get('/dashboard/staff/getmonthcost',[SystemReportController::class, 'getMonthCost']);
+$app->router->get('/dashboard/staff/neworders',[StaffController::class, 'newOrders']);
+$app->router->get('/dashboard/staff/onorders',[StaffController::class, 'onOrders']);
+$app->router->get('/dashboard/staff/pastorders',[StaffController::class, 'pastOrders']);
+$app->router->get('/dashboard/staff/getnewusercount',[SystemReportController::class, 'getNewUserCount']);
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
@@ -168,6 +183,11 @@ $app->router->get('/api/getshopitemsales',[ShopController::class,'getsales']);
 $app->router->get('/api/getrider',[APIController::class,'getRider']);
 $app->router->get('/api/getriders',[APIController::class,'getRiders']);
 
+//api - staff
+$app->router->get('/api/getshopstaff',[StaffController::class,'getShopStaff']);
+$app->router->get('/api/getriderstaff',[StaffController::class,'getRiderStaff']);
+$app->router->get('/api/getdeliverystaff',[StaffController::class,'getDeliveryStaff']);
+$app->router->get('/api/getsystemstaff',[StaffController::class,'getSystemStaff']);
 
 $app->router->get('/api/getriderlocation',[DeliveryController::class,'getRiderLocation']);
 $app->router->get('/api/getriderlocationdata',[DeliveryController::class,'getRiderLocationData']);

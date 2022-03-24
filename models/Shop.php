@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\core\Model;
 use app\core\UserModel;
 
 class Shop extends UserModel
@@ -14,12 +13,12 @@ class Shop extends UserModel
     public string $Email = '';
     public string $ContactNo = '';
     public string $Location = '';
-    public string $City = '';
-    public string $Suburb = '';
+    public int $City = 0;
+    public int $Suburb = 0;
     public string $ShopName = '';
     public string $PlaceID = '';
     public string $ShopDesc = '';
-    public int $Category = 0;//['0'=>'Grocery','1'=>'Vegetable','2'=>'Meat','3'=>'Fruit']
+    public int $Category = 0;//['0'=>'Vegetables','1'=>'Fruits','2'=>'Grocery''3'=>'Fish','4'=>'Meat',]
 
     public string $Password = '';
     public string $ConfirmPassword = '';
@@ -61,12 +60,12 @@ class Shop extends UserModel
             'ConfirmPassword' => [self::RULE_REQUIRED,[self::RULE_MATCH,'match' => 'Password']],//check if the user class has the same email or not.
             'Name' => [self::RULE_REQUIRED],
             'Address' => [self::RULE_REQUIRED],
-            'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE,[self::RULE_MAX,'max' => 10],[self::RULE_MIN,'min' => 10]],
+            'ContactNo' => [self::RULE_REQUIRED, self::RULE_PHONE],
             'City' => [self::RULE_REQUIRED],
             'Suburb' => [self::RULE_REQUIRED],
             'Location' => [self::RULE_REQUIRED],
             'ShopName' => [self::RULE_REQUIRED],
-            'ShopDesc' => [self::RULE_REQUIRED,[self::RULE_MAX,'max'=>1000]],
+            'ShopDesc' => [self::RULE_REQUIRED,[self::RULE_MAX,'max'=>30]],
             'Category' => [self::RULE_REQUIRED,[self::RULE_ONEOF,'oneof'=>[0,1,2,3,4]]]
         ];
     }
