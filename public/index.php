@@ -137,6 +137,9 @@ $app->router->get('/api/getcart',[CartController::class,'getTempCart']);
 $app->router->post('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->post('/api/deletefromcart',[CartController::class,'deleteFromCart']);
+$app->router->get('/api/getcity',[APIController::class,'getCity']);
+$app->router->get('/api/getsuburb',[APIController::class,'getSuburb']);
+$app->router->get('/api/getcitysuburb',[APIController::class,'getCitySuburb']);
 
 //api - shop
 $app->router->get('/api/orders',[APIController::class,'getOrders']);
@@ -160,17 +163,15 @@ $app->router->get('/api/getshopitemsales',[ShopController::class,'getsales']);
 $app->router->get('/api/getrider',[APIController::class,'getRider']);
 $app->router->get('/api/getriders',[APIController::class,'getRiders']);
 
+//api - staff
+$app->router->get('/api/getshopstaff',[StaffController::class,'getShopStaff']);
+$app->router->get('/api/getriderstaff',[StaffController::class,'getRiderStaff']);
+$app->router->get('/api/getdeliverystaff',[StaffController::class,'getDeliveryStaff']);
+$app->router->get('/api/getsystemstaff',[StaffController::class,'getSystemStaff']);
 
 $app->router->get('/api/getriderlocation',[DeliveryController::class,'getRiderLocation']);
 $app->router->get('/api/getriderlocationdata',[DeliveryController::class,'getRiderLocationData']);
-//rider
-$app->router->get('/rider/register',[RiderController::class,'riderRegister']);
-$app->router->post('/rider/register',[RiderController::class,'riderRegister']);
-$app->router->get('/rider/vieworder',[RiderController::class,'vieworder']);
-$app->router->post('/rider/vieworder',[RiderController::class,'vieworder']);
-$app->router->get('/rider/order',[RiderController::class,'order']);
-$app->router->post('/rider/order',[RiderController::class,'order']);
-$app->router->post('/rider/getlocation',[RiderController::class,'riderLocation']);
+
 
 $app->router->get('/changePwd',[AuthController::class,'changePassword']);
 $app->router->post('/changePwd',[AuthController::class,'changePassword']);
