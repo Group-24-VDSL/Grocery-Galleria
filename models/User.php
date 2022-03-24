@@ -77,7 +77,7 @@ class User extends UserModel
                 $url = '/rider/order';
                 break ;
             case 'Delivery':
-                $url = '/dashboard/delivery/vieworder';
+                $url = '/dashboard/delivery/viewdelivery';
                 break ;
             case 'Staff':
                 $url = '/dashboard/staff/products';

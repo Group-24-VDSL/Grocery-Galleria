@@ -1,7 +1,7 @@
 <?php
 
 namespace app\core;
-//autoload
+
 
 
 use app\core\db\Database;
