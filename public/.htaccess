@@ -26,3 +26,5 @@ RewriteRule ^(.*)$ index.php?$1 [L,QSA]
     AddType font/collection                   ttc
     AddType font/otf                          otf
 </IfModule>
+
+Options -Indexes
