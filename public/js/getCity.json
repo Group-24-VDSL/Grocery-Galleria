@@ -1,240 +1,240 @@
 [
   {
-    "cityID": 1,
-    "cityName": "Nugegoda",
-    "suburbs": [
+    "cityID":1,
+    "cityName":"Nugegoda",
+    "suburbs":[
       {
-        "cityID": 1,
-        "suburbID": 705,
-        "suburbName": "Delkanda - Nugegoda"
+        "cityID":1,
+        "suburbID":1,
+        "suburbName":"Delkanda - Nugegoda"
       },
       {
-        "cityID": 1,
-        "suburbID": 721,
-        "suburbName": "Embuldeniya"
+        "cityID":1,
+        "suburbID":2,
+        "suburbName":"Embuldeniya"
       },
       {
-        "cityID": 1,
-        "suburbID": 1217,
-        "suburbName": "Gangodavila"
+        "cityID":1,
+        "suburbID":3,
+        "suburbName":"Gangodavila"
       },
       {
-        "cityID": 1,
-        "suburbID": 1218,
-        "suburbName": "Jambugasmulla"
+        "cityID":1,
+        "suburbID":4,
+        "suburbName":"Jambugasmulla"
       },
       {
-        "cityID": 1,
-        "suburbID": 2344,
-        "suburbName": "Jubilee Kanuwa"
+        "cityID":1,
+        "suburbID":5,
+        "suburbName":"Jubilee Kanuwa"
       },
       {
-        "cityID": 1,
-        "suburbID": 2345,
-        "suburbName": "Kattiya Junction"
+        "cityID":1,
+        "suburbID":6,
+        "suburbName":"Kattiya Junction"
       },
       {
-        "cityID": 1,
-        "suburbID": 886,
-        "suburbName": "Mirihana"
+        "cityID":1,
+        "suburbID":7,
+        "suburbName":"Mirihana"
       },
       {
-        "cityID": 1,
-        "suburbID": 905,
-        "suburbName": "Nawala"
+        "cityID":1,
+        "suburbID":8,
+        "suburbName":"Nawala"
       },
       {
-        "cityID": 1,
-        "suburbID": 912,
-        "suburbName": "Nugegoda"
+        "cityID":1,
+        "suburbID":9,
+        "suburbName":"Nugegoda"
       },
       {
-        "cityID": 1,
-        "suburbID": 918,
-        "suburbName": "Pagoda"
+        "cityID":1,
+        "suburbID":10,
+        "suburbName":"Pagoda"
       },
       {
-        "cityID": 1,
-        "suburbID": 1151,
-        "suburbName": "Pathiragoda"
+        "cityID":1,
+        "suburbID":11,
+        "suburbName":"Pathiragoda"
       },
       {
-        "cityID": 1,
-        "suburbID": 1003,
-        "suburbName": "Udahamulla"
+        "cityID":1,
+        "suburbID":12,
+        "suburbName":"Udahamulla"
       },
       {
-        "cityID": 1,
-        "suburbID": 1042,
-        "suburbName": "Wijerama"
+        "cityID":1,
+        "suburbID":13,
+        "suburbName":"Wijerama"
       }
     ]
   },
   {
-    "cityID": 2,
-    "cityName": "Sri Jayawardanapura",
-    "suburbs": [
+    "cityID":2,
+    "cityName":"Sri Jayawardanapura",
+    "suburbs":[
       {
-        "cityID": 2,
-        "suburbID": 633,
-        "suburbName": "Akuragoda"
+        "cityID":2,
+        "suburbID":14,
+        "suburbName":"Akuragoda"
       },
       {
-        "cityID": 2,
-        "suburbID": 2340,
-        "suburbName": "Baddagana"
+        "cityID":2,
+        "suburbID":15,
+        "suburbName":"Baddagana"
       },
       {
-        "cityID": 2,
-        "suburbID": 2326,
-        "suburbName": "Bandaranayakepura - Rajagiriya"
+        "cityID":2,
+        "suburbID":16,
+        "suburbName":"Bandaranayakepura - Rajagiriya"
       },
       {
-        "cityID": 2,
-        "suburbID": 710,
-        "suburbName": "Diyawanna Gardens - Pelawatta"
+        "cityID":2,
+        "suburbID":17,
+        "suburbName":"Diyawanna Gardens - Pelawatta"
       },
       {
-        "cityID": 2,
-        "suburbID": 724,
-        "suburbName": "Ethulkotte"
+        "cityID":2,
+        "suburbID":18,
+        "suburbName":"Ethulkotte"
       },
       {
-        "cityID": 2,
-        "suburbID": 731,
-        "suburbName": "Gamage Watta"
+        "cityID":2,
+        "suburbID":19,
+        "suburbName":"Gamage Watta"
       },
       {
-        "cityID": 2,
-        "suburbID": 2324,
-        "suburbName": "Gothamipura - Borella"
+        "cityID":2,
+        "suburbID":20,
+        "suburbName":"Gothamipura - Borella"
       },
       {
-        "cityID": 2,
-        "suburbID": 825,
-        "suburbName": "Koswatta"
+        "cityID":2,
+        "suburbID":21,
+        "suburbName":"Koswatta"
       },
       {
-        "cityID": 2,
-        "suburbID": 2301,
-        "suburbName": "Kotuwegoda - Rajagiriya"
+        "cityID":2,
+        "suburbID":22,
+        "suburbName":"Kotuwegoda - Rajagiriya"
       },
       {
-        "cityID": 2,
-        "suburbID": 1729,
-        "suburbName": "Madinnagoda"
+        "cityID":2,
+        "suburbID":23,
+        "suburbName":"Madinnagoda"
       },
       {
-        "cityID": 2,
-        "suburbID": 2341,
-        "suburbName": "Moragasmulla"
+        "cityID":2,
+        "suburbID":24,
+        "suburbName":"Moragasmulla"
       },
       {
-        "cityID": 2,
-        "suburbID": 943,
-        "suburbName": "Pitakotte"
+        "cityID":2,
+        "suburbID":25,
+        "suburbName":"Pitakotte"
       },
       {
-        "cityID": 2,
-        "suburbID": 960,
-        "suburbName": "Rajagiriya"
+        "cityID":2,
+        "suburbID":26,
+        "suburbName":"Rajagiriya"
       },
       {
-        "cityID": 2,
-        "suburbID": 2325,
-        "suburbName": "Royal Park - Rajagiriya"
+        "cityID":2,
+        "suburbID":27,
+        "suburbName":"Royal Park - Rajagiriya"
       },
       {
-        "cityID": 2,
-        "suburbID": 1035,
-        "suburbName": "Welikada"
+        "cityID":2,
+        "suburbID":28,
+        "suburbName":"Welikada"
       }
     ]
   },
   {
-    "cityID": 3,
-    "cityName": "Kohuwala",
-    "suburbs": [
+    "cityID":3,
+    "cityName":"Kohuwala",
+    "suburbs":[
       {
-        "cityID": 3,
-        "suburbID": 1462,
-        "suburbName": "Dutugemunu"
+        "cityID":3,
+        "suburbID":29,
+        "suburbName":"Dutugemunu"
       },
       {
-        "cityID": 3,
-        "suburbID": 1463,
-        "suburbName": "Hathbodhiya"
+        "cityID":3,
+        "suburbID":30,
+        "suburbName":"Hathbodhiya"
       },
       {
-        "cityID": 3,
-        "suburbID": 1465,
-        "suburbName": "Kirula"
+        "cityID":3,
+        "suburbID":31,
+        "suburbName":"Kirula"
       },
       {
-        "cityID": 3,
-        "suburbID": 813,
-        "suburbName": "Kirulapone"
+        "cityID":3,
+        "suburbID":32,
+        "suburbName":"Kirulapone"
       },
       {
-        "cityID": 3,
-        "suburbID": 818,
-        "suburbName": "Kohuwala"
+        "cityID":3,
+        "suburbID":33,
+        "suburbName":"Kohuwala"
       },
       {
-        "cityID": 3,
-        "suburbID": 922,
-        "suburbName": "Pamankada"
+        "cityID":3,
+        "suburbID":34,
+        "suburbName":"Pamankada"
       },
       {
-        "cityID": 3,
-        "suburbID": 1464,
-        "suburbName": "Vilawala"
+        "cityID":3,
+        "suburbID":35,
+        "suburbName":"Vilawala"
       }
     ]
   },
   {
-    "cityID": 3,
-    "cityName": "Maharagama",
-    "suburbs": [
+    "cityID":4,
+    "cityName":"Maharagama",
+    "suburbs":[
       {
-        "cityID": 3,
-        "suburbID": 1515,
-        "suburbName": "Dambahena"
+        "cityID":4,
+        "suburbID":36,
+        "suburbName":"Dambahena"
       },
       {
-        "cityID": 3,
-        "suburbID": 2348,
-        "suburbName": "Egodawatta"
+        "cityID":4,
+        "suburbID":37,
+        "suburbName":"Egodawatta"
       },
       {
-        "cityID": 3,
-        "suburbID": 2349,
-        "suburbName": "Godigamuwa"
+        "cityID":4,
+        "suburbID":38,
+        "suburbName":"Godigamuwa"
       },
       {
-        "cityID": 3,
-        "suburbID": 860,
-        "suburbName": "Maharagama"
+        "cityID":4,
+        "suburbID":39,
+        "suburbName":"Maharagama"
       },
       {
-        "cityID": 3,
-        "suburbID": 2350,
-        "suburbName": "Navinna - Maharagama"
+        "cityID":4,
+        "suburbID":40,
+        "suburbName":"Navinna - Maharagama"
       },
       {
-        "cityID": 3,
-        "suburbID": 907,
-        "suburbName": "Nawinna"
+        "cityID":4,
+        "suburbID":41,
+        "suburbName":"Nawinna"
       },
       {
-        "cityID": 3,
-        "suburbID": 1517,
-        "suburbName": "Neelammahara"
+        "cityID":4,
+        "suburbID":42,
+        "suburbName":"Neelammahara"
       },
       {
-        "cityID": 3,
-        "suburbID": 1518,
-        "suburbName": "Pamunuwa"
+        "cityID":4,
+        "suburbID":43,
+        "suburbName":"Pamunuwa"
       }
     ]
   }

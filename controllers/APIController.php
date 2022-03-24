@@ -2,6 +2,7 @@
 
 
 namespace app\controllers;
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
@@ -53,24 +54,6 @@ class APIController extends Controller
     }
 
 
-    // Shop section
-    public function getShop(Request $request, Response $response) // get shop details from DB
-    {
-        $this->setLayout('empty');
-        $response->setContentTypeJSON();
-        $shop = Shop::findOne(array_slice($request->getBody(),1,null,true));
-        return json_encode($shop);
-    }
-
-
-    public function getAllShop(Request $request,Response $response)
-    {
-        $this->setLayout('empty');
-        $response->setContentTypeJSON();
-        $shops = Shop::findAll(array_slice($request->getBody(),1,null,true));
-        return json_encode($shops);
-
-    }
 
     //cart
 
@@ -170,9 +153,22 @@ class APIController extends Controller
         $this->setLayout('empty');
         $response->setContentTypeJSON();
         $riders = Rider::findAll(array_slice($request->getBody(),1,null,true));
-
         return json_encode($riders);
 
+    }
+    public function getCity(Request $request,Response $response){
+        return Application::getCity();
+    }
+    public function getSuburb(Request $request,Response $response){
+        return Application::getSuburb();
+    }
+
+    public function getCitySuburb(Request $request,Response $response)
+    {
+        $city = Application::getCity();
+        $suburb = Application::getSuburb();
+        $citySubArr = ["City"=>$city,"Suburb"=>$suburb];
+        return json_encode($citySubArr);
     }
 
 }

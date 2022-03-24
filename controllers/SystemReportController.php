@@ -6,7 +6,7 @@ use app\core\Controller;
 use app\core\db\DBModel;
 use app\core\Request;
 
-class Reports extends Controller
+class SystemReportController extends Controller
 {
 
     public function systemReports()
@@ -151,6 +151,38 @@ class Reports extends Controller
 GROUP BY HOUR(TIME(OrderDate))";
         $result =DBModel::query($querySQl,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
         return json_encode($result);
+    }
+
+    public function monthReport(Request $request)
+    {
+        $body = $request->getBody();
+        $date = $body['SalesMonth1'];
+        $querySQL = "SELECT SUM(od.TotalCost) AS TotIncome, SUM(od.DeliveryCost) AS DelIncome FROM orders od 
+                    WHERE MONTH(od.OrderDate) = MONTH ('$date') AND YEAR(od.OrderDate) = YEAR('$date')
+                    GROUP BY MONTH (od.OrderDate)";
+        $results = DBModel::query($querySQL,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
+        return json_encode($results);
+
+    }
+
+    public function getMonthCost(Request $request)
+    {
+        $body = $request->getBody();
+        $date = $body['SalesMonth1'];
+        $querySQL = "SELECT Cost FROM systemcost WHERE MONTH(Date)= MONTH ('$date') AND YEAR(Date) = YEAR('$date')";
+        $result = DBModel::query($querySQL,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
+        return json_encode($result);
+    }
+
+    public function getNewUserCount(Request $request)
+    {
+        $body = $request->getBody();
+        $date = $body['SalesMonth1'];
+        $querySQL = "SELECT lg.Role AS userRole,COUNT(DISTINCT lg.UserID) AS NewCount FROM `login` lg 
+                    WHERE MONTH(lg.RegTime)=MONTH('$date') GROUP BY lg.Role";
+        $result = DBModel::query($querySQL,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
+        return json_encode($result);
+        
     }
 
 }

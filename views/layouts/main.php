@@ -20,7 +20,7 @@
         <?php if (\app\core\Application::isGuest()):?>
         <a href="/login" class="logout"><i class="fas fa-sign-out-alt"></i></a>
         <?php else:; ?>
-        <a href="/login" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        <a href="/logout" class="logout"><i class="fas fa-sign-out-alt"></i></a>
         <?php endif; ?>
     </div>
     <div class="header-2">
@@ -33,12 +33,6 @@
         </nav>
         <div class="part">
             <div id="menu-bar" class="fas fa-bars"></div>
-            <div id="search-bar">
-                <form action="" class="search-box-container">
-                    <input type="search" id="search-box" placeholder="Search shop..">
-                    <button class="fas fa-search search "></button>
-                </form>
-            </div>
         </div>
 
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
     <link rel="stylesheet" href="/css/template.css">
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/template.js"></script>
     <title>Dashboard Delivery</title>
@@ -40,6 +41,12 @@
             <a href="">
                 <i class='bx bx-cycling'></i>
                 <span class="link-name">Riders</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="bx bxs-pie-chart-alt"></i>
+                <span class="link-name">Analytics</span>
             </a>
         </li>
         <li>
@@ -140,6 +147,7 @@
 </section>
 <script src="/js/dashboardScript.js"></script>
 <script src="/js/delivery-order.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 </body>
 </html>

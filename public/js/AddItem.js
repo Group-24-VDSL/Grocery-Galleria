@@ -20,9 +20,9 @@ $(function () {
                     }
                 })
             });
-            MRP.setAttribute("value", items[0].MRP);
+            MRP.setAttribute("value", "Rs. "+items[0].MRP);
             Unit.setAttribute("value", UnitTag[items[0].Unit]);
-            UWeight.setAttribute("value", items[0].UWeight);
+            UWeight.setAttribute("value", items[0].UWeight+" g");
 
             select.addEventListener('change', function () {
                 items.forEach(item=>{
@@ -30,6 +30,7 @@ $(function () {
                         MRP.setAttribute("value", item.MRP);
                         Unit.setAttribute("value", UnitTag[item.Unit]);
                         UWeight.setAttribute("value", item.UWeight);
+
                     }
                 })
 

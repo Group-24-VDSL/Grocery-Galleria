@@ -45,6 +45,7 @@ class CustomerController extends Controller
     }
     public function profile()
     {
+        $this->setLayout('main');
         return $this->render('customer/profile');
     }
 

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/fonts.css"/>
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
     <link rel="stylesheet" href="/css/template.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 
 
     <link
@@ -123,13 +124,16 @@
     </div>
 </section>
 <!-- Home section ends -->
-<script src="/js/staff.js"></script>
+
 <script src="/js/dashboardScript.js"></script>
 <script src="/js/complaint.js"></script>
 <script src="/js/register.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
         integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 </body>
+</html>
 

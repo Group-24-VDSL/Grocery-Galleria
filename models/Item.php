@@ -16,6 +16,7 @@ class Item extends DBModel
     public float $MRP = 0.0;
     public int $Category = 0;//['0'=>'Vegetables','1'=>'Fruits','2'=>'Grocery''3'=>'Fish','4'=>'Meat',]
     public int $MaxCount = 0; // cabbage: (250g/Unit)*8 = 2000g(max selling weigh) // MaxCount=8
+    public int $Status = 0; // 1:Enabled, 0:Disabled
 
     public function save()
     {
@@ -29,7 +30,7 @@ class Item extends DBModel
 
     public function attributes(): array
     {
-        return ['Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
+        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category','Status'];
     }
 
     public function labels(): array{
@@ -41,7 +42,8 @@ class Item extends DBModel
             'Unit'=>'Unit',
             'Category'=>'Category',
             'MRP'=>'Item Price',
-            'MaxCount' => 'Max Count'
+            'MaxCount' => 'Max Count',
+            'Status'=>'Active Status'
         ];
     }
 
@@ -64,7 +66,7 @@ class Item extends DBModel
 
     public function jsonarray(): array
     {
-        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category'];
+        return ['ItemID','Name','ItemImage','Brand','UWeight','Unit','MRP','MaxCount','Category','Status'];
     }
 
     public function excludeonupdateattributes(): array
