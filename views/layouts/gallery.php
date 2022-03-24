@@ -17,13 +17,14 @@
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
-        <a href="" class="back"><i class="fas fa-step-backward"></i></a>
+        <a href="javascript:history.back()" class="backward"><i class="fas fa-step-backward"></i></a>
     </div>
     <!-- Vege banner start -->
     <section class="shop-banner" id="banner">
         <div class="content">
             <h3 class="title"><i class="fas fa-store"></i> <span id="CategoryType"></span> Stores</h3>
-            <h3 class="subtitle">City</h3>
+            <h3 id="city-name" class="subtitle">City</h3>
+            <h3 id="suburb-name" class="subtitle">Suburb</h3>
         </div>
     </section>
     <!-- Vege banner end -->
@@ -37,12 +38,7 @@
         </nav>
         <div class="part">
             <div id="menu-bar" class="fas fa-bars"></div>
-            <div id="search-bar">
-                <form action="" class="search-box-container">
-                    <input type="search" id="search-box" placeholder="Search shop..">
-                    <button class="fas fa-search search "></button>
-                </form>
-            </div>
+
         </div>
         <div class="part">
             <div class="icons">

@@ -2,6 +2,7 @@
 
 
 namespace app\controllers;
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
@@ -155,6 +156,20 @@ class APIController extends Controller
 
         return json_encode($riders);
 
+    }
+    public function getCity(Request $request,Response $response){
+        return Application::getCity();
+    }
+    public function getSuburb(Request $request,Response $response){
+        return Application::getSuburb();
+    }
+
+    public function getCitySuburb(Request $request,Response $response)
+    {
+        $city = Application::getCity();
+        $suburb = Application::getSuburb();
+        $citySubArr = ["City"=>$city,"Suburb"=>$suburb];
+        return json_encode($citySubArr);
     }
 
 }
