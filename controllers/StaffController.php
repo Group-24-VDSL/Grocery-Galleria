@@ -3,9 +3,12 @@
 namespace app\controllers;
 
 use app\core\db\DBModel;
+use app\core\Response;
 use app\models\Customer;
 use app\models\OrderCart;
+use app\models\DeliveryStaff;
 use app\models\Orders;
+use app\models\Rider;
 use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
@@ -169,7 +172,6 @@ class StaffController extends Controller
     public function addcomplaint(Request $request)
     {
         $complaint = new Complaint();
-
         $this->setLayout("headeronly-staff");
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
@@ -216,11 +218,9 @@ class StaffController extends Controller
         $user = new User();
         $this->setLayout("dashboardL-staff");
         $model = $model->findOne(['StaffID' => $userID]);
-//        $user = $user->findOne(['UserID' => 11]);
         if ($request->isPost()) {
             $newObj = new Staff();
             $newObj->loadData($request->getBody());
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
             $newObj->StaffID = $userID;
             if ($newObj->validate('update') && $newObj->update()) {
                 $newObj->callProcedure('email_update', ['UserID' => $newObj->StaffID, 'Email' => $newObj->Email]);
@@ -290,68 +290,31 @@ class StaffController extends Controller
     }
 //-> view system order details by 19001541
 
-//    public function vieworderdetails(Request $request)
-//    {
-//        $this->setLayout('headeronly-staff');
-//        $OrderID = $request->getBody()["OrderID"];
-//
-//        $ShopCount = $request->getBody()["ShopCount"];
-//
-////        var_dump($ShopCount);
-////        var_dump($OrderID);
-//
-//        $order = Orders::findOne(["OrderID" => $OrderID]);
-////        var_dump($order);
-//        $CustomerID = $order->CustomerID;
-//        $customer = Customer::findOne(["CustomerID" => $CustomerID]);
-//
-//        $carts = OrderCart::findAll(["CartID" => $order->CartID]);
-//        $shopOrders = ShopOrder::findAll(["CartID" => $order->CartID]);
-//
-//
-//        $shops = [];
-//
-//        foreach ($shopOrders as $shopOrder) {
-//            $ItemsArray = [];
-//            $itemList = [];
-//            $shopWeight = 0;
-////            var_dump($shopOrder);
-//
-//
-//            $shop = Shop::findOne(["ShopID" => $shopOrder->ShopID]);
-//
-//            $i = 0;
-//            $orderCarts = OrderCart::findAll(["ShopID" => $shopOrder->ShopID, "CartID" => $order->CartID]);
-//
-//            foreach ($orderCarts as $cart) {
-////                var_dump($cart->ItemID);
-//
-//                $shopItem = ShopItem::findOne(["ItemID" => $cart->ItemID]);
-//                $systemItem = Item::findOne(["ItemID" => $cart->ItemID]);
-//
-////                $itemList[$i] = ["shopItem"=>$shopItem, "systemItem"=>$systemItem];
-//
-//
-//                array_push($itemList, ["shopItem" => $shopItem, "systemItem" => $systemItem , "quantity" => $cart->Quantity]);
-//
-//                $shopWeight = ($cart->Quantity * $systemItem->UWeight) / 1000;
-////                var_dump($shopItem);
-//
-//            }
-//
-//            $ItemsArray[] = $itemList;
-//            $i += 1;
-//
-//
-//            $shops[$shopOrder->ShopID] = ["shop" => $shop, "shopOrder" => $shopOrder, "itemList" => $ItemsArray, "shopWeight" => $shopWeight];
-//        }
-//
-//
-//        return $this->render('staff/view-orders-details',
-//            ['order' => $order, 'customer' => $customer, 'shops' => $shops]);
-//
-//
-//    }
+    //apis
+    public function getShopStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $shops  = Shop::findAll();
+        return $response->json($shops);
+
+    }
+    public function getRiderStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $riders = Rider::findAll();
+        return $response->json($riders);
+
+    }
+    public function getDeliveryStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $deliverys = DeliveryStaff::findAll();
+        return $response->json($deliverys);
+
+    }
+    public function getSystemStaff(Request $request,Response $response){
+        $response->setContentTypeJSON();
+        $systems  = Staff::findAll();
+        return $response->json($systems);
+
+    }
 
 
 }

@@ -19,7 +19,6 @@ use Stripe\StripeClient;
 class Application
 {
     public string $layout = 'main';
-
     public Router $router;
     public Request $request;
     public Response $response;
@@ -30,7 +29,7 @@ class Application
     public ?UserModel $user;
     public Factory $secfactory;
     public Generator $generator;
-    public SendGrid  $sendgrid;
+    public SendGrid $sendgrid;
     public StripeClient $stripe;
     public From $emailfrom;
     public Pusher $pusher;
@@ -40,49 +39,156 @@ class Application
     public static Application $app;
     public string $domain;
 
-    public function __construct($rootPath ,$config)
+    public function __construct($rootPath,$config)
     {
         self::$app = $this;
         self::$ROOT_DIR = $rootPath;
         $this->request=new Request();
         $this->response=new Response();
 
-        $this->router=new Router($this->request,$this->response);
+        $this->router = new Router($this->request, $this->response);
         $this->db = new Database($config['db']);
 
         $this->view = new View();
 
-        $this->session=new Session();
+        $this->session = new Session();
 
-        $this->authMiddleware=new AuthMiddleware([
-            'Guest' => ['welcome','verify','emailverified','login','shopRegister','customerRegister','test','riderRegister','paymentProcessor'],
-            'Delivery' => ['riderRegister','riderRegister','viewriders','viewrider','viewOrder','viewOrder','viewDelivery','deliveryInfo','newDelivery','onDelivery','pastDelivery','profile','getRiders','getRider','getRiderLocation','assignRider','getRiderLocationData','pwdUpdate'],
-            'Customer' => ['welcome','getTempCart','profile','cart','checkout','proceedToCheckout','showshop','shopGallery','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getCart','addToCart','deleteFromCart','paymentSuccess','pwdUpdate'],
-            'Staff' => ['Register','addItem','updateItem','viewitems','user','viewcustomers','viewshops','viewUsers','addcomplaint','viewcomplaints','viewOrders','viewOrder','vieworderdetails','profilesettings',
-                'profilesettings','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart','itemReport','salesReportCurrent','salesReportLast','systemReports',
-                'shopReports','shopsReportMonthly','shopsReportYearly','getTotalOrders','getTotalUsers','productReports','getItemWeekReport','dailyRevenue','dailyTotOrders','pwdUpdate',
-                'newOrders','onOrders','pastOrders','monthReport','getMonthCost','getNewUserCount'],
-            'Shop' => ['productOverview','productOverview','viewitems','viewitem','vieworder','vieworders','vieworderdetails','updateStatus','additem','getItem','getItemAll','getShopItems','getShopItem','getShop','getAllShop','getOrders','getOrderCart'
-                ,'updateOngoingShopItem','updateOngoingShopItem','getShopOrders','getShopOrder','getDelivery','getShopItems','updateItem','profilesettings','profileUpdate','abc','safetystock','pwdUpdate'],
-            'Rider' => ['vieworder','order','riderLocation','pwdUpdate'],
-            "Common" => ['logout','profileUpdate','test']
+        $this->authMiddleware = new AuthMiddleware([
+            'Guest' => [
+                'welcome',
+                'verify',
+                'emailverified',
+                'login',
+                'shopRegister',
+                'customerRegister',
+                'test',
+                'riderRegister',
+                'paymentProcessor'
+            ],
+            'Delivery' => [
+                'riderRegister',
+                'riderRegister',
+                'viewriders',
+                'viewrider',
+                'vieworders',
+                'vieworder',
+                'viewDelivery',
+                'assignrider',
+                'viewdelivery',
+                'viewnewdelivery',
+                'viewongoingdelivery',
+                'viewcompletedelivery',
+                'newDelivery',
+                'onDelivery',
+                'pastDelivery',
+                'profile',
+                'getRiders',
+                'getRider',
+                'getRiderLocation',
+                'getRiderLocationData'],
+            'Customer' => ['welcome',
+                'getTempCart',
+                'paymentProcessor',
+                'profile',
+                'cart',
+                'checkout',
+                'proceedToCheckout',
+                'showshop',
+                'shopGallery',
+                'getItem',
+                'getItemAll',
+                'getShopItems',
+                'getShopItem',
+                'getShop',
+                'getAllShop',
+                'getCart',
+                'addToCart',
+                'deleteFromCart',
+                'paymentSuccess',
+                'getCity',
+                'getSuburb',
+                'getCitySuburb'],
+            'Staff' => [
+                'Register',
+                'addItem',
+                'updateItem',
+                'viewitems',
+                'user',
+                'viewcustomers',
+                'viewshops',
+                'viewUsers',
+                'addcomplaint',
+                'viewcomplaints',
+                'vieworders',
+                'vieworderdetails',
+                'profilesettings',
+                'getItem',
+                'getItemAll',
+                'getShopItems',
+                'getShopItem',
+                'getShop',
+                'getAllShop',
+                'getOrders',
+                'getOrderCart',
+                'getCustomer',
+                'vieworderdetails'],
+            'Shop' => [
+                'vieworder',
+                'productOverview',
+                'productOverview',
+                'viewitems',
+                'vieworder',
+                'vieworders',
+                'vieworderdetails',
+                'updateStatus',
+                'additem',
+                'getItem',
+                'getItemAll',
+                'getShopItems',
+                'getShopItem',
+                'getShop',
+                'getAllShop',
+                'getOrders',
+                'getOrderCart',
+                'updateOngoingShopItem',
+                'updateOngoingShopItem',
+                'getShopOrders',
+                'getShopOrder',
+                'getDelivery',
+                'getShopItems',
+                'updateItem',
+                'profilesettings',
+                'profileUpdate',
+                'abc',
+                'safetystock'
+            ],
+            'Rider' => [
+                'vieworder',
+                'order',
+                'riderLocation'
+            ],
+            'Common' => [
+                'logout',
+                'profileUpdate',
+                'test'
+            ]
         ]);
 
         $this->stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
 
-        $this->domain=$_ENV['DOMAIN'];
+        $this->domain = $_ENV['DOMAIN'];
 
         $this->logger = new Logger('Default');
-        $this->logger->pushHandler(new StreamHandler($_ENV['LOG_FILE'],Logger::DEBUG));
+        $this->logger->pushHandler(new StreamHandler($_ENV['LOG_FILE'], Logger::DEBUG));
 
         $this->sendgrid = new SendGrid($_ENV['SENDGRID_API_KEY']);
-        $this->emailfrom = new From($_ENV['SENDGRID_EMAIL'],$_ENV['SENDGRID_NAME']);
+        $this->emailfrom = new From($_ENV['SENDGRID_EMAIL'], $_ENV['SENDGRID_NAME']);
 
         $this->secfactory = new Factory();
         $this->generator = $this->secfactory->getGenerator(new Strength(Strength::LOW));
 
 
-        $this->pusher = new Pusher($_ENV['PUSHER_APP_KEY'],$_ENV['PUSHER_APP_SECRET'],$_ENV['PUSHER_APP_ID'],['cluster'=>$_ENV['PUSHER_APP_CLUSTER'],'useTLS'=>true]);
+        $this->pusher = new Pusher($_ENV['PUSHER_APP_KEY'], $_ENV['PUSHER_APP_SECRET'], $_ENV['PUSHER_APP_ID'], ['cluster' => $_ENV['PUSHER_APP_CLUSTER'], 'useTLS' => true]);
 
         $userID = Application::$app->session->get('user');
         if ($userID) {
@@ -98,13 +204,14 @@ class Application
     {
         return !self::$app->user;
     }
-    public static function getUserID(){
-        return self::$app->session->get('user');
-    }
+
     public static function getUser(){
         return self::$app->user;
     }
 
+    public static function getUserID(){
+        return self::$app->session->get('user');
+    }
 
     public static function getUserRole(){
         return self::$app->user->Role??null;
@@ -155,10 +262,13 @@ class Application
         return $this->user->homepage();
     }
 
-    public function logout(){
+    public function logout()
+    {
         $this->user = null;
         $this->session->remove('user');
+        $this->session->remove('role');
+        $this->session->remove('city');
+        $this->session->remove('suburb');
         return true;
-
     }
 }

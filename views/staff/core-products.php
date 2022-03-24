@@ -1,5 +1,5 @@
 <?php
-/** @var $model \app\models\Item * */
+/** @var $model \app\models\Item **/
 /** @var $form app\core\form\Form */
 ?>
 <div class="core">
@@ -164,4 +164,6 @@
     </div>
 
 </div>
+<script src="/js/product-search.js" ></script>
+<script src="/js/staff.js"></script>
 

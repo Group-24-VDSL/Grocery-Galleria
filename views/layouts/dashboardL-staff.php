@@ -124,7 +124,7 @@
     </div>
 </section>
 <!-- Home section ends -->
-<script src="/js/staff.js"></script>
+
 <script src="/js/dashboardScript.js"></script>
 <script src="/js/complaint.js"></script>
 <script src="/js/register.js"></script>

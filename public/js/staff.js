@@ -1,23 +1,3 @@
-// get url parameters
-const getUrlParameter = function getUrlParameter(sParam) {
-    let sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
-    }
-    return false;
-}
-
-const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-const ItemType = ['Vegetables', 'Fruits', 'Grocery', 'Fish', 'Meat'];
-
 const host = window.location.origin; //http://domainname
 const chartDiv1 = document.getElementById('chartDiv1');
 const chartDiv2 = document.getElementById('chartDiv2');
@@ -229,35 +209,54 @@ $(document).ready(function () {
                 }).then(changeState)
             })
 
+
+            const searchbox = document.getElementById("product-search");
+            searchbox.addEventListener("focus", function () {
+                console.log("hello")
+                const itemBtn = document.getElementsByClassName('btn-row')[0];
+                $(itemBtn).trigger("click");
+            })
+            searchbox.addEventListener("keyup", function () {
+                let input = document.getElementById("product-search").value.toUpperCase();
+                let table = document.getElementById("item-table");
+                items = table.getElementsByClassName("row");
+                Array.prototype.forEach.call(items, function (ulelement) {
+                    let brand = ulelement.getElementsByClassName("row-brand")[0].textContent || ulelement.getElementsByClassName("row-brand")[0].innerText;
+                    let name = ulelement.getElementsByClassName("row-name")[0].textContent || ulelement.getElementsByClassName("row-name")[0].innerText;
+                    if (name.toUpperCase().indexOf(input) > -1 || brand.toUpperCase().indexOf(input) > -1) {
+                        ulelement.style.display = "";
+                    } else {
+                        ulelement.style.display = "none";
+                    }
+
+                });
+            });
         })
-
-    })
-
-    function changeState() {
-        console.log("changeState");
-        if ($('#Status').val()==="1") {
-            console.log(document.getElementById('Status'))
-            $('#Status').prop('checked', true);
-        } else {
-            console.log(document.getElementById('Status'))
-            $('#Status').prop('checked', false);
-        }
-
-    }
-
-    $('#Status').change(function () {
-        if ($(this).is(':checked')) {
-            $(this).val(1);
-            console.log(document.getElementById('Status'))
-        } else {
-            $(this).val(0);
-            $(this).attr('checked', false);
-            console.log(document.getElementById('Status'))
-        }
     })
     $('#veg-tab-items').trigger("click");
 })
 
+function changeState() {
+    if ($('#Status').val() === "1") {
+        console.log(document.getElementById('Status'))
+        $('#Status').prop('checked', true);
+    } else {
+        console.log(document.getElementById('Status'))
+        $('#Status').prop('checked', false);
+    }
+
+}
+
+$('#Status').change(function () {
+    if ($(this).is(':checked')) {
+        $(this).val(1);
+        console.log(document.getElementById('Status'))
+    } else {
+        $(this).val(0);
+        $(this).attr('checked', false);
+        console.log(document.getElementById('Status'))
+    }
+})
 
 
 

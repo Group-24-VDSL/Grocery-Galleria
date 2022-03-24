@@ -357,12 +357,7 @@ class ShopController extends Controller
         $response->setContentTypeJSON();
         $shops = Shop::findAll(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
         return json_encode($shops);
-
-
     }
-
-    
-
 
     public function updateItem(Request $request)
     {
