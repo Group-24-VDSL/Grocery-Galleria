@@ -80,6 +80,14 @@ class ShopController extends Controller
         if ($request->isPost()) {
             $item->loadData($request->getBody());
 
+            $itemID = $item->ItemID ;
+
+            $tempItem = Item::findOne(["ItemID"=>$itemID]);
+
+            if ($tempItem->Unit == 0 || $tempItem->Unit ==1){
+                $item->Stock = $item->Stock*1000 ;
+            }
+
 //            Application::$app->logger->debug($item->loadData($request->getBody()));
 
             if ($item->validate() && $item->update()) {
@@ -232,11 +240,12 @@ class ShopController extends Controller
 
         if ($request->isPost()) {
             $shopItem->loadData($request->getBody());
-            if ($request->getBody()['Unit'] == "Kg") {
+            if ($request->getBody()['Unit'] == "g") {
                 $stock = $shopItem->Stock ;
                 $stock = $stock * 1000 ;
                 $shopItem->Stock = $stock ;
             }
+
             if ($shopItem->validate() && $shopItem->save()) {
                 Application::$app->session->setFlash("success", "Item Saved.");
                 Application::$app->response->redirect("/dashboard/shop/additem");
@@ -371,6 +380,8 @@ class ShopController extends Controller
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
 
+            $itemUpdated->Stock*1000 ;
+
             if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item update is success" );
 //                Application::$app->response->redirect("/dashboard/shop/products");
@@ -399,10 +410,11 @@ class ShopController extends Controller
             $tempshopitem->loadData($json);
 
             $checktemp = ShopItem::findOne(["ItemID" => $tempshopitem->ItemID, "ShopID" => $tempshopitem->ShopID]);
+            $checktemp->Stock = $tempshopitem->Stock ;
 
             if ($request->isPost()) {
                 if ($checktemp) { //there exists such item
-                    if ($tempshopitem->validate('update') && $tempshopitem->update()) {
+                    if ($checktemp->validate('update') && $checktemp->update()) {
                         Application::$app->response->redirect("/dashboard/shop/viewitems");
                         return $response->json('{"success":"ok"}');
                     }
@@ -543,17 +555,20 @@ class ShopController extends Controller
         $shopID = (int)$request->getJson()['ShopID'];
 
 
-        $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
 
         if ($json) {
             if ($request->isPost()) {
-                return $response->json($result);
+                $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
+
+                if($result){
+                    return $response->json($result);
+                }
+
             }elseif($request->isPatch()) {
 
             }
 
         }
-        return $response->json($result);
     }
 
     public function shopcards(Request $request, Response $response)

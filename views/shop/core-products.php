@@ -13,7 +13,7 @@ use app\models\ShopOrder;
 <!--<link rel="stylesheet" href="/css/dashboardStyleStaff.css">-->
 <div class="content">
     <div class="update-content">
-        <div class="core shop-item-table">
+        <div style="height: 750px" class="core shop-item-table">
             <h1 class="heading">Shop <span>Products</span></h1>
             <div class="container-items">
 
@@ -48,7 +48,7 @@ use app\models\ShopOrder;
 
 
 
-        <div style="margin-left: 0" class="core" id="Update">
+        <div style="margin-left: 0;height: 750px" class="core" id="Update">
 
             <h1 class="heading">Update <span>Products</span></h1>
 

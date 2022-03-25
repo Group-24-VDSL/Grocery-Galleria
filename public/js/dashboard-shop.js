@@ -44,23 +44,29 @@ $(document).ready(function () {
                 console.log(URLShopItems)
 
                 $.getJSON(URLShopItems, function (Items) {
+                    Items.sort();
                     Items.forEach(Item => {
 
                         console.log(Shop.Enabled)
 
                         let UnitSymbol = '';
+                        let Stock = 0 ;
                         switch (Item.Unit) {
                             case 0 :
                                 UnitSymbol = 'Kg';
+                                Stock = Shop.Stock ;
                                 break;
                             case 1 :
                                 UnitSymbol = 'g';
+                                Stock = Shop.Stock/1000 ;
                                 break;
                             case 2 :
                                 UnitSymbol = 'l';
+                                Stock = Shop.Stock ;
                                 break;
                             case 3 :
                                 UnitSymbol = 'Unit';
+                                Stock = Shop.Stock ;
                                 break;
                         }
 
@@ -85,7 +91,7 @@ $(document).ready(function () {
                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                 <td id="Unit" class="row-unit">${UnitSymbol}</td>
                 <td id="Stock" class="row-stock">${Shop.MinStock}</td>
-                <td id="Stock" class="row-stock">${Shop.Stock}</td>              
+                <td id="Stock" class="row-stock">${Stock}</td>              
                 <td id="Enable" class="row-enable">${Shop.Enabled}</i></td>
                 <td class="row-ubutton">
                     <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID},${Shop.ShopID})">Update</button></a>
@@ -109,19 +115,36 @@ function  setDataTable(){
 
 function shopItemUpdate(itemID, shopID){
 
-    console.log('im updte')
+
 
     const GetShopItem = URLShopItemAPI.concat("?ItemID=").concat(itemID).concat("&ShopID=").concat(shopID);
     const GetItem =  URLFindItemAPI.concat("?ItemID=").concat(itemID);
 
     $.getJSON(GetItem, function (Item) {
         $.getJSON(GetShopItem, function (ShopItem) {
+
+            let Stock = 0 ;
+            switch (Item.Unit) {
+                case 0 :
+                    Stock = ShopItem.Stock/1000  ;
+                    break;
+                case 1 :
+                    Stock = ShopItem.Stock/1000 ;
+                    break;
+                case 2 :
+                    Stock = ShopItem.Stock ;
+                    break;
+                case 3 :
+                    Stock = ShopItem.Stock ;
+                    break;
+            }
+
             document.getElementById("updateID").textContent= ShopItem.ItemID;
             document.getElementById("updateName").textContent= Item.Name;
             $('input[id=ShopID]').val(ShopItem.ShopID);
             $('input[id=ItemID]').val(ShopItem.ItemID);
             $('img[id=updateImage]').attr('src',Item.ItemImage);
-            $('input[id=Stock]').val(ShopItem.Stock);
+            $('input[id=Stock]').val(Stock);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
 
             if (ShopItem.Enabled == 1){

@@ -15,9 +15,6 @@ const URLUpdateItem = host+ "/api/updateshopitem" ;
 const URLGetOrderCart = host+ "/api/getordercart" ;
 const URLSafetyStock = host+ "/api/getsafetystock" ;
 const ShopID =  host + "/api/getshopid";
-const shopID = ShopID ;
-
-
 
 const ItemTable = document.getElementById('item-table');
 const ItemUpdate = document.getElementById('updateItem');
@@ -55,7 +52,11 @@ $(document).ready(function () {
                             console.log("hhhhhf")
                         }
 
-                        let Unit =  (Item.Unit == 0)  ? "Kg" : (Item.Unit ==1) ? "g"  : (Item.Unit ==2) ? "Litre" : "Units";
+                        let Unit =  (Item.Unit == 0 || Item.Unit ==1)  ? "Kg"   : (Item.Unit ==2) ? "L" : "Units";
+
+                        let Stock = (Item.Unit ==1) ? Shop.Stock/1000 : Shop.Stock ;
+
+
 
                         const ItemRow = document.createElement('tr');
                         ItemRow.innerHTML = `
@@ -67,7 +68,7 @@ $(document).ready(function () {
                                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                                 <td id="UPrice" class="row-uprice">Rs. <input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
-                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Shop.Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>                                                              
+                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>                                                              
                                 <td id="Safety_stock_${Shop.ShopID}_${Shop.ItemID}"></td>
                                 <td id="ReOrder_point${Shop.ShopID}_${Shop.ItemID}"></td>
                                 <td id="Safety_${Shop.ShopID}_${Shop.ItemID}"></td>
@@ -83,6 +84,7 @@ $(document).ready(function () {
                         itemArray['ItemID'] = Shop.ItemID ;
                         itemArray['uPriceID'] = u_priceID ;
                         itemArray['stockID'] = stockID ;
+                        itemArray['unitTag'] = Item.Unit ;
                         itemArray['StockData'] = Shop.Stock;
                         itemArray['Enabled'] = Shop.Enabled ;
                         itemArray['MaxPrice'] = Item.MRP;
@@ -111,6 +113,7 @@ function safetyStock(ShopItem){
     // new safety stock 2022 03 17
 
     let obj = {"ShopID":ShopItem.ShopID , "ItemID":ShopItem.ItemID} ;
+    console.log(ShopItem)
 
     $.ajax({
         url : URLSafetyStock,
@@ -137,7 +140,13 @@ function safetyStock(ShopItem){
         document.getElementById('Safety_stock_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = data["SafetyStock"]+" Kg";
         document.getElementById('ReOrder_point'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = data["ReOrderPoint"]+" Kg";
 
-        if(parseFloat(data["SafetyStock"]) <= ShopItem.StockData){
+        let stock
+
+        if(ShopItem.unitTag === 1){
+             stock  = ShopItem.StockData/1000 ;
+        }
+
+        if(parseFloat(data["SafetyStock"]) <= stock){
             document.getElementById('Safety_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = "<img src=\"https://img.icons8.com/emoji/30/26e07f/check-mark-button-emoji.png\"/>";
         }
         else {
@@ -153,15 +162,23 @@ function updateShopItem(){
     const error_update = [] ;
     itemArray.forEach(item=>{
 
+        console.log(item)
+
         let unitprice = $('#'.concat(item.uPriceID)).val();
         let stock = $('#'.concat(item.stockID)).val();
         let oldStock = $('#'.concat(item.stockID)).attr('data-stock');
         let oldUprice = $('#'.concat(item.uPriceID)).attr('data-unitPrice');
 
+        if(item.unitTag == 1 || item.unitTag == 0){
+            stock = stock*1000 ;
+        }
+
         if(oldStock!==stock || oldUprice!==unitprice){
+
             if (item.MaxPrice < unitprice){
                 error_update.push(item.ItemID) ;
             }
+
             else {
                 let obj = {
                     "ShopID": item.ShopID,
@@ -181,6 +198,8 @@ function updateShopItem(){
                     processData: false,
                     contentType: 'application/json'
                 }).done(function (data) {
+
+                    console.log(data)
                     if (JSON.parse(data)['success'] === 'ok') {
 
                         templateAlert('green', 'Item ' + item.ItemID + ' is updated.');
@@ -194,8 +213,6 @@ function updateShopItem(){
         }
 
     })
-
-    // location.reload();
 
     error_update.forEach(item=>{
         templateAlert('red', 'Item ' + item + ' is not updated.');
