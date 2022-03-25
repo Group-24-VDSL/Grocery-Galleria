@@ -20,14 +20,14 @@
                     <i class="fas fa-edit"></i>
                     <?php echo $model->labels()['Name']?>
                 </label>
-                <?php echo $form->fieldonly($model,"Name");?>
+                <?php echo $form->fieldonly($model,"Name")->setInteraction('required');?>
             </div>
             <div class="inputBox">
                 <label for="ItemImage">
                     <i class="far fa-images"></i>
                     <?php echo $model->labels()['ItemImage']?>
                 </label>
-                <?php echo $form->inputfile($model,"ItemImage")?>
+                <?php echo $form->inputfile($model,"ItemImage")->setInteraction('required');?>
             </div>
             <div class="inputBox">
                 <label for="Brand">

@@ -592,3 +592,12 @@ display: flex;
   padding: 6px;
   font-weight: 600;
 }
+.back-arrow{
+  font-size: 2rem;
+  padding: 1rem;
+  color: var(--text-color);
+}
+.back-arrow:hover{
+  color: red;
+  transition: .3s;
+}

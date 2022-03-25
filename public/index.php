@@ -76,6 +76,7 @@ $app->router->get('/dashboard/delivery/pastdelivery',[DeliveryController::class,
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 $app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
 $app->router->post('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
+$app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
 
 //system staff
 $app->router->get('/dashboard/staff/adduser',[StaffController::class, 'Register']);

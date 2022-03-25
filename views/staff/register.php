@@ -19,10 +19,6 @@
                 <input class="form-radio" type="radio" name="radio" data-for="shop"/>
                 <label>Shop</label>
             </span>
-            <span class="radio-label">
-                <input class="form-radio" type="radio" name="radio" data-for="staff"/>
-                <label>Staff</label>
-            </span>
         </div>
         <div class="form-container scroller" data-name="customer">
             <?php $form = \app\core\form\Form::begin("/customer/register", "post", ""); ?>
@@ -52,11 +48,11 @@
             </div>
             <div class="inputBox">
                 <label for="city"><i class="fas fa-map-marked-alt"></i>Select city</label>
-                <?php echo $form->selectfieldonly($customer, 'City', ['Colombo' => 'Colombo', 'Maharagama' => 'Maharagama', 'Gampaha' => 'Gampaha', 'Nawala' => 'Nawala']); ?>
+                <?php echo $form->selectfieldonly($customer, 'City'); ?>
             </div>
             <div class="inputBox">
                 <label for="suburb"><i class="fas fa-street-view"></i>Select suburb</label>
-                <?php echo $form->selectfieldonly($customer, 'Suburb', ['Colombo' => 'Colombo', 'Maharagama' => 'Maharagama', 'Gampaha' => 'Gampaha', 'Nawala' => 'Nawala']); ?>
+                <?php echo $form->selectfieldonly($customer, 'Suburb'); ?>
             </div>
             <?php echo $form->fieldonly($customer, 'Location')->hiddenField(); ?>
             <?php echo $form->fieldonly($customer, 'PlaceID')->hiddenField(); ?>
@@ -118,20 +114,12 @@
             <div class="inputBox">
                 <label for="city"><i class="fas fa-map-marked-alt"></i>
                     <?php echo $shop->labels()['City'] ?></label>
-                <?php echo $form->selectfieldonly($shop, 'City',
-                    ['Colombo' => 'Colombo',
-                        'Maharagama' => 'Maharagama',
-                        'Gampaha' => 'Gampaha',
-                        'Nawala' => 'Nawala']); ?>
+                <?php echo $form->selectfieldonly($shop, 'City'); ?>
             </div>
             <div class="inputBox">
                 <label for="suburb"><i class="fas fa-street-view"></i>
                     <?php echo $shop->labels()['Suburb'] ?></label>
-                <?php echo $form->selectfieldonly($shop, 'Suburb',
-                    ['Colombo' => 'Colombo',
-                        'Maharagama' => 'Maharagama',
-                        'Gampaha' => 'Gampaha',
-                        'Nawala' => 'Nawala']); ?>
+                <?php echo $form->selectfieldonly($shop, 'Suburb'); ?>
             </div>
             <div class="inputBox">
                 <label for="description"><i class="fas fa-hashtag"></i>
@@ -151,42 +139,7 @@
             </div>
             <?php echo $form->end(); ?>
         </div>
-        <div class="form-container scroller" data-name="staff">
-            <?php $form = \app\core\form\Form::begin("/dashboard/staff/adduser", "post", ""); ?>
-            <div class="inputBox">
-                <label for="Name"><i class="fas fa-edit"></i>Name</label>
-                <?php echo $form->fieldonly($staff, 'Name'); ?>
 
-            </div>
-            <div class="inputBox">
-                <label for="Address"><i class="fas fa-home"></i>Address</label>
-                <input type="text" placeholder="Eg: No:56/B Example Rd, Example" id="address">
-
-            </div>
-            <div class="inputBox">
-                <label for="Email"><i class="fas fa-envelope"></i>Email</label>
-                <?php echo $form->fieldonly($staff, 'Email')->emailField(); ?>
-            </div>
-            <div class="inputBox">
-                <label for="contact"><i class="fas fa-phone"></i>Contact No</label>
-                <?php echo $form->fieldonly($staff, 'ContactNo'); ?>
-            </div>
-            <div class="inputBox">
-                <label for="Password"><i class="fas fa-key"></i>Password</label>
-                <?php echo $form->fieldonly($staff, 'Password')->passwordField(); ?>
-            </div>
-            <div class="inputBox">
-                <label for="PasswordR"><i class="fas fa-key"></i>Re-enter password</label>
-                <?php echo $form->fieldonly($staff, 'ConfirmPassword')->passwordField(); ?>
-
-            </div>
-            <div class="inputBox"></div>
-            <div class="btn-align">
-                <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
-                <button id="accept" type="submit" class="btn submit">Submit Registration</button>
-            </div>
-            <?php \app\core\form\Form::end() ?>
-
-        </div>
     </section>
 </div>
+<script src="/js/citySuburb.js"></script>
