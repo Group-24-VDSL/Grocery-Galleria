@@ -147,13 +147,6 @@ class StaffController extends Controller
         return $this->render('staff/view-orders');
     }
 
-    public function vieworderdetails(Request $request)
-    {
-        $this->setLayout('headeronly-staff');
-        $OrderID = $request->getBody()["OrderID"];
-
-        return $this->render('staff/view-orders-details');
-    }
 
     public function viewitems()
     {
