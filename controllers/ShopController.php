@@ -182,10 +182,7 @@ class ShopController extends Controller
 
         $shopitems = DBModel::query("SELECT ItemID  From shopitem WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
 
-//        echo $shopitems[0]["ItemID"] ;
-
         $q = DBModel::query("SELECT ItemID,ShopID  From shopitemsales WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
-
 
         foreach ($shopitems as $item){
 
@@ -338,8 +335,6 @@ class ShopController extends Controller
 
     public function shopincome(Request $request)
     {
-
-//        $user = new Shop;
         $this->setLayout('dashboardL-shop');
         return $this->render('shop/shop-analytics');
     }
@@ -442,10 +437,8 @@ class ShopController extends Controller
 
 
 
-//            $newObj->StaffID = Application::getCustomerID(); // get session id
-//            $newObj->ShopID = 3;
+
             if ($newObj->validate('update') && $newObj->update()) {
-//                $newObj->singleProcedure('email_update', $newObj->ShopID, $newObj->Email);
                 Application::$app->session->setFlash('success','Update Success');
                 Application::$app->response->redirect('/dashboard/shop/profilesettings');
             } else {

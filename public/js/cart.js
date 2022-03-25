@@ -47,7 +47,7 @@ $.getJSON(URLGetCart, function (CartItems) {
             Shop.id = 'Shop'.concat(CartItem.ShopID);
             ShopName.classList.add('shop-name');
             $.getJSON(URLShop, function (shop) {
-                ShopName.innerHTML = `<i class="fas fa-store"></i>${shop.ShopName}`
+                ShopName.innerHTML = `<i class="fas fa-store"></i>${shop.ShopName}<br><small><i class="fas fa-map-marked-alt"></i>${shop.Address}</small>`
             });
             cartItems.classList.add('cart-items');
             cartItems.id = 'CartItemsOfShop'.concat(CartItem.ShopID);
@@ -189,12 +189,7 @@ function remove(ShopID,ItemID,UnitPrice){
 }
 
 function calculateDelivery(numberofshops){
-    let baseDeli = 120;
-
-    for (let i = 1; i < 5 && i < numberofshops; i++) {
-        baseDeli += 30;
-    }
-    return baseDeli;
+   return (numberofshops===1)?120:160;
 }
 
 
