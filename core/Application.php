@@ -165,7 +165,9 @@ class Application
                 'pwdUpdate'],
             'Shop' => [
                 'vieworder',
+                'shopcards',
                 'productOverview',
+                'getShopID',
                 'viewitems',
                 'vieworder',
                 'vieworders',
@@ -262,6 +264,10 @@ class Application
         return self::$app->user;
     }
 
+    public static function getUserID(){
+        return self::$app->session->get('user');
+    }
+
 
     public static function getUserRole(){
         return self::$app->user->Role??null;
@@ -273,7 +279,7 @@ class Application
 
     public static function getSuburb(){
         return self::$app->session->get('suburb');
-}
+    }
 
     public function run()
     {
