@@ -67,7 +67,7 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                 </div>
                 <div class="quantity">
                         <span>Qty :</span>
-                        <input class="quantity-input" type="number" name="quantity" min=${item.Unit==3? 1:item.UWeight} max="${item.Unit==3? item.MaxCount :item.UWeight * item.MaxCount}" step=${item.Unit==3? 1:item.UWeight} value=${item.Unit==3? 1:item.UWeight} onkeydown="return false;">
+                        <input class="quantity-input" type="number" name="quantity" min=${item.Unit==2? 1:item.UWeight} max="${item.Unit==2? item.MaxCount :item.UWeight * item.MaxCount}" step=${item.Unit==2? 1:item.UWeight} value=${item.Unit==2? 1:item.UWeight} onkeydown="return false;">
                 </div>
                     <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this);"><i class="fas fa-cart-plus"></i> add to cart</button>
             `
