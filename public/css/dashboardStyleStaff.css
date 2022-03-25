@@ -42,6 +42,13 @@
   border-radius: 0.5rem;
   /* justify-items: left; */
 }
+
+.home-content .core .container-core .container-core-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .home-content .core .container-core .table-header {
   padding: 1rem 2.5rem;
   border: 0.1rem solid var(--home-color);
@@ -582,5 +589,6 @@ display: flex;
   font-weight: bold;
 }
 .details .details-div input{
-  padding: 4px;
+  padding: 6px;
+  font-weight: 600;
 }

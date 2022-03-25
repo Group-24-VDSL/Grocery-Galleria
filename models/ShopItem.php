@@ -9,11 +9,11 @@ class ShopItem extends DBModel
     public int $ItemID = 0;
     public int $ShopID = 0;
     public float $UnitPrice = 0.0;
+    public float $MinStock = 1.0;
     public float $Stock = 0.0 ;
     public int $Enabled = 0 ;
     public int $MaxLeadTime = 1;
     public int $MinLeadTime = 1;
-    public float $MinStock = 1;
 
     public function save()
     {
@@ -51,15 +51,15 @@ class ShopItem extends DBModel
     {
         return [
             'ShopID'=> [self::RULE_REQUIRED],
-            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_MAX_VAL_CLASS,'class'=> Item::class,'checkattribute'=>'MRP','where'=>'ItemID']],
-            'Stock' => [self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0]],
-            'MinStock' => [[self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>1]]]
+            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_IF_ONLY_THEN,'class'=> Item::class,'ValMatch'=>2,'CheckAttribute1'=>'MRP','matchAttribute1'=>'Category','where'=>'ItemID']],
+             'Stock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>5]],
+            'MinStock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0]],
         ];
     }
 
     public function jsonarray(): array
     {
-        return ['ItemID','ShopID','UnitPrice','Stock','Enabled','MaxLeadTime','MinLeadTime','MinStock'];
+        return ['ItemID','ShopID','UnitPrice','MinStock','Stock','Enabled','MaxLeadTime','MinLeadTime'];
     }
 
     public function excludeonupdateattributes(): array

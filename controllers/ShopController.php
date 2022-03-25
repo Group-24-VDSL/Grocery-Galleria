@@ -76,7 +76,6 @@ class ShopController extends Controller
         $item = new ShopItem();
         $this->setLayout("dashboardL-shop");
 
-
         if ($request->isPost()) {
             $item->loadData($request->getBody());
 
@@ -193,10 +192,7 @@ class ShopController extends Controller
 
         $shopitems = DBModel::query("SELECT ItemID  From shopitem WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
 
-//        echo $shopitems[0]["ItemID"] ;
-
         $q = DBModel::query("SELECT ItemID,ShopID  From shopitemsales WHERE  ShopID = ".$shopID." ",\PDO::FETCH_ASSOC,true);
-
 
         foreach ($shopitems as $item){
 
@@ -240,11 +236,6 @@ class ShopController extends Controller
 
         if ($request->isPost()) {
             $shopItem->loadData($request->getBody());
-            if ($request->getBody()['Unit'] == "g") {
-                $stock = $shopItem->Stock ;
-                $stock = $stock * 1000 ;
-                $shopItem->Stock = $stock ;
-            }
 
             if ($shopItem->validate() && $shopItem->save()) {
                 Application::$app->session->setFlash("success", "Item Saved.");
@@ -365,12 +356,7 @@ class ShopController extends Controller
         $response->setContentTypeJSON();
         $shops = Shop::findAll(['Category'=>$request->getBody()["Category"],'City'=>Application::getCity(),'Suburb'=>Application::getSuburb()]);
         return json_encode($shops);
-
-
     }
-
-    
-
 
     public function updateItem(Request $request)
     {
@@ -379,8 +365,6 @@ class ShopController extends Controller
 
         if ($request->isPost()) {
             $itemUpdated->loadData($request->getBody());
-
-            $itemUpdated->Stock*1000 ;
 
             if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item update is success" );
@@ -399,12 +383,9 @@ class ShopController extends Controller
             ]);
     }
 
-
-
     public function updateOngoingShopItem(Request $request, Response $response)
     {
         $json = $request->getJson();
-        Application::$app->logger->debug('ikik');
         if ($json) {
             $tempshopitem = new ShopItem();
             $tempshopitem->loadData($json);
@@ -442,7 +423,6 @@ class ShopController extends Controller
         $newObj = new Shop();
         $user = new User();
 
-
         $this->setLayout("dashboardL-shop");
 
         $shop = $shop->findOne(['ShopID' => Application::getUserID()]);
@@ -466,7 +446,6 @@ class ShopController extends Controller
                     $newObj->singleProcedure('email_Update', $newObj->ShopID, $newObj->Email);
                     Application::$app->session->setFlash('success', 'Update Success');
                     Application::$app->response->redirect('/dashboard/shop/profilesettings');
-
             }
             else {
                 Application::$app->session->setFlash('danger', 'Update Failed');

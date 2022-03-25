@@ -8,7 +8,6 @@ use app\core\db\DBModel;
 use app\core\exceptions\ForbiddenException;
 use app\core\Request;
 use app\core\Response;
-use app\models\Cart;
 use app\models\Customer;
 use app\models\ShopItem;
 use app\models\TemporaryCart;
@@ -52,31 +51,47 @@ class CartController extends Controller
         if ($json) {
             $tempcart = new TemporaryCart();
             $tempcart->loadData($json);
-            $tempcart->CustomerID=Application::getUserID();
-            $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
-            if ($request->isPost()) {
-                if ($checktemp) { //there exists such item
-                    $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
-                    $tempcart->Quantity = $newQuantity;
-                    if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok"}');
+            if($this->checkCurrentCart($tempcart->ShopID,Application::getUserID())){
+            if ($tempcart->Quantity > 0) {
+                $tempcart->CustomerID = Application::getUserID();
+                $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
+                if ($request->isPost()) {
+                    if ($checktemp) { //there exists such item
+                        $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
+                        $tempcart->Quantity = $newQuantity;
+                        if ($tempcart->validate('update') && $tempcart->update()) {
+                            return $response->json('{"success":"ok"}');
+                        }
+                    } else {
+                        if ($tempcart->validate() && $tempcart->save()) {
+                            return json_encode('{"success":"ok"}');
+                        }
                     }
-                } else {
-                    if ($tempcart->validate() && $tempcart->save()) {
-                        return json_encode('{"success":"ok"}');
-                    }
-                }
-                return $response->json('{"success":"fail"}');
-            } elseif($request->isPatch()) {
-                if ($checktemp) { //there exists such item
-                    $tempcart->Quantity = $json['Quantity'];
-                    if ($tempcart->validate('update') && $tempcart->update()) {
-                        return $response->json('{"success":"ok"}');
+                    return $response->json('{"success":"fail"}');
+                } elseif ($request->isPatch()) {
+                    if ($checktemp) { //there exists such item
+                        $tempcart->Quantity = $json['Quantity'];
+                        if ($tempcart->validate('update') && $tempcart->update()) {
+                            return $response->json('{"success":"ok"}');
+                        }
                     }
                 }
             }
+            }
         }
         return $response->json('{"success":"fail"}');
+    }
+
+    //api - helper function to return a
+    public function checkCurrentCart($shopid,$customerid){
+        $shops = DBModel::query("SELECT DISTINCT ShopID FROM temporarycart WHERE Purchased=0 AND CustomerID=$customerid",\PDO::FETCH_COLUMN,true);
+        if(in_array($shopid,$shops) && count($shops)<6){
+            return true;
+        }elseif ((count($shops)+1)<6){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function deleteFromCart(Request $request, Response $response)
@@ -176,6 +191,17 @@ class CartController extends Controller
                         'quantity' => $item["Quantity"],
                     ];
                 }
+
+                $arr[] = [
+                    'price_data' => [
+                        'currency' => 'lkr',
+                        'unit_amount' => $deliveryfee*100,
+                        'product_data' => [
+                            'name' => "Delivery Fee"
+                        ],
+                    ],
+                    'quantity' =>1,
+                ];
 
                 $checkout_session = Application::$app->stripe->checkout->sessions->create([
                     'payment_method_types' => ['card'],

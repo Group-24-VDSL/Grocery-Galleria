@@ -17,17 +17,17 @@ const getUrlParameter = function getUrlParameter(sParam) {
 
 
 const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-const ShopType =["Vegetable","Fruit","Grocery","Fish","Meat"];
+const ShopType = ["Vegetable", "Fruit", "Grocery", "Fish", "Meat"];
 
 
 const host = window.location.origin; //http://domainname
 
 //Api links
-const URLShopAPI = host+"/api/shop";
-const URLShopItemAPI = host+"/api/shopitems";
-const URLFindItemAPI = host+"/api/item";
+const URLShopAPI = host + "/api/shop";
+const URLShopItemAPI = host + "/api/shopitems";
+const URLFindItemAPI = host + "/api/item";
 
-const URLAddtoCartAPI = host+"/api/addtocart";
+const URLAddtoCartAPI = host + "/api/addtocart";
 
 const shopName = document.getElementById('ShopName');
 const shopCity = document.getElementById('City');
@@ -52,28 +52,34 @@ const ItemBox = document.getElementById('ItemBox');
 
 $.getJSON(URLFindShopItems, function (ShopItems) {
     ShopItems.forEach(shopItem => {
-        const Item = document.createElement('div');
-        Item.classList.add('box');
-        const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
-        $.getJSON(URLShopItem, function (item) {
-            Item.innerHTML = `
+        if ((shopItem.Stock > shopItem.MinStock) && (shopItem.Enabled === 1)) {
+            const URLShopItem = URLFindItemAPI.concat("?ItemID=").concat(shopItem.ItemID);
+            const Item = document.createElement('div');
+            Item.classList.add('box');
+            $.getJSON(URLShopItem, function (item) {
+                Item.innerHTML = `
             <img id="ItemImage" alt="ItemImage" src="${item.ItemImage}" >
                 <h3 id="Name">${item.Name}</h3>
                 <div class="price">
-                    <span id="UnitPrice">${shopItem.UnitPrice}</span>
-                    <span> /</span>
-                    <span id="Unit">${UnitTag[item.Unit]}</span>
+                    <span id="UnitPrice">Rs: ${shopItem.UnitPrice}</span>
+                    <span> / Unit</span>
+<!--                    <span style="text-transform: lowercase;" id="Unit">${UnitTag[item.Unit]}</span>-->
                 </div>
                 <div class="quantity">
-                        <span>quantity :</span>
-                        <input class="quantity-input" type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight}>
+                        <span>Qty :</span>
+                        <input class="quantity-input" type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight} onkeydown="return false;">
                 </div>
                     <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this);"><i class="fas fa-cart-plus"></i> add to cart</button>
             `
-        })
-        ItemBox.appendChild(Item);
+            })
+            ItemBox.appendChild(Item);
+        }
     })
 
+}).then(function (){
+    $(".quantity-input").keypress(function (evt) {
+        evt.preventDefault();
+    });
 });
 
 $(document).ready(function () {
@@ -109,10 +115,21 @@ function addtocart(item) {
     const value = $(item).parent().children(".quantity").find('.quantity-input').val();
     const step = $(item).parent().children(".quantity").find('.quantity-input').attr('step');
 
-    var passingvalue = Math.trunc(value / step);
-    var obj = {"ItemID": itemidvalue, "ShopID": shopidvalue, "Quantity": passingvalue}; //keys and values should be enclosed in double quotes
+    if(value > 0){
+        var passingvalue = Math.trunc(value / step);
+        var obj = {"ItemID": itemidvalue, "ShopID": shopidvalue, "Quantity": passingvalue}; //keys and values should be enclosed in double quotes
 
-    $.post(URLAddtoCartAPI, JSON.stringify(obj));
+        $.post(URLAddtoCartAPI, JSON.stringify(obj)).done(function (res){
+            if(JSON.parse(res)['success'] === 'ok'){
+                templateAlert('green', 'Item updated.');
+            }else{
+                templateAlert('red', 'Item update failed.');
+            }
+        });
+    }else{
+        templateAlert('red', 'Invalid quantity passed.');
+    }
+
 
 }
 

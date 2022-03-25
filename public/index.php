@@ -67,7 +67,6 @@ $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'ri
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'viewriders']);
 $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'viewrider']);
-//$app->router->get('/dashboard/delivery/vieworders',[DeliveryController::class,'vieworders']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);
 $app->router->get('/dashboard/delivery/deliveryInfo',[DeliveryController::class, 'deliveryInfo']);
 $app->router->get('/dashboard/delivery/viewdelivery',[DeliveryController::class, 'viewDelivery']);
@@ -119,7 +118,7 @@ $app->router->get('/dashboard/staff/getmonthcost',[SystemReportController::class
 $app->router->get('/dashboard/staff/neworders',[StaffController::class, 'newOrders']);
 $app->router->get('/dashboard/staff/onorders',[StaffController::class, 'onOrders']);
 $app->router->get('/dashboard/staff/pastorders',[StaffController::class, 'pastOrders']);
-
+$app->router->get('/dashboard/staff/getnewusercount',[SystemReportController::class, 'getNewUserCount']);
 
 //shop staff
 $app->router->get('/dashboard/shop/products',[ShopController::class,'productOverview']);
@@ -153,8 +152,8 @@ $app->router->get('/api/item',[APIController::class,'getItem']);
 $app->router->get('/api/items',[APIController::class,'getItemAll']);
 $app->router->get('/api/shopitems',[APIController::class,'getShopItems']);
 $app->router->get('/api/shopitem',[APIController::class,'getShopItem']);
-$app->router->get('/api/shop',[APIController::class,'getShop']);
-$app->router->get('/api/shops',[APIController::class,'getAllShop']);
+$app->router->get('/api/shop',[ShopController::class,'getShop']);
+$app->router->get('/api/shops',[ShopController::class,'getAllShop']);
 $app->router->get('/api/getcustomer',[APIController::class,'getCustomer']);
 $app->router->get('/api/getcomplaints',[APIController::class,'getComplaints']);
 $app->router->post('/api/updatecomplaint',[StaffController::class,'updateComplaint']);
@@ -165,6 +164,9 @@ $app->router->get('/api/getcart',[CartController::class,'getTempCart']);
 $app->router->post('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->patch('/api/addtocart',[CartController::class,'addToCart']);
 $app->router->post('/api/deletefromcart',[CartController::class,'deleteFromCart']);
+$app->router->get('/api/getcity',[APIController::class,'getCity']);
+$app->router->get('/api/getsuburb',[APIController::class,'getSuburb']);
+$app->router->get('/api/getcitysuburb',[APIController::class,'getCitySuburb']);
 
 //api - shop
 $app->router->get('/api/orders',[APIController::class,'getOrders']);
@@ -193,6 +195,11 @@ $app->router->get('/api/getshopcards',[ShopController::class,'shopcards']);
 $app->router->get('/api/getrider',[APIController::class,'getRider']);
 $app->router->get('/api/getriders',[APIController::class,'getRiders']);
 
+//api - staff
+$app->router->get('/api/getshopstaff',[StaffController::class,'getShopStaff']);
+$app->router->get('/api/getriderstaff',[StaffController::class,'getRiderStaff']);
+$app->router->get('/api/getdeliverystaff',[StaffController::class,'getDeliveryStaff']);
+$app->router->get('/api/getsystemstaff',[StaffController::class,'getSystemStaff']);
 
 $app->router->get('/api/getriderlocation',[DeliveryController::class,'getRiderLocation']);
 $app->router->get('/api/getriderlocationdata',[DeliveryController::class,'getRiderLocationData']);

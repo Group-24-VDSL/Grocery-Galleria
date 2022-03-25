@@ -7,11 +7,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template.css">
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/Shop.css">
 
     <!-- JavaScript -->
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/template.js"></script>
     <title></title>
     <?php include_once("utils/pwa.php"); ?>
 </head>
@@ -21,7 +23,7 @@
 <header>
     <div class="header-1">
         <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
-        <a href="" class="back"><i class="fas fa-step-backward"></i></a>
+        <a href="javascript:history.back()" class="back"><i class="fas fa-step-backward"></i></a>
     </div>
     <!-- Shop banner start -->
     <section class="shop-banner" id="banner">
@@ -40,21 +42,9 @@
     </section>
     <!-- Shop banner end -->
     <div class="header-2">
-        <nav class="navbar">
-            <a href="#">All</a>
-            <a href="#">Random</a>
-            <a href="#">Low</a>
-            <a href="#">High</a>
-            <a href="#">Special</a>
-        </nav>
         <div class="part">
             <div id="menu-bar" class="fas fa-bars"></div>
-            <div id="search-bar">
-                <form action="" class="search-box-container">
-                    <input type="search" id="search-box" placeholder="Search items..">
-                    <button class="fas fa-search search "></button>
-                </form>
-            </div>
+
         </div>
         <div class="part">
             <div class="icons">

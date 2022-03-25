@@ -175,4 +175,15 @@ GROUP BY HOUR(TIME(OrderDate))";
         return json_encode($result);
     }
 
+    public function getNewUserCount(Request $request)
+    {
+        $body = $request->getBody();
+        $date = $body['SalesMonth1'];
+        $querySQL = "SELECT lg.Role AS userRole,COUNT(DISTINCT lg.UserID) AS NewCount FROM `login` lg 
+                    WHERE MONTH(lg.RegTime)=MONTH('$date') GROUP BY lg.Role";
+        $result = DBModel::query($querySQL,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
+        return json_encode($result);
+        
+    }
+
 }

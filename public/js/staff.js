@@ -1,23 +1,3 @@
-// get url parameters
-const getUrlParameter = function getUrlParameter(sParam) {
-    let sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
-    }
-    return false;
-}
-
-const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-const ItemType = ['Vegetables', 'Fruits', 'Grocery', 'Fish', 'Meat'];
-
 const host = window.location.origin; //http://domainname
 const chartDiv1 = document.getElementById('chartDiv1');
 const chartDiv2 = document.getElementById('chartDiv2');
@@ -31,35 +11,31 @@ const URLItemWeekReport = host + '/dashboard/staff/getitemweekreport';
 
 $(document).ready(function () {
     $(".btn-tab").click(function () {
-        let table = $('#Items').DataTable();
-        table.destroy();
-        $('#Item-info-rows').empty();
+        $('#item-table').empty();
         let URLFindItems = URLItemsAPI.concat($(this).data("href"));
         $.getJSON(URLFindItems, function (Items) {
             Items.forEach(Item => {
-                const itemRow = document.createElement('tr');
+                const itemRow = document.createElement('ul');
+                itemRow.classList.add('row');
                 itemRow.innerHTML = `
-                 <td class="row-img">
+                 <li class="row-img">
                     <img src="${Item.ItemImage}" alt="${Item.Name}" />
-                </td>
-                <td class="row-name">${Item.Name}</td>
-                <td class="row-brand">${Item.Brand}</td>
-                <td class="row-unit">${Item.Unit}</td>
-                <td class="row-minWeight">${Item.UWeight}</td>
-                <td class="row-mrp">${Item.MRP}</td>
-                <td class="row-IncStep">${Item.MaxCount}</td>
-                <td class="row-Status">${Item.Status}</td>
-                <td class="row-ubutton">
+                </li>
+                <li class="row-name">${Item.Name}</li>
+                <li class="row-brand">${Item.Brand}</li>
+                <li class="row-unit">${Item.Unit}</li>
+                <li class="row-minWeight">${Item.UWeight}</li>
+                <li class="row-mrp">${Item.MRP}</li>
+                <li class="row-IncStep">${Item.MaxCount}</li>
+                <li class="row-Status">${Item.Status}</li>
+                <li class="row-ubutton">
                     <button id="ItemID=${Item.ItemID}" data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
-                </td>
+                </li>
                 `
-                $('#Item-info-rows').append(itemRow);
+                ItemTable.appendChild(itemRow);
             })
         }).then(function () {
-            $('#Items').DataTable({
-                "pageLength": 5,
-            });
-            ////
+
             console.log("here")
             const itemBtns = document.getElementsByClassName('btn-row');
             $(itemBtns).click(function () {
@@ -196,6 +172,15 @@ $(document).ready(function () {
                             const myChart = new Chart(ctx, config);
                         })
                     })
+                    Date.prototype.toDateInputValue = (function () {
+                        const local = new Date(this);
+                        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                        return local.toJSON().slice(0, 10);
+                    });
+
+                    $('#SalesDate').val(new Date().toDateInputValue());
+                    const fireEvent = new Event('change');
+                    document.getElementById('SalesDate').dispatchEvent(fireEvent);
                 })
                 // console.log(URLFindItem);
                 $.getJSON(URLFindItem, function (Item) {
@@ -219,27 +204,61 @@ $(document).ready(function () {
                     // console.log(document.getElementById('MaxCount').value);
                     $('#MRP').val(Item.MRP);
                     // console.log(document.getElementById('MRP').value);
-                    // $('#Status').val(Item.Status);
+                    $('#Status').val(Item.Status);
 
-                })
+                }).then(changeState)
             })
 
+
+            const searchbox = document.getElementById("product-search");
+            searchbox.addEventListener("focus", function () {
+                console.log("hello")
+                const itemBtn = document.getElementsByClassName('btn-row')[0];
+                $(itemBtn).trigger("click");
+            })
+            searchbox.addEventListener("keyup", function () {
+                let input = document.getElementById("product-search").value.toUpperCase();
+                let table = document.getElementById("item-table");
+                items = table.getElementsByClassName("row");
+                Array.prototype.forEach.call(items, function (ulelement) {
+                    let brand = ulelement.getElementsByClassName("row-brand")[0].textContent || ulelement.getElementsByClassName("row-brand")[0].innerText;
+                    let name = ulelement.getElementsByClassName("row-name")[0].textContent || ulelement.getElementsByClassName("row-name")[0].innerText;
+                    if (name.toUpperCase().indexOf(input) > -1 || brand.toUpperCase().indexOf(input) > -1) {
+                        ulelement.style.display = "";
+                    } else {
+                        ulelement.style.display = "none";
+                    }
+
+                });
+            });
         })
     })
-
-    $('#Status').change(function () {
-        if ($(this).is(':checked')) {
-            $(this).val(1);
-            // console.log(document.getElementById('Status'))
-        } else {
-            $(this).val(0);
-            $(this).prop('checked', false);
-            // console.log(document.getElementById('Status'))
-        }
-    })
-
     $('#veg-tab-items').trigger("click");
 })
+
+function changeState() {
+    if ($('#Status').val() === "1") {
+        console.log(document.getElementById('Status'))
+        $('#Status').prop('checked', true);
+    } else {
+        console.log(document.getElementById('Status'))
+        $('#Status').prop('checked', false);
+    }
+
+}
+
+$('#Status').change(function () {
+    if ($(this).is(':checked')) {
+        $(this).val(1);
+        console.log(document.getElementById('Status'))
+    } else {
+        $(this).val(0);
+        $(this).attr('checked', false);
+        console.log(document.getElementById('Status'))
+    }
+})
+
+
 
 
 
