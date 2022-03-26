@@ -11,6 +11,9 @@ const ItemBody = document.getElementById('user-table-body');
 
 $(document).ready(function () {
     $(".btn-tab").click(function () {
+        const tabId = $(this).attr('id');
+        $('.btn-tab').removeClass('btn-select');
+        $('#'+tabId).toggleClass('btn-select');
         $(ItemHeader).empty();
         $(ItemBody).empty();
         let URLUser;

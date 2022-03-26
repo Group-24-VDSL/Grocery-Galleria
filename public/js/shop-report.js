@@ -7,6 +7,9 @@ const yearTableBody = document.getElementById('year-table-body');
 
 $(document).ready(function () {
     $(".btn-tab").click(function () {
+        const tabId = $(this).attr('id');
+        $('.btn-tab').removeClass('btn-select');
+        $('#'+tabId).toggleClass('btn-select');
         $('#month-table tbody').empty();
         $('#year-table tbody').empty();
         $('#category').empty().append('#Top10 '+$(this).data("name")+' Report');

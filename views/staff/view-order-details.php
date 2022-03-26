@@ -139,7 +139,7 @@
     <div style="height: auto" class="core" id="orderDetails">
         <h1 class="heading">Order<span> Details</span></h1>
     </div>
-<script src="/js/view-order.js"></script>
-<!--<script src="/js/order-map.js"></script>-->
 </section>
+<script src="/js/view-order.js"></script>
+<script src="/js/order-map.js"></script>
 
