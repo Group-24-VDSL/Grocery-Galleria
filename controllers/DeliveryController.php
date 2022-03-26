@@ -44,27 +44,6 @@ class DeliveryController extends Controller
                         Application::$app->session->setFlash('success', 'Rider Register Success');
                         //send user verification
                         $status = AuthController::verificationSend($rider->RiderID, $rider->Name, $user->Email);
-//                            if($status){
-//                                $url = "http://localhost/changePwd?UserID=$rider->RiderID";
-//                                $to = new To($rider->Email, $rider->Name, ['password' => $user->Password, 'name' => $rider->Name,'link' => $url,]);
-//                                $email =  new Mail(
-//                                    Application::$app->emailfrom,$to
-//                                );
-//                                $email->setTemplateId('d-4c34f31db7674b7d98f93f0eed9f23f5');
-//
-//                                try {
-//                                    $response = Application::$app->sendgrid->send($email);
-//                                } catch (Exception $e) {
-//                                    echo 'Caught exception: '.  $e->getMessage(). "\n";
-//                                    Application::$app->session->setFlash('warning', 'Error sending Email');
-//                                    return $this->render('delivery/add-rider', [
-//                                        'model' => $rider
-//                                    ]);
-//                                }
-//                                Application::$app->response->redirect('/login');
-//                            }
-                        //send the register success email
-                        //id = d-4c34f31db7674b7d98f93f0eed9f23f5
 
 
                         $this->setLayout('dashboard-delivery');
@@ -88,6 +67,17 @@ class DeliveryController extends Controller
         ]);
     }
 
+
+    public function viewriders(Request $request)
+    {
+        $this->setLayout('dashboard-delivery');
+        $riders = Rider::findAll(['City' => Application::getCity()]);
+        return $this->render('delivery/view-riders', [
+                'riders' => $riders
+            ]
+        );
+    }
+
     public function viewrider(Request $request)
     {
         $this->setLayout('dashboard-deli');
@@ -107,14 +97,19 @@ class DeliveryController extends Controller
     {
         $order = Orders::findOne(array_slice($request->getBody(), 1, null, true));
         $cartID = $order->CartID;
+        $orderID = $order->OrderID;
         $cart = Cart::findOne(['CartID' => $cartID]);
         $customer = Customer::findOne(['CustomerID' => $cart->CustomerID]);
         $orderSQL = "SELECT * FROM `ordercart` WHERE CartID=$cartID GROUP BY ShopID,ItemID";
         $shopCountSQl = "SELECT COUNT(DISTINCT(ShopID)) AS ShopCount FROM `ordercart` WHERE CartID=$cartID";
+        $shopStatusSQL = "SELECT sh.ShopID,sh.ShopName,sh.ContactNo,so.Status FROM `shop` AS sh INNER JOIN `shoporder` AS so ON sh.ShopID=so.ShopID WHERE sh.ShopID IN (SELECT oc.ShopID FROM `ordercart` AS oc WHERE CartID=$cartID); ";
         $orderStmt = DBModel::prepare($orderSQL);
+        $shopStatusStmt = DBModel::prepare($shopStatusSQL);
         $shopCountStmt = DBModel::prepare($shopCountSQl);
+        $shopStatusStmt->execute();
         $orderStmt->execute();
         $shopCountStmt->execute();
+        $shopStatus = $shopStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
         $shopOrders = $orderStmt->fetchAll(\PDO::FETCH_ASSOC);
         $shopCount = $shopCountStmt->fetchColumn(\PDO::FETCH_DEFAULT);
         $this->setLayout('dashboard-delivery');
@@ -124,7 +119,8 @@ class DeliveryController extends Controller
                 'cart' => $cart,
                 'customer' => $customer,
                 'shopOrders' => $shopOrders,
-                'shopCount' => $shopCount
+                'shopCount' => $shopCount,
+                'shopStatus' => $shopStatus
             ]
         );
     }
@@ -145,7 +141,7 @@ class DeliveryController extends Controller
 
         $city = Application::getCity();
         $querySql =
-            "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost FROM orders od
+            "SELECT od.OrderID, crt.CartID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost FROM orders od
                 INNER JOIN cart crt ON
                 od.CartID = crt.CartID
                 INNER JOIN customer cus ON
@@ -160,7 +156,7 @@ class DeliveryController extends Controller
     {
 
         $city = Application::getCity();
-        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+        $querySQL = "SELECT od.OrderID, crt.CartID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
                     INNER JOIN cart crt ON
                     od.CartID = crt.CartID
                     INNER JOIN customer cus ON
@@ -179,7 +175,7 @@ class DeliveryController extends Controller
     {
 
         $city = Application::getCity();
-        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+        $querySQL = "SELECT od.OrderID, crt.CartID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
                     INNER JOIN cart crt ON
                     od.CartID = crt.CartID
                     INNER JOIN customer cus ON
