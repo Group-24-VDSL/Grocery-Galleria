@@ -190,14 +190,14 @@ $( document ).ready(function() {
         new Chart("revenueBarchart", {
             type: "bar",
             data: {
-                labels: xValues,
+                labels: xValues.reverse(),
                 datasets: [{
                     fill: true,
                     backgroundColor: '#A52A2A',
                     borderColor: '#a6cee3',
                     label: 'Income in month',
                     borderColor: "green",
-                    data: yValues
+                    data: yValues.reverse()
                 }]
             },
             options: {
