@@ -63,7 +63,7 @@ $(function () {
                                     break;
                             }
 
-                            UPrice.setAttribute("max", MaxPrice);
+                            // UPrice.setAttribute("max", MaxPrice);
 
 
                             MRP.setAttribute("value", parseFloat(systemItems[0].MRP, 2));
@@ -103,7 +103,7 @@ $(function () {
                                             MaxPrice = '';
                                             break ;
                                     }
-                                    UPrice.setAttribute("max", MaxPrice);
+                                    // UPrice.setAttribute("max", MaxPrice);
                                     MRP.setAttribute("value", parseFloat(item.MRP, 2));
                                     Unit.setAttribute("value", UnitTag[item.Unit]);
                                     UWeight.setAttribute("value", item.UWeight + " " + UnitSymbol);
