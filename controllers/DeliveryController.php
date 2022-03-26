@@ -197,7 +197,6 @@ class DeliveryController extends Controller
 
     public function assignRider(Request $request, Response $response)
     {
-        $delivery = new Delivery();
         $deliveryRider = new Rider();
         $order = new Orders();
         $body = $request->getBody();
@@ -213,6 +212,17 @@ class DeliveryController extends Controller
         if ($deliveryRider) {
             if ($order->update() && $deliveryRider->update() && $stmt->execute()) {
                 Application::$app->session->setFlash('success', 'Rider allocation Success');
+                Application::$app->pushnotifications->publishToInterests(
+                    array("rider"),
+                    array(
+                        "web" => array(
+                            "notification" => array(
+                                "title" => "New Ride!",
+                                "body" => "You have a new order assigned.",
+                                "deep_link" => Application::$app->domain."/dashboard/shop/vieworderdetails?ShopID=15&CartID=2"
+                            )
+                        )
+                    ));
                 Application::$app->response->redirect('/dashboard/delivery/viewdelivery');
 
             } else {
@@ -233,7 +243,7 @@ class DeliveryController extends Controller
         $response->setContentTypeJSON();
         $this->setLayout('empty');
         $data['City'] = Application::getCity();
-        Application::$app->pusher->trigger('my-channel', 'get-location', $data,);
+        Application::$app->pusher->trigger('my-channel', 'get-location', $data);
     }
 
     public function getRiderLocationData(Request $request, Response $response)
