@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\db\DBModel;
 use app\core\Response;
+use app\models\Cart;
 use app\models\Customer;
 use app\models\OrderCart;
 use app\models\DeliveryStaff;
@@ -21,6 +22,12 @@ use app\models\Complaint;
 use app\models\User;
 use app\models\Verification;
 use app\models\SystemReports;
+use SendGrid\Mail\TypeException;
+
+/**
+ * @throws TypeException
+ */
+
 
 class StaffController extends Controller
 {
@@ -135,6 +142,7 @@ class StaffController extends Controller
         $this->setLayout('dashboardL-staff');
         return $this->render('staff/view-orders');
     }
+
     public function viewOrders()
     {
         $this->setLayout('dashboardL-staff');
@@ -143,13 +151,73 @@ class StaffController extends Controller
 
     public function vieworderdetails(Request $request)
     {
-        $this->setLayout('headeronly-staff');
-        $OrderID = $request->getBody()["OrderID"];
 
-        return $this->render('staff/view-orders-details');
+        $order = Orders::findOne(array_slice($request->getBody(), 1, null, true));
+        $cartID = $order->CartID;
+        $cart = Cart::findOne(['CartID' => $cartID]);
+        $customer = Customer::findOne(['CustomerID' => $cart->CustomerID]);
+        $shopCountSQl = "SELECT COUNT(DISTINCT(ShopID)) AS ShopCount FROM `ordercart` WHERE CartID=$cartID";
+        $shopCountStmt = DBModel::prepare($shopCountSQl);
+        $shopCountStmt->execute();
+        $shopCount = $shopCountStmt->fetchColumn(\PDO::FETCH_DEFAULT);
+        $this->setLayout("dashboardL-staff");
+        return $this->render('staff/view-order-details',
+            [
+                'order' => $order,
+                'customer' => $customer,
+                'shopCount' => $shopCount
+            ]
+        );
     }
 
-    public function viewitems()
+    public function getShopList(Request $request)
+    {
+        $cartID = $request->getBody()['CartID'];
+        $shopIDsSQL = "SELECT ShopID FROM `ordercart` WHERE CartID=$cartID GROUP BY ShopID";
+        $shopIDs = DBModel::query($shopIDsSQL, fetch_type: \PDO::FETCH_ASSOC, fetchAll: true);
+        return json_encode($shopIDs);
+
+
+    }
+
+    public function getOrderShopDetails(Request $request)
+    {
+        $Shopid = $request->getBody()['ShopID'];
+        $shopSQL = "SELECT * FROM `shop` WHERE ShopID=$Shopid";
+        $shop = DBModel::query($shopSQL, fetch_type: \PDO::FETCH_ASSOC, fetchAll: true);
+        return json_encode($shop);
+    }
+
+    public function getOrderShopItemDetails(Request $request)
+    {
+        $body = $request->getBody();
+        $cartID = $body['CartID'];
+        $shopID = $body['ShopID'];
+        $querySQL = "SELECT odc.ItemID, it.Name,it.ItemImage,it.Unit,it.UWeight,si.UnitPrice, odc.Quantity, odc.Total FROM `ordercart` odc 
+                    INNER JOIN Item it ON
+                    it.ItemID = odc.ItemID
+                    INNER JOIN shopitem si ON
+                    si.ItemID = it.ItemID
+                    WHERE odc.CartID =$cartID AND odc.ShopID=$shopID
+                    GROUP BY odc.ItemID";
+        $shopItems = DBModel::query($querySQL,fetch_type: \PDO::FETCH_ASSOC,fetchAll: true);
+        return json_encode($shopItems);
+
+
+    }
+
+    public function getShopLocations(Request $request)
+    {
+        $cartID = $request->getBody()['CartID'];
+        $shopIDsSQL = "SELECT odc.ShopID, sp.Location FROM `ordercart` odc
+        INNER JOIN `shop` sp ON sp.ShopID = odc.ShopID WHERE CartID=$cartID GROUP BY ShopID;";
+        $shopLocations = DBModel::query($shopIDsSQL, fetch_type: \PDO::FETCH_ASSOC, fetchAll: true);
+        return json_encode($shopLocations);
+
+    }
+
+    public
+    function viewitems()
     {
         $items = Item::findAll();
         $this->setLayout("dashboardL-staff");
@@ -159,29 +227,70 @@ class StaffController extends Controller
             ]);
     }
 
-    public function viewcomplaints()
+    public function viewcomplaints(Request $request,Response $response)
     {
         $complaints = Complaint::findAll();
+
+        $complaint = new Complaint() ;
+
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/view-complaint",
             [
-                'comlist' => $complaints
+                'complaintlist' => $complaints, 'model'=> $complaint
             ]);
     }
 
-    public function addcomplaint(Request $request)
+    public function updateComplaint(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        if ($json) {
+            $temp = new Complaint();
+            $temp->loadData($json);
+
+            $temp->Status =1;
+            $checktemp = Complaint::findOne(["ComplaintID" => $temp->ComplaintID ]);
+
+            if ($request->isPost()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        return $response->json('{"success":"ok"}');
+                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
+
+                    }
+                    else {
+                        return $response->json('{"success":"fail"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+
+            } elseif($request->isPatch()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewcomplaints");
+                        return $response->json('{"success":"ok"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+            }
+        }
+        return $response->json('{"success":"fail"}');
+    }
+
+
+    public
+    function addcomplaint(Request $request)
     {
         $complaint = new Complaint();
         $this->setLayout("headeronly-staff");
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
 
-            $complaint->ComplaintDate =  date("d-m-Y");
+            $complaint->ComplaintDate =  date("Y-m-d");
 
             $OrderID = $complaint->OrderID ;
             $order = Orders::findOne(['OrderID' => $OrderID]);
             if(!$order){
-                Application::$app->session->setFlash("warning", "Order is not in the system");
+                Application::$app->session->setFlash("warning", "Order is not exist in the system.");
                 Application::$app->response->redirect("/dashboard/staff/addcomplaint");
             }
             $complaint->OrderDate = $order->OrderDate;
@@ -205,13 +314,15 @@ class StaffController extends Controller
             ]);
     }
 
-    public function viewUsers()
+    public
+    function viewUsers()
     {
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/users");
     }
 
-    public function profilesettings(Request $request)
+    public
+    function profilesettings(Request $request)
     {
         $userID = Application::getUserID();
         $model = new Staff();
@@ -239,25 +350,28 @@ class StaffController extends Controller
             'loginmodel' => $user
         ]);
     }
-    public function newOrders()
+
+    public
+    function newOrders()
     {
 
         $querySql =
-            "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost FROM orders od
+            "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact, od.DeliveryCost,od.TotalCost, od.Status FROM orders od
                 INNER JOIN cart crt ON
                 od.CartID = crt.CartID
                 INNER JOIN customer cus ON
                 crt.CustomerID = cus.CustomerID
                 WHERE od.Status=0";
-        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC,true);
+        $newDeliveries = DBModel::query($querySql, \PDO::FETCH_ASSOC, true);
         return json_encode($newDeliveries);
 
     }
 
-    public function onOrders()
+    public
+    function onOrders()
     {
 
-        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost, od.Status FROM orders od
                     INNER JOIN cart crt ON
                     od.CartID = crt.CartID
                     INNER JOIN customer cus ON
@@ -267,15 +381,16 @@ class StaffController extends Controller
                     INNER JOIN deliveryrider delR ON
                     delR.RiderID = del.RiderID
                     WHERE od.Status=1 AND del.Status=0";
-        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC, true);
         return json_encode($onDeliveries);
 
     }
 
-    public function pastOrders()
+    public
+    function pastOrders()
     {
 
-        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost FROM orders od
+        $querySQL = "SELECT od.OrderID, od.OrderDate,cus.Name AS custName,od.Note,cus.ContactNo AS custContact,del.RiderID,delR.Name AS RiderName,delR.ContactNo AS RiderContact, od.DeliveryCost,od.TotalCost, od.Status FROM orders od
                     INNER JOIN cart crt ON
                     od.CartID = crt.CartID
                     INNER JOIN customer cus ON
@@ -285,33 +400,45 @@ class StaffController extends Controller
                     INNER JOIN deliveryrider delR ON
                     delR.RiderID = del.RiderID
                     WHERE od.Status=1 AND del.Status=1 AND";
-        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
+        $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC, true);
         return json_encode($onDeliveries);
     }
+
 //-> view system order details by 19001541
 
-    //apis
-    public function getShopStaff(Request $request,Response $response){
+//apis
+    public
+    function getShopStaff(Request $request, Response $response)
+    {
         $response->setContentTypeJSON();
-        $shops  = Shop::findAll();
+        $shops = Shop::findAll();
         return $response->json($shops);
 
     }
-    public function getRiderStaff(Request $request,Response $response){
+
+    public
+    function getRiderStaff(Request $request, Response $response)
+    {
         $response->setContentTypeJSON();
         $riders = Rider::findAll();
         return $response->json($riders);
 
     }
-    public function getDeliveryStaff(Request $request,Response $response){
+
+    public
+    function getDeliveryStaff(Request $request, Response $response)
+    {
         $response->setContentTypeJSON();
         $deliverys = DeliveryStaff::findAll();
         return $response->json($deliverys);
 
     }
-    public function getSystemStaff(Request $request,Response $response){
+
+    public
+    function getSystemStaff(Request $request, Response $response)
+    {
         $response->setContentTypeJSON();
-        $systems  = Staff::findAll();
+        $systems = Staff::findAll();
         return $response->json($systems);
 
     }

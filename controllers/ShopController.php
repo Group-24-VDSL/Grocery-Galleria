@@ -79,6 +79,16 @@ class ShopController extends Controller
         if ($request->isPost()) {
             $item->loadData($request->getBody());
 
+            $itemID = $item->ItemID ;
+
+            $tempItem = Item::findOne(["ItemID"=>$itemID]);
+
+            if ($tempItem->Unit == 0 || $tempItem->Unit ==1){
+                $item->Stock = $item->Stock*1000 ;
+            }
+
+//            Application::$app->logger->debug($item->loadData($request->getBody()));
+
             if ($item->validate() && $item->update()) {
                 Application::$app->session->setFlash("success", "Item Updated Successfully.");
                 Application::$app->response->redirect("/dashboard/shop/products");
@@ -100,7 +110,7 @@ class ShopController extends Controller
     public function shopOrderAnalytics(Request $request,Response $response){
         $response->setContentTypeJSON();
 
-        $shopID =  1 ;
+        $shopID =   Application::getUserID()  ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 13; $x >= 1; $x--) {
@@ -118,7 +128,7 @@ class ShopController extends Controller
 
     public function getmonthorders(Request $request,Response $response){
         $response->setContentTypeJSON();
-        $shopID =  1 ;
+        $shopID =   Application::getUserID()  ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 30 ; $x >= 1; $x--) {
@@ -135,7 +145,7 @@ class ShopController extends Controller
     public function getmonthlyrevenues(Request $request,Response $response){
         $response->setContentTypeJSON();
 
-        $shopID =  1 ;
+        $shopID =   Application::getUserID()  ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 13; $x >= 1; $x--) {
@@ -156,7 +166,7 @@ class ShopController extends Controller
 
     public function getmonthrevenues(Request $request,Response $response){
         $response->setContentTypeJSON();
-        $shopID =  1 ;
+        $shopID =  Application::getUserID() ;
         $yms = array();
         $now = date('Y-m-d');
         for($x = 30 ; $x >= 1; $x--) {
@@ -176,7 +186,7 @@ class ShopController extends Controller
     public function getShopItemList(Request $request,Response $response){
         $response->setContentTypeJSON();
 
-        $shopID =  5 ;
+        $shopID =  Application::getUserID() ;
 
         $itemdetails = array();
 
@@ -188,9 +198,9 @@ class ShopController extends Controller
 
             $itemID =  $item["ItemID"] ;
 
-            $x = DBModel::query("SELECT ItemID, Name,ItemImage From item WHERE  ItemID = ".$itemID." ",\PDO::FETCH_OBJ,true);
+            $item = DBModel::query("SELECT ItemID, Name,ItemImage From item WHERE  ItemID = ".$itemID." ",\PDO::FETCH_OBJ,true);
 
-            array_push($itemdetails,$x);
+            array_push($itemdetails,$item);
         }
 
 
@@ -202,7 +212,7 @@ class ShopController extends Controller
 
         $response->setContentTypeJSON();
 
-        $shopID =  5 ;
+        $shopID =  Application::getUserID() ;
         $itemID = $request->getBody()["ItemID"] ;
         $yms = array();
 
@@ -215,24 +225,18 @@ class ShopController extends Controller
             $yms[$ym] = $sales[0];
         }
 
-//        echo "<pre>";
-//        print_r($yms);
-//        echo "</pre>";
-
         return $response->json($yms) ;
     }
 
     public function additem(Request $request){
-
         $shopItem = new ShopItem();
+        $shopItem->ShopID = Application::getUserID() ;
+
         $this->setLayout('dashboardL-shop');
+
         if ($request->isPost()) {
             $shopItem->loadData($request->getBody());
-            if ($request->getBody()['Unit'] == "Kg") {
-                $stock = $shopItem->Stock ;
-                $stock = $stock * 1000 ;
-                $shopItem->Stock = $stock ;
-            }
+
             if ($shopItem->validate() && $shopItem->save()) {
                 Application::$app->session->setFlash("success", "Item Saved.");
                 Application::$app->response->redirect("/dashboard/shop/additem");
@@ -364,7 +368,7 @@ class ShopController extends Controller
 
             if ($itemUpdated->validate('update') && $itemUpdated->update()) {
                 Application::$app->session->setFlash("success", "Item update is success" );
-                Application::$app->response->redirect("/dashboard/shop/products");
+//                Application::$app->response->redirect("/dashboard/shop/products");
             } else {
                 Application::$app->session->setFlash("warning", "Validation Failed.");
                 return $this->render("shop/core-products"
@@ -387,10 +391,12 @@ class ShopController extends Controller
             $tempshopitem->loadData($json);
 
             $checktemp = ShopItem::findOne(["ItemID" => $tempshopitem->ItemID, "ShopID" => $tempshopitem->ShopID]);
+            $checktemp->Stock = $tempshopitem->Stock ;
 
             if ($request->isPost()) {
                 if ($checktemp) { //there exists such item
-                    if ($tempshopitem->validate('update') && $tempshopitem->update()) {
+                    if ($checktemp->validate('update') && $checktemp->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewitems");
                         return $response->json('{"success":"ok"}');
                     }
                 }
@@ -398,7 +404,6 @@ class ShopController extends Controller
 
             } elseif($request->isPatch()) {
                 if ($checktemp) { //there exists such item
-//                    Application::$app->logger->debug("iiiii");
                     if ($tempshopitem->validate('update') && $tempshopitem->update()) {
                         Application::$app->response->redirect("/dashboard/shop/viewitems");
                         return $response->json('{"success":"ok"}');
@@ -416,32 +421,33 @@ class ShopController extends Controller
         // get logged staff ID
         $shop = new Shop();
         $newObj = new Shop();
-        $tempObj =new Shop();
         $user = new User();
 
         $this->setLayout("dashboardL-shop");
 
-        $shop = $shop->findOne(['ShopID' => 3]);
-        $user = $user->findOne(['UserID' => 3]);
+        $shop = $shop->findOne(['ShopID' => Application::getUserID()]);
+        $user = $user->findOne(['UserID' => Application::getUserID()]);
+
 
         if ($request->isPost()) {
-            $tempObj->loadData($request->getBody());
+            $newObj->loadData($request->getBody());
+            $newObj->ShopID = Application::getUserID();
+            $newObj->Category = $shop->Category;
+            $newObj->Address = $shop->Address;
+            $newObj->City = $shop->City;
+            $newObj->Suburb = $shop->Suburb;
+            $newObj->Location = $shop->Location;
+            $newObj->PlaceID = $shop->PlaceID ;
+            $newObj->Password = 123;
+            $newObj->ConfirmPassword = 123 ;
 
-            $newObj = Shop::findOne(['ShopID'=>3]);
 
-            $newObj->Name = $tempObj->Name ;
-            $newObj->ShopName = $tempObj->ShopName ;
-            $newObj->Email = $tempObj->Email ;
-            $newObj->ShopDesc = $tempObj->ShopDesc ;
-            $newObj->ContactNo = $tempObj->ContactNo ;
-
-
-
-
-            if ($newObj->validate('update') && $newObj->update()) {
-                Application::$app->session->setFlash('success','Update Success');
-                Application::$app->response->redirect('/dashboard/shop/profilesettings');
-            } else {
+            if ($newObj->update() && $newObj->validate('update')){
+                    $newObj->singleProcedure('email_Update', $newObj->ShopID, $newObj->Email);
+                    Application::$app->session->setFlash('success', 'Update Success');
+                    Application::$app->response->redirect('/dashboard/shop/profilesettings');
+            }
+            else {
                 Application::$app->session->setFlash('danger', 'Update Failed');
                 $this->setLayout("dashboardL-shop");
                 return $this->render("shop/shop-profile-setting", [
@@ -454,6 +460,120 @@ class ShopController extends Controller
             'model' => $shop,
             'loginmodel' => $user
         ]);
+    }
+
+    // shop-change password(garbage)
+    public function changepassword(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        var_dump("in password");
+        if ($json) {
+            var_dump("in password");
+            $tempuser = new User();
+            $tempuser->loadData($json);
+
+            $checktemp = User::findOne(["UserID" => Application::getUserID()]);
+
+
+            $currenPwdHash =  password_hash($json["OldPwd"],PASSWORD_BCRYPT);
+
+
+
+            if ($request->isPost()) {
+                if (strlen($json["OldPwd"]) == 0) {
+                    return $response->json('{"success":"currentRequire"}');
+                } elseif (strlen($json["NewPwd"]) == 0) {
+                    return $response->json('{"success":"newRequire"}');
+                } elseif (strlen($json["ConfirmPwd"]) == 0) {
+                    return $response->json('{"success":"confirmRequire"}');
+                } else {
+
+                    if ($checktemp) { //there exists such user
+
+                        if(password_verify($json["OldPwd"], $checktemp->PasswordHash)){
+//
+                            if(strlen($json["NewPwd"])>=8) {
+                                if ($json["NewPwd"] === $json["ConfirmPwd"]) {
+                                    $tempuser = $checktemp ;
+                                    $tempuser->PasswordHash = password_hash($json["NewPwd"] ,PASSWORD_BCRYPT);
+                                    if ($tempuser->update()) {
+//                                        Application::$app->response->redirect("/test");
+                                        return $response->json('{"success":"ok"}');
+                                    }
+
+
+                                } else {
+                                    return $response->json('{"success":"newConfirmFail"}');
+                                }
+                            }
+                            else{
+                                return $response->json('{"success":"sizeFail"}') ;
+                            }
+
+                        }
+                        else{
+                            return $response->json('{"success":"currentFail"}');
+                        }
+                    }
+                    return $response->json('{"success":"fail"}');
+
+                }
+            }elseif($request->isPatch()) {
+
+            }
+
+        }
+        return $response->json('{"success5":"fail"}');
+    }
+
+    public function safetystock(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+
+        $itemID = (int)$request->getJson()['ItemID'] ;
+        $shopID = (int)$request->getJson()['ShopID'];
+
+
+
+        if ($json) {
+            if ($request->isPost()) {
+                $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
+
+                if($result){
+                    return $response->json($result);
+                }
+
+            }elseif($request->isPatch()) {
+
+            }
+
+        }
+    }
+
+    public function shopcards(Request $request, Response $response)
+    {
+        $shopID = Application::getUserID();
+
+        $json = $request->getJson();
+
+        $result = DBModel:: returnProcedure('shop_Summary', $shopID, 1);
+        return $response->json($result);
+
+    }
+
+    public function getShopCategory(Request $request,Response $response)
+    {
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+        $shop =Shop::findOne(["ShopID" => Application::getUserID()]);
+        return json_encode($shop->Category);
+    }
+
+    public function getShopID(Request $request,Response $response)
+    {
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+        return json_encode(Application::getUserID());
     }
 
 }

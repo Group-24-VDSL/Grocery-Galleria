@@ -57,10 +57,9 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span style="width: 350px" class="dashboard">Delivery Dashboard</span>
         </div>
-        <div>
-
-            <a href="javascript:history.back()" class="back-arrow"><i class="fas fa-step-backward"></i></a>
-
+        <div class="profile-details">
+            <i class="bx bx-user"></i>
+            <span id="userName" class="user-name"></span>
         </div>
     </nav>
 
@@ -69,6 +68,7 @@
     </div>
 </section>
 <script src="/js/dashboardScript.js"></script>
+<script src="/js/user.js"></script>
 <script src="/js/delivery-order.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 

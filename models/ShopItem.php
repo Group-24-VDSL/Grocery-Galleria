@@ -9,9 +9,9 @@ class ShopItem extends DBModel
     public int $ItemID = 0;
     public int $ShopID = 0;
     public float $UnitPrice = 0.0;
-    public float $MinStock = 0.0;
-    public float $Stock = 0;
-    public int $Enabled = 0;
+    public float $MinStock = 1.0;
+    public float $Stock = 0.0 ;
+    public int $Enabled = 0 ;
     public int $MaxLeadTime = 1;
     public int $MinLeadTime = 1;
 
@@ -27,7 +27,7 @@ class ShopItem extends DBModel
 
     public function attributes(): array
     {
-        return ['ItemID','ShopID','UnitPrice','MinStock','Stock','Enabled','MaxLeadTime','MinLeadTime'];
+        return ['ItemID','ShopID','UnitPrice','Stock','Enabled','MaxLeadTime','MinLeadTime','MinStock'];
     }
 
     public function labels(): array{
@@ -36,9 +36,9 @@ class ShopItem extends DBModel
             'Name'=>'Item Name',
             'Stock'=>'Item Stock',
             'UPrice'=>'Item Unit Price',
-            'MinStock'=>'Minimum Stock',
             'Enable'=>'Item Enable',
-            'Image'=>'Item Image'
+            'Image'=>'Item Image',
+            'MinStock'=>'Minimum Stock'
         ];
     }
 
@@ -51,9 +51,9 @@ class ShopItem extends DBModel
     {
         return [
             'ShopID'=> [self::RULE_REQUIRED],
-             'Stock' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>5]],
-            'MinStock' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0]],
-            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_IF_ONLY_THEN,'class'=> Item::class,'ValMatch'=>2,'CheckAttribute1'=>'MRP','matchAttribute1'=>'Category','where'=>'ItemID']],
+            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_IF_ONLY_THEN,'class'=> Item::class,'ValMatch'=>2,'CheckAttribute1'=>'MRP','matchAttribute1'=>'Category','where'=>'ItemID']],
+             'Stock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>5]],
+            'MinStock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0]],
         ];
     }
 

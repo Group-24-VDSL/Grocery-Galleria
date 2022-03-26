@@ -1,18 +1,20 @@
-
 const host = window.location.origin; //http://domainname
 
-const orderInfoURL = host+'/dashboard/staff/vieworder';
-const orderURL = host+'/dashboard/staff/'
+const orderInfoURL = host + '/dashboard/staff/vieworderdetails';
+const orderURL = host + '/dashboard/staff/'
 
 
-$(document).ready(function (){
-    $('.btn-tab').click(function (){
+$(document).ready(function () {
+    $('.btn-tab').click(function () {
+        const tabId = $(this).attr('id');
+        $('.btn-tab').removeClass('btn-select');
+        $('#' + tabId).toggleClass('btn-select');
         $('#Order-info-rows').empty();
         const getOrderInfoURL = orderURL.concat($(this).data("href"));
         console.log(getOrderInfoURL)
-        $.getJSON(getOrderInfoURL,function (orders){
-            orders.forEach(order=>{
-                const orderViewURL = orderInfoURL+"?OrderID="+order.OrderID;
+        $.getJSON(getOrderInfoURL, function (orders) {
+            orders.forEach(order => {
+                const orderViewURL = orderInfoURL + "?OrderID=" + order.OrderID+"&Status="+order.Status;
                 const orderRow = document.createElement('tr');
                 orderRow.innerHTML = `
                         <td>${order.OrderID}</td>
@@ -30,7 +32,7 @@ $(document).ready(function (){
                 `
                 $('#Order-info-rows').append(orderRow);
             })
-        }).then(function (){
+        }).then(function () {
             $('#Orders').DataTable();
         })
     });

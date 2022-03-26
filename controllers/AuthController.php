@@ -127,6 +127,7 @@ class AuthController extends Controller
     {
         $login = Application::getUser();
         $userID = Application::getUserID();
+
         if ($login->Role == 'Customer') {
             $this->setLayout('register');
         }

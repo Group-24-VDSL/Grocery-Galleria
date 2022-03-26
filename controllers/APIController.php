@@ -6,6 +6,7 @@ use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
+use app\models\Complaint;
 use app\models\Customer;
 use app\models\Delivery;
 use app\models\Item;
@@ -51,6 +52,14 @@ class APIController extends Controller
         $response->setContentTypeJSON();
         $shopItem=ShopItem::findAll(array_slice($request->getBody(),1,null,true));
         return json_encode($shopItem);
+    }
+
+    public function getComplaints(Request $request, Response $response) // get all shop items from DB
+    {
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+        $complaints=Complaint::findAll(array_slice($request->getBody(),1,null,true));
+        return json_encode($complaints);
     }
 
 
@@ -112,6 +121,8 @@ class APIController extends Controller
     }
 
 
+
+
     public function getUser(Request $request, Response $response)
     {
         $this->setLayout('empty');
@@ -169,6 +180,13 @@ class APIController extends Controller
         $suburb = Application::getSuburb();
         $citySubArr = ["City"=>$city,"Suburb"=>$suburb];
         return json_encode($citySubArr);
+    }
+
+    public function getSessionUser(Request $request, Response $response)
+    {
+        $user = Application::getUser();
+        return json_encode($user);
+
     }
 
 }

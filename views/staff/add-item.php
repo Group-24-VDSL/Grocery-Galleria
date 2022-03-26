@@ -50,7 +50,7 @@
                     <i class="fas fa-weight-hanging"></i>
                     <?php echo $model->labels()['UWeight']?>
                 </label>
-                <?php echo $form->numberfieldonly($model,"UWeight",10,10000,10);?>
+                <?php echo $form->numberfieldonly($model,"UWeight",0.1,10000,step: 0.01);?>
             </div>
 
             <div class="inputBox">
@@ -67,7 +67,7 @@
                     <?php echo $model->labels()['MRP']?>
                     <small style="color: red; font-size:15px ">( Applicable only for Grocery items! )</small>
                 </label>
-                <?php echo $form->numberfieldonly($model,"MRP",1,10000,1);?>
+                <?php echo $form->numberfieldonly($model,"MRP",1,10000,0.01);?>
             </div>
             <div class="inputBox"></div>
             <div class="inputBox btn-div">

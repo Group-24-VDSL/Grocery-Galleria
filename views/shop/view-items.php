@@ -3,14 +3,11 @@
 /** @var $form app\core\form\Form */
 ?>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/css/shop-items.css">
-<script src="/js/shop-ongoing-items.js" defer></script>
 <link rel="stylesheet" href="/css/dashboardStyle.css">
 <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
+<script src="/js/shop-ongoing-items.js" defer></script>
 
-<div class="core" style="height: height: 580px">
+<div class="core" style=" height: 780px">
     <h1 class="heading">Ongoing <span>Products</span></h1>
     <div class="container-items">
         <div class="safety-details">
@@ -24,13 +21,13 @@
         <table class="table-item small-first-col" id="ongoing-item-table">
             <thead>
             <tr>
-                <th></th>
+
                 <th>Item ID</th>
                 <th>Item Image</th>
                 <th>Item Name</th>
                 <th>Brand Name</th>
                 <th>Unit Weight</th>
-                <th>MRP</th>
+                <th>Max price</th>
                 <th>Unit Price</th>
                 <th>Stock</th>
                 <th>Safety Stock</th>
@@ -49,6 +46,13 @@
         </table>
 
         <button type="submit" id="updateItems" class="button-item-update" onclick="updateShopItem()"><span id="status">Update Items</span></button>
+        <p style="margin-bottom: 2rem"><br> <br>
+            Safety Stock : <br>Re Order Level : </p>
 
     </div>
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/css/shop-items.css">
+

@@ -40,6 +40,7 @@ class SystemReportController extends Controller
                         WHERE odc.ItemID = $itemID
                         GROUP BY MONTH(od.OrderDate)";
         $itemRevenue = DBModel::query($querySQL, fetch_type: \PDO::FETCH_ASSOC, fetchAll: true);
+
         return json_encode($itemRevenue);
 
     }

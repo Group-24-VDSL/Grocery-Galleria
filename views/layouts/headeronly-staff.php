@@ -3,7 +3,7 @@
 <head>
     <script>
         function goBack() {
-            window.history.back();
+            history.back();
         }
     </script>
     <meta charset="UTF-8">
