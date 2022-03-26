@@ -55,7 +55,7 @@ class  RiderController extends Controller
         if(is_null($orderid)){
             return new NotFoundException();
         }else{
-            $order = DBModel::query("SELECT RiderID,OrderID,CartID FROM `delivery` WHERE DeliveryID=$orderid AND Status=0",\PDO::FETCH_ASSOC);
+            $order = DBModel::query("SELECT RiderID,OrderID,CartID FROM `delivery` WHERE OrderID=$orderid AND CartID=$orderid AND Status=0",\PDO::FETCH_ASSOC);
             if($order){
                 if(Application::getUserID() == $order["RiderID"]){ //authorized rider views the order
                     $cartid = $order["CartID"];
@@ -80,7 +80,7 @@ class  RiderController extends Controller
                     }
 
                     $cartdetails = DBModel::query("SELECT * FROM `orders` WHERE CartID=$cartid and OrderID=$orderid",\PDO::FETCH_ASSOC);
-                    print_r($cartdetails);
+//                    print_r($cartdetails);
                     $customerid=$cart["CustomerID"];
                     $customer = DBModel::query("SELECT Name,ContactNo,Suburb,Location,PlaceID FROM `customer` WHERE CustomerID=$customerid",\PDO::FETCH_ASSOC);
 
@@ -137,6 +137,7 @@ class  RiderController extends Controller
         }
 
     }
+
 
 
     

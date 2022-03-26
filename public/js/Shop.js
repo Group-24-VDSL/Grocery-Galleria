@@ -16,7 +16,7 @@ const getUrlParameter = function getUrlParameter(sParam) {
 };
 
 
-const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
+const UnitTag = ["Kg", "g", "L", "Unit"];
 const ShopType = ["Vegetable", "Fruit", "Grocery", "Fish", "Meat"];
 
 
@@ -62,12 +62,12 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                 <h3 id="Name">${item.Name}</h3>
                 <div class="price">
                     <span id="UnitPrice">Rs: ${shopItem.UnitPrice}</span>
-                    <span> / Unit</span>
-<!--                    <span style="text-transform: lowercase;" id="Unit">${UnitTag[item.Unit]}</span>-->
+<!--                    <span> / </span>-->
+                    <span style="text-transform: lowercase;" id="Unit">/ ${UnitTag[item.Unit]}</span>
                 </div>
                 <div class="quantity">
                         <span>Qty :</span>
-                        <input class="quantity-input" type="number" name="quantity" min=${item.UWeight} max="${item.UWeight * item.MaxCount}" step=${item.UWeight} value=${item.UWeight} onkeydown="return false;">
+                        <input class="quantity-input" type="number" name="quantity" min=${item.Unit==2? 1:item.UWeight} max="${item.Unit==2? item.MaxCount :item.UWeight * item.MaxCount}" step=${item.Unit==2? 1:item.UWeight} value=${item.Unit==2? 1:item.UWeight} onkeydown="return false;">
                 </div>
                     <button class="btn addCart" data-itemid="${item.ItemID}" data-shopid="${shopItem.ShopID}" onclick="addtocart(this);"><i class="fas fa-cart-plus"></i> add to cart</button>
             `

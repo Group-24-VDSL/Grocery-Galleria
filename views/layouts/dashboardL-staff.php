@@ -29,15 +29,15 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/dashboard/staff/vieworders">
-                <i class="bx bx-grid-alt"></i>
-                <span class="link-name">Dashboard</span>
-            </a>
-        </li>
-        <li>
             <a href="/dashboard/staff/products">
                 <i class="bx bx-box"></i>
                 <span class="link-name">Products</span>
+            </a>
+        </li>
+        <li>
+            <a href="/dashboard/staff/vieworders">
+                <i class="bx bx-grid-alt"></i>
+                <span class="link-name">Orders</span>
             </a>
         </li>
         <li>

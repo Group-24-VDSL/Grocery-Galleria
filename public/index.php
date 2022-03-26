@@ -5,7 +5,6 @@ use app\controllers\APIController;
 use app\controllers\CartController;
 use app\controllers\CustomerController;
 use app\controllers\DeliveryController;
-use app\controllers\PaymentController;
 use app\controllers\ShopController;
 use app\controllers\StaffController;
 use app\controllers\TestController;
@@ -76,6 +75,7 @@ $app->router->get('/dashboard/delivery/pastdelivery',[DeliveryController::class,
 $app->router->get('/dashboard/delivery/profile',[DeliveryController::class,'profile']);
 $app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
 $app->router->post('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
+$app->router->get('/dashboard/delivery/assignrider',[DeliveryController::class,'assignRider']);
 
 //system staff
 $app->router->get('/dashboard/staff/adduser',[StaffController::class, 'Register']);

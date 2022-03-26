@@ -40,9 +40,7 @@
     </div>
 
 </div>
-<div class="core">
-    <h1 class="heading">Add <span>Complaint</span></h1>
-</div>
+
 <script src="/js/staff-order.js"></script>
 
 

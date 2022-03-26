@@ -134,6 +134,11 @@ class DeliveryController extends Controller
         $this->setLayout('dashboard-delivery');
         return $this->render('delivery/view-delivery');
     }
+//    public function viewFullDelivery()
+//    {
+//        $this->setLayout('dashboard-delivery');
+//        return $this->render('delivery/view-complete-delivery-details.php');
+//    }
 
     public function newDelivery()
     {

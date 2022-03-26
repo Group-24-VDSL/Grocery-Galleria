@@ -305,7 +305,7 @@ class StaffController extends Controller
                     del.OrderID = od.OrderID
                     INNER JOIN deliveryrider delR ON
                     delR.RiderID = del.RiderID
-                    WHERE od.Status=1 AND del.Status=1";
+                    WHERE od.Status=1 AND del.Status=0";
         $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
         return json_encode($onDeliveries);
 
@@ -323,7 +323,7 @@ class StaffController extends Controller
                     del.OrderID = od.OrderID
                     INNER JOIN deliveryrider delR ON
                     delR.RiderID = del.RiderID
-                    WHERE od.Status=1 AND del.Status=2 AND";
+                    WHERE od.Status=1 AND del.Status=1 AND";
         $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC,true);
         return json_encode($onDeliveries);
     }

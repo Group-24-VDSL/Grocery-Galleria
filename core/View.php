@@ -16,19 +16,12 @@ class View //layout variables for rendering
         include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
         return ob_get_clean();
     }
-//
-//    protected function renderOnlyView($view):string{
-//        ob_start();
-//        include_once Application::$ROOT_DIR."/views/$view.php";
-//        return ob_get_clean();
-//    }
+
     public function renderView($view, $params = [])
     {
         $viewContent = $this->renderViewOnly($view, $params);
         $layoutContent = $this->layoutContent();
-//        ob_start();
-//        include_once Application::$ROOT_DIR.'/views/layouts/main.php';
-//        $layoutContent = ob_get_clean();
+
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
