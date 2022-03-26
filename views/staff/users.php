@@ -6,9 +6,9 @@
     <div class="container-core">
         <ul class="tabs">
             <li><button id="shop-tab" data-user="shop" class="btn-tab">Shops</button></li>
-            <li><button data-user="rider" class="btn-tab">Delivery Riders</button></li>
-            <li><button data-user="delivery" class="btn-tab">Delivery Staff</button></li>
-            <li><button data-user="system" class="btn-tab">System Staff</button></li>
+            <li><button id="rider-tab" data-user="rider" class="btn-tab">Delivery Riders</button></li>
+            <li><button id="del-tab" data-user="delivery" class="btn-tab">Delivery Staff</button></li>
+            <li><button id="staff-tab" data-user="system" class="btn-tab">System Staff</button></li>
         </ul>
         <table id="user-table">
             <thead id="user-table-head">

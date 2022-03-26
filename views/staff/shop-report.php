@@ -9,16 +9,16 @@
                 </button>
             </li>
             <li>
-                <button data-name="Fruit Shops" data-href="?Category=1" class="btn-tab">Fruits</button>
+                <button data-name="Fruit Shops" data-href="?Category=1" id="btn-fru" class="btn-tab">Fruits</button>
             </li>
             <li>
-                <button data-name="Grocery Shops" data-href="?Category=2" class="btn-tab">Grocery</button>
+                <button data-name="Grocery Shops" data-href="?Category=2" id="btn-gro" class="btn-tab">Grocery</button>
             </li>
             <li>
-                <button data-name="Fish Shops" data-href="?Category=3" class="btn-tab">Fish</button>
+                <button data-name="Fish Shops" data-href="?Category=3" id="btn-fis" class="btn-tab">Fish</button>
             </li>
             <li>
-                <button data-name="Meat Shops" data-href="?Category=4" class="btn-tab">Meat</button>
+                <button data-name="Meat Shops" data-href="?Category=4" id="btn-meat" class="btn-tab">Meat</button>
             </li>
         </ul>
         <div>
