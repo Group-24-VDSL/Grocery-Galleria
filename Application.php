@@ -285,9 +285,7 @@ class Application
         return self::$app->session->get('user');
     }
 
-    public static function getUserID(){
-        return self::$app->session->get('user');
-    }
+
 
 
     public static function getUserRole(){
