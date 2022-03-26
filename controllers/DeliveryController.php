@@ -44,27 +44,6 @@ class DeliveryController extends Controller
                         Application::$app->session->setFlash('success', 'Rider Register Success');
                         //send user verification
                         $status = AuthController::verificationSend($rider->RiderID, $rider->Name, $user->Email);
-//                            if($status){
-//                                $url = "http://localhost/changePwd?UserID=$rider->RiderID";
-//                                $to = new To($rider->Email, $rider->Name, ['password' => $user->Password, 'name' => $rider->Name,'link' => $url,]);
-//                                $email =  new Mail(
-//                                    Application::$app->emailfrom,$to
-//                                );
-//                                $email->setTemplateId('d-4c34f31db7674b7d98f93f0eed9f23f5');
-//
-//                                try {
-//                                    $response = Application::$app->sendgrid->send($email);
-//                                } catch (Exception $e) {
-//                                    echo 'Caught exception: '.  $e->getMessage(). "\n";
-//                                    Application::$app->session->setFlash('warning', 'Error sending Email');
-//                                    return $this->render('delivery/add-rider', [
-//                                        'model' => $rider
-//                                    ]);
-//                                }
-//                                Application::$app->response->redirect('/login');
-//                            }
-                        //send the register success email
-                        //id = d-4c34f31db7674b7d98f93f0eed9f23f5
 
 
                         $this->setLayout('dashboard-delivery');
@@ -201,7 +180,6 @@ class DeliveryController extends Controller
 
     public function assignRider(Request $request, Response $response)
     {
-        $delivery = new Delivery();
         $deliveryRider = new Rider();
         $order = new Orders();
         $body = $request->getBody();
@@ -217,6 +195,17 @@ class DeliveryController extends Controller
         if ($deliveryRider) {
             if ($order->update() && $deliveryRider->update() && $stmt->execute()) {
                 Application::$app->session->setFlash('success', 'Rider allocation Success');
+                Application::$app->pushnotifications->publishToInterests(
+                    array("rider"),
+                    array(
+                        "web" => array(
+                            "notification" => array(
+                                "title" => "New Ride!",
+                                "body" => "You have a new order assigned.",
+                                "deep_link" => Application::$app->domain."/dashboard/shop/vieworderdetails?ShopID=15&CartID=2"
+                            )
+                        )
+                    ));
                 Application::$app->response->redirect('/dashboard/delivery/viewdelivery');
 
             } else {
@@ -237,7 +226,7 @@ class DeliveryController extends Controller
         $response->setContentTypeJSON();
         $this->setLayout('empty');
         $data['City'] = Application::getCity();
-        Application::$app->pusher->trigger('my-channel', 'get-location', $data,);
+        Application::$app->pusher->trigger('my-channel', 'get-location', $data);
     }
 
     public function getRiderLocationData(Request $request, Response $response)

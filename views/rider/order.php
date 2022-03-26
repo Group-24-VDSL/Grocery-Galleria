@@ -5,14 +5,16 @@
     <div class="rider-header-container"><h2 class="header">Orders</h2></div>
     <div class="order-view">
         <h3>New Orders</h3>
-        <table>
-            <a href="#">
+        <table id="orders">
+            <thead>
                 <tr>
                     <th>OrderID</th>
                     <th>Destination</th>
                     <th>Price</th>
                     <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php
                 foreach($orders as $order){
                     echo sprintf("<tr>
@@ -28,6 +30,10 @@
                     );
                 }
                 ?>
+            </tbody>
         </table>
     </div>
 </div>
+<script>
+    $('#orders').DataTable();
+</script>
