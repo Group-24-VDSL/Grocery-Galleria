@@ -23,84 +23,131 @@ const URLShopItemsAPI = host + "/api/shopitems";
 const URLShopItemAPI = host + "/api/shopitem";
 const URLFindItemsAPI = host + "/api/items";
 const URLFindItemAPI = host + "/api/item";
+const ShopID =  host + "/api/getshopid";
 
-const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat('5');
+
 
 const ItemTable = document.getElementById('item-table');
 // ItemTable.classList.add('item-table-body body-half-screen');
 
 $(document).ready(function () {
-    $.getJSON(URLGetShop, function (Shops) {
-        Shops.forEach(Shop => {
-            // itemRow.classList.add('row');
-            const URLShopItems = URLFindItemsAPI.concat("?ItemID=").concat(Shop.ItemID);
-            console.log(URLShopItems);
+    $.getJSON(ShopID, function (shopID) {
 
-            $.getJSON(URLShopItems, function (Items) {
+        const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat(shopID);
+        console.log(URLGetShop)
+
+        $.getJSON(URLGetShop, function (Shops) {
+
+            Shops.forEach(Shop => {
+
+                const URLShopItems = URLFindItemsAPI.concat("?ItemID=").concat(Shop.ItemID);
+                console.log(URLShopItems)
+
+                $.getJSON(URLShopItems, function (Items) {
+                    Items.sort();
                     Items.forEach(Item => {
 
-                        if(!Item.Brand ){
-                            toString(Item.Brand ) ;
+                        console.log(Shop.Enabled)
+
+                        let UnitSymbol = '';
+                        let Stock = 0 ;
+                        switch (Item.Unit) {
+                            case 0 :
+                                UnitSymbol = 'Kg';
+                                Stock = Shop.Stock ;
+                                break;
+                            case 1 :
+                                UnitSymbol = 'g';
+                                Stock = Shop.Stock/1000 ;
+                                break;
+                            case 2 :
+                                UnitSymbol = 'l';
+                                Stock = Shop.Stock ;
+                                break;
+                            case 3 :
+                                UnitSymbol = 'Unit';
+                                Stock = Shop.Stock ;
+                                break;
+                        }
+
+                        if (!Item.Brand) {
+                            toString(Item.Brand);
                             Item.Brand = "-";
                         }
+                        if (Shop.Enabled == 0) {
+                            Shop.Enabled = '<i style="color: red" class="fa fa-circle" aria-hidden="true"></i>';
+                        } else {
+                            Shop.Enabled = '<i style="color: lawngreen" class="fa fa-circle" aria-hidden="true"></i>';
+                        }
 
-                            const ItemRow = document.createElement('tr');
-                            // itemRow.classList.add('tr');
-                            ItemRow.innerHTML = `
+                        const ItemRow = document.createElement('tr');
 
-                 <td></td>
-                 <td id="Name" class="row-name">${Shop.ItemID}</td>
-                 <td id="ItemImage" class="row-img">
-                    <img src="${Item.ItemImage}" alt="${Item.Name}" />
-                </td>
-                <td id="Name" class="row-name">${Item.Name}</td>
-                
+                        ItemRow.innerHTML = `
+                 <td id="ItemImage" class="row-img"><img src="${Item.ItemImage}" alt="${Item.Name}" /> </td>
+                <td id="Name" class="row-name">${Item.Name}</td>          
                 <td id="Brand" class="row-brand">${Item.Brand}</td>
-                <td id="Unit" class="row-unit">${Item.Unit}</td>
-                <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                 <td id="UPrice" class="row-uprice">${Shop.UnitPrice}</td>
-                <td id="Stock" class="row-stock">${Shop.Stock}</td>
-                <td id="Enable" class="row-enable">${Shop.Enabled}</td>
+                <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
+                <td id="Unit" class="row-unit">${UnitSymbol}</td>
+                <td id="Stock" class="row-stock">${Shop.MinStock}</td>
+                <td id="Stock" class="row-stock">${Stock}</td>              
+                <td id="Enable" class="row-enable">${Shop.Enabled}</i></td>
                 <td class="row-ubutton">
                     <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID},${Shop.ShopID})">Update</button></a>
-                </td>
-                
+                </td>               
                 `
-                            ItemTable.appendChild(ItemRow);
-                            console.log(Item.Name)
-                        }
-                    )
-                }
-            )
+                        ItemTable.appendChild(ItemRow);
+                    })
+                }).then(function () {
+                    $('#shop-products').DataTable();
+                })
+            })
+        })
+    })
+});
 
-
-        });
-    }
-    )
-;});
+function  setDataTable(){
+    // var table = $('#shop-products').DataTable();
+    // table.destroy() ;
+    // $('#shop-products').DataTable();
+}
 
 function shopItemUpdate(itemID, shopID){
-    console.log(itemID);
+
+
+
     const GetShopItem = URLShopItemAPI.concat("?ItemID=").concat(itemID).concat("&ShopID=").concat(shopID);
     const GetItem =  URLFindItemAPI.concat("?ItemID=").concat(itemID);
-    console.log(GetShopItem)
-    console.log(GetItem)
 
     $.getJSON(GetItem, function (Item) {
         $.getJSON(GetShopItem, function (ShopItem) {
-            console.log(ShopItem.Enabled);
+
+            let Stock = 0 ;
+            switch (Item.Unit) {
+                case 0 :
+                    Stock = ShopItem.Stock/1000  ;
+                    break;
+                case 1 :
+                    Stock = ShopItem.Stock/1000 ;
+                    break;
+                case 2 :
+                    Stock = ShopItem.Stock ;
+                    break;
+                case 3 :
+                    Stock = ShopItem.Stock ;
+                    break;
+            }
+
             document.getElementById("updateID").textContent= ShopItem.ItemID;
             document.getElementById("updateName").textContent= Item.Name;
             $('input[id=ShopID]').val(ShopItem.ShopID);
             $('input[id=ItemID]').val(ShopItem.ItemID);
-            // $('#updateImage').attr('src',Item.ItemImage);
             $('img[id=updateImage]').attr('src',Item.ItemImage);
-            $('input[id=Stock]').val(ShopItem.Stock);
+            $('input[id=Stock]').val(Stock);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
-            console.log(ShopItem.Enabled);
 
-            if (ShopItem.Enabled === 1){
+            if (ShopItem.Enabled == 1){
                 document.getElementById("checkbox1").checked = true;
             }
             else {
@@ -108,8 +155,10 @@ function shopItemUpdate(itemID, shopID){
             }
 
             $("#checkbox1").on('change', function(){
+                console.log("checkbox")
                 if ($('#checkbox1').is(':checked')) {
                     $('input[id=Enabled]').val(1);
+                    document.getElementById("Enabled").setAttribute('value',1);
                     console.log("checked=1")
                 }
                 else {
@@ -120,8 +169,5 @@ function shopItemUpdate(itemID, shopID){
 
         });
     });
-    // $("#").innerHTML("jj")
-
-
 }
 

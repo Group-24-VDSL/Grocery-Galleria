@@ -22,6 +22,12 @@ use app\models\Complaint;
 use app\models\User;
 use app\models\Verification;
 use app\models\SystemReports;
+use SendGrid\Mail\TypeException;
+
+/**
+ * @throws TypeException
+ */
+
 
 class StaffController extends Controller
 {
@@ -221,16 +227,55 @@ class StaffController extends Controller
             ]);
     }
 
-    public
-    function viewcomplaints()
+    public function viewcomplaints(Request $request,Response $response)
     {
         $complaints = Complaint::findAll();
+
+        $complaint = new Complaint() ;
+
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/view-complaint",
             [
-                'comlist' => $complaints
+                'complaintlist' => $complaints, 'model'=> $complaint
             ]);
     }
+
+    public function updateComplaint(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        if ($json) {
+            $temp = new Complaint();
+            $temp->loadData($json);
+
+            $temp->Status =1;
+            $checktemp = Complaint::findOne(["ComplaintID" => $temp->ComplaintID ]);
+
+            if ($request->isPost()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        return $response->json('{"success":"ok"}');
+                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
+
+                    }
+                    else {
+                        return $response->json('{"success":"fail"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+
+            } elseif($request->isPatch()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewcomplaints");
+                        return $response->json('{"success":"ok"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+            }
+        }
+        return $response->json('{"success":"fail"}');
+    }
+
 
     public
     function addcomplaint(Request $request)
@@ -240,15 +285,16 @@ class StaffController extends Controller
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
 
-            $complaint->ComplaintDate = date("d-m-Y");
+            $complaint->ComplaintDate =  date("Y-m-d");
 
-            $OrderID = $complaint->OrderID;
+            $OrderID = $complaint->OrderID ;
             $order = Orders::findOne(['OrderID' => $OrderID]);
-            if (!$order) {
-                Application::$app->session->setFlash("warning", "Order is not in the system");
+            if(!$order){
+                Application::$app->session->setFlash("warning", "Order is not exist in the system.");
                 Application::$app->response->redirect("/dashboard/staff/addcomplaint");
             }
             $complaint->OrderDate = $order->OrderDate;
+
 
 
             if ($complaint->validate() && $complaint->save()) {

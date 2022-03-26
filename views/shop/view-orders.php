@@ -11,7 +11,7 @@
 <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"/>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/shopOrder.js" defer></script>
-<script src="/js/shop-orders.js" defer></script>
+
 
 <div class="home-content">
 
@@ -25,10 +25,10 @@
 
             <div class = "tab-content">
                 <div id="new" data-tab-content class="active">
-                    <table class="table-item small-first-col">
+                    <table class="table-item small-first-col" id="order-table-new">
                         <thead>
                         <tr>
-                            <th></th>
+
                             <th>Order ID</th>
                             <th>Rider ID</th>
                             <th>Order Date</th>
@@ -44,8 +44,9 @@
                         <?php \app\core\form\Form::end(); ?>
                     </table>
                 </div>
+
                 <div id="completed" data-tab-content >
-                    <table class="table-item small-first-col">
+                    <table class="table-item small-first-col" id="order-table-old">
                         <thead>
                         <tr>
                             <th></th>
@@ -69,3 +70,5 @@
     </div>
 </div>
 </div>
+
+<script src="/js/shop-orders.js" defer></script>

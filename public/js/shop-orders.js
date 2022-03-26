@@ -17,63 +17,64 @@ const host = window.location.origin; //http://domainname
 
 //Api links
 
-//const URLOrderAPI = host + "/api/orders";
-
-
 const URLShopOrders = host + "/api/getshoporders" ;
 const URLDeliveryAPI = host + "/api/getdelivery";
-const URLGetOrder = URLShopOrders.concat('?ShopID=').concat('1');
+const ShopID =  host + "/api/getshopid";
+
 
 const ItemTableNew = document.getElementById('item-table-new');
 const ItemTableComplete = document.getElementById('item-table-complete');
 
 $(document).ready(function () {
-    $.getJSON(URLGetOrder, function (ShopOrders) {
-            ShopOrders.forEach(ShopOrder => {
+    $.getJSON(ShopID, function (shopID) {
 
-                const URLFindDelivery = URLDeliveryAPI.concat("?OrderID=").concat(ShopOrder.CartID);
+        const URLGetOrder = URLShopOrders.concat('?ShopID=').concat(shopID);
 
-                if (ShopOrder.Status === 0) {
-                    $.getJSON(URLFindDelivery, function (Delivery) {
+        $.getJSON(URLGetOrder, function (ShopOrders) {
+            ShopOrders.sort();
+            console.log(ShopOrders)
+                ShopOrders.forEach(ShopOrder => {
 
-                        console.log("this is status");
+                    const URLFindDelivery = URLDeliveryAPI.concat("?OrderID=").concat(ShopOrder.CartID);
 
-                        const ItemRowNew = document.createElement('tr');
+                    if (ShopOrder.Status === 0) {
+                        $.getJSON(URLFindDelivery, function (Delivery) {
 
-                        ItemRowNew.innerHTML = `
-                <td></td>
-                <td id="ID" class="order-id">${ShopOrder.CartID}</td>            
-                <td id="RiderID" class="rider-id">${Delivery.RiderID}</td>  
-                <td id="Date" class="order-date">${ShopOrder.Date}</td>
-                <td id="Time" class="order-time">${ShopOrder.Time}</td>
-                <td id="Total" class="shop-total">${ShopOrder.ShopTotal}</td>
-                <td id="View" class="ubutton"> <a href="/dashboard/shop/vieworderdetails?ShopID=${ShopOrder.ShopID}&CartID=${ShopOrder.CartID}" data-shopid = "${ShopOrder.ShopID}" data-orderid = "${ShopOrder.CartID}"><button id="button" class="btn-item" onclick="abc(this);" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a></td>     
-                 `
-                        ItemTableNew.appendChild(ItemRowNew);
-                    })
-                }
+                            const ItemRowNew = document.createElement('tr');
 
-                if (ShopOrder.Status === 1){
-                    $.getJSON(URLFindDelivery, function (Delivery) {
+                            ItemRowNew.innerHTML = `
+    
+                    <td id="ID" class="order-id">${ShopOrder.CartID}</td>            
+                    <td id="RiderID" class="rider-id">${Delivery.RiderID}</td>  
+                    <td id="Date" class="order-date">${ShopOrder.Date}</td>
+                    <td id="Time" class="order-time">${ShopOrder.Time}</td>
+                    <td id="Total" class="shop-total">${ShopOrder.ShopTotal}</td>
+                    <td id="View" class="ubutton"> <a href="/dashboard/shop/vieworderdetails?ShopID=${ShopOrder.ShopID}&CartID=${ShopOrder.CartID}" data-shopid = "${ShopOrder.ShopID}" data-orderid = "${ShopOrder.CartID}"><button id="button" class="btn-item" onclick="abc(this);" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a></td>     
+                     `
+                            ItemTableNew.appendChild(ItemRowNew);
+                        }).then(function (){$('#order-table-new').DataTable();console.log(1)})
+                    }
 
-                        const ItemRowComplete = document.createElement('tr');
+                    else if (ShopOrder.Status === 1){
+                        $.getJSON(URLFindDelivery, function (Delivery) {
 
-                        ItemRowComplete.innerHTML = `
-                <td></td>
-                <td id="ID" class="order-id">${ShopOrder.CartID}</td>            
-                <td id="RiderID" class="rider-id">${Delivery.RiderID}</td>  
-                <td id="Date" class="order-date">${ShopOrder.Date}</td>
-                <td id="Time" class="order-time">${ShopOrder.Time}</td>
-                <td id="Total" class="shop-total">${ShopOrder.ShopTotal}</td>
-                <td id="View" class="ubutton"> <a href="/dashboard/shop/vieworderdetails?ShopID=${ShopOrder.ShopID}&CartID=${ShopOrder.CartID}" data-shopid = "${ShopOrder.ShopID}" data-orderid = "${ShopOrder.CartID}"><button id="button" class="btn-item" onclick="abc(this);" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a></td>     
-                 `
-                        ItemTableComplete.appendChild(ItemRowComplete);
-                    })
-                }
+                            const ItemRowComplete = document.createElement('tr');
 
-            });
-        }
-    );
+                            ItemRowComplete.innerHTML = `
+    
+                    <td id="ID" class="order-id">${ShopOrder.CartID}</td>            
+                    <td id="RiderID" class="rider-id">${Delivery.RiderID}</td>  
+                    <td id="Date" class="order-date">${ShopOrder.Date}</td>
+                    <td id="Time" class="order-time">${ShopOrder.Time}</td>
+                    <td id="Total" class="shop-total">${ShopOrder.ShopTotal}</td>
+                    <td id="View" class="ubutton"> <a href="/dashboard/shop/vieworderdetails?ShopID=${ShopOrder.ShopID}&CartID=${ShopOrder.CartID}" data-shopid = "${ShopOrder.ShopID}" data-orderid = "${ShopOrder.CartID}"><button id="button" class="btn-item" onclick="abc(this);" type="submit"><span class = "order-view"><i class='bx bx-show-alt'></i></span></button></a></td>     
+                     `
+                            ItemTableComplete.appendChild(ItemRowComplete);
+                        }).then(function (){$('#order-table-old').DataTable();console.log(1)});
+                    }
 
+                }).then(function (){$('#order-table-old').DataTable();console.log(1)});
+            })
+        })
 });
 

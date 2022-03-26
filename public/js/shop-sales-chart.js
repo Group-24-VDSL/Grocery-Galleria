@@ -7,7 +7,7 @@ const URLItemSales= host + "/api/getshopitemsales" ;
 const ItemTable = document.getElementById('itemList');
 
 
-function myFunction() {
+function itemDropDownBtn() {
     document.getElementById("itemDropdown").classList.toggle("show");
 
 }
@@ -23,9 +23,6 @@ window.onclick = function(event) {
         for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
-
-                // openDropdown.classList.remove('show');
-
             }
         }
     }
@@ -37,18 +34,18 @@ $( document ).ready(function() {
 
     $.getJSON(URLShopItems, function (items) {
 
-items.forEach(item=>{
-    console.log(item[0].ItemID)
+        items.forEach(item=>{
+            console.log(item[0].ItemID)
 
-    const ItemRow = document.createElement('tr');
-     ItemRow.onclick = function() {getchart(item[0].ItemID, item[0].ItemImage,item[0].Name)};
-    ItemRow.innerHTML = `
+            const ItemRow = document.createElement('tr');
+            ItemRow.onclick = function() {getchart(item[0].ItemID, item[0].ItemImage,item[0].Name)};
+            ItemRow.innerHTML = `
                     <td id="ItemImage" class="row-img">
-                     <img src="${item[0].ItemImage}" alt="Item Image" />
-                  <td id="Name" class="row-name">${item[0].Name}</td></button>
+                    <img src="${item[0].ItemImage}" alt="Item Image" />
+                    <td id="Name" class="row-name">${item[0].Name}</td></button>
                 `
-    ItemTable.appendChild(ItemRow);
-})
+                    ItemTable.appendChild(ItemRow);
+        })
 
     });
 });
@@ -64,8 +61,6 @@ function getchart(ItemID,ItemImage,ItemName){
 
         let xValues = [] ;
         let yValues = [] ;
-
-        console.log(yValues)
 
         let a = Object.values(sales)[0]
         console.log(a);
@@ -93,15 +88,14 @@ function getchart(ItemID,ItemImage,ItemName){
         });
 
 
-        var ctx = document.getElementById("myChart").getContext("2d");
-        document.getElementById("order-linechart-average").innerHTML = sum/12
-        document.getElementById("order-linechart-sum").innerHTML = sum
+        var ctx = document.getElementById("salesChart").getContext("2d");
+        document.getElementById("order-linechart-average").innerHTML = (sum/12).toFixed(2);
+        document.getElementById("order-linechart-sum").innerHTML = parseFloat(sum,2);
 
             var data = {
                 labels:xValues,
                 datasets: [
                     {
-                        // borderColor : green,
                         fill:false,
                         label: "My First dataset",
                         fillColor: "green",
@@ -109,22 +103,17 @@ function getchart(ItemID,ItemImage,ItemName){
                         pointColor: "green",
                         pointStrokeColor: "green",
                         lineTension: 0,
-                        // pointHighlightFill: "#fff",
-                        // pointHighlightStroke: "rgba(220,220,220,1)",
                         data: yValues
                     },
                     {
                         fill:false,
-                        // label: "My First dataset",
                         fillColor: "#51ac37",
                         strokeColor: "#51ac37",
                         lineTension: 0,
-                        // pointHighlightFill: "#fff",
-                        // pointHighlightStroke: "rgba(220,220,220,1)",
+
                         data: average
                     }
                 ]
-
             };
 
             var data2 = {
@@ -132,87 +121,22 @@ function getchart(ItemID,ItemImage,ItemName){
                 datasets: [
                     {
                         fill:false,
-                        // label: "My First dataset",
                         fillColor: "rgba(220,220,220,0)",
                         strokeColor: "green",
                         pointColor: "green",
                         pointStrokeColor: "green",
                         lineTension: 0,
-                        // pointHighlightFill: "#fff",
-                        // pointHighlightStroke: "rgba(220,220,220,1)",
                         data: yValues
                     },
-
-
-
-
                 ]
 
             };
 
             new Chart(ctx).Bar(data, {
                 onAnimationComplete: function () {
-                    // var sourceCanvas = this.chart.ctx.canvas;
-                    // var copyWidth = this.scale.xScalePaddingLeft - 4;
-                    // var copyHeight = this.scale.endPoint + 15;
-                    var targetCtx = document.getElementById("myChartAxis").getContext("2d");
-                    // targetCtx.canvas.width = copyWidth;
+                    var targetCtx = document.getElementById("salesChartAxis").getContext("2d");
                     targetCtx.drawImage(0,0,0);
-
-
                 }
             });
-
-
-
-
-        // var ctx = document.getElementById("myChart").getContext("2d");
-        //
-        //  new Chart(ctx, {
-        //     // type: "bar",
-        //     data: {
-        //         labels: xValues,
-        //         datasets: [{
-        //             type: "bar",
-        //             label: 'Orders in month',
-        //             backgroundColor: "#55a630ff",
-        //             borderColor: "#55a630ff",
-        //             data: yValues
-        //         },{
-        //             type: "line",
-        //             label: 'Orders in month',
-        //             backgroundColor: "#55a630ff",
-        //             borderColor: "#55a630ff",
-        //             data: yValues
-        //         }
-        //
-        //         ]
-        //     },
-        //     options: {
-        //         legend: {display: false},
-        //
-        //         scales: {
-        //             yAxes: [{
-        //                 scaleLabel: {
-        //                     display: true,
-        //                     labelString: 'probability'
-        //                 }
-        //             }]
-        //         },
-        //
-        //         plugins: {
-        //             title: {
-        //                 display: true,
-        //                 text: 'ORDERS IN LAST YEAR',
-        //                 color: '#55a630ff',
-        //                 font: {
-        //                     size: 14
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
-
-
     });
 }
