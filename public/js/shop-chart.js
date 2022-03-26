@@ -36,8 +36,8 @@ $( document ).ready(function() {
                 datasets: [{
                     type: "bar",
                     label: 'Orders in month',
-                    backgroundColor: "#55a630ff",
-                    borderColor: "#55a630ff",
+                    backgroundColor: "#088F8F",
+                    borderColor: " #088F8F",
                     data: yValues
                 },
 
@@ -60,7 +60,7 @@ $( document ).ready(function() {
                     title: {
                         display: true,
                         text: 'TOTAL ORDERS IN LAST YEAR',
-                        color: '#55a630ff',
+                        color: '#088F8F',
                         font: {
                             size: 14
                         }
@@ -106,7 +106,7 @@ $( document ).ready(function() {
                     pointStrokeColor: "green",
                     label: 'Orders in day',
                     data: yValues.reverse(),
-                    borderColor: "#55a630ff",
+                    borderColor: " #088F8F",
                     fill: false
                 }]
             },
@@ -116,7 +116,7 @@ $( document ).ready(function() {
                     title: {
                         display: true,
                         text: 'TOTAL ORDERS IN LAST MONTH',
-                        color: '#55a630ff',
+                        color: '#088F8F',
                         layout: {
                             padding: 5
                         },
@@ -193,10 +193,9 @@ $( document ).ready(function() {
                 labels: xValues,
                 datasets: [{
                     fill: true,
-                    backgroundColor: '#a6cee3',
+                    backgroundColor: '#A52A2A',
                     borderColor: '#a6cee3',
                     label: 'Income in month',
-                    backgroundColor: "green",
                     borderColor: "green",
                     data: yValues
                 }]
@@ -210,7 +209,7 @@ $( document ).ready(function() {
                     title: {
                         display: true,
                         text: 'LAST YEAR INCOME',
-                        color: 'green',
+                        color: '#A52A2A',
                         font: {
                             size: 14
                         }
@@ -255,7 +254,7 @@ $( document ).ready(function() {
                     label: 'Income in day',
                     fill: true,
                     data: yValues.reverse(),
-                    borderColor: "green",
+                    borderColor: "#A52A2A",
                     fill: false
                 }]
             },
@@ -265,7 +264,7 @@ $( document ).ready(function() {
                     title: {
                         display: true,
                         text: 'Last Month Income',
-                        color: 'green',
+                        color: '#A52A2A',
                         layout: {
                             padding: 5
                         },

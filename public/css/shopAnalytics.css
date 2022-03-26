@@ -166,7 +166,7 @@
     color: var(--text-color-light);
 }
 
-.box-green, .box-red {
+.box-green, .box-red ,.box-lightgreen {
     float: left;
     height: 15px;
     width: 20px;
@@ -180,8 +180,12 @@
     background-color: green;
 }
 
+.box-lightgreen{
+    background-color: #90ee90;
+}
+
 .box-red{
-    background-color: #51ac37;
+    background-color: #A52A2A;
 }
 
 
