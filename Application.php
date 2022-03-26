@@ -160,7 +160,12 @@ class Application
                 'onOrders',
                 'pastOrders',
                 'customerRegister',
-                'shopRegister'],
+                'shopRegister',
+                'getSessionUser',
+                'getOrderShopDetails',
+                'getShopList',
+                'getOrderShopItemDetails',
+                'getShopLocations'],
             'Shop' => [
                 'vieworder',
                 'productOverview',
