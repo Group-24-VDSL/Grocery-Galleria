@@ -4,7 +4,7 @@
 <div class="main-content">
     <div class="rider-header-container"><h2 class="header">Orders</h2></div>
     <div class="order-view">
-        <h3>New Orders</h3>
+        <h3>Past Orders</h3>
         <table style="width: 100%">
             <a href="#">
                 <tr>
@@ -21,10 +21,10 @@
                     <td>Rs.%.2f</td>
                     <td><button type='button' class='btn btn-primary btn-icon-only order-view-button' data-href='/rider/vieworder?id=%d'><i class='far fa-eye'></i></button></td>
                 </tr></a>",
-                    $order["OrderID"],
-                    $order["Address"],
-                    $order["TotalCost"],
-                    $order["OrderID"]
+                        $order["OrderID"],
+                        $order["Address"],
+                        $order["TotalCost"],
+                        $order["OrderID"]
                     );
                 }
                 ?>
