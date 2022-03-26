@@ -23,6 +23,10 @@ let itemArray = [];
 
 $(document).ready(function () {
 
+    window.setTimeout( function() {
+            window.location.reload();
+        },600000) ;
+
 
     $.getJSON(ShopID, function (shopID) {
 
@@ -37,11 +41,13 @@ $(document).ready(function () {
             const URLShopItems = URLFindItemAPI.concat("?ItemID=").concat(Shop.ItemID);
 
             $.getJSON(URLShopItems, function (Items) {
-                Items.sort();
+
 
                 Items.forEach(Item => {
+                    Items.sort();
+                    let MaxPrice
                     console.log( Shop)
-                    if (Shop.Enabled == 1  && Shop.Stock >= Shop.MinStock)
+                    if (Shop.Enabled == 1 && Shop.Stock*Item.UWeight >= Shop.MinStock  )
                     {
                         if(!Item.Brand ){
                             toString(Item.Brand ) ;
@@ -49,12 +55,15 @@ $(document).ready(function () {
                         }
 
                         if(Item.Category == 0) {
-                            console.log("hhhhhf")
+                            MaxPrice = Item.MRP ;
+                        }
+                        else {
+                            MaxPrice = '' ;
                         }
 
-                        let Unit =  (Item.Unit == 0 || Item.Unit ==1)  ? "Kg"   : (Item.Unit ==2) ? "L" : "Units";
+                        let Unit =  (Item.Unit == 0)   ? "Kg"   : (Item.Unit ==1) ? "L" : "U";
 
-                        let Stock = (Item.Unit ==1) ? Shop.Stock/1000 : Shop.Stock ;
+                        let Stock = (Item.Unit == 0 || Item.Unit == 1) ? Shop.Stock * Item.UWeight : Shop.Stock  ;
 
 
 
@@ -65,10 +74,11 @@ $(document).ready(function () {
                                 <td id="ItemImage" class="row-img"><img src="${Item.ItemImage}" alt="${Item.Name}" /></td>
                                 <td id="Name" class="row-name">${Item.Name}</td>                                
                                 <td id="Brand" class="row-brand">${Item.Brand}</td>
-                                <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
+                                <td id="UWeight" class="row-minWeight">${Item.UWeight} ${Unit}</td>
                                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
-                                <td id="UPrice" class="row-uprice">Rs. <input type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
-                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${Item.MRP}" value="${Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>                                                              
+                                <td id="UPrice" class="row-uprice">Rs. <input onchange = "errorDisplay(${Shop.ItemID},${Shop.ShopID},${Item.Category}, ${Item.MRP})" class="input-space" type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
+                                <td id="Min_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"> ${Shop.MinStock} ${Unit}</td>                                                              
+                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input class="input-space"  type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${MaxPrice}" value="${Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>    
                                 <td id="Safety_stock_${Shop.ShopID}_${Shop.ItemID}"></td>
                                 <td id="ReOrder_point${Shop.ShopID}_${Shop.ItemID}"></td>
                                 <td id="Safety_${Shop.ShopID}_${Shop.ItemID}"></td>
@@ -85,6 +95,7 @@ $(document).ready(function () {
                         itemArray['uPriceID'] = u_priceID ;
                         itemArray['stockID'] = stockID ;
                         itemArray['unitTag'] = Item.Unit ;
+                        itemArray['unitWeight'] = Item.UWeight ;
                         itemArray['StockData'] = Shop.Stock;
                         itemArray['Enabled'] = Shop.Enabled ;
                         itemArray['MaxPrice'] = Item.MRP;
@@ -111,6 +122,12 @@ function setItemArray(Item){
 function safetyStock(ShopItem){
 
     // new safety stock 2022 03 17
+    let unit = '' ;
+    switch (ShopItem.unitTag){
+        case 0 : unit = "Kg" ; break ;
+        case 1 : unit = "L" ; break ;
+        case 2 : unit = "U" ; break ;
+    }
 
     let obj = {"ShopID":ShopItem.ShopID , "ItemID":ShopItem.ItemID} ;
     console.log(ShopItem)
@@ -125,25 +142,28 @@ function safetyStock(ShopItem){
     }).done(function (data){
 
         if (data["SafetyStock"]=== null || data["ReOrderPoint"] === null){
-            data["SafetyStock"] = "0.000" ;
-            data["ReOrderPoint"] = "0.000" ;
+            data["SafetyStock"] = "1" ;
+            data["ReOrderPoint"] = "1" ;
         }
 
         if (data["SafetyStock"]=== "0.000" ){
-            data["SafetyStock"] = "1.000" ;
+            data["SafetyStock"] = "1" ;
         }
 
         if ( data["ReOrderPoint"] === "0.000"){
-            data["ReOrderPoint"] = "1.000" ;
+            data["ReOrderPoint"] = "1" ;
         }
 
-        document.getElementById('Safety_stock_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = data["SafetyStock"]+" Kg";
-        document.getElementById('ReOrder_point'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = data["ReOrderPoint"]+" Kg";
+        document.getElementById('Safety_stock_'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = Math. ceil(data["SafetyStock"])+ " " + unit;
+        document.getElementById('ReOrder_point'.concat(ShopItem.ShopID).concat("_").concat(ShopItem.ItemID)).innerHTML = Math. ceil(data["ReOrderPoint"])+ " " + unit;
 
         let stock
 
-        if(ShopItem.unitTag === 1){
-             stock  = ShopItem.StockData/1000 ;
+        if(ShopItem.unitTag === 0 || ShopItem.unitTag === 1 ){
+             stock  = ShopItem.StockData * ShopItem.unitWeight ;
+        }
+        else {
+            stock = ShopItem.StockData ;
         }
 
         if(parseFloat(data["SafetyStock"]) <= stock){
@@ -170,12 +190,12 @@ function updateShopItem(){
         let oldUprice = $('#'.concat(item.uPriceID)).attr('data-unitPrice');
 
         if(item.unitTag == 1 || item.unitTag == 0){
-            stock = stock*1000 ;
+            stock = stock/item.unitWeight ;
         }
 
         if(oldStock!==stock || oldUprice!==unitprice){
 
-            if (item.MaxPrice < unitprice){
+            if (item.MaxPrice < unitprice && item.Category === 2){
                 error_update.push(item.ItemID) ;
             }
 
@@ -215,7 +235,18 @@ function updateShopItem(){
     })
 
     error_update.forEach(item=>{
-        templateAlert('red', 'Item ' + item + ' is not updated.');
+        templateAlert('red', 'Item ' + item + ' is not updated (Unit price should be less than or equal to the System Price for grocery items).');
     })
 
+}
+
+function errorDisplay(itemID, shopID, categoty , MRP){
+    //
+    // if(categoty == 0){
+    //
+    //     if(MRP < parseInt($('#uPrice_'.concat(shopID).concat("_").concat(itemID)).val() )){
+    //         templateAlert('red', 'Unit Price Cannot be Greaterthan to the System Price');
+    //     }
+
+    // }
 }

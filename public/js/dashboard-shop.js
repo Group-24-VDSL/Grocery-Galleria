@@ -31,6 +31,9 @@ const ItemTable = document.getElementById('item-table');
 // ItemTable.classList.add('item-table-body body-half-screen');
 
 $(document).ready(function () {
+    window.setTimeout( function() {
+        window.location.reload();
+    },600000) ;
     $.getJSON(ShopID, function (shopID) {
 
         const URLGetShop = URLShopItemsAPI.concat('?ShopID=').concat(shopID);
@@ -47,24 +50,20 @@ $(document).ready(function () {
                     Items.sort();
                     Items.forEach(Item => {
 
-                        console.log(Shop.Enabled)
+                        console.log(Items)
 
                         let UnitSymbol = '';
                         let Stock = 0 ;
                         switch (Item.Unit) {
                             case 0 :
                                 UnitSymbol = 'Kg';
-                                Stock = Shop.Stock ;
+                                Stock = Shop.Stock *Item.UWeight  ;
                                 break;
                             case 1 :
-                                UnitSymbol = 'g';
-                                Stock = Shop.Stock/1000 ;
+                                UnitSymbol = 'L';
+                                Stock = Stock = Shop.Stock *Item.UWeight   ;
                                 break;
                             case 2 :
-                                UnitSymbol = 'l';
-                                Stock = Shop.Stock ;
-                                break;
-                            case 3 :
                                 UnitSymbol = 'Unit';
                                 Stock = Shop.Stock ;
                                 break;
@@ -89,9 +88,9 @@ $(document).ready(function () {
                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                 <td id="UPrice" class="row-uprice">${Shop.UnitPrice}</td>
                 <td id="UWeight" class="row-minWeight">${Item.UWeight}</td>
-                <td id="Unit" class="row-unit">${UnitSymbol}</td>
                 <td id="Stock" class="row-stock">${Shop.MinStock}</td>
-                <td id="Stock" class="row-stock">${Stock}</td>              
+                <td id="Stock" class="row-stock">${Stock}</td>      
+                <td id="Unit" class="row-unit">${UnitSymbol}</td>        
                 <td id="Enable" class="row-enable">${Shop.Enabled}</i></td>
                 <td class="row-ubutton">
                     <button data-href="${Shop.ItemID}" class="btn-row" onclick="shopItemUpdate(${Shop.ItemID},${Shop.ShopID})">Update</button></a>
@@ -123,29 +122,48 @@ function shopItemUpdate(itemID, shopID){
     $.getJSON(GetItem, function (Item) {
         $.getJSON(GetShopItem, function (ShopItem) {
 
-            let Stock = 0 ;
-            switch (Item.Unit) {
+            console.log(ShopItem)
+
+            // let Stock = 0 ;
+            // switch (Item.Unit) {
+            //     case 0 :
+            //         Stock = ShopItem.Stock/1000  ;
+            //         break;
+            //     case 1 :
+            //         Stock = ShopItem.Stock/1000 ;
+            //         break;
+            //     case 2 :
+            //         Stock = ShopItem.Stock ;
+            //         break;
+            //     case 3 :
+            //         Stock = ShopItem.Stock ;
+            //         break;
+            // }
+            let unit = ' ' ;
+            switch (Item.Unit){
                 case 0 :
-                    Stock = ShopItem.Stock/1000  ;
-                    break;
+                    unit = '(Kg)' ; break ;
                 case 1 :
-                    Stock = ShopItem.Stock/1000 ;
-                    break;
+                    unit = '(L)' ; break ;
                 case 2 :
-                    Stock = ShopItem.Stock ;
-                    break;
-                case 3 :
-                    Stock = ShopItem.Stock ;
-                    break;
+                    unit = '(Units)' ; break ;
             }
 
             document.getElementById("updateID").textContent= ShopItem.ItemID;
             document.getElementById("updateName").textContent= Item.Name;
+            document.getElementById('stock').textContent = unit ;
+            document.getElementById('min-stock').textContent = unit ;
+
             $('input[id=ShopID]').val(ShopItem.ShopID);
             $('input[id=ItemID]').val(ShopItem.ItemID);
             $('img[id=updateImage]').attr('src',Item.ItemImage);
-            $('input[id=Stock]').val(Stock);
+            $('input[id=Stock]').val(ShopItem.Stock*Item.UWeight);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
+            $('input[id=UnitPrice]').attr('max',Item.MRP);
+            $('input[id=MinLeadTime]').val(ShopItem.MinLeadTime);
+            $('input[id=MaxLeadTime]').val(ShopItem.MaxLeadTime);
+            $('input[id=MinStock]').val(ShopItem.MinStock);
+
 
             if (ShopItem.Enabled == 1){
                 document.getElementById("checkbox1").checked = true;

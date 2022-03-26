@@ -1,6 +1,6 @@
 
 //Api links
-
+const host = window.location.origin; //http://domainname
 
 const URLComplaints = host + "/api/getcomplaints" ;
 

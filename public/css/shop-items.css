@@ -240,3 +240,20 @@ input:checked + .slider .off
     margin-top: 2rem;
     float: right;
 }
+
+.input-space {
+    width: 4rem;
+}
+
+#itemUpdate-shop {
+    grid-auto-rows: 80px;
+}
+
+.input-text{
+    font-size: 10px;
+}
+
+.lable-unit{
+    font-size: 11px;
+    margin-left :2.5rem ;
+}

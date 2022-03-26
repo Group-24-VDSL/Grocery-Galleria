@@ -224,8 +224,18 @@ class Application
                 'updateItem',
                 'profilesettings',
                 'profileUpdate',
-                'abc',
-                'safetystock'
+                'safetystock',
+                'itemsales',
+                'shopcards',
+                'getShopCategory',
+                'getShopID',
+                'shopincome',
+                'shopOrderAnalytics',
+                'getmonthorders',
+                'getmonthlyrevenues',
+                'getmonthrevenues',
+                'getShopItemList',
+                'getsales',
             ],
             'Rider' => [
                 'vieworder',
@@ -273,6 +283,11 @@ class Application
 
     public static function getUser(){
         return self::$app->user;
+
+    }
+
+    public static function getUserID(){
+        return self::$app->session->get('user');
     }
 
     public static function getUserID(){

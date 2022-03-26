@@ -31,8 +31,9 @@
                                     <td><span class="chart-item-name" id="chart-item-name"></span></td>
                                 </tr>
                                 <tr>
-                                    <td><div class='box-green'></div> &ensp;- Total Sales in Month</td>
-                                    <td><div class='box-red'></div> &ensp;- Average Sales in Month</td>
+                                    <td><div class='box-red'></div> &ensp;- Total Income in Month (LKR)</td>
+                                    <td><div class='box-green'></div> &ensp;- Total Sales Amount in Month <span id="unit-tag"></span></td>
+                                    <td><div class='box-lightgreen'></div> &ensp;- Average Sales Amount in Month <span id="unit-tag"></span></td>
                                 </tr>
 
                             </table>
@@ -40,7 +41,7 @@
 
                         </div>
 
-                        <canvas id="salesChart" height="350" width="850" style="margin-bottom: 1rem "></canvas>
+                        <canvas id="salesChart" height="350" width="950" style="margin-bottom: 1rem "></canvas>
                     </div>
                     <canvas id="salesChartAxis" height="600" width="0"></canvas>
                 </div>
