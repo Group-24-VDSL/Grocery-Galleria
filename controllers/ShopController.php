@@ -83,8 +83,10 @@ class ShopController extends Controller
 
             $tempItem = Item::findOne(["ItemID"=>$itemID]);
 
-            if ($tempItem->Unit == 0 || $tempItem->Unit ==1){
-                $item->Stock = $item->Stock*1000 ;
+            if ($tempItem->Unit == 0 || $tempItem->Unit == 1) {
+
+                $item->Stock = $item->Stock / $tempItem->UWeight;
+
             }
 
 //            Application::$app->logger->debug($item->loadData($request->getBody()));
@@ -176,7 +178,7 @@ class ShopController extends Controller
             $day = date('d', strtotime($now . " -$x days"));
             $revenue = DBModel::query("SELECT SUM(ShopTotal) AS Total FROM `shoporder` WHERE YEAR (Date) =  ".$year." AND  MONTH (Date)= ".$month." AND  DAY (Date)= ".$day." AND ShopID = ".$shopID."  ",\PDO::FETCH_ASSOC,true);
             if($revenue[0] == null){
-                $revenue[0] =0 ;
+                $revenue[0] = 0 ;
             }
             $yms[$ym] = $revenue[0];
         }
@@ -441,7 +443,6 @@ class ShopController extends Controller
             $newObj->Password = 123;
             $newObj->ConfirmPassword = 123 ;
 
-
             if ($newObj->update() && $newObj->validate('update')){
                     $newObj->singleProcedure('email_Update', $newObj->ShopID, $newObj->Email);
                     Application::$app->session->setFlash('success', 'Update Success');
@@ -533,18 +534,17 @@ class ShopController extends Controller
         $itemID = (int)$request->getJson()['ItemID'] ;
         $shopID = (int)$request->getJson()['ShopID'];
 
-
-
         if ($json) {
             if ($request->isPost()) {
                 $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
-
                 if($result){
                     return $response->json($result);
                 }
-
             }elseif($request->isPatch()) {
-
+                $result = DBModel:: returnProcedure('stockManage',$itemID,$shopID);
+                if($result){
+                    return $response->json($result);
+                }
             }
 
         }

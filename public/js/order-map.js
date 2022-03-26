@@ -1,4 +1,3 @@
-const host = window.location.origin; //http://domainname
 
 let map;
 let infoWindows = [];

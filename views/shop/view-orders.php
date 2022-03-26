@@ -30,7 +30,6 @@
                         <tr>
 
                             <th>Order ID</th>
-                            <th>Rider ID</th>
                             <th>Order Date</th>
                             <th>Order Time</th>
                             <th>Total (LKR)</th>
@@ -49,9 +48,7 @@
                     <table class="table-item small-first-col" id="order-table-old">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>Order ID</th>
-                            <th>Rider ID</th>
                             <th>Order Date</th>
                             <th>Order Time</th>
                             <th>Total (LKR)</th>

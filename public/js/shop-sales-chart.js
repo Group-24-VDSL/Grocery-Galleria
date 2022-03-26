@@ -97,7 +97,15 @@ function getchart(ItemID,ItemImage,ItemName){
                 datasets: [
                     {
                         fill:false,
-                        label: "My First dataset",
+                        fillColor: "#A52A2A",
+                        strokeColor: "#A52A2A",
+                        lineTension: 0,
+
+                        data: average
+                    },
+                    {
+                        fill:false,
+                        label: "",
                         fillColor: "green",
                         strokeColor: "green",
                         pointColor: "green",
@@ -107,30 +115,47 @@ function getchart(ItemID,ItemImage,ItemName){
                     },
                     {
                         fill:false,
-                        fillColor: "#51ac37",
-                        strokeColor: "#51ac37",
+                        fillColor: "#90ee90",
+                        strokeColor: "#90ee90",
                         lineTension: 0,
 
                         data: average
-                    }
-                ]
-            };
-
-            var data2 = {
-                labels:xValues,
-                datasets: [
-                    {
-                        fill:false,
-                        fillColor: "rgba(220,220,220,0)",
-                        strokeColor: "green",
-                        pointColor: "green",
-                        pointStrokeColor: "green",
-                        lineTension: 0,
-                        data: yValues
                     },
-                ]
 
+                ]
             };
+
+        //     var data2 = {
+        //         labels:xValues,
+        //         datasets: [
+        //             {
+        //                 fill:false,
+        //                 fillColor: "rgba(220,220,220,0)",
+        //                 strokeColor: "green",
+        //                 pointColor: "green",
+        //                 pointStrokeColor: "green",
+        //                 lineTension: 0,
+        //                 data: yValues
+        //             },
+        //         ]
+        //
+        //     };
+        //
+        // var data3 = {
+        //     labels:xValues,
+        //     datasets: [
+        //         {
+        //             fill:false,
+        //             fillColor: "rgba(220,220,220,0)",
+        //             strokeColor: "green",
+        //             pointColor: "green",
+        //             pointStrokeColor: "green",
+        //             lineTension: 0,
+        //             data: yValues
+        //         },
+        //     ]
+        //
+        // };
 
             new Chart(ctx).Bar(data, {
                 onAnimationComplete: function () {

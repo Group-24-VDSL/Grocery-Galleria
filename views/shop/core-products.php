@@ -22,16 +22,16 @@ use app\models\ShopOrder;
                     <tr>
 <!--                        <th></th>-->
 <!--                        <th>Item ID</th>-->
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Brand</th>
-                        <th>System Price</th>
-                        <th>Unit<br>Price</th>
-                        <th>Unit<br>Weight</th>
-                        <th>Unit</th>
-                        <th>Min<br>Stock</th>
-                        <th>Stock</th>
-                        <th>Status</th>
+                        <th style="font-weight: 550;font-size: 11px;">Image</th>
+                        <th style="font-weight: 550;font-size: 11px;">Name</th>
+                        <th style="font-weight: 550;font-size: 11px;">Brand</th>
+                        <th style="font-weight: 550;font-size: 11px;">System Price(LKR)</th>
+                        <th style="font-weight: 550;font-size: 11px;">Unit<br>Price</th>
+                        <th style="font-weight: 550;font-size: 11px;">Unit<br>Weight</th>
+                        <th style="font-weight: 550;font-size: 11px;">Min<br>Stock</th>
+                        <th style="font-weight: 550;font-size: 11px;">Stock</th>
+                        <th style="font-weight: 550;font-size: 11px;">Unit</th>
+                        <th style="font-weight: 550;font-size: 11px;">Status</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -48,7 +48,7 @@ use app\models\ShopOrder;
 
 
 
-        <div style="margin-left: 0;height: 750px" class="core" id="Update">
+        <div style="margin-left: 0;height: 750px ;width: 30rem" class="core" id="Update">
 
             <h1 class="heading">Update <span>Products</span></h1>
 
@@ -62,45 +62,75 @@ use app\models\ShopOrder;
                     <input id="ItemID" name="ItemID" value="" hidden>
                     <input id="ShopID" name="ShopID" value="" hidden>
                     <div class="inputBox">
-                        <label for="ID">
+                        <label class="input-text"  for="ID">
                             <i class="fas fa-sort-amount-down"></i>
                             <?php echo $model->labels()['ItemID']?>
                         </label>
                         <span class="fileds" id = "updateID"></span>
                     </div>
                     <div class="inputBox">
-                        <label for="Name">
+                        <label class="input-text"  for="Name">
                             <i class="fas fa-edit"></i>
                             <?php echo $model->labels()['Name']?>
                         </label>
                         <span class="fileds" id = "updateName"> </span>
                     </div>
                     <div class="inputBox">
-                        <label for="Image">
+                        <label class="input-text"  for="Image">
                             <i class="far fa-images"></i>
                             <?php echo $model->labels()['Image']?>
                         </label> <span class="image-box" ><img id="updateImage" ></span></div>
-                    <div class="inputBox">
-                        <label for="Stock">
-                            <i class="fas fa-boxes"></i>
-                            <?php echo $model->labels()['Stock']?>
-                        </label>
-                        <?php echo $form->numberfieldonly($model,"Stock",'','',1);?>
-                    </div>
+
 
                     <div class="inputBox">
-                        <label for="Uprice">
+                        <label class="input-text"  for="Uprice">
                             <i class="fas fa-coins"></i>
                             <?php echo $model->labels()['UPrice']?>
+                            <span id="uprice" class="lable-unit ">(LKR)</span>
                         </label>
                         <?php
 
-                        echo $form->numberfieldonly($model,"UnitPrice",10,10000,1);
-                        echo $form->numberfieldonly($model,"MinStock",'','',1)->hiddenField();?>
+                        echo $form->numberfieldonly($model,"UnitPrice",'0','',1);?>
+                    </div>
+                    <div class="inputBox">
+                        <label class="input-text"  for="Stock">
+                            <i class="fas fa-boxes"></i>
+                            <?php echo $model->labels()['Stock']?>
+                            <span id="stock" class="lable-unit "></span>
+                        </label>
+                        <?php echo $form->numberfieldonly($model,"Stock",'0','',1);?>
                     </div>
 
                     <div class="inputBox">
-                        <label for="Enable">
+                        <label class="input-text"  for="Stock">
+                            <i class="fas fa-boxes"></i>
+                            <?php echo $model->labels()['MinStock']?>
+                            <span id="min-stock" class="lable-unit min-stock"></span>
+                        </label>
+                        <?php echo $form->numberfieldonly($model,"MinStock",'0','',1);?>
+                    </div>
+
+
+                    <div class="inputBox">
+                        <label class="input-text"  for="Stock">
+                            <i class="fas fa-calendar"></i>
+                            <?php echo $model->labels()['MinLead']?>
+                            <span class="lable-unit">(days)</span>
+                        </label>
+                        <?php echo $form->numberfieldonly($model,"MinLeadTime",'1','',1);?>
+                    </div>
+
+                    <div class="inputBox">
+                        <label class="input-text"  for="Stock">
+                            <i class="fas fa-calendar"></i>
+                            <?php echo $model->labels()['MaxLead']?>
+                            <span class="lable-unit">(days)</span>
+                        </label>
+                        <?php echo $form->numberfieldonly($model,"MaxLeadTime",'1','',1);?>
+                    </div>
+
+                    <div class="inputBox">
+                        <label class="input-text"  for="Enable">
                             <i class="far fa-flag"></i>
                             <?php echo $model->labels()['Enable']?>
                         </label>

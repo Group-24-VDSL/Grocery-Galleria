@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="/css/dashboardStyleStaff.css">
     <link rel="stylesheet" href="/css/template.css">
     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="/js/jquery.min.js"></script>
 
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"  rel="stylesheet"  />
     <title>Dashboard-Staff</title>
@@ -46,12 +45,12 @@
                 <span class="link-name">New</span>
             </a>
         </li>
-        <li>
-            <a href="/dashboard/staff/adduser">
-                <i class='bx bx-user-plus'></i>
-                <span class="link-name">Register</span>
-            </a>
-        </li>
+<!--        <li>-->
+<!--            <a href="/dashboard/staff/adduser">-->
+<!--                <i class='bx bx-user-plus'></i>-->
+<!--                <span class="link-name">Register</span>-->
+<!--            </a>-->
+<!--        </li>-->
         <li>
             <a href="/dashboard/staff/viewusers">
                 <i class="bx bxs-group"></i>
