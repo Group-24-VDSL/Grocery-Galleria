@@ -46,12 +46,12 @@
                 <span class="link-name">New</span>
             </a>
         </li>
-        <li>
-            <a href="/dashboard/staff/adduser">
-                <i class='bx bx-user-plus'></i>
-                <span class="link-name">Register</span>
-            </a>
-        </li>
+<!--        <li>-->
+<!--            <a href="/dashboard/staff/adduser">-->
+<!--                <i class='bx bx-user-plus'></i>-->
+<!--                <span class="link-name">Register</span>-->
+<!--            </a>-->
+<!--        </li>-->
         <li>
             <a href="/dashboard/staff/viewusers">
                 <i class="bx bxs-group"></i>
