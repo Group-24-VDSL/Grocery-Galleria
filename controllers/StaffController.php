@@ -21,6 +21,12 @@ use app\models\Complaint;
 use app\models\User;
 use app\models\Verification;
 use app\models\SystemReports;
+use SendGrid\Mail\TypeException;
+
+/**
+ * @throws TypeException
+ */
+
 
 class StaffController extends Controller
 {
@@ -141,13 +147,6 @@ class StaffController extends Controller
         return $this->render('staff/view-orders');
     }
 
-    public function vieworderdetails(Request $request)
-    {
-        $this->setLayout('headeronly-staff');
-        $OrderID = $request->getBody()["OrderID"];
-
-        return $this->render('staff/view-orders-details');
-    }
 
     public function viewitems()
     {
@@ -159,15 +158,55 @@ class StaffController extends Controller
             ]);
     }
 
-    public function viewcomplaints()
+    public function viewcomplaints(Request $request,Response $response)
     {
         $complaints = Complaint::findAll();
+
+        $complaint = new Complaint() ;
+
         $this->setLayout("dashboardL-staff");
         return $this->render("staff/view-complaint",
             [
-                'comlist' => $complaints
+                'complaintlist' => $complaints, 'model'=> $complaint
             ]);
     }
+
+    public function updateComplaint(Request $request, Response $response)
+    {
+        $json = $request->getJson();
+        if ($json) {
+            $temp = new Complaint();
+            $temp->loadData($json);
+
+            $temp->Status =1;
+            $checktemp = Complaint::findOne(["ComplaintID" => $temp->ComplaintID ]);
+
+            if ($request->isPost()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        return $response->json('{"success":"ok"}');
+                        Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
+
+                    }
+                    else {
+                        return $response->json('{"success":"fail"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+
+            } elseif($request->isPatch()) {
+                if ($checktemp) { //there exists such item
+                    if ($temp->validate('update') && $temp->update()) {
+                        Application::$app->response->redirect("/dashboard/shop/viewcomplaints");
+                        return $response->json('{"success":"ok"}');
+                    }
+                }
+                return $response->json('{"success":"fail"}');
+            }
+        }
+        return $response->json('{"success":"fail"}');
+    }
+
 
     public function addcomplaint(Request $request)
     {
@@ -176,12 +215,12 @@ class StaffController extends Controller
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
 
-            $complaint->ComplaintDate =  date("d-m-Y");
+            $complaint->ComplaintDate =  date("Y-m-d");
 
             $OrderID = $complaint->OrderID ;
             $order = Orders::findOne(['OrderID' => $OrderID]);
             if(!$order){
-                Application::$app->session->setFlash("warning", "Order is not in the system");
+                Application::$app->session->setFlash("warning", "Order is not exist in the system.");
                 Application::$app->response->redirect("/dashboard/staff/addcomplaint");
             }
             $complaint->OrderDate = $order->OrderDate;
@@ -290,6 +329,71 @@ class StaffController extends Controller
     }
 //-> view system order details by 19001541
 
+    public function vieworderdetails(Request $request)
+    {
+        $this->setLayout('headeronly-staff');
+//        $OrderID = $request->getBody()["OrderID"];
+        $OrderID = 1;
+
+
+//        $ShopCount = $request->getBody()["ShopCount"];
+        $shopCount = 3 ;
+
+//        var_dump($ShopCount);
+//        var_dump($OrderID);
+
+        $order = Orders::findOne(["OrderID" => $OrderID]);
+//        var_dump($order);
+        $CustomerID = $order->CustomerID;
+        $customer = Customer::findOne(["CustomerID" => $CustomerID]);
+
+        $carts = OrderCart::findAll(["CartID" => $order->CartID]);
+        $shopOrders = ShopOrder::findAll(["CartID" => $order->CartID]);
+
+
+        $shops = [];
+
+        foreach ($shopOrders as $shopOrder) {
+            $ItemsArray = [];
+            $itemList = [];
+            $shopWeight = 0;
+//            var_dump($shopOrder);
+
+
+            $shop = Shop::findOne(["ShopID" => $shopOrder->ShopID]);
+
+            $i = 0;
+            $orderCarts = OrderCart::findAll(["ShopID" => $shopOrder->ShopID, "CartID" => $order->CartID]);
+
+            foreach ($orderCarts as $cart) {
+//                var_dump($cart->ItemID);
+
+                $shopItem = ShopItem::findOne(["ItemID" => $cart->ItemID]);
+                $systemItem = Item::findOne(["ItemID" => $cart->ItemID]);
+
+//                $itemList[$i] = ["shopItem"=>$shopItem, "systemItem"=>$systemItem];
+
+
+                array_push($itemList, ["shopItem" => $shopItem, "systemItem" => $systemItem , "quantity" => $cart->Quantity]);
+
+                $shopWeight = ($cart->Quantity * $systemItem->UWeight) / 1000;
+//                var_dump($shopItem);
+
+            }
+
+            $ItemsArray[] = $itemList;
+            $i += 1;
+
+
+            $shops[$shopOrder->ShopID] = ["shop" => $shop, "shopOrder" => $shopOrder, "itemList" => $ItemsArray, "shopWeight" => $shopWeight];
+        }
+
+
+        return $this->render('staff/view-orders-details',
+            ['order' => $order, 'customer' => $customer, 'shops' => $shops]);
+
+
+    }
     //apis
     public function getShopStaff(Request $request,Response $response){
         $response->setContentTypeJSON();

@@ -10,32 +10,33 @@ use app\models\ShopOrder;
 <script src="/js/dashboard-shop.js" defer></script>
 <script src="/js/jquery.min.js"></script>
 <link rel="stylesheet" href="/css/dashboardStyle.css">
-<link rel="stylesheet" href="/css/dashboardStyleStaff.css">
+<!--<link rel="stylesheet" href="/css/dashboardStyleStaff.css">-->
 <div class="content">
     <div class="update-content">
-        <div class="core shop-item-table">
-            <h1 class="heading">Ongoing <span>Products</span></h1>
+        <div style="height: 750px" class="core shop-item-table">
+            <h1 class="heading">Shop <span>Products</span></h1>
             <div class="container-items">
 
-                <table class="table-item small-first-col">
+                <table id="shop-products" class="table-item small-first-col">
                     <thead>
                     <tr>
-                        <th></th>
-                        <th>Item ID</th>
-                        <th>Item Image</th>
-                        <th>Item Name</th>
+<!--                        <th></th>-->
+<!--                        <th>Item ID</th>-->
+                        <th>Image</th>
+                        <th>Name</th>
                         <th>Brand</th>
+                        <th>System Price</th>
+                        <th>Unit<br>Price</th>
+                        <th>Unit<br>Weight</th>
                         <th>Unit</th>
-                        <th>Unit Weight</th>
-                        <th>Max Price</th>
-                        <th>U/Price</th>
+                        <th>Min<br>Stock</th>
                         <th>Stock</th>
-                        <th>enable</th>
-                        <th>Action</th>
+                        <th>Status</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <?php $form = \app\core\form\Form::begin("","post",'',[""]); ?>
-                    <tbody id="item-table" class="item-table-body body-half-screen">
+                    <tbody style="" id="item-table" class="item-table-body body-half-screen">
 
 
                     </tbody>
@@ -47,17 +48,16 @@ use app\models\ShopOrder;
 
 
 
-        <div style="margin-left: 0" class="core" id="Update">
+        <div style="margin-left: 0;height: 750px" class="core" id="Update">
 
             <h1 class="heading">Update <span>Products</span></h1>
 
             <div style="border: 0" class="container-core ">
-
                 <div style="padding: 0" class="form-details register">
                     <div id = "updateItem">
 
                     </div>
-                    <?php $form = \app\core\form\Form::begin("","post","itemUpdate",[],"multipart/form-data",);?>
+                    <?php $form = \app\core\form\Form::begin("","post","itemUpdate-shop",[],"multipart/form-data",);?>
 
                     <input id="ItemID" name="ItemID" value="" hidden>
                     <input id="ShopID" name="ShopID" value="" hidden>
@@ -66,38 +66,26 @@ use app\models\ShopOrder;
                             <i class="fas fa-sort-amount-down"></i>
                             <?php echo $model->labels()['ItemID']?>
                         </label>
-
-                        <span class="fileds" id = "updateID">
-
-                </span>
+                        <span class="fileds" id = "updateID"></span>
                     </div>
                     <div class="inputBox">
                         <label for="Name">
                             <i class="fas fa-edit"></i>
                             <?php echo $model->labels()['Name']?>
                         </label>
-
-                        <span class="fileds" id = "updateName">
-
-                </span>
+                        <span class="fileds" id = "updateName"> </span>
                     </div>
                     <div class="inputBox">
                         <label for="Image">
                             <i class="far fa-images"></i>
                             <?php echo $model->labels()['Image']?>
-                        </label>
-
-                        <span class="image-box" >
-                    <img id="updateImage" >
-                </span>
-
-                    </div>
+                        </label> <span class="image-box" ><img id="updateImage" ></span></div>
                     <div class="inputBox">
                         <label for="Stock">
                             <i class="fas fa-boxes"></i>
                             <?php echo $model->labels()['Stock']?>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"Stock",10,10000,1);?>
+                        <?php echo $form->numberfieldonly($model,"Stock",'','',1);?>
                     </div>
 
                     <div class="inputBox">
@@ -107,7 +95,8 @@ use app\models\ShopOrder;
                         </label>
                         <?php
 
-                        echo $form->numberfieldonly($model,"UnitPrice",10,10000,1);?>
+                        echo $form->numberfieldonly($model,"UnitPrice",10,10000,1);
+                        echo $form->numberfieldonly($model,"MinStock",'','',1)->hiddenField();?>
                     </div>
 
                     <div class="inputBox">
@@ -125,8 +114,9 @@ use app\models\ShopOrder;
                                 </div>
                             </label>
                         </div>
-
                     </div>
+
+                    <?php echo $form->numberfieldonly($model,"Enabled",'','',1)->hiddenField();?>
 
                     <input id="Enabled" name="Enabled" hidden>
 

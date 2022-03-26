@@ -228,7 +228,7 @@ ul {
     padding: 0 1rem;
     margin: 0 1rem;
     border-radius: 0.5rem;
-    height: 32rem;
+    height: 33rem;
 }
 .home-content .core-order .container-items {
     width: 100%;
@@ -573,7 +573,6 @@ button{
     transition: 0.3s;
     border: 0px;
     background-color: #FFF;
-    align-items: top;
 }
 
 .home-content .core-order .container-items .ongoing-items .ubutton .btn-item:hover{

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/css/all.css">
 <link rel="stylesheet" href="/css/complaint.css">
 <link rel="stylesheet" href="/css/Register.css">
+<link rel="stylesheet" href="/css/template.css">
 <script src="/js/complaint.js" defer></script>
 
 <div class = "main-content" id="#complaint-section">
@@ -47,7 +48,7 @@
             <li class="form-line" id="">
                 <label class="form-label form-label-top " id="" > The complaint is regarding: </label>
                 <div id="" class="form-input-wide" >
-                    <?php echo $form->selectfieldonly($model,'Regarding',['0'=>'Shop','1'=>'Delivery'],["select","form-dropDown"]); ?>
+                    <?php echo $form->selectfieldonly($model,'Regarding',['0'=>'Shop','1'=>'Delivery','2'=>'Shop/Delivery'],["select","form-dropDown"]); ?>
                 </div>
             </li>
             <li class="form-line" id="">

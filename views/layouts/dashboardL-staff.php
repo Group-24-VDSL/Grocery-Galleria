@@ -16,10 +16,7 @@
     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 
 
-    <link
-            href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
-            rel="stylesheet"
-    />
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"  rel="stylesheet"  />
     <title>Dashboard-Staff</title>
     <?php include_once("utils/pwa.php"); ?>
 </head>
@@ -126,7 +123,7 @@
 <!-- Home section ends -->
 
 <script src="/js/dashboardScript.js"></script>
-<script src="/js/complaint.js"></script>
+<!--<script src="/js/complaint.js"></script>-->
 <script src="/js/register.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
