@@ -8,9 +8,13 @@ const URLItemAPI = host + "/api/item";
 const ItemTable = document.getElementById('item-table');
 const URLItemReport = host + '/dashboard/staff/itemreport';
 const URLItemWeekReport = host + '/dashboard/staff/getitemweekreport';
-
+const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
+const Status = ["Disable","Enable"];
 $(document).ready(function () {
     $(".btn-tab").click(function () {
+        const tabId = $(this).attr('id');
+        $('.btn-tab').removeClass('btn-select');
+        $('#'+tabId).toggleClass('btn-select');
         $('#item-table').empty();
         let URLFindItems = URLItemsAPI.concat($(this).data("href"));
         $.getJSON(URLFindItems, function (Items) {
@@ -23,11 +27,11 @@ $(document).ready(function () {
                 </li>
                 <li class="row-name">${Item.Name}</li>
                 <li class="row-brand">${Item.Brand}</li>
-                <li class="row-unit">${Item.Unit}</li>
+                <li class="row-unit">${UnitTag[Item.Unit]}</li>
                 <li class="row-minWeight">${Item.UWeight}</li>
                 <li class="row-mrp">${Item.MRP}</li>
                 <li class="row-IncStep">${Item.MaxCount}</li>
-                <li class="row-Status">${Item.Status}</li>
+                <li class="row-Status">${Status[Item.Status]}</li>
                 <li class="row-ubutton">
                     <button id="ItemID=${Item.ItemID}" data-href="?ItemID=${Item.ItemID}" class="btn-row">Update</button>
                 </li>

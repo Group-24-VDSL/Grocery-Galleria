@@ -88,7 +88,7 @@
         </div>
         <div class="profile-details">
             <i class="bx bx-user"></i>
-            <span class="user-name">Dilshan98</span>
+            <span id="userName" class="user-name">Dilshan98</span>
         </div>
     </nav>
 
@@ -154,5 +154,6 @@
     </div>
   </section>
 <script src="/js/dashboardScript.js"></script>
+<script src="/js/user.js"></script>
 </body>
 </html>
