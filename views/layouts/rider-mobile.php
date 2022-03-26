@@ -62,8 +62,8 @@
     <!--mobile navigation icons-->
     <div class="navigation-icons">
         <a class="navigation-item navigation-toggle" href="#menu-mobile"><i class="fas fa-bars"></i><span>Menu</span></a>
-        <a class="navigation-item" href="./rider/orders"><i class="fas fa-truck "></i><span>Orders</span></a>
-        <a class="navigation-item" href="./rider/profile"><i class="fas fa-user-circle"></i><span>Profile</span></a>
+        <a class="navigation-item" href="/rider/orders"><i class="fas fa-truck "></i><span>Orders</span></a>
+        <a class="navigation-item" href="/rider/profile"><i class="fas fa-user-circle"></i><span>Profile</span></a>
     </div>
     <!--mobile navigation sidebars-->
     <div class="navigation-sidebar" id="menu-mobile">
