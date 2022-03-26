@@ -4,6 +4,8 @@
 /** @var $customer * */
 /** @var $shopOrders * */
 /** @var $shopCount * */
+/** @var $shopStatus * */
+
 //echo '<pre>'; print_r($order); echo '</pre>';
 //echo '<pre>'; print_r($cart); echo '</pre>';
 //echo '<pre>'; print_r($customer); echo '</pre>';
@@ -14,7 +16,7 @@
 <link rel="stylesheet" href="/css/shop-order-details.css"/>
 <link rel="stylesheet" href="/css/order-details.css"/>
 
-
+<?php print_r($shopStatus); ?>
 <section class="section-home">
     <div class="home-content order-content">
         <div class="overview-boxes boxes-t2" id="">
@@ -95,6 +97,7 @@
         </div>
 
         <div style="height: auto" class="core">
+            <div style="display: flex">
             <div class="customer-details">
                 <h1 class="heading">Customer <span>Details</span></h1>
                 <table class="cus-details">
@@ -110,14 +113,46 @@
                     <tr>
                         <td><?php echo $customer->Name ?></td>
                         <td><?php echo $customer->Address ?></td>
-                        <td><?php echo $customer->Email ?></td>
-                        <td><?php echo $customer->ContactNo ?></td>
+                        <td><a href="mailto:<?php echo $customer->Email ?>"><?php echo $customer->Email ?></a></td>
+                        <td><a href="tel:<?php echo $customer->ContactNo ?>"><?php echo $customer->ContactNo ?></a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-
+            <div>
+                <h1 class="heading">Shop <span>Status</span></h1>
+                <table class="cus-details">
+                    <thead>
+                    <tr>
+                        <th>ShopID</th>
+                        <th>Shop Name</th>
+                        <th>Contact Number</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody class="">
+                    <?php foreach($shopStatus as $status){
+                        echo sprintf("
+                            <tr>
+                                    <td>%d</td>
+                                    <td>%s</td>
+                                    <td><a href='tel:%s'>%s</a></td>
+                                    <td>%s</td>
+                            </tr>",
+                        $status["ShopID"],
+                        $status["ShopName"],
+                        $status["ContactNo"],
+                        $status["ContactNo"],
+                        $status["Status"]? "Order Ready": "Order in Processing" ,
+                        );
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            </div>
         </div>
+
 <!--        <div style="height: auto" class="core">-->
 <!--            <div class="container-order-details">-->
 <!--                <h1 class="heading">Item <span>List</span></h1>-->

@@ -67,6 +67,17 @@ class DeliveryController extends Controller
         ]);
     }
 
+
+    public function viewriders(Request $request)
+    {
+        $this->setLayout('dashboard-delivery');
+        $riders = Rider::findAll(['City' => Application::getCity()]);
+        return $this->render('delivery/view-riders', [
+                'riders' => $riders
+            ]
+        );
+    }
+
     public function viewrider(Request $request)
     {
         $this->setLayout('dashboard-deli');
@@ -86,14 +97,19 @@ class DeliveryController extends Controller
     {
         $order = Orders::findOne(array_slice($request->getBody(), 1, null, true));
         $cartID = $order->CartID;
+        $orderID = $order->OrderID;
         $cart = Cart::findOne(['CartID' => $cartID]);
         $customer = Customer::findOne(['CustomerID' => $cart->CustomerID]);
         $orderSQL = "SELECT * FROM `ordercart` WHERE CartID=$cartID GROUP BY ShopID,ItemID";
         $shopCountSQl = "SELECT COUNT(DISTINCT(ShopID)) AS ShopCount FROM `ordercart` WHERE CartID=$cartID";
+        $shopStatusSQL = "SELECT sh.ShopID,sh.ShopName,sh.ContactNo,so.Status FROM `shop` AS sh INNER JOIN `shoporder` AS so ON sh.ShopID=so.ShopID WHERE sh.ShopID IN (SELECT oc.ShopID FROM `ordercart` AS oc WHERE CartID=$cartID); ";
         $orderStmt = DBModel::prepare($orderSQL);
+        $shopStatusStmt = DBModel::prepare($shopStatusSQL);
         $shopCountStmt = DBModel::prepare($shopCountSQl);
+        $shopStatusStmt->execute();
         $orderStmt->execute();
         $shopCountStmt->execute();
+        $shopStatus = $shopStatusStmt->fetchAll(\PDO::FETCH_ASSOC);
         $shopOrders = $orderStmt->fetchAll(\PDO::FETCH_ASSOC);
         $shopCount = $shopCountStmt->fetchColumn(\PDO::FETCH_DEFAULT);
         $this->setLayout('dashboard-delivery');
@@ -103,7 +119,8 @@ class DeliveryController extends Controller
                 'cart' => $cart,
                 'customer' => $customer,
                 'shopOrders' => $shopOrders,
-                'shopCount' => $shopCount
+                'shopCount' => $shopCount,
+                'shopStatus' => $shopStatus
             ]
         );
     }
