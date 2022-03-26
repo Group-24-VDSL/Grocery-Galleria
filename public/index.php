@@ -5,7 +5,6 @@ use app\controllers\APIController;
 use app\controllers\CartController;
 use app\controllers\CustomerController;
 use app\controllers\DeliveryController;
-use app\controllers\PaymentController;
 use app\controllers\ShopController;
 use app\controllers\StaffController;
 use app\controllers\TestController;
