@@ -78,7 +78,7 @@ $(document).ready(function () {
                                 <td id="MRP" class="row-mrp">${Item.MRP}</td>
                                 <td id="UPrice" class="row-uprice">Rs. <input onchange = "errorDisplay(${Shop.ItemID},${Shop.ShopID},${Item.Category}, ${Item.MRP})" class="input-space" type="number" id="uPrice_${Shop.ShopID}_${Shop.ItemID}" name="uPrice${Shop.ShopID}${Shop.ItemID}" min="1" max="${Item.MRP}" value="${Shop.UnitPrice}" step="5" data-unitPrice="${Shop.UnitPrice}"></td>
                                 <td id="Min_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"> ${Shop.MinStock} ${Unit}</td>                                                              
-                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input class="input-space"  type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="5" max="${MaxPrice}" value="${Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>    
+                                <td id="Field_stock_${Shop.ShopID}_${Shop.ItemID}" class="row-stock"><input class="input-space"  type="number" id="stock_${Shop.ShopID}_${Shop.ItemID}" name="stock${Shop.ShopID}${Shop.ItemID}" min="0" max="${MaxPrice}" value="${Stock}" step="5" data-stock="${Shop.Stock}"> ${Unit} </td>    
                                 <td id="Safety_stock_${Shop.ShopID}_${Shop.ItemID}"></td>
                                 <td id="ReOrder_point${Shop.ShopID}_${Shop.ItemID}"></td>
                                 <td id="Safety_${Shop.ShopID}_${Shop.ItemID}"></td>
@@ -233,6 +233,8 @@ function updateShopItem(){
         }
 
     })
+
+
 
     error_update.forEach(item=>{
         templateAlert('red', 'Item ' + item + ' is not updated (Unit price should be less than or equal to the System Price for grocery items).');

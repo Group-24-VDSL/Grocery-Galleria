@@ -18,9 +18,9 @@
             <div class="lineChart" ">
                 <canvas id="orderLinechart" height="120rem"  style="position: absolute; max-width:650px"></canvas>
                 <div class= "average" >
-                    Average Orders Per Day in Previous Month : <span id="order-linechart-average"></span>
+                    Average Revenue Per Day in Previous Month : <span id="order-linechart-average"></span>
                     <br>
-                    Total Orders in Previous Month  : <span id="order-linechart-sum"></span>
+                    Total Revenue in Previous Month  : <span id="order-linechart-sum"></span>
                 </div>
             </div>
         </div>
