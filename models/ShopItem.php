@@ -35,10 +35,12 @@ class ShopItem extends DBModel
             'ItemID'=>'Item ID',
             'Name'=>'Item Name',
             'Stock'=>'Item Stock',
-            'UPrice'=>'Item Unit Price',
+            'UPrice'=>'Item U/Price',
             'Enable'=>'Item Enable',
             'Image'=>'Item Image',
-            'MinStock'=>'Minimum Stock'
+            'MinStock'=>'MinStock',
+            'MinLead' => 'Min Lead Time',
+            'MaxLead' => 'Max LeadTime'
         ];
     }
 
@@ -52,7 +54,7 @@ class ShopItem extends DBModel
         return [
             'ShopID'=> [self::RULE_REQUIRED],
             'UnitPrice' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_IF_ONLY_THEN,'class'=> Item::class,'ValMatch'=>2,'CheckAttribute1'=>'MRP','matchAttribute1'=>'Category','where'=>'ItemID']],
-             'Stock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>5]],
+             'Stock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0]],
             'MinStock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0]],
         ];
     }

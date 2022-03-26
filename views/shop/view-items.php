@@ -12,26 +12,31 @@
     <div class="container-items">
         <div class="safety-details">
             <img src="https://img.icons8.com/emoji/16/26e07f/check-mark-button-emoji.png"/>
-            <span>: Item stock is Safe </span>
+            <span style="font-size: 13px">: Item stock is Safe </span>
             <br>
             <img src="https://img.icons8.com/office/16/000000/high-risk.png"/>
-            <span>: Item stock is not Safe </span>
+            <span style="font-size: 13px">: Item stock is not Safe </span>
+
+            <p style="font-size: 12px"><br>Kg : Kilogram  09 L : Liter  &#9 &#9  U : Units</p>
         </div>
+
+
 
         <table class="table-item small-first-col" id="ongoing-item-table">
             <thead>
             <tr>
 
-                <th>Item ID</th>
-                <th>Item Image</th>
-                <th>Item Name</th>
-                <th>Brand Name</th>
-                <th>Unit Weight</th>
-                <th>Max price</th>
-                <th>Unit Price</th>
-                <th>Stock</th>
-                <th>Safety Stock</th>
-                <th>Re Order Level</th>
+                <th style="font-weight: 550">Item ID</th>
+                <th style="font-weight: 550">Image</th>
+                <th style="font-weight: 550">Name</th>
+                <th style="font-weight: 550">Brand Name</th>
+                <th style="font-weight: 550">U\Weight</th>
+                <th style="font-weight: 550">Sys\Price<br>(LKR)</th>
+                <th style="font-weight: 550">U\Price<br>(LKR)</th>
+                <th style="font-weight: 550">Min Stock</th>
+                <th style="font-weight: 550">Stock</th>
+                <th style="font-weight: 550">Safety Stock</th>
+                <th style="font-weight: 550">Re Order Level</th>
                 <th></th>
             </tr>
             </thead>
