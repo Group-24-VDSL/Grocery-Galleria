@@ -40,3 +40,4 @@
         </div>
 
     </div>
+<script src="/js/delivery-order.js"></script>
