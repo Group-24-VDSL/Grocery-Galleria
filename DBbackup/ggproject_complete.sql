@@ -634,7 +634,35 @@ CREATE TABLE `verification` (
 
 INSERT INTO `verification` (`UserID`, `VerificationCode`, `UniqueID`) VALUES
 (11, 'yGM5xcT9Z2Si3d8EC4xBYdRM', 'GWxnwqSqH9xnaBB0614reDfJ');
+--
+-- Table structure for table `systemcost`
+--
 
+CREATE TABLE `systemcost` (
+                              `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                              `Cost` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `systemcost`
+--
+
+INSERT INTO `systemcost` (`Date`, `Cost`) VALUES
+                                              ('2021-12-25 02:19:40', 9500),
+                                              ('2022-01-25 02:19:12', 12500),
+                                              ('2022-02-25 02:19:12', 10000),
+                                              ('2022-03-25 02:18:08', 10000);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `systemcost`
+--
+ALTER TABLE `systemcost`
+    ADD PRIMARY KEY (`Date`);
+COMMIT;
 --
 -- Indexes for dumped tables
 --

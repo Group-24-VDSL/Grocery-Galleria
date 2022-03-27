@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/template.css">
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/template.js"></script>
@@ -91,7 +92,10 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span class="dashboard">Shop Dashboard</span>
         </div>
-
+        <div class="profile-details">
+            <i class="bx bx-user"></i>
+            <span id="userName" class="user-name">Dilshan98</span>
+        </div>
     </nav>
 
     <div class="home-content">
@@ -162,5 +166,27 @@
 
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
+<script src="/js/user.js"></script>
+<script>
+    const beamsClient = new PusherPushNotifications.Client({
+        instanceId: '420889f3-e55f-484e-8051-3be89e5fc4c4',
+    });
+
+    beamsClient.start()
+        .then(() => beamsClient.addDeviceInterest('shop'))
+        .then(() => console.log('Successfully registered and subscribed!'))
+        .catch(console.error);
+
+    if(checkNotificationPromise()) {
+        Notification.requestPermission()
+            .then((permission) => {
+                console.log("Hello");
+            })
+    } else {
+        Notification.requestPermission(function(permission) {
+            console.log("Hello");
+        });
+    }
+</script>
 </body>
 </html>

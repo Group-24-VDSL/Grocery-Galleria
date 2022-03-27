@@ -30,7 +30,10 @@
   background-color: white;
   border-bottom: 0.2rem solid var(--first-color-alt);
 }
-
+.tabs .btn-select{
+  background-color: white;
+  border-bottom: 0.2rem solid var(--first-color-alt);
+}
 .home-content .core {
   height: 640px;
 }

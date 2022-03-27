@@ -128,7 +128,7 @@
                 </div>
                 <div class="inputBox">
                     <label for="PasswordR"><i class="fas fa-key"></i>Re-enter password</label>
-                    <input type="passwordR" placeholder="Re-enter password" id="passwordR">
+                    <input type="password" placeholder="Re-enter password" id="passwordR">
                     <i class="iconSE fas fa-check-circle"></i>
                     <i class="iconSE fas fa-exclamation-circle"></i>
                     <small></small>

@@ -30,34 +30,14 @@
                 <span class="link-name">Delivery Dashboard</span>
             </a>
         </li>
-
-        <!--        <li>-->
-        <!--            <a href="">-->
-        <!--                <i class="bx bx-list-ul"></i>-->
-        <!--                <span class="link-name">Delivery list</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
-
         <li>
-            <a href="">
+            <a href="/dashboard/delivery/viewriders">
                 <i class='bx bx-cycling'></i>
                 <span class="link-name">Riders</span>
             </a>
         </li>
-        <!--        <li>-->
-        <!--            <a href="">-->
-        <!--                <i class="bx bxs-pie-chart-alt"></i>-->
-        <!--                <span class="link-name">Analytics</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
-        <!--        <li>-->
-        <!--            <a href="/dashboard/delivery/addrider">-->
-        <!--                <i class='bx bx-user-plus' ></i>-->
-        <!--                <span class="link-name">Register</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
         <li>
-            <a href="dashboard/delivery/profile">
+            <a href="/dashboard/delivery/profile">
                 <i class="bx bx-cog"></i>
                 <span class="link-name">Settings</span>
             </a>
@@ -77,77 +57,18 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span style="width: 350px" class="dashboard">Delivery Dashboard</span>
         </div>
-        <div>
-
-            <a href="javascript:history.back()" class="back-arrow"><i class="fas fa-step-backward"></i></a>
-
+        <div class="profile-details">
+            <i class="bx bx-user"></i>
+            <span id="userName" class="user-name"></span>
         </div>
-        <!--        <div class="profile-details">-->
-        <!--            <i class="bx bx-user"></i>-->
-        <!--            <span class="user-name">S.K.D</span>-->
-        <!--        </div>-->
     </nav>
 
     <div class="home-content">
-        <!--        <div class="overview-boxes">-->
-        <!--            <div class="box">-->
-        <!--                <div class="content">-->
-        <!--                    <div class="box-topic">Total Delivery</div>-->
-        <!--                    <div class="number">1276</div>-->
-        <!--                    <div class="indicator">-->
-        <!--                        <i class="bx bxs-up-arrow-square"></i>-->
-        <!--                        <span class="text">Up so far</span>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <i class='bx bx-cart-alt cart'></i> -->
-        <!--                <img src="https://img.icons8.com/external-konkapp-flat-konkapp/64/000000/external-delivery-logistic-and-delivery-konkapp-flat-konkapp.png"/>-->
-        <!--            </div>-->
-        <!--            <div class="box">-->
-        <!--                <div class="content">-->
-        <!--                    <div class="box-topic">Total Revenue</div>-->
-        <!--                    <div class="number">1276</div>-->
-        <!--                    <div class="indicator">-->
-        <!--                        <i class="bx bxs-up-arrow-square"></i>-->
-        <!--                        <span class="text">Up so far</span>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <img-->
-        <!--                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-revenue-money-and-economy-itim2101-lineal-color-itim2101.png"-->
-        <!--                />-->
-        <!--            </div>-->
-        <!--             <i class='bx bx-cart-alt cart'></i> -->
-        <!---->
-        <!--            <div class="box">-->
-        <!--                <div class="content">-->
-        <!--                    <div class="box-topic">Total Income</div>-->
-        <!--                    <div class="number">12,876</div>-->
-        <!--                    <div class="indicator">-->
-        <!--                        <i class="down bx bxs-down-arrow-square"></i>-->
-        <!--                        <span class="text">Down from today</span>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <img-->
-        <!--                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-financial-mobile-payment-itim2101-lineal-color-itim2101.png"-->
-        <!--                />-->
-        <!--            </div>-->
-        <!--            <div class="box">-->
-        <!--                <div class="content">-->
-        <!--                    <div class="box-topic">Total Orders</div>-->
-        <!--                    <div class="number">11,086</div>-->
-        <!--                    <div class="indicator">-->
-        <!--                        <i class="down bx bxs-down-arrow-square"></i>-->
-        <!--                        <span class="text">Down From Today</span>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <img-->
-        <!--                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-order-online-shopping-itim2101-lineal-color-itim2101.png"-->
-        <!--                />-->
-        <!--            </div>-->
-        <!--        </div>-->
         {{content}}
     </div>
 </section>
 <script src="/js/dashboardScript.js"></script>
+<script src="/js/user.js"></script>
 <script src="/js/delivery-order.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 

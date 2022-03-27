@@ -129,6 +129,7 @@
     ?>
 
     <div class="order-summary">
+
         <button class="btn btn-primary btn-lg margin-bottom">Mark as Completed</button>
         <button class="btn btn-secondary btn-lg margin-bottom">Submit a Issue</button>
     </div>
