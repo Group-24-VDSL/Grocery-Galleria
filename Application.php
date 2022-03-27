@@ -85,7 +85,6 @@ class Application
                 'profile',
                 'getRiders',
                 'getRider',
-                'getSessionUser',
                 'getRiderLocation',
                 'getRiderLocationData',
                 'deliveryInfo',
@@ -239,6 +238,7 @@ class Application
                 'getmonthrevenues',
                 'getShopItemList',
                 'getsales',
+                'getOrder',
             ],
             'Rider' => [
                 'vieworder',
