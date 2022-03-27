@@ -185,6 +185,7 @@ $app->router->post('/api/updatepassword',[ShopController::class,'changepassword'
 $app->router->post('/api/getsafetystock',[ShopController::class,'safetystock']);
 $app->router->get('/api/getshopcategory',[ShopController::class,'getShopCategory']);
 $app->router->get('/api/getshopid',[ShopController::class,'getShopID']);
+$app->router->get('/api/getorder',[ShopController::class,'getOrder']);
 
 $app->router->get('/api/getshopmonthlyorders',[ShopController::class,'shopOrderAnalytics']);
 $app->router->get('/api/getshoplastmonthorders',[ShopController::class,'getmonthorders']);

@@ -11,6 +11,7 @@ use app\core\Response;
 use app\models\Delivery;
 use app\models\Item;
 use app\models\OrderCart;
+use app\models\Orders;
 use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
@@ -18,6 +19,8 @@ use app\models\Staff;
 use app\models\TemporaryCart;
 use app\models\User;
 use SendGrid\Mail\TypeException;
+use Stripe\Order;
+
 /**
  * @throws TypeException
  */
@@ -83,23 +86,32 @@ class ShopController extends Controller
 
             $tempItem = Item::findOne(["ItemID"=>$itemID]);
 
-            if ($tempItem->Unit == 0 || $tempItem->Unit == 1) {
+//            $item->loadData($request->getBody());
+            if($tempItem) {
 
-                $item->Stock = $item->Stock / $tempItem->UWeight;
+                if ($tempItem->Unit == 0 || $tempItem->Unit == 1) {
 
-            }
+                    $item->Stock = $item->Stock / $tempItem->UWeight;
 
-//            Application::$app->logger->debug($item->loadData($request->getBody()));
+                }
 
-            if ($item->validate() && $item->update()) {
-                Application::$app->session->setFlash("success", "Item Updated Successfully.");
-                Application::$app->response->redirect("/dashboard/shop/products");
-            } else {
-                Application::$app->session->setFlash("warning", "Validation Failed.");
-                return $this->render("shop/core-products"
-                    , [
-                        'model' => $item
-                    ]);
+
+
+//            Application::$app->logger->info(var_export($request->getBody(),true));
+                Application::$app->logger->info(var_export($tempItem,true));
+                Application::$app->logger->info(var_export($item,true));
+
+                if ($item->validate('update') && $item->update()) {
+                    Application::$app->session->setFlash("success", "Item Updated Successfully.");
+                    Application::$app->response->redirect("/dashboard/shop/products");
+                } else {
+                    Application::$app->session->setFlash("warning", "Validation Failed.");
+                    return $this->render("shop/core-products"
+                        , [
+                            'model' => $item
+                        ]);
+                }
+
             }
         }
         return $this->render("shop/core-products"
@@ -232,12 +244,25 @@ class ShopController extends Controller
 
     public function additem(Request $request){
         $shopItem = new ShopItem();
+        $Item = new Item();
         $shopItem->ShopID = Application::getUserID() ;
 
         $this->setLayout('dashboardL-shop');
 
         if ($request->isPost()) {
+
             $shopItem->loadData($request->getBody());
+
+
+            Application::$app->logger->info(var_export($shopItem->ItemID,true));
+
+            $Item = Item::findOne(["ItemID"=>$shopItem->ItemID]) ;
+
+            if($Item->Unit ==0 || $Item->Unit ==1){
+                $shopItem->Stock = $shopItem->Stock/$Item->UWeight ;
+            }
+
+            Application::$app->logger->info(var_export($Item,true));
 
             if ($shopItem->validate() && $shopItem->save()) {
                 Application::$app->session->setFlash("success", "Item Saved.");
@@ -296,7 +321,9 @@ class ShopController extends Controller
             $orderUpdated = ShopOrder::findOne(['ShopID' => $ShopID, 'CartID' => $CartID]);
 
             $orderUpdated->Status = 1 ;
-            $orderUpdated->CompleteDate = date("Y-m-d");
+            $orderUpdated->CompleteDate = date("Y-m-d H:i:s");
+
+            Application::$app->logger->info(var_export($orderUpdated,true));
 
             if ($orderUpdated->validate('update') && $orderUpdated->update()) {
 
@@ -432,30 +459,51 @@ class ShopController extends Controller
 
 
         if ($request->isPost()) {
+
             $newObj->loadData($request->getBody());
+            Application::$app->logger->info(var_export($newObj, true));
             $newObj->ShopID = Application::getUserID();
+
             $newObj->Category = $shop->Category;
             $newObj->Address = $shop->Address;
             $newObj->City = $shop->City;
             $newObj->Suburb = $shop->Suburb;
             $newObj->Location = $shop->Location;
-            $newObj->PlaceID = $shop->PlaceID ;
-            $newObj->Password = 123;
-            $newObj->ConfirmPassword = 123 ;
+            $newObj->PlaceID = $shop->PlaceID;
+            $newObj->Password = 123456789;
+            $newObj->ConfirmPassword = 123456789;
 
-            if ($newObj->update() && $newObj->validate('update')){
+//            Application::$app->logger->info();
+
+            $Email = (string)$request->getBody()["Email"];
+            Application::$app->logger->info(var_export($Email,true));
+
+            $log = DBModel::query("SELECT UserID  FROM login WHERE Email =  '$Email'  AND UserID <>  $newObj->ShopID  ", \PDO::FETCH_ASSOC, true);
+
+            Application::$app->logger->info(var_export($log,true));
+
+            if (!$log) {
+                $newObj->Email =  $Email ;
+                if ($newObj->validate('update') && $newObj->update()) {
                     $newObj->singleProcedure('email_Update', $newObj->ShopID, $newObj->Email);
                     Application::$app->session->setFlash('success', 'Update Success');
                     Application::$app->response->redirect('/dashboard/shop/profilesettings');
+
+                } else {
+                    Application::$app->session->setFlash('danger', 'Update Failed');
+                    $this->setLayout("dashboardL-shop");
+                    return $this->render("shop/shop-profile-setting", [
+                        'model' => $newObj,
+                        'loginmodel' => $user
+                    ]);
+                }
+        }
+
+            else{
+                Application::$app->session->setFlash('danger', 'Email is not valid');
+                Application::$app->response->redirect('/dashboard/shop/profilesettings');
             }
-            else {
-                Application::$app->session->setFlash('danger', 'Update Failed');
-                $this->setLayout("dashboardL-shop");
-                return $this->render("shop/shop-profile-setting", [
-                    'model' => $newObj,
-                    'loginmodel' => $user
-                ]);
-            }
+
         }
         return $this->render("shop/shop-profile-setting", [
             'model' => $shop,
@@ -467,9 +515,7 @@ class ShopController extends Controller
     public function changepassword(Request $request, Response $response)
     {
         $json = $request->getJson();
-        var_dump("in password");
         if ($json) {
-            var_dump("in password");
             $tempuser = new User();
             $tempuser->loadData($json);
 
@@ -574,6 +620,28 @@ class ShopController extends Controller
         $this->setLayout('empty');
         $response->setContentTypeJSON();
         return json_encode(Application::getUserID());
+    }
+
+    public function getOrder(Request $request,Response $response)
+    {
+        $json = $request->getJson();
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+//        Application::$app->logger->info(var_export($request->getBody()['OrderID'],true));
+        $orderID = $request->getBody()['OrderID'] ;
+        $order = Orders::findOne(["OrderID" => $orderID]);
+        return json_encode($order);
+    }
+
+    public function getCitySubUrbs(Request $request,Response $response)
+    {
+        $json = $request->getJson();
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+//        Application::$app->logger->info(var_export($request->getBody()['OrderID'],true));
+        $orderID = $request->getBody()['OrderID'] ;
+        $order = Orders::findOne(["OrderID" => $orderID]);
+//        return json_encode(Application::getCity(),Application::getSuburb());
     }
 
 }

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../../css/all.css">
     <link rel="stylesheet" href="/css/dashoboardStyle.css">
     <link rel="stylesheet" href="/css/complaint.css">
+    <script src="/js/jquery.min.js"></script>
 <?php include_once("utils/pwa.php"); ?>
 </head>
 <body>

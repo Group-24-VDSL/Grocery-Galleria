@@ -20,20 +20,23 @@
             <label for="Username"><i class='bx bxs-category' ></i> Shop Category</label>
             <span class="fileds">
                 <?php
+                $category = '' ;
                 switch($model->Category ) {
                     case 0 :
-                        $category = "Grocery";
-                        break;
-
-                    case 1 :
                         $category = "Vegetable";
                         break;
 
-                    case 2 :
-                        $category = "Meat";
+                    case 1 :
+                        $category = 'Fruits';
                         break;
-                    case  3 :
-                        $category = "Fruits";
+                    case 2 :
+                        $category = 'Grocery';
+                        break;
+                    case 3 :
+                        $category = "Fish";
+                        break;
+                    case  4 :
+                        $category = "Meat";
                         break;
                 }
                 echo $category
