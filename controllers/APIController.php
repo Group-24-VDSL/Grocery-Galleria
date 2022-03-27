@@ -184,4 +184,11 @@ class APIController extends Controller
         return json_encode($citySubArr);
     }
 
+    public function getSessionUser(Request $request, Response $response)
+    {
+        $user = Application::getUser();
+        return json_encode($user);
+
+    }
+
 }

@@ -96,7 +96,10 @@ $app->router->post('/dashboard/staff/viewcomplaints',[StaffController::class,'vi
 $app->router->get('/dashboard/staff/vieworders',[StaffController::class,'viewOrders']);
 $app->router->get('/dashboard/staff/vieworder',[StaffController::class,'viewOrder']);
 $app->router->get('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
-$app->router->post('/dashboard/staff/vieworderdetails',[StaffController::class,'vieworderdetails']);
+$app->router->get('/dashboard/staff/getshoplist',[StaffController::class,'getShopList']);
+$app->router->get('/dashboard/staff/getordershopdetails',[StaffController::class,'getOrderShopDetails']);
+$app->router->get('/dashboard/staff/getordershopitemdetails',[StaffController::class,'getOrderShopItemDetails']);
+$app->router->get('/dashboard/staff/getshoplocations',[StaffController::class,'getShopLocations']);
 $app->router->get('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->post('/dashboard/staff/profilesettings',[StaffController::class,'profilesettings']);
 $app->router->get('/dashboard/staff/systemreports',[SystemReportController::class,'systemReports']);
@@ -217,6 +220,7 @@ $app->router->post('/rider/getlocation',[RiderController::class,'riderLocation']
 $app->router->get('/changePwd',[AuthController::class,'changePassword']);
 $app->router->post('/changePwd',[AuthController::class,'changePassword']);
 
+$app->router->get('/dashboard/staff/getsessionuser',[APIController::class,'getSessionUser']);
 $app->run();
 
 ?>

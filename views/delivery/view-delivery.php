@@ -9,7 +9,7 @@
     <h1 class="heading">System <span>Orders</span></h1>
     <div class="container-core delivery-core ">
         <ul class="tabs">
-            <li><a data-href="newdelivery" class="btn-tab" id="newDel">New</a></li>
+            <li><a data-func="" data-href="newdelivery" class="btn-tab" id="newDel">New</a></li>
             <li><a data-href="ondelivery" class="btn-tab">On-Going</a></li>
             <li><a data-href="pastdelivery" class="btn-tab">Past</a></li>
         </ul>

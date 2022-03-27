@@ -38,7 +38,7 @@ class Item extends DBModel
             'Name'=>'Product Name',
             'ItemImage'=>'Item Image',
             'Brand'=>'Brand (if any)',
-            'UWeight'=>'Unit Weight in gram',
+            'UWeight'=>'Unit Weight in Unit',
             'Unit'=>'Unit',
             'Category'=>'Category',
             'MRP'=>'Item Price',

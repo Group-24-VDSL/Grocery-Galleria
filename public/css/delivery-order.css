@@ -60,11 +60,11 @@
 
 /* Other options */
 
-.table-scroll.small-first-col td:first-child,
-.table-scroll.small-first-col th:first-child{
-    flex-basis:20%;
-    flex-grow:1;
-}
+/*.table-scroll.small-first-col td:first-child,*/
+/*.table-scroll.small-first-col th:first-child{*/
+/*    flex-basis:20%;*/
+/*    flex-grow:1;*/
+/*}*/
 
 /*.table-scroll tbody tr:nth-child(2n){*/
 /*    background-color: var(--home-color);*/

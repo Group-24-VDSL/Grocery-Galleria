@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="/css/template.css">
     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 
-
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"  rel="stylesheet"  />
     <title>Dashboard-Staff</title>
     <?php include_once("utils/pwa.php"); ?>
@@ -46,12 +45,12 @@
                 <span class="link-name">New</span>
             </a>
         </li>
-        <li>
-            <a href="/dashboard/staff/adduser">
-                <i class='bx bx-user-plus'></i>
-                <span class="link-name">Register</span>
-            </a>
-        </li>
+<!--        <li>-->
+<!--            <a href="/dashboard/staff/adduser">-->
+<!--                <i class='bx bx-user-plus'></i>-->
+<!--                <span class="link-name">Register</span>-->
+<!--            </a>-->
+<!--        </li>-->
         <li>
             <a href="/dashboard/staff/viewusers">
                 <i class="bx bxs-group"></i>
@@ -105,13 +104,13 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span style="width:300px" class="dashboard">Staff Dashboard</span>
         </div>
-        <div class="search-box">
-            <input type="search" id="" placeholder="Search.... "/>
-            <button class="bx bx-search search"></button>
-        </div>
+<!--        <div class="search-box">-->
+<!--            <input type="search" id="" placeholder="Search.... "/>-->
+<!--            <button class="bx bx-search search"></button>-->
+<!--        </div>-->
         <div class="profile-details">
             <i class="bx bx-user"></i>
-            <span class="user-name">Dilshan98</span>
+            <span id="userName" class="user-name"></span>
         </div>
     </nav>
 
@@ -125,6 +124,7 @@
 <script src="/js/dashboardScript.js"></script>
 <!--<script src="/js/complaint.js"></script>-->
 <script src="/js/register.js"></script>
+<script src="/js/user.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
         integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="

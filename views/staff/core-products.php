@@ -10,16 +10,16 @@
                 <button data-href="?Category=0" id="veg-tab-items" class="btn-tab">Vegetables</button>
             </li>
             <li>
-                <button data-href="?Category=1" class="btn-tab">Fruits</button>
+                <button data-href="?Category=1" id="fru-tab-items" class="btn-tab">Fruits</button>
             </li>
             <li>
-                <button data-href="?Category=2" class="btn-tab">Grocery</button>
+                <button data-href="?Category=2" id="gro-tab-items" class="btn-tab">Grocery</button>
             </li>
             <li>
-                <button data-href="?Category=3" class="btn-tab">Fish</button>
+                <button data-href="?Category=3" id="fish-tab-items" class="btn-tab">Fish</button>
             </li>
             <li>
-                <button data-href="?Category=4" class="btn-tab">Meat</button>
+                <button data-href="?Category=4" id="meat-tab-items" class="btn-tab">Meat</button>
             </li>
         </ul>
         <div class="table-header">
@@ -97,7 +97,7 @@
                     <i class="fas fa-weight-hanging"></i>
                     <?php echo $model->labels()['UWeight'] ?>
                 </label>
-                <?php echo $form->numberfieldonly($model, "UWeight", 10, 10000, 10); ?>
+                <?php echo $form->numberfieldonly($model, "UWeight", 0.1, 10000, 0.01); ?>
             </div>
 
             <div class="inputBox">
@@ -113,7 +113,7 @@
                     <i class="fas fa-coins"></i>
                     <?php echo $model->labels()['MRP'] ?>
                 </label>
-                <?php echo $form->numberfieldonly($model, "MRP", 1, 10000, 1); ?>
+                <?php echo $form->numberfieldonly($model, "MRP", 1, 10000, 0.01); ?>
             </div>
             <div class="inputBox">
                 <label>
