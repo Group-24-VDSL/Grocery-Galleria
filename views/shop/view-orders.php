@@ -30,8 +30,7 @@
                         <tr>
 
                             <th>Order ID</th>
-                            <th>Order Date</th>
-                            <th>Order Time</th>
+                            <th>Order Date/Time</th>
                             <th>Total (LKR)</th>
                             <th>View</th>
                         </tr>
@@ -49,9 +48,9 @@
                         <thead>
                         <tr>
                             <th>Order ID</th>
-                            <th>Order Date</th>
-                            <th>Order Time</th>
+                            <th>Order Date/Time</th>
                             <th>Total (LKR)</th>
+                            <th>Completed Date/Time</th>
                             <th>View</th>
                         </tr>
                         </thead>
