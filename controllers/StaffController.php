@@ -209,7 +209,7 @@ class StaffController extends Controller
     public function getShopLocations(Request $request)
     {
         $cartID = $request->getBody()['CartID'];
-        $shopIDsSQL = "SELECT odc.ShopID, sp.Location FROM `ordercart` odc
+        $shopIDsSQL = "SELECT odc.ShopID,sp.ShopName,sp.ContactNo, sp.Location FROM `ordercart` odc
         INNER JOIN `shop` sp ON sp.ShopID = odc.ShopID WHERE CartID=$cartID GROUP BY ShopID;";
         $shopLocations = DBModel::query($shopIDsSQL, fetch_type: \PDO::FETCH_ASSOC, fetchAll: true);
         return json_encode($shopLocations);

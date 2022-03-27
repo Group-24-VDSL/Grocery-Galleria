@@ -142,4 +142,6 @@
 
     </section>
 </div>
+<script src="/js/register.js"></script>
 <script src="/js/citySuburb.js"></script>
+

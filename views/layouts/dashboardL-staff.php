@@ -45,12 +45,12 @@
                 <span class="link-name">New</span>
             </a>
         </li>
-<!--        <li>-->
-<!--            <a href="/dashboard/staff/adduser">-->
-<!--                <i class='bx bx-user-plus'></i>-->
-<!--                <span class="link-name">Register</span>-->
-<!--            </a>-->
-<!--        </li>-->
+        <li>
+            <a href="/dashboard/staff/adduser">
+                <i class='bx bx-user-plus'></i>
+                <span class="link-name">Register</span>
+            </a>
+        </li>
         <li>
             <a href="/dashboard/staff/viewusers">
                 <i class="bx bxs-group"></i>
@@ -179,7 +179,6 @@
 
 <script src="/js/dashboardScript.js"></script>
 <!--<script src="/js/complaint.js"></script>-->
-<script src="/js/register.js"></script>
 <script src="/js/user.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
