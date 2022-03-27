@@ -23,6 +23,7 @@ class TestController extends Controller
 
     public function test(Request $request){
         echo Application::getUserID();
+        var_dump(0<=0);
     }
 
 

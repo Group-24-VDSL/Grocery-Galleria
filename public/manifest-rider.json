@@ -5,7 +5,7 @@
   "background_color": "#000000",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
+  "scope": "/rider/",
   "start_url": "/rider/order",
   "icons": [
     {

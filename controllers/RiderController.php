@@ -10,6 +10,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\Orders;
 use app\models\Rider;
+use MongoDB\Driver\Query;
 
 class  RiderController extends Controller
 {
@@ -47,60 +48,88 @@ class  RiderController extends Controller
             'model' => $user
         ]);
     }
-    public function vieworder(Request $request)
+    public function vieworder(Request $request,Response $response)
     {
         $this->setLayout('rider-mobile');
-        $orderid = filter_var((int)$request->getBody()["id"],FILTER_SANITIZE_NUMBER_INT);
+        if($request->isPost()){
+            $json=$request->getJson();
+            if($json){
+                $orderid = $json["orderid"];
+                $cartid = $json["cartid"];
 
-        if(is_null($orderid)){
-            return new NotFoundException();
-        }else{
-            $order = DBModel::query("SELECT RiderID,OrderID,CartID FROM `delivery` WHERE OrderID=$orderid AND CartID=$orderid AND Status=0",\PDO::FETCH_ASSOC);
-            if($order){
-                if(Application::getUserID() == $order["RiderID"]){ //authorized rider views the order
-                    $cartid = $order["CartID"];
-                    $cart = DBModel::query("SELECT cus.CustomerID,cus.Address FROM `cart` AS c JOIN `customer` AS cus ON c.CustomerID=cus.CustomerID WHERE CartID=$cartid  ",\PDO::FETCH_ASSOC);
-                    $cartitems = DBModel::query("SELECT ShopID,ItemID,Quantity,Total FROM `ordercart` WHERE CartID=$cartid ORDER BY ShopID",\PDO::FETCH_ASSOC,true);
-                    $shopdetails = [];
-                    $itemdetails = [];
-                    $cartitemsfinal = []; //where we pass the items
-                    $uniqueshops = array_unique(array_map(function ($i){return $i["ShopID"];},$cartitems));
-                    foreach($cartitems as $cartitem){
-                        $shopid = $cartitem['ShopID'];
-                        $itemid = $cartitem['ItemID'];
-                        if(!isset($shopdetails[$shopid])){
-                            $details = DBModel::query("SELECT Name,Address,ContactNo,ShopName,Location,PlaceID FROM `shop` WHERE ShopID=$shopid",\PDO::FETCH_ASSOC);
-                            $shopdetails[$shopid] = $details;
-                        }
-                        if(!isset($itemdetails[$itemid])){
-                            $item = DBModel::query("SELECT Name,ItemImage,Brand,UWeight FROM `item` WHERE ItemID=$itemid",\PDO::FETCH_ASSOC);
-                            $itemdetails[$itemid]=$item;
-                        }
-                        $cartitemsfinal[$shopid][$itemid] = [$cartitem["Quantity"],$cartitem["Total"]];
+                $orderStatus = DBModel::query("Update `delivery` SET Status=2 WHERE OrderID=$orderid AND CartID=$cartid",\PDO::FETCH_ASSOC);
+                if($orderStatus){
+                    $riderid=Application::getUserID();
+                    $riderStatus = DBModel::query("Update `deliveryrider` SET Status=0 WHERE RiderID=$riderid ",\PDO::FETCH_ASSOC);
+                    if($riderStatus){
+                        Application::$app->session->setFlash('success','Order Completed');
+                        return $response->json('{"url":"/rider/order" }');
                     }
-
-                    $cartdetails = DBModel::query("SELECT * FROM `orders` WHERE CartID=$cartid and OrderID=$orderid",\PDO::FETCH_ASSOC);
-//                    print_r($cartdetails);
-                    $customerid=$cart["CustomerID"];
-                    $customer = DBModel::query("SELECT Name,ContactNo,Suburb,Location,PlaceID FROM `customer` WHERE CustomerID=$customerid",\PDO::FETCH_ASSOC);
-
-                    return $this->render('rider/view-order',[
-                        'orderid' => $orderid,
-                        'cartid' => $cartid,
-                        'cartdetails' => $cartdetails,
-                        'cart' => $cart,
-                        'customer' => $customer,
-                        'shopdetails' => $shopdetails,
-                        'itemdetails' => $itemdetails,
-                        'uniqueshops' => $uniqueshops,
-                        'cartitemsfinal' => $cartitemsfinal
-                    ]);
-
+                    Application::$app->session->setFlash('danger','Rider is not Updated');
+                    return $response->json('{"url":"/rider/order" }');
                 }
             }
+            Application::$app->session->setFlash('danger','Json is invalid');
+            return $response->json('{"url":"/rider/order" }');
+        }elseif ($request->isGet()) {
+            $orderid = filter_var((int)$request->getBody()["orderid"], FILTER_SANITIZE_NUMBER_INT);
+            $cartid = filter_var((int)$request->getBody()["cartid"], FILTER_SANITIZE_NUMBER_INT);
 
+            if (is_null($orderid)) {
+                return new NotFoundException();
+            } else {
+                $order = DBModel::query("SELECT RiderID,OrderID,CartID FROM `delivery` WHERE OrderID=$orderid AND CartID=$cartid AND Status=0", \PDO::FETCH_ASSOC);
+                if ($order) {
+                    if (Application::getUserID() == $order["RiderID"]) { //authorized rider views the order
+                        $cartid = $order["CartID"];
+                        $cart = DBModel::query("SELECT cus.CustomerID,cus.Address FROM `cart` AS c JOIN `customer` AS cus ON c.CustomerID=cus.CustomerID WHERE CartID=$cartid  ", \PDO::FETCH_ASSOC);
+                        $cartitems = DBModel::query("SELECT ShopID,ItemID,Quantity,Total FROM `ordercart` WHERE CartID=$cartid ORDER BY ShopID", \PDO::FETCH_ASSOC, true);
+                        $shopdetails = [];
+                        $itemdetails = [];
+                        $cartitemsfinal = []; //where we pass the items
+                        $uniqueshops = array_unique(array_map(function ($i) {
+                            return $i["ShopID"];
+                        }, $cartitems));
+                        foreach ($cartitems as $cartitem) {
+                            $shopid = $cartitem['ShopID'];
+                            $itemid = $cartitem['ItemID'];
+                            if (!isset($shopdetails[$shopid])) {
+                                $details = DBModel::query("SELECT Name,Address,ContactNo,ShopName,Location,PlaceID FROM `shop` WHERE ShopID=$shopid", \PDO::FETCH_ASSOC);
+                                $shopdetails[$shopid] = $details;
+                            }
+                            if (!isset($itemdetails[$itemid])) {
+                                $item = DBModel::query("SELECT Name,ItemImage,Brand,UWeight FROM `item` WHERE ItemID=$itemid", \PDO::FETCH_ASSOC);
+                                $itemdetails[$itemid] = $item;
+                            }
+                            $cartitemsfinal[$shopid][$itemid] = [$cartitem["Quantity"], $cartitem["Total"]];
+                        }
+
+                        $cartdetails = DBModel::query("SELECT * FROM `orders` WHERE CartID=$cartid and OrderID=$orderid", \PDO::FETCH_ASSOC);
+                        $customerid = $cart["CustomerID"];
+                        $customer = DBModel::query("SELECT Name,ContactNo,Suburb,Location,PlaceID FROM `customer` WHERE CustomerID=$customerid", \PDO::FETCH_ASSOC);
+                        $deliveryStatus = "SELECT Status FROM `delivery` WHERE OrderID=$orderid AND CartID=$cartid";
+                        $deliveryStatusStmt = DBModel::prepare($deliveryStatus);
+                        $deliveryStatusStmt->execute();
+                        $orderStatus = $deliveryStatusStmt->fetchColumn();
+
+                        return $this->render('rider/view-order', [
+                            'orderid' => $orderid,
+                            'cartid' => $cartid,
+                            'cartdetails' => $cartdetails,
+                            'cart' => $cart,
+                            'customer' => $customer,
+                            'shopdetails' => $shopdetails,
+                            'itemdetails' => $itemdetails,
+                            'uniqueshops' => $uniqueshops,
+                            'cartitemsfinal' => $cartitemsfinal,
+                            'orderStatus' => $orderStatus
+                        ]);
+
+                    }
+                }
+
+            }
         }
-
     }
     public function order()
     {
@@ -112,6 +141,7 @@ class  RiderController extends Controller
             $result = DBModel::query("SELECT CartID,TotalCost FROM `orders` WHERE OrderID=$orderid",\PDO::FETCH_ASSOC);
             $order["TotalCost"] = $result["TotalCost"];
             $cartid = $result["CartID"];
+            $order["CartID"] = $result["CartID"];
             $order["Address"] = DBModel::query("SELECT cus.Address FROM `cart` AS c JOIN `customer` AS cus ON c.CustomerID=cus.CustomerID WHERE c.CartID=$cartid",\PDO::FETCH_COLUMN);
         }
 
