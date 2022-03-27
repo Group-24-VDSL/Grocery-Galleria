@@ -57,7 +57,7 @@ class  RiderController extends Controller
                 $orderid = $json["orderid"];
                 $cartid = $json["cartid"];
 
-                $orderStatus = DBModel::query("Update `delivery` SET Status=2 WHERE OrderID=$orderid AND CartID=$cartid",\PDO::FETCH_ASSOC);
+                $orderStatus = DBModel::query("Update `delivery` SET Status=2, CompTime=CURRENT_TIMESTAMP WHERE OrderID=$orderid AND CartID=$cartid",\PDO::FETCH_ASSOC);
                 if($orderStatus){
                     $riderid=Application::getUserID();
                     $riderStatus = DBModel::query("Update `deliveryrider` SET Status=0 WHERE RiderID=$riderid ",\PDO::FETCH_ASSOC);

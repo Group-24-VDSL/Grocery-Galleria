@@ -67,8 +67,7 @@ $(function () {
                     position: new google.maps.LatLng(locationArr[0],locationArr[1]),
                     icon: shopicon,
                 });
-                infoWindows[i] = new google.maps.InfoWindow({
-                    content: "<h4>"+shopLocation.ShopName+"</h4><p><strong>ContactNo: </strong><a href='tel:"+shopLocation.ContactNo+"'>"+shopLocation.ContactNo+"</a></p>",
+                infoWindows[i] = new google.maps.InfoWindow({                    content: "<h4>"+shopLocation.ShopName+"</h4><p><strong>ContactNo: </strong><a href='tel:"+shopLocation.ContactNo+"'>"+shopLocation.ContactNo+"</a></p>",
                 });
                 shopMarkers[i].setMap(map);
                 shopMarkers[i].addListener("mouseover", () => {
