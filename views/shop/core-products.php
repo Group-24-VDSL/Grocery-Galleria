@@ -90,7 +90,7 @@ use app\models\ShopOrder;
                         </label>
                         <?php
 
-                        echo $form->numberfieldonly($model,"UnitPrice",'1','',1);?>
+                        echo $form->numberfieldonly($model,"UnitPrice",'','',0.05);?>
                     </div>
                     <div class="inputBox">
                         <label class="input-text"  for="Stock">
@@ -98,7 +98,7 @@ use app\models\ShopOrder;
                             <?php echo $model->labels()['Stock']?>
                             <span id="stock" class="lable-unit "></span>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"Stock",'1','',1.00);?>
+                        <?php echo $form->numberfieldonly($model,"Stock",'1.00','',0.05);?>
                     </div>
 
                     <div class="inputBox">
@@ -107,7 +107,7 @@ use app\models\ShopOrder;
                             <?php echo $model->labels()['MinStock']?>
                             <span id="min-stock" class="lable-unit min-stock"></span>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"MinStock",'1','',1);?>
+                        <?php echo $form->numberfieldonly($model,"MinStock",'1','',0.05);?>
                     </div>
 
 

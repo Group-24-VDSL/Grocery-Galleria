@@ -92,10 +92,6 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span class="dashboard">Shop Dashboard</span>
         </div>
-        <div class="profile-details">
-            <i class="bx bx-user"></i>
-            <span id="userName" class="user-name">Dilshan98</span>
-        </div>
     </nav>
 
     <div class="home-content">

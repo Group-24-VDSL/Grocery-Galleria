@@ -1,4 +1,4 @@
-const host = window.location.origin; //http://domainname
+let host = window.location.origin; //http://domainname
 const ShopCategory =  host + "/api/getshopcategory";
 const ShopID =  host + "/api/getshopid";
 const URLGetItem = host + "/api/item" ;
@@ -12,7 +12,7 @@ $(function () {
     let UnitSymbol = ' ';
     let MaxPrice = '' ;
     let systemItems = [];
-    const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
+    const UnitTag = ["Kg", "L", "Unit"];
 
 
         $.getJSON(ShopID, function (shopID) {
@@ -47,13 +47,10 @@ $(function () {
                                     UnitSymbol = 'Kg';
                                     break;
                                 case 1 :
-                                    UnitSymbol = 'g';
+                                    UnitSymbol = 'L';
                                     break;
                                 case 2 :
-                                    UnitSymbol = 'l';
-                                    break;
-                                case 3 :
-                                    UnitSymbol = 'Units';
+                                    UnitSymbol = 'Unit';
                                     break;
                             }
 
@@ -85,12 +82,9 @@ $(function () {
                                             UnitSymbol = 'Kg';
                                             break;
                                         case 1 :
-                                            UnitSymbol = 'g';
+                                            UnitSymbol = 'L';
                                             break;
                                         case 2 :
-                                            UnitSymbol = 'l';
-                                            break;
-                                        case 3 :
                                             UnitSymbol = 'Unit';
                                             break;
                                     }
