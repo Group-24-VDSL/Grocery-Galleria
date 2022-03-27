@@ -1,4 +1,4 @@
-const host = window.location.origin; //http://domainname
+let host = window.location.origin; //http://domainname
 const ShopCategory =  host + "/api/getshopcategory";
 const ShopID =  host + "/api/getshopid";
 const URLGetItem = host + "/api/item" ;

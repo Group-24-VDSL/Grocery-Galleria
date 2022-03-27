@@ -31,7 +31,7 @@
                                     <td><span class="chart-item-name" id="chart-item-name"></span></td>
                                 </tr>
                                 <tr>
-                                    <td><div class='box-red'></div> &ensp;- Total Income in Month (LKR)</td>
+<!--                                    <td><div class='box-red'></div> &ensp;- Total Income in Month (LKR)</td>-->
                                     <td><div class='box-green'></div> &ensp;- Total Sales Amount in Month <span id="unit-tag"></span></td>
                                     <td><div class='box-lightgreen'></div> &ensp;- Average Sales Amount in Month <span id="unit-tag"></span></td>
                                 </tr>
@@ -47,9 +47,9 @@
                 </div>
 
                 <div class= "average" >
-                    Average Sales Per Month in Previous Year : <span id="order-linechart-average"></span> Kg
+                    Average Sales Per Month in Previous Year : <span id="order-linechart-average"><span id="unit-tag"></span> </span>
                     <br>
-                    Total Sales in Previous Year  : <span id="order-linechart-sum"></span> Kg
+                    Total Sales in Previous Year  : <span id="order-linechart-sum"></span>
                 </div>
             </div>
 
