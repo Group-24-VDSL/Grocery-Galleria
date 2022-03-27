@@ -16,7 +16,7 @@
 <?php include_once("utils/sessions.php"); ?>
 <header>
     <div class="header-1">
-        <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
+        <a href="/" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
         <a href="javascript:history.back()" class="back"><i class="fas fa-step-backward"></i></a>
     </div>
 </header>
