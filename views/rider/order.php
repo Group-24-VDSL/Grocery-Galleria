@@ -17,16 +17,17 @@
             <tbody>
                 <?php
                 foreach($orders as $order){
-                    echo sprintf("<tr>
+                echo sprintf("<tr>
                     <td>%d</td>
                     <td>%s</td>
                     <td>Rs.%.2f</td>
-                    <td><button type='button' class='btn btn-primary btn-icon-only order-view-button' data-href='/rider/vieworder?id=%d'><i class='far fa-eye'></i></button></td>
+                    <td><button type='button' class='btn btn-primary btn-icon-only order-view-button' data-href='/rider/vieworder?orderid=%d&cartid=%d'><i class='far fa-eye'></i></button></td>
                 </tr></a>",
                     $order["OrderID"],
                     $order["Address"],
                     $order["TotalCost"],
-                    $order["OrderID"]
+                    $order["OrderID"],
+                    $order["CartID"]
                     );
                 }
                 ?>

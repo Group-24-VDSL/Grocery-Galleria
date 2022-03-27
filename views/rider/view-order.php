@@ -8,6 +8,8 @@
 /** @var array $itemdetails */
 /** @var array $uniqueshops */
 /** @var array $cartitemsfinal */
+/** @var array $cartitemsfinal */
+/** @var $orderStatus */
 ?>
 
 <div class="main-content">
@@ -130,7 +132,24 @@
 
     <div class="order-summary">
 
-        <button class="btn btn-primary btn-lg margin-bottom">Mark as Completed</button>
+        <?php
+        if(!$orderStatus) {
+            echo "<button id='mark-as-completed' data-cartid=$cartid data-orderid=$orderid  class='btn btn-primary btn-lg margin-bottom'>Mark as Completed</button>";
+        }else{
+            echo "<button class='btn btn-secondary btn-lg margin-bottom' disabled>Marked as Completed</button>";
+        }
+        ?>
         <button class="btn btn-secondary btn-lg margin-bottom">Submit a Issue</button>
     </div>
 </div>
+<script>
+    $('#mark-as-completed').click(function (){
+        let cartid=$('#mark-as-completed').data('cartid');
+        let orderid=$('#mark-as-completed').data('orderid');
+        let obj = {"cartid": cartid, "orderid":orderid }
+        $.post(window.location.origin+window.location.pathname,JSON.stringify(obj)).success(function(res){
+            // let response = JSON.parse(res);
+            console.log(res);
+        });
+    })
+</script>
