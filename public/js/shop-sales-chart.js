@@ -15,9 +15,7 @@ function itemDropDownBtn() {
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn-item')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
-
         document.getElementsByClassName("dropbtn-item");
-
         var i;
         for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
@@ -28,14 +26,10 @@ window.onclick = function(event) {
 }
 
 
-
 $( document ).ready(function() {
 
     $.getJSON(URLShopItems, function (items) {
-
         items.forEach(item=>{
-            console.log(item[0].ItemID)
-
             const ItemRow = document.createElement('tr');
             ItemRow.onclick = function() {getchart(item[0].ItemID, item[0].ItemImage,item[0].Name)};
             ItemRow.innerHTML = `
@@ -45,10 +39,8 @@ $( document ).ready(function() {
                 `
                     ItemTable.appendChild(ItemRow);
         })
-
     });
 });
-
 
 
 function getchart(ItemID,ItemImage,ItemName){
@@ -56,11 +48,21 @@ function getchart(ItemID,ItemImage,ItemName){
     document.getElementById("chart-item-name").innerHTML= ItemName;
     const URLGetItemSales = URLItemSales.concat("?ItemID=").concat(ItemID) ;
     console.log(URLGetItemSales);
+
     $.getJSON(URLGetItemSales, function (sales) {
+        let unit
+        let unitTag = '';
+
+        switch (parseInt(sales['unit'][0]['Unit'])){
+            case 0 : unit = parseFloat(sales['unit'][0]['UWeight']) ; unitTag = 'Kg'; break ;
+            case 1 : unit = parseFloat(sales['unit'][0]['UWeight']) ; unitTag = 'L'; break ;
+            case 2 : unit = 1;  unitTag = 'Units'; break ;
+            default: unit = 1 ; break ;
+        }
+
 
         let xValues = [] ;
         let yValues = [] ;
-
         let a = Object.values(sales)[0]
         console.log(a);
         console.log(Object.keys(sales).length)
@@ -69,39 +71,28 @@ function getchart(ItemID,ItemImage,ItemName){
                 yValues.push(0);
             }
             else {
-                yValues.push(parseInt(Object.values(sales)[i]["sales"]))
+                yValues.push(parseInt(Object.values(sales)[i]["sales"])*unit)
             }
-
         }
-        xValues = Object.keys(sales);
 
+        xValues = Object.keys(sales);
         let average = []
+
         for (let i = 0; i < yValues.length; i++) {
             average.push((yValues[i]/12).toFixed(2))
         }
-
-
 
         const sum = yValues.reduce((a, b) => {
             return a + b;
         });
 
-
         var ctx = document.getElementById("salesChart").getContext("2d");
-        document.getElementById("order-linechart-average").innerHTML = (sum/12).toFixed(2);
-        document.getElementById("order-linechart-sum").innerHTML = parseFloat(sum,2);
+        document.getElementById("order-linechart-average").innerHTML = (sum/12).toFixed(2) + " "+ unitTag;
+        document.getElementById("order-linechart-sum").innerHTML = parseFloat(sum,2) + " "+ unitTag;
 
             var data = {
                 labels:xValues,
                 datasets: [
-                    {
-                        fill:false,
-                        fillColor: "#A52A2A",
-                        strokeColor: "#A52A2A",
-                        lineTension: 0,
-
-                        data: average
-                    },
                     {
                         fill:false,
                         label: "",
@@ -117,45 +108,10 @@ function getchart(ItemID,ItemImage,ItemName){
                         fillColor: "#90ee90",
                         strokeColor: "#90ee90",
                         lineTension: 0,
-
                         data: average
                     },
-
                 ]
             };
-
-        //     var data2 = {
-        //         labels:xValues,
-        //         datasets: [
-        //             {
-        //                 fill:false,
-        //                 fillColor: "rgba(220,220,220,0)",
-        //                 strokeColor: "green",
-        //                 pointColor: "green",
-        //                 pointStrokeColor: "green",
-        //                 lineTension: 0,
-        //                 data: yValues
-        //             },
-        //         ]
-        //
-        //     };
-        //
-        // var data3 = {
-        //     labels:xValues,
-        //     datasets: [
-        //         {
-        //             fill:false,
-        //             fillColor: "rgba(220,220,220,0)",
-        //             strokeColor: "green",
-        //             pointColor: "green",
-        //             pointStrokeColor: "green",
-        //             lineTension: 0,
-        //             data: yValues
-        //         },
-        //     ]
-        //
-        // };
-
             new Chart(ctx).Bar(data, {
                 onAnimationComplete: function () {
                     var targetCtx = document.getElementById("salesChartAxis").getContext("2d");

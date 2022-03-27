@@ -164,6 +164,7 @@ function shopItemUpdate(itemID, shopID){
             $('img[id=updateImage]').attr('src',Item.ItemImage);
             $('input[id=Stock]').val(ShopItem.Stock*Item.UWeight);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
+            $('input[id=UnitPrice]').setAttribute('value',ShopItem.UnitPrice);
             $('input[id=UnitPrice]').attr('max',maxPrice);
             $('input[id=MinLeadTime]').val(ShopItem.MinLeadTime);
             $('input[id=MaxLeadTime]').val(ShopItem.MaxLeadTime);
@@ -172,9 +173,11 @@ function shopItemUpdate(itemID, shopID){
 
             if (ShopItem.Enabled == 1){
                 document.getElementById("checkbox1").checked = true;
+                $('input[id=Enabled]').val(1);
             }
             else {
                 document.getElementById("checkbox1").checked = false;
+                $('input[id=Enabled]').val(0);
             }
 
             $("#checkbox1").on('change', function(){
