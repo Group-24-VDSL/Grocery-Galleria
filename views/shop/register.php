@@ -82,20 +82,12 @@
     <div class="inputBox">
         <label for="city"><i class="fas fa-map-marked-alt"></i>
             <?php echo $model->labels()['City'] ?></label>
-        <?php echo $form->selectfieldonly($model, 'City',
-            ['Colombo' => 'Colombo',
-                'Maharagama' => 'Maharagama',
-                'Gampaha' => 'Gampaha',
-                'Nawala' => 'Nawala']); ?>
+        <?php echo $form->selectfieldonly($model, 'City'); ?>
     </div>
     <div class="inputBox">
         <label for="suburb"><i class="fas fa-street-view"></i>
             <?php echo $model->labels()['Suburb'] ?></label>
-        <?php echo $form->selectfieldonly($model, 'Suburb',
-            ['Colombo' => 'Colombo',
-                'Maharagama' => 'Maharagama',
-                'Gampaha' => 'Gampaha',
-                'Nawala' => 'Nawala']); ?>
+        <?php echo $form->selectfieldonly($model, 'Suburb'); ?>
     </div>
     <div class="inputBox">
         <label for="description"><i class="fas fa-hashtag"></i>
@@ -114,3 +106,4 @@
     </div>
     <?php echo $form->end(); ?>
 </section>
+<script src="/js/citySuburb.js" defer></script>

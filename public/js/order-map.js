@@ -56,14 +56,16 @@ $(function () {
 
     const URLShopLocations = host + '/dashboard/staff/getshoplocations';
     const cartID = $('#CartID').val();
+    console.log(cartID);
+    const URLGetShopLocations = URLShopLocations.concat("?CartID=" + cartID);
+    console.log(URLGetShopLocations);
 
-    let shop_icon = {
+    let shopicon = {
         url: host + '/img/shop_icon.png', // url
         scaledSize: new google.maps.Size(25, 25), // scaled size
         origin: new google.maps.Point(0, 0), // origin
         anchor: new google.maps.Point(0, 0) // anchor
     };
-    const URLGetShopLocations = URLShopLocations.concat("?CartID=" + cartID);
     $.getJSON(URLGetShopLocations, function (shopLocations) {
         console.log(URLGetShopLocations)
         shopMarkers.forEach(shopMarker => {
@@ -73,12 +75,12 @@ $(function () {
         infoWindows = [];
         shopLocations.forEach((shopLocation, i) => {
             shopMarkers[i] = new google.maps.Marker({
-                position: new google.maps.LatLng(shopLocation['lat'], shopLocation['lng']),
-                icon: shop_icon,
+                position: new google.maps.LatLng(shopLocation.Location.lat, shopLocation.Location.lng),
+                icon: shopicon,
             });
+        shopMarkers[i].setMap(map);
         });
 
-        shopMarkers[i].setMap(map);
 
         shopMarkers[i].addListener("mouseover", () => {
             infoWindows[i].open({

@@ -7,6 +7,9 @@ const deliveryURL = host+'/dashboard/delivery/'
 
 $(document).ready(function (){
     $('.btn-tab').click(function (){
+        const tabId = $(this).attr('id');
+        $('.btn-tab').removeClass('btn-select');
+        $('#' + tabId).toggleClass('btn-select');
         $('#Delivery-info-rows').empty();
         const getDeliveryInfoURL = deliveryURL.concat($(this).data("href"));
         console.log(getDeliveryInfoURL)
