@@ -256,7 +256,7 @@ class StaffController extends Controller
                 if ($checktemp) { //there exists such item
                     $checktemp->Status =1;
                     if ($checktemp->validate('update') && $checktemp->update()) {
-                        return $response->json('{"success":"ok"}');
+                        $response->json('{"success":"ok"}');
                         Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
 
                     }

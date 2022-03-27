@@ -16,7 +16,7 @@ const getUrlParameter = function getUrlParameter(sParam) {
 };
 
 
-const UnitTag = ["Kg", "g", "L", "Unit"];
+const UnitTag = ["Kg", "L", "Unit"];
 const ShopType = ["Vegetable", "Fruit", "Grocery", "Fish", "Meat"];
 
 
