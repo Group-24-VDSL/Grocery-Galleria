@@ -115,7 +115,63 @@
     </nav>
 
     <div class="home-content">
+        <div class="overview-boxes">
+            <div class="box">
+                <div class="content">
+                    <div class="box-topic">Total Orders</div>
+                    <div id="totOrders" class="number"></div>
+                    <div class="indicator">
+                        <i class="bx bxs-up-arrow-square"></i>
+                        <span class="text">Up so far</span>
+                    </div>
+                </div>
+                <!-- <i class='bx bx-cart-alt cart'></i> -->
+                <img
+                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-delivery-box-shopping-and-ecommerce-itim2101-lineal-color-itim2101.png"
+                />
+            </div>
+            <div class="box">
+                <div class="content">
+                    <div class="box-topic">Total Revenue</div>
+                    <div id="totRevenue" class="number"></div>
+                    <div class="indicator">
+                        <i class="bx bxs-up-arrow-square"></i>
+                        <span class="text">Up so far</span>
+                    </div>
+                </div>
+                <img
+                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-revenue-money-and-economy-itim2101-lineal-color-itim2101.png"
+                />
+            </div>
+            <!-- <i class='bx bx-cart-alt cart'></i> -->
 
+            <div class="box">
+                <div class="content">
+                    <div class="box-topic">Total Shops</div>
+                    <div id="totShops" class="number"></div>
+                    <div class="indicator">
+                        <i class="bx bxs-up-arrow-square"></i>
+                        <span class="text">Up so far</span>
+                    </div>
+                </div>
+                <img
+                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-financial-mobile-payment-itim2101-lineal-color-itim2101.png"
+                />
+            </div>
+            <div class="box">
+                <div class="content">
+                    <div class="box-topic">Total Riders</div>
+                    <div id="totRiders" class="number"></div>
+                    <div class="indicator">
+                        <i class="bx bxs-up-arrow-square"></i>
+                        <span class="text">Up so far</span>
+                    </div>
+                </div>
+                <img
+                        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-order-online-shopping-itim2101-lineal-color-itim2101.png"
+                />
+            </div>
+        </div>
         {{content}}
     </div>
 </section>

@@ -50,6 +50,7 @@
                     <i class="fas fa-weight-hanging"></i>
                     <?php echo $model->labels()['UWeight']?>
                 </label>
+                <small style="color: var(--first-color); font-size:15px ">(Eg:- Kg: 0.25kg, Gram: 300g, Litre: 1L, ml: 250ml, Unit: 1)</small>
                 <?php echo $form->numberfieldonly($model,"UWeight",0.1,10000,step: 0.01);?>
             </div>
 
@@ -57,15 +58,15 @@
                 <label for="MaxCount">
                     <i class="fas fa-weight-hanging"></i>
                     <?php echo $model->labels()['MaxCount']?>
-                </label
-                >
+                </label>
+                <small style="color: var(--first-color); font-size:15px ">(Maximum selling count per order)</small>
                 <?php echo $form->numberfieldonly($model,"MaxCount",1,100,1);?>
             </div>
             <div class="inputBox">
                 <label for="MRP">
                     <i class="fas fa-coins"></i>
                     <?php echo $model->labels()['MRP']?>
-                    <small style="color: red; font-size:15px ">( Applicable only for Grocery items! )</small>
+                    <small style="color: var(--first-color); font-size:15px ">(Applicable only for Grocery items!)</small>
                 </label>
                 <?php echo $form->numberfieldonly($model,"MRP",1,10000,0.01);?>
             </div>

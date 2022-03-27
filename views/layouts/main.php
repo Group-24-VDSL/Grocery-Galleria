@@ -16,7 +16,7 @@
 <!-- Header start -->
 <header>
     <div class="header-1">
-        <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
+        <a href="/" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
         <?php if (\app\core\Application::isGuest()):?>
         <a href="/login" class="logout"><i class="fas fa-sign-out-alt"></i></a>
         <?php else:; ?>

@@ -16,7 +16,7 @@
 <!-- Header start -->
 <header>
     <div class="header-1">
-        <a href="#" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
+        <a href="/" class="logo"><img class="logo-img" src="/img/logo2.png" alt="" srcset=""></a>
         <a href="javascript:history.back()" class="backward"><i class="fas fa-step-backward"></i></a>
     </div>
     <!-- Vege banner start -->
