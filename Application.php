@@ -231,6 +231,7 @@ class Application
                 'getmonthrevenues',
                 'getShopItemList',
                 'getsales',
+                'getOrder',
             ],
             'Rider' => [
                 'vieworder',
