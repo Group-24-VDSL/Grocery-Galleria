@@ -37,6 +37,7 @@ class StaffController extends Controller
         $user = new Staff(); // staff instance
         $customer = new Customer();
         $shop = new Shop();
+        $delivery = new DeliveryStaff();
         $user->loadData($request->getBody());
         if ($request->isPost()) {
             $userid = AuthController::register($request, 'Staff');
@@ -64,7 +65,8 @@ class StaffController extends Controller
         return $this->render("staff/register", [
             'staff' => $user,
             'customer' => $customer,
-            'shop' => $shop
+            'shop' => $shop,
+            'delivery' => $delivery
         ]);
 
     }
@@ -209,7 +211,7 @@ class StaffController extends Controller
     public function getShopLocations(Request $request)
     {
         $cartID = $request->getBody()['CartID'];
-        $shopIDsSQL = "SELECT odc.ShopID, sp.Location FROM `ordercart` odc
+        $shopIDsSQL = "SELECT odc.ShopID,sp.ShopName,sp.ContactNo, sp.Location FROM `ordercart` odc
         INNER JOIN `shop` sp ON sp.ShopID = odc.ShopID WHERE CartID=$cartID GROUP BY ShopID;";
         $shopLocations = DBModel::query($shopIDsSQL, fetch_type: \PDO::FETCH_ASSOC, fetchAll: true);
         return json_encode($shopLocations);
@@ -256,7 +258,7 @@ class StaffController extends Controller
                 if ($checktemp) { //there exists such item
                     $checktemp->Status =1;
                     if ($checktemp->validate('update') && $checktemp->update()) {
-                        return $response->json('{"success":"ok"}');
+                        $response->json('{"success":"ok"}');
                         Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
 
                     }

@@ -1,4 +1,4 @@
-let host = window.location.origin; //http://domainname
+//http://domainname
 
 const URLGetUser = '/dashboard/staff/getsessionuser';
 

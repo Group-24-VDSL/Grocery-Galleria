@@ -11,6 +11,7 @@ use app\core\Response;
 use app\models\Cart;
 use app\models\Customer;
 use app\models\Delivery;
+use app\models\DeliveryStaff;
 use app\models\OrderCart;
 use app\models\Orders;
 use app\models\Rider;
@@ -23,6 +24,45 @@ use SendGrid\Mail\To;
 
 class DeliveryController extends Controller
 {
+    public function register(Request $request, Response $response)
+    {
+        $this->setLayout('dashboardL-delivery');
+        $user = new Staff(); // staff instance
+        $customer = new Customer();
+        $shop = new Shop();
+        $delivery = new DeliveryStaff();
+        // staff instance
+        $user->loadData($request->getBody());
+        if ($request->isPost()) {
+            $userid = AuthController::register($request, 'Delivery');
+            if ($userid) {
+                $user->StaffID = $userid; //save the UserID = CustomerID
+                if ($user->validate() && $user->save()) {
+                    Application::$app->session->setFlash('success', 'Registration Success');
+                    //send user verification
+                    $status = AuthController::verificationSend($user->StaffID, $user->Name, $user->Email);
+                    if ($status) {
+                        Application::$app->response->redirect('/dashboard/staff/addstaff');
+                    }
+                } else {
+                    Application::$app->session->setFlash('danger', 'Registration Failed');
+                    $this->setLayout('dashboardL-staff');
+                    return $this->render("staff/register", ['model' => $user]);
+                }
+            } else {
+                Application::$app->session->setFlash('danger', 'Registration Failed ');
+                $this->setLayout('dashboardL-staff');
+                return $this->render("staff/register", ['model' => $user]);
+            }
+
+        }
+        return $this->render("staff/register", [
+            'staff' => $user,
+            'customer' => $customer,
+            'shop' => $shop
+        ]);
+    }
+
     public function riderRegister(Request $request)
     {
         $this->setLayout('dashboard-delivery');

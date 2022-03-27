@@ -15,7 +15,7 @@ const getUrlParameter = function getUrlParameter(sParam) {
     return false;
 };
 
-const host = window.location.origin; //http://domainname
+let host = window.location.origin; //http://domainname
 
 //Api links
 const URLShopsAPI = host + "/api/shops";
@@ -31,14 +31,24 @@ const URLGetCitySuburb = host + '/api/getcitysuburb';
 
 const galleryBox = document.getElementById('gallery-box');
 $.getJSON(URLGetCitySuburb, function (data) {
-    // $.getJSON("getCity.json", function (cityData) {
-    //     $('#city-name').html(
-    //         cityData.forEach(city => {
-    //                 console.log(city.cityName)
-    //             }
-    //         ))
-    // })
-    // $('#city-name').html(data.City)
+    $.getJSON(host+"/js/getCity.json", function (cityData) {
+        let arr = cityData.filter(obj => {
+            return obj.cityID===data.City;
+        })
+
+        $('#city-name').html(
+            arr[0].cityName
+        );
+
+        let arr1 = arr[0].suburbs.filter(obj=> {
+            return obj.cityID === data.City && obj.suburbID === data.Suburb;
+        })
+        $('#suburb-name').html(
+            arr1[0].suburbName
+        );
+
+    })
+    $('#city-name').html(data.City)
     const URLFindShops = URLShopsAPI.concat("?Category=").concat(ShopCategory).concat("&City=" + data.City + "&Suburb=" + data.Suburb);
     console.log(URLFindShops);
     $.getJSON(URLFindShops, function (Shops) {

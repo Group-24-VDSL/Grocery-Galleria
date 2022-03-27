@@ -75,6 +75,7 @@ class Application
                 'vieworder',
                 'viewDelivery',
                 'assignrider',
+                'getSessionUser',
                 'viewdelivery',
                 'viewnewdelivery',
                 'viewongoingdelivery',
@@ -85,6 +86,7 @@ class Application
                 'profile',
                 'getRiders',
                 'getRider',
+                'getShopLocations',
                 'getRiderLocation',
                 'getRiderLocationData',
                 'deliveryInfo',
@@ -106,6 +108,7 @@ class Application
                 'getShop',
                 'getAllShop',
                 'getCart',
+                'getSessionUser',
                 'addToCart',
                 'deleteFromCart',
                 'paymentSuccess',
@@ -194,6 +197,7 @@ class Application
                 'getShop',
                 'getAllShop',
                 'getOrders',
+                'getSessionUser',
                 'getOrderCart',
                 'itemReport',
                 'salesReportCurrent',
@@ -357,6 +361,5 @@ class Application
         $this->session->remove('role');
         $this->session->remove('city');
         $this->session->remove('suburb');
-        return true;
     }
 }

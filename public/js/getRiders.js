@@ -18,14 +18,15 @@ let infoWindows=[];
 $(function(){
         // Create the script tag, set the appropriate attributes
         let script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwYJrYLyEaQGRUYEnh10GS5luyYnt2a5U&callback=initMap';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpaxUjC3jwFxrFVyFaeH5t2pvFQhRoGSY&callback=initMap';
         // script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap';
         script.async = true;
 
 
         window.initMap = function () {
 
-
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer();
 
             let infoWindow = new google.maps.InfoWindow({
                 content: "Customer",
@@ -33,10 +34,14 @@ $(function(){
 
             let customer = $(document.getElementById("map")).data('location');
 
+
             map = new google.maps.Map(document.getElementById("map"), {
                 center: customer,
                 zoom: 16,
             });
+
+            directionsRenderer.setMap(map);
+
             let cus_icon = {
                 url: host + '/img/human_icon.png', // url
                 scaledSize: new google.maps.Size(25,25), // scaled size
@@ -60,6 +65,56 @@ $(function(){
             myMarker.addListener("mouseout", () => {
                 infoWindow.close();
             });
+
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+            const URLShopLocations = host + '/dashboard/staff/getshoplocations';
+            const cartID = params.CartID; //get the get
+            const URLGetShopLocations = URLShopLocations.concat("?CartID=" + cartID);
+
+            let shopicon = {
+                url: host + '/img/shop_icon.png', // url
+                scaledSize: new google.maps.Size(25, 25), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
+            let shopMarkers = []
+            let shopPos = []
+            let infoWindows = [];
+            let regex = /[+-]?\d+(\.\d+)?/g; //match floating points
+            $.getJSON(URLGetShopLocations, function (shopLocations) {
+
+                shopLocations.forEach((shopLocation, i) => {
+
+                    let locationArr = shopLocation.Location.match(regex).map(function(v) { return parseFloat(v); }); //each shop location array
+
+                    shopPos.push({location:new google.maps.LatLng(locationArr[0],locationArr[1]),stopover:true});
+
+                    shopMarkers[i] = new google.maps.Marker({
+                        position: new google.maps.LatLng(locationArr[0],locationArr[1]),
+                        icon: shopicon,
+                    });
+                    infoWindows[i] = new google.maps.InfoWindow({  content: "<h4>"+shopLocation.ShopName+"</h4><p><strong>ContactNo: </strong><a href='tel:"+shopLocation.ContactNo+"'>"+shopLocation.ContactNo+"</a></p>",
+                    });
+                    shopMarkers[i].setMap(map);
+                    shopMarkers[i].addListener("mouseover", () => {
+                        infoWindows[i].open({
+                            anchor: shopMarkers[i],
+                            map,
+                            shouldFocus: false,
+                        });
+                    });
+                    shopMarkers[i].addListener("mouseout", () => {
+                        infoWindows[i].close();
+                    });
+                });
+                calculateAndDisplayRoute(directionsService, directionsRenderer, map,customer,shopPos);
+
+
+
+            });
+
 
         }
 
@@ -124,6 +179,37 @@ function mapUpdateRiders(){
     return true;
 }
 
+function calculateAndDisplayRoute(directionsService, directionsRenderer,map,customer,waypoints) {
+    //get the rider location as origin
+            console.log(customer);
+            console.log(waypoints);
+
+                //shops
+                let mapz = document.getElementById("map");
+                //customer
+                let destination = new google.maps.LatLng(customer['lat'], customer['lng']);
+
+                console.log(destination.lat())
+
+                let [head, ...rest] = waypoints;
+                console.log(head.location.lat());
+                console.log();
+                directionsService
+                    .route({
+                        origin:head.location,
+                        destination:destination,
+                        waypoints:rest,
+                        optimizeWaypoints: true,
+                        travelMode: google.maps.TravelMode.DRIVING
+                    })
+                    .then((response) => {
+                        directionsRenderer.setDirections(response);
+                        console.log(response)
+                    })
+                    .catch((e) => console.log("Directions request failed due to " + e));
+
+
+}
 
 $(document).ready(function () {
 
