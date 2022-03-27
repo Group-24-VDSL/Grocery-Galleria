@@ -34,7 +34,7 @@
 
         <div class="inputBox">
             <label for="Stock"><i class="fas fa-coins"></i>Current Stock <span id="unit-tag"></span> </label>
-            <?php echo $form->numberfieldonly($model, "Stock", '0','','0.5','') ?>
+            <?php echo $form->numberfieldonly($model, "Stock", '1','','0.5','') ?>
         </div>
         <div class="inputBox">
             <label for="MinStock"><i class="fas fa-coins"></i>Minimum Stock</label>

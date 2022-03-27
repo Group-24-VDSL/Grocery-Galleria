@@ -41,9 +41,9 @@
             <div class="lineChart">
                 <canvas id="revenueLinechart" height="120rem"  style="position: absolute; max-width:650px"></canvas>
                 <div class= "average" >
-                    Average Orders Per Day in Previous Month : Rs. <span id="revenue-linechart-average"></span>
+                    Average Revenue Per Day in Previous Month : Rs. <span id="revenue-linechart-average"></span>
                     <br>
-                    Total Orders in Previous Month  : Rs. <span id="revenue-linechart-sum"></span>
+                    Total Revenue in Previous Month  : Rs. <span id="revenue-linechart-sum"></span>
                 </div>
             </div>
         </div>

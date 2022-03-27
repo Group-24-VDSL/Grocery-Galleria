@@ -11,7 +11,7 @@ class ShopOrder extends DBModel
     public string $Date = '';
     public float $ShopTotal = 0;
     public int $Status = 0 ;
-    public string $CompleteDate = '';
+    public ?string $CompleteDate = null ;
 
     public static function tableName(): string
     {
