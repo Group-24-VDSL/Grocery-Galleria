@@ -9,6 +9,7 @@ use Exception;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Pusher\Pusher;
+use Pusher\PushNotifications\PushNotifications;
 use \RandomLib\Factory;
 use RandomLib\Generator;
 use SecurityLib\Strength;
@@ -33,6 +34,7 @@ class Application
     public StripeClient $stripe;
     public From $emailfrom;
     public Pusher $pusher;
+    public PushNotifications $pushnotifications;
     public Logger $logger;
     public View $view;
     public AuthMiddleware $authMiddleware;
@@ -83,6 +85,7 @@ class Application
                 'profile',
                 'getRiders',
                 'getRider',
+                'getSessionUser',
                 'getRiderLocation',
                 'getRiderLocationData',
                 'deliveryInfo',
@@ -265,6 +268,13 @@ class Application
 
 
         $this->pusher = new Pusher($_ENV['PUSHER_APP_KEY'], $_ENV['PUSHER_APP_SECRET'], $_ENV['PUSHER_APP_ID'], ['cluster' => $_ENV['PUSHER_APP_CLUSTER'], 'useTLS' => true]);
+        $this->pushnotifications = new \Pusher\PushNotifications\PushNotifications(
+            array(
+                "instanceId" => $_ENV['PUSHER_NOTI_ID'],
+                "secretKey" => $_ENV['PUSHER_NOTI_PRIMARY'],
+            )
+        );
+
 
         $userID = Application::$app->session->get('user');
         if ($userID) {
@@ -289,7 +299,6 @@ class Application
     public static function getUserID(){
         return self::$app->session->get('user');
     }
-
 
 
     public static function getUserRole(){

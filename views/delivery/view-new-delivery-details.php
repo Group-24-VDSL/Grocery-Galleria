@@ -4,6 +4,8 @@
 /** @var $customer * */
 /** @var $shopOrders * */
 /** @var $shopCount * */
+/** @var $shopStatus * */
+
 //echo '<pre>'; print_r($order); echo '</pre>';
 //echo '<pre>'; print_r($cart); echo '</pre>';
 //echo '<pre>'; print_r($customer); echo '</pre>';
@@ -95,6 +97,7 @@
         </div>
 
         <div style="height: auto" class="core">
+            <div style="display: flex">
             <div class="customer-details">
                 <h1 class="heading">Customer <span>Details</span></h1>
                 <table class="cus-details">
@@ -110,13 +113,44 @@
                     <tr>
                         <td><?php echo $customer->Name ?></td>
                         <td><?php echo $customer->Address ?></td>
-                        <td><?php echo $customer->Email ?></td>
-                        <td><?php echo $customer->ContactNo ?></td>
+                        <td><a href="mailto:<?php echo $customer->Email ?>"><?php echo $customer->Email ?></a></td>
+                        <td><a href="tel:<?php echo $customer->ContactNo ?>"><?php echo $customer->ContactNo ?></a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-
+            <div>
+                <h1 class="heading">Shop <span>Status</span></h1>
+                <table class="cus-details">
+                    <thead>
+                    <tr>
+                        <th>ShopID</th>
+                        <th>Shop Name</th>
+                        <th>Contact Number</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody class="">
+                    <?php foreach($shopStatus as $status){
+                        echo sprintf("
+                            <tr>
+                                    <td>%d</td>
+                                    <td>%s</td>
+                                    <td><a href='tel:%s'>%s</a></td>
+                                    <td>%s</td>
+                            </tr>",
+                        $status["ShopID"],
+                        $status["ShopName"],
+                        $status["ContactNo"],
+                        $status["ContactNo"],
+                        $status["Status"]? "Order Ready": "Order in Processing" ,
+                        );
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            </div>
         </div>
         <div class="core">
             <div class="dynamic-map">
@@ -160,179 +194,6 @@
             </div>
         </div>
     </div>
-        <div style="height: auto" class="core">
-            <div class="container-order-details">
-                <h1 class="heading">Item <span>List</span></h1>
-                <div>
-                    <div class="item-list">
-                        <div class="complete-section">
-                            <table class="shop-details">
-                                <tbody>
-                                <tr>
-                                    <th>Shop<br>ID</th>
-                                    <td>: S12340</td>
-                                </tr>
-                                <tr>
-                                    <th>Shop<br>Name</th>
-                                    <td>: Samarasekara Stores</td>
-                                </tr>
-                                <tr>
-                                    <th>Shop<br>Category</th>
-                                    <td>: Grocery</td>
-                                </tr>
-                                <tr>
-                                    <th>Shop<br>Address</th>
-                                    <td>: No. 23/30, Bambalapitiya Dr, Colombo 03</td>
-                                </tr>
-                                <tr>
-                                    <th>Shop<br>Location</th>
-                                    <td>: <a class="location-link" href="#">Shop Location</a></p></td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                        <table class="table-scroll small-first-col">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Item ID</th>
-                                <th>Item Image</th>
-                                <th>Item Name</th>
-                                <th>U/Weight</th>
-                                <th>U/Price(LKR)</th>
-                                <th>Quantity</th>
-                                <th>Price(LKR)</th>
-                            </tr>
-                            </thead>
-                            <tbody class="body-half-screen">
-                            <tr>
-                                <td>1.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>5.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>6.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>7.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>8.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>9.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-                            <tr>
-                                <td>10.</td>
-                                <td>V00011</td>
-                                <td><img class="item-img" src="img/Pic914006.jpg"></td>
-                                <td>Big Onion</td>
-                                <td>500g</td>
-                                <td>80.00</td>
-                                <td>2</td>
-                                <td>320.00</td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                        <div class="complete-section">
-
-                            <table class="staff-details">
-                                <tbody>
-                                <tr>
-                                    <th>Shop Total (LKR) :</th>
-                                    <td>2500.00</td>
-                                </tr>
-                                <tr>
-                                    <th>Shop Weight :</th>
-                                    <td>5 Kg</td>
-                                </tr>
-                                <tr>
-                                    <th>Number of Items:</th>
-                                    <td>15</td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 </section>
 <script src="/js/getRiders.js"></script>
 <script src="/js/order.js"></script>

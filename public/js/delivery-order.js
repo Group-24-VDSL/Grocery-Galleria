@@ -15,7 +15,7 @@ $(document).ready(function (){
         console.log(getDeliveryInfoURL)
         $.getJSON(getDeliveryInfoURL,function (deliveries){
             deliveries.forEach(delivery=>{
-                const deliveryURL = deliverInfoURL+"?OrderID="+delivery.OrderID;
+                const deliveryURL = deliverInfoURL+"?OrderID="+delivery.OrderID+"&CartID="+delivery.CartID;
                 const orderRow = document.createElement('tr');
                 orderRow.innerHTML = `
                         <td>${delivery.OrderID}</td>
@@ -23,9 +23,9 @@ $(document).ready(function (){
                         <td>${delivery.custName}</td>
                         <td>${delivery.Note}</td>
                         <td>${delivery.custContact}</td>
-                        <td>${delivery.RiderID}</td>
-                        <td>${delivery.RiderName}</td>
-                        <td>${delivery.RiderContact}</td>
+                        <td>${delivery.RiderID??"Not Assigned"}</td>
+                        <td>${delivery.RiderName??"Not Assigned"}</td>
+                        <td>${delivery.RiderContact??"Not Assigned"}</td>
                         <td>${delivery.DeliveryCost}</td>
                         <td>${delivery.TotalCost}</td>
                         <td> <a class="order-view" href=${deliveryURL}>
