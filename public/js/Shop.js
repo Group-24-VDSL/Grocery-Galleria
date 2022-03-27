@@ -120,10 +120,10 @@ function addtocart(item) {
         var obj = {"ItemID": itemidvalue, "ShopID": shopidvalue, "Quantity": passingvalue}; //keys and values should be enclosed in double quotes
 
         $.post(URLAddtoCartAPI, JSON.stringify(obj)).done(function (res){
-            if(JSON.parse(res)['success'] === 'ok'){
+            if(JSON.parse(res)['success'] == 'ok'){
                 templateAlert('green', 'Item updated.');
             }else{
-                templateAlert('red', 'Item update failed.');
+                templateAlert('red','Item update failed.');
             }
         });
     }else{

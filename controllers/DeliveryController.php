@@ -102,7 +102,7 @@ class DeliveryController extends Controller
         $customer = Customer::findOne(['CustomerID' => $cart->CustomerID]);
         $orderSQL = "SELECT * FROM `ordercart` WHERE CartID=$cartID GROUP BY ShopID,ItemID";
         $shopCountSQl = "SELECT COUNT(DISTINCT(ShopID)) AS ShopCount FROM `ordercart` WHERE CartID=$cartID";
-        $shopStatusSQL = "SELECT sh.ShopID,sh.ShopName,sh.ContactNo,so.Status FROM `shop` AS sh INNER JOIN `shoporder` AS so ON sh.ShopID=so.ShopID WHERE sh.ShopID IN (SELECT oc.ShopID FROM `ordercart` AS oc WHERE CartID=$cartID); ";
+        $shopStatusSQL = "SELECT DISTINCT sh.ShopID,sh.ShopName,sh.ContactNo,so.Status FROM `shop` AS sh INNER JOIN `shoporder` AS so ON sh.ShopID=so.ShopID WHERE sh.ShopID IN (SELECT oc.ShopID FROM `ordercart` AS oc WHERE CartID=$cartID ); ";
         $orderStmt = DBModel::prepare($orderSQL);
         $shopStatusStmt = DBModel::prepare($shopStatusSQL);
         $shopCountStmt = DBModel::prepare($shopCountSQl);
@@ -120,7 +120,7 @@ class DeliveryController extends Controller
                 'customer' => $customer,
                 'shopOrders' => $shopOrders,
                 'shopCount' => $shopCount,
-                'shopStatus' => $shopStatus
+                'shopStatus' => $shopStatus,
             ]
         );
     }
@@ -136,7 +136,7 @@ class DeliveryController extends Controller
 //        return $this->render('delivery/view-complete-delivery-details.php');
 //    }
 
-    public function newDelivery()
+    public function newDelivery(Request $request)
     {
 
         $city = Application::getCity();
@@ -152,7 +152,7 @@ class DeliveryController extends Controller
 
     }
 
-    public function onDelivery()
+    public function onDelivery(Request $request)
     {
 
         $city = Application::getCity();
@@ -165,7 +165,7 @@ class DeliveryController extends Controller
                     del.OrderID = od.OrderID
                     INNER JOIN deliveryrider delR ON
                     delR.RiderID = del.RiderID
-                    WHERE od.Status=1 AND del.Status=1 AND od.City=$city";
+                    WHERE od.Status=1 AND del.Status=0 AND od.City=$city";
         $onDeliveries = DBModel::query($querySQL, \PDO::FETCH_ASSOC, true);
         return json_encode($onDeliveries);
 
@@ -220,7 +220,7 @@ class DeliveryController extends Controller
                             "notification" => array(
                                 "title" => "New Ride!",
                                 "body" => "You have a new order assigned.",
-                                "deep_link" => Application::$app->domain."/dashboard/shop/vieworderdetails?ShopID=15&CartID=2"
+                                "deep_link" => Application::$app->domain."dashboard/shop/vieworderdetails?ShopID=15&CartID=2"
                             )
                         )
                     ));
