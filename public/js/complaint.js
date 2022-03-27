@@ -138,7 +138,7 @@ function updatecomplaint(complaintID){
         processData: false,
         contentType : 'application/json'
     }).done(function (data){
-        if (JSON.parse(data)['success'] !== 'ok') {
+        if (JSON.parse(data)['success'] == 'ok') {
             templateAlert('green', 'Update Success');
         } else if (JSON.parse(data)['success'] === 'fail') {
             templateAlert('yellow', 'Update Failed');

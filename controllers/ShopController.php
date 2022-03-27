@@ -11,6 +11,7 @@ use app\core\Response;
 use app\models\Delivery;
 use app\models\Item;
 use app\models\OrderCart;
+use app\models\Orders;
 use app\models\Shop;
 use app\models\ShopItem;
 use app\models\ShopOrder;
@@ -18,6 +19,8 @@ use app\models\Staff;
 use app\models\TemporaryCart;
 use app\models\User;
 use SendGrid\Mail\TypeException;
+use Stripe\Order;
+
 /**
  * @throws TypeException
  */
@@ -318,7 +321,9 @@ class ShopController extends Controller
             $orderUpdated = ShopOrder::findOne(['ShopID' => $ShopID, 'CartID' => $CartID]);
 
             $orderUpdated->Status = 1 ;
-            $orderUpdated->CompleteDate = date("Y-m-d");
+            $orderUpdated->CompleteDate = date("Y-m-d H:i:s");
+
+            Application::$app->logger->info(var_export($orderUpdated,true));
 
             if ($orderUpdated->validate('update') && $orderUpdated->update()) {
 
@@ -615,6 +620,28 @@ class ShopController extends Controller
         $this->setLayout('empty');
         $response->setContentTypeJSON();
         return json_encode(Application::getUserID());
+    }
+
+    public function getOrder(Request $request,Response $response)
+    {
+        $json = $request->getJson();
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+//        Application::$app->logger->info(var_export($request->getBody()['OrderID'],true));
+        $orderID = $request->getBody()['OrderID'] ;
+        $order = Orders::findOne(["OrderID" => $orderID]);
+        return json_encode($order);
+    }
+
+    public function getCitySubUrbs(Request $request,Response $response)
+    {
+        $json = $request->getJson();
+        $this->setLayout('empty');
+        $response->setContentTypeJSON();
+//        Application::$app->logger->info(var_export($request->getBody()['OrderID'],true));
+        $orderID = $request->getBody()['OrderID'] ;
+        $order = Orders::findOne(["OrderID" => $orderID]);
+        return json_encode(Application::getCity(),Application::getSuburb());
     }
 
 }
