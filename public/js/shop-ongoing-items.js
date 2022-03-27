@@ -1,7 +1,4 @@
 
-
-const host = window.location.origin; //http://domainname
-
 //Api links
 
 const URLShopAPI = host + "/api/shop";

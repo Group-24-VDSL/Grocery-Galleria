@@ -641,7 +641,7 @@ class ShopController extends Controller
 //        Application::$app->logger->info(var_export($request->getBody()['OrderID'],true));
         $orderID = $request->getBody()['OrderID'] ;
         $order = Orders::findOne(["OrderID" => $orderID]);
-        return json_encode(Application::getCity(),Application::getSuburb());
+//        return json_encode(Application::getCity(),Application::getSuburb());
     }
 
 }
