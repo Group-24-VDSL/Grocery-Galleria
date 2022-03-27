@@ -64,7 +64,7 @@ class CartController extends Controller
                         }
                     } else {
                         if ($tempcart->validate() && $tempcart->save()) {
-                            return json_encode('{"success":"ok"}');
+                            return $response->json('{"success":"ok"}');
                         }
                     }
                     return $response->json('{"success":"fail"}');
