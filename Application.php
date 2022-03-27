@@ -357,6 +357,5 @@ class Application
         $this->session->remove('role');
         $this->session->remove('city');
         $this->session->remove('suburb');
-        return true;
     }
 }
