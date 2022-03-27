@@ -13,6 +13,7 @@ const getUrlParameter = function getUrlParameter(sParam) {
     }
     return false;
 }
+const host = window.location.origin;
 
 //Api links
 

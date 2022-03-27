@@ -1,3 +1,4 @@
+const host = window.location.origin;
 
 //Api links
 const URLMonthlyOrders = host + "/api/getshopmonthlyorders" ;

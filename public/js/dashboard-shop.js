@@ -14,6 +14,7 @@ const getUrlParameter = function getUrlParameter(sParam) {
     return false;
 }
 
+const host = window.location.origin;
 
 //Api links
 
@@ -164,7 +165,7 @@ function shopItemUpdate(itemID, shopID){
             $('img[id=updateImage]').attr('src',Item.ItemImage);
             $('input[id=Stock]').val(ShopItem.Stock*Item.UWeight);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
-            $('input[id=UnitPrice]').setAttribute('value',ShopItem.UnitPrice);
+            // $('input[id=UnitPrice]').setAttribute('value',ShopItem.UnitPrice);
             $('input[id=UnitPrice]').attr('max',maxPrice);
             $('input[id=MinLeadTime]').val(ShopItem.MinLeadTime);
             $('input[id=MaxLeadTime]').val(ShopItem.MaxLeadTime);

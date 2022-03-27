@@ -49,8 +49,8 @@
             <?php echo $form->numberfieldonly($model, "MinLeadTime", '1','','1.00','') ?>
         </div>
         <div style="height: 3rem" class="inputBox">
-            <p style="font-size: 12px ; color: green">Lead Time : Time taken to supply the shop items <br><br>
-                * SPECIAL - Lead time sections can only be filled when particular item is added <br></p>
+            <p style="font-size: 12px ; color: green">Lead Time : Time taken to supply the item to the shop <br><br>
+                * SPECIAL - IF YOUR SHOP IS REGISTERED UNDER GROCERY CATEGORY <br></p>
         </div>
         <div class="inputBox">
             <?php echo $form->fieldonly($model, "ShopID")->setValue($model->ShopID)->hiddenField();?>

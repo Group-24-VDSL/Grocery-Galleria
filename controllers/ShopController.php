@@ -226,7 +226,7 @@ class ShopController extends Controller
             $shopItem->loadData($request->getBody());
             $Item = Item::findOne(["ItemID"=>$shopItem->ItemID]) ;
             if($Item->Unit ==0 || $Item->Unit ==1){
-                $shopItem->Stock = $shopItem->Stock/$Item->UWeight ;
+                $shopItem->Stock = round($shopItem->Stock/$Item->UWeight,2) ;
             }
 
             Application::$app->logger->info(var_export($Item,true));

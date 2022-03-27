@@ -117,7 +117,7 @@ use app\models\ShopOrder;
                             <?php echo $model->labels()['MinLead']?>
                             <span class="lable-unit">(days)</span>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"MinLeadTime",'1','',1);?>
+                        <?php echo $form->numberfieldonly($model,"MinLeadTime",'0','',1);?>
                     </div>
 
                     <div class="inputBox">
@@ -126,7 +126,7 @@ use app\models\ShopOrder;
                             <?php echo $model->labels()['MaxLead']?>
                             <span class="lable-unit">(days)</span>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"MaxLeadTime",'1','',1);?>
+                        <?php echo $form->numberfieldonly($model,"MaxLeadTime",'0','',1);?>
                     </div>
 
                     <div class="inputBox">
