@@ -135,7 +135,7 @@ abstract class Model implements JsonSerializable
                 if ($ruleName === self::RULE_ONEOF && !in_array($value, $rule['oneof'], true)) {
                     $this->addErrorForRule($attribute, self::RULE_ONEOF);
                 }
-                if ($ruleName === self::RULE_MIN_VAL && $value < (float)(is_string($rule['minValue']) ? $this->{$rule['minValue']} : $rule['minValue'])) {
+                if ($ruleName === self::RULE_MIN_VAL && $value <= (float)(is_string($rule['minValue']) ? $this->{$rule['minValue']} : $rule['minValue'])) {
                     $this->addErrorForRule($attribute, self::RULE_MIN_VAL, ['minValue' => is_string($rule['minValue']) ? $this->{$rule['minValue']} : $rule['minValue']]);//$this->>Uweight;
                 }
                 if ($ruleName === self::RULE_MAX_VAL && $value > (float)(is_string($rule['maxValue']) ? $this->{$rule['maxValue']} : $rule['maxValue'])) {
