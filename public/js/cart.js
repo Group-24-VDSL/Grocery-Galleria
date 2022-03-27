@@ -1,4 +1,4 @@
-// const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
+// const UnitTag = ["Kg", "L", "Unit"];
 
 const host = window.location.origin; //http://domainname
 

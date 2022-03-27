@@ -16,7 +16,7 @@ const getUrlParameter = function getUrlParameter(sParam) {
 };
 
 
-const UnitTag = ["Kg", "g", "L", "Unit"];
+const UnitTag = ["Kg", "L", "Unit"];
 const ShopType = ["Vegetable", "Fruit", "Grocery", "Fish", "Meat"];
 
 
@@ -63,7 +63,7 @@ $.getJSON(URLFindShopItems, function (ShopItems) {
                 <div class="price">
                     <span id="UnitPrice">Rs: ${shopItem.UnitPrice}</span>
 <!--                    <span> / </span>-->
-                    <span style="text-transform: lowercase;" id="Unit">/ ${UnitTag[item.Unit]}</span>
+                    <span style="text-transform: lowercase;" id="Unit">/ ${item.Unit==2? 1:item.UWeight} ${UnitTag[item.Unit]}</span>
                 </div>
                 <div class="quantity">
                         <span>Qty :</span>

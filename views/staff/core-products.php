@@ -83,7 +83,7 @@
                     <?php echo $model->labels()['Unit'] ?>
                 </label
                 >
-                <?php echo $form->selectfieldonly($model, "Unit", ['0' => 'Kg', '1' => 'Gram', '2' => 'Litre', '3' => 'ml', '4' => 'Unit']); ?>
+                <?php echo $form->selectfieldonly($model, "Unit", ['0' => 'Kg', '1' => 'Litre', '2' => 'Unit']); ?>
             </div>
             <div class="inputBox">
                 <label for="ItemImage">

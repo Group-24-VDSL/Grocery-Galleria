@@ -5,7 +5,7 @@ const URLShopList = host + '/dashboard/staff/getshoplist'
 const URLShop = host + '/dashboard/staff/getordershopdetails'
 const URLShopItems = host + '/dashboard/staff/getordershopitemdetails'
 const category = ["Vegetable", "Fruit", "Grocery", "Fish", "Meat"]
-const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
+const UnitTag = ["Kg", "L", "Unit"];
 const OrderState = ["New","OnGoing","Past"];
 const ordersDetailsDIv = document.getElementById('orderDetails');
 
