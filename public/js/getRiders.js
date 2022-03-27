@@ -25,7 +25,6 @@ $(function(){
 
         window.initMap = function () {
 
-            const geocoder = new google.maps.Geocoder();
 
 
             let infoWindow = new google.maps.InfoWindow({
