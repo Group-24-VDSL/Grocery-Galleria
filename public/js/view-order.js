@@ -21,7 +21,7 @@ document.getElementById('orderStatus').innerHTML = `${OrderState[Status]}`
         shops.forEach(shop => {
             const URLGetShop = URLShop.concat("?ShopID=" + shop.ShopID);
             $.getJSON(URLGetShop, function (shopDetails) {
-                console.log(shopDetails[0].ShopName)
+                // console.log(shopDetails[0].ShopName)
                 const shopDiv = document.createElement('div');
                 shopDiv.classList.add('container-order-details');
                 shopDiv.innerHTML = `
@@ -76,7 +76,7 @@ document.getElementById('orderStatus').innerHTML = `${OrderState[Status]}`
                 const URLGetShopItems = URLShopItems.concat("?CartID=" + cartID + "&ShopID=" + shop.ShopID);
                 $.getJSON(URLGetShopItems, function (shopItems) {
                     shopItems.forEach(function (shopItem){
-                        console.log(shopItem)
+                        // console.log(shopItem)
                         const tableRow = document.createElement('tr');
                         tableRow.innerHTML=`
                         <td>${shopItem.ItemID}</td>
