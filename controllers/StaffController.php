@@ -37,6 +37,7 @@ class StaffController extends Controller
         $user = new Staff(); // staff instance
         $customer = new Customer();
         $shop = new Shop();
+        $delivery = new DeliveryStaff();
         $user->loadData($request->getBody());
         if ($request->isPost()) {
             $userid = AuthController::register($request, 'Staff');
@@ -64,7 +65,8 @@ class StaffController extends Controller
         return $this->render("staff/register", [
             'staff' => $user,
             'customer' => $customer,
-            'shop' => $shop
+            'shop' => $shop,
+            'delivery' => $delivery
         ]);
 
     }

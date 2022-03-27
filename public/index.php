@@ -64,6 +64,8 @@ $app->router->get('/gallery',[ShopController::class,'shopGallery']);
 //delivery staff
 $app->router->get('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
 $app->router->post('/dashboard/delivery/addrider',[DeliveryController::class, 'riderRegister']);
+$app->router->get('/delivery/register',[DeliveryController::class, 'Register']);
+$app->router->post('/delivery/register',[DeliveryController::class, 'Register']);
 $app->router->get('/dashboard/delivery/viewriders',[DeliveryController::class,'viewriders']);
 $app->router->get('/dashboard/delivery/viewrider',[DeliveryController::class,'viewrider']);
 $app->router->get('/dashboard/delivery/vieworder',[DeliveryController::class,'vieworder']);

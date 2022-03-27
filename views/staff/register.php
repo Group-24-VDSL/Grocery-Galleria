@@ -5,6 +5,7 @@
 /** @var $staff \app\models\Staff * */
 /** @var $form app\core\form\Form */
 /** @var $customer app\models\Customer */
+/** @var $delivery app\models\DeliveryStaff */
 /** @var $shop app\models\Shop */
 ?>
 <div class="core">
@@ -18,6 +19,14 @@
             <span class="radio-label">
                 <input class="form-radio" type="radio" name="radio" data-for="shop"/>
                 <label>Shop</label>
+            </span>
+            <span class="radio-label">
+                <input class="form-radio" type="radio" name="radio" data-for="delivery"/>
+                <label>Delivery</label>
+            </span>
+            <span class="radio-label">
+                <input class="form-radio" type="radio" name="radio" data-for="staff"/>
+                <label>Staff</label>
             </span>
         </div>
         <div class="form-container scroller" data-name="customer">
@@ -70,11 +79,6 @@
         <div class="form-container scroller" data-name="shop">
 
             <?php $form = \app\core\form\Form::begin("/shop/register", "post", "ShopRegister"); ?>
-            <div class="inputBox">
-                <label for="Name"><i class="fas fa-edit"></i>
-                    <?php echo $shop->labels()['Category'] ?></label>
-                <?php echo $form->selectfieldonly($shop, "Category", ['0' => 'Vegetables', '1' => 'Fruits', '2' => 'Grocery', '3' => 'Fish', '4' => 'Meat']); ?>
-            </div>
             <div class="inputBox">
                 <label for="Name"><i class="fas fa-edit"></i>
                     <?php echo $shop->labels()['Name'] ?></label>
@@ -133,6 +137,97 @@
                 <div id="map2"></div>
             </div>
             <div class="inputBox"></div>
+            <div class="btn-align">
+                <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
+                <button id="accept" type="submit" class="btn submit">Submit Registration</button>
+            </div>
+            <?php echo $form->end(); ?>
+        </div>
+        <div class="form-container scroller" data-name="delivery">
+
+            <?php $form = \app\core\form\Form::begin("/delivery/register", "post", ""); ?>
+            <div class="inputBox">
+                <label for="Name"><i class="fas fa-user"></i>
+                    Name </label>
+                <?php echo $form->fieldonly($delivery, 'Name') ?>
+            </div>
+            <div class="inputBox">
+                <label for="Email"><i class="fas fa-envelope"></i>
+                    Email
+                </label>
+                <?php echo $form->fieldonly($delivery, 'Email')->emailField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="contact"><i class="fas fa-phone"></i>
+                    Contact Number</label>
+                <?php echo $form->fieldonly($delivery, 'ContactNo'); ?>
+            </div>
+            <div class="inputBox">
+                <label for="Password"><i class="fas fa-key"></i>
+                   Password </label>
+                <?php echo $form->fieldonly($delivery, 'Password')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="PasswordR"><i class="fas fa-key"></i>
+                   Confirm Password </label>
+                <?php echo $form->fieldonly($delivery, 'ConfirmPassword')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="city"><i class="fas fa-map-marked-alt"></i>
+                   City </label>
+                <?php echo $form->selectfieldonly($delivery, 'City'); ?>
+            </div>
+            <div class="inputBox">
+                <label for="suburb"><i class="fas fa-street-view"></i>
+                    Suburb</label>
+                <?php echo $form->selectfieldonly($delivery, 'Suburb'); ?>
+            </div>
+            <div class="btn-align">
+                <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
+                <button id="accept" type="submit" class="btn submit">Submit Registration</button>
+            </div>
+            <?php echo $form->end(); ?>
+        </div>
+        <div class="form-container scroller" data-name="staff">
+
+            <?php $form = \app\core\form\Form::begin("/staff/register", "post", "ShopRegister"); ?>
+            <div class="inputBox">
+                <label for="Name"><i class="fas fa-edit"></i>
+                    Name </label>
+                <?php echo $form->fieldonly($staff, 'Name') ?>
+            </div>
+
+            <div class="inputBox">
+                <label for="Email"><i class="fas fa-envelope"></i>
+                    Email
+                </label>
+                <?php echo $form->fieldonly($staff, 'Email')->emailField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="contact"><i class="fas fa-phone"></i>
+                    Contact Number</label>
+                <?php echo $form->fieldonly($staff, 'ContactNo'); ?>
+            </div>
+            <div class="inputBox">
+                <label for="Password"><i class="fas fa-key"></i>
+                    Password</label>
+                <?php echo $form->fieldonly($staff, 'Password')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="PasswordR"><i class="fas fa-key"></i>
+                    Confirm Password</label>
+                <?php echo $form->fieldonly($staff, 'ConfirmPassword')->passwordField(); ?>
+            </div>
+            <div class="inputBox">
+                <label for="city"><i class="fas fa-map-marked-alt"></i>
+                    City</label>
+                <?php echo $form->selectfieldonly($staff, 'City'); ?>
+            </div>
+            <div class="inputBox">
+                <label for="suburb"><i class="fas fa-street-view"></i>
+                    Suburb </label>
+                <?php echo $form->selectfieldonly($staff, 'Suburb'); ?>
+            </div>
             <div class="btn-align">
                 <button id="deny" type="submit" class="btn submit deny">Deny Registration</button>
                 <button id="accept" type="submit" class="btn submit">Submit Registration</button>
