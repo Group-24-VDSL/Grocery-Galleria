@@ -9,7 +9,7 @@ const ItemTable = document.getElementById('item-table');
 const URLItemReport = host + '/dashboard/staff/itemreport';
 const URLItemWeekReport = host + '/dashboard/staff/getitemweekreport';
 const UnitTag = ["Kg", "g", "L", "ml", "Unit"];
-const Status = ["Disable","Enable"];
+const Status = ["<img src=\"https://img.icons8.com/ios-glyphs/30/fa314a/connection-status-on.png\"/>","<img src=\"https://img.icons8.com/ios-glyphs/30/26e07f/connection-status-on.png\"/>"];
 $(document).ready(function () {
     $(".btn-tab").click(function () {
         const tabId = $(this).attr('id');

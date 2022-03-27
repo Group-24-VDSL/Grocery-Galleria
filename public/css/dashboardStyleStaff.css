@@ -129,7 +129,7 @@
   padding: 1rem;
 }
 .home-content .core .container-core form .inputBox {
-  /*display: grid;*/
+  display: grid;
   padding: .5rem;
 
 
