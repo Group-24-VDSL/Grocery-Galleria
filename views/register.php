@@ -39,7 +39,7 @@
             <small></small>
         </div>
         <div class="inputBox">
-            <label for="PasswordR"><i class="fas fa-key"></i>Re-enter password</label>
+            <label for="Password"><i class="fas fa-key"></i>Re-enter password</label>
             <?php echo $form->fieldonly($model,'ConfirmPassword')->passwordField();?>
             <i class="iconSE fas fa-check-circle"></i>
             <i class="iconSE fas fa-exclamation-circle"></i>

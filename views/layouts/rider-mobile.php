@@ -4,12 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Template</title>
     <!--Stylesheets-->
+    <link rel="stylesheet" href="/css/datatables.min.css" />
     <link rel="stylesheet" href="/css/rider-mobile.css" />
     <link rel="stylesheet" href="/css/template.css" />
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <!--Javascript-->
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/datatables.min.js"></script>
+
     <script src="/js/rider-mobile.js"></script>
     <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -18,11 +21,11 @@
         let endpoint = window.location.origin + "/rider/getlocation";
 
         const beamsClient = new PusherPushNotifications.Client({
-            instanceId: 'd248ec3c-fd1b-484f-902b-82c20393efcb',
+            instanceId: '420889f3-e55f-484e-8051-3be89e5fc4c4',
         });
 
         beamsClient.start()
-            .then(() => beamsClient.addDeviceInterest('hello'))
+            .then(() => beamsClient.addDeviceInterest('rider'))
             .then(() => console.log('Successfully registered and subscribed!'))
             .catch(console.error);
 
@@ -62,8 +65,8 @@
     <!--mobile navigation icons-->
     <div class="navigation-icons">
         <a class="navigation-item navigation-toggle" href="#menu-mobile"><i class="fas fa-bars"></i><span>Menu</span></a>
-        <a class="navigation-item" href="./rider/orders"><i class="fas fa-truck "></i><span>Orders</span></a>
-        <a class="navigation-item" href="./rider/profile"><i class="fas fa-user-circle"></i><span>Profile</span></a>
+        <a class="navigation-item" href="/rider/orders"><i class="fas fa-truck "></i><span>Orders</span></a>
+        <a class="navigation-item" href="/rider/profile"><i class="fas fa-user-circle"></i><span>Profile</span></a>
     </div>
     <!--mobile navigation sidebars-->
     <div class="navigation-sidebar" id="menu-mobile">

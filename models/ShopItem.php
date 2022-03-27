@@ -53,9 +53,11 @@ class ShopItem extends DBModel
     {
         return [
             'ShopID'=> [self::RULE_REQUIRED],
-            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0],[self::RULE_IF_ONLY_THEN,'class'=> Item::class,'ValMatch'=>2,'CheckAttribute1'=>'MRP','matchAttribute1'=>'Category','where'=>'ItemID']],
-             'Stock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0]],
+            'UnitPrice' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>1],[self::RULE_IF_ONLY_THEN,'class'=> Item::class,'ValMatch'=>2,'CheckAttribute1'=>'MRP','matchAttribute1'=>'Category','where'=>'ItemID']],
+             'Stock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>1]],
             'MinStock' => [self::RULE_REQUIRED,self::RULE_FLOAT,[self::RULE_MIN_VAL,'minValue'=>0]],
+            'MinLeadTime' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>1]],
+            'MaxLeadTime' => [self::RULE_REQUIRED,self::RULE_INT,[self::RULE_MIN_VAL,'minValue'=>1]],
         ];
     }
 

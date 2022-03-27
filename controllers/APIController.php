@@ -76,6 +76,7 @@ class APIController extends Controller
 
     public function getShopOrders(Request $request , Response $response)
     {
+        Application::$app->logger->info(var_export($request->getBody(),true));
         $this->setLayout('empty');
         $response->setContentTypeJSON();
         $orders = ShopOrder::findAll(array_slice($request->getBody(),1,null,true));
@@ -85,6 +86,7 @@ class APIController extends Controller
 
     public function getShopOrder(Request $request , Response $response)
     {
+        Application::$app->logger->info(var_export($request->getBody(),true));
         $this->setLayout('empty');
         $response->setContentTypeJSON();
         $order = ShopOrder::findOne(array_slice($request->getBody(),1,null,true));

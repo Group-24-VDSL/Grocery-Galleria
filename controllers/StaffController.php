@@ -247,12 +247,15 @@ class StaffController extends Controller
             $temp = new Complaint();
             $temp->loadData($json);
 
-            $temp->Status =1;
+
             $checktemp = Complaint::findOne(["ComplaintID" => $temp->ComplaintID ]);
 
+
             if ($request->isPost()) {
+
                 if ($checktemp) { //there exists such item
-                    if ($temp->validate('update') && $temp->update()) {
+                    $checktemp->Status =1;
+                    if ($checktemp->validate('update') && $checktemp->update()) {
                         return $response->json('{"success":"ok"}');
                         Application::$app->response->redirect("/dashboard/staff/viewcomplaints");
 
@@ -264,8 +267,10 @@ class StaffController extends Controller
                 return $response->json('{"success":"fail"}');
 
             } elseif($request->isPatch()) {
+                $temp->Status =1;
                 if ($checktemp) { //there exists such item
-                    if ($temp->validate('update') && $temp->update()) {
+                    $checktemp->Status =1;
+                    if ($checktemp->validate('update') && $checktemp->update()) {
                         Application::$app->response->redirect("/dashboard/shop/viewcomplaints");
                         return $response->json('{"success":"ok"}');
                     }
@@ -285,7 +290,7 @@ class StaffController extends Controller
         if ($request->isPost()) {
             $complaint->loadData($request->getbody());
 
-            $complaint->ComplaintDate =  date("Y-m-d");
+            $complaint->ComplaintDate =  date("Y-m-d H:i:s") ;
 
             $OrderID = $complaint->OrderID ;
             $order = Orders::findOne(['OrderID' => $OrderID]);

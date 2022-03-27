@@ -14,7 +14,6 @@ const getUrlParameter = function getUrlParameter(sParam) {
     return false;
 }
 
-const host = window.location.origin; //http://domainname
 
 //Api links
 
@@ -140,6 +139,7 @@ function shopItemUpdate(itemID, shopID){
             //         break;
             // }
             let unit = ' ' ;
+            let maxPrice
             switch (Item.Unit){
                 case 0 :
                     unit = '(Kg)' ; break ;
@@ -147,6 +147,11 @@ function shopItemUpdate(itemID, shopID){
                     unit = '(L)' ; break ;
                 case 2 :
                     unit = '(Units)' ; break ;
+            }
+
+            switch (Item.Category) {
+                case 2 : maxPrice = Item.MRP ; break ;
+                default : maxPrice = '' ; break ;
             }
 
             document.getElementById("updateID").textContent= ShopItem.ItemID;
@@ -159,7 +164,7 @@ function shopItemUpdate(itemID, shopID){
             $('img[id=updateImage]').attr('src',Item.ItemImage);
             $('input[id=Stock]').val(ShopItem.Stock*Item.UWeight);
             $('input[id=UnitPrice]').val(ShopItem.UnitPrice);
-            $('input[id=UnitPrice]').attr('max',Item.MRP);
+            $('input[id=UnitPrice]').attr('max',maxPrice);
             $('input[id=MinLeadTime]').val(ShopItem.MinLeadTime);
             $('input[id=MaxLeadTime]').val(ShopItem.MaxLeadTime);
             $('input[id=MinStock]').val(ShopItem.MinStock);

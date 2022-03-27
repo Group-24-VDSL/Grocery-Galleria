@@ -132,7 +132,7 @@ ul {
 }
 .home-section nav .sidebar-toggle span {
   font-size: var(--h1-font-size);
-  width: fit-content;
+  /*width: fit-content;*/
 }
 .home-section nav .search-box {
   display: flex;

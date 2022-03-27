@@ -17,7 +17,7 @@
             <img src="https://img.icons8.com/office/16/000000/high-risk.png"/>
             <span style="font-size: 13px">: Item stock is not Safe </span>
 
-            <p style="font-size: 12px"><br>Kg : Kilogram  09 L : Liter  &#9 &#9  U : Units</p>
+            <p style="font-size: 12px"><br>Kg : Kilogram   L : Liter  &#9 &#9  U : Units</p>
         </div>
 
 

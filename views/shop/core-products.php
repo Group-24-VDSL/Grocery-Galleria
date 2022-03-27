@@ -13,7 +13,7 @@ use app\models\ShopOrder;
 <!--<link rel="stylesheet" href="/css/dashboardStyleStaff.css">-->
 <div class="content">
     <div class="update-content">
-        <div style="height: 750px" class="core shop-item-table">
+        <div style="height: 850px" class="core shop-item-table">
             <h1 class="heading">Shop <span>Products</span></h1>
             <div class="container-items">
 
@@ -26,7 +26,7 @@ use app\models\ShopOrder;
                         <th style="font-weight: 550;font-size: 11px;">Name</th>
                         <th style="font-weight: 550;font-size: 11px;">Brand</th>
                         <th style="font-weight: 550;font-size: 11px;">System Price(LKR)</th>
-                        <th style="font-weight: 550;font-size: 11px;">Unit<br>Price</th>
+                        <th style="font-weight: 550;font-size: 11px;">Unit<br>Price(LKR)</th>
                         <th style="font-weight: 550;font-size: 11px;">Unit<br>Weight</th>
                         <th style="font-weight: 550;font-size: 11px;">Min<br>Stock</th>
                         <th style="font-weight: 550;font-size: 11px;">Stock</th>
@@ -48,7 +48,7 @@ use app\models\ShopOrder;
 
 
 
-        <div style="margin-left: 0;height: 750px ;width: 30rem" class="core" id="Update">
+        <div style="margin-left: 0;height: 850px ;width: 30rem" class="core" id="Update">
 
             <h1 class="heading">Update <span>Products</span></h1>
 
@@ -90,7 +90,7 @@ use app\models\ShopOrder;
                         </label>
                         <?php
 
-                        echo $form->numberfieldonly($model,"UnitPrice",'0','',1);?>
+                        echo $form->numberfieldonly($model,"UnitPrice",'1','',1);?>
                     </div>
                     <div class="inputBox">
                         <label class="input-text"  for="Stock">
@@ -98,7 +98,7 @@ use app\models\ShopOrder;
                             <?php echo $model->labels()['Stock']?>
                             <span id="stock" class="lable-unit "></span>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"Stock",'0','',1);?>
+                        <?php echo $form->numberfieldonly($model,"Stock",'1','',1.00);?>
                     </div>
 
                     <div class="inputBox">
@@ -107,7 +107,7 @@ use app\models\ShopOrder;
                             <?php echo $model->labels()['MinStock']?>
                             <span id="min-stock" class="lable-unit min-stock"></span>
                         </label>
-                        <?php echo $form->numberfieldonly($model,"MinStock",'0','',1);?>
+                        <?php echo $form->numberfieldonly($model,"MinStock",'1','',1);?>
                     </div>
 
 

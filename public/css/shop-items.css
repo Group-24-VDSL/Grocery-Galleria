@@ -246,7 +246,7 @@ input:checked + .slider .off
 }
 
 #itemUpdate-shop {
-    grid-auto-rows: 80px;
+    grid-auto-rows: 100px;
 }
 
 .input-text{
