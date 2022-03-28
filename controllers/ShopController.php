@@ -21,13 +21,6 @@ use app\models\User;
 use SendGrid\Mail\TypeException;
 use Stripe\Order;
 
-/**
- * @throws TypeException
- */
-
-/**
- * @throws TypeException
- */
 
 class ShopController extends Controller
 {

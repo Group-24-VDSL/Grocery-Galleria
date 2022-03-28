@@ -13,8 +13,8 @@ const getUrlParameter = function getUrlParameter(sParam) {
     }
     return false;
 }
-
 const host = window.location.origin;
+
 
 //Api links
 
@@ -57,11 +57,11 @@ $(document).ready(function () {
                         switch (Item.Unit) {
                             case 0 :
                                 UnitSymbol = 'Kg';
-                                Stock = Shop.Stock *Item.UWeight  ;
+                                Stock = (Shop.Stock *Item.UWeight).toFixed(2)  ;
                                 break;
                             case 1 :
                                 UnitSymbol = 'L';
-                                Stock = Stock = Shop.Stock *Item.UWeight   ;
+                                Stock = (Shop.Stock *Item.UWeight).toFixed(2)  ;
                                 break;
                             case 2 :
                                 UnitSymbol = 'Unit';

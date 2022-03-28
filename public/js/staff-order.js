@@ -22,9 +22,9 @@ $(document).ready(function () {
                         <td>${order.custName}</td>
                         <td>${order.Note}</td>
                         <td>${order.custContact}</td>
-                        <td>${order.RiderID}</td>
-                        <td>${order.RiderName}</td>
-                        <td>${order.RiderContact}</td>
+                        <td>${order.RiderID??"Not Assigned"}</td>
+                        <td>${order.RiderName??"Not Assigned"}</td>
+                        <td>${order.RiderContact??"Not Assigned"}</td>
                         <td>${order.DeliveryCost}</td>
                         <td>${order.TotalCost}</td>
                         <td> <a class="order-view" href=${orderViewURL}>

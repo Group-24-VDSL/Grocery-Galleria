@@ -262,6 +262,7 @@ class CartController extends Controller
 
         switch ($event->type) {
             case 'checkout.session.completed':
+                Application::$app->logger->debug("Here");
                 $checkoutSession = $event->data->object;
                 $this->fullfillOrder($checkoutSession);
                 break;
@@ -292,6 +293,7 @@ class CartController extends Controller
 
     public function fullfillOrder($obj)
     {
+        Application::$app->logger->debug("Here2");
         $customerid = filter_var($obj->metadata->userid,FILTER_SANITIZE_NUMBER_INT);
         $notes=filter_var($obj->metadata->notes,FILTER_SANITIZE_SPECIAL_CHARS);
         $rec_name=filter_var($obj->metadata->recipient_name,FILTER_SANITIZE_SPECIAL_CHARS);
@@ -308,11 +310,13 @@ class CartController extends Controller
 
             try{
                 if($customer){
+                    Application::$app->logger->debug("Here3");
                     $sql="INSERT INTO `cart` (CustomerID,Date,Time) VALUES (:id,CURRENT_DATE,CURRENT_TIME);";
                     $result = $pdo->prepare($sql);
                     $result->bindValue(":id",$customerid);
                     $result->execute();
                     $cartid= $pdo->lastInsertId();
+                    Application::$app->logger->debug("Here4");
 
                     $sql="INSERT INTO `orders` (CartID,RecipientName,Note,RecipientContact,DeliveryCost,TotalCost,City,Suburb,Status) VALUES (:cartid,:rec_name,:notes,:rec_contact,:delivery_fee,:totalcost,:city,:suburb,0);";
                     $result = $pdo->prepare($sql);
@@ -325,7 +329,7 @@ class CartController extends Controller
                     $result->bindValue(":city",$city);
                     $result->bindValue(":suburb",$suburb);
                     $result->execute();
-
+                    Application::$app->logger->debug("Here5");
                     $orderid=$pdo->lastInsertId();
 
                     $sql="INSERT INTO `ordercart` (CartID,ShopID,ItemID,Quantity,Total) SELECT :cartid AS CartID,tc.ShopID,tc.ItemID,tc.Quantity,(si.UnitPrice*tc.Quantity) AS Total from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND tc.ItemID=si.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid;";
@@ -333,28 +337,33 @@ class CartController extends Controller
                     $result->bindValue(":cartid",$cartid);
                     $result->bindValue(":customerid",$customerid);
                     $result->execute();
+                    Application::$app->logger->debug("Here6");
 
                     $sql="INSERT INTO `shoporder` (ShopID,CartID,ShopTotal,Status) SELECT  tc.ShopID,:cartid AS CartID,SUM(si.UnitPrice*tc.Quantity), 0 AS Status from `temporarycart` AS tc INNER JOIN `shopitem`AS si ON si.ShopID=tc.ShopID AND si.ItemID=tc.ItemID WHERE tc.Purchased=1 AND tc.CustomerID=:customerid GROUP BY tc.ShopID;";
                     $result = $pdo->prepare($sql);
                     $result->bindValue(":cartid",$cartid);
                     $result->bindValue(":customerid",$customerid);
                     $result->execute();
+                    Application::$app->logger->debug("Here7");
 
                     $sql ="INSERT INTO `payment` (OrderID,TotalPrice) VALUES (:orderid,:totalcost);";
                     $result = $pdo->prepare($sql);
                     $result->bindValue(":orderid",$orderid);
                     $result->bindValue(":totalcost",$totalcost);
                     $result->execute();
+                    Application::$app->logger->debug("Here8");
 
                     $sql ="UPDATE `shopitem` si JOIN temporarycart tc ON tc.ItemID=si.ItemID AND tc.ShopID=si.ShopID SET si.Stock=(si.Stock-tc.Quantity) WHERE tc.CustomerID=:customerid AND (si.Stock-tc.Quantity) > 0 AND tc.Purchased=1;";
                     $result = $pdo->prepare($sql);
                     $result->bindValue(":customerid",$customerid);
                     $result->execute();
+                    Application::$app->logger->debug("Here9");
 
                     $sql="DELETE FROM `temporarycart` WHERE `temporarycart`.`Purchased`=1 AND `temporarycart`.`CustomerID`=:customerid;";
                     $result = $pdo->prepare($sql);
                     $result->bindValue(":customerid",$customerid);
                     $result->execute();
+                    Application::$app->logger->debug("Here10");
                 }
 
                 }catch (\PDOException $pdoex){

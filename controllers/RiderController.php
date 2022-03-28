@@ -58,16 +58,13 @@ class  RiderController extends Controller
                 $cartid = $json["cartid"];
 
                 $orderStatus = DBModel::query("Update `delivery` SET Status=2, CompTime=CURRENT_TIMESTAMP WHERE OrderID=$orderid AND CartID=$cartid",\PDO::FETCH_ASSOC);
-                if($orderStatus){
+
                     $riderid=Application::getUserID();
                     $riderStatus = DBModel::query("Update `deliveryrider` SET Status=0 WHERE RiderID=$riderid ",\PDO::FETCH_ASSOC);
-                    if($riderStatus){
-                        Application::$app->session->setFlash('success','Order Completed');
-                        return $response->json('{"url":"/rider/order" }');
-                    }
-                    Application::$app->session->setFlash('danger','Rider is not Updated');
+                    Application::$app->session->setFlash('success','Order Completed');
                     return $response->json('{"url":"/rider/order" }');
-                }
+
+
             }
             Application::$app->session->setFlash('danger','Json is invalid');
             return $response->json('{"url":"/rider/order" }');
