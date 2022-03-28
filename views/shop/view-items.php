@@ -51,8 +51,8 @@
         </table>
 
         <button type="submit" id="updateItems" class="button-item-update" onclick="updateShopItem()"><span id="status">Update Items</span></button>
-        <p style="margin-bottom: 2rem"><br> <br>
-            Safety Stock : <br>Re Order Level : </p>
+        <p style="color:green ;margin-bottom: 2rem"><br> <br>
+            Safety Stock : Safe Stock level to average order<br>Re Order Level : Stock level to replenish the item stock</p>
 
     </div>
 </div>
