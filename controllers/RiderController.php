@@ -64,7 +64,6 @@ class  RiderController extends Controller
                     Application::$app->session->setFlash('success','Order Completed');
                     return $response->json('{"url":"/rider/order" }');
 
-
             }
             Application::$app->session->setFlash('danger','Json is invalid');
             return $response->json('{"url":"/rider/order" }');
