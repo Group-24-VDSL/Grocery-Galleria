@@ -56,18 +56,26 @@ class CartController extends Controller
                 $tempcart->CustomerID = Application::getUserID();
                 $checktemp = TemporaryCart::findOne(["ItemID" => $tempcart->ItemID, "ShopID" => $tempcart->ShopID, "CustomerID" => Application::getUserID()]);
                 if ($request->isPost()) {
-                    if ($checktemp) { //there exists such item
-                        $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
-                        $tempcart->Quantity = $newQuantity;
-                        if ($tempcart->validate('update') && $tempcart->update()) {
-                            return $response->json('{"success":"ok"}');
+                    $itemid = $tempcart->ItemID;
+                    $shopid = $tempcart->ShopID;
+                    $quantity = $tempcart->Quantity;
+                    $stockStatus = DBModel::query("SELECT Stock FROM shopitem WHERE ItemID=$itemid AND ShopID=$shopid",\PDO::FETCH_COLUMN);
+                    Application::$app->logger->debug($stockStatus);
+                    if($stockStatus>$quantity) {
+                        if ($checktemp) { //there exists such item
+                            $newQuantity = $tempcart->Quantity + $checktemp->Quantity;
+                            $tempcart->Quantity = $newQuantity;
+                            if ($tempcart->validate('update') && $tempcart->update()) {
+                                return $response->json('{"success":"ok"}');
+                            }
+                        } else {
+                            if ($tempcart->validate() && $tempcart->save()) {
+                                return $response->json('{"success":"ok"}');
+                            }
                         }
-                    } else {
-                        if ($tempcart->validate() && $tempcart->save()) {
-                            return $response->json('{"success":"ok"}');
-                        }
+                    }else{
+                    return $response->json('{"warning":"low"}');
                     }
-                    return $response->json('{"success":"fail"}');
                 } elseif ($request->isPatch()) {
                     if ($checktemp) { //there exists such item
                         $tempcart->Quantity = $json['Quantity'];
