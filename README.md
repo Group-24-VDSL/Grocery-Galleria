@@ -16,7 +16,7 @@
 
 ### Customer 
 <div style="text-align:center,width:50%"><img src="./_docs/screenshots/1.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/2.png" style="width:25%" /><img src="./_docs/screenshots/3.png" style="width:25%" /></div>
+<div style="text-align:center"><img src="./_docs/screenshots/2.png" style="width:50%" /><img src="./_docs/screenshots/3.png" style="width:50%" /></div>
 <div style="text-align:center, width:50%"><img  src="./_docs/screenshots/4.png" /></div>
 <div style="text-align:center, width:50%"></div>
 <div style="text-align:center, width:50%"><img src="./_docs/screenshots/5.png" /></div>
