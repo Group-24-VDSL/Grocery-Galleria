@@ -15,31 +15,31 @@
 ---
 
 ### Customer 
-<div style="text-align:center"><img src="./_docs/screenshots/1.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/2.png" style="width:50%" /><img src="./_docs/screenshots/3.png" style="width:50%" /></div>
-<div style="text-align:center, display:flex, flex-direction:column"><img  src="./_docs/screenshots/4.png" /></div>
-<div style="text-align:center"></div>
-<div style="text-align:center"><img src="./_docs/screenshots/5.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/6.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/7.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/8.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/9.png" /></div>
+<div style="text-align:center,width:50%"><img src="./_docs/screenshots/1.png" /></div>
+<div style="text-align:center"><img src="./_docs/screenshots/2.png" style="width:25%" /><img src="./_docs/screenshots/3.png" style="width:25%" /></div>
+<div style="text-align:center, width:50%"><img  src="./_docs/screenshots/4.png" /></div>
+<div style="text-align:center, width:50%"></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/5.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/6.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/7.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/8.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/9.png" /></div>
 
 ### Shop Dashboard
-<div style="text-align:center"><img src="./_docs/screenshots/11.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/15.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/11.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/15.png" /></div>
 
 ### Staff Dashboard
-<div style="text-align:center"><img src="./_docs/screenshots/13.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/13.png" /></div>
 
-<div style="text-align:center"><img src="./_docs/screenshots/14.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/14.png" /></div>
 
 ### Delivery Dashboard
-<div style="text-align:center"><img src="./_docs/screenshots/16.png" /></div>
-<div style="text-align:center"><img src="./_docs/screenshots/17.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/16.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/17.png" /></div>
 
 ### Delivery Rider Web Application
-<div style="text-align:center"><img src="./_docs/screenshots/18.png" /></div>
+<div style="text-align:center, width:50%"><img src="./_docs/screenshots/18.png" /></div>
 
 
 ## Instructions 
